@@ -2,23 +2,14 @@
 <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <sitemap>
-    <loc>https://example.com/en/sitemap.xml</loc>
+    <loc>https://teaize.github.io/zh-cn/sitemap.xml</loc>
     
       <lastmod>2024-08-25T12:16:35+08:00</lastmod>
     
   </sitemap>
   
   <sitemap>
-    <loc>https://example.com/zh-cn/sitemap.xml</loc>
-    
-      <lastmod>2020-09-09T00:00:00+00:00</lastmod>
-    
-  </sitemap>
-  
-  <sitemap>
-    <loc>https://example.com/ar/sitemap.xml</loc>
-    
-      <lastmod>2019-03-09T00:00:00+00:00</lastmod>
+    <loc>https://teaize.github.io/en/sitemap.xml</loc>
     
   </sitemap>
   
