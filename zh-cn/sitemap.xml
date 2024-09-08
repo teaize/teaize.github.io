@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2024-09-08T17:16:11+00:00</lastmod>
+    <lastmod>2024-09-08T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,8 +15,27 @@
                 href="https://teaize.github.io/"
                 />
   </url><url>
+    <loc>https://teaize.github.io/tags/hexo/</loc>
+    <lastmod>2024-09-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/</loc>
+    <lastmod>2024-09-08T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://teaize.github.io/post/</loc>
-    <lastmod>2024-09-08T17:16:11+00:00</lastmod>
+    <lastmod>2024-09-08T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/tags/</loc>
+    <lastmod>2024-09-08T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://teaize.github.io/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://teaize.github.io/tags/"
+                />
   </url><url>
     <loc>https://teaize.github.io/archives/</loc>
     <lastmod>2019-05-28T00:00:00+00:00</lastmod>
@@ -45,19 +64,6 @@
   </url><url>
     <loc>https://teaize.github.io/tags/tag-with-whitespaces/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://teaize.github.io/tags/</loc>
-    <lastmod>2019-03-09T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://teaize.github.io/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://teaize.github.io/tags/"
-                />
   </url><url>
     <loc>https://teaize.github.io/categories/test/</loc>
     <lastmod>2019-03-09T00:00:00+00:00</lastmod>
