@@ -163,6 +163,25 @@
 &lt;/div&gt;</description>
         </item>
         <item>
+        <title>新建文档指南</title>
+        <link>https://teaize.github.io/p/%E6%96%B0%E5%BB%BA%E6%96%87%E6%A1%A3%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Tue, 01 Mar 2022 22:27:04 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%96%B0%E5%BB%BA%E6%96%87%E6%A1%A3%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;ol&gt;
+&lt;li&gt;首先创建一个专门的文件夹&lt;/li&gt;
+&lt;li&gt;创建 imgs，PDFs 等子文件夹用于存储资源文件&lt;/li&gt;
+&lt;li&gt;注意所截取的图片一定要保存下来，在到 word 中插入图片【过程虽然比直接复制截图繁琐，但是这个图片以后如果用得到呢？难道还要在打开 PDF 进行截图吗】&lt;/li&gt;
+&lt;li&gt;截图的图片命名好名字，不要按照默认的时间命名&lt;/li&gt;
+&lt;li&gt;给图片添加题注，顺手的事情，因为图片的名字可以作为图片的图注&lt;/li&gt;
+&lt;li&gt;将图片和图注复制到其他文档中后，选择图注的域代码，按下 F9 即可更新图注，所以说前面给图片添加题注是一个好习惯，后期省的给图片添加图注&lt;/li&gt;
+&lt;li&gt;保存一份带有标题样式的 Word 模板&lt;/li&gt;
+&lt;li&gt;保存好使用到的 pdf 文件和图片，方便后期直接压缩包打包
+最后，一定要注意，文章中插入的信息要标注来源！！！&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>Chinese Test</title>
         <link>https://teaize.github.io/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>

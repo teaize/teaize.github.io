@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Excel on Coffity&#39;s Blog</title>
+        <link>https://teaize.github.io/tags/excel/</link>
+        <description>Recent content in Excel on Coffity&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Coffity</copyright>
+        <lastBuildDate>Fri, 20 Oct 2023 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/excel/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Excel进阶</title>
+        <link>https://teaize.github.io/p/excel%E8%BF%9B%E9%98%B6/</link>
+        <pubDate>Fri, 20 Oct 2023 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/excel%E8%BF%9B%E9%98%B6/</guid>
+        <description>&lt;h3 id=&#34;统计单元格中特定字符的个数&#34;&gt;统计单元格中特定字符的个数
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;统计字符 k 的个数&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;数量&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;k-1,k-2,k-3,K-5&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;k-2,K-2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.loli.net/2023/10/20/FG6MuO2ajomHpkx.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image.png&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=LEN(A2) - LEN(SUBSTITUTE(A2, &amp;#34;k&amp;#34;, &amp;#34;&amp;#34;))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;SUBSTITUTE(A2, &amp;quot;k&amp;quot;, &amp;quot;&amp;quot;)&lt;/code&gt;：使用空白字符来替换 &lt;code&gt;k&lt;/code&gt; 字符，区分大小写&lt;/li&gt;
+&lt;li&gt;LEN 函数：单元格中字符的长度，不包括空白字符&lt;/li&gt;
+&lt;li&gt;公式的思路：原来字符的总长度 - 替换为空白字符之后的总长度 = 字符 k 的个数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;随机生成一个时间&#34;&gt;随机生成一个时间
+&lt;/h3&gt;&lt;p&gt;这个逻辑比较简单：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=TIME(RANDBETWEEN(0,24), RANDBETWEEN(0,60), RANDBETWEEN(0,60))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://s2.loli.net/2023/10/20/rhiYVoGFkjNCDTX.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image.png&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;text-函数转换格式&#34;&gt;Text 函数转换格式
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;开始时间&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;结束时间&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;持续时间 (单元格改为时间格式)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;标准时间&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;是否超时&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;5:34&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;8:48&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3:14&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4:00&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;✗&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;5:34&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;9:48&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4:14&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4:00&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;✗&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3:28&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10:59&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;7:31&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4:00&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;✗&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3:28&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;14:59&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;11:31&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4:00&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;✗&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.loli.net/2023/10/20/fuO2LV5npb7hgyA.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image.png&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;以上表格中使用到的函数
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=TEXT(B2-A2, &amp;#34;h:mm&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=IF(C2&amp;lt;D2,&amp;#34;✓&amp;#34;,&amp;#34;✗&amp;#34;)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意将“持续时间”这一列的单元格格式改为时间格式&lt;/p&gt;
+&lt;h3 id=&#34;时间函数相关&#34;&gt;时间函数相关
+&lt;/h3&gt;&lt;p&gt;给定一个初始时间，给定一个持续时间，求初试时间与持续时间的加减计算&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://s2.loli.net/2023/10/20/DONPXlGjRgnJSc5.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;image.png&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;=TIME(HOUR(A2), MINUTE(A2)-B2, SECOND(A2))
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
