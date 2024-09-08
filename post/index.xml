@@ -7,20 +7,7 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 25 Aug 2024 12:16:35 +0800</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>AutoDeploy</title>
-        <link>https://teaize.github.io/p/autodeploy/</link>
-        <pubDate>Sun, 25 Aug 2024 12:16:35 +0800</pubDate>
-        
-        <guid>https://teaize.github.io/p/autodeploy/</guid>
-        <description>&lt;ul&gt;
-&lt;li&gt;This file was modifed by Github Desktop on MacOS&lt;/li&gt;
-&lt;li&gt;This was modified by windows from home!&lt;/li&gt;
-&lt;li&gt;This was modifed by windows form SDL&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
+        <lastBuildDate>Wed, 09 Sep 2020 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Chinese Test</title>
         <link>https://teaize.github.io/p/test-chinese/</link>
         <pubDate>Wed, 09 Sep 2020 00:00:00 +0000</pubDate>
@@ -142,61 +129,61 @@
 &lt;h2 id=&#34;tables&#34;&gt;Tables
 &lt;/h2&gt;&lt;p&gt;Tables aren&amp;rsquo;t part of the core Markdown spec, but Hugo supports supports them out-of-the-box.&lt;/p&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Name&lt;/th&gt;
-&lt;th&gt;Age&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Bob&lt;/td&gt;
-&lt;td&gt;27&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Alice&lt;/td&gt;
-&lt;td&gt;23&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Name&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Age&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Bob&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;27&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Alice&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;23&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h4 id=&#34;inline-markdown-within-tables&#34;&gt;Inline Markdown within tables
 &lt;/h4&gt;&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Italics&lt;/th&gt;
-&lt;th&gt;Bold&lt;/th&gt;
-&lt;th&gt;Code&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;em&gt;italics&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;code&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Italics&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Bold&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Code&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;em&gt;italics&lt;/em&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&lt;code&gt;code&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;A&lt;/th&gt;
-&lt;th&gt;B&lt;/th&gt;
-&lt;th&gt;C&lt;/th&gt;
-&lt;th&gt;D&lt;/th&gt;
-&lt;th&gt;E&lt;/th&gt;
-&lt;th&gt;F&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/td&gt;
-&lt;td&gt;Phasellus ultricies, sapien non euismod aliquam, dui ligula tincidunt odio, at accumsan nulla sapien eget ex.&lt;/td&gt;
-&lt;td&gt;Proin eleifend dictum ipsum, non euismod ipsum pulvinar et. Vivamus sollicitudin, quam in pulvinar aliquam, metus elit pretium purus&lt;/td&gt;
-&lt;td&gt;Proin sit amet velit nec enim imperdiet vehicula.&lt;/td&gt;
-&lt;td&gt;Ut bibendum vestibulum quam, eu egestas turpis gravida nec&lt;/td&gt;
-&lt;td&gt;Sed scelerisque nec turpis vel viverra. Vivamus vitae pretium sapien&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;A&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;B&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;C&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;D&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;E&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;F&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Lorem ipsum dolor sit amet, consectetur adipiscing elit.&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Phasellus ultricies, sapien non euismod aliquam, dui ligula tincidunt odio, at accumsan nulla sapien eget ex.&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Proin eleifend dictum ipsum, non euismod ipsum pulvinar et. Vivamus sollicitudin, quam in pulvinar aliquam, metus elit pretium purus&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Proin sit amet velit nec enim imperdiet vehicula.&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Ut bibendum vestibulum quam, eu egestas turpis gravida nec&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Sed scelerisque nec turpis vel viverra. Vivamus vitae pretium sapien&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;h2 id=&#34;code-blocks&#34;&gt;Code Blocks
 &lt;/h2&gt;&lt;h4 id=&#34;code-block-with-backticks&#34;&gt;Code block with backticks
@@ -369,6 +356,22 @@
 &lt;/h2&gt;&lt;p&gt;Victa caducifer, malo vulnere contra dicere aurato, ludit regale, voca! Retorsit colit est profanae esse virescere furit nec; iaculi matertera et visa est, viribus. Divesque creatis, tecta novat collumque vulnus est, parvas. &lt;strong&gt;Faces illo pepulere&lt;/strong&gt; tempus adest. Tendit flamma, ab opes virum sustinet, sidus sequendo urbis.&lt;/p&gt;
 &lt;p&gt;Iubar proles corpore raptos vero auctor imperium; sed et huic: manus caeli Lelegas tu lux. Verbis obstitit intus oblectamina fixis linguisque ausus sperare Echionides cornuaque tenent clausit possit. Omnia putatur. Praeteritae refert ausus; ferebant e primus lora nutat, vici quae mea ipse. Et iter nil spectatae vulnus haerentia iuste et exercebat, sui et.&lt;/p&gt;
 &lt;p&gt;Eurytus Hector, materna ipsumque ut Politen, nec, nate, ignari, vernum cohaesit sequitur. Vel &lt;strong&gt;mitis temploque&lt;/strong&gt; vocatus, inque alis, &lt;em&gt;oculos nomen&lt;/em&gt; non silvis corpore coniunx ne displicet illa. Crescunt non unus, vidit visa quantum inmiti flumina mortis facto sic: undique a alios vincula sunt iactata abdita! Suspenderat ego fuit tendit: luna, ante urbem Propoetides &lt;strong&gt;parte&lt;/strong&gt;.&lt;/p&gt;</description>
+        </item>
+        <item>
+        <title>AutoDeploy</title>
+        <link>https://teaize.github.io/p/autodeploy/</link>
+        <pubDate>Fri, 08 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/autodeploy/</guid>
+        <description>&lt;p&gt;$$
+N_s = \frac{Z_b}{Q_a}\times100%
+$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;This file was modifed by Github Desktop on MacOS&lt;/li&gt;
+&lt;li&gt;This was modified by windows from home!&lt;/li&gt;
+&lt;li&gt;This was modifed by windows form SDL!&lt;/li&gt;
+&lt;/ul&gt;
+</description>
         </item>
         <item>
         <title>Math Typesetting</title>
