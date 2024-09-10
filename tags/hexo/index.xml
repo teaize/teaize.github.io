@@ -28,16 +28,14 @@
 &lt;li&gt;&lt;code&gt;/D&lt;/code&gt; 表示要创建的是一个目录符号链接，而不是文件符号链接&lt;/li&gt;
 &lt;li&gt;第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image.png&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h3 id=&#34;实现功能&#34;&gt;实现功能
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;将第二个路径至于 Obsidian 文件夹中，相当于利用 Obsidian 作为 Markdown 的编辑器，这样做可以充分利用 Obsidian 中的一些插件&lt;/li&gt;
@@ -46,16 +44,14 @@
 &lt;/ul&gt;
 &lt;p&gt;通过以上操作，非常方便的在多台设备上创建笔记并发布博文；博客的源文件自动备份在 Github 的私有仓库中，通过 Github Action 创建的静态页面自动部署在 &lt;code&gt;teaize.github.io&lt;/code&gt; 公开仓库中&lt;/p&gt;
 &lt;p&gt;之前在 Mac 上使用 Hexo 框架来生成博客，几乎只能在 Mac 上生成静态页面，再发布博客，并且需要 &lt;code&gt;hexo clean&lt;/code&gt;, &lt;code&gt;hexo g&lt;/code&gt;, &lt;code&gt;hexo d&lt;/code&gt; 来部署；当前这个 Hugo 方案就方便很多&lt;/p&gt;
-&lt;p&gt;&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png&#34;
-	
-	
-	
-	loading=&#34;lazy&#34;
-	
-		alt=&#34;image.png&#34;
-	
-	
-&gt;&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 </description>
         </item>
         

@@ -1,12 +1,18 @@
 <!DOCTYPE html>
 <html lang="zh-cn" dir="ltr">
-    <head><meta charset='utf-8'>
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
 <meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="软连接 1 mklink /D &#34;E:\\003-SynZhPObsidian\\SynZhPObsidian\\00-HugoBlog&#34; &#34;D:\\001-Github\\Hugo-Main\\content\\post&#34; mklink 是 Windows 中的一个命令行工具，用于创建符号链接，类似于 MacOS 系统中的 ln -s 命令（可参考 Obsidian2Hexo | 智朋的个人博客） /D 表示要创建的是一个目录符号链接，而不是文件符号链接 第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径 ">
 <title>Hugo-Obsidian软连接</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/'>
 
-<link rel="stylesheet" href="/scss/style.min.0304c6baf04e01a8fe70693791cb744d56a3578a3120a8796cefc66825aa39c7.css"><meta property='og:title' content="Hugo-Obsidian软连接">
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="Hugo-Obsidian软连接">
 <meta property='og:description' content="软连接 1 mklink /D &#34;E:\\003-SynZhPObsidian\\SynZhPObsidian\\00-HugoBlog&#34; &#34;D:\\001-Github\\Hugo-Main\\content\\post&#34; mklink 是 Windows 中的一个命令行工具，用于创建符号链接，类似于 MacOS 系统中的 ln -s 命令（可参考 Obsidian2Hexo | 智朋的个人博客） /D 表示要创建的是一个目录符号链接，而不是文件符号链接 第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径 ">
 <meta property='og:url' content='https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
@@ -348,16 +354,14 @@
 <li><code>/D</code> 表示要创建的是一个目录符号链接，而不是文件符号链接</li>
 <li>第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径</li>
 </ul>
-<p><img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
 <h3 id="实现功能">实现功能
 </h3><ul>
 <li>将第二个路径至于 Obsidian 文件夹中，相当于利用 Obsidian 作为 Markdown 的编辑器，这样做可以充分利用 Obsidian 中的一些插件</li>
@@ -366,16 +370,14 @@
 </ul>
 <p>通过以上操作，非常方便的在多台设备上创建笔记并发布博文；博客的源文件自动备份在 Github 的私有仓库中，通过 Github Action 创建的静态页面自动部署在 <code>teaize.github.io</code> 公开仓库中</p>
 <p>之前在 Mac 上使用 Hexo 框架来生成博客，几乎只能在 Mac 上生成静态页面，再发布博客，并且需要 <code>hexo clean</code>, <code>hexo g</code>, <code>hexo d</code> 来部署；当前这个 Hugo 方案就方便很多</p>
-<p><img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png"
-	
-	
-	
-	loading="lazy"
-	
-		alt="image.png"
-	
-	
-></p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
 
 </section>
 
@@ -479,10 +481,16 @@
     </section>
     
     <section class="powerby">
-        使用 <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> 构建 <br />
-        主题 <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.26.0">Stack</a></b> 由 <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a> 设计
-    </section>
+        
 
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
 </footer>
 
 
