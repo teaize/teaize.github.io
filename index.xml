@@ -7,7 +7,85 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 11 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>导线线径与功率</title>
+        <link>https://teaize.github.io/p/%E5%AF%BC%E7%BA%BF%E7%BA%BF%E5%BE%84%E4%B8%8E%E5%8A%9F%E7%8E%87/</link>
+        <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%AF%BC%E7%BA%BF%E7%BA%BF%E5%BE%84%E4%B8%8E%E5%8A%9F%E7%8E%87/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;GB 4706.1-2005 家用和类似用途电器的安全　第 1 部分：通用要求&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.wenshui.gov.cn/zmhd/zsk/201805/t20180510_558650.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;1、1.5、2.5、4、6平方电线可以负荷多少瓦？多少电流？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;标称横街面积与器具的额定电流&#34;&gt;标称横街面积与器具的额定电流
+&lt;/h3&gt;&lt;p&gt;电线的载流能力，即电线能够安全传导的最大电流，与电线的线径相关。线径越大，电线的载流能力越强。线径的选择主要是根据电路中的电流来决定的，而电流与负载功率关系密切。&lt;/p&gt;
+&lt;p&gt;以下表格摘自标准 &lt;code&gt;GB 4706.1-2005&lt;/code&gt;：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;器具的额定电流 A&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;标称横截面积 mm²&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;≤ 0.2&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;$箔线^a$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 0.2 且 ≤ 3&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;$0.5^a$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 3 且 ≤ 6&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;0.75&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 6 且 ≤ 10&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1.0 $(0.75)^b$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 10 且 ≤ 16&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1.5 $(1.0)^b$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 16 且 ≤ 25&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 25 且 ≤ 32&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;4&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 32 且 ≤ 40&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;6&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;&amp;gt; 40 且 ≤ 63&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;10&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;表格中上角标 a：只有软线或软线保护装置进入器具的那一点到插头的那一点之间的长度不超过 2m，才可以使用这种软线。&lt;/li&gt;
+&lt;li&gt;表格中上角标 b：导线长度不超过 2m，对于便携式器具可以采用圆括号内的值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240911192135.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240911192135.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;1-平方可以负荷多少瓦&#34;&gt;1 平方可以负荷多少瓦
+&lt;/h3&gt;&lt;p&gt;一个电工常用的经验公式：若是铜芯电线，每平方毫米的截面积可以安全通过 4-5A 的额定电流。在 220V 单相电路中，每 1KW 的功率，其电流约为 4.5A 左右；在 380V 三相平衡电路中，每 1KW 的功率，其电流约为 2A 左右。&lt;/p&gt;
+&lt;p&gt;根据这个计算可知：&lt;strong&gt;每 1 平方毫米截面积的铜芯线，如果用于 220V 单相电路中，则可以安全承载 1KW 的负载所通过的电流&lt;/strong&gt;；如果用在三相平衡负载 (比如电动机) 电路中，则可以安全承载 2.5KW 负载所通过的电流。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Hugo-Obsidian软连接</title>
         <link>https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/</link>
         <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
@@ -52,6 +130,7 @@
 	&lt;/div&gt;
 
 &lt;/p&gt;
+&lt;p&gt;有个问题还是没有弄明白，明明在 Obsidian 中放的是一个软连接，Obsidian 竟然可以实现云同步：）&lt;/p&gt;
 </description>
         </item>
         <item>

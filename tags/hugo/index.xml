@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Hexo on Coffity&#39;s Blog</title>
-        <link>https://teaize.github.io/tags/hexo/</link>
-        <description>Recent content in Hexo on Coffity&#39;s Blog</description>
+        <title>Hugo on Coffity&#39;s Blog</title>
+        <link>https://teaize.github.io/tags/hugo/</link>
+        <description>Recent content in Hugo on Coffity&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/hexo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 08 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>Hugo-Obsidian软连接</title>
         <link>https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/</link>
         <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
