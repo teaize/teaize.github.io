@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Obsidian on Coffity&#39;s Blog</title>
+        <link>https://teaize.github.io/tags/obsidian/</link>
+        <description>Recent content in Obsidian on Coffity&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Coffity</copyright>
+        <lastBuildDate>Thu, 19 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/obsidian/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Excalidraw简明笔记</title>
+        <link>https://teaize.github.io/p/excalidraw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/excalidraw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;安装脚本&#34;&gt;安装脚本
+&lt;/h2&gt;&lt;p&gt;设置 —&amp;gt; Script Library —&amp;gt; 选择想要的脚本点击安装即可&lt;/p&gt;
+&lt;p&gt;安装的脚本可在 &lt;code&gt;Obsidian工具面板&lt;/code&gt; 最下栏 Download 中查看&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919212103.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919212103.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;PS：可鼠标长按拖动面板中的插件按钮到侧边栏&lt;/p&gt;
+&lt;p&gt;已安装插件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Set Stroke Width of Selected Elements：设置线条宽度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set Dimensions：设置元素尺寸&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boolean Operations：布尔运算&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Mindmap format：将已有的箭头整理为类似思维导图样式的箭头&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;![[Pasted image 20240919214334.png]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Auto Layout：自动布局&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add Connector Point：添加无序列表符号&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set Text Alignment：设置文字对齐&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Split text by lines：单个元素多行文本 —&amp;gt; 多个元素单行文本&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919214550.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919214550.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Box Selected Elements：给选中元素添加边框&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Connect elements：连接元素&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Slideshow：实现类似幻灯片效果&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;slideshow&#34;&gt;Slideshow
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Hu41157Hs/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=3ae7ae95fa254383ab9ae83f75abd29d&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;超越PPT：使用obsidian Excalidraw Slideshow 创造动态演示_哔哩哔哩_bilibili&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=JwgtCrIVeEU&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;A detailed walkthrough of the Excalidraw-Obsidian Slideshow 3.0 script - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用流程&#34;&gt;使用流程
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;安装插件&lt;/li&gt;
+&lt;li&gt;绘制元素&lt;/li&gt;
+&lt;li&gt;通过以下两种方式设置幻灯片播放顺序
+&lt;ul&gt;
+&lt;li&gt;绘制一个箭头来控制顺序：绘制一根箭头，跨过不同元素。绘制完之后，选择箭头，然后点击 slide show 命令；若需要调整，可右键对箭头进行编辑调整&lt;/li&gt;
+&lt;li&gt;通过设置 Frame 来控制顺序：会自动按照 Frame 的顺序进行播放&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919215759.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919215759.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;设计库&#34;&gt;设计库
+&lt;/h2&gt;&lt;p&gt;经常需要复用的元素，可右键元素 —&amp;gt; Add to library&lt;/p&gt;
+&lt;p&gt;也可以安装别人的设计库：&lt;a class=&#34;link&#34; href=&#34;https://libraries.excalidraw.com/?target=_blank&amp;amp;referrer=app%3A%2F%2Fobsidian.md&amp;amp;useHash=true&amp;amp;token=UpRWGKeZwRpgrotKBvcaP&amp;amp;theme=light&amp;amp;version=2&amp;amp;sort=default&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Excalidraw Libraries&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919221037.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919221037.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Piping and instrumentation diagram P&amp;amp;ID&lt;/li&gt;
+&lt;li&gt;Stick Figures Collaboration&lt;/li&gt;
+&lt;li&gt;Thicc arrow&lt;/li&gt;
+&lt;li&gt;Webpage frames&lt;/li&gt;
+&lt;li&gt;Stick Figures&lt;/li&gt;
+&lt;li&gt;Mathematical Symbols&lt;/li&gt;
+&lt;li&gt;Presentation Templates&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

@@ -7,7 +7,214 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 11 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 21 Sep 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>气动接头连接螺纹简明笔记</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E8%BF%9E%E6%8E%A5%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E8%BF%9E%E6%8E%A5%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921111024.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921111024.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;平行螺纹&#34;&gt;平行螺纹
+&lt;/h2&gt;&lt;h3 id=&#34;unf-螺纹&#34;&gt;UNF 螺纹
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;UNF 螺纹是统一细牙螺纹 (Unified National Fine Thread) 的简称，属于英制螺纹的一种。UN 系列螺纹系统主要有两种类型：UNC（统一粗牙螺纹）和 UNF（统一细牙螺纹）&lt;/li&gt;
+&lt;li&gt;螺纹角度为 60°&lt;/li&gt;
+&lt;li&gt;单位为英寸&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如 &lt;code&gt;10-32UNF&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;10：表示 &lt;strong&gt;10#&lt;/strong&gt;。对应的螺纹直径约为 0.19 英寸（4.83mm）。在英制螺纹中，直径的标识通常是由数字（如 4、6、8、10 等）来表示的，而不是直接给出具体的直径尺寸。&lt;/li&gt;
+&lt;li&gt;32：32 表示&lt;strong&gt;每英寸有 32 个螺纹牙&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;m-螺纹&#34;&gt;M 螺纹
+&lt;/h3&gt;&lt;p&gt;M 螺纹是公制螺纹 (Metric Thread) 的缩写，广泛应用于世界各地的机械设计中。M 螺纹也有粗牙和细牙之分，一般默认使用的是粗牙螺纹，螺纹角度为 60°&lt;/p&gt;
+&lt;p&gt;例如 &lt;code&gt;M12×1.5&lt;/code&gt; 表示螺纹直径为 12 毫米，螺距为 1.5 毫米。&lt;/p&gt;
+&lt;h3 id=&#34;g-螺纹&#34;&gt;G 螺纹
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;G 螺纹，也称为 BSPP 螺纹（British Standard Pipe Parallel），是&lt;strong&gt;英国标准的平行管螺纹&lt;/strong&gt;。通常需要配合垫圈或 O 型圈来实现密封。&lt;/li&gt;
+&lt;li&gt;螺纹角为 55°&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;锥形螺纹&#34;&gt;锥形螺纹
+&lt;/h2&gt;&lt;p&gt;有时候碰到 RT 的标注，指的是 &amp;ldquo;R Taper&amp;rdquo;，即锥形螺纹（Tapered Thread）&lt;/p&gt;
+&lt;h3 id=&#34;r-螺纹&#34;&gt;R 螺纹
+&lt;/h3&gt;&lt;p&gt;R 螺纹通常指 BSPT(British Standard Pipe Tapered) 螺纹，即&lt;strong&gt;英国标准管螺纹锥管螺纹&lt;/strong&gt; 。它在欧洲和亚洲的管道系统中使用较多。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;R 螺纹是锥形螺纹，因此它具有自密封功能，通常不需要密封材料，但为了更好的密封性，也可以使用密封带&lt;/li&gt;
+&lt;li&gt;螺纹角为 55°，通过螺纹锥度配合实现自密封&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;npt-螺纹&#34;&gt;NPT 螺纹
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;NPT 螺纹是&lt;strong&gt;美国国家标准管螺纹&lt;/strong&gt;(National Pipe Tapered Thread) ，是一种锥形螺纹，广泛应用于北美地区。&lt;/li&gt;
+&lt;li&gt;与 R 螺纹相似，不过 NPT 螺纹角为 60°&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Excalidraw简明笔记</title>
+        <link>https://teaize.github.io/p/excalidraw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Thu, 19 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/excalidraw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;安装脚本&#34;&gt;安装脚本
+&lt;/h2&gt;&lt;p&gt;设置 —&amp;gt; Script Library —&amp;gt; 选择想要的脚本点击安装即可&lt;/p&gt;
+&lt;p&gt;安装的脚本可在 &lt;code&gt;Obsidian工具面板&lt;/code&gt; 最下栏 Download 中查看&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919212103.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919212103.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;PS：可鼠标长按拖动面板中的插件按钮到侧边栏&lt;/p&gt;
+&lt;p&gt;已安装插件：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Set Stroke Width of Selected Elements：设置线条宽度&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set Dimensions：设置元素尺寸&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Boolean Operations：布尔运算&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Mindmap format：将已有的箭头整理为类似思维导图样式的箭头&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;![[Pasted image 20240919214334.png]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Auto Layout：自动布局&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add Connector Point：添加无序列表符号&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Set Text Alignment：设置文字对齐&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Split text by lines：单个元素多行文本 —&amp;gt; 多个元素单行文本&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919214550.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919214550.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Box Selected Elements：给选中元素添加边框&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Connect elements：连接元素&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Slideshow：实现类似幻灯片效果&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;slideshow&#34;&gt;Slideshow
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bilibili.com/video/BV1Hu41157Hs/?spm_id_from=333.337.search-card.all.click&amp;amp;vd_source=3ae7ae95fa254383ab9ae83f75abd29d&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;超越PPT：使用obsidian Excalidraw Slideshow 创造动态演示_哔哩哔哩_bilibili&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=JwgtCrIVeEU&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;A detailed walkthrough of the Excalidraw-Obsidian Slideshow 3.0 script - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用流程&#34;&gt;使用流程
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;安装插件&lt;/li&gt;
+&lt;li&gt;绘制元素&lt;/li&gt;
+&lt;li&gt;通过以下两种方式设置幻灯片播放顺序
+&lt;ul&gt;
+&lt;li&gt;绘制一个箭头来控制顺序：绘制一根箭头，跨过不同元素。绘制完之后，选择箭头，然后点击 slide show 命令；若需要调整，可右键对箭头进行编辑调整&lt;/li&gt;
+&lt;li&gt;通过设置 Frame 来控制顺序：会自动按照 Frame 的顺序进行播放&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919215759.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919215759.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;设计库&#34;&gt;设计库
+&lt;/h2&gt;&lt;p&gt;经常需要复用的元素，可右键元素 —&amp;gt; Add to library&lt;/p&gt;
+&lt;p&gt;也可以安装别人的设计库：&lt;a class=&#34;link&#34; href=&#34;https://libraries.excalidraw.com/?target=_blank&amp;amp;referrer=app%3A%2F%2Fobsidian.md&amp;amp;useHash=true&amp;amp;token=UpRWGKeZwRpgrotKBvcaP&amp;amp;theme=light&amp;amp;version=2&amp;amp;sort=default&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Excalidraw Libraries&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919221037.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240919221037.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Piping and instrumentation diagram P&amp;amp;ID&lt;/li&gt;
+&lt;li&gt;Stick Figures Collaboration&lt;/li&gt;
+&lt;li&gt;Thicc arrow&lt;/li&gt;
+&lt;li&gt;Webpage frames&lt;/li&gt;
+&lt;li&gt;Stick Figures&lt;/li&gt;
+&lt;li&gt;Mathematical Symbols&lt;/li&gt;
+&lt;li&gt;Presentation Templates&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>冷轧钢喷塑</title>
+        <link>https://teaize.github.io/p/%E5%86%B7%E8%BD%A7%E9%92%A2%E5%96%B7%E5%A1%91/</link>
+        <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%86%B7%E8%BD%A7%E9%92%A2%E5%96%B7%E5%A1%91/</guid>
+        <description>&lt;p&gt;喷塑也就是常讲的静电粉末喷涂，它是利用静电发生器使塑料粉末带电，吸附在铁板（冷轧钢）表面，然后经过 180～220℃的烘烤，使粉末熔化黏附在金属表面，喷塑产品多用于户内使用的箱体，漆膜呈现平光或哑光效果。&lt;/p&gt;
+&lt;h3 id=&#34;喷塑的目的&#34;&gt;喷塑的目的
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;防腐蚀：在钢材表面形成一层致密的塑料涂层，有效防止氧化和腐蚀，提高使用寿命&lt;/li&gt;
+&lt;li&gt;美观性：使产品表面更加光滑和均匀，提高产品的美观度，同时可以根据需要选择不同的颜色，满足不同的设计和使用要求&lt;/li&gt;
+&lt;li&gt;耐磨性和抗冲击性：喷塑涂层具有一定的硬度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;喷塑喷的什么塑&#34;&gt;喷塑，喷的什么塑
+&lt;/h3&gt;&lt;p&gt;喷塑过程中使用的材料主要是热固性粉末涂料或热塑性粉末涂料，常见的材料包括&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;环氧树脂粉末：具有优异的附着力、耐腐蚀性和机械性能，常用于需要高防腐蚀要求的场合。然而，其耐候性较差，不适合长期暴露在户外。&lt;/li&gt;
+&lt;li&gt;聚酯粉末：具有良好的耐候性、耐紫外线性能和机械性能，适合户外使用。这种粉末的表面光洁度高，色彩稳定性好。&lt;/li&gt;
+&lt;li&gt;环氧 - 聚酯混合粉末：结合了环氧树脂和聚酯粉末的优点，既具有良好的附着力和机械性能，又提高了耐候性，是常用的通用型喷塑材料。&lt;/li&gt;
+&lt;li&gt;聚氨酯粉末：具有优异的耐磨性、耐化学腐蚀性和弹性，适合用于需要高机械强度和耐化学性的场合。&lt;/li&gt;
+&lt;li&gt;聚乙烯和聚丙烯粉末：这些属于热塑性粉末，具有良好的耐化学性和耐磨性，但机械性能相对较弱，常用于特定的工业环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;喷塑流程&#34;&gt;喷塑流程
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;前处理：清洗、磷化、干燥&lt;/li&gt;
+&lt;li&gt;静电喷涂：利用静电喷枪将粉末涂料喷射到工件表面。喷枪使粉末带有负电荷，工件通过接地带正电荷，这种静电吸引力使粉末均匀地吸附在工件表面。注意喷涂过程中的粉末涂料的&lt;strong&gt;均匀性控制&lt;/strong&gt;，涂层应均匀覆盖工件包括边缘、角落和复杂形状等各个区域&lt;/li&gt;
+&lt;li&gt;加热固化：送入固化炉中，温度通常在 180-200°C 左右，具体温度取决于所使用的粉末涂料类型&lt;/li&gt;
+&lt;li&gt;冷却：自然冷却或风冷&lt;/li&gt;
+&lt;li&gt;检验和后处理：对喷塑后的工件进行外观和性能检验，确保涂层均匀、无气泡、流挂、针孔等缺陷，并达到所需的硬度、附着力和防腐性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他工艺&#34;&gt;其他工艺
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;喷漆&lt;/li&gt;
+&lt;li&gt;电泳涂装&lt;/li&gt;
+&lt;li&gt;热镀锌&lt;/li&gt;
+&lt;li&gt;电镀&lt;/li&gt;
+&lt;li&gt;阳极氧化（主要用于铝合金）&lt;/li&gt;
+&lt;li&gt;氟碳喷涂&lt;/li&gt;
+&lt;li&gt;浸塑&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>导线线径与功率</title>
         <link>https://teaize.github.io/p/%E5%AF%BC%E7%BA%BF%E7%BA%BF%E5%BE%84%E4%B8%8E%E5%8A%9F%E7%8E%87/</link>
         <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
@@ -15,7 +222,7 @@
         <guid>https://teaize.github.io/p/%E5%AF%BC%E7%BA%BF%E7%BA%BF%E5%BE%84%E4%B8%8E%E5%8A%9F%E7%8E%87/</guid>
         <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;GB 4706.1-2005 家用和类似用途电器的安全　第 1 部分：通用要求&lt;/li&gt;
+&lt;li&gt;GB 4706.1-2005 家用和类似用途电器的安全 第 1 部分：通用要求&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.wenshui.gov.cn/zmhd/zsk/201805/t20180510_558650.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;1、1.5、2.5、4、6平方电线可以负荷多少瓦？多少电流？&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
