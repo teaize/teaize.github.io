@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
+    <lastmod>2024-10-06T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,17 +15,14 @@
                 href="https://teaize.github.io/"
                 />
   </url><url>
-    <loc>https://teaize.github.io/tags/ahk/</loc>
-    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://teaize.github.io/p/ahk-%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
-    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
+    <loc>https://teaize.github.io/tags/automation/</loc>
+    <lastmod>2024-10-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/post/</loc>
-    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
+    <lastmod>2024-10-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/tags/</loc>
-    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
+    <lastmod>2024-10-06T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -36,6 +33,15 @@
                 hreflang="zh-cn"
                 href="https://teaize.github.io/tags/"
                 />
+  </url><url>
+    <loc>https://teaize.github.io/p/%E7%94%B5%E7%A3%81%E9%98%80%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</loc>
+    <lastmod>2024-10-06T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/tags/ahk/</loc>
+    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/ahk-%E7%A8%8B%E5%BA%8F%E5%90%AF%E5%8A%A8%E5%BF%AB%E6%8D%B7%E9%94%AE/</loc>
+    <lastmod>2024-09-29T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/tags/mechanic/</loc>
     <lastmod>2024-09-25T00:00:00+00:00</lastmod>
