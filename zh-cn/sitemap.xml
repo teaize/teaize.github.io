@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2024-10-20T00:00:00+00:00</lastmod>
+    <lastmod>2024-10-23T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -16,7 +16,26 @@
                 />
   </url><url>
     <loc>https://teaize.github.io/post/</loc>
-    <lastmod>2024-10-20T00:00:00+00:00</lastmod>
+    <lastmod>2024-10-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/tags/solidworks/</loc>
+    <lastmod>2024-10-23T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/tags/</loc>
+    <lastmod>2024-10-23T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://teaize.github.io/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://teaize.github.io/tags/"
+                />
+  </url><url>
+    <loc>https://teaize.github.io/p/%E5%9F%BA%E4%BA%8E%E8%A7%84%E5%88%99%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1/</loc>
+    <lastmod>2024-10-23T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8E%8B%E5%8A%9B%E5%8D%95%E4%BD%8D%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-10-20T00:00:00+00:00</lastmod>
@@ -29,19 +48,6 @@
   </url><url>
     <loc>https://teaize.github.io/p/plc%E6%BC%8F%E5%9E%8B%E8%BE%93%E5%85%A5%E5%92%8C%E6%BA%90%E5%9E%8B%E8%BE%93%E5%85%A5/</loc>
     <lastmod>2024-10-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://teaize.github.io/tags/</loc>
-    <lastmod>2024-10-06T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://teaize.github.io/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://teaize.github.io/tags/"
-                />
   </url><url>
     <loc>https://teaize.github.io/p/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1rs232rs485%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2024-10-06T00:00:00+00:00</lastmod>
