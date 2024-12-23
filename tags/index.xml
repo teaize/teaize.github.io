@@ -71,30 +71,6 @@
         <guid>https://teaize.github.io/tags/hexo/</guid>
         <description></description>
         </item>
-        <item>
-        <title>Markdown</title>
-        <link>https://teaize.github.io/tags/markdown/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/tags/markdown/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Tag With Whitespaces</title>
-        <link>https://teaize.github.io/tags/tag-with-whitespaces/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/tags/tag-with-whitespaces/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Text</title>
-        <link>https://teaize.github.io/tags/text/</link>
-        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/tags/text/</guid>
-        <description></description>
-        </item>
         
     </channel>
 </rss>
