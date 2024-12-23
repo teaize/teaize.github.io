@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
     <channel>
-        <title>Hugo on Coffity&#39;s Blog</title>
-        <link>https://teaize.github.io/tags/hugo/</link>
-        <description>Recent content in Hugo on Coffity&#39;s Blog</description>
+        <title>Git on Coffity&#39;s Blog</title>
+        <link>https://teaize.github.io/tags/git/</link>
+        <description>Recent content in Git on Coffity&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/hugo/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" /><item>
         <title>博客恢复到某Git节点</title>
         <link>https://teaize.github.io/p/%E5%8D%9A%E5%AE%A2%E6%81%A2%E5%A4%8D%E5%88%B0%E6%9F%90git%E8%8A%82%E7%82%B9/</link>
         <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
@@ -72,54 +72,6 @@
 &lt;/div&gt;
 &lt;/div&gt;&lt;p&gt;PS：如果遇到网络连接问题：&lt;code&gt;Failed to connect to github.com port 443 after 1043 ms: Connection refused&lt;/code&gt;，可参考 &lt;a class=&#34;link&#34; href=&#34;https://blog.csdn.net/zpf1813763637/article/details/128340109&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Git报错： Failed to connect to github.com port 443 解决方案-CSDN博客&lt;/a&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
-        <title>Hugo-Obsidian软连接</title>
-        <link>https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/</link>
-        <pubDate>Sun, 08 Sep 2024 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/hugo-obsidian%E8%BD%AF%E8%BF%9E%E6%8E%A5/</guid>
-        <description>&lt;h3 id=&#34;软连接&#34;&gt;软连接
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;E:\003-SynZhPObsidian\SynZhPObsidian\00-HugoBlog&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\post&amp;#34;&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;&lt;code&gt;mklink&lt;/code&gt; 是 Windows 中的一个命令行工具，用于创建符号链接，类似于 MacOS 系统中的 &lt;code&gt;ln -s&lt;/code&gt; 命令（可参考 &lt;a class=&#34;link&#34; href=&#34;https://coffeelize.top/posts/Obsidian-to-Hexo.html?highlight=%e8%bd%af&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Obsidian2Hexo | 智朋的个人博客&lt;/a&gt;）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;/D&lt;/code&gt; 表示要创建的是一个目录符号链接，而不是文件符号链接&lt;/li&gt;
-&lt;li&gt;第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908190814.png&#34; alt=&#34;image.png&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;h3 id=&#34;实现功能&#34;&gt;实现功能
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;将第二个路径至于 Obsidian 文件夹中，相当于利用 Obsidian 作为 Markdown 的编辑器，这样做可以充分利用 Obsidian 中的一些插件&lt;/li&gt;
-&lt;li&gt;第一个路径为 Hugo 博客的 post 目录，即发布博客的源文件目录。在 Obsidan 中增删改 markdown 文件，相当于直接编辑了 post 目录中的 markdown 文件，修改完成之后可快速推送到 github 仓库中&lt;/li&gt;
-&lt;li&gt;已为 Hugo 创建了一个 Github Action，检测到 Github 中仓库有新提交，就会触发生成网页并部署等一系列操作&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;通过以上操作，非常方便的在多台设备上创建笔记并发布博文；博客的源文件自动备份在 Github 的私有仓库中，通过 Github Action 创建的静态页面自动部署在 &lt;code&gt;teaize.github.io&lt;/code&gt; 公开仓库中&lt;/p&gt;
-&lt;p&gt;之前在 Mac 上使用 Hexo 框架来生成博客，几乎只能在 Mac 上生成静态页面，再发布博客，并且需要 &lt;code&gt;hexo clean&lt;/code&gt;, &lt;code&gt;hexo g&lt;/code&gt;, &lt;code&gt;hexo d&lt;/code&gt; 来部署；当前这个 Hugo 方案就方便很多&lt;/p&gt;
-&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240908191940.png&#34; alt=&#34;image.png&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;p&gt;有个问题还是没有弄明白，明明在 Obsidian 中放的是一个软连接，Obsidian 竟然可以实现云同步：）&lt;/p&gt;
 </description>
         </item>
         
