@@ -106,6 +106,81 @@
 </description>
         </item>
         <item>
+        <title>RS232、RS485简明笔记</title>
+        <link>https://teaize.github.io/p/rs232rs485%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sun, 10 Nov 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/rs232rs485%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h3 id=&#34;rs-232-和-rs-485-通信&#34;&gt;RS-232 和 RS-485 通信
+&lt;/h3&gt;&lt;p&gt;RS-232 和 RS-485 通信标准都是用于传输 数字信号 的&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;RS-232&lt;/th&gt;
+          &lt;th&gt;RS-485&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;通信类型&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;串行通信&lt;/td&gt;
+          &lt;td&gt;差分串行通信&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;信号类型&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;数字信号&lt;/td&gt;
+          &lt;td&gt;数字信号&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;信号表示&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;使用电压电平表示 0 和 1&lt;/td&gt;
+          &lt;td&gt;使用差分电压表示 0 和 1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑 1 电压&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;-3V 至 -15V&lt;/td&gt;
+          &lt;td&gt;A 电压高于 B&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑 0 电压&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;+3V 至 +15V&lt;/td&gt;
+          &lt;td&gt;A 电压低于 B&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;通信距离&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;通常为 15 米（50 英尺）&lt;/td&gt;
+          &lt;td&gt;可达 1200 米（4000 英尺）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;最大通信速率&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;通常为 115200 bps（每秒比特数）&lt;/td&gt;
+          &lt;td&gt;可达 10 Mbps（每秒比特数）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;连接方式&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;点对点&lt;/td&gt;
+          &lt;td&gt;多点&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;常见应用&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;计算机与外设（打印机、调制解调器等）&lt;/td&gt;
+          &lt;td&gt;工业自动化（PLC、传感器网络等）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;电缆类型&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;单端串行电缆&lt;/td&gt;
+          &lt;td&gt;差分电缆&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;RS-232 通信常用于点对点的连接，适合短距离通信，使用单端电压信号。&lt;/li&gt;
+&lt;li&gt;RS-485 通信适用于多点连接，支持更长距离和更高的数据传输速率，使用差分电压信号来提高抗干扰能力。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>基于规则的模块化设计</title>
         <link>https://teaize.github.io/p/%E5%9F%BA%E4%BA%8E%E8%A7%84%E5%88%99%E7%9A%84%E6%A8%A1%E5%9D%97%E5%8C%96%E8%AE%BE%E8%AE%A1/</link>
         <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
@@ -237,7 +312,7 @@
 &lt;/li&gt;
 &lt;li&gt;kgf/cm²（kilogram-force per square centimeter，每平方厘米的千克力）
 &lt;ul&gt;
-&lt;li&gt;kgf/cm² 相当于 0.1MPa&lt;/li&gt;
+&lt;li&gt;kgf/cm² 相当于 0.1MPa，即等于bar&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -603,38 +678,37 @@
 &lt;/h3&gt;&lt;p&gt;硬度是材料抵抗局部变形（如划痕、压痕或摩擦）能力的量度。用于评估材料的耐磨性、切削加工性能和抗塑性变形能力。&lt;/p&gt;
 &lt;h3 id=&#34;分类与测试方法&#34;&gt;分类与测试方法
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;布氏硬度（Brinell Hardness, HB）&lt;/strong&gt;
+&lt;li&gt;布氏硬度（Brinell Hardness, HB）
 &lt;ul&gt;
 &lt;li&gt;原理：使用硬化钢球或硬质合金球（通常是直径为 10 mm 的球体）在规定的负荷下压入材料表面，保持一定时间后，测量压痕直径，通过压痕面积计算硬度值。&lt;/li&gt;
-&lt;li&gt;应用：适用于较软的材料，如铸&lt;/li&gt;
-&lt;li&gt;铁、钢材、铜合金等，主要用于测定粗大晶粒和不均匀材料的硬度。钢球压头用 HBS 表示，硬质合金球用 HBW 表示&lt;/li&gt;
+&lt;li&gt;应用：适用于较软的材料，如铸铁、钢材、铜合金等，主要用于测定粗大晶粒和不均匀材料的硬度。钢球压头用 HBS 表示，硬质合金球用 HBW 表示&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;洛氏硬度（Rockwell Hardness, HRA、HRB、HRC）&lt;/strong&gt;
+&lt;li&gt;洛氏硬度（Rockwell Hardness, HRA、HRB、HRC）
 &lt;ul&gt;
 &lt;li&gt;原理：通过金刚石锥或钢球在较小的初始负荷下压入材料表面，随后增加更大的主负荷，去除负荷后测量压痕深度，并以此计算硬度值。常见的标度有 HRC（用于硬钢）、HRB（用于软钢和有色金属）。&lt;/li&gt;
-&lt;li&gt;应用：广泛用于金属材料的硬度测试，特别是钢材，HRC（C 标度）常用于硬钢的测量。&lt;/li&gt;
+&lt;li&gt;应用：&lt;strong&gt;广泛用于金属材料的硬度测试，特别是钢材&lt;/strong&gt;，HRC（C 标度）常用于硬钢的测量。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;维氏硬度（Vickers Hardness, HV）&lt;/strong&gt;
+&lt;li&gt;维氏硬度（Vickers Hardness, HV）
 &lt;ul&gt;
 &lt;li&gt;原理：使用金字塔形金刚石压头，在一定负荷下压入材料表面，测量压痕对角线长度，通过压痕面积计算硬度值。维氏硬度测试适用于各种材料，特别是薄材料或小零件。&lt;/li&gt;
 &lt;li&gt;应用：适用于硬度范围较宽的材料，如钢、铜合金、铝合金等，也适用于薄材料和表面硬度测量。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;肖氏硬度（Shore Hardness, HS）&lt;/strong&gt;
+&lt;li&gt;肖氏硬度（Shore Hardness, HS）
 &lt;ul&gt;
 &lt;li&gt;原理：使用弹性测试仪器，通过测量从特定高度跌落的标准锤在材料表面弹回的高度来确定硬度。分为肖氏 A 硬度（软质材料，如橡胶）和肖氏 D 硬度（硬质材料，如塑料）。&lt;/li&gt;
 &lt;li&gt;应用：主要用于测定橡胶、塑料等非金属材料的硬度。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;努氏硬度（Knoop Hardness, HK）&lt;/strong&gt;
+&lt;li&gt;努氏硬度（Knoop Hardness, HK）
 &lt;ul&gt;
 &lt;li&gt;原理：与维氏硬度相似，使用一种菱形压头，但压痕形状不同，更适用于测试薄层材料或脆性材料。&lt;/li&gt;
 &lt;li&gt;应用：用于陶瓷、玻璃、涂层等脆性材料的硬度测试。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;莫氏硬度（Mohs Hardness）&lt;/strong&gt;
+&lt;li&gt;莫氏硬度（Mohs Hardness）
 &lt;ul&gt;
 &lt;li&gt;原理：使用刻划硬度方法，将一种材料在另一种材料上划出痕迹的能力表示材料的硬度。莫氏硬度是一个相对标度，从 1（滑石）到 10（钻石）。&lt;/li&gt;
 &lt;li&gt;应用：常用于矿物学和地质学中的硬度评估。&lt;/li&gt;
@@ -651,13 +725,13 @@
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;洛氏硬度（HRC, HRB）
 &lt;ul&gt;
-&lt;li&gt;应用最广泛：洛氏硬度测试因其操作简便、测试速度快，且适用于不同硬度范围的材料，因此在机械制造和加工领域应用最广泛。尤其是 HRC 标度，常用于测量钢材和硬质合金材料的硬度。&lt;/li&gt;
+&lt;li&gt;应用最广泛：洛氏硬度测试因其操作简便、测试速度快，且适用于不同硬度范围的材料，&lt;strong&gt;因此在机械制造和加工领域应用最广泛&lt;/strong&gt;。尤其是 HRC 标度，常用于测量钢材和硬质合金材料的硬度。&lt;/li&gt;
 &lt;li&gt;典型应用：HRC 用于热处理后的钢材、工具、模具等材料的硬度测试，HRB 适用于较软的材料如低碳钢和一些有色金属。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;布氏硬度（HB）
 &lt;ul&gt;
-&lt;li&gt;应用于大块材料和铸件：布氏硬度因其测试压痕较大，适合测试粗晶材料或不均匀材料（如铸件）。布氏硬度常用于铸铁、钢材、铜合金等材料的测试。&lt;/li&gt;
+&lt;li&gt;应用于大块材料和铸件：布氏硬度因其测试压痕较大，适合测试粗晶材料或不均匀材料（如铸件）。&lt;strong&gt;布氏硬度常用于铸铁、钢材、铜合金等材料的测试&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;典型应用：大型铸件、锻件和粗晶材料的硬度测试。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -1979,6 +2053,28 @@
         
         <guid>https://teaize.github.io/archives/</guid>
         <description></description>
+        </item>
+        <item>
+        <title>مثال نص</title>
+        <link>https://teaize.github.io/p/%D9%85%D8%AB%D8%A7%D9%84-%D9%86%D8%B5/</link>
+        <pubDate>Sat, 09 Mar 2019 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%D9%85%D8%AB%D8%A7%D9%84-%D9%86%D8%B5/</guid>
+        <description>&lt;img src="https://teaize.github.io/matt-le-SJSpo9hQf7s-unsplash.jpg" alt="Featured image of post مثال نص" /&gt;&lt;h2 id=&#34;فقرة-1&#34;&gt;فقرة 1
+&lt;/h2&gt;&lt;p&gt;هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من &lt;a class=&#34;link&#34; href=&#34;https://colorslab.com/textgator/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;مولد النص العربى&lt;/a&gt;، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.
+ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد النص العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه التصميم فيظهر بشكل لا يليق.
+هذا النص يمكن أن يتم تركيبه على أي تصميم دون مشكلة فلن يبدو وكأنه نص منسوخ، غير منظم، غير منسق، أو حتى غير مفهوم. لأنه مازال نصاً بديلاً ومؤقتاً.&lt;/p&gt;
+&lt;h2 id=&#34;فقرة-2&#34;&gt;فقرة 2
+&lt;/h2&gt;&lt;p&gt;هذا النص هو مثال لنص يمكن أن يستبدل في نفس المساحة، لقد تم توليد هذا النص من &lt;a class=&#34;link&#34; href=&#34;https://colorslab.com/textgator/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;مولد النص العربى&lt;/a&gt;، حيث يمكنك أن تولد مثل هذا النص أو العديد من النصوص الأخرى إضافة إلى زيادة عدد الحروف التى يولدها التطبيق.
+إذا كنت تحتاج إلى عدد أكبر من الفقرات يتيح لك مولد النص العربى زيادة عدد الفقرات كما تريد، النص لن يبدو مقسما ولا يحوي أخطاء لغوية، مولد النص العربى مفيد لمصممي المواقع على وجه الخصوص، حيث يحتاج العميل فى كثير من الأحيان أن يطلع على صورة حقيقية لتصميم الموقع.
+ومن هنا وجب على المصمم أن يضع نصوصا مؤقتة على التصميم ليظهر للعميل الشكل كاملاً،دور مولد النص العربى أن يوفر على المصمم عناء البحث عن نص بديل لا علاقة له بالموضوع الذى يتحدث عنه التصميم فيظهر بشكل لا يليق.
+هذا النص يمكن أن يتم تركيبه على أي تصميم دون مشكلة فلن يبدو وكأنه نص منسوخ، غير منظم، غير منسق، أو حتى غير مفهوم. لأنه مازال نصاً بديلاً ومؤقتاً.&lt;/p&gt;
+&lt;h2 id=&#34;تجربة-rtl&#34;&gt;تجربة RTL
+&lt;/h2&gt;&lt;p&gt;كلمة 1 Text كلمة 2&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>Links</title>
