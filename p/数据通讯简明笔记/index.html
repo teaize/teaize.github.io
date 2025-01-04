@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数据通讯的基本概念 通讯方式：有线通讯（如 RS-485、以太网）和无线通讯（如 Wi-Fi、蓝牙、LoRa）。 通讯模型：OSI 七层模型、TCP/IP 模型。 数据协议：定义数据传输的规则和格式。 通讯接口与硬件 串行接口：RS-232、RS-485、USB。 并行接口：如 GPIB。 网络接口：以太网接口、工业总线接口。 无线接口：如 ZigBee、Wi-Fi 模块。 数据通讯协议 基础协议：Modbus、Profibus、CAN、HART。 互联网协议：TCP/IP、HTTP、MQTT。 工业协议：OPC UA、EtherCAT、Profinet。 专有协议：特定厂商开发的协议。 通讯拓扑结构 点对点通讯：如主从式设备连接。 多点通讯：如总线型结构。 网络通讯：星形、环形、树形、网状拓扑结构。 数据传输技术 同步与异步传输：数据发送方式的选择。 全双工与半双工：通讯方向的控制。 数据速率：带宽与波特率对传输性能的影响。 数据完整性：校验技术（如奇偶校验、CRC）。 工业自动化通讯 设备通讯：如传感器、执行器与控制系统之间的通讯。 现场总线：如 CAN、Profibus 在现场设备中的应用。 工业以太网：在自动化系统中的高速通讯。 数据通讯的安全性 数据加密：确保通讯过程中数据的保密性。 访问控制：限制未授权设备的接入。 异常检测：如流量分析、入侵检测。 数据冗余：通过冗余链路确保通讯可靠性。 通讯应用案例 远程监控：如 PLC 与 SCADA 系统的数据交换。 数据采集：使用 Modbus 协议采集传感器数据。 智能控制：通过工业以太网实现实时控制。 云端通讯：通过 MQTT 或 HTTP 上传数据到云平台。 数据通讯的测试与调试 调试工具：如串口调试助手、网络抓包工具（Wireshark）。 信号完整性：测试信号波形、延迟和误码率。 协议解析：分析数据帧格式和通讯协议实现。 数据通讯的发展趋势 边缘计算：减少延迟并提高实时性。 工业物联网（IIoT）：实现设备间的全面互联。 5G 技术：在工业自动化中的应用。 数据通讯标准化：推进工业协议的统一化。 ">
+<title>数据通讯简明笔记</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E6%95%B0%E6%8D%AE%E9%80%9A%E8%AE%AF%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="数据通讯简明笔记">
+<meta property='og:description' content="数据通讯的基本概念 通讯方式：有线通讯（如 RS-485、以太网）和无线通讯（如 Wi-Fi、蓝牙、LoRa）。 通讯模型：OSI 七层模型、TCP/IP 模型。 数据协议：定义数据传输的规则和格式。 通讯接口与硬件 串行接口：RS-232、RS-485、USB。 并行接口：如 GPIB。 网络接口：以太网接口、工业总线接口。 无线接口：如 ZigBee、Wi-Fi 模块。 数据通讯协议 基础协议：Modbus、Profibus、CAN、HART。 互联网协议：TCP/IP、HTTP、MQTT。 工业协议：OPC UA、EtherCAT、Profinet。 专有协议：特定厂商开发的协议。 通讯拓扑结构 点对点通讯：如主从式设备连接。 多点通讯：如总线型结构。 网络通讯：星形、环形、树形、网状拓扑结构。 数据传输技术 同步与异步传输：数据发送方式的选择。 全双工与半双工：通讯方向的控制。 数据速率：带宽与波特率对传输性能的影响。 数据完整性：校验技术（如奇偶校验、CRC）。 工业自动化通讯 设备通讯：如传感器、执行器与控制系统之间的通讯。 现场总线：如 CAN、Profibus 在现场设备中的应用。 工业以太网：在自动化系统中的高速通讯。 数据通讯的安全性 数据加密：确保通讯过程中数据的保密性。 访问控制：限制未授权设备的接入。 异常检测：如流量分析、入侵检测。 数据冗余：通过冗余链路确保通讯可靠性。 通讯应用案例 远程监控：如 PLC 与 SCADA 系统的数据交换。 数据采集：使用 Modbus 协议采集传感器数据。 智能控制：通过工业以太网实现实时控制。 云端通讯：通过 MQTT 或 HTTP 上传数据到云平台。 数据通讯的测试与调试 调试工具：如串口调试助手、网络抓包工具（Wireshark）。 信号完整性：测试信号波形、延迟和误码率。 协议解析：分析数据帧格式和通讯协议实现。 数据通讯的发展趋势 边缘计算：减少延迟并提高实时性。 工业物联网（IIoT）：实现设备间的全面互联。 5G 技术：在工业自动化中的应用。 数据通讯标准化：推进工业协议的统一化。 ">
+<meta property='og:url' content='https://teaize.github.io/p/%E6%95%B0%E6%8D%AE%E9%80%9A%E8%AE%AF%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-04T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="数据通讯简明笔记">
+<meta name="twitter:description" content="数据通讯的基本概念 通讯方式：有线通讯（如 RS-485、以太网）和无线通讯（如 Wi-Fi、蓝牙、LoRa）。 通讯模型：OSI 七层模型、TCP/IP 模型。 数据协议：定义数据传输的规则和格式。 通讯接口与硬件 串行接口：RS-232、RS-485、USB。 并行接口：如 GPIB。 网络接口：以太网接口、工业总线接口。 无线接口：如 ZigBee、Wi-Fi 模块。 数据通讯协议 基础协议：Modbus、Profibus、CAN、HART。 互联网协议：TCP/IP、HTTP、MQTT。 工业协议：OPC UA、EtherCAT、Profinet。 专有协议：特定厂商开发的协议。 通讯拓扑结构 点对点通讯：如主从式设备连接。 多点通讯：如总线型结构。 网络通讯：星形、环形、树形、网状拓扑结构。 数据传输技术 同步与异步传输：数据发送方式的选择。 全双工与半双工：通讯方向的控制。 数据速率：带宽与波特率对传输性能的影响。 数据完整性：校验技术（如奇偶校验、CRC）。 工业自动化通讯 设备通讯：如传感器、执行器与控制系统之间的通讯。 现场总线：如 CAN、Profibus 在现场设备中的应用。 工业以太网：在自动化系统中的高速通讯。 数据通讯的安全性 数据加密：确保通讯过程中数据的保密性。 访问控制：限制未授权设备的接入。 异常检测：如流量分析、入侵检测。 数据冗余：通过冗余链路确保通讯可靠性。 通讯应用案例 远程监控：如 PLC 与 SCADA 系统的数据交换。 数据采集：使用 Modbus 协议采集传感器数据。 智能控制：通过工业以太网实现实时控制。 云端通讯：通过 MQTT 或 HTTP 上传数据到云平台。 数据通讯的测试与调试 调试工具：如串口调试助手、网络抓包工具（Wireshark）。 信号完整性：测试信号波形、延迟和误码率。 协议解析：分析数据帧格式和通讯协议实现。 数据通讯的发展趋势 边缘计算：减少延迟并提高实时性。 工业物联网（IIoT）：实现设备间的全面互联。 5G 技术：在工业自动化中的应用。 数据通讯标准化：推进工业协议的统一化。 ">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu16052301101920195293.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#数据通讯的基本概念">数据通讯的基本概念</a></li>
+        <li><a href="#通讯接口与硬件">通讯接口与硬件</a></li>
+        <li><a href="#数据通讯协议">数据通讯协议</a></li>
+        <li><a href="#通讯拓扑结构">通讯拓扑结构</a></li>
+        <li><a href="#数据传输技术">数据传输技术</a></li>
+        <li><a href="#工业自动化通讯">工业自动化通讯</a></li>
+        <li><a href="#数据通讯的安全性">数据通讯的安全性</a></li>
+        <li><a href="#通讯应用案例">通讯应用案例</a></li>
+        <li><a href="#数据通讯的测试与调试">数据通讯的测试与调试</a></li>
+        <li><a href="#数据通讯的发展趋势">数据通讯的发展趋势</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%95%B0%E6%8D%AE%E9%80%9A%E8%AE%AF%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/">数据通讯简明笔记</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-01-04</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="数据通讯的基本概念">数据通讯的基本概念
+</h3><ul>
+<li>通讯方式：有线通讯（如 RS-485、以太网）和无线通讯（如 Wi-Fi、蓝牙、LoRa）。</li>
+<li>通讯模型：OSI 七层模型、TCP/IP 模型。</li>
+<li>数据协议：定义数据传输的规则和格式。</li>
+</ul>
+<h3 id="通讯接口与硬件">通讯接口与硬件
+</h3><ul>
+<li>串行接口：RS-232、RS-485、USB。</li>
+<li>并行接口：如 GPIB。</li>
+<li>网络接口：以太网接口、工业总线接口。</li>
+<li>无线接口：如 ZigBee、Wi-Fi 模块。</li>
+</ul>
+<h3 id="数据通讯协议">数据通讯协议
+</h3><ul>
+<li>基础协议：Modbus、Profibus、CAN、HART。</li>
+<li>互联网协议：TCP/IP、HTTP、MQTT。</li>
+<li>工业协议：OPC UA、EtherCAT、Profinet。</li>
+<li>专有协议：特定厂商开发的协议。</li>
+</ul>
+<h3 id="通讯拓扑结构">通讯拓扑结构
+</h3><ul>
+<li>点对点通讯：如主从式设备连接。</li>
+<li>多点通讯：如总线型结构。</li>
+<li>网络通讯：星形、环形、树形、网状拓扑结构。</li>
+</ul>
+<h3 id="数据传输技术">数据传输技术
+</h3><ul>
+<li>同步与异步传输：数据发送方式的选择。</li>
+<li>全双工与半双工：通讯方向的控制。</li>
+<li>数据速率：带宽与波特率对传输性能的影响。</li>
+<li>数据完整性：校验技术（如奇偶校验、CRC）。</li>
+</ul>
+<h3 id="工业自动化通讯">工业自动化通讯
+</h3><ul>
+<li>设备通讯：如传感器、执行器与控制系统之间的通讯。</li>
+<li>现场总线：如 CAN、Profibus 在现场设备中的应用。</li>
+<li>工业以太网：在自动化系统中的高速通讯。</li>
+</ul>
+<h3 id="数据通讯的安全性">数据通讯的安全性
+</h3><ul>
+<li>数据加密：确保通讯过程中数据的保密性。</li>
+<li>访问控制：限制未授权设备的接入。</li>
+<li>异常检测：如流量分析、入侵检测。</li>
+<li>数据冗余：通过冗余链路确保通讯可靠性。</li>
+</ul>
+<h3 id="通讯应用案例">通讯应用案例
+</h3><ul>
+<li>远程监控：如 PLC 与 SCADA 系统的数据交换。</li>
+<li>数据采集：使用 Modbus 协议采集传感器数据。</li>
+<li>智能控制：通过工业以太网实现实时控制。</li>
+<li>云端通讯：通过 MQTT 或 HTTP 上传数据到云平台。</li>
+</ul>
+<h3 id="数据通讯的测试与调试">数据通讯的测试与调试
+</h3><ul>
+<li>调试工具：如串口调试助手、网络抓包工具（Wireshark）。</li>
+<li>信号完整性：测试信号波形、延迟和误码率。</li>
+<li>协议解析：分析数据帧格式和通讯协议实现。</li>
+</ul>
+<h3 id="数据通讯的发展趋势">数据通讯的发展趋势
+</h3><ul>
+<li>边缘计算：减少延迟并提高实时性。</li>
+<li>工业物联网（IIoT）：实现设备间的全面互联。</li>
+<li>5G 技术：在工业自动化中的应用。</li>
+<li>数据通讯标准化：推进工业协议的统一化。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

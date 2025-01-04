@@ -7,7 +7,15 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Mon, 23 Dec 2024 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 03 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>RSS</title>
+        <link>https://teaize.github.io/tags/rss/</link>
+        <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/tags/rss/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Git</title>
         <link>https://teaize.github.io/tags/git/</link>
         <pubDate>Mon, 23 Dec 2024 00:00:00 +0000</pubDate>
@@ -29,14 +37,6 @@
         <pubDate>Wed, 23 Oct 2024 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/tags/solidworks/</guid>
-        <description></description>
-        </item>
-        <item>
-        <title>Automation</title>
-        <link>https://teaize.github.io/tags/automation/</link>
-        <pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/tags/automation/</guid>
         <description></description>
         </item>
         <item>
