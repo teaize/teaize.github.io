@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="结构拆装方式 根据产品功能、制造和装配需求将整体结构拆分为多个零部件，进而生产、运输及维修。 设计要点： 功能明确，每个部件功能单一 考虑重组事宜，减少复杂性和重组时间 常见材料厚度问题 根据材料特性设计适当的厚度，保证强度、装配效果和外观质量。 设计要点: 材料厚薄均匀，避免重点。 厚度不足会导致变形，过厚增加成本和重量。 常见结构固定方式 通过物理或化学方式连接零件，确保稳定性和可感应性。 设计要点： 根据连接需求选择合适的方式 (如临时性用卡扣，长期性用胶水）。 预留足够的固定空间并配备公差。 防水结构设计 通过密封设计防止液体渗入，保护内部组件。 设计要点： 接缝处采用密封胶条或防水涂层，设计密封条（如橡胶圈、硅胶垫圈）。 使用防水涂层或防水材料 保证整体成型或配置防水接口。 确保结构满足 IP 防护等级（如 IP65、IP68） 防尘结构设计 目标：避免灰尘进入设备内部影响性能。 设计要点： 设置防尘密封圈。 设计防尘网或滤网。 保持内部气压高于外界（如设计微正压结构）。 防震与抗冲击结构 利用缓冲材料或结构设计吸收冲击力，防止内部零件损坏。 设计要点： 选择高弹性材料，如硅胶、泡沫垫。 确定抗冲击区域的分布合理。 增加减震器（如橡胶垫、弹簧）。 设计隔振槽或减振框架。 热管理结构设计 通过设计散热器通道或材料导热性能，降低设备温度。 设计要点: 优化孔布局，避免局部过热。 结合文艺复兴 (风扇) 和笔记本电脑 (中世纪片)。 散热结构设计 目标：优化设备的散热性能，保证运行稳定性和安全性。 设计要点： 计算热源分布，设计合理的散热通道。 采用散热材料（如铝、铜、热导率高的复合材料）。 设计通风口和散热片，避免气流阻塞。 考虑强制散热（风扇）或自然对流散热。 可拆卸结构设计 关于维修、清洁或功能模块的更换。 设计内容： 采用模块化设计，便于快速替换或升级。 选择方便的连接方式（如卡扣式、螺钉式） 确保多次安装拆卸后结构支架，不影响性能。 折叠与伸缩结构设计 通过折叠或伸缩功能优化产品的存储性或便携性。 设计要点： 走廊链或滑轨部分可靠，防止多次操作后松动。 设计紧凑，保证折叠后的稳定性和安全性。 防滑结构设计 通过表面处理或增加障碍物，增强握持或接触稳定性。 设计要点： 根据使用场景选择帆布纹路或材料（如橡胶垫）。 保证外观结构美观与功能兼顾。 导向与限位结构设计 通过导向槽或限位装置确保组件安装顺利并避免错误操作。 设计要点： 目标作品形状明确，内容错性好。 限制位部分需具备稳定的机械性能。 声学结构设计 优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。 设计要点： 计算集中频率，避免干扰干扰。 选择吸音或坟墓材料。 光学结构设计 优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。 设计要点： 计算集中频率，避免干扰干扰。 选择吸音或坟墓材料。 嵌入与卡扣设计 通过嵌入或卡扣连接方式实现安装和感应。 设计要点： 设计足够的扣合力，避免松动或丢失。 确保感应时不损坏卡扣或嵌入部件。 结构防误操作设计 通过形状、尺寸、颜色等差异化设计，避免操作错误或安装。 设计要点： 差异化设计显而易见，减少用户判断时间。 对高风险场景优先设计防误功能。 快速装配结构设计 通过优化零件接口和连接方式，提高装配效率。 设计要点： 减少装配步骤和零件数量。 提供明确的装配方向或标志。 减重结构设计 目标：减轻设备重量，便于携带或安装。 设计要点： 使用轻量化材料（如镁合金、碳纤维）。 使用蜂窝结构或加强筋，减重同时保证强度。 耐腐蚀结构设计 目标：延长设备在腐蚀环境中的使用寿命。 设计要点： 选择耐腐蚀材料（如不锈钢、耐腐蚀涂层）。 避免缝隙腐蚀，设计光滑表面。 增加排水或通气通道，减少积液。 抗电磁干扰结构设计 目标：避免电子设备受到外界电磁波干扰。 设计要点： 采用屏蔽结构，如金属外壳或导电涂层。 合理布置信号线，避免交叉干扰。 增加接地措施，减少电磁辐射。 美学与人机工程结构设计 目标：提升用户体验，符合人体工程学。 设计要点： 考虑手持舒适性，优化握持部位。 调整控制界面的角度和高度，方便操作。 设计外形曲线，提高视觉吸引力。 优化重量分布，减少长时间使用的疲劳感。 滑动与旋转结构设计 通过运动组件的滑动或旋转实现运动功能。 设计要点： 保证运动结束，无卡顿或异响。 使用耐磨材料，延长使用寿命。 出模方式 为实现从模具中顺利脱模,采用不同的结构设计来避免卡死或变形。 设计要点： 提供适当的脱模斜度（一般 2°~3°)。 复杂结构需设计分型面和抽芯机构。 模具纹理精加工 通过纹理加工提升产品的外观和触感，同时掩盖表面缺陷。 设计要点： 根据品牌定位选择纹理 (如高端产品更注重细致和光滑）。 控制纹理纹理，避免影响模具消耗。 特殊模具及工艺 针对复杂产品或特殊材料，采用专用模具和工艺进行加工。 设计要点: 根据产品性能需求工艺选择。 保证模具精度和加工稳定性。 参考资料 mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw ">
+<title>工业设计结构</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%B7%A5%E4%B8%9A%E8%AE%BE%E8%AE%A1%E7%BB%93%E6%9E%84/'>
+
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="工业设计结构">
+<meta property='og:description' content="结构拆装方式 根据产品功能、制造和装配需求将整体结构拆分为多个零部件，进而生产、运输及维修。 设计要点： 功能明确，每个部件功能单一 考虑重组事宜，减少复杂性和重组时间 常见材料厚度问题 根据材料特性设计适当的厚度，保证强度、装配效果和外观质量。 设计要点: 材料厚薄均匀，避免重点。 厚度不足会导致变形，过厚增加成本和重量。 常见结构固定方式 通过物理或化学方式连接零件，确保稳定性和可感应性。 设计要点： 根据连接需求选择合适的方式 (如临时性用卡扣，长期性用胶水）。 预留足够的固定空间并配备公差。 防水结构设计 通过密封设计防止液体渗入，保护内部组件。 设计要点： 接缝处采用密封胶条或防水涂层，设计密封条（如橡胶圈、硅胶垫圈）。 使用防水涂层或防水材料 保证整体成型或配置防水接口。 确保结构满足 IP 防护等级（如 IP65、IP68） 防尘结构设计 目标：避免灰尘进入设备内部影响性能。 设计要点： 设置防尘密封圈。 设计防尘网或滤网。 保持内部气压高于外界（如设计微正压结构）。 防震与抗冲击结构 利用缓冲材料或结构设计吸收冲击力，防止内部零件损坏。 设计要点： 选择高弹性材料，如硅胶、泡沫垫。 确定抗冲击区域的分布合理。 增加减震器（如橡胶垫、弹簧）。 设计隔振槽或减振框架。 热管理结构设计 通过设计散热器通道或材料导热性能，降低设备温度。 设计要点: 优化孔布局，避免局部过热。 结合文艺复兴 (风扇) 和笔记本电脑 (中世纪片)。 散热结构设计 目标：优化设备的散热性能，保证运行稳定性和安全性。 设计要点： 计算热源分布，设计合理的散热通道。 采用散热材料（如铝、铜、热导率高的复合材料）。 设计通风口和散热片，避免气流阻塞。 考虑强制散热（风扇）或自然对流散热。 可拆卸结构设计 关于维修、清洁或功能模块的更换。 设计内容： 采用模块化设计，便于快速替换或升级。 选择方便的连接方式（如卡扣式、螺钉式） 确保多次安装拆卸后结构支架，不影响性能。 折叠与伸缩结构设计 通过折叠或伸缩功能优化产品的存储性或便携性。 设计要点： 走廊链或滑轨部分可靠，防止多次操作后松动。 设计紧凑，保证折叠后的稳定性和安全性。 防滑结构设计 通过表面处理或增加障碍物，增强握持或接触稳定性。 设计要点： 根据使用场景选择帆布纹路或材料（如橡胶垫）。 保证外观结构美观与功能兼顾。 导向与限位结构设计 通过导向槽或限位装置确保组件安装顺利并避免错误操作。 设计要点： 目标作品形状明确，内容错性好。 限制位部分需具备稳定的机械性能。 声学结构设计 优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。 设计要点： 计算集中频率，避免干扰干扰。 选择吸音或坟墓材料。 光学结构设计 优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。 设计要点： 计算集中频率，避免干扰干扰。 选择吸音或坟墓材料。 嵌入与卡扣设计 通过嵌入或卡扣连接方式实现安装和感应。 设计要点： 设计足够的扣合力，避免松动或丢失。 确保感应时不损坏卡扣或嵌入部件。 结构防误操作设计 通过形状、尺寸、颜色等差异化设计，避免操作错误或安装。 设计要点： 差异化设计显而易见，减少用户判断时间。 对高风险场景优先设计防误功能。 快速装配结构设计 通过优化零件接口和连接方式，提高装配效率。 设计要点： 减少装配步骤和零件数量。 提供明确的装配方向或标志。 减重结构设计 目标：减轻设备重量，便于携带或安装。 设计要点： 使用轻量化材料（如镁合金、碳纤维）。 使用蜂窝结构或加强筋，减重同时保证强度。 耐腐蚀结构设计 目标：延长设备在腐蚀环境中的使用寿命。 设计要点： 选择耐腐蚀材料（如不锈钢、耐腐蚀涂层）。 避免缝隙腐蚀，设计光滑表面。 增加排水或通气通道，减少积液。 抗电磁干扰结构设计 目标：避免电子设备受到外界电磁波干扰。 设计要点： 采用屏蔽结构，如金属外壳或导电涂层。 合理布置信号线，避免交叉干扰。 增加接地措施，减少电磁辐射。 美学与人机工程结构设计 目标：提升用户体验，符合人体工程学。 设计要点： 考虑手持舒适性，优化握持部位。 调整控制界面的角度和高度，方便操作。 设计外形曲线，提高视觉吸引力。 优化重量分布，减少长时间使用的疲劳感。 滑动与旋转结构设计 通过运动组件的滑动或旋转实现运动功能。 设计要点： 保证运动结束，无卡顿或异响。 使用耐磨材料，延长使用寿命。 出模方式 为实现从模具中顺利脱模,采用不同的结构设计来避免卡死或变形。 设计要点： 提供适当的脱模斜度（一般 2°~3°)。 复杂结构需设计分型面和抽芯机构。 模具纹理精加工 通过纹理加工提升产品的外观和触感，同时掩盖表面缺陷。 设计要点： 根据品牌定位选择纹理 (如高端产品更注重细致和光滑）。 控制纹理纹理，避免影响模具消耗。 特殊模具及工艺 针对复杂产品或特殊材料，采用专用模具和工艺进行加工。 设计要点: 根据产品性能需求工艺选择。 保证模具精度和加工稳定性。 参考资料 mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw ">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%B7%A5%E4%B8%9A%E8%AE%BE%E8%AE%A1%E7%BB%93%E6%9E%84/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-15T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-15T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="工业设计结构">
+<meta name="twitter:description" content="结构拆装方式 根据产品功能、制造和装配需求将整体结构拆分为多个零部件，进而生产、运输及维修。 设计要点： 功能明确，每个部件功能单一 考虑重组事宜，减少复杂性和重组时间 常见材料厚度问题 根据材料特性设计适当的厚度，保证强度、装配效果和外观质量。 设计要点: 材料厚薄均匀，避免重点。 厚度不足会导致变形，过厚增加成本和重量。 常见结构固定方式 通过物理或化学方式连接零件，确保稳定性和可感应性。 设计要点： 根据连接需求选择合适的方式 (如临时性用卡扣，长期性用胶水）。 预留足够的固定空间并配备公差。 防水结构设计 通过密封设计防止液体渗入，保护内部组件。 设计要点： 接缝处采用密封胶条或防水涂层，设计密封条（如橡胶圈、硅胶垫圈）。 使用防水涂层或防水材料 保证整体成型或配置防水接口。 确保结构满足 IP 防护等级（如 IP65、IP68） 防尘结构设计 目标：避免灰尘进入设备内部影响性能。 设计要点： 设置防尘密封圈。 设计防尘网或滤网。 保持内部气压高于外界（如设计微正压结构）。 防震与抗冲击结构 利用缓冲材料或结构设计吸收冲击力，防止内部零件损坏。 设计要点： 选择高弹性材料，如硅胶、泡沫垫。 确定抗冲击区域的分布合理。 增加减震器（如橡胶垫、弹簧）。 设计隔振槽或减振框架。 热管理结构设计 通过设计散热器通道或材料导热性能，降低设备温度。 设计要点: 优化孔布局，避免局部过热。 结合文艺复兴 (风扇) 和笔记本电脑 (中世纪片)。 散热结构设计 目标：优化设备的散热性能，保证运行稳定性和安全性。 设计要点： 计算热源分布，设计合理的散热通道。 采用散热材料（如铝、铜、热导率高的复合材料）。 设计通风口和散热片，避免气流阻塞。 考虑强制散热（风扇）或自然对流散热。 可拆卸结构设计 关于维修、清洁或功能模块的更换。 设计内容： 采用模块化设计，便于快速替换或升级。 选择方便的连接方式（如卡扣式、螺钉式） 确保多次安装拆卸后结构支架，不影响性能。 折叠与伸缩结构设计 通过折叠或伸缩功能优化产品的存储性或便携性。 设计要点： 走廊链或滑轨部分可靠，防止多次操作后松动。 设计紧凑，保证折叠后的稳定性和安全性。 防滑结构设计 通过表面处理或增加障碍物，增强握持或接触稳定性。 设计要点： 根据使用场景选择帆布纹路或材料（如橡胶垫）。 保证外观结构美观与功能兼顾。 导向与限位结构设计 通过导向槽或限位装置确保组件安装顺利并避免错误操作。 设计要点： 目标作品形状明确，内容错性好。 限制位部分需具备稳定的机械性能。 声学结构设计 优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。 设计要点： 计算集中频率，避免干扰干扰。 选择吸音或坟墓材料。 光学结构设计 优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。 设计要点： 计算集中频率，避免干扰干扰。 选择吸音或坟墓材料。 嵌入与卡扣设计 通过嵌入或卡扣连接方式实现安装和感应。 设计要点： 设计足够的扣合力，避免松动或丢失。 确保感应时不损坏卡扣或嵌入部件。 结构防误操作设计 通过形状、尺寸、颜色等差异化设计，避免操作错误或安装。 设计要点： 差异化设计显而易见，减少用户判断时间。 对高风险场景优先设计防误功能。 快速装配结构设计 通过优化零件接口和连接方式，提高装配效率。 设计要点： 减少装配步骤和零件数量。 提供明确的装配方向或标志。 减重结构设计 目标：减轻设备重量，便于携带或安装。 设计要点： 使用轻量化材料（如镁合金、碳纤维）。 使用蜂窝结构或加强筋，减重同时保证强度。 耐腐蚀结构设计 目标：延长设备在腐蚀环境中的使用寿命。 设计要点： 选择耐腐蚀材料（如不锈钢、耐腐蚀涂层）。 避免缝隙腐蚀，设计光滑表面。 增加排水或通气通道，减少积液。 抗电磁干扰结构设计 目标：避免电子设备受到外界电磁波干扰。 设计要点： 采用屏蔽结构，如金属外壳或导电涂层。 合理布置信号线，避免交叉干扰。 增加接地措施，减少电磁辐射。 美学与人机工程结构设计 目标：提升用户体验，符合人体工程学。 设计要点： 考虑手持舒适性，优化握持部位。 调整控制界面的角度和高度，方便操作。 设计外形曲线，提高视觉吸引力。 优化重量分布，减少长时间使用的疲劳感。 滑动与旋转结构设计 通过运动组件的滑动或旋转实现运动功能。 设计要点： 保证运动结束，无卡顿或异响。 使用耐磨材料，延长使用寿命。 出模方式 为实现从模具中顺利脱模,采用不同的结构设计来避免卡死或变形。 设计要点： 提供适当的脱模斜度（一般 2°~3°)。 复杂结构需设计分型面和抽芯机构。 模具纹理精加工 通过纹理加工提升产品的外观和触感，同时掩盖表面缺陷。 设计要点： 根据品牌定位选择纹理 (如高端产品更注重细致和光滑）。 控制纹理纹理，避免影响模具消耗。 特殊模具及工艺 针对复杂产品或特殊材料，采用专用模具和工艺进行加工。 设计要点: 根据产品性能需求工艺选择。 保证模具精度和加工稳定性。 参考资料 mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw ">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu16052301101920195293.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#结构拆装方式">结构拆装方式</a></li>
+        <li><a href="#常见材料厚度问题">常见材料厚度问题</a></li>
+        <li><a href="#常见结构固定方式">常见结构固定方式</a></li>
+        <li><a href="#防水结构设计">防水结构设计</a></li>
+        <li><a href="#防尘结构设计">防尘结构设计</a></li>
+        <li><a href="#防震与抗冲击结构">防震与抗冲击结构</a></li>
+        <li><a href="#热管理结构设计">热管理结构设计</a></li>
+        <li><a href="#散热结构设计">散热结构设计</a></li>
+        <li><a href="#可拆卸结构设计">可拆卸结构设计</a></li>
+        <li><a href="#折叠与伸缩结构设计">折叠与伸缩结构设计</a></li>
+        <li><a href="#防滑结构设计">防滑结构设计</a></li>
+        <li><a href="#导向与限位结构设计">导向与限位结构设计</a></li>
+        <li><a href="#声学结构设计">声学结构设计</a></li>
+        <li><a href="#光学结构设计">光学结构设计</a></li>
+        <li><a href="#嵌入与卡扣设计">嵌入与卡扣设计</a></li>
+        <li><a href="#结构防误操作设计">结构防误操作设计</a></li>
+        <li><a href="#快速装配结构设计">快速装配结构设计</a></li>
+        <li><a href="#减重结构设计">减重结构设计</a></li>
+        <li><a href="#耐腐蚀结构设计">耐腐蚀结构设计</a></li>
+        <li><a href="#抗电磁干扰结构设计">抗电磁干扰结构设计</a></li>
+        <li><a href="#美学与人机工程结构设计">美学与人机工程结构设计</a></li>
+        <li><a href="#滑动与旋转结构设计">滑动与旋转结构设计</a></li>
+        <li><a href="#出模方式">出模方式</a></li>
+        <li><a href="#模具纹理精加工">模具纹理精加工</a></li>
+        <li><a href="#特殊模具及工艺">特殊模具及工艺</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%B7%A5%E4%B8%9A%E8%AE%BE%E8%AE%A1%E7%BB%93%E6%9E%84/">工业设计结构</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-01-15</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="结构拆装方式">结构拆装方式
+</h3><ul>
+<li>根据产品功能、制造和装配需求将整体结构拆分为多个零部件，进而生产、运输及维修。</li>
+<li>设计要点：
+<ul>
+<li>功能明确，每个部件功能单一</li>
+<li>考虑重组事宜，减少复杂性和重组时间</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见材料厚度问题">常见材料厚度问题
+</h3><ul>
+<li>根据材料特性设计适当的厚度，保证强度、装配效果和外观质量。</li>
+<li>设计要点:
+<ul>
+<li>材料厚薄均匀，避免重点。</li>
+<li>厚度不足会导致变形，过厚增加成本和重量。</li>
+</ul>
+</li>
+</ul>
+<h3 id="常见结构固定方式">常见结构固定方式
+</h3><ul>
+<li>通过物理或化学方式连接零件，确保稳定性和可感应性。</li>
+<li>设计要点：
+<ul>
+<li>根据连接需求选择合适的方式 (如临时性用卡扣，长期性用胶水）。</li>
+<li>预留足够的固定空间并配备公差。</li>
+</ul>
+</li>
+</ul>
+<h3 id="防水结构设计">防水结构设计
+</h3><ul>
+<li>通过密封设计防止液体渗入，保护内部组件。</li>
+<li>设计要点：
+<ul>
+<li>接缝处采用密封胶条或防水涂层，设计密封条（如橡胶圈、硅胶垫圈）。</li>
+<li>使用防水涂层或防水材料</li>
+<li>保证整体成型或配置防水接口。</li>
+<li>确保结构满足 IP 防护等级（如 IP65、IP68）</li>
+</ul>
+</li>
+</ul>
+<h3 id="防尘结构设计">防尘结构设计
+</h3><ul>
+<li>目标：避免灰尘进入设备内部影响性能。</li>
+<li>设计要点：
+<ul>
+<li>设置防尘密封圈。</li>
+<li>设计防尘网或滤网。</li>
+<li>保持内部气压高于外界（如设计微正压结构）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="防震与抗冲击结构">防震与抗冲击结构
+</h3><ul>
+<li>利用缓冲材料或结构设计吸收冲击力，防止内部零件损坏。</li>
+<li>设计要点：
+<ul>
+<li>选择高弹性材料，如硅胶、泡沫垫。</li>
+<li>确定抗冲击区域的分布合理。</li>
+<li>增加减震器（如橡胶垫、弹簧）。</li>
+<li>设计隔振槽或减振框架。</li>
+</ul>
+</li>
+</ul>
+<h3 id="热管理结构设计">热管理结构设计
+</h3><ul>
+<li>通过设计散热器通道或材料导热性能，降低设备温度。</li>
+<li>设计要点:
+<ul>
+<li>优化孔布局，避免局部过热。</li>
+<li>结合文艺复兴 (风扇) 和笔记本电脑 (中世纪片)。</li>
+</ul>
+</li>
+</ul>
+<h3 id="散热结构设计">散热结构设计
+</h3><ul>
+<li>目标：优化设备的散热性能，保证运行稳定性和安全性。</li>
+<li>设计要点：
+<ul>
+<li>计算热源分布，设计合理的散热通道。</li>
+<li>采用散热材料（如铝、铜、热导率高的复合材料）。</li>
+<li>设计通风口和散热片，避免气流阻塞。</li>
+<li>考虑强制散热（风扇）或自然对流散热。</li>
+</ul>
+</li>
+</ul>
+<h3 id="可拆卸结构设计">可拆卸结构设计
+</h3><ul>
+<li>关于维修、清洁或功能模块的更换。</li>
+<li>设计内容：
+<ul>
+<li>采用模块化设计，便于快速替换或升级。</li>
+<li>选择方便的连接方式（如卡扣式、螺钉式）</li>
+<li>确保多次安装拆卸后结构支架，不影响性能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="折叠与伸缩结构设计">折叠与伸缩结构设计
+</h3><ul>
+<li>通过折叠或伸缩功能优化产品的存储性或便携性。</li>
+<li>设计要点：
+<ul>
+<li>走廊链或滑轨部分可靠，防止多次操作后松动。</li>
+<li>设计紧凑，保证折叠后的稳定性和安全性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="防滑结构设计">防滑结构设计
+</h3><ul>
+<li>通过表面处理或增加障碍物，增强握持或接触稳定性。</li>
+<li>设计要点：
+<ul>
+<li>根据使用场景选择帆布纹路或材料（如橡胶垫）。</li>
+<li>保证外观结构美观与功能兼顾。</li>
+</ul>
+</li>
+</ul>
+<h3 id="导向与限位结构设计">导向与限位结构设计
+</h3><ul>
+<li>通过导向槽或限位装置确保组件安装顺利并避免错误操作。</li>
+<li>设计要点：
+<ul>
+<li>目标作品形状明确，内容错性好。</li>
+<li>限制位部分需具备稳定的机械性能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="声学结构设计">声学结构设计
+</h3><ul>
+<li>优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。</li>
+<li>设计要点：
+<ul>
+<li>计算集中频率，避免干扰干扰。</li>
+<li>选择吸音或坟墓材料。</li>
+</ul>
+</li>
+</ul>
+<h3 id="光学结构设计">光学结构设计
+</h3><ul>
+<li>优化声学性能以提升声音或噪音效果，结合结构形状和材料特性。</li>
+<li>设计要点：
+<ul>
+<li>计算集中频率，避免干扰干扰。</li>
+<li>选择吸音或坟墓材料。</li>
+</ul>
+</li>
+</ul>
+<h3 id="嵌入与卡扣设计">嵌入与卡扣设计
+</h3><ul>
+<li>通过嵌入或卡扣连接方式实现安装和感应。</li>
+<li>设计要点：
+<ul>
+<li>设计足够的扣合力，避免松动或丢失。</li>
+<li>确保感应时不损坏卡扣或嵌入部件。</li>
+</ul>
+</li>
+</ul>
+<h3 id="结构防误操作设计">结构防误操作设计
+</h3><ul>
+<li>通过形状、尺寸、颜色等差异化设计，避免操作错误或安装。</li>
+<li>设计要点：
+<ul>
+<li>差异化设计显而易见，减少用户判断时间。</li>
+<li>对高风险场景优先设计防误功能。</li>
+</ul>
+</li>
+</ul>
+<h3 id="快速装配结构设计">快速装配结构设计
+</h3><ul>
+<li>通过优化零件接口和连接方式，提高装配效率。</li>
+<li>设计要点：
+<ul>
+<li>减少装配步骤和零件数量。</li>
+<li>提供明确的装配方向或标志。</li>
+</ul>
+</li>
+</ul>
+<h3 id="减重结构设计">减重结构设计
+</h3><ul>
+<li>目标：减轻设备重量，便于携带或安装。</li>
+<li>设计要点：
+<ul>
+<li>使用轻量化材料（如镁合金、碳纤维）。</li>
+<li>使用蜂窝结构或加强筋，减重同时保证强度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="耐腐蚀结构设计">耐腐蚀结构设计
+</h3><ul>
+<li>目标：延长设备在腐蚀环境中的使用寿命。</li>
+<li>设计要点：
+<ul>
+<li>选择耐腐蚀材料（如不锈钢、耐腐蚀涂层）。</li>
+<li>避免缝隙腐蚀，设计光滑表面。</li>
+<li>增加排水或通气通道，减少积液。</li>
+</ul>
+</li>
+</ul>
+<h3 id="抗电磁干扰结构设计">抗电磁干扰结构设计
+</h3><ul>
+<li>目标：避免电子设备受到外界电磁波干扰。</li>
+<li>设计要点：
+<ul>
+<li>采用屏蔽结构，如金属外壳或导电涂层。</li>
+<li>合理布置信号线，避免交叉干扰。</li>
+<li>增加接地措施，减少电磁辐射。</li>
+</ul>
+</li>
+</ul>
+<h3 id="美学与人机工程结构设计">美学与人机工程结构设计
+</h3><ul>
+<li>目标：提升用户体验，符合人体工程学。</li>
+<li>设计要点：
+<ul>
+<li>考虑手持舒适性，优化握持部位。</li>
+<li>调整控制界面的角度和高度，方便操作。</li>
+<li>设计外形曲线，提高视觉吸引力。</li>
+<li>优化重量分布，减少长时间使用的疲劳感。</li>
+</ul>
+</li>
+</ul>
+<h3 id="滑动与旋转结构设计">滑动与旋转结构设计
+</h3><ul>
+<li>通过运动组件的滑动或旋转实现运动功能。</li>
+<li>设计要点：
+<ul>
+<li>保证运动结束，无卡顿或异响。</li>
+<li>使用耐磨材料，延长使用寿命。</li>
+</ul>
+</li>
+</ul>
+<h3 id="出模方式">出模方式
+</h3><ul>
+<li>为实现从模具中顺利脱模,采用不同的结构设计来避免卡死或变形。</li>
+<li>设计要点：
+<ul>
+<li>提供适当的脱模斜度（一般 2°~3°)。</li>
+<li>复杂结构需设计分型面和抽芯机构。</li>
+</ul>
+</li>
+</ul>
+<h3 id="模具纹理精加工">模具纹理精加工
+</h3><ul>
+<li>通过纹理加工提升产品的外观和触感，同时掩盖表面缺陷。</li>
+<li>设计要点：
+<ul>
+<li>根据品牌定位选择纹理 (如高端产品更注重细致和光滑）。</li>
+<li>控制纹理纹理，避免影响模具消耗。</li>
+</ul>
+</li>
+</ul>
+<h3 id="特殊模具及工艺">特殊模具及工艺
+</h3><ul>
+<li>针对复杂产品或特殊材料，采用专用模具和工艺进行加工。</li>
+<li>设计要点:
+<ul>
+<li>根据产品性能需求工艺选择。</li>
+<li>保证模具精度和加工稳定性。</li>
+</ul>
+</li>
+</ul>
+<h3 id="参考资料">参考资料
+</h3><ul>
+<li><a class="link" href="https://mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw"  target="_blank" rel="noopener"
+    >mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
