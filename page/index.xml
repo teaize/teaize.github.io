@@ -51,6 +51,17 @@
 </description>
         </item>
         <item>
+        <title>notes</title>
+        <link>https://teaize.github.io/notes/</link>
+        <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/notes/</guid>
+        <description>&lt;p&gt;这个网站是一个工程师的存档点，网站使用 Hugo 搭建，静态网页和原始文件均存放在 Github 仓库中&lt;/p&gt;
+&lt;p&gt;网站的作者没有主动将网站提交给 Google、Bing 等搜索引擎进行抓取，在互联网的这块孤岛上，或许永远也没有人能够来到这片土地，更不会有人认识网站的作者&lt;/p&gt;
+&lt;p&gt;因此，希望能在这篇净土上畅所欲言的表达&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Search</title>
         <link>https://teaize.github.io/search/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
