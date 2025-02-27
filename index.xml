@@ -7,7 +7,402 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 15 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>机加工技术要求</title>
+        <link>https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/</link>
+        <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/</guid>
+        <description>&lt;h2 id=&#34;机加工技术要求&#34;&gt;机加工技术要求
+&lt;/h2&gt;&lt;h3 id=&#34;材料要求&#34;&gt;材料要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;指定零件的材质，例如钢材（45#钢、不锈钢）、铝合金、铜合金等&lt;/li&gt;
+&lt;li&gt;材料牌号和执行的标准（如 GB、ASTM 等）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;热处理要求&#34;&gt;热处理要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;例如调质、淬火、退火、正火等热处理工艺及其具体要求&lt;/li&gt;
+&lt;li&gt;硬度指标（如 HRC 45~50）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;表面处理要求&#34;&gt;表面处理要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;表面涂层（如镀锌、镀镍、阳极氧化、发黑处理等）
+&lt;ul&gt;
+&lt;li&gt;印字：&lt;code&gt;字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;底色：RAL 7035&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;镀黑色PTFE表面要求光洁，无划痕&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;XXX 焊接好后整体喷塑&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;内表面喷氟处理，涂层厚度 20~30um，可在200℃环境下长期使用&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;镀镍后螺纹二次攻牙处理&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;棱边倒钝，去毛刺&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;涂层厚度或质量要求&lt;/li&gt;
+&lt;li&gt;表面粗糙度（Ra 值）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;尺寸公差&#34;&gt;尺寸公差
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;关键尺寸的公差要求，例如±0.01mm&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;未标注的尺寸公差执行 GB/T 1804-2000M 标准&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;对装配或功能影响较大的尺寸标注具体的公差等级（如 H7/g6）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;形位公差&#34;&gt;形位公差
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;包括平面度、平行度、垂直度、同轴度、圆跳动等要求&lt;/li&gt;
+&lt;li&gt;通常以符号和数值标注（例如平行度≤0.01mm）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;未注形位公差值应按GB/T 1184-H&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;配合公差&#34;&gt;配合公差
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;孔和轴的配合公差等级（如 H7/g6）&lt;/li&gt;
+&lt;li&gt;对重要配合部位标注特定的配合关系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;孔加工要求&#34;&gt;孔加工要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;孔间距公差（例如±0.02mm）&lt;/li&gt;
+&lt;li&gt;孔的加工形式（钻孔、攻丝、沉头孔等）&lt;/li&gt;
+&lt;li&gt;孔的直径公差和表面粗糙度要求&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;压铆螺母在背面/正面压铆&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;所有螺纹在喷涂时需要保护。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;工艺孔加工完焊死，外表面走平整，工艺孔打压测试0.2MPa下零泄漏&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;表面粗糙度&#34;&gt;表面粗糙度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;各部位的表面粗糙度要求（例如 Ra≤1.6μm）&lt;/li&gt;
+&lt;li&gt;重要表面可能单独注明粗糙度要求&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;装配及工艺要求&#34;&gt;装配及工艺要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;标注装配要求，如装配间隙或过盈要求&lt;/li&gt;
+&lt;li&gt;具体工艺说明，如需要夹具辅助加工或特定的焊接方法&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他技术要求&#34;&gt;其他技术要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;防锈处理（如油封、防锈涂层等）&lt;/li&gt;
+&lt;li&gt;清洗要求（例如无油污、无残渣）
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;整体酸洗，超声波酒精清洗，烘干&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;验收标准和方法（如关键尺寸需全检或抽检标准）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;焊接要求&#34;&gt;焊接要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;氩弧焊，零件位置关系如图，保证焊接不漏气&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;焊缝形式和尺寸&lt;/li&gt;
+&lt;li&gt;焊接质量要求
+&lt;ul&gt;
+&lt;li&gt;焊接部位的焊后处理要求（如清除焊渣、抛光等）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;焊接完外表面电抛光&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;焊接处不可有焊瘤&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;示例技术要求书写：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;材料：45#钢，执行 GB/T 699-2015 标准&lt;/li&gt;
+&lt;li&gt;热处理：调质处理，硬度 HRC 28~32&lt;/li&gt;
+&lt;li&gt;表面粗糙度：未注表面 Ra3.2μm，配合面 Ra1.6μm&lt;/li&gt;
+&lt;li&gt;孔径公差：φ20H7，孔间距公差±0.02mm&lt;/li&gt;
+&lt;li&gt;表面处理：发黑处理，涂防锈油&lt;/li&gt;
+&lt;li&gt;检验要求：关键尺寸需全检，其他尺寸按抽检标准检验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;焊接要求-1&#34;&gt;焊接要求
+&lt;/h2&gt;&lt;p&gt;在机加工图纸的技术要求中，如果涉及焊接工艺，通常包括以下焊接要求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;焊接方法&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等。&lt;/li&gt;
+&lt;li&gt;对于特殊焊接方法，需要注明具体标准或工艺规范。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;焊接材料&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;指定焊接材料或焊丝型号，例如 E6013、ER70S-6 等。&lt;/li&gt;
+&lt;li&gt;如果需要，注明焊接材料的执行标准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;焊缝形式和尺寸&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;标明焊缝类型（如对接焊缝、角焊缝、T 型焊缝等）。&lt;/li&gt;
+&lt;li&gt;焊缝尺寸，包括焊缝高度、焊角尺寸、坡口角度等。&lt;/li&gt;
+&lt;li&gt;焊缝的具体位置在图纸中应清晰标注。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;焊接质量要求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;标明焊缝等级（如按 GB/T 3323 规定的等级：一级、二级、三级）。&lt;/li&gt;
+&lt;li&gt;对焊缝的外观要求（如无气孔、裂纹、咬边等缺陷）。&lt;/li&gt;
+&lt;li&gt;焊接部位的焊后处理要求（如清除焊渣、抛光等）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;焊后热处理要求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;如果有必要，要求进行焊后热处理（如消除应力处理）。&lt;/li&gt;
+&lt;li&gt;热处理温度范围和保温时间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;无损检测要求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;指定检测方法（如射线探伤 RT、超声波探伤 UT、磁粉检测 MT、渗透检测 PT）。&lt;/li&gt;
+&lt;li&gt;标明检测范围和验收标准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;表面处理要求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;对焊接后的表面处理，如打磨光滑、喷漆或防锈处理。&lt;/li&gt;
+&lt;li&gt;涂层厚度和质量要求。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;8&#34;&gt;
+&lt;li&gt;特殊工艺要求&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;明确焊接过程中的特殊要求，例如预热温度、焊接顺序、层间温度等。&lt;/li&gt;
+&lt;li&gt;对焊接环境的要求（如防止风吹或潮湿）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;示例焊接技术要求书写&#34;&gt;示例焊接技术要求书写
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;焊接方法：手工电弧焊（SMAW），使用 E6013 焊条。&lt;/li&gt;
+&lt;li&gt;焊缝形式：角焊缝，焊脚尺寸 4mm，焊缝长度为 50mm。&lt;/li&gt;
+&lt;li&gt;焊接质量：符合 GB/T 3323 二级焊缝标准。&lt;/li&gt;
+&lt;li&gt;无损检测：关键焊缝进行超声波探伤（UT），探伤比例为 100%。&lt;/li&gt;
+&lt;li&gt;焊后处理：焊后进行打磨并喷涂防锈漆，漆膜厚度≥30μm。&lt;/li&gt;
+&lt;li&gt;特殊要求：焊接前母材需预热至 100℃，焊后消除应力热处理（550℃，保温 2 小时）。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>PYQT程序框架模板</title>
+        <link>https://teaize.github.io/p/pyqt%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6%E6%A8%A1%E6%9D%BF/</link>
+        <pubDate>Fri, 17 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pyqt%E7%A8%8B%E5%BA%8F%E6%A1%86%E6%9E%B6%E6%A8%A1%E6%9D%BF/</guid>
+        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;sys&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;PyQt6.QtWidgets&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QMainWindow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QVBoxLayout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QTabWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLineEdit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QMessageBox&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nc&#34;&gt;MyWindow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;QMainWindow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;fm&#34;&gt;__init__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nb&#34;&gt;super&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;fm&#34;&gt;__init__&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 创建主窗口和布局&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setWindowTitle&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Dynamic Tabs with Functions&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setGeometry&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;400&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;300&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 创建 QTabWidget&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tabs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QTabWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setCentralWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tabs&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 添加初始分页&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_dew_point_to_ppm_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;add_subtract_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;add_dew_point_to_ppm_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;tab&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QVBoxLayout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 输入框和按钮&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLineEdit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setPlaceholderText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入露点温度 (°C)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLineEdit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setPlaceholderText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入总压力 (atm)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_label&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;体积分数: &amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;cal_button&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;计算&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;cal_button&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;clicked&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dew_point_to_ppm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;cal_button&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_label&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;tab&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setLayout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tabs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addTab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;露点 -&amp;gt; 体积分数&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;dew_point_to_ppm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# 输入验证&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;T_d_Celsius&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;P_total_atm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input2&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P_total_atm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                &lt;span class=&#34;k&#34;&gt;raise&lt;/span&gt; &lt;span class=&#34;ne&#34;&gt;ValueError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;总压力必须大于0&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# Antoine 方程的常数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;8.07131&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1730.63&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;C&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;233.426&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# 计算饱和蒸汽压 P_H2O(T_d)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;P_H2O_mmHg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;**&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;T_d_Celsius&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;P_H2O_atm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P_H2O_mmHg&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;760&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;c1&#34;&gt;# 计算水蒸气浓度（ppm）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;C_H2O_ppm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;P_H2O_atm&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P_total_atm&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1e6&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;体积分数: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;C_H2O_ppm&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.2f&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt; ppm&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt; &lt;span class=&#34;ne&#34;&gt;ValueError&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;QMessageBox&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;输入错误&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入有效的数字.&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\n&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;错误: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;str&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;e&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;add_subtract_tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;tab&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QVBoxLayout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;# 输入框和按钮&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLineEdit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setPlaceholderText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;输入第一个数&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input4&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLineEdit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setPlaceholderText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;输入第二个数&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_label_subtract&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QLabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;结果:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;subtract_button&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QPushButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;计算减法&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;subtract_button&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;clicked&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;calculate_subtraction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;subtract_button&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addWidget&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_label_subtract&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;tab&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setLayout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;layout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tabs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;addTab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;tab&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;减法计算&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;def&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;calculate_subtraction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;try&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;num1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input3&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;num2&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;input4&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;num2&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_label_subtract&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;setText&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;结果: &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;.2f&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;except&lt;/span&gt; &lt;span class=&#34;ne&#34;&gt;ValueError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;QMessageBox&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;bp&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;输入错误&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请输入有效的数字.&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;vm&#34;&gt;__name__&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;__main__&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;QApplication&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sys&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;argv&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;window&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MyWindow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;window&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;sys&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;app&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;())&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
         <title>工业设计结构</title>
         <link>https://teaize.github.io/p/%E5%B7%A5%E4%B8%9A%E8%AE%BE%E8%AE%A1%E7%BB%93%E6%9E%84/</link>
         <pubDate>Wed, 15 Jan 2025 00:00:00 +0000</pubDate>
@@ -42,6 +437,7 @@
 &lt;li&gt;预留足够的固定空间并配备公差。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;参考资料&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;防水结构设计&#34;&gt;防水结构设计
 &lt;/h3&gt;&lt;ul&gt;
@@ -77,11 +473,12 @@
 &lt;li&gt;设计隔振槽或减振框架。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;参考资料：[[减震器]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;热管理结构设计&#34;&gt;热管理结构设计
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;通过设计散热器通道或材料导热性能，降低设备温度。&lt;/li&gt;
-&lt;li&gt;设计要点:
+&lt;li&gt;设计要点：
 &lt;ul&gt;
 &lt;li&gt;优化孔布局，避免局部过热。&lt;/li&gt;
 &lt;li&gt;结合文艺复兴 (风扇) 和笔记本电脑 (中世纪片)。&lt;/li&gt;
@@ -278,27 +675,8 @@
 &lt;h3 id=&#34;参考资料&#34;&gt;参考资料
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;mp.weixin.qq.com/s/wpSUmfjOfUfsByHBh27sfw&lt;/a&gt;&lt;/li&gt;
+    &gt;工业设计必须了解的19种结构常识&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>性与经济一直都是夫妻感情长久的基础</title>
-        <link>https://teaize.github.io/p/%E6%80%A7%E4%B8%8E%E7%BB%8F%E6%B5%8E%E4%B8%80%E7%9B%B4%E9%83%BD%E6%98%AF%E5%A4%AB%E5%A6%BB%E6%84%9F%E6%83%85%E9%95%BF%E4%B9%85%E7%9A%84%E5%9F%BA%E7%A1%80/</link>
-        <pubDate>Sun, 12 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E6%80%A7%E4%B8%8E%E7%BB%8F%E6%B5%8E%E4%B8%80%E7%9B%B4%E9%83%BD%E6%98%AF%E5%A4%AB%E5%A6%BB%E6%84%9F%E6%83%85%E9%95%BF%E4%B9%85%E7%9A%84%E5%9F%BA%E7%A1%80/</guid>
-        <description>&lt;p&gt;性与经济一直是夫妻关系长久的基础：&lt;/p&gt;
-&lt;p&gt;夫妻长久的秘诀是什么？简单来说就是一个字：熬。如果乐观地看，夫妻长久的秘诀在于相互包容、欣赏、成长和理解。但从现实角度出发，或站在人性的角度来看，任何长久的关系，本质上都是反人性的。真正遵从人的本心，其实是没有长久关系这一说的，也是难以长久维持的。&lt;/p&gt;
-&lt;p&gt;以婚姻为例，婚姻生活的平淡很容易磨灭所有的激情、热情和爱情。当日常生活变得索然无味，同时还要承担家庭琐事和各种责任，夫妻间的矛盾会让生活大部分时间都不快乐。不快乐就想要逃离，这是人之常情。&lt;/p&gt;
-&lt;p&gt;再者，人性本是喜新厌旧、趋利避害。当看清对方真实面目后，会逐渐去除之前对对方的美化。当你感觉伴侣越来越普通时，这时考验的就是良心和背叛的代价。&lt;/p&gt;
-&lt;p&gt;没有人能几十年如一日地吃同一道菜或与同一个人相处而不感到倦怠和厌烦。于是开始质疑、好奇和憧憬：当初未选择的那条路，会不会更加美好？&lt;/p&gt;
-&lt;p&gt;不要说你从未有过离婚的念头，实际上，在离婚和妥协之间反复矛盾、不断纠结，才是婚姻生活的常态。那什么叫妥协？是不是违背了本心？所以一段关系的长久，并非因为人的本心，而是因为利益的牵绊、责任的约束、分手的代价。&lt;/p&gt;
-&lt;p&gt;长久的婚姻是熬出来的，但熬的方式各有不同。如果只是无望地熬，那千万不要以为自己能长久忍受，终有一日会无法忍受。也就是说，你还需要从中获得些什么，来平衡你的痛苦。这也是人性所在，既然付出、牺牲、承担了许多，总希望有所获得。&lt;/p&gt;
-&lt;p&gt;所以对于个人的需求来说，唯一可能具有长久性的，就是性。这也是夫妻之间唯一可能长久提供的好处。性满足了个人最基本的需求，是人的本能和原始欲望。经济则满足了生活的基本需求，是过日子的根本。&lt;/p&gt;
-&lt;p&gt;虽然个人的需求可能会因为基础需求的满足而有所提升，但至少还有基础需求的满足，在得不到进一步满足时，人们还是会选择妥协。&lt;/p&gt;
-&lt;p&gt;何止是婚姻，一个人到了一定年龄，主要关注的就是两样东西：性与经济。你不能忽视对方作为一个“个体”的存在，每个人都有其基础需求。任何忽视个人基础需求的关系，都是不道德的。&lt;/p&gt;
-&lt;p&gt;婚姻毕竟是两个人的关系，正如古语所说：“饮食男女，人之大欲存焉。”不可否认，世界上确实存在和谐美满的夫妻，但那是极少数，且需要双方都有极高的智慧和修养。对于大多数普通夫妻来说，维系关系的往往是孩子、责任、利益和代价。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -663,7 +1041,7 @@
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;根据防护和美观需求，确定表面处理方式
 &lt;ul&gt;
-&lt;li&gt;[[喷涂颜色]]&lt;/li&gt;
+&lt;li&gt;[[喷涂工艺]]&lt;/li&gt;
 &lt;li&gt;[[阳极氧化、微弧氧化]]&lt;/li&gt;
 &lt;li&gt;[[电镀、真空镀]]&lt;/li&gt;
 &lt;/ul&gt;
@@ -693,7 +1071,7 @@
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;应力与应变：应力的种类（拉应力、压应力、剪应力等），应变的类型（弹性应变、塑性应变等）
 &lt;ul&gt;
-&lt;li&gt;[[拉伸、压缩与剪切]]&lt;/li&gt;
+&lt;li&gt;[[材料力学-拉伸、压缩与剪切]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;本构关系：材料的应力应变关系，如胡克定律&lt;/li&gt;
@@ -838,7 +1216,7 @@
 &lt;/li&gt;
 &lt;li&gt;表面修饰：如抛光、喷砂、拉丝等工艺
 &lt;ul&gt;
-&lt;li&gt;[[常用的表面处理工艺]]&lt;/li&gt;
+&lt;li&gt;[[材料-表面处理工艺]]&lt;/li&gt;
 &lt;li&gt;[[电解抛光]]&lt;/li&gt;
 &lt;li&gt;[[粉体涂装]]&lt;/li&gt;
 &lt;/ul&gt;
@@ -1289,7 +1667,7 @@ $$&lt;/p&gt;
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;弹性材料：如橡胶、硅胶、氟橡胶等
 &lt;ul&gt;
-&lt;li&gt;[[常用密封材料]]&lt;/li&gt;
+&lt;li&gt;[[材料-密封材料]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;塑性材料：如聚四氟乙烯（PTFE）、尼龙&lt;/li&gt;
@@ -1629,18 +2007,6 @@ $$&lt;/p&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.zhihu.com/question/21696230/answer/1422216296&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;知乎 你是明白了哪几个基本原理之后而厨艺大增的？&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;基本原则&#34;&gt;基本原则
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;骨头肉类冷水下锅，焯去血沫，肉不腥&lt;/li&gt;
-&lt;li&gt;调料的作用是增香，而不是遮住食材本身的香气，吃的是食材，不是调料&lt;/li&gt;
-&lt;li&gt;煲汤的时候尽量水一次性加足，如果中途非要加水的话，加热水&lt;/li&gt;
-&lt;li&gt;鲜肉不好切，冰箱里冻一会再切就容易的多&lt;/li&gt;
-&lt;li&gt;鸡蛋液加两小勺水煎出来的鸡蛋更嫩&lt;/li&gt;
-&lt;li&gt;黄瓜、白菜心等凉拌菜最好上桌前再放味极鲜等调味料，因为时间长了会很快腌出水分，影响口感&lt;/li&gt;
-&lt;li&gt;做鱼的时候，白酒的去腥效果要比料酒好的多&lt;/li&gt;
-&lt;li&gt;炒青菜的时候，建议开到最大火爆炒，快断生的时候就出锅&lt;/li&gt;
-&lt;li&gt;土豆丝切好后清水里洗一下，去除掉淀粉，做出来的土豆丝更清脆爽口。当然你也可以不洗，看个人喜好&lt;/li&gt;
-&lt;/ul&gt;
 &lt;h3 id=&#34;菜单&#34;&gt;菜单
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/105840941/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
@@ -1691,6 +2057,16 @@ $$&lt;/p&gt;
     &gt;牛肉炖土豆 - 小红书&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/61ef80a00000000001026224?xsec_token=ABZ2ZUHKGCy4JjRJe3PEzg2eq3g2TEHCFVj0u-Mzq-JlQ=&amp;amp;xsec_source=pc_collect&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;腊味煲仔饭 - 小红书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/106655867/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;炖鸡鸡汤_下厨房&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/107362685/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【豆腐这样吃，瞬间光盘的做法步骤图】奶油小厨房_下厨房&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/107317352/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;滑动验证&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/106858555/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;麻婆豆腐&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/103951128/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;鱼香肉丝&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;蘸料&#34;&gt;蘸料
 &lt;/h3&gt;&lt;ul&gt;
@@ -1715,7 +2091,7 @@ $$&lt;/p&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/107254893/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;烤冷面_下厨房&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/102761689/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;【油炸鸡蛋丝_下厨房&lt;/a&gt;&lt;/li&gt;
+    &gt;油炸鸡蛋丝_下厨房&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;汤&#34;&gt;汤
 &lt;/h3&gt;&lt;ul&gt;
@@ -1733,6 +2109,15 @@ $$&lt;/p&gt;
     &gt;紫菜蛋花汤-小红书&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/66dd10c50000000012011ef3?xsec_token=ABh5Fff70R8PRB6pB-FlNhfXX0xfSUw5ob8TSiG_ED7pU=&amp;amp;xsec_source=pc_search&amp;amp;source=unknown&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;山药骨头汤 - 小红书&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;待尝试&#34;&gt;待尝试
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/66417796000000001e027fbb?xsec_token=ABamc5RYkXmLpXRSOZpSrKTBXMeXsTNi53vg6Bq-TXZV8=&amp;amp;xsec_source=pc_search&amp;amp;source=web_search_result_notes&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;芝士焗饭 - 小红书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/6211ff73000000000102a2bb?xsec_token=AB7yhLiZtFLxC44JzqMolDI33uevqIjIGsbgfK60Jq6I4=&amp;amp;xsec_source=pc_search&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;香煎鸡胸肉 - 小红书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/64a6785e000000001e0127c2?xsec_token=ABX4IfZxf090RkdzefrXlsJcyCs_LBReYZjlXzQCZsKWg=&amp;amp;xsec_source=pc_search&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;大学生糊弄做饭之糖醋鸡胸肉！ - 小红书&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -1756,19 +2141,6 @@ $$&lt;/p&gt;
 &lt;li&gt;更简单，更强大的国产在线 PCB 设计软件&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>Obsidian插件</title>
-        <link>https://teaize.github.io/p/obsidian%E6%8F%92%E4%BB%B6/</link>
-        <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/obsidian%E6%8F%92%E4%BB%B6/</guid>
-        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/scambier/obsidian-omnisearch&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;GitHub - scambier/obsidian-omnisearch: A search engine that &amp;ldquo;just works&amp;rdquo; for Obsidian. Supports OCR and PDF indexing.&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -2489,6 +2861,33 @@ $$&lt;/p&gt;
 &lt;li&gt;对于 PNP 型传感器，1M 公共端接 0V&lt;/li&gt;
 &lt;li&gt;对于 NPN 型传感器，1M 公共端接 24V&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>串口通信、RS232、RS485简明笔记</title>
+        <link>https://teaize.github.io/p/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1rs232rs485%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%B8%B2%E5%8F%A3%E9%80%9A%E4%BF%A1rs232rs485%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/HKQaYN5Odlk?si=HxR2KJq7MAyYUMCL&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;5分钟看懂!串口RS232 RS485最本质的区别！ - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://youtu.be/3wgKcUDlHuM?si=YDg1Nt6TnITuU5PO&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;What is RS485 and How it&amp;rsquo;s used in Industrial Control Systems? - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>电磁阀的工作原理</title>
+        <link>https://teaize.github.io/p/%E7%94%B5%E7%A3%81%E9%98%80%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Sun, 06 Oct 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%94%B5%E7%A3%81%E9%98%80%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=gWyGaqp_k1g&amp;amp;t=20s&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solenoid Valve Explained | Types and Application - YouTube&lt;/a&gt;&lt;/p&gt;
+&lt;iframe width=&#34;560&#34; height=&#34;315&#34; src=&#34;https://www.youtube.com/embed/gWyGaqp_k1g?si=iC49OqKsuZp-GrAm&#34; title=&#34;YouTube video player&#34; frameborder=&#34;0&#34; allow=&#34;accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share&#34; referrerpolicy=&#34;strict-origin-when-cross-origin&#34; allowfullscreen&gt;&lt;/iframe&gt;
 </description>
         </item>
         <item>
@@ -3408,6 +3807,15 @@ $$&lt;/p&gt;
 	&lt;/div&gt;
 
 &lt;/p&gt;
+&lt;h3 id=&#34;细牙螺纹底孔尺寸&#34;&gt;细牙螺纹底孔尺寸
+&lt;/h3&gt;&lt;p&gt;以 M12X1.5 细牙螺纹为例，对于普通的 60° 螺纹，底孔直径约为螺纹公称直径减去螺距。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M12×1.75（普通螺距）：底孔直径 ≈ 12 - 1.75 = 10.25 mm&lt;/li&gt;
+&lt;li&gt;M12×1.5（细牙螺纹）：底孔直径 ≈ 12 - 1.5 = 10.5 mm&lt;/li&gt;
+&lt;li&gt;M12×1.25（细牙螺纹）：底孔直径 ≈ 12 - 1.25 = 10.75 mm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;底孔直径计算公式：&lt;/p&gt;
+&lt;p&gt;$d_{\text{底孔}} = d_{\text{公称直径}} - P$&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -3818,6 +4226,48 @@ $$&lt;/p&gt;
 </description>
         </item>
         <item>
+        <title>冷轧钢喷塑</title>
+        <link>https://teaize.github.io/p/%E5%86%B7%E8%BD%A7%E9%92%A2%E5%96%B7%E5%A1%91/</link>
+        <pubDate>Sun, 15 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%86%B7%E8%BD%A7%E9%92%A2%E5%96%B7%E5%A1%91/</guid>
+        <description>&lt;p&gt;喷塑也就是常讲的静电粉末喷涂，它是利用静电发生器使塑料粉末带电，吸附在铁板（冷轧钢）表面，然后经过 180～220℃的烘烤，使粉末熔化黏附在金属表面，喷塑产品多用于户内使用的箱体，漆膜呈现平光或哑光效果。&lt;/p&gt;
+&lt;h3 id=&#34;喷塑的目的&#34;&gt;喷塑的目的
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;防腐蚀：在钢材表面形成一层致密的塑料涂层，有效防止氧化和腐蚀，提高使用寿命&lt;/li&gt;
+&lt;li&gt;美观性：使产品表面更加光滑和均匀，提高产品的美观度，同时可以根据需要选择不同的颜色，满足不同的设计和使用要求&lt;/li&gt;
+&lt;li&gt;耐磨性和抗冲击性：喷塑涂层具有一定的硬度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;喷塑喷的什么塑&#34;&gt;喷塑，喷的什么塑
+&lt;/h3&gt;&lt;p&gt;喷塑过程中使用的材料主要是热固性粉末涂料或热塑性粉末涂料，常见的材料包括&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;环氧树脂粉末：具有优异的附着力、耐腐蚀性和机械性能，常用于需要高防腐蚀要求的场合。然而，其耐候性较差，不适合长期暴露在户外。&lt;/li&gt;
+&lt;li&gt;聚酯粉末：具有良好的耐候性、耐紫外线性能和机械性能，适合户外使用。这种粉末的表面光洁度高，色彩稳定性好。&lt;/li&gt;
+&lt;li&gt;环氧 - 聚酯混合粉末：结合了环氧树脂和聚酯粉末的优点，既具有良好的附着力和机械性能，又提高了耐候性，是常用的通用型喷塑材料。&lt;/li&gt;
+&lt;li&gt;聚氨酯粉末：具有优异的耐磨性、耐化学腐蚀性和弹性，适合用于需要高机械强度和耐化学性的场合。&lt;/li&gt;
+&lt;li&gt;聚乙烯和聚丙烯粉末：这些属于热塑性粉末，具有良好的耐化学性和耐磨性，但机械性能相对较弱，常用于特定的工业环境。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;喷塑流程&#34;&gt;喷塑流程
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;前处理：清洗、磷化、干燥&lt;/li&gt;
+&lt;li&gt;静电喷涂：利用静电喷枪将粉末涂料喷射到工件表面。喷枪使粉末带有负电荷，工件通过接地带正电荷，这种静电吸引力使粉末均匀地吸附在工件表面。注意喷涂过程中的粉末涂料的&lt;strong&gt;均匀性控制&lt;/strong&gt;，涂层应均匀覆盖工件包括边缘、角落和复杂形状等各个区域&lt;/li&gt;
+&lt;li&gt;加热固化：送入固化炉中，温度通常在 180-200°C 左右，具体温度取决于所使用的粉末涂料类型&lt;/li&gt;
+&lt;li&gt;冷却：自然冷却或风冷&lt;/li&gt;
+&lt;li&gt;检验和后处理：对喷塑后的工件进行外观和性能检验，确保涂层均匀、无气泡、流挂、针孔等缺陷，并达到所需的硬度、附着力和防腐性能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他工艺&#34;&gt;其他工艺
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;喷漆&lt;/li&gt;
+&lt;li&gt;电泳涂装&lt;/li&gt;
+&lt;li&gt;热镀锌&lt;/li&gt;
+&lt;li&gt;电镀&lt;/li&gt;
+&lt;li&gt;阳极氧化（主要用于铝合金）&lt;/li&gt;
+&lt;li&gt;氟碳喷涂&lt;/li&gt;
+&lt;li&gt;浸塑&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>导线线径与功率</title>
         <link>https://teaize.github.io/p/%E5%AF%BC%E7%BA%BF%E7%BA%BF%E5%BE%84%E4%B8%8E%E5%8A%9F%E7%8E%87/</link>
         <pubDate>Wed, 11 Sep 2024 00:00:00 +0000</pubDate>
@@ -3979,7 +4429,11 @@ $$&lt;/p&gt;
 &lt;li&gt;&lt;code&gt;mklink&lt;/code&gt; 是 Windows 中的一个命令行工具，用于创建符号链接，类似于 MacOS 系统中的 &lt;code&gt;ln -s&lt;/code&gt; 命令（可参考 &lt;a class=&#34;link&#34; href=&#34;https://coffeelize.top/posts/Obsidian-to-Hexo.html?highlight=%e8%bd%af&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Obsidian2Hexo | 智朋的个人博客&lt;/a&gt;）&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;/D&lt;/code&gt; 表示要创建的是一个目录符号链接，而不是文件符号链接&lt;/li&gt;
-&lt;li&gt;第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径&lt;/li&gt;
+&lt;li&gt;第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径
+&lt;ul&gt;
+&lt;li&gt;首先删除 Obsidian 当中的 &lt;code&gt;00-HugoBlog&lt;/code&gt;，在该路径下调用 CMD，运行上面的命令之后，会在当前路径下生成一个链接文件夹 &lt;code&gt;00-HugoBlog&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;
 	&lt;div class=&#34;post-img-view&#34;&gt;

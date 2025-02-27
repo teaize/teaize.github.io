@@ -93,7 +93,11 @@
 &lt;li&gt;&lt;code&gt;mklink&lt;/code&gt; 是 Windows 中的一个命令行工具，用于创建符号链接，类似于 MacOS 系统中的 &lt;code&gt;ln -s&lt;/code&gt; 命令（可参考 &lt;a class=&#34;link&#34; href=&#34;https://coffeelize.top/posts/Obsidian-to-Hexo.html?highlight=%e8%bd%af&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Obsidian2Hexo | 智朋的个人博客&lt;/a&gt;）&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;/D&lt;/code&gt; 表示要创建的是一个目录符号链接，而不是文件符号链接&lt;/li&gt;
-&lt;li&gt;第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径&lt;/li&gt;
+&lt;li&gt;第一个路径是源目录的实际路径，第二个路径通过符号链接指向第一个路径，即在访问第二个路径时，实际上是在访问第一个路径
+&lt;ul&gt;
+&lt;li&gt;首先删除 Obsidian 当中的 &lt;code&gt;00-HugoBlog&lt;/code&gt;，在该路径下调用 CMD，运行上面的命令之后，会在当前路径下生成一个链接文件夹 &lt;code&gt;00-HugoBlog&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;
 	&lt;div class=&#34;post-img-view&#34;&gt;
