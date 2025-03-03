@@ -7,7 +7,125 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>气体浓度的表示方法</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;p&gt;气体的浓度可以用不同的方式表示，常见的有&lt;strong&gt;体积浓度&lt;/strong&gt;、&lt;strong&gt;质量浓度&lt;/strong&gt;、&lt;strong&gt;摩尔浓度&lt;/strong&gt;和&lt;strong&gt;混合比&lt;/strong&gt;等。&lt;/p&gt;
+&lt;h2 id=&#34;1-体积浓度volume-concentration&#34;&gt;1. 体积浓度（Volume Concentration）
+&lt;/h2&gt;&lt;p&gt;体积浓度通常用于气体分析，常见的单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ppm（parts per million，百万分浓度）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppm} = \frac{1 \text{ cm}^3}{1 \text{ m}^3} = 10^{-6}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ppb（parts per billion，十亿分浓度）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppb} = 10^{-9}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;%（体积分数，Volume Percent）
+&lt;ul&gt;
+&lt;li&gt;$1% = 10^4 \text{ ppm}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气污染监测（SO₂、NO₂、CO、O₃）、工业气体分析等。&lt;/p&gt;
+&lt;h2 id=&#34;2-质量浓度mass-concentration&#34;&gt;2. 质量浓度（Mass Concentration）
+&lt;/h2&gt;&lt;p&gt;质量浓度表示单位体积气体中某种气体成分的质量，常见单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mg/m³（毫克每立方米）
+&lt;ul&gt;
+&lt;li&gt;其中 $C_m$ 是质量浓度，$m$ 是质量（mg），$V$ 是体积（m³）。$$C_m = \frac{m}{V}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;μg/m³（微克每立方米），用于更低浓度的测量，如空气污染物。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气质量监测（PM2.5、PM10、SO₂、NO₂）、职业安全评估等。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;体积浓度与质量浓度转换&lt;/strong&gt;：
+$$C_m = C_v \times \frac{M}{22.4} \times \frac{273.15}{T} \times \frac{P}{101.325}$$
+其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$C_m$：质量浓度（mg/m³）&lt;/li&gt;
+&lt;li&gt;$C_v$：体积浓度（ppm）&lt;/li&gt;
+&lt;li&gt;$M$：气体的摩尔质量（g/mol）&lt;/li&gt;
+&lt;li&gt;$T$：温度（K）&lt;/li&gt;
+&lt;li&gt;$P$：压力（kPa）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-摩尔浓度molar-concentration&#34;&gt;3. 摩尔浓度（Molar Concentration）
+&lt;/h2&gt;&lt;p&gt;摩尔浓度表示单位体积气体中的物质的量，单位是 mol/m³ 或 mol/L。
+$$C_n = \frac{n}{V}$$
+其中 $C_n$ 是摩尔浓度，$n$ 是摩尔数（mol），$V$ 是体积（m³）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在标准状态（0℃，101.325 kPa），1 mol 气体的体积约为 22.4 L。&lt;/li&gt;
+&lt;li&gt;在 25℃ 时，1 mol 气体的体积约为 24.5 L。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：化学反应计算、气体定量分析等。&lt;/p&gt;
+&lt;h2 id=&#34;4-质量比mass-ratio&#34;&gt;4. 质量比（Mass Ratio）
+&lt;/h2&gt;&lt;p&gt;表示某种气体在混合气体中的质量占比，常见单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mg/kg&lt;/li&gt;
+&lt;li&gt;μg/g&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于空气污染、燃烧排放分析等。&lt;/p&gt;
+&lt;h2 id=&#34;5-体积比mixing-ratio&#34;&gt;5. 体积比（Mixing Ratio）
+&lt;/h2&gt;&lt;p&gt;表示气体的体积占比，通常用于气象、环境科学，单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ppm、ppb、ppt（万亿分比）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppt} = 10^{-12}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;mol/mol（摩尔分数）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppm} = 10^{-6} \text{ mol/mol}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于温室气体分析（CO₂、CH₄）、大气监测等。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;浓度类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;常见单位&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ppm、ppb、%&lt;/td&gt;
+          &lt;td&gt;气体污染物、CEMS 监测&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mg/m³、μg/m³&lt;/td&gt;
+          &lt;td&gt;PM2.5、空气质量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;摩尔浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mol/m³、mol/L&lt;/td&gt;
+          &lt;td&gt;化学反应、气体分析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量比&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mg/kg、μg/g&lt;/td&gt;
+          &lt;td&gt;燃烧排放、气体混合&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积比&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ppm、ppb、mol/mol&lt;/td&gt;
+          &lt;td&gt;温室气体、环境监测&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
         <title>机加工技术要求</title>
         <link>https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/</link>
         <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
@@ -4422,7 +4540,7 @@ $$&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;E:\003-SynZhPObsidian\SynZhPObsidian\00-HugoBlog&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\post&amp;#34;&lt;/span&gt; 
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;F:\003-SynZhPObsidian\SynZhPObsidian\00-HugoBlog&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\post&amp;#34;&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ul&gt;
@@ -4460,7 +4578,16 @@ $$&lt;/p&gt;
 
 &lt;/p&gt;
 &lt;p&gt;有个问题还是没有弄明白，明明在 Obsidian 中放的是一个软连接，Obsidian 竟然可以实现云同步：）&lt;/p&gt;
-</description>
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;F:\003-SynZhPObsidian\SynZhPObsidian\HugoNotes&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\page\notes&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         <item>
         <title>Archives</title>
@@ -4506,14 +4633,100 @@ $$&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>notes</title>
+        <title>Notes</title>
         <link>https://teaize.github.io/notes/</link>
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/notes/</guid>
-        <description>&lt;p&gt;这个网站是一个工程师的存档点，网站使用 Hugo 搭建，静态网页和原始文件均存放在 Github 仓库中&lt;/p&gt;
-&lt;p&gt;网站的作者没有主动将网站提交给 Google、Bing 等搜索引擎进行抓取，在互联网的这块孤岛上，或许永远也没有人能够来到这片土地，更不会有人认识网站的作者&lt;/p&gt;
-&lt;p&gt;因此，希望能在这篇净土上畅所欲言的表达&lt;/p&gt;
+        <description>&lt;h3 id=&#34;2025-年-2-月&#34;&gt;2025 年 2 月
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;学会给自己留缓冲的余地：在你觉得能够完成需求的天数基础上适当多报个一两天。&lt;/li&gt;
+&lt;li&gt;学会偷懒：持续保持高强度的工作是不可能的，也是不可取的。适当偷偷懒，让自己的身体，尤其是脑子休息一下，恢复精力才能持久工作。这个偷懒不是说让大家在工作上偷奸耍滑，不要误解了。&lt;/li&gt;
+&lt;li&gt;不要过于主动：尽量不要过于主动，越主动，负担就越重，压力就越大。当然，如果你的抗压能力比较强，也比较有上进心的话，那就当我没说。&lt;/li&gt;
+&lt;li&gt;不要逞强：难度过高的任务，一定要主动说完成不了，让上层再细分细分，千万不要想的过少就口出狂言，最后累死的是自己。&lt;/li&gt;
+&lt;li&gt;有跳槽想法就要尽快行动起来：如有跳槽想法，建议尽早开始备战面试跳槽。在完成工作任务的前提下，尽可能地多挤出时间来准备面试。工作期间挤不出来时间就下班之后再开始，少刷一些抖音，少打一些游戏。一定要做好规划，每天时间充足就拉短周期，每天时间少就拉长周期。尽量“骑驴找马”，提前做面试准备，还要实际感受一下面试难度和市场行情。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2025-年-1-月&#34;&gt;2025 年 1 月
+&lt;/h3&gt;&lt;p&gt;人的精神寄托可以是音乐，可以是书籍，可以是工作，可以是山川湖海，唯独不可以是人。不要轻易去依赖一个人，当分别来临时，你失去的不是某个人，而是你精神的支柱。无论何时何地，都要学会独立行走，它会让你走的更加坦然一些，人与人之间的一切关系都如流沙，握的越紧，流失的越快。把期待放在别人身上，期待越高，失望越大。没有人有义务要满足你的期待，包括你自己，即使是你的影子，也会在黑暗中离开你&lt;/p&gt;
+&lt;h3 id=&#34;2024-年-10-月&#34;&gt;2024 年 10 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;开源思维导图 SimpleMindMap
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/wanglin2/mind-map&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub - wanglin2/mind-map: 一个还算强大的Web思维导图。A relatively powerful web mind map.&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2024-年-9-月&#34;&gt;2024 年 9 月
+&lt;/h3&gt;&lt;p&gt;当我对所有的事情都厌倦的时候，我就会想起你，想到你在世界的某个地方生活着，存在着，我就愿意忍受一切。你的存在，对我很重要&lt;/p&gt;
+&lt;h3 id=&#34;2024-年-6-月&#34;&gt;2024 年 6 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;一个研究生的存档点 —&amp;gt; 一个工程师的存档点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2024-年-5-月&#34;&gt;2024 年 5 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;真正能断定一个理论是不是垃圾，有多大价值，要看他会不会被后人记住。真正好的理论往往会引发人们广泛而深刻的探讨，甚至是争论。后来的人们会站在该理论的基础之上做出更为充实的科学贡献&lt;/li&gt;
+&lt;li&gt;某个环境的条件如何如何之好并不是你去到某个环境中的理由，你能从这个环境中获得什么样的成就，才是你前往某个环境的原因&lt;/li&gt;
+&lt;li&gt;Entities must not be multiplied beyond necessity.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2023-年-11-月&#34;&gt;2023 年 11 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;The hard of hearing always listen closest.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2023-年-10-月&#34;&gt;2023 年 10 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;我深怕自己本非美玉，故而不敢加以刻苦琢磨，却又半信自己是块美玉，故又不肯庸庸碌碌，与瓦砾为伍&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2023-年-9-月&#34;&gt;2023 年 9 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;人们为何要移民？是什么迫使他们背井离乡，放下熟稔的一切事物，奔向地平线另一侧的广袤未知之地？移民手续繁琐得如同珠穆朗玛峰，为何还要像乞丐一样翻越它？为何要闯入一片异域丛林，而那里的一切都令你感到新鲜、陌生而又寸步难行？答案是放之四海皆准的：人们移民，乃是希望拥有更美好的生活&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2023-年-6-月&#34;&gt;2023 年 6 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;富裕并非拥有许多财产，而是拥有很少需求&lt;/li&gt;
+&lt;li&gt;相比于时间，专注力可能才是我们更稀缺的资源&lt;/li&gt;
+&lt;li&gt;专注力这种技能不是与生俱来的，而是获得的技能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-11-月&#34;&gt;2022 年 11 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;又做了一次同位素磷 32 的瘢痕疙瘩治疗，期望瘢痕能够慢慢好转过来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-10-月&#34;&gt;2022 年 10 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;每当我在网站上看到“免费订阅”按钮，我就把网站主办方的邮箱提交上去。我还把这些邮箱保留下来，等到有空了，把它们逐个提交到各种订阅服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-9-月&#34;&gt;2022 年 9 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;要想消除烦恼，只有一个人在宇宙中生存&lt;/li&gt;
+&lt;li&gt;你并不是“受怒气支配而大发雷霆”，完全是“为了大发雷霆而制造怒气”&lt;/li&gt;
+&lt;li&gt;“长高干什么呢？你可有让人感觉轻松的本事啊！”的确，高大强壮的男性本身就会给人一种震慑感；而另一方面，矮小的我却能让对方放下警惕心理。看来个子矮小无论是对周围人来说还是对自己来说，都有好处呢！这就是价值的转换&lt;/li&gt;
+&lt;li&gt;但是，这种贡献也可以通过看不见的形式实现。只要有“对别人有用”的主观感觉，即“贡献感”就可以，幸福就是“贡献感”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-8-月&#34;&gt;2022 年 8 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;阿德勒的目的论是说：“无论之前的人发生过什么，都对今后的人生如何度过没有影响。”决定自己人生的是活在“此时此刻”的你自己&lt;/li&gt;
+&lt;li&gt;决定我们自己的不是“经验本身”而是“赋予经验的意义”&lt;/li&gt;
+&lt;li&gt;重要的不是被给予了什么，而是如何利用被给予的东西&lt;/li&gt;
+&lt;li&gt;自由就是被别人讨厌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-7-月&#34;&gt;2022 年 7 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;没必要把你懂的东西都说出来，人们不喜欢他们身边有人比他们懂得更多，那会让他们恼火。你说的再正确，也改变不了这些人，除非他们自己想学，否则一点办法也没有。你要么闭上嘴巴，要么就使用他们的语言&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-6-月&#34;&gt;2022 年 6 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;虚室生白，吉祥止止：当我们达到一种内心的宁静和超然境界时，我们能够在虚无中获得珍贵之物，同时吉祥的状态也会持续不断。这句话所传达的是一种追求心灵自由和平静的境界，以及在内心寂静中获得真正的幸福和吉祥&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-5-月&#34;&gt;2022 年 5 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Your paper makes no goddamn sense, but it&amp;rsquo;s the most beautiful thing I have ever laid eyes on&lt;/li&gt;
+&lt;li&gt;在学术文档中人们经常要用到参考文献，这样做既可以有选择地提供事实，作客观公证科学严谨状，还可以拉帮结派党同伐异&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2022-年-4-月&#34;&gt;2022 年 4 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;我们好像只能使用经过精选的时间；我们记得的只是一生中最精彩的时刻；半小时对我们来说不算时间；我们只承认整段整段的时间，只承认不受客观环境和偶然事件干扰的大段时间。只有在这样的时间里，我们才打算大显身手。短一点的时间，我们马上会借口外界有干扰、客观条件不允许而难以用上。啊，不依我们意志为转移的客观条件，具有充分权力和理由的客观条件真是威力无比！把责任往它们身上一推，那是多么轻而易举啊&lt;/li&gt;
+&lt;li&gt;我们的记忆是靠什么？靠事件。我们的生活是拿时间来做标志的。它们仿佛是路标，路标之间却是一片空白…比方说，自从我写柳比歇夫的小说以来，最近这几个月的时光都跑到哪儿去了？伏案写作的时间本身并不多，这些日子都干什么了？我可是干事儿来着，一直忙得很，究竟忙些什么，却记不起来。是瞎忙还是忙的正事——这 90 天该怎么总结呢？光这几个月倒也罢了…以往，年轻的时候，每逢过年，我总是猛然想起，一年又过去了，我决心要做的，并且也向别人保证了的，有没有做成——一部小说没有写完，有些信没有回复，同谁没有见成面，又是什么没有做…拖啊拖，结果是拖无可拖了&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>

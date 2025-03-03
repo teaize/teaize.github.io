@@ -7,7 +7,125 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Tue, 21 Jan 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 03 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>气体浓度的表示方法</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;p&gt;气体的浓度可以用不同的方式表示，常见的有&lt;strong&gt;体积浓度&lt;/strong&gt;、&lt;strong&gt;质量浓度&lt;/strong&gt;、&lt;strong&gt;摩尔浓度&lt;/strong&gt;和&lt;strong&gt;混合比&lt;/strong&gt;等。&lt;/p&gt;
+&lt;h2 id=&#34;1-体积浓度volume-concentration&#34;&gt;1. 体积浓度（Volume Concentration）
+&lt;/h2&gt;&lt;p&gt;体积浓度通常用于气体分析，常见的单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ppm（parts per million，百万分浓度）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppm} = \frac{1 \text{ cm}^3}{1 \text{ m}^3} = 10^{-6}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ppb（parts per billion，十亿分浓度）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppb} = 10^{-9}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;%（体积分数，Volume Percent）
+&lt;ul&gt;
+&lt;li&gt;$1% = 10^4 \text{ ppm}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气污染监测（SO₂、NO₂、CO、O₃）、工业气体分析等。&lt;/p&gt;
+&lt;h2 id=&#34;2-质量浓度mass-concentration&#34;&gt;2. 质量浓度（Mass Concentration）
+&lt;/h2&gt;&lt;p&gt;质量浓度表示单位体积气体中某种气体成分的质量，常见单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mg/m³（毫克每立方米）
+&lt;ul&gt;
+&lt;li&gt;其中 $C_m$ 是质量浓度，$m$ 是质量（mg），$V$ 是体积（m³）。$$C_m = \frac{m}{V}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;μg/m³（微克每立方米），用于更低浓度的测量，如空气污染物。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气质量监测（PM2.5、PM10、SO₂、NO₂）、职业安全评估等。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;体积浓度与质量浓度转换&lt;/strong&gt;：
+$$C_m = C_v \times \frac{M}{22.4} \times \frac{273.15}{T} \times \frac{P}{101.325}$$
+其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$C_m$：质量浓度（mg/m³）&lt;/li&gt;
+&lt;li&gt;$C_v$：体积浓度（ppm）&lt;/li&gt;
+&lt;li&gt;$M$：气体的摩尔质量（g/mol）&lt;/li&gt;
+&lt;li&gt;$T$：温度（K）&lt;/li&gt;
+&lt;li&gt;$P$：压力（kPa）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-摩尔浓度molar-concentration&#34;&gt;3. 摩尔浓度（Molar Concentration）
+&lt;/h2&gt;&lt;p&gt;摩尔浓度表示单位体积气体中的物质的量，单位是 mol/m³ 或 mol/L。
+$$C_n = \frac{n}{V}$$
+其中 $C_n$ 是摩尔浓度，$n$ 是摩尔数（mol），$V$ 是体积（m³）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在标准状态（0℃，101.325 kPa），1 mol 气体的体积约为 22.4 L。&lt;/li&gt;
+&lt;li&gt;在 25℃ 时，1 mol 气体的体积约为 24.5 L。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：化学反应计算、气体定量分析等。&lt;/p&gt;
+&lt;h2 id=&#34;4-质量比mass-ratio&#34;&gt;4. 质量比（Mass Ratio）
+&lt;/h2&gt;&lt;p&gt;表示某种气体在混合气体中的质量占比，常见单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mg/kg&lt;/li&gt;
+&lt;li&gt;μg/g&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于空气污染、燃烧排放分析等。&lt;/p&gt;
+&lt;h2 id=&#34;5-体积比mixing-ratio&#34;&gt;5. 体积比（Mixing Ratio）
+&lt;/h2&gt;&lt;p&gt;表示气体的体积占比，通常用于气象、环境科学，单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ppm、ppb、ppt（万亿分比）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppt} = 10^{-12}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;mol/mol（摩尔分数）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppm} = 10^{-6} \text{ mol/mol}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于温室气体分析（CO₂、CH₄）、大气监测等。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;浓度类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;常见单位&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ppm、ppb、%&lt;/td&gt;
+          &lt;td&gt;气体污染物、CEMS 监测&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mg/m³、μg/m³&lt;/td&gt;
+          &lt;td&gt;PM2.5、空气质量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;摩尔浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mol/m³、mol/L&lt;/td&gt;
+          &lt;td&gt;化学反应、气体分析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量比&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mg/kg、μg/g&lt;/td&gt;
+          &lt;td&gt;燃烧排放、气体混合&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积比&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ppm、ppb、mol/mol&lt;/td&gt;
+          &lt;td&gt;温室气体、环境监测&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
         <title>机加工技术要求</title>
         <link>https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/</link>
         <pubDate>Tue, 21 Jan 2025 00:00:00 +0000</pubDate>
@@ -4422,7 +4540,7 @@ $$&lt;/p&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;E:\003-SynZhPObsidian\SynZhPObsidian\00-HugoBlog&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\post&amp;#34;&lt;/span&gt; 
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;F:\003-SynZhPObsidian\SynZhPObsidian\00-HugoBlog&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\post&amp;#34;&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;ul&gt;
@@ -4460,7 +4578,16 @@ $$&lt;/p&gt;
 
 &lt;/p&gt;
 &lt;p&gt;有个问题还是没有弄明白，明明在 Obsidian 中放的是一个软连接，Obsidian 竟然可以实现云同步：）&lt;/p&gt;
-</description>
+&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mklink /D &lt;span class=&#34;s2&#34;&gt;&amp;#34;F:\003-SynZhPObsidian\SynZhPObsidian\HugoNotes&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;D:\001-Github\Hugo-Main\content\page\notes&amp;#34;&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
         </item>
         
     </channel>
