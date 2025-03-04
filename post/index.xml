@@ -34,6 +34,12 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气污染监测（SO₂、NO₂、CO、O₃）、工业气体分析等。&lt;/p&gt;
+&lt;p&gt;体积浓度的优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;体积比不会随温度、压力变化而变化，更加稳定。&lt;/li&gt;
+&lt;li&gt;在不同环境条件下（实验室、工厂、野外），&lt;strong&gt;同一气体的体积浓度值一致&lt;/strong&gt;，便于对比。&lt;/li&gt;
+&lt;li&gt;气体分析仪（如 CEMS）大多基于&lt;strong&gt;体积浓度&lt;/strong&gt;测量，ppm 直接读取，无需复杂换算。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h2 id=&#34;2-质量浓度mass-concentration&#34;&gt;2. 质量浓度（Mass Concentration）
 &lt;/h2&gt;&lt;p&gt;质量浓度表示单位体积气体中某种气体成分的质量，常见单位有：&lt;/p&gt;
 &lt;ul&gt;
@@ -45,6 +51,12 @@
 &lt;li&gt;μg/m³（微克每立方米），用于更低浓度的测量，如空气污染物。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气质量监测（PM2.5、PM10、SO₂、NO₂）、职业安全评估等。&lt;/p&gt;
+&lt;p&gt;质量浓度的优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;质量浓度&lt;strong&gt;更直观地表示气体的实际污染量&lt;/strong&gt;，适用于环境法规和排放标准。&lt;/li&gt;
+&lt;li&gt;不同气体的密度不同，质量浓度能更好地反映气体的真实影响（例如 SO₂ 和 CO₂ 质量浓度相同，但危害性不同）。&lt;/li&gt;
+&lt;li&gt;适用于职业卫生和健康评估，如吸入某种有毒气体的质量剂量是否超标。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;p&gt;&lt;strong&gt;体积浓度与质量浓度转换&lt;/strong&gt;：
 $$C_m = C_v \times \frac{M}{22.4} \times \frac{273.15}{T} \times \frac{P}{101.325}$$
 其中：&lt;/p&gt;
@@ -87,7 +99,30 @@ $$C_n = \frac{n}{V}$$
 &lt;/ul&gt;
 &lt;p&gt;适用于温室气体分析（CO₂、CH₄）、大气监测等。&lt;/p&gt;
 &lt;h2 id=&#34;总结&#34;&gt;总结
-&lt;/h2&gt;&lt;table&gt;
+&lt;/h2&gt;&lt;p&gt;体积浓度与质量浓度对比&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;类别&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;优势&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;不受温度、压力影响，适合气体成分分析&lt;/td&gt;
+          &lt;td&gt;CEMS、温室气体、燃烧排放&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;直接反映气体的质量，易于执行环保标准&lt;/td&gt;
+          &lt;td&gt;空气质量、职业安全、健康评估&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;不同浓度类型&lt;/p&gt;
+&lt;table&gt;
   &lt;thead&gt;
       &lt;tr&gt;
           &lt;th&gt;&lt;strong&gt;浓度类型&lt;/strong&gt;&lt;/th&gt;
@@ -123,6 +158,129 @@ $$C_n = \frac{n}{V}$$
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>如何提问</title>
+        <link>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/</link>
+        <pubDate>Mon, 03 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%8F%90%E9%97%AE/</guid>
+        <description>&lt;h3 id=&#34;一提升提问质量的通用原则&#34;&gt;一、提升提问质量的通用原则
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;明确背景：说明问题的使用场景/目标（如学术论文/商业决策/兴趣学习）&lt;/li&gt;
+&lt;li&gt;结构化描述：将复杂问题拆解为具体子问题（避免模糊的一揽子提问）&lt;/li&gt;
+&lt;li&gt;提供示例：给出你期望的回答格式（如大纲/代码/表格/对比分析）&lt;/li&gt;
+&lt;li&gt;定义需求：说明回答的深度（如科普级/专业级）和限制条件（如字数/语言）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;二高效提问模板&#34;&gt;二、高效提问模板
+&lt;/h3&gt;&lt;h4 id=&#34;模板-1学术技术类问题&#34;&gt;模板 1：学术/技术类问题
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;背景&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;我正在研究______领域&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;目标是解决______问题&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;当前进展&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;目前已知______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;但遇到______困难&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;具体需求&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;请用______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;如公式&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;代码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;图表&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;解释______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;并推荐相关文献&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;模板-2决策建议类问题&#34;&gt;模板 2：决策建议类问题
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;目标&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;我需要在______情况下选择______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;如职业方向&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;投资方案&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;选项&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;目前考虑的方案有&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;______&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;______&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;C&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;______&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;限制条件&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;需考虑______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;如预算&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;时间&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;风险&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;），&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;优先关注______因素&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;模板-3创意生成类问题&#34;&gt;模板 3：创意生成类问题
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;主题&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;需要为______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;如产品&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;故事&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;活动&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;设计创意&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;风格要求&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;希望融合______和______元素&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;类似______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;示例&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;限制&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;需避免______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;必须包含______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;模板-4纠错优化类问题&#34;&gt;模板 4：纠错/优化类问题
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;原始内容&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;附上你的代码&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;文案&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;方案&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;可简化脱敏&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;问题现象&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;当______时会出现______错误&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;效果不理想&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;尝试方法&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;已尝试过______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;但______&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;三实操案例对比&#34;&gt;三、实操案例对比
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;低效提问：&amp;quot; 如何学习 Python？&amp;quot;&lt;/li&gt;
+&lt;li&gt;优化后提问：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;背景&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;我是一名市场营销从业者&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;想用Python自动化处理Excel报表&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;基础水平&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;已掌握基础语法&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;但不懂如何连接Excel&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;【&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;具体需求&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;】&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;请用代码示例说明&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mf&#34;&gt;1.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;用pandas读取含合并单元格的Excel文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mf&#34;&gt;2.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;将处理后的数据按部门分类导出为单独sheet&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mf&#34;&gt;3.&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;推荐适合商业场景的Python学习资源&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;中文优先&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;四进阶技巧&#34;&gt;四、进阶技巧
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;预设边界：
+&lt;ul&gt;
+&lt;li&gt;❌ 避免：&amp;quot; 全面分析中美关系 &amp;quot;&lt;/li&gt;
+&lt;li&gt;✅ 优化：&amp;quot; 请从科技竞争角度，对比 2018-2023 年中美在 AI 领域的政策差异 &amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;分步推进：
+&lt;ul&gt;
+&lt;li&gt;Step1: 先解释区块链的基本原理（比喻手法）&lt;/li&gt;
+&lt;li&gt;Step2: 再说明智能合约在供应链金融中的具体应用案例&lt;/li&gt;
+&lt;li&gt;Step3: 最后分析该技术的实施风险&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;反向验证：
+&lt;ul&gt;
+&lt;li&gt;&amp;quot; 如果我假设 ___ ，这个推论是否存在逻辑漏洞？&amp;quot;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;hr&gt;
+&lt;p&gt;比如 &lt;code&gt;文学化编程&lt;/code&gt; 这个问题，如何快速去了解他呢：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;他出现的背景是什么&lt;/li&gt;
+&lt;li&gt;他是由谁提出来的&lt;/li&gt;
+&lt;li&gt;他的主要目标是为了实现什么&lt;/li&gt;
+&lt;li&gt;他相对于其他，主要优点是什么&lt;/li&gt;
+&lt;li&gt;他是什么（主要内容）&lt;/li&gt;
+&lt;li&gt;他的特征是什么，或者说什么样的才能称之为文学化编程&lt;/li&gt;
+&lt;li&gt;其他比如 Markdown，算是使用了文学化编程思想吗&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -2240,11 +2398,11 @@ $$&lt;/p&gt;
 </description>
         </item>
         <item>
-        <title>DIY</title>
-        <link>https://teaize.github.io/p/diy/</link>
+        <title>DIY设计手册</title>
+        <link>https://teaize.github.io/p/diy%E8%AE%BE%E8%AE%A1%E6%89%8B%E5%86%8C/</link>
         <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://teaize.github.io/p/diy/</guid>
+        <guid>https://teaize.github.io/p/diy%E8%AE%BE%E8%AE%A1%E6%89%8B%E5%86%8C/</guid>
         <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.tinkercad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
