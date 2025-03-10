@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在机械设计中，为了满足功能需求、便于加工装配、减少应力集中或提高零件使用寿命，常常会设计一些特定的结构。以下是几种常见的机械结构及其用途：\n退刀槽 定义：在加工螺纹或台阶轴时，为了便于刀具退刀而设计的小槽。 用途： 避免刀具碰伤零件表面。 方便后续装配螺母等零件。 典型设计：退刀槽的深度应略大于螺纹的底径，宽度通常取刀具宽度的 1.5 倍左右。 逃角处理 定义：在两个面相交处，为避免刀具无法加工到位或因应力集中引发裂纹而设计的小圆角。 用途： 减小应力集中，增加零件的疲劳寿命。 方便加工，避免刀具尖角受损。 设计注意： 圆角半径要与加工刀具半径匹配。 过大的圆角可能导致装配问题。 清根（根切） 定义：为避免加工残留材料或提高装配间隙，在转角处设计的切除部分。 用途： 避免刀具加工不彻底导致的根部毛刺或多余材料。 提高装配精度和效率。 常见应用：齿轮根部、螺纹根部。 导向结构 定义：用于引导零件正确装配或定位的结构，例如导向销、倒角等。 用途： 提高装配效率。 保证装配的稳定性和精度。 设计注意：倒角的角度和深度应与配合件匹配，导向销需有适当间隙。 过盈配合结构 定义：用于紧密连接两个零件的结构，例如锥形孔配合、过盈套配合。 用途： 提高连接强度。 防止零件在运行中松动。 应用场景：轴承与轴配合、齿轮固定等。 加强筋 定义：在零件上增加的凸起结构，用于提高刚度和强度。 用途： 增强薄壁零件的抗变形能力。 降低材料用量的同时提高结构强度。 设计注意： 加强筋的方向应与受力方向一致。 筋的高度和厚度要根据载荷合理设计。 润滑槽 定义：在摩擦副表面设计的槽，用于储存润滑油或脂。 用途： 提高润滑效果，减少摩擦磨损。 延长零件的使用寿命。 常见形式：直线槽、螺旋槽、网格槽。 定位台阶 定义：在零件上设计的台阶，用于定位或分段配合。 用途： 提供装配的精确定位。 提高零件的加工和检测精度。 典型应用：轴的台阶设计、孔的阶梯结构。 例如过滤片\n">
+<title>机械设计中常见的结构</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BB%93%E6%9E%84/'>
+
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="机械设计中常见的结构">
+<meta property='og:description' content="在机械设计中，为了满足功能需求、便于加工装配、减少应力集中或提高零件使用寿命，常常会设计一些特定的结构。以下是几种常见的机械结构及其用途：\n退刀槽 定义：在加工螺纹或台阶轴时，为了便于刀具退刀而设计的小槽。 用途： 避免刀具碰伤零件表面。 方便后续装配螺母等零件。 典型设计：退刀槽的深度应略大于螺纹的底径，宽度通常取刀具宽度的 1.5 倍左右。 逃角处理 定义：在两个面相交处，为避免刀具无法加工到位或因应力集中引发裂纹而设计的小圆角。 用途： 减小应力集中，增加零件的疲劳寿命。 方便加工，避免刀具尖角受损。 设计注意： 圆角半径要与加工刀具半径匹配。 过大的圆角可能导致装配问题。 清根（根切） 定义：为避免加工残留材料或提高装配间隙，在转角处设计的切除部分。 用途： 避免刀具加工不彻底导致的根部毛刺或多余材料。 提高装配精度和效率。 常见应用：齿轮根部、螺纹根部。 导向结构 定义：用于引导零件正确装配或定位的结构，例如导向销、倒角等。 用途： 提高装配效率。 保证装配的稳定性和精度。 设计注意：倒角的角度和深度应与配合件匹配，导向销需有适当间隙。 过盈配合结构 定义：用于紧密连接两个零件的结构，例如锥形孔配合、过盈套配合。 用途： 提高连接强度。 防止零件在运行中松动。 应用场景：轴承与轴配合、齿轮固定等。 加强筋 定义：在零件上增加的凸起结构，用于提高刚度和强度。 用途： 增强薄壁零件的抗变形能力。 降低材料用量的同时提高结构强度。 设计注意： 加强筋的方向应与受力方向一致。 筋的高度和厚度要根据载荷合理设计。 润滑槽 定义：在摩擦副表面设计的槽，用于储存润滑油或脂。 用途： 提高润滑效果，减少摩擦磨损。 延长零件的使用寿命。 常见形式：直线槽、螺旋槽、网格槽。 定位台阶 定义：在零件上设计的台阶，用于定位或分段配合。 用途： 提供装配的精确定位。 提高零件的加工和检测精度。 典型应用：轴的台阶设计、孔的阶梯结构。 例如过滤片\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BB%93%E6%9E%84/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="机械设计中常见的结构">
+<meta name="twitter:description" content="在机械设计中，为了满足功能需求、便于加工装配、减少应力集中或提高零件使用寿命，常常会设计一些特定的结构。以下是几种常见的机械结构及其用途：\n退刀槽 定义：在加工螺纹或台阶轴时，为了便于刀具退刀而设计的小槽。 用途： 避免刀具碰伤零件表面。 方便后续装配螺母等零件。 典型设计：退刀槽的深度应略大于螺纹的底径，宽度通常取刀具宽度的 1.5 倍左右。 逃角处理 定义：在两个面相交处，为避免刀具无法加工到位或因应力集中引发裂纹而设计的小圆角。 用途： 减小应力集中，增加零件的疲劳寿命。 方便加工，避免刀具尖角受损。 设计注意： 圆角半径要与加工刀具半径匹配。 过大的圆角可能导致装配问题。 清根（根切） 定义：为避免加工残留材料或提高装配间隙，在转角处设计的切除部分。 用途： 避免刀具加工不彻底导致的根部毛刺或多余材料。 提高装配精度和效率。 常见应用：齿轮根部、螺纹根部。 导向结构 定义：用于引导零件正确装配或定位的结构，例如导向销、倒角等。 用途： 提高装配效率。 保证装配的稳定性和精度。 设计注意：倒角的角度和深度应与配合件匹配，导向销需有适当间隙。 过盈配合结构 定义：用于紧密连接两个零件的结构，例如锥形孔配合、过盈套配合。 用途： 提高连接强度。 防止零件在运行中松动。 应用场景：轴承与轴配合、齿轮固定等。 加强筋 定义：在零件上增加的凸起结构，用于提高刚度和强度。 用途： 增强薄壁零件的抗变形能力。 降低材料用量的同时提高结构强度。 设计注意： 加强筋的方向应与受力方向一致。 筋的高度和厚度要根据载荷合理设计。 润滑槽 定义：在摩擦副表面设计的槽，用于储存润滑油或脂。 用途： 提高润滑效果，减少摩擦磨损。 延长零件的使用寿命。 常见形式：直线槽、螺旋槽、网格槽。 定位台阶 定义：在零件上设计的台阶，用于定位或分段配合。 用途： 提供装配的精确定位。 提高零件的加工和检测精度。 典型应用：轴的台阶设计、孔的阶梯结构。 例如过滤片\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#退刀槽">退刀槽</a></li>
+        <li><a href="#逃角处理">逃角处理</a></li>
+        <li><a href="#清根根切">清根（根切）</a></li>
+        <li><a href="#导向结构">导向结构</a></li>
+        <li><a href="#过盈配合结构">过盈配合结构</a></li>
+        <li><a href="#加强筋">加强筋</a></li>
+        <li><a href="#润滑槽">润滑槽</a></li>
+        <li><a href="#定位台阶">定位台阶</a></li>
+        <li><a href="#过渡圆角">过渡圆角</a></li>
+        <li><a href="#排屑槽">排屑槽</a></li>
+        <li><a href="#键槽与键">键槽与键</a></li>
+        <li><a href="#通气孔">通气孔</a></li>
+        <li><a href="#凸缘结构">凸缘结构</a></li>
+        <li><a href="#倒角">倒角</a></li>
+        <li><a href="#o-形圈沟槽">O 形圈沟槽</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1%E4%B8%AD%E5%B8%B8%E8%A7%81%E7%9A%84%E7%BB%93%E6%9E%84/">机械设计中常见的结构</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-03-07</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在机械设计中，为了满足功能需求、便于加工装配、减少应力集中或提高零件使用寿命，常常会设计一些特定的结构。以下是几种常见的机械结构及其用途：</p>
+<h3 id="退刀槽">退刀槽
+</h3><ul>
+<li>定义：在加工螺纹或台阶轴时，为了便于刀具退刀而设计的小槽。</li>
+<li>用途：
+<ul>
+<li>避免刀具碰伤零件表面。</li>
+<li>方便后续装配螺母等零件。</li>
+</ul>
+</li>
+<li>典型设计：退刀槽的深度应略大于螺纹的底径，宽度通常取刀具宽度的 1.5 倍左右。</li>
+</ul>
+<h3 id="逃角处理">逃角处理
+</h3><ul>
+<li>定义：在两个面相交处，为避免刀具无法加工到位或因应力集中引发裂纹而设计的小圆角。</li>
+<li>用途：
+<ul>
+<li>减小应力集中，增加零件的疲劳寿命。</li>
+<li>方便加工，避免刀具尖角受损。</li>
+</ul>
+</li>
+<li>设计注意：
+<ul>
+<li>圆角半径要与加工刀具半径匹配。</li>
+<li>过大的圆角可能导致装配问题。</li>
+</ul>
+</li>
+</ul>
+<h3 id="清根根切">清根（根切）
+</h3><ul>
+<li>定义：为避免加工残留材料或提高装配间隙，在转角处设计的切除部分。</li>
+<li>用途：
+<ul>
+<li>避免刀具加工不彻底导致的根部毛刺或多余材料。</li>
+<li>提高装配精度和效率。</li>
+</ul>
+</li>
+<li>常见应用：齿轮根部、螺纹根部。</li>
+</ul>
+<h3 id="导向结构">导向结构
+</h3><ul>
+<li>定义：用于引导零件正确装配或定位的结构，例如导向销、倒角等。</li>
+<li>用途：
+<ul>
+<li>提高装配效率。</li>
+<li>保证装配的稳定性和精度。</li>
+</ul>
+</li>
+<li>设计注意：倒角的角度和深度应与配合件匹配，导向销需有适当间隙。</li>
+</ul>
+<h3 id="过盈配合结构">过盈配合结构
+</h3><ul>
+<li>定义：用于紧密连接两个零件的结构，例如锥形孔配合、过盈套配合。</li>
+<li>用途：
+<ul>
+<li>提高连接强度。</li>
+<li>防止零件在运行中松动。</li>
+</ul>
+</li>
+<li>应用场景：轴承与轴配合、齿轮固定等。</li>
+</ul>
+<h3 id="加强筋">加强筋
+</h3><ul>
+<li>定义：在零件上增加的凸起结构，用于提高刚度和强度。</li>
+<li>用途：
+<ul>
+<li>增强薄壁零件的抗变形能力。</li>
+<li>降低材料用量的同时提高结构强度。</li>
+</ul>
+</li>
+<li>设计注意：
+<ul>
+<li>加强筋的方向应与受力方向一致。</li>
+<li>筋的高度和厚度要根据载荷合理设计。</li>
+</ul>
+</li>
+</ul>
+<h3 id="润滑槽">润滑槽
+</h3><ul>
+<li>定义：在摩擦副表面设计的槽，用于储存润滑油或脂。</li>
+<li>用途：
+<ul>
+<li>提高润滑效果，减少摩擦磨损。</li>
+<li>延长零件的使用寿命。</li>
+</ul>
+</li>
+<li>常见形式：直线槽、螺旋槽、网格槽。</li>
+</ul>
+<h3 id="定位台阶">定位台阶
+</h3><ul>
+<li>定义：在零件上设计的台阶，用于定位或分段配合。</li>
+<li>用途：
+<ul>
+<li>提供装配的精确定位。</li>
+<li>提高零件的加工和检测精度。</li>
+</ul>
+</li>
+<li>典型应用：轴的台阶设计、孔的阶梯结构。</li>
+</ul>
+<p>例如过滤片</p>
+<h3 id="过渡圆角">过渡圆角
+</h3><ul>
+<li>定义：在零件的尖角处设计的圆弧过渡。</li>
+<li>用途：
+<ul>
+<li>减少应力集中。</li>
+<li>提高零件在动态载荷下的疲劳强度。</li>
+</ul>
+</li>
+<li>设计注意：过渡圆角的半径应尽可能大，但不能影响其他零件的装配。</li>
+</ul>
+<h3 id="排屑槽">排屑槽
+</h3><ul>
+<li>定义：为便于加工过程中排屑而设计的槽。</li>
+<li>用途：
+<ul>
+<li>避免切屑堆积导致加工表面受损。</li>
+<li>提高加工效率。</li>
+</ul>
+</li>
+<li>典型应用：螺纹加工的排屑槽。</li>
+</ul>
+<h3 id="键槽与键">键槽与键
+</h3><ul>
+<li>定义：用于轴与孔之间传递扭矩的连接结构。</li>
+<li>用途：
+<ul>
+<li>防止旋转零件在运行中打滑。</li>
+<li>确保传动的可靠性。</li>
+</ul>
+</li>
+<li>典型设计：
+<ul>
+<li>键槽宽度和深度应与键匹配。</li>
+<li>键槽底部应有圆角以避免应力集中。</li>
+</ul>
+</li>
+</ul>
+<h3 id="通气孔">通气孔
+</h3><ul>
+<li>定义：在装配结构中设置的小孔，用于释放空气或液体。</li>
+<li>用途：
+<ul>
+<li>防止密封件装配时的空气压缩。</li>
+<li>提高密封结构的稳定性。</li>
+</ul>
+</li>
+<li>应用场景：液压缸、密封盒等。</li>
+</ul>
+<h3 id="凸缘结构">凸缘结构
+</h3><ul>
+<li>定义：在零件上设计的突出的边缘，用于增强连接或提高强度。</li>
+<li>用途：
+<ul>
+<li>增大受力面积。</li>
+<li>提供安装螺栓的固定位置。</li>
+</ul>
+</li>
+<li>应用场景：管道法兰连接、轴承座。</li>
+</ul>
+<h3 id="倒角">倒角
+</h3><ul>
+<li>定义：在零件的棱角处削去一部分，形成斜面。</li>
+<li>用途：
+<ul>
+<li>方便装配（例如导入轴孔）。</li>
+<li>避免尖锐边缘对操作人员的伤害。</li>
+</ul>
+</li>
+<li>设计注意：倒角角度一般为 45°，尺寸要根据加工精度确定。</li>
+</ul>
+<h3 id="o-形圈沟槽">O 形圈沟槽
+</h3><ul>
+<li>
+<p><strong>定义</strong>：用于容纳 O 形密封圈的沟槽，配合 O 形圈实现轴向或径向密封。</p>
+</li>
+<li>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>O 形圈通过压缩变形来实现密封。</li>
+<li>沟槽设计需兼顾 O 形圈的压缩率和拉伸率。</li>
+</ul>
+</li>
+<li>
+<p><strong>应用</strong>：</p>
+<ul>
+<li>液压、气动系统中的静密封和动密封。</li>
+</ul>
+</li>
+<li>
+<p>定位结构：包括定位销、定位孔或台阶，用于精确装配和定位</p>
+</li>
+<li>
+<p>隔热槽：减少热传导，保护敏感部件免受高温影响。</p>
+</li>
+<li>
+<p>防旋转结构：包括防转槽、卡扣或止动设计，确保零件在受力下不旋转。</p>
+</li>
+<li>
+<p>弹簧槽：为安装弹簧设计的槽或凹陷，用于储能或缓冲。</p>
+</li>
+<li>
+<p>限位槽：限制零件运动范围，确保机械系统的可靠性。</p>
+</li>
+<li>
+<p>加强凸台：在需要加强的区域增加材料厚度，常用于薄板或壳体。</p>
+</li>
+<li>
+<p>螺纹卸载槽：减少螺纹连接中的过载应力，保护螺纹完整性。</p>
+</li>
+<li>
+<p>齿根圆角：在齿轮根部设计圆角，减少应力集中，增加疲劳强度。</p>
+</li>
+<li>
+<p>夹持槽：设计供夹具或工具固定的区域，便于加工或操作。</p>
+</li>
+<li>
+<p>工艺孔：用于加工、装配或运输时临时使用的孔洞，装配完成后可能被封闭。</p>
+</li>
+<li>
+<p>应力释放槽：通过设计狭缝或凹槽，引导应力集中区域，防止零件失效。</p>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
