@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" \u200e早餐 - 歌单 - Apple Music 提取歌曲名称 需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" \u200e早餐 - 歌单 - Apple Music 提取 Apple Music 早餐歌单数据 需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理\n">
 <title>Music</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/music/'>
 
 <link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="Music">
-<meta property='og:description' content=" \u200e早餐 - 歌单 - Apple Music 提取歌曲名称 需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理\n">
+<meta property='og:description' content=" \u200e早餐 - 歌单 - Apple Music 提取 Apple Music 早餐歌单数据 需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理\n">
 <meta property='og:url' content='https://teaize.github.io/p/music/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-09T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="Music">
-<meta name="twitter:description" content=" \u200e早餐 - 歌单 - Apple Music 提取歌曲名称 需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理\n">
+<meta name="twitter:description" content=" \u200e早餐 - 歌单 - Apple Music 提取 Apple Music 早餐歌单数据 需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -295,13 +295,14 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#提取歌曲名称">提取歌曲名称</a>
+    <li><a href="#提取-apple-music-早餐歌单数据">提取 Apple Music 早餐歌单数据</a>
       <ol>
         <li><a href="#deepseek">Deepseek</a></li>
         <li><a href="#chatgpt">ChatGPT</a></li>
         <li><a href="#正则表达式">正则表达式</a></li>
       </ol>
     </li>
+    <li><a href="#昏昏欲睡">昏昏欲睡</a></li>
   </ol>
 </nav>
         </div>
@@ -363,7 +364,7 @@
 <li><a class="link" href="https://music.apple.com/cn/playlist/%E6%97%A9%E9%A4%90/pl.296fd5d490444aaf80e23fa3dea02cb7"  target="_blank" rel="noopener"
     >‎早餐 - 歌单 - Apple Music</a></li>
 </ul>
-<h2 id="提取歌曲名称">提取歌曲名称
+<h2 id="提取-apple-music-早餐歌单数据">提取 Apple Music 早餐歌单数据
 </h2><p>需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者
 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理</p>
 <h3 id="deepseek">Deepseek
@@ -1856,6 +1857,417 @@
           <td>99</td>
           <td>Keeping The Light On</td>
           <td>Joy Oladokun</td>
+      </tr>
+  </tbody>
+</table></div>
+<h2 id="昏昏欲睡">昏昏欲睡
+</h2><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>歌曲名</th>
+          <th>演唱者</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>Back Home (Rework)</td>
+          <td>lloom</td>
+      </tr>
+      <tr>
+          <td>Perspective</td>
+          <td>lofi geek</td>
+      </tr>
+      <tr>
+          <td>midwest</td>
+          <td>juniorodeo &amp; Delayde</td>
+      </tr>
+      <tr>
+          <td>Asleep With You</td>
+          <td>Son Nu</td>
+      </tr>
+      <tr>
+          <td>A Foggy View</td>
+          <td>softy</td>
+      </tr>
+      <tr>
+          <td>Sinking</td>
+          <td>Euxia &amp; Kainbeats</td>
+      </tr>
+      <tr>
+          <td>waxing moon</td>
+          <td>zxry.</td>
+      </tr>
+      <tr>
+          <td>long night</td>
+          <td>felt</td>
+      </tr>
+      <tr>
+          <td>Sunrise</td>
+          <td>Basmati</td>
+      </tr>
+      <tr>
+          <td>Away We Go</td>
+          <td>Lomme</td>
+      </tr>
+      <tr>
+          <td>Dreamlike Encounters</td>
+          <td>Obie Hans</td>
+      </tr>
+      <tr>
+          <td>Native</td>
+          <td>zya</td>
+      </tr>
+      <tr>
+          <td>Calmest Place on Earth</td>
+          <td>Pearldiver</td>
+      </tr>
+      <tr>
+          <td>Way Back When</td>
+          <td>Beddy</td>
+      </tr>
+      <tr>
+          <td>The Fall</td>
+          <td>Constantine</td>
+      </tr>
+      <tr>
+          <td>Secret Stars</td>
+          <td>Astro Casual</td>
+      </tr>
+      <tr>
+          <td>Early June</td>
+          <td>lloom</td>
+      </tr>
+      <tr>
+          <td>Underwater Blue</td>
+          <td>MyceliumBug</td>
+      </tr>
+      <tr>
+          <td>Whispers of Shibuya</td>
+          <td>Pearldiver</td>
+      </tr>
+      <tr>
+          <td>oj on the porch in -4 celcius</td>
+          <td>HM Surf</td>
+      </tr>
+      <tr>
+          <td>capri</td>
+          <td>Kromattic</td>
+      </tr>
+      <tr>
+          <td>Parallel</td>
+          <td>Kainbeats</td>
+      </tr>
+      <tr>
+          <td>Chamomile Tea</td>
+          <td>Maono</td>
+      </tr>
+      <tr>
+          <td>The Emperor&rsquo;s Ride Home</td>
+          <td>Daphné</td>
+      </tr>
+      <tr>
+          <td>Seek</td>
+          <td>koia</td>
+      </tr>
+      <tr>
+          <td>Whispers</td>
+          <td>Lomme &amp; Elk Beats</td>
+      </tr>
+      <tr>
+          <td>Cedar</td>
+          <td>Tykho</td>
+      </tr>
+      <tr>
+          <td>Zandukeli</td>
+          <td>Yakubu</td>
+      </tr>
+      <tr>
+          <td>Gnite Orion</td>
+          <td>Beddy</td>
+      </tr>
+      <tr>
+          <td>sub zero</td>
+          <td>bby knife</td>
+      </tr>
+      <tr>
+          <td>quiet pond</td>
+          <td>Bcalm</td>
+      </tr>
+      <tr>
+          <td>Between</td>
+          <td>Bcalm</td>
+      </tr>
+      <tr>
+          <td>Moonlight Canvas</td>
+          <td>Obie Hans</td>
+      </tr>
+      <tr>
+          <td>Drift Away</td>
+          <td>Kattnap</td>
+      </tr>
+      <tr>
+          <td>Mulberry Ln</td>
+          <td>Beddy</td>
+      </tr>
+      <tr>
+          <td>slow breaths</td>
+          <td>No Spirit &amp; colours in the dark</td>
+      </tr>
+      <tr>
+          <td>Over The Moon</td>
+          <td>cxlt.</td>
+      </tr>
+      <tr>
+          <td>Light as a Feather</td>
+          <td>Fuyu Echo (feat. Arjun K. Verma)</td>
+      </tr>
+      <tr>
+          <td>Painted Postcard</td>
+          <td>Obie Hans</td>
+      </tr>
+      <tr>
+          <td>Remember</td>
+          <td>koia</td>
+      </tr>
+      <tr>
+          <td>The Sanctuary</td>
+          <td>sftspkn &amp; Prithvi</td>
+      </tr>
+      <tr>
+          <td>Till The Rain Stops</td>
+          <td>Chill Denis</td>
+      </tr>
+      <tr>
+          <td>Carry Me</td>
+          <td>Phonedown &amp; møndberg</td>
+      </tr>
+      <tr>
+          <td>Perpetual Dream</td>
+          <td>Corey J. Beats</td>
+      </tr>
+      <tr>
+          <td>Stargazing</td>
+          <td>sftspkn &amp; Prithvi</td>
+      </tr>
+      <tr>
+          <td>still miss you</td>
+          <td>Chill Denis &amp; hushfall</td>
+      </tr>
+      <tr>
+          <td>Flowing</td>
+          <td>dozy</td>
+      </tr>
+      <tr>
+          <td>Lost &amp; Never Found</td>
+          <td>Chill Denis &amp; mėlyna</td>
+      </tr>
+      <tr>
+          <td>Liminal Spaces</td>
+          <td>Constantine</td>
+      </tr>
+      <tr>
+          <td>Wait For Me</td>
+          <td>Plant Guy</td>
+      </tr>
+      <tr>
+          <td>Ode To The Night Sky</td>
+          <td>cxlt.</td>
+      </tr>
+      <tr>
+          <td>Burley</td>
+          <td>Pearldiver</td>
+      </tr>
+      <tr>
+          <td>Warm Blankets</td>
+          <td>Seek Shelter &amp; Solar Body</td>
+      </tr>
+      <tr>
+          <td>In Balance</td>
+          <td>Mujo &amp; Sweet Medicine</td>
+      </tr>
+      <tr>
+          <td>Storm Clouds</td>
+          <td>bedroom lofi &amp; Late Night Tones</td>
+      </tr>
+      <tr>
+          <td>Wildheart</td>
+          <td>COSMOGLOW</td>
+      </tr>
+      <tr>
+          <td>Starry Night</td>
+          <td>Gerardo Millán &amp; Blocktane</td>
+      </tr>
+      <tr>
+          <td>I&rsquo;m Gonna Miss You</td>
+          <td>hushfall &amp; jxsn</td>
+      </tr>
+      <tr>
+          <td>SUNLIGHT</td>
+          <td>coquelicot</td>
+      </tr>
+      <tr>
+          <td>Ripples</td>
+          <td>Lomme &amp; Elk Beats</td>
+      </tr>
+      <tr>
+          <td>Space Between the Stars</td>
+          <td>luv pug &amp; Spaniel Mac (feat. Lofido)</td>
+      </tr>
+      <tr>
+          <td>Sleeprune (Instrumental)</td>
+          <td>Kainbeats &amp; idylla</td>
+      </tr>
+      <tr>
+          <td>In the Garden</td>
+          <td>Euxia</td>
+      </tr>
+      <tr>
+          <td>Velvet Afternoon</td>
+          <td>Kattnap</td>
+      </tr>
+      <tr>
+          <td>Elysian</td>
+          <td>Amesyt</td>
+      </tr>
+      <tr>
+          <td>Cloudgate</td>
+          <td>Kainbeats</td>
+      </tr>
+      <tr>
+          <td>Lyla</td>
+          <td>rhoom</td>
+      </tr>
+      <tr>
+          <td>Moving On</td>
+          <td>Dontcry &amp; cxlt.</td>
+      </tr>
+      <tr>
+          <td>Astronaut</td>
+          <td>Elk Beats &amp; Lomme</td>
+      </tr>
+      <tr>
+          <td>Everything Will Get Better</td>
+          <td>Jam&rsquo;addict</td>
+      </tr>
+      <tr>
+          <td>Fall Softly (Lofi Version)</td>
+          <td>Blocktane &amp; Mahaji (feat. Steezy Prime)</td>
+      </tr>
+      <tr>
+          <td>cycles</td>
+          <td>Kino MacGregor</td>
+      </tr>
+      <tr>
+          <td>Memories</td>
+          <td>Dontcry &amp; Nokiaa</td>
+      </tr>
+      <tr>
+          <td>Quiet Storm</td>
+          <td>Pepper &amp; Lola</td>
+      </tr>
+      <tr>
+          <td>Whispering Winds</td>
+          <td>zya</td>
+      </tr>
+      <tr>
+          <td>Kamakura Breeze</td>
+          <td>Blue Gardenia</td>
+      </tr>
+      <tr>
+          <td>Scenery</td>
+          <td>Yasumu</td>
+      </tr>
+      <tr>
+          <td>Moongazers</td>
+          <td>Astro Casual</td>
+      </tr>
+      <tr>
+          <td>Dreaming In Lofi</td>
+          <td>valmy</td>
+      </tr>
+      <tr>
+          <td>Adrift</td>
+          <td>Cauzy</td>
+      </tr>
+      <tr>
+          <td>daydreamer</td>
+          <td>Redseal</td>
+      </tr>
+      <tr>
+          <td>Midtown Midnight</td>
+          <td>auv</td>
+      </tr>
+      <tr>
+          <td>Celestial Reverie</td>
+          <td>vimef &amp; Chill Denis</td>
+      </tr>
+      <tr>
+          <td>Hornsby&rsquo;s Tavern</td>
+          <td>Captain Kidd</td>
+      </tr>
+      <tr>
+          <td>Collide A Scope</td>
+          <td>NueBoo &amp; Recalibration Machine</td>
+      </tr>
+      <tr>
+          <td>onyx</td>
+          <td>Kromattic</td>
+      </tr>
+      <tr>
+          <td>Tea Leaves</td>
+          <td>Lomme &amp; Elk Beats</td>
+      </tr>
+      <tr>
+          <td>Daydreams</td>
+          <td>Sleepermane &amp; Casiio</td>
+      </tr>
+      <tr>
+          <td>I am</td>
+          <td>LIVE FREE</td>
+      </tr>
+      <tr>
+          <td>Defensive</td>
+          <td>xander. &amp; Philip Somber</td>
+      </tr>
+      <tr>
+          <td>Daydreamer</td>
+          <td>Osoku</td>
+      </tr>
+      <tr>
+          <td>Finesse</td>
+          <td>Ajose &amp; zxry.</td>
+      </tr>
+      <tr>
+          <td>sReim</td>
+          <td>erwOn</td>
+      </tr>
+      <tr>
+          <td>Orka</td>
+          <td>tillit</td>
+      </tr>
+      <tr>
+          <td>Diamonds in the Sky</td>
+          <td>Oatmello</td>
+      </tr>
+      <tr>
+          <td>Dusty Lanterns</td>
+          <td>Nice Pajamas &amp; Hypntc</td>
+      </tr>
+      <tr>
+          <td>Tripping Over</td>
+          <td>Charlee Nguyen &amp; Tsunamii</td>
+      </tr>
+      <tr>
+          <td>kRia</td>
+          <td>erwOn</td>
+      </tr>
+      <tr>
+          <td>Places We Go</td>
+          <td>Euxia</td>
+      </tr>
+      <tr>
+          <td>Cannonier</td>
+          <td>Shrimpnose</td>
       </tr>
   </tbody>
 </table></div>

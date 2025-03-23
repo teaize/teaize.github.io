@@ -301,6 +301,12 @@
         <li><a href="#基本介绍">基本介绍</a></li>
         <li><a href="#接口类型">接口类型</a></li>
         <li><a href="#lcd1602-连接和使用">LCD1602 连接和使用</a></li>
+        <li><a href="#拓展">拓展</a>
+          <ol>
+            <li><a href="#驱动起到了什么作用">驱动起到了什么作用</a></li>
+            <li><a href="#pcf8574-在-lcd1602-i2c-中的作用">PCF8574 在 LCD1602 I2C 中的作用</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -634,6 +640,57 @@
 	</div>
 
 </p>
+<h3 id="拓展">拓展
+</h3><h4 id="驱动起到了什么作用">驱动起到了什么作用
+</h4><p>ESP32 通过 I2C 总线（SDA/SCL） 与 PCF8574 I/O 扩展芯片 进行通信，控制 LCD1602</p>
+<ul>
+<li>LCD1602 本身是 并行接口 的字符液晶模块，它通常需要 8 个数据位 + 控制位（RS、RW、E） 来进行操作。如果直接使用 ESP32 控制，会占用大量的 GPIO 口【如果直接使用 并行接口 控制 LCD1602，理论上是不需要额外的驱动库的，因为可以直接使用 GPIO 发送命令和数据】</li>
+<li>如果 LCD1602 连接了 I2C 扩展模块（如 PCF8574 芯片），它就可以通过 I2C 总线（SDA/SCL）进行通信，这样就减少了引脚使用</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>GPIO 口占用</th>
+          <th>代码复杂度</th>
+          <th>适用场景</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>使用 I2C 驱动（推荐）</strong></td>
+          <td><strong>仅 2 根线</strong></td>
+          <td><strong>简单</strong>，调用 Python 函数即可</td>
+          <td><strong>适合 ESP32，节省引脚</strong></td>
+      </tr>
+      <tr>
+          <td><strong>直接用 GPIO（无驱动）</strong></td>
+          <td><strong>6~8 根线</strong></td>
+          <td><strong>复杂</strong>，手动写 LCD 指令</td>
+          <td><strong>适用于无 I2C 模块的 LCD1602</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>在 ESP32 + LCD1602 I2C 方案中，驱动的作用是：</p>
+<ul>
+<li><strong>简化代码</strong>（不需要手写 LCD 指令）</li>
+<li><strong>节省 GPIO</strong>（只用 SDA &amp; SCL）</li>
+<li><strong>封装 LCD 控制逻辑</strong>（不用自己算指令）</li>
+</ul>
+<h4 id="pcf8574-在-lcd1602-i2c-中的作用">PCF8574 在 LCD1602 I2C 中的作用
+</h4><p>PCF8574 是一颗 <strong>I2C 转 8 位 GPIO 的 I/O 扩展芯片</strong>，在 LCD1602 I2C 版本的模块上，它的作用主要是：</p>
+<ul>
+<li>扩展 ESP32 的 I/O 端口，从而用 I2C 控制 LCD1602，节省 GPIO 资源。</li>
+<li>将 ESP32 发送的 I2C 信号转换为 LCD1602 需要的并行信号（数据和命令）。</li>
+<li>适配不同的电平，确保 ESP32（3.3V）能够控制 LCD1602（5V）。</li>
+</ul>
+<p>如果不用 PCF8574，而是直接用 GPIO 并行控制 LCD1602，就不需要 I2C 驱动，但会占用更多的 GPIO，并且需要自己写 LCD1602 驱动代码</p>
+<p>那使用这种方式相对于直接并行接口来说有什么缺点呢：</p>
+<ul>
+<li>速度比直接并行模式慢（因为 I2C 速度受限）</li>
+<li>需要额外的 I2C 驱动代码</li>
+<li>如果 I2C 地址不匹配，可能导致 LCD 无法工作</li>
+</ul>
 
 </section>
 

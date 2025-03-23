@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>Anki简明笔记</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、传感器基础 传感器（Sensor） 将物理量（如温度、压力、光强）转换为电信号的装置。 示例：热电偶（温度→电压）、光敏电阻（光强→电阻值）。\n灵敏度（Sensitivity） 输出信号变化量与输入物理量变化的比值。 公式：S = ΔV/ΔP（如 10mV/°C）。\n">
+<title>生成 PCB 的设</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/anki%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E7%94%9F%E6%88%90-pcb-%E7%9A%84%E8%AE%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="Anki简明笔记">
-<meta property='og:description' content="">
-<meta property='og:url' content='https://teaize.github.io/p/anki%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="生成 PCB 的设">
+<meta property='og:description' content="一、传感器基础 传感器（Sensor） 将物理量（如温度、压力、光强）转换为电信号的装置。 示例：热电偶（温度→电压）、光敏电阻（光强→电阻值）。\n灵敏度（Sensitivity） 输出信号变化量与输入物理量变化的比值。 公式：S = ΔV/ΔP（如 10mV/°C）。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E7%94%9F%E6%88%90-pcb-%E7%9A%84%E8%AE%BE/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-04T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Anki简明笔记">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-10T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-10T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="生成 PCB 的设">
+<meta name="twitter:description" content="一、传感器基础 传感器（Sensor） 将物理量（如温度、压力、光强）转换为电信号的装置。 示例：热电偶（温度→电压）、光敏电阻（光强→电阻值）。\n灵敏度（Sensitivity） 输出信号变化量与输入物理量变化的比值。 公式：S = ΔV/ΔP（如 10mV/°C）。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,7 +273,57 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#一传感器基础">一、传感器基础</a></li>
+        <li><a href="#二信号类型">二、信号类型</a></li>
+        <li><a href="#三核心电路元件">三、核心电路元件</a></li>
+        <li><a href="#四噪声与抗干扰">四、噪声与抗干扰</a></li>
+        <li><a href="#五接口与通信">五、接口与通信</a></li>
+        <li><a href="#六性能参数">六、性能参数</a></li>
+        <li><a href="#七电源管理">七、电源管理</a></li>
+        <li><a href="#八校准与补偿">八、校准与补偿</a></li>
+        <li><a href="#九传感器类型扩展">九、传感器类型扩展</a></li>
+        <li><a href="#十信号处理进阶">十、信号处理进阶</a></li>
+        <li><a href="#十一误差与补偿技术">十一、误差与补偿技术</a></li>
+        <li><a href="#十二接口协议扩展">十二、接口协议扩展</a></li>
+        <li><a href="#十三电源与保护电路">十三、电源与保护电路</a></li>
+        <li><a href="#十四环境因素与可靠性">十四、环境因素与可靠性</a></li>
+        <li><a href="#十五新兴技术">十五、新兴技术</a></li>
+        <li><a href="#十六实用设计技巧">十六、实用设计技巧</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -284,7 +334,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/anki%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/">Anki简明笔记</a>
+            <a href="/p/%E7%94%9F%E6%88%90-pcb-%E7%9A%84%E8%AE%BE/">生成 PCB 的设</a>
         </h2>
     
         
@@ -306,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-01-04</time>
+                <time class="article-time--published">2025-03-10</time>
             </div>
         
 
@@ -322,7 +372,138 @@
     <section class="article-content">
     
     
-    
+    <h3 id="一传感器基础">一、传感器基础
+</h3><p>传感器（Sensor）
+将物理量（如温度、压力、光强）转换为电信号的装置。
+示例：热电偶（温度→电压）、光敏电阻（光强→电阻值）。</p>
+<p>灵敏度（Sensitivity）
+输出信号变化量与输入物理量变化的比值。
+公式：S = ΔV/ΔP（如 10mV/°C）。</p>
+<p>分辨率（Resolution）
+传感器可检测的最小输入变化量，决定测量精度。</p>
+<h3 id="二信号类型">二、信号类型
+</h3><p>模拟信号（Analog Signal）
+连续变化的电信号（如电压、电流），需通过 ADC 转换为数字信号。</p>
+<p>数字信号（Digital Signal）
+离散的二进制信号（如 0/1、I2C、SPI 协议），抗干扰能力强。</p>
+<h3 id="三核心电路元件">三、核心电路元件
+</h3><p>运算放大器（Op-Amp）
+用于信号放大、滤波、阻抗匹配。
+典型电路：差分放大（抑制共模噪声）。</p>
+<p>模数转换器（ADC, Analog-to-Digital Converter）
+将模拟信号转换为数字信号，关键参数：分辨率（如 12 位）、采样率（如 1kHz）。</p>
+<p>参考电压（Reference Voltage, Vref）
+为 ADC 或比较器提供稳定基准电压，影响测量精度。</p>
+<h3 id="四噪声与抗干扰">四、噪声与抗干扰
+</h3><p>信噪比（SNR, Signal-to-Noise Ratio）
+有用信号与噪声的功率比值，单位 dB（越高越好）。</p>
+<p>低通滤波（LPF, Low-Pass Filter）
+允许低频信号通过，抑制高频噪声。
+实现方式：RC 电路、运放有源滤波。</p>
+<p>电磁兼容（EMC, Electromagnetic Compatibility）
+电路在电磁环境中抗干扰且不干扰其他设备的能力。</p>
+<h3 id="五接口与通信">五、接口与通信
+</h3><p>I2C（Inter-Integrated Circuit）
+双线制串行总线（SCL 时钟线、SDA 数据线），支持多设备通信。</p>
+<p>SPI（Serial Peripheral Interface）
+四线制高速同步接口（SCK、MOSI、MISO、CS），全双工通信。</p>
+<h3 id="六性能参数">六、性能参数
+</h3><p>线性度（Linearity）
+传感器输出与输入物理量之间的直线关系偏差（常用%FS 表示）。</p>
+<p>响应时间（Response Time）
+传感器输出达到稳定值 90% 所需时间（如温度传感器需 5 秒）。</p>
+<p>迟滞（Hysteresis）
+输入量增大和减小时输出差异，反映传感器的回程误差。</p>
+<h3 id="七电源管理">七、电源管理
+</h3><p>供电电压（Vcc/Vdd）
+传感器工作电压范围（如 3.3V 或 5V±10%）。</p>
+<p>功耗（Power Consumption）
+静态电流（待机时）与动态电流（工作时）的消耗，影响电池寿命。</p>
+<h3 id="八校准与补偿">八、校准与补偿
+</h3><p>零点漂移（Zero Drift）
+无输入时输出信号的缓慢偏移，需定期校准。</p>
+<p>温度补偿（Temperature Compensation）
+通过电路或算法消除温度对传感器输出的影响（如热敏电阻网络）。</p>
+<h3 id="九传感器类型扩展">九、传感器类型扩展
+</h3><p>MEMS 传感器（Micro-Electro-Mechanical Systems）
+微机电系统传感器，集成机械结构与电子电路（如加速度计、陀螺仪）。
+关键特点：微型化、低功耗、批量生产成本低。</p>
+<p>压电传感器（Piezoelectric Sensor）
+利用压电效应将机械应力转换为电荷（如压力传感器、超声波探头）。
+需配合电荷放大器处理微弱信号。</p>
+<p>霍尔传感器（Hall Effect Sensor）
+检测磁场变化并输出电压（如电机转速检测、位置开关）。
+典型输出：模拟线性信号或数字开关信号。</p>
+<p>应变片（Strain Gauge）
+电阻值随形变变化的传感器，用于测量应力或重量（需惠斯通电桥电路放大信号）。</p>
+<h3 id="十信号处理进阶">十、信号处理进阶
+</h3><p>跨阻放大器（Transimpedance Amplifier）
+将电流信号转换为电压信号，用于光电二极管等电流型传感器。
+公式：Vout = I_in × R_feedback（如 I/V 转换）。</p>
+<p>锁相放大器（Lock-In Amplifier）
+通过参考信号同步检测微弱信号，抑制噪声（如光学传感中的低频信号提取）。</p>
+<p>PWM（Pulse Width Modulation）
+通过调节脉冲宽度传递模拟信息（如温度控制中的占空比调节）。
+优势：数字信号抗干扰，可直接驱动执行器。</p>
+<h3 id="十一误差与补偿技术">十一、误差与补偿技术
+</h3><p>非线性补偿（Nonlinearity Compensation）
+通过多项式拟合或查表法修正传感器非线性误差（如热敏电阻的温度 - 电阻曲线）。</p>
+<p>共模抑制比（CMRR, Common-Mode Rejection Ratio）
+差分放大器抑制共模干扰的能力（单位 dB，越高越好）。
+公式：CMRR = 20log10(Ad/Ac)，Ad 为差模增益，Ac 为共模增益。</p>
+<p>自校准（Self-Calibration）
+传感器内置校准电路（如自动零点校正），减少人工干预。</p>
+<h3 id="十二接口协议扩展">十二、接口协议扩展
+</h3><p>RS-485
+工业级差分串行通信协议，支持长距离（1200 米）和多设备组网（如工业传感器网络）。</p>
+<p>CAN 总线（Controller Area Network）
+汽车电子常用抗干扰总线，支持优先级仲裁（如车载传感器数据整合）。</p>
+<p>4-20mA 电流环（Current Loop）
+工业传感器标准输出，抗噪声能力强，可长距离传输（0mA 表示故障，提高可靠性）。</p>
+<h3 id="十三电源与保护电路">十三、电源与保护电路
+</h3><p>LDO（Low Dropout Regulator）
+低压差线性稳压器，为传感器提供稳定电压（如 3.3V，压差低至 0.2V）。
+对比：开关电源效率高但噪声大。</p>
+<p>TVS 二极管（Transient Voltage Suppressor）
+瞬态电压抑制器，保护传感器端口免受静电（ESD）或浪涌损坏。</p>
+<p>电源去耦（Power Decoupling）
+通过并联电容（如 0.1μF 陶瓷电容 +10μF 电解电容）滤除高频噪声。</p>
+<h3 id="十四环境因素与可靠性">十四、环境因素与可靠性
+</h3><p>IP 防护等级（Ingress Protection）
+传感器外壳防尘防水等级（如 IP67：完全防尘，可短时浸水）。</p>
+<p>MTBF（Mean Time Between Failures）
+平均无故障时间，衡量传感器寿命（工业级传感器可达 10 万小时）。</p>
+<p>热噪声（Johnson-Nyquist Noise）
+电阻器件因温度产生的随机噪声（公式：V_rms = √(4kTRB)，k 为玻尔兹曼常数）。</p>
+<h3 id="十五新兴技术">十五、新兴技术
+</h3><p>无线传感器网络（WSN, Wireless Sensor Network）
+基于 ZigBee、LoRa 或 NB-IoT 的无线传输方案（如物联网环境监测系统）。</p>
+<p>AI 边缘处理（Edge AI）
+在传感器端集成 AI 芯片，实现本地数据处理（如振动传感器的故障预测）。</p>
+<p>柔性传感器（Flexible Sensor）
+使用聚合物或纳米材料制成，可弯曲贴合表面（如可穿戴健康监测设备）。</p>
+<h3 id="十六实用设计技巧">十六、实用设计技巧
+</h3><ul>
+<li>接地策略：
+<ul>
+<li>模拟地与数字地单点连接，避免地环路噪声。</li>
+<li>敏感信号采用屏蔽线（如热电偶信号线）。</li>
+</ul>
+</li>
+<li>PCB 布局：
+<ul>
+<li>传感器信号走线远离高频或大电流路径。</li>
+<li>使用铺铜降低阻抗，避免天线效应。</li>
+</ul>
+</li>
+<li>故障诊断：
+<ul>
+<li>示波器观察信号波形（如检查 ADC 采样是否混叠）。</li>
+<li>万用表测量参考电压是否漂移（排查零点误差）。</li>
+</ul>
+</li>
+</ul>
+
 </section>
 
 

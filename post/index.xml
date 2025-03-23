@@ -7,7 +7,1743 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 09 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 23 Mar 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>压力传感器</title>
+        <link>https://teaize.github.io/p/%E5%8E%8B%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8/</link>
+        <pubDate>Sun, 23 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8E%8B%E5%8A%9B%E4%BC%A0%E6%84%9F%E5%99%A8/</guid>
+        <description>&lt;h3 id=&#34;压力传感器类型&#34;&gt;压力传感器类型
+&lt;/h3&gt;&lt;h4 id=&#34;表压gauge-pressure-gp&#34;&gt;表压（Gauge Pressure, GP）
+&lt;/h4&gt;&lt;p&gt;表压是相对于大气压的压力。大多数日常使用的压力传感器（如轮胎压力表）都是表压传感器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：一个轮胎的内部压力测量值为 250 kPa（表压），表示该压力比大气压 101.3 kPa 高出 250 kPa&lt;/li&gt;
+&lt;li&gt;计算公式：$P_{\text{表}} = P_{\text{绝}} - P_{\text{大气}}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;绝压absolute-pressure-ap&#34;&gt;绝压（Absolute Pressure, AP）
+&lt;/h4&gt;&lt;p&gt;绝压是相对于绝对真空（0 Pa）的压力，常用于气象测量、航空和工业真空系统等领域&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：标准大气压 101.3 kPa 就是一个绝对压力值&lt;/li&gt;
+&lt;li&gt;计算公式：$P_{\text{绝}} = P_{\text{表}} + P_{\text{大气}}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;差压differential-pressure-dp&#34;&gt;差压（Differential Pressure, DP）
+&lt;/h4&gt;&lt;p&gt;差压是指两个不同位置之间的压力差，广泛用于流量计（如孔板流量计）、过滤器监测等&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：测量管道内流体的进出口压力差，以计算流量或监测堵塞情况&lt;/li&gt;
+&lt;li&gt;计算公式：$P_{\text{差}} = P_1 - P_2$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;复合压compound-pressure-cp&#34;&gt;复合压（Compound Pressure, CP）
+&lt;/h4&gt;&lt;p&gt;复合压可以测量正压和负压（真空），适用于既需要测量正压，又要测量真空的应用场景，如空调系统和气体泄漏检测等&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：空调系统可能会测量 -50 kPa（真空） 到 +300 kPa 之间的压力范围&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;小结&#34;&gt;小结
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;类型&lt;/th&gt;
+          &lt;th&gt;参考压力&lt;/th&gt;
+          &lt;th&gt;适用场景&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;表压&lt;/td&gt;
+          &lt;td&gt;大气压&lt;/td&gt;
+          &lt;td&gt;轮胎压力、液压系统&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;绝压&lt;/td&gt;
+          &lt;td&gt;绝对真空&lt;/td&gt;
+          &lt;td&gt;气象、航空、真空设备&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;差压&lt;/td&gt;
+          &lt;td&gt;两点之间&lt;/td&gt;
+          &lt;td&gt;流量计、过滤器监测&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;复合压&lt;/td&gt;
+          &lt;td&gt;大气压（正压 + 负压）&lt;/td&gt;
+          &lt;td&gt;空调、气体泄漏检测&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250323192216.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250323192216.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;某压力传感器技术特点：&lt;a class=&#34;link&#34; href=&#34;https://www.sensepa.com.cn/product/727990/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;放大型SDX - SDX系列 - Product - 上海圣色传感技术有限公司_Sensepa_专业定制_压力传感器_压力变送器_倾角开关_角度传感器&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;主要参数有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;供电电压&lt;/li&gt;
+&lt;li&gt;供电电流&lt;/li&gt;
+&lt;li&gt;压力量程&lt;/li&gt;
+&lt;li&gt;零点输出&lt;/li&gt;
+&lt;li&gt;满量程输出&lt;/li&gt;
+&lt;li&gt;输出源电流&lt;/li&gt;
+&lt;li&gt;精度&lt;/li&gt;
+&lt;li&gt;响应时间&lt;/li&gt;
+&lt;li&gt;过载压力&lt;/li&gt;
+&lt;li&gt;补偿温度&lt;/li&gt;
+&lt;li&gt;工作温度&lt;/li&gt;
+&lt;li&gt;储存温度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;零点输出电压&#34;&gt;零点输出电压
+&lt;/h3&gt;&lt;p&gt;以上举例的压力传感器中，零点输出是&lt;strong&gt;0.5V&lt;/strong&gt;（或其他非零电压），并不一定是零点对应的 0V，这样做有什么好处呢：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;防止负压或负信号
+&lt;ul&gt;
+&lt;li&gt;在单电源供电系统（如 5V 或 10V）中，如果传感器的零点输出为 0V，那么负压可能无法正确检测，甚至可能被误认为是断开或故障&lt;/li&gt;
+&lt;li&gt;采用 0.5V 零点 可以让传感器支持一定范围的负压（如 -100 kPa ～ +100 kPa）&lt;/li&gt;
+&lt;li&gt;防止传感器零漂影响：传感器在长时间使用后，可能会发生零漂，如果零点设为 0V，一旦零漂出现，可能会导致负压误判或数据错误；设定 0.5V 零点 可以给零点漂移留有一定的容错空间，提高稳定性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;避免信号处理中的非线性问题
+&lt;ul&gt;
+&lt;li&gt;许多传感器输出信号后，会经过运算放大器、ADC（模数转换器）等电路处理，而 &lt;strong&gt;0V 信号可能会遇到非线性误差，或者导致放大电路无法正常工作&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;适应标准信号输出
+&lt;ul&gt;
+&lt;li&gt;工业标准信号常见的输出范围：
+&lt;ul&gt;
+&lt;li&gt;0.5V ～ 4.5V（对应 0% ～ 100% 压力范围）&lt;/li&gt;
+&lt;li&gt;1V ～ 5V（适用于部分控制系统）&lt;/li&gt;
+&lt;li&gt;4mA ～ 20mA（常见于工业自动化传感器）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;其中 0.5V ～ 4.5V 这种方式可以避免 0V（可能被误认为断线），同时提供较大的信号范围，方便后续信号处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;补偿温度&#34;&gt;补偿温度
+&lt;/h3&gt;&lt;p&gt;以上举例的压力传感器中，温度补偿范围为 0-85℃，那么补偿温度有什么意义：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;压力传感器通常由应变片、MEMS 芯片等敏感元件构成，&lt;strong&gt;温度变化会影响其电阻值、灵敏度、零点漂移等特性，导致误差&lt;/strong&gt;。如果没有温度补偿，环境温度变化会导致传感器输出偏差&lt;/li&gt;
+&lt;li&gt;补偿温度范围（0～85℃） 说明在该范围内，传感器的测量误差已经过工厂校准和补偿，误差被控制在规格书允许的范围内；超出补偿温度范围（如低于 0℃ 或高于 85℃），传感器仍可工作，但误差可能增大，不再符合精度指标&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常见的补偿方式有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;温度传感器补偿：&lt;strong&gt;内置温度传感器&lt;/strong&gt;，实时检测温度变化，进行数字或模拟补偿。&lt;/li&gt;
+&lt;li&gt;激光修正补偿：在生产时，工厂通过激光调整电阻或 EEPROM 校准参数，减少温度漂移
+&lt;ul&gt;
+&lt;li&gt;通过激光修正电阻，改变传感器的电桥平衡，使其零点漂移最小化&lt;/li&gt;
+&lt;li&gt;通过测试不同温度点的传感器误差，并计算补偿参数，写入 EEPROM，让传感器自动修正漂移&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;软件补偿：某些智能传感器可通过 MCU 计算修正温漂误差。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;压力传感器按工作原理分类&#34;&gt;压力传感器按工作原理分类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;应变片式（Strain Gauge）：利用惠斯通电桥测量压力引起的微小变形，广泛用于工业控制&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;压阻式&lt;/strong&gt;（Piezoresistive）：常见于 MEMS 传感器，灵敏度高，但需要温度补偿&lt;/li&gt;
+&lt;li&gt;电容式（Capacitive）：用于测量小压力变化，如医疗设备&lt;/li&gt;
+&lt;li&gt;谐振式（Resonant）：通过频率变化检测压力，常用于高精度测量&lt;/li&gt;
+&lt;li&gt;光纤式（Optical Fiber）：适用于高温、高压、强电磁干扰环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用注意事项&#34;&gt;使用注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;选型注意
+&lt;ul&gt;
+&lt;li&gt;量程匹配：压力传感器的满量程应略大于工作压力的 1.5～2 倍，以防止过载损坏。&lt;/li&gt;
+&lt;li&gt;工作温度：确保传感器的补偿温度和工作温度符合环境要求。&lt;/li&gt;
+&lt;li&gt;防护等级（IP 级别）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;安装与维护
+&lt;ul&gt;
+&lt;li&gt;传感器安装方向：
+&lt;ul&gt;
+&lt;li&gt;液体测量：传感器应安装在管道下方，避免气泡影响&lt;/li&gt;
+&lt;li&gt;气体测量：传感器应安装在管道上方，避免冷凝水影响&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;避免机械冲击与振动，必要时加减震装置&lt;/li&gt;
+&lt;li&gt;防止电磁干扰：
+&lt;ul&gt;
+&lt;li&gt;传感器信号线避免与强电电缆并行敷设&lt;/li&gt;
+&lt;li&gt;使用屏蔽电缆，并在单侧接地 (屏蔽层的一端接地，外部电磁干扰通过屏蔽层流入接地)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;定期校准
+&lt;ul&gt;
+&lt;li&gt;一般压力传感器建议每 6 个月至 1 年校准一次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.amphenol-sensors.com/en/novasensor/pressure-sensors/3453-npi-19-medium&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NPI-19 Series Medium Pressure Sensors | NovaSensor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://m.gys.cn/yalichuanganqi/4997994590.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;NPI-19A-CZ101AH软排线芯体绝压15psi压力传感器Novasensor - 供应商网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.aosong.com/products-212.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AGR12 表压型压力传感器（模拟款）-压力传感器-温湿度传感器 温湿度芯片 温湿度变送器模块 气体传感器 流量传感器 广州奥松电子股份有限公司&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.sensepa.com.cn/product/727990/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;放大型SDX - SDX系列 - Product - 上海圣色传感技术有限公司_Sensepa_专业定制_压力传感器_压力变送器_倾角开关_角度传感器&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Anki2Obsidian</title>
+        <link>https://teaize.github.io/p/anki2obsidian/</link>
+        <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/anki2obsidian/</guid>
+        <description>&lt;p&gt;例如在笔记当中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&amp;lt;a href=&amp;#34;obsidian://open?vault=SynZhPObsidan&amp;amp;amp;file=05-Work%2FRFID%E6%89%AB%E6%8F%8F%E7%B3%BB%E7%BB%9F&amp;#34;&amp;gt;Obsidian笔记&amp;lt;/a&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160943.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160943.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;可以通过该超链接调整到 Obsidian 笔记&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160953.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160953.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SW导出可方便查阅的模型</title>
+        <link>https://teaize.github.io/p/sw%E5%AF%BC%E5%87%BA%E5%8F%AF%E6%96%B9%E4%BE%BF%E6%9F%A5%E9%98%85%E7%9A%84%E6%A8%A1%E5%9E%8B/</link>
+        <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E5%AF%BC%E5%87%BA%E5%8F%AF%E6%96%B9%E4%BE%BF%E6%9F%A5%E9%98%85%E7%9A%84%E6%A8%A1%E5%9E%8B/</guid>
+        <description>&lt;h3 id=&#34;基本概念&#34;&gt;基本概念
+&lt;/h3&gt;&lt;p&gt;eDrawings 为开源软件，体积小巧。可将 Solidworks 模型导出为 eDrawings 格式&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160648.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160648.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;出版到 eDrawings 时，可选择生成 exe 的可执行文件或者 html 的网页文件
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160700.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160700.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>管道常用五种阀门工作原理</title>
+        <link>https://teaize.github.io/p/%E7%AE%A1%E9%81%93%E5%B8%B8%E7%94%A8%E4%BA%94%E7%A7%8D%E9%98%80%E9%97%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</link>
+        <pubDate>Sat, 22 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%AE%A1%E9%81%93%E5%B8%B8%E7%94%A8%E4%BA%94%E7%A7%8D%E9%98%80%E9%97%A8%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;截止阀&#34;&gt;截止阀
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;工作原理：通过阀瓣的上下移动来调节流体的流量，阀瓣与阀座之间的密封来关闭或开启流动通道&lt;/li&gt;
+&lt;li&gt;应用场合：适用于流量调节和关闭场合，常用于水、气、油等流体的管道中&lt;/li&gt;
+&lt;li&gt;区别：适合精确调节流量，不适合快速开启或关闭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;止回阀&#34;&gt;止回阀
+&lt;/h3&gt;&lt;p&gt;参考资料：&lt;a class=&#34;link&#34; href=&#34;https://www.douyin.com/video/7016633131096673566&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;douyin.com/video/7016633131096673566&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工作原理：依靠流体的流动方向来控制阀门的开启或关闭，防止流体反向流动&lt;/li&gt;
+&lt;li&gt;应用场合：用于防止回流的场合，如泵的出口&lt;/li&gt;
+&lt;li&gt;区别：只允许单向流动，不可用于调节流量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322155957.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322155957.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;蝶阀&#34;&gt;蝶阀
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;工作原理：通过蝶板在阀体内的旋转来调节或截断流体的流动，蝶板的角度决定流量大小。&lt;/li&gt;
+&lt;li&gt;应用场合：适用于气体和液体的流量控制，尤其在大口径管道中。&lt;/li&gt;
+&lt;li&gt;区别：结构简单，重量轻，适合大流量和低压场合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;闸阀&#34;&gt;闸阀
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;工作原理：通过阀瓣的上下移动来实现全开或全关状态，流体在阀体内几乎没有阻碍。&lt;/li&gt;
+&lt;li&gt;应用场合：主要用于管道的开启和关闭，适合于不需要流量调节的场合。&lt;/li&gt;
+&lt;li&gt;区别：流阻小，密封性好，但不适合频繁开关。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;球阀&#34;&gt;球阀
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;工作原理：通过一个带有通孔的球体旋转来控制流体的流动，球体的旋转可实现快速开启和关闭。&lt;/li&gt;
+&lt;li&gt;应用场合：广泛应用于水、油、气等流体的管道，适合频繁操作的场合。&lt;/li&gt;
+&lt;li&gt;区别：开启和关闭迅速，流阻小，适合高压和高温的应用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;小结&#34;&gt;小结
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;截止阀：适合流量调节。&lt;/li&gt;
+&lt;li&gt;止回阀：防止流体反向流动。&lt;/li&gt;
+&lt;li&gt;蝶阀：适合大流量、低压。&lt;/li&gt;
+&lt;li&gt;闸阀：全开或全关，流阻小。&lt;/li&gt;
+&lt;li&gt;球阀：快速开启和关闭，适合高压高温。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.douyin.com/video/7414094886435032320&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://www.douyin.com/video/7414094886435032320&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.douyin.com/video/7016633131096673566&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;douyin.com/video/7016633131096673566&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;管道常用五种阀门工作原理（截止阀止回阀蝶阀闸阀球阀）.mp4&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Anki中的特殊字段</title>
+        <link>https://teaize.github.io/p/anki%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%AD%97%E6%AE%B5/</link>
+        <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/anki%E4%B8%AD%E7%9A%84%E7%89%B9%E6%AE%8A%E5%AD%97%E6%AE%B5/</guid>
+        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The note&amp;#39;s tags: {{Tags}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The type of note: {{Type}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The card&amp;#39;s deck: {{Deck}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The card&amp;#39;s subdeck: {{Subdeck}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The card&amp;#39;s flag: {{CardFlag}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The type of card (&amp;#34;Forward&amp;#34;, etc): {{Card}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The content of the front template
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;(only valid in back template): {{FrontSide}}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;例如在模板中插入字段：
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250320215336.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250320215336.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;http://anki-doc.youlan.pro/FieldReplacements.html#%e6%8f%90%e7%a4%ba%e5%ad%97%e6%ae%b5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;6.1. 字段替换 | Anki 官方文档翻译&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SW-二次开发</title>
+        <link>https://teaize.github.io/p/sw-%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/</link>
+        <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw-%E4%BA%8C%E6%AC%A1%E5%BC%80%E5%8F%91/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://help.solidworks.com/HelpProducts.aspx&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SolidWorks Web Help&lt;/a&gt;，阅读时注意语法支持的版本，目前只有英文手册&lt;/li&gt;
+&lt;li&gt;书籍：&lt;code&gt;SOLIDWORKS二次开发与API教程 2020版&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250320215658.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250320215658.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SW宏-工程图保存为 PDF</title>
+        <link>https://teaize.github.io/p/sw%E5%AE%8F-%E5%B7%A5%E7%A8%8B%E5%9B%BE%E4%BF%9D%E5%AD%98%E4%B8%BA-pdf/</link>
+        <pubDate>Thu, 20 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E5%AE%8F-%E5%B7%A5%E7%A8%8B%E5%9B%BE%E4%BF%9D%E5%AD%98%E4%B8%BA-pdf/</guid>
+        <description>&lt;h3 id=&#34;工程图保存为-pdf&#34;&gt;工程图保存为 PDF
+&lt;/h3&gt;&lt;p&gt;宏的作用：在 SolidWorks 中打开一个文档后，自动将其保存为 &lt;code&gt;.DWG&lt;/code&gt; 和 &lt;code&gt;.PDF&lt;/code&gt; 两种格式，路径与当前文档的路径相同。具体步骤如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;获取当前打开文档的路径。&lt;/li&gt;
+&lt;li&gt;去掉原文件的扩展名。&lt;/li&gt;
+&lt;li&gt;将文档分别保存为 &lt;code&gt;.DWG&lt;/code&gt; 和 &lt;code&gt;.PDF&lt;/code&gt; 文件&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Dim swApp As Object
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Dim Part As Object
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Dim Filename As String
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Dim No As Integer
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Dim Title As String
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Sub main()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Set swApp = Application.SldWorks
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Set Part = swApp.ActiveDoc
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Filename = Part.GetPathName()
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;No = Len(Filename)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Filename = Left(Filename, No - 7)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Part.SaveAs2 Filename &amp;amp; &amp;#34;.DWG&amp;#34;, 0, True, False
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Part.SaveAs2 Filename &amp;amp; &amp;#34;.PDF&amp;#34;, 0, True, False
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;End Sub
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>SW宏-删除零件所有特征</title>
+        <link>https://teaize.github.io/p/sw%E5%AE%8F-%E5%88%A0%E9%99%A4%E9%9B%B6%E4%BB%B6%E6%89%80%E6%9C%89%E7%89%B9%E5%BE%81/</link>
+        <pubDate>Wed, 19 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E5%AE%8F-%E5%88%A0%E9%99%A4%E9%9B%B6%E4%BB%B6%E6%89%80%E6%9C%89%E7%89%B9%E5%BE%81/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;适用对象：零件&lt;/li&gt;
+&lt;li&gt;主要功能：删除所有特征，将零件所有特征删除的干干净净，只剩下最开始绘制的一个草图&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Sub&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;删除零件特征&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39; 获取SolidWorks应用程序对象&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Set&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swApp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Application&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SldWorks&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Set&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swModel&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swApp&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ActiveDoc&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39; 检查是否打开了文档&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;If&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swModel&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Is&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Nothing&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;MsgBox&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请打开一个文档。&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vbExclamation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;错误&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Exit&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Sub&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;End&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;If&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39; 检查是否是零件文档&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;If&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TypeOf&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swModel&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Is&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SldWorks&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;partDoc&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Then&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;MsgBox&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;请在零件模式下运行。&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vbExclamation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;错误&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Exit&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Sub&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;End&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;If&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39; 获取第一个特征&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Set&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swFeature&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swModel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FirstFeature&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39; 遍历并删除所有特征&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Do&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;While&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swFeature&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Is&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Nothing&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Dim&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nextFeature&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;As&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SldWorks&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Feature&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Set&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nextFeature&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swFeature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GetNextFeature&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;swFeature&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Select2&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;swModel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;EditDelete&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;Set&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;swFeature&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nextFeature&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Loop&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39; 强制重新构建模型以显示更改&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;s1&#34;&gt;&amp;#39;swModel.ForceRebuild3 True&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;MsgBox&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;已删除所有特征。&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;vbInformation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;完成&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;End&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Sub&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>SW工程图字体问题</title>
+        <link>https://teaize.github.io/p/sw%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%AD%97%E4%BD%93%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%AD%97%E4%BD%93%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;h3 id=&#34;问题描述&#34;&gt;问题描述
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;使用字体&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;仿宋_GB2312&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;而改字体不可用&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250317170520.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250317170520.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;解决方式很简单，下载该字体就行：&lt;a class=&#34;link&#34; href=&#34;https://www.zitijia.com/downloadpage?itemid=266006025365113913&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;仿宋_GB2312免费字体下载页 - 中文字体免费下载尽在字体家&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250317170528.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250317170528.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>常用功能性涂层</title>
+        <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%80%A7%E6%B6%82%E5%B1%82/</link>
+        <pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8A%9F%E8%83%BD%E6%80%A7%E6%B6%82%E5%B1%82/</guid>
+        <description>&lt;h2 id=&#34;耐腐蚀涂层&#34;&gt;耐腐蚀涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层的主要目的是防止金属材料因与空气、水、化学品等接触而产生腐蚀&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;镀锌（Zn）：通过电镀或热浸镀的方式在钢铁表面形成锌层，提供有效的防腐蚀保护，尤其适用于建筑和汽车工业&lt;/li&gt;
+&lt;li&gt;镀铬（Cr）：镀铬层不仅能提高表面的硬度，还具有很好的耐腐蚀性能，常用于汽车零部件和机械设备&lt;/li&gt;
+&lt;li&gt;镀镍（Ni）：镀镍具有良好的耐腐蚀性，常用于化工设备、电子器件等无电解镀镍（如磷镍）尤其适用于耐腐蚀要求较高的应用&lt;/li&gt;
+&lt;li&gt;涂层镍钴合金（Ni-Co）：具有优异的耐腐蚀性，常用于电力设备、海洋设备的保护&lt;/li&gt;
+&lt;li&gt;热喷涂涂层：例如热喷铝、热喷锌，广泛应用于防止钢结构等设备在恶劣环境下的腐蚀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;耐磨损涂层&#34;&gt;耐磨损涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层的目的是增强金属或其他材料的表面硬度和耐磨性，以减少摩擦和磨损&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;硬铬镀（Hard Chrome Plating）：具有极高的硬度和耐磨损性，广泛用于机械设备、工具、轴承等的表面处理&lt;/li&gt;
+&lt;li&gt;氮化（Nitriding）：通过在高温下将氮渗透进钢铁表面，形成硬化层，显著提高耐磨性，常用于汽车发动机零部件和工具&lt;/li&gt;
+&lt;li&gt;氮化钛（TiN）涂层：氮化钛具有非常高的硬度和耐磨性，通常用于刀具、模具、航空航天领域的部件&lt;/li&gt;
+&lt;li&gt;硬质涂层（如铝铬涂层）：广泛应用于工业刀具、机械加工部件等，以提高耐磨性和延长使用寿命&lt;/li&gt;
+&lt;li&gt;超硬涂层（例如金刚石薄膜、CVD 涂层）：这些涂层可以显著增加材料的耐磨性，适用于高精度、高负载的工作环境&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;耐高温涂层&#34;&gt;耐高温涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层用于保护材料在高温环境下的稳定性，防止氧化、熔化或退化&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;陶瓷涂层（如铝氧化物、锆氧化物）：具有非常高的耐高温性能，广泛应用于航空发动机、燃气涡轮等高温环境&lt;/li&gt;
+&lt;li&gt;热喷涂陶瓷涂层：常用于高温环境中的金属表面，如涡轮叶片、燃烧室等&lt;/li&gt;
+&lt;li&gt;镍基合金涂层（如 Inconel）：常用于航空、航天等高温高压环境中，能够有效抵抗氧化和热疲劳&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;抗氧化涂层&#34;&gt;抗氧化涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层用于防止金属在高温或其他氧化性环境下发生氧化反应，延长其使用寿命&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;镀铝（Aluminum Plating）：铝具有优异的抗氧化性，镀铝层能有效防止钢铁等材料在高温环境下氧化，广泛应用于高温设备和热交换器&lt;/li&gt;
+&lt;li&gt;硅涂层：通常用于高温环境中的金属涂层，特别是在熔炉、锅炉等设备中，能有效防止氧化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;导电涂层&#34;&gt;导电涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层用于改善材料的导电性，主要应用于电子器件和电气设备&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;银镀（Ag）：银具有极高的导电性，银镀常用于电子元器件的接触表面，以提高接触的导电性能，减少接触电阻&lt;/li&gt;
+&lt;li&gt;铜镀（Cu）：用于电子线路、集成电路等的表面处理，提供良好的导电性&lt;/li&gt;
+&lt;li&gt;铟锡合金（Sn-Ag）涂层：广泛应用于电子元器件的焊接，具有良好的导电性和抗氧化性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;自润滑涂层&#34;&gt;自润滑涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层可以提供良好的润滑效果，减少摩擦和磨损，适用于机械设备和工具&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;石墨涂层：具有自润滑特性，广泛应用于摩擦和滑动部件，如轴承、齿轮等&lt;/li&gt;
+&lt;li&gt;MoS₂（硫化钼）涂层：硫化钼具有非常好的抗摩擦性能，常用于高负载、高温环境中的润滑&lt;/li&gt;
+&lt;li&gt;PTFE（聚四氟乙烯）涂层：由于其极低的摩擦系数，PTFE 涂层常用于滑动部件和密封件中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;防指纹涂层&#34;&gt;防指纹涂层
+&lt;/h2&gt;&lt;p&gt;这种涂层能防止金属或玻璃表面因为手指触摸而留下油污和指纹，常见于高端电子产品和家电的外观处理&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;防指纹镀层：常用于智能手机、显示屏、家电等产品，减少油污附着，使表面易清洁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;抗菌涂层&#34;&gt;抗菌涂层
+&lt;/h2&gt;&lt;p&gt;这些涂层具有抗菌作用，常用于医疗、食品加工等领域，以减少细菌和病毒的传播&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;银基抗菌涂层：银具有天然的抗菌性质，常用于医疗器械、厨房用品、空调等领域的表面涂层&lt;/li&gt;
+&lt;li&gt;铜基抗菌涂层：铜也具有抗菌效果，常应用于医院设施、公共场所的表面涂层&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>工程图命名规则</title>
+        <link>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/</link>
+        <pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/</guid>
+        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;总装图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第一层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;01&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第一层装配图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第二层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;01&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第二层装配体&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第三层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;01&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第三层装配体&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第四层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;01&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;03&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;				&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第三层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;03&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;			&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第二层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;03&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第一层零件图&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;03&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;第一层装配体&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;XXX&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;04&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;00&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;参考资料：&lt;a class=&#34;link&#34; href=&#34;https://www.sohu.com/a/579073834_121124370&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;【基础知识】公司内部机械设计及制图规范参考（适合solidworks所有机械行业）_装配_零部件_草图&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>CMD命令运行程序</title>
+        <link>https://teaize.github.io/p/cmd%E5%91%BD%E4%BB%A4%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</link>
+        <pubDate>Fri, 14 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/cmd%E5%91%BD%E4%BB%A4%E8%BF%90%E8%A1%8C%E7%A8%8B%E5%BA%8F/</guid>
+        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;  1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;  9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 85
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 86
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 87
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 88
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 89
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 90
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 91
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 92
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 93
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 94
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 95
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 96
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 97
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 98
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 99
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;100
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;101
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;102
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;103
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;104
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;105
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;106
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;107
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;108
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;109
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;110
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;111
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;112
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;113
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;114
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;115
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;116
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;117
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;118
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;119
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;120
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;121
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;122
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;123
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;124
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;125
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;126
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;127
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;128
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;129
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;130
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;131
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;132
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;133
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;134
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Bash&#34; data-lang=&#34;Bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;REM 定义菜单选项及相应的命令
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; menuItems&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;打开QQ
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; commands&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;1&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;E:&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;01-Sorfware&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;5-QQ&lt;span class=&#34;se&#34;&gt;\B&lt;/span&gt;in&lt;span class=&#34;se&#34;&gt;\q&lt;/span&gt;q.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; menuItems&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;执行微信
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; commands&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;2&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;E:&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;01-Sorfware&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;20-Wechart&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;eChat&lt;span class=&#34;se&#34;&gt;\W&lt;/span&gt;eChat.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; menuItems&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;3&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;打开知云
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; commands&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;3&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;E:&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;01-Sorfware&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;14-知云翻译&lt;span class=&#34;se&#34;&gt;\0&lt;/span&gt;1&lt;span class=&#34;se&#34;&gt;\Z&lt;/span&gt;hiYunTranslator.exe
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; menuItems&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;4&lt;span class=&#34;o&#34;&gt;]=&lt;/span&gt;退出程序
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 请选择要执行的操作：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; /l %%i in &lt;span class=&#34;o&#34;&gt;(&lt;/span&gt;1,1,4&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;do&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; %%i. !menuItems&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;%%i&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; /p &lt;span class=&#34;nv&#34;&gt;choice&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;请输入数字并按 Enter 键：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%choice%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;4&amp;#34;&lt;/span&gt; goto op4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%choice%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;3&amp;#34;&lt;/span&gt; goto op3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%choice%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;2&amp;#34;&lt;/span&gt; goto op2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%choice%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;1&amp;#34;&lt;/span&gt; goto op1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 请输入有效的数字！
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:op1
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 正在打开QQ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 检查QQ是否在运行...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tasklist /FI &lt;span class=&#34;s2&#34;&gt;&amp;#34;IMAGENAME eq qq.exe&amp;#34;&lt;/span&gt; 2&amp;gt;NUL &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /I /N &lt;span class=&#34;s2&#34;&gt;&amp;#34;qq.exe&amp;#34;&lt;/span&gt;&amp;gt;NUL
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%ERRORLEVEL%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; goto already_running_qq
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 正在自动运行QQ...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;start &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;!commands[1]!&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto end_qq
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:already_running_qq
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; QQ程序已在运行
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:end_qq
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 操作1的代码已执行完毕。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:op2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 检查WeChat是否在运行...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tasklist /FI &lt;span class=&#34;s2&#34;&gt;&amp;#34;IMAGENAME eq WeChat.exe&amp;#34;&lt;/span&gt; 2&amp;gt;NUL &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /I /N &lt;span class=&#34;s2&#34;&gt;&amp;#34;WeChat.exe&amp;#34;&lt;/span&gt;&amp;gt;NUL
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%ERRORLEVEL%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; goto already_running_wechat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 正在自动运行微信...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;start &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;!commands[2]!&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto end_wechat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:already_running_wechat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; WeChat程序已在运行
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:end_wechat
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 操作2的代码已执行完毕。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:op3
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 正在打开知云...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 检查知云是否在运行...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;tasklist /FI &lt;span class=&#34;s2&#34;&gt;&amp;#34;IMAGENAME eq ZhiYunTranslator.exe&amp;#34;&lt;/span&gt; 2&amp;gt;NUL &lt;span class=&#34;p&#34;&gt;|&lt;/span&gt; find /I /N &lt;span class=&#34;s2&#34;&gt;&amp;#34;ZhiYunTranslator.exe&amp;#34;&lt;/span&gt;&amp;gt;NUL
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;%ERRORLEVEL%&amp;#34;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;==&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;0&amp;#34;&lt;/span&gt; goto already_running_zhiyun
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 正在自动运行知云...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;start &lt;span class=&#34;s2&#34;&gt;&amp;#34;&amp;#34;&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;!commands[3]!&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto end_zhiyun
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:already_running_zhiyun
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; Zhiyun程序已在运行
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:end_zhiyun
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 操作3的代码已执行完毕。
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;goto menu
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;:op4
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;echo&lt;/span&gt; 正在退出程序...
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;echo.
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;pause
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;exit&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>取样泵</title>
+        <link>https://teaize.github.io/p/%E5%8F%96%E6%A0%B7%E6%B3%B5/</link>
+        <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8F%96%E6%A0%B7%E6%B3%B5/</guid>
+        <description>&lt;h2 id=&#34;取样泵参数&#34;&gt;取样泵参数
+&lt;/h2&gt;&lt;h3 id=&#34;取样泵重要参数&#34;&gt;取样泵重要参数
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;流量（L/min 或 m³/h）&lt;/strong&gt; - 影响采样速度和效率&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;真空度（kPa 或 mmHg）&lt;/strong&gt; - 影响泵的抽吸能力，决定了泵是否能有效抽取低压或高阻力环境下的气体&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;出口压力（kPa 或 bar）&lt;/strong&gt; - 影响气体输送能力&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;功率（W 或 kW）&lt;/strong&gt; - 影响能耗&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;适用气体类型&lt;/strong&gt; - 例如是否可用于腐蚀性、可燃性或含颗粒物的气体&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;耐温范围（°C）&lt;/strong&gt; - 影响在高低温环境下的可靠性&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;驱动方式&lt;/strong&gt; - 如电动、气动或手动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;取样泵性能曲线&#34;&gt;取样泵性能曲线
+&lt;/h3&gt;&lt;p&gt;参考资料：&lt;a class=&#34;link&#34; href=&#34;https://knf.com/zh/cn/%E6%95%85%E4%BA%8B%E4%B8%8E%E6%B4%BB%E5%8A%A8/%E5%8D%9A%E5%AE%A2/%E7%9F%A5%E8%AF%86%E6%B5%81/%E7%A8%BF%E4%BB%B6/%E8%AF%BB%E6%87%82%E6%B3%B5%E6%9B%B2%E7%BA%BF&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;如何读懂泵曲线 | KNF&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>梭阀-Shutter Valve</title>
+        <link>https://teaize.github.io/p/%E6%A2%AD%E9%98%80-shutter-valve/</link>
+        <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%A2%AD%E9%98%80-shutter-valve/</guid>
+        <description>&lt;p&gt;梭阀（Shuttle Valve）是一种液压或气动阀门，主要用于在两个流体通道之间切换，通常是选择性地连接两个输入流路之一。它能够根据两个输入流路中的信号或压力，自动选择一个路径供流体流通，通常用于液压系统中的双回路控制、切换控制等场合&lt;/p&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/watch?v=n4WObl68YH0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Alfa Laval Mixproof CP-3 Valve Maintenance - YouTube&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>仪器仪表中电路板基本常识</title>
+        <link>https://teaize.github.io/p/%E4%BB%AA%E5%99%A8%E4%BB%AA%E8%A1%A8%E4%B8%AD%E7%94%B5%E8%B7%AF%E6%9D%BF%E5%9F%BA%E6%9C%AC%E5%B8%B8%E8%AF%86/</link>
+        <pubDate>Thu, 13 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BB%AA%E5%99%A8%E4%BB%AA%E8%A1%A8%E4%B8%AD%E7%94%B5%E8%B7%AF%E6%9D%BF%E5%9F%BA%E6%9C%AC%E5%B8%B8%E8%AF%86/</guid>
+        <description>&lt;h2 id=&#34;电路板分类&#34;&gt;电路板分类
+&lt;/h2&gt;&lt;h3 id=&#34;通讯电路板&#34;&gt;通讯电路板
+&lt;/h3&gt;&lt;p&gt;通讯电路板主要负责数据的传输、通信和系统集成。其核心功能包括：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据采集与传输：
+&lt;ul&gt;
+&lt;li&gt;通讯电路板从 CEMS 的各个传感器和分析仪（如气体分析仪、颗粒物监测仪、流量计等）采集实时数据。将这些数据传输到本地控制系统（如 PLC 或工控机）或远程监控平台（如环保部门的监管平台）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;协议转换与兼容：
+&lt;ul&gt;
+&lt;li&gt;CEMS 通常需要与多种设备（如分析仪、流量计、温湿度传感器）和系统（如 DCS、SCADA、环保监管平台）通信。&lt;/li&gt;
+&lt;li&gt;通讯电路板负责将不同设备的数据协议（如 Modbus、Profibus、HART、4-20mA）转换为统一的通信协议（如 TCP/IP、OPC、MQTT），确保数据兼容性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;远程监控与诊断：
+&lt;ul&gt;
+&lt;li&gt;通过通讯电路板，CEMS 可以实现远程监控和故障诊断，方便运维人员实时查看系统状态、接收报警信息并进行远程维护。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;数据存储与转发：
+&lt;ul&gt;
+&lt;li&gt;通讯电路板通常配备存储模块，用于缓存数据，防止网络中断时数据丢失。&lt;/li&gt;
+&lt;li&gt;在网络恢复后，将缓存的数据转发到目标系统。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;网络安全与加密：
+&lt;ul&gt;
+&lt;li&gt;通讯电路板可能集成网络安全功能（如防火墙、数据加密），确保数据传输的安全性，防止数据被篡改或泄露。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;信号调理电路板&#34;&gt;信号调理电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：对传感器输出的模拟信号（如 4-20mA、0-10V）进行放大、滤波和隔离，确保信号稳定可靠。&lt;/li&gt;
+&lt;li&gt;应用：用于处理气体浓度、流量、温度、压力等传感器的原始信号。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;数据采集电路板&#34;&gt;数据采集电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：采集多路传感器信号，并将其转换为数字信号供后续处理。&lt;/li&gt;
+&lt;li&gt;应用：用于多通道数据采集系统，支持高精度、高频率的数据采集。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;主控电路板如-plc-或嵌入式控制器&#34;&gt;主控电路板（如 PLC 或嵌入式控制器）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：作为 CEMS 的核心控制单元，负责数据处理、逻辑控制、报警触发和系统管理。&lt;/li&gt;
+&lt;li&gt;应用：控制整个 CEMS 的运行，协调各模块的工作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;电源管理电路板&#34;&gt;电源管理电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：为 CEMS 各模块提供稳定的电源，支持过压、过流、短路保护。&lt;/li&gt;
+&lt;li&gt;应用：用于工业环境中的电源分配和管理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;显示与操作电路板&#34;&gt;显示与操作电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：驱动本地显示屏（如 LCD 或触摸屏），提供人机交互界面。&lt;/li&gt;
+&lt;li&gt;应用：用于现场操作、参数设置和状态显示。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;存储与备份电路板&#34;&gt;存储与备份电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：存储历史数据、配置参数和日志信息，支持数据备份和恢复。&lt;/li&gt;
+&lt;li&gt;应用：用于数据长期保存和故障分析。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;报警与保护电路板&#34;&gt;报警与保护电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：监测系统状态（如超限、故障、断电），触发声光报警或保护动作。&lt;/li&gt;
+&lt;li&gt;应用：用于保障系统安全和及时提醒运维人员。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;无线通信电路板&#34;&gt;无线通信电路板
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;作用：支持无线数据传输（如 4G/5G、LoRa、Wi-Fi），适用于远程或移动监测场景。&lt;/li&gt;
+&lt;li&gt;应用：用于无法布设有线网络的场合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;纽扣电池在电路板上的作用&#34;&gt;纽扣电池在电路板上的作用
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;维持实时时钟：许多电子设备（如电脑主板、智能家电、嵌入式系统）需要持续记录时间，即使设备断电。纽扣电池为实时时钟芯片供电，确保时间信息不会丢失。&lt;/li&gt;
+&lt;li&gt;保存 CMOS 设置：在计算机中，纽扣电池为 BIOS/UEFI 芯片供电，存储硬件配置信息（如启动顺序、硬盘参数等）。如果电池耗尽，这些设置会恢复出厂默认值。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>AI图像生成</title>
+        <link>https://teaize.github.io/p/ai%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/</link>
+        <pubDate>Wed, 12 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/ai%E5%9B%BE%E5%83%8F%E7%94%9F%E6%88%90/</guid>
+        <description>&lt;p&gt;在线图像生成：&lt;a class=&#34;link&#34; href=&#34;https://cloud.siliconflow.cn/playground/image/17885302553&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;硅基流动统一登录&lt;/a&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;a coastal scene I really enjoy is one where the ocean stretches endlessly to the horizon under a sky painted with the soft colors of twilight. The waves crash gently against the shore, creating a rhythmic sound that blends with the salty breeze. The sand feels warm beneath your feet, still holding the heat from the day, but it’s cool at the water&amp;#39;s edge where the surf meets the land. In the distance, seagulls wheel and dive, their calls mingling with the sound of the waves. As the sun sets, the sky turns into a canvas of purples, oranges, and pinks, reflecting off the surface of the water, giving the whole scene a serene, almost otherworldly glow. The cool night air starts to roll in, but there&amp;#39;s still a peaceful warmth in the fading light. The feeling of infinity is overwhelming, as if the ocean and sky could go on forever, and the world feels both vast and intimately close at the same time.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250312204750.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250312204750.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250312204756.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250312204756.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;The air is crisp, filled with the scent of pine and damp earth. As the sun begins to rise, its soft, golden light filters through the trees, casting long shadows and illuminating the mist that clings to the forest floor. The sound of rustling leaves and distant bird calls is the only noise, creating a peaceful, almost sacred atmosphere. The trees, tall and ancient, stand like silent guardians, their trunks covered in moss, while small streams trickle nearby, adding a gentle, soothing melody to the scene. There&amp;#39;s a sense of timelessness, as if the world is holding its breath, waiting for the day to begin.
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250312204807.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250312204807.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>标签系统</title>
+        <link>https://teaize.github.io/p/%E6%A0%87%E7%AD%BE%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Wed, 12 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%A0%87%E7%AD%BE%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;p&gt;文本类容源于 GPT，觉得还不错，遂保存下来。如果有一个长期记录的习惯，可以根据自己的使用场景，建立一套适合自己的标签体系&lt;/p&gt;
+&lt;h3 id=&#34;认知--思维类&#34;&gt;认知 &amp;amp; 思维类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;认知升级：记录思维方式的变化，如何从新的角度看待问题&lt;/li&gt;
+&lt;li&gt;经验复盘：对一次经历或项目的总结，分析得失&lt;/li&gt;
+&lt;li&gt;思维陷阱：记录自己曾经的错误思维方式，以后避免&lt;/li&gt;
+&lt;li&gt;自我提升：记录让自己更高效、更聪明的经验&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;技术--工作类&#34;&gt;技术 &amp;amp; 工作类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;避坑指南 / 踩坑记录：记录技术或工作中的坑，以后避免&lt;/li&gt;
+&lt;li&gt;高效工具 / 效率提升：记录能提高生产力的工具和方法&lt;/li&gt;
+&lt;li&gt;造轮子反思：当发现自己重复造轮子时，思考是否有更优解&lt;/li&gt;
+&lt;li&gt;最佳实践：记录行业或个人总结出的最优解决方案&lt;/li&gt;
+&lt;li&gt;自动化改进：记录如何用工具或代码减少重复工作，提高效率&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;项目--实践类&#34;&gt;项目 &amp;amp; 实践类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;失败教训：记录某个尝试失败的原因和改进方案&lt;/li&gt;
+&lt;li&gt;灵感记录：记录新的想法，即使暂时没有实现&lt;/li&gt;
+&lt;li&gt;开发心得：记录技术开发过程中值得总结的经验&lt;/li&gt;
+&lt;li&gt;代码复用策略：如何避免重复写代码，提高复用性&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;生活--学习类&#34;&gt;生活 &amp;amp; 学习类
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;信息差利用：记录自己学到的独特信息，提升认知&lt;/li&gt;
+&lt;li&gt;时间管理：如何更合理地安排时间，提高效率&lt;/li&gt;
+&lt;li&gt;资源整理：记录和分类有用的资源，方便后续查找&lt;/li&gt;
+&lt;li&gt;思维误区：记录自己曾经误解或忽视的重要概念&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>非暴力沟通</title>
+        <link>https://teaize.github.io/p/%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A/</link>
+        <pubDate>Wed, 12 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%9D%9E%E6%9A%B4%E5%8A%9B%E6%B2%9F%E9%80%9A/</guid>
+        <description>&lt;p&gt;《非暴力沟通》是美国心理学家马歇尔·卢森堡（Marshall B. Rosenberg）提出的一种沟通方式，强调同理心、尊重与理解。书中核心思想可归纳如下：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;观察与评判分开&lt;/strong&gt;&lt;br&gt;
+人们常常把主观评价混入观察之中，但非暴力沟通要求我们只描述事实，不带主观判断。例如，不说“你总是迟到”，而是说“你今天迟到了 10 分钟”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;表达感受，而非指责&lt;/strong&gt;&lt;br&gt;
+许多人在表达不满时习惯指责他人，例如“你让我很生气”，但更好的表达方式是“我感到生气，因为……”。这样可以让对方更容易理解你的情绪，而不会本能地防御或反击。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;聚焦需求，而非具体行为&lt;/strong&gt;&lt;br&gt;
+感受源于需求的满足或未满足，而非他人的行为。例如，生气可能是因为“我需要被尊重”，而不是“对方不听我的话”。明确自己的需求有助于更有效地表达，而不是陷入争执。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提出具体可行的请求，而非模糊的要求&lt;/strong&gt;&lt;br&gt;
+许多沟通问题源于含糊不清的表达。例如，与其说“希望你尊重我”，不如说“希望你说话时语气温和一些”。清晰的请求更有可能被理解和接受。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;核心理念是：&lt;strong&gt;带着同理心去倾听，用清晰、尊重、无攻击性的方式表达自己&lt;/strong&gt;。这种沟通方式有助于减少误解和冲突，让人与人之间的关系更加和谐。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;&lt;strong&gt;“聚焦需求，而非具体行为”&lt;/strong&gt; 是非暴力沟通（NVC）的核心原则之一，它强调我们在沟通时应当关注自己的需求，而不是仅仅指责对方的行为。这样可以让沟通更具建设性，避免冲突升级，同时让对方更容易理解和接受你的诉求。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;错误示范&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;关注具体行为&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;❌&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;你总是不听我说话&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;你根本不在乎我&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;！”&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;这句话的焦点是指责对方的行为&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;不听我说话&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”），&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;并带有假设&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;你不在乎我&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”）。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;可能引发对方的防御&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;我有听啊&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;！&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;你误会了&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;！”&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;容易导致争吵&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;而不是理解和改善关系&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;正确示范&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;聚焦需求&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;✅&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;当我和你说话时&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;我希望被关注和倾听&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;因为这让我感到被尊重和理解&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。”&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;这句话表达了&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;希望被关注和倾听&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;的需求&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;而不是指责对方&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;“&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;总是不听&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;”。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;对方更容易接受&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;也更容易找到方法来满足你的需求&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;比如他可以调整注意力&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;眼神接触或做出回应&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;p&gt;非暴力沟通提供了一个简单的四步模型，可以帮助我们把重点放在需求上：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;观察&lt;/strong&gt;（不带评价地描述事实）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;感受&lt;/strong&gt;（表达自己的情绪）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;需求&lt;/strong&gt;（明确自己内心的真正需求）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;请求&lt;/strong&gt;（提出具体可行的行动方案）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：“当我看到你看手机而没有回应我的问题时（观察），我感到有些失落（感受），因为我需要被关注和理解（需求）。你可以在我说话时放下手机，和我有更多眼神交流吗？（请求）”&lt;/p&gt;
+&lt;p&gt;这样表达比直接指责“你总是玩手机”更容易让对方接受，并愿意做出改变。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>个人知识管理精进指南</title>
+        <link>https://teaize.github.io/p/%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B2%BE%E8%BF%9B%E6%8C%87%E5%8D%97/</link>
+        <pubDate>Wed, 12 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%B8%AA%E4%BA%BA%E7%9F%A5%E8%AF%86%E7%AE%A1%E7%90%86%E7%B2%BE%E8%BF%9B%E6%8C%87%E5%8D%97/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;知识的价值在于应用，而非积累
+&lt;ul&gt;
+&lt;li&gt;仅仅收集和记忆知识并不会带来真正的成长，关键在于如何把知识转化为能力和行动&lt;/li&gt;
+&lt;li&gt;学习的目标应该是解决问题，而不是追求知识的“占有感”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;高效学习需要建立知识体系
+&lt;ul&gt;
+&lt;li&gt;知识是网络化的，零散的信息难以形成深层理解&lt;/li&gt;
+&lt;li&gt;通过&lt;strong&gt;构建知识地图、框架思维和主题学习&lt;/strong&gt;，可以让知识之间建立联系，形成稳固的知识体系&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;费曼学习法 + 刻意练习，提高知识吸收率
+&lt;ul&gt;
+&lt;li&gt;费曼学习法（用简单语言解释概念）能帮助加深理解，防止“伪学习”&lt;/li&gt;
+&lt;li&gt;结合刻意练习（针对薄弱环节进行强化），能够更有效地掌握新知识&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;外部工具 + 内部认知，提高学习效率
+&lt;ul&gt;
+&lt;li&gt;外部工具（如笔记、思维导图、卡片盒等）能帮助整理和回顾知识&lt;/li&gt;
+&lt;li&gt;内部认知（如批判性思维、元认知）决定了我们如何筛选、组织和运用知识&lt;/li&gt;
+&lt;li&gt;两者结合，才能真正提升学习效果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;知识管理的核心是输入 - 存储 - 输出的循环
+&lt;ul&gt;
+&lt;li&gt;输入：主动选择高质量信息，避免信息过载&lt;/li&gt;
+&lt;li&gt;存储：建立有效的笔记系统，把知识结构化&lt;/li&gt;
+&lt;li&gt;输出：通过写作、分享、实践等方式强化记忆，实现知识的内化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;生活每天都在生产未经加工的经验素材。我们的判断来源于经验，而有效的经验来源于对判断的反思。反思，让我们把生活的素材重新解读，成为洞见。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>传感器信号调理</title>
+        <link>https://teaize.github.io/p/%E4%BC%A0%E6%84%9F%E5%99%A8%E4%BF%A1%E5%8F%B7%E8%B0%83%E7%90%86/</link>
+        <pubDate>Tue, 11 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BC%A0%E6%84%9F%E5%99%A8%E4%BF%A1%E5%8F%B7%E8%B0%83%E7%90%86/</guid>
+        <description>&lt;p&gt;切入方向&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仪器仪表技术 → 看《过程控制系统与仪表》&lt;/li&gt;
+&lt;li&gt;模拟电子技术 → 学运算放大器电路设计&lt;/li&gt;
+&lt;li&gt;嵌入式开发 → 玩 Arduino+ 传感器做简易检测仪&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;链接&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;[[运算放大器电路]]&lt;/li&gt;
+&lt;li&gt;[[简单嵌入式程序开发]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ESP32-连接Wifi代码模块</title>
+        <link>https://teaize.github.io/p/esp32-%E8%BF%9E%E6%8E%A5wifi%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9D%97/</link>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/esp32-%E8%BF%9E%E6%8E%A5wifi%E4%BB%A3%E7%A0%81%E6%A8%A1%E5%9D%97/</guid>
+        <description>&lt;h3 id=&#34;程序代码&#34;&gt;程序代码
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;network&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ssid&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;你的WiFi名称&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;你的WiFi密码&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;network&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WLAN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;network&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;STA_IF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# STA 模式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;active&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 启用 WiFi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ssid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 连接 WiFi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isconnected&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 等待连接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;连接成功，IP 地址：&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ifconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 输出 IP 地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;network&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;ssid&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;coffeelize&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;18195786901&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;network&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;WLAN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;network&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;STA_IF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# STA 模式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;active&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 启用 WiFi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;connect&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ssid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 连接 WiFi&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;isconnected&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;():&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 等待连接&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;pass&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;连接成功，IP 地址：&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;wlan&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ifconfig&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 输出 IP 地址&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;程序返回&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;连接成功&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IP&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;地址&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;192.168.31.35&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>SSD1306-OLED显示屏</title>
+        <link>https://teaize.github.io/p/ssd1306-oled%E6%98%BE%E7%A4%BA%E5%B1%8F/</link>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/ssd1306-oled%E6%98%BE%E7%A4%BA%E5%B1%8F/</guid>
+        <description>&lt;p&gt;SSD1306 是一款常见的 OLED（有机发光二极管）显示驱动芯片，常用于小型单色 OLED 显示屏，分辨率一般为 128×64 或 128×32。这里展示的是 &lt;strong&gt;I2C&lt;/strong&gt;（两线：SCL、SDA）的通信方式&lt;/p&gt;
+&lt;h3 id=&#34;硬件接线&#34;&gt;硬件接线
+&lt;/h3&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250310184225.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250310184225.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;|SSD1306|ESP32（默认 I2C）|
+|:&amp;mdash;:&amp;mdash;|:&amp;mdash;:&amp;mdash;|
+|VCC|3.3V 或 5V|
+|GND|GND|
+|SCL|GPIO22（SCL）|
+|SDA|GPIO21（SDA）|&lt;/p&gt;
+&lt;h3 id=&#34;查找-i2c-设备&#34;&gt;查找 I2C 设备
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;machine&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;I2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;I2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;scl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sda&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;devices&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scan&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 扫描 I2C 设备&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;devices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;I2C 设备地址:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;hex&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dev&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dev&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;devices&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;])&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;else&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;未找到 I2C 设备，请检查接线！&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;程序返回：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;I2C&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;设备地址&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;0x3c&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;程序&#34;&gt;程序
+&lt;/h3&gt;&lt;h4 id=&#34;显示文字&#34;&gt;显示文字
+&lt;/h4&gt;&lt;p&gt;注意：需下载并上传 &lt;code&gt;ssd1306.py&lt;/code&gt; 到 ESP32&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;machine&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;ssd1306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 初始化 I2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sda&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;freq&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ssd1306&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SSD1306_I2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;128&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 显示文本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Coffeelize, Go home!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;如果要显示&lt;strong&gt;大字体&lt;/strong&gt;，可以下载 &lt;code&gt;symbol.py&lt;/code&gt; 并上传到 ESP32&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;symbol.py&lt;/code&gt; 是一个自定义库，用于在 SSD1306 OLED 屏幕上 显示大字体（16x16 或更大）。因为在 MicroPython 的 ssd1306 官方驱动中，text() 方法只能显示 默认 8x8 像素的 ASCII 字符，字体有些小&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;machine&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;ssd1306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;symbol&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 初始化 I2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sda&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;freq&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ssd1306&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SSD1306_I2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;128&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dsp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;symbol&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Symbol&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 仍然保留 symbol&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 显示文本&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Meow, Go home!&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250310191622.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250310191622.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;迷你像素画动画&#34;&gt;迷你像素画/动画
+&lt;/h4&gt;&lt;p&gt;例如在屏幕中绘制一个移动端点&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;ssd1306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;machine&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sda&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ssd1306&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SSD1306_I2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;128&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;dx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 方向&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fill&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 清屏&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pixel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;y&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 画一个点&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dx&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;128&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;or&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;dx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dx&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 反向移动&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.05&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;电子时钟&#34;&gt;电子时钟
+&lt;/h3&gt;&lt;h2 id=&#34;可以结合-esp32-内部-rtc-来做一个-电子时钟&#34;&gt;可以结合 ESP32 内部 RTC 来做一个 电子时钟
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;network&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;ssd1306&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;time&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;machine&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SoftI2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;scl&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;22&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sda&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;21&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ssd1306&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SSD1306_I2C&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;128&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;64&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i2c&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;localtime&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;now&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;02d&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;02d&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;02d&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 格式化小时:分钟:秒&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fill&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 清屏&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Current Time:&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;text&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;now&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;35&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;40&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;oled&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;gui&#34;&gt;GUI
+&lt;/h3&gt;&lt;p&gt;参考资料：&lt;a class=&#34;link&#34; href=&#34;https://github.com/peterhinch/micropython-nano-gui&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GitHub - peterhinch/micropython-nano-gui: A lightweight MicroPython GUI library for display drivers based on framebuf class&lt;/a&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>串口调试工具</title>
+        <link>https://teaize.github.io/p/%E4%B8%B2%E5%8F%A3%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</link>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%B8%B2%E5%8F%A3%E8%B0%83%E8%AF%95%E5%B7%A5%E5%85%B7/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.elecfans.com/topic/software/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;电子工程师工具库 - 电子发烧友网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>生成 PCB 的设</title>
+        <link>https://teaize.github.io/p/%E7%94%9F%E6%88%90-pcb-%E7%9A%84%E8%AE%BE/</link>
+        <pubDate>Mon, 10 Mar 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%94%9F%E6%88%90-pcb-%E7%9A%84%E8%AE%BE/</guid>
+        <description>&lt;h3 id=&#34;一传感器基础&#34;&gt;一、传感器基础
+&lt;/h3&gt;&lt;p&gt;传感器（Sensor）
+将物理量（如温度、压力、光强）转换为电信号的装置。
+示例：热电偶（温度→电压）、光敏电阻（光强→电阻值）。&lt;/p&gt;
+&lt;p&gt;灵敏度（Sensitivity）
+输出信号变化量与输入物理量变化的比值。
+公式：S = ΔV/ΔP（如 10mV/°C）。&lt;/p&gt;
+&lt;p&gt;分辨率（Resolution）
+传感器可检测的最小输入变化量，决定测量精度。&lt;/p&gt;
+&lt;h3 id=&#34;二信号类型&#34;&gt;二、信号类型
+&lt;/h3&gt;&lt;p&gt;模拟信号（Analog Signal）
+连续变化的电信号（如电压、电流），需通过 ADC 转换为数字信号。&lt;/p&gt;
+&lt;p&gt;数字信号（Digital Signal）
+离散的二进制信号（如 0/1、I2C、SPI 协议），抗干扰能力强。&lt;/p&gt;
+&lt;h3 id=&#34;三核心电路元件&#34;&gt;三、核心电路元件
+&lt;/h3&gt;&lt;p&gt;运算放大器（Op-Amp）
+用于信号放大、滤波、阻抗匹配。
+典型电路：差分放大（抑制共模噪声）。&lt;/p&gt;
+&lt;p&gt;模数转换器（ADC, Analog-to-Digital Converter）
+将模拟信号转换为数字信号，关键参数：分辨率（如 12 位）、采样率（如 1kHz）。&lt;/p&gt;
+&lt;p&gt;参考电压（Reference Voltage, Vref）
+为 ADC 或比较器提供稳定基准电压，影响测量精度。&lt;/p&gt;
+&lt;h3 id=&#34;四噪声与抗干扰&#34;&gt;四、噪声与抗干扰
+&lt;/h3&gt;&lt;p&gt;信噪比（SNR, Signal-to-Noise Ratio）
+有用信号与噪声的功率比值，单位 dB（越高越好）。&lt;/p&gt;
+&lt;p&gt;低通滤波（LPF, Low-Pass Filter）
+允许低频信号通过，抑制高频噪声。
+实现方式：RC 电路、运放有源滤波。&lt;/p&gt;
+&lt;p&gt;电磁兼容（EMC, Electromagnetic Compatibility）
+电路在电磁环境中抗干扰且不干扰其他设备的能力。&lt;/p&gt;
+&lt;h3 id=&#34;五接口与通信&#34;&gt;五、接口与通信
+&lt;/h3&gt;&lt;p&gt;I2C（Inter-Integrated Circuit）
+双线制串行总线（SCL 时钟线、SDA 数据线），支持多设备通信。&lt;/p&gt;
+&lt;p&gt;SPI（Serial Peripheral Interface）
+四线制高速同步接口（SCK、MOSI、MISO、CS），全双工通信。&lt;/p&gt;
+&lt;h3 id=&#34;六性能参数&#34;&gt;六、性能参数
+&lt;/h3&gt;&lt;p&gt;线性度（Linearity）
+传感器输出与输入物理量之间的直线关系偏差（常用%FS 表示）。&lt;/p&gt;
+&lt;p&gt;响应时间（Response Time）
+传感器输出达到稳定值 90% 所需时间（如温度传感器需 5 秒）。&lt;/p&gt;
+&lt;p&gt;迟滞（Hysteresis）
+输入量增大和减小时输出差异，反映传感器的回程误差。&lt;/p&gt;
+&lt;h3 id=&#34;七电源管理&#34;&gt;七、电源管理
+&lt;/h3&gt;&lt;p&gt;供电电压（Vcc/Vdd）
+传感器工作电压范围（如 3.3V 或 5V±10%）。&lt;/p&gt;
+&lt;p&gt;功耗（Power Consumption）
+静态电流（待机时）与动态电流（工作时）的消耗，影响电池寿命。&lt;/p&gt;
+&lt;h3 id=&#34;八校准与补偿&#34;&gt;八、校准与补偿
+&lt;/h3&gt;&lt;p&gt;零点漂移（Zero Drift）
+无输入时输出信号的缓慢偏移，需定期校准。&lt;/p&gt;
+&lt;p&gt;温度补偿（Temperature Compensation）
+通过电路或算法消除温度对传感器输出的影响（如热敏电阻网络）。&lt;/p&gt;
+&lt;h3 id=&#34;九传感器类型扩展&#34;&gt;九、传感器类型扩展
+&lt;/h3&gt;&lt;p&gt;MEMS 传感器（Micro-Electro-Mechanical Systems）
+微机电系统传感器，集成机械结构与电子电路（如加速度计、陀螺仪）。
+关键特点：微型化、低功耗、批量生产成本低。&lt;/p&gt;
+&lt;p&gt;压电传感器（Piezoelectric Sensor）
+利用压电效应将机械应力转换为电荷（如压力传感器、超声波探头）。
+需配合电荷放大器处理微弱信号。&lt;/p&gt;
+&lt;p&gt;霍尔传感器（Hall Effect Sensor）
+检测磁场变化并输出电压（如电机转速检测、位置开关）。
+典型输出：模拟线性信号或数字开关信号。&lt;/p&gt;
+&lt;p&gt;应变片（Strain Gauge）
+电阻值随形变变化的传感器，用于测量应力或重量（需惠斯通电桥电路放大信号）。&lt;/p&gt;
+&lt;h3 id=&#34;十信号处理进阶&#34;&gt;十、信号处理进阶
+&lt;/h3&gt;&lt;p&gt;跨阻放大器（Transimpedance Amplifier）
+将电流信号转换为电压信号，用于光电二极管等电流型传感器。
+公式：Vout = I_in × R_feedback（如 I/V 转换）。&lt;/p&gt;
+&lt;p&gt;锁相放大器（Lock-In Amplifier）
+通过参考信号同步检测微弱信号，抑制噪声（如光学传感中的低频信号提取）。&lt;/p&gt;
+&lt;p&gt;PWM（Pulse Width Modulation）
+通过调节脉冲宽度传递模拟信息（如温度控制中的占空比调节）。
+优势：数字信号抗干扰，可直接驱动执行器。&lt;/p&gt;
+&lt;h3 id=&#34;十一误差与补偿技术&#34;&gt;十一、误差与补偿技术
+&lt;/h3&gt;&lt;p&gt;非线性补偿（Nonlinearity Compensation）
+通过多项式拟合或查表法修正传感器非线性误差（如热敏电阻的温度 - 电阻曲线）。&lt;/p&gt;
+&lt;p&gt;共模抑制比（CMRR, Common-Mode Rejection Ratio）
+差分放大器抑制共模干扰的能力（单位 dB，越高越好）。
+公式：CMRR = 20log10(Ad/Ac)，Ad 为差模增益，Ac 为共模增益。&lt;/p&gt;
+&lt;p&gt;自校准（Self-Calibration）
+传感器内置校准电路（如自动零点校正），减少人工干预。&lt;/p&gt;
+&lt;h3 id=&#34;十二接口协议扩展&#34;&gt;十二、接口协议扩展
+&lt;/h3&gt;&lt;p&gt;RS-485
+工业级差分串行通信协议，支持长距离（1200 米）和多设备组网（如工业传感器网络）。&lt;/p&gt;
+&lt;p&gt;CAN 总线（Controller Area Network）
+汽车电子常用抗干扰总线，支持优先级仲裁（如车载传感器数据整合）。&lt;/p&gt;
+&lt;p&gt;4-20mA 电流环（Current Loop）
+工业传感器标准输出，抗噪声能力强，可长距离传输（0mA 表示故障，提高可靠性）。&lt;/p&gt;
+&lt;h3 id=&#34;十三电源与保护电路&#34;&gt;十三、电源与保护电路
+&lt;/h3&gt;&lt;p&gt;LDO（Low Dropout Regulator）
+低压差线性稳压器，为传感器提供稳定电压（如 3.3V，压差低至 0.2V）。
+对比：开关电源效率高但噪声大。&lt;/p&gt;
+&lt;p&gt;TVS 二极管（Transient Voltage Suppressor）
+瞬态电压抑制器，保护传感器端口免受静电（ESD）或浪涌损坏。&lt;/p&gt;
+&lt;p&gt;电源去耦（Power Decoupling）
+通过并联电容（如 0.1μF 陶瓷电容 +10μF 电解电容）滤除高频噪声。&lt;/p&gt;
+&lt;h3 id=&#34;十四环境因素与可靠性&#34;&gt;十四、环境因素与可靠性
+&lt;/h3&gt;&lt;p&gt;IP 防护等级（Ingress Protection）
+传感器外壳防尘防水等级（如 IP67：完全防尘，可短时浸水）。&lt;/p&gt;
+&lt;p&gt;MTBF（Mean Time Between Failures）
+平均无故障时间，衡量传感器寿命（工业级传感器可达 10 万小时）。&lt;/p&gt;
+&lt;p&gt;热噪声（Johnson-Nyquist Noise）
+电阻器件因温度产生的随机噪声（公式：V_rms = √(4kTRB)，k 为玻尔兹曼常数）。&lt;/p&gt;
+&lt;h3 id=&#34;十五新兴技术&#34;&gt;十五、新兴技术
+&lt;/h3&gt;&lt;p&gt;无线传感器网络（WSN, Wireless Sensor Network）
+基于 ZigBee、LoRa 或 NB-IoT 的无线传输方案（如物联网环境监测系统）。&lt;/p&gt;
+&lt;p&gt;AI 边缘处理（Edge AI）
+在传感器端集成 AI 芯片，实现本地数据处理（如振动传感器的故障预测）。&lt;/p&gt;
+&lt;p&gt;柔性传感器（Flexible Sensor）
+使用聚合物或纳米材料制成，可弯曲贴合表面（如可穿戴健康监测设备）。&lt;/p&gt;
+&lt;h3 id=&#34;十六实用设计技巧&#34;&gt;十六、实用设计技巧
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;接地策略：
+&lt;ul&gt;
+&lt;li&gt;模拟地与数字地单点连接，避免地环路噪声。&lt;/li&gt;
+&lt;li&gt;敏感信号采用屏蔽线（如热电偶信号线）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;PCB 布局：
+&lt;ul&gt;
+&lt;li&gt;传感器信号走线远离高频或大电流路径。&lt;/li&gt;
+&lt;li&gt;使用铺铜降低阻抗，避免天线效应。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;故障诊断：
+&lt;ul&gt;
+&lt;li&gt;示波器观察信号波形（如检查 ADC 采样是否混叠）。&lt;/li&gt;
+&lt;li&gt;万用表测量参考电压是否漂移（排查零点误差）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>ESP32-DHT11温湿度传感器</title>
         <link>https://teaize.github.io/p/esp32-dht11%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/</link>
         <pubDate>Sun, 09 Mar 2025 00:00:00 +0000</pubDate>
@@ -675,14 +2411,6 @@
 </description>
         </item>
         <item>
-        <title>ESP32-Wifi</title>
-        <link>https://teaize.github.io/p/esp32-wifi/</link>
-        <pubDate>Sun, 09 Mar 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/esp32-wifi/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>LCD1602液晶显示器</title>
         <link>https://teaize.github.io/p/lcd1602%E6%B6%B2%E6%99%B6%E6%98%BE%E7%A4%BA%E5%99%A8/</link>
         <pubDate>Sun, 09 Mar 2025 00:00:00 +0000</pubDate>
@@ -962,6 +2690,57 @@
 	&lt;/div&gt;
 
 &lt;/p&gt;
+&lt;h3 id=&#34;拓展&#34;&gt;拓展
+&lt;/h3&gt;&lt;h4 id=&#34;驱动起到了什么作用&#34;&gt;驱动起到了什么作用
+&lt;/h4&gt;&lt;p&gt;ESP32 通过 I2C 总线（SDA/SCL） 与 PCF8574 I/O 扩展芯片 进行通信，控制 LCD1602&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;LCD1602 本身是 并行接口 的字符液晶模块，它通常需要 8 个数据位 + 控制位（RS、RW、E） 来进行操作。如果直接使用 ESP32 控制，会占用大量的 GPIO 口【如果直接使用 并行接口 控制 LCD1602，理论上是不需要额外的驱动库的，因为可以直接使用 GPIO 发送命令和数据】&lt;/li&gt;
+&lt;li&gt;如果 LCD1602 连接了 I2C 扩展模块（如 PCF8574 芯片），它就可以通过 I2C 总线（SDA/SCL）进行通信，这样就减少了引脚使用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;方法&lt;/th&gt;
+          &lt;th&gt;GPIO 口占用&lt;/th&gt;
+          &lt;th&gt;代码复杂度&lt;/th&gt;
+          &lt;th&gt;适用场景&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;使用 I2C 驱动（推荐）&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;仅 2 根线&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;简单&lt;/strong&gt;，调用 Python 函数即可&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;适合 ESP32，节省引脚&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;直接用 GPIO（无驱动）&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;6~8 根线&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;复杂&lt;/strong&gt;，手动写 LCD 指令&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;适用于无 I2C 模块的 LCD1602&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;在 ESP32 + LCD1602 I2C 方案中，驱动的作用是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;简化代码&lt;/strong&gt;（不需要手写 LCD 指令）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;节省 GPIO&lt;/strong&gt;（只用 SDA &amp;amp; SCL）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;封装 LCD 控制逻辑&lt;/strong&gt;（不用自己算指令）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;pcf8574-在-lcd1602-i2c-中的作用&#34;&gt;PCF8574 在 LCD1602 I2C 中的作用
+&lt;/h4&gt;&lt;p&gt;PCF8574 是一颗 &lt;strong&gt;I2C 转 8 位 GPIO 的 I/O 扩展芯片&lt;/strong&gt;，在 LCD1602 I2C 版本的模块上，它的作用主要是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;扩展 ESP32 的 I/O 端口，从而用 I2C 控制 LCD1602，节省 GPIO 资源。&lt;/li&gt;
+&lt;li&gt;将 ESP32 发送的 I2C 信号转换为 LCD1602 需要的并行信号（数据和命令）。&lt;/li&gt;
+&lt;li&gt;适配不同的电平，确保 ESP32（3.3V）能够控制 LCD1602（5V）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果不用 PCF8574，而是直接用 GPIO 并行控制 LCD1602，就不需要 I2C 驱动，但会占用更多的 GPIO，并且需要自己写 LCD1602 驱动代码&lt;/p&gt;
+&lt;p&gt;那使用这种方式相对于直接并行接口来说有什么缺点呢：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;速度比直接并行模式慢（因为 I2C 速度受限）&lt;/li&gt;
+&lt;li&gt;需要额外的 I2C 驱动代码&lt;/li&gt;
+&lt;li&gt;如果 I2C 地址不匹配，可能导致 LCD 无法工作&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -974,7 +2753,7 @@
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://music.apple.com/cn/playlist/%E6%97%A9%E9%A4%90/pl.296fd5d490444aaf80e23fa3dea02cb7&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;‎早餐 - 歌单 - Apple Music&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h2 id=&#34;提取歌曲名称&#34;&gt;提取歌曲名称
+&lt;h2 id=&#34;提取-apple-music-早餐歌单数据&#34;&gt;提取 Apple Music 早餐歌单数据
 &lt;/h2&gt;&lt;p&gt;需求描述：获取 Apple music 中早餐歌单的歌曲名和演唱者
 问题描述：常规的方法，拷贝歌单的 HTML 给 AI 模型进行处理，但是文本量太长，字数达到限制，AI 处理&lt;/p&gt;
 &lt;h3 id=&#34;deepseek&#34;&gt;Deepseek
@@ -2470,6 +4249,417 @@
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h2 id=&#34;昏昏欲睡&#34;&gt;昏昏欲睡
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;歌曲名&lt;/th&gt;
+          &lt;th&gt;演唱者&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Back Home (Rework)&lt;/td&gt;
+          &lt;td&gt;lloom&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Perspective&lt;/td&gt;
+          &lt;td&gt;lofi geek&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;midwest&lt;/td&gt;
+          &lt;td&gt;juniorodeo &amp;amp; Delayde&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Asleep With You&lt;/td&gt;
+          &lt;td&gt;Son Nu&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;A Foggy View&lt;/td&gt;
+          &lt;td&gt;softy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Sinking&lt;/td&gt;
+          &lt;td&gt;Euxia &amp;amp; Kainbeats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;waxing moon&lt;/td&gt;
+          &lt;td&gt;zxry.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;long night&lt;/td&gt;
+          &lt;td&gt;felt&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Sunrise&lt;/td&gt;
+          &lt;td&gt;Basmati&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Away We Go&lt;/td&gt;
+          &lt;td&gt;Lomme&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Dreamlike Encounters&lt;/td&gt;
+          &lt;td&gt;Obie Hans&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Native&lt;/td&gt;
+          &lt;td&gt;zya&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Calmest Place on Earth&lt;/td&gt;
+          &lt;td&gt;Pearldiver&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Way Back When&lt;/td&gt;
+          &lt;td&gt;Beddy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;The Fall&lt;/td&gt;
+          &lt;td&gt;Constantine&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Secret Stars&lt;/td&gt;
+          &lt;td&gt;Astro Casual&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Early June&lt;/td&gt;
+          &lt;td&gt;lloom&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Underwater Blue&lt;/td&gt;
+          &lt;td&gt;MyceliumBug&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Whispers of Shibuya&lt;/td&gt;
+          &lt;td&gt;Pearldiver&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;oj on the porch in -4 celcius&lt;/td&gt;
+          &lt;td&gt;HM Surf&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;capri&lt;/td&gt;
+          &lt;td&gt;Kromattic&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Parallel&lt;/td&gt;
+          &lt;td&gt;Kainbeats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Chamomile Tea&lt;/td&gt;
+          &lt;td&gt;Maono&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;The Emperor&amp;rsquo;s Ride Home&lt;/td&gt;
+          &lt;td&gt;Daphné&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Seek&lt;/td&gt;
+          &lt;td&gt;koia&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Whispers&lt;/td&gt;
+          &lt;td&gt;Lomme &amp;amp; Elk Beats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Cedar&lt;/td&gt;
+          &lt;td&gt;Tykho&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Zandukeli&lt;/td&gt;
+          &lt;td&gt;Yakubu&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Gnite Orion&lt;/td&gt;
+          &lt;td&gt;Beddy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;sub zero&lt;/td&gt;
+          &lt;td&gt;bby knife&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;quiet pond&lt;/td&gt;
+          &lt;td&gt;Bcalm&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Between&lt;/td&gt;
+          &lt;td&gt;Bcalm&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Moonlight Canvas&lt;/td&gt;
+          &lt;td&gt;Obie Hans&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Drift Away&lt;/td&gt;
+          &lt;td&gt;Kattnap&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Mulberry Ln&lt;/td&gt;
+          &lt;td&gt;Beddy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;slow breaths&lt;/td&gt;
+          &lt;td&gt;No Spirit &amp;amp; colours in the dark&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Over The Moon&lt;/td&gt;
+          &lt;td&gt;cxlt.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Light as a Feather&lt;/td&gt;
+          &lt;td&gt;Fuyu Echo (feat. Arjun K. Verma)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Painted Postcard&lt;/td&gt;
+          &lt;td&gt;Obie Hans&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Remember&lt;/td&gt;
+          &lt;td&gt;koia&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;The Sanctuary&lt;/td&gt;
+          &lt;td&gt;sftspkn &amp;amp; Prithvi&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Till The Rain Stops&lt;/td&gt;
+          &lt;td&gt;Chill Denis&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Carry Me&lt;/td&gt;
+          &lt;td&gt;Phonedown &amp;amp; møndberg&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Perpetual Dream&lt;/td&gt;
+          &lt;td&gt;Corey J. Beats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Stargazing&lt;/td&gt;
+          &lt;td&gt;sftspkn &amp;amp; Prithvi&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;still miss you&lt;/td&gt;
+          &lt;td&gt;Chill Denis &amp;amp; hushfall&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Flowing&lt;/td&gt;
+          &lt;td&gt;dozy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Lost &amp;amp; Never Found&lt;/td&gt;
+          &lt;td&gt;Chill Denis &amp;amp; mėlyna&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Liminal Spaces&lt;/td&gt;
+          &lt;td&gt;Constantine&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Wait For Me&lt;/td&gt;
+          &lt;td&gt;Plant Guy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Ode To The Night Sky&lt;/td&gt;
+          &lt;td&gt;cxlt.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Burley&lt;/td&gt;
+          &lt;td&gt;Pearldiver&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Warm Blankets&lt;/td&gt;
+          &lt;td&gt;Seek Shelter &amp;amp; Solar Body&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;In Balance&lt;/td&gt;
+          &lt;td&gt;Mujo &amp;amp; Sweet Medicine&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Storm Clouds&lt;/td&gt;
+          &lt;td&gt;bedroom lofi &amp;amp; Late Night Tones&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Wildheart&lt;/td&gt;
+          &lt;td&gt;COSMOGLOW&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Starry Night&lt;/td&gt;
+          &lt;td&gt;Gerardo Millán &amp;amp; Blocktane&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;I&amp;rsquo;m Gonna Miss You&lt;/td&gt;
+          &lt;td&gt;hushfall &amp;amp; jxsn&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SUNLIGHT&lt;/td&gt;
+          &lt;td&gt;coquelicot&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Ripples&lt;/td&gt;
+          &lt;td&gt;Lomme &amp;amp; Elk Beats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Space Between the Stars&lt;/td&gt;
+          &lt;td&gt;luv pug &amp;amp; Spaniel Mac (feat. Lofido)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Sleeprune (Instrumental)&lt;/td&gt;
+          &lt;td&gt;Kainbeats &amp;amp; idylla&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;In the Garden&lt;/td&gt;
+          &lt;td&gt;Euxia&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Velvet Afternoon&lt;/td&gt;
+          &lt;td&gt;Kattnap&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Elysian&lt;/td&gt;
+          &lt;td&gt;Amesyt&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Cloudgate&lt;/td&gt;
+          &lt;td&gt;Kainbeats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Lyla&lt;/td&gt;
+          &lt;td&gt;rhoom&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Moving On&lt;/td&gt;
+          &lt;td&gt;Dontcry &amp;amp; cxlt.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Astronaut&lt;/td&gt;
+          &lt;td&gt;Elk Beats &amp;amp; Lomme&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Everything Will Get Better&lt;/td&gt;
+          &lt;td&gt;Jam&amp;rsquo;addict&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Fall Softly (Lofi Version)&lt;/td&gt;
+          &lt;td&gt;Blocktane &amp;amp; Mahaji (feat. Steezy Prime)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;cycles&lt;/td&gt;
+          &lt;td&gt;Kino MacGregor&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Memories&lt;/td&gt;
+          &lt;td&gt;Dontcry &amp;amp; Nokiaa&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Quiet Storm&lt;/td&gt;
+          &lt;td&gt;Pepper &amp;amp; Lola&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Whispering Winds&lt;/td&gt;
+          &lt;td&gt;zya&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Kamakura Breeze&lt;/td&gt;
+          &lt;td&gt;Blue Gardenia&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Scenery&lt;/td&gt;
+          &lt;td&gt;Yasumu&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Moongazers&lt;/td&gt;
+          &lt;td&gt;Astro Casual&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Dreaming In Lofi&lt;/td&gt;
+          &lt;td&gt;valmy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Adrift&lt;/td&gt;
+          &lt;td&gt;Cauzy&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;daydreamer&lt;/td&gt;
+          &lt;td&gt;Redseal&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Midtown Midnight&lt;/td&gt;
+          &lt;td&gt;auv&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Celestial Reverie&lt;/td&gt;
+          &lt;td&gt;vimef &amp;amp; Chill Denis&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Hornsby&amp;rsquo;s Tavern&lt;/td&gt;
+          &lt;td&gt;Captain Kidd&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Collide A Scope&lt;/td&gt;
+          &lt;td&gt;NueBoo &amp;amp; Recalibration Machine&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;onyx&lt;/td&gt;
+          &lt;td&gt;Kromattic&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Tea Leaves&lt;/td&gt;
+          &lt;td&gt;Lomme &amp;amp; Elk Beats&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Daydreams&lt;/td&gt;
+          &lt;td&gt;Sleepermane &amp;amp; Casiio&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;I am&lt;/td&gt;
+          &lt;td&gt;LIVE FREE&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Defensive&lt;/td&gt;
+          &lt;td&gt;xander. &amp;amp; Philip Somber&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Daydreamer&lt;/td&gt;
+          &lt;td&gt;Osoku&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Finesse&lt;/td&gt;
+          &lt;td&gt;Ajose &amp;amp; zxry.&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;sReim&lt;/td&gt;
+          &lt;td&gt;erwOn&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Orka&lt;/td&gt;
+          &lt;td&gt;tillit&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Diamonds in the Sky&lt;/td&gt;
+          &lt;td&gt;Oatmello&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Dusty Lanterns&lt;/td&gt;
+          &lt;td&gt;Nice Pajamas &amp;amp; Hypntc&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Tripping Over&lt;/td&gt;
+          &lt;td&gt;Charlee Nguyen &amp;amp; Tsunamii&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;kRia&lt;/td&gt;
+          &lt;td&gt;erwOn&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Places We Go&lt;/td&gt;
+          &lt;td&gt;Euxia&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Cannonier&lt;/td&gt;
+          &lt;td&gt;Shrimpnose&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         </item>
         <item>
@@ -2742,7 +4932,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;If&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hasSwitched&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;            ; 切换输入法为默认输入法（搜狗拼音）&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;            ; 切换输入法为默认输入法&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;nb&#34;&gt;SendInput&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LAlt&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Down&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shift&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Down&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Shift&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Up&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LAlt&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Up&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;            &lt;span class=&#34;n&#34;&gt;hasSwitched&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;:=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
@@ -2753,7 +4943,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;ExitApp&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;这个修改后的脚本在切换出 SolidWorks 窗口时，会自动将输入法切换回默认输入法（搜狗拼音）。当焦点离开 SolidWorks 窗口时，脚本会检查 &lt;code&gt;hasSwitched&lt;/code&gt; 的值，如果为 1，则触发输入法切换回默认输入法，并将 &lt;code&gt;hasSwitched&lt;/code&gt; 的值设置为 0。&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;这个修改后的脚本在切换出 SolidWorks 窗口时，会自动将输入法切换回默认输入法。当焦点离开 SolidWorks 窗口时，脚本会检查 &lt;code&gt;hasSwitched&lt;/code&gt; 的值，如果为 1，则触发输入法切换回默认输入法，并将 &lt;code&gt;hasSwitched&lt;/code&gt; 的值设置为 0。&lt;/p&gt;
 &lt;p&gt;
 	&lt;div class=&#34;post-img-view&#34;&gt;
 		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://s2.loli.net/2025/03/07/KC3YPOx8rTVjaUX.gif&#34;&gt;
@@ -4594,14 +6784,6 @@ $$C_n = \frac{n}{V}$$
 </description>
         </item>
         <item>
-        <title>Anki简明笔记</title>
-        <link>https://teaize.github.io/p/anki%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
-        <pubDate>Sat, 04 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/anki%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
-        <description></description>
-        </item>
-        <item>
         <title>SW简明笔记</title>
         <link>https://teaize.github.io/p/sw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
         <pubDate>Sat, 04 Jan 2025 00:00:00 +0000</pubDate>
@@ -4673,7 +6855,6 @@ $$C_n = \frac{n}{V}$$
 &lt;ul&gt;
 &lt;li&gt;[[SW动画]]&lt;/li&gt;
 &lt;li&gt;[[SW-SMG文件]]&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -4828,7 +7009,7 @@ $$C_n = \frac{n}{V}$$
 &lt;h2 id=&#34;sw-钣金模块&#34;&gt;SW 钣金模块
 &lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;[[闭合角]]&lt;/li&gt;
-&lt;li&gt;[[钣金箱体建模]]&lt;/li&gt;
+&lt;li&gt;[[钣金箱体的制作流程]]&lt;/li&gt;
 &lt;li&gt;[[博士钣金]]&lt;/li&gt;
 &lt;/ul&gt;
 </description>
@@ -4908,18 +7089,6 @@ $$C_n = \frac{n}{V}$$
 &lt;li&gt;拉伸试验：测定材料的应力应变关系和力学性能&lt;/li&gt;
 &lt;li&gt;压缩试验：对材料在压缩条件下的行为进行测试&lt;/li&gt;
 &lt;li&gt;疲劳试验：对材料在循环载荷下的耐久性进行测试&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>常用网站手册</title>
-        <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99%E6%89%8B%E5%86%8C/</link>
-        <pubDate>Sat, 04 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E7%BD%91%E7%AB%99%E6%89%8B%E5%86%8C/</guid>
-        <description>&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://xifengboke.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;溪风博客SolidWorks自学网站 - 关注SolidWorks教程|SolidWorks插件|SolidWorks练习题的一站式SolidWorks自学网站&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -5491,7 +7660,6 @@ $$&lt;/p&gt;
 &lt;h3 id=&#34;专题&#34;&gt;专题
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;[[Trelleborg-特瑞堡]]&lt;/li&gt;
-&lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -5502,100 +7670,48 @@ $$&lt;/p&gt;
         
         <guid>https://teaize.github.io/p/%E8%A7%86%E9%A2%91%E8%B5%84%E6%96%99/</guid>
         <description>&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1228&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;阀门执行器设计教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=974&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;机械制图与CAD视频教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=679&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Solidworks2018视频教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=1243&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;非标自动化机械设计教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=658&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AutoCAD2018视频教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.rjzxw.com/jc-166.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;工业自动化机械设计视频教程 - 软件自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://xifengboke.com/post/892.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;十天学会SolidWorks视频教程-溪风官方原版更新完毕 - solidworks教程VIP - 溪风博客SolidWorks自学网站&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=935#!fenye=2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Solidworks Composer2018视频教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=967#!fenye=3&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Solidworks2020实用技巧教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1015&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;FactoryIO视频教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=833&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;机械制图视频教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[00-KeyShot视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1025&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Solidworks2020工程图教程-我要自学网&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/@addmakertw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AddMaker 加點製造 - YouTube&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[工业自动化机械设计视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[十天学会SolidWorks视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[FactoryIO视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[00-KeyShot视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[Solidworks Composer视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[Solidworks2018视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[SW-快捷键]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[00-机械制图视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;[[CAD2018视频教程]]&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=658&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AutoCAD20AutoCAD2018视频教程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=679&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Solidworks2018视频教程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1025&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Solidworks2020工程图教程&lt;/a&gt;&lt;/p&gt;
-&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1228&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;阀门执行器设计教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=974&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;机械制图与CAD视频教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=679&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solidworks2018视频教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=1243&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;非标自动化机械设计教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=658&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AutoCAD2018视频教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.rjzxw.com/jc-166.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;工业自动化机械设计视频教程 - 软件自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://xifengboke.com/post/892.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;十天学会SolidWorks视频教程-溪风官方原版更新完毕 - solidworks教程VIP - 溪风博客SolidWorks自学网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=935#!fenye=2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solidworks Composer2018视频教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/list.aspx?cid=967#!fenye=3&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solidworks2020实用技巧教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1015&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;FactoryIO视频教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=833&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;机械制图视频教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[[00-KeyShot视频教程]]&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1025&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solidworks2020工程图教程-我要自学网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/@addmakertw&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AddMaker 加點製造 - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;[[工业自动化机械设计视频教程]]&lt;/li&gt;
+&lt;li&gt;[[十天学会SolidWorks视频教程]]&lt;/li&gt;
+&lt;li&gt;[[FactoryIO视频教程]]&lt;/li&gt;
+&lt;li&gt;[[00-KeyShot视频教程]]&lt;/li&gt;
+&lt;li&gt;[[Solidworks Composer视频教程]]&lt;/li&gt;
+&lt;li&gt;[[Solidworks2018视频教程]]&lt;/li&gt;
+&lt;li&gt;[[SW-快捷键]]&lt;/li&gt;
+&lt;li&gt;[[00-机械制图视频教程]]&lt;/li&gt;
+&lt;li&gt;[[CAD2018视频教程]]&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=658&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AutoCAD20AutoCAD2018视频教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=679&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solidworks2018视频教程&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.51zxw.net/List.aspx?cid=1025&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Solidworks2020工程图教程&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -5830,6 +7946,16 @@ $$&lt;/p&gt;
 &lt;li&gt;更简单，更强大的国产在线 PCB 设计软件&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.elecfans.com/tools/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;电子技术资料工具-电子发烧友&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.elecfans.com/topic/software/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;电子工程师工具库 - 电子发烧友网&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.instructables.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Yours for the making - Instructables&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.taiwansensor.com.tw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;台灣智能感測科技, 一個讓你的夢想實現,創意可以實踐的地方&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.pcbway.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;China PCB Prototype &amp;amp; Fabrication Manufacturer - PCB Prototype the Easy Way&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -6023,14 +8149,6 @@ $$&lt;/p&gt;
     &gt;字体渲染（自用脚本）&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
-        </item>
-        <item>
-        <title>喜欢的博客</title>
-        <link>https://teaize.github.io/p/%E5%96%9C%E6%AC%A2%E7%9A%84%E5%8D%9A%E5%AE%A2/</link>
-        <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E5%96%9C%E6%AC%A2%E7%9A%84%E5%8D%9A%E5%AE%A2/</guid>
-        <description></description>
         </item>
         <item>
         <title>校园生存手册</title>
@@ -6382,10 +8500,352 @@ $$&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;kgf/cm²（kilogram-force per square centimeter，每平方厘米的千克力）
 &lt;ul&gt;
-&lt;li&gt;kgf/cm² 相当于 0.1MPa，即等于bar&lt;/li&gt;
+&lt;li&gt;kgf/cm² 相当于 0.1MPa，即等于 bar&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;h3 id=&#34;负压状态常用数值表&#34;&gt;负压状态常用数值表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;表负压 (Kpa)&lt;/th&gt;
+          &lt;th&gt;绝对压力 (Torr)&lt;/th&gt;
+          &lt;th&gt;绝对压力 (mbar)&lt;/th&gt;
+          &lt;th&gt;绝对压力 (inHg)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;760&lt;/td&gt;
+          &lt;td&gt;1013.25&lt;/td&gt;
+          &lt;td&gt;224.43&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-5&lt;/td&gt;
+          &lt;td&gt;722.5&lt;/td&gt;
+          &lt;td&gt;963.25&lt;/td&gt;
+          &lt;td&gt;213.35&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-10&lt;/td&gt;
+          &lt;td&gt;685&lt;/td&gt;
+          &lt;td&gt;913.26&lt;/td&gt;
+          &lt;td&gt;202.28&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-15&lt;/td&gt;
+          &lt;td&gt;647.5&lt;/td&gt;
+          &lt;td&gt;863.26&lt;/td&gt;
+          &lt;td&gt;191.21&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-20&lt;/td&gt;
+          &lt;td&gt;610&lt;/td&gt;
+          &lt;td&gt;813.26&lt;/td&gt;
+          &lt;td&gt;180.13&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-25&lt;/td&gt;
+          &lt;td&gt;572.5&lt;/td&gt;
+          &lt;td&gt;763.27&lt;/td&gt;
+          &lt;td&gt;169.06&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-30&lt;/td&gt;
+          &lt;td&gt;535&lt;/td&gt;
+          &lt;td&gt;713.27&lt;/td&gt;
+          &lt;td&gt;157.99&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-35&lt;/td&gt;
+          &lt;td&gt;497.5&lt;/td&gt;
+          &lt;td&gt;663.28&lt;/td&gt;
+          &lt;td&gt;146.91&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-40&lt;/td&gt;
+          &lt;td&gt;460&lt;/td&gt;
+          &lt;td&gt;613.28&lt;/td&gt;
+          &lt;td&gt;135.84&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-45&lt;/td&gt;
+          &lt;td&gt;422.5&lt;/td&gt;
+          &lt;td&gt;563.29&lt;/td&gt;
+          &lt;td&gt;124.76&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-50&lt;/td&gt;
+          &lt;td&gt;385&lt;/td&gt;
+          &lt;td&gt;513.29&lt;/td&gt;
+          &lt;td&gt;113.69&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-55&lt;/td&gt;
+          &lt;td&gt;347.5&lt;/td&gt;
+          &lt;td&gt;463.29&lt;/td&gt;
+          &lt;td&gt;102.62&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-60&lt;/td&gt;
+          &lt;td&gt;310&lt;/td&gt;
+          &lt;td&gt;413.30&lt;/td&gt;
+          &lt;td&gt;91.54&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-65&lt;/td&gt;
+          &lt;td&gt;272.5&lt;/td&gt;
+          &lt;td&gt;363.30&lt;/td&gt;
+          &lt;td&gt;80.47&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-70&lt;/td&gt;
+          &lt;td&gt;235&lt;/td&gt;
+          &lt;td&gt;313.31&lt;/td&gt;
+          &lt;td&gt;69.40&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-75&lt;/td&gt;
+          &lt;td&gt;197.5&lt;/td&gt;
+          &lt;td&gt;263.31&lt;/td&gt;
+          &lt;td&gt;58.32&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-80&lt;/td&gt;
+          &lt;td&gt;160&lt;/td&gt;
+          &lt;td&gt;213.32&lt;/td&gt;
+          &lt;td&gt;47.25&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-85&lt;/td&gt;
+          &lt;td&gt;122.5&lt;/td&gt;
+          &lt;td&gt;163.32&lt;/td&gt;
+          &lt;td&gt;36.17&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-90&lt;/td&gt;
+          &lt;td&gt;85&lt;/td&gt;
+          &lt;td&gt;113.32&lt;/td&gt;
+          &lt;td&gt;25.10&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-95&lt;/td&gt;
+          &lt;td&gt;47.5&lt;/td&gt;
+          &lt;td&gt;63.33&lt;/td&gt;
+          &lt;td&gt;14.03&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-100&lt;/td&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;13.33&lt;/td&gt;
+          &lt;td&gt;2.95&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;0 KPa（表压）对应大气压，标准值约为 760 Torr、1013.25 mbar、29.92 inHg&lt;/li&gt;
+&lt;li&gt;负压增大（真空度增加），Torr、mbar 和 inHg 逐渐降低&lt;/li&gt;
+&lt;li&gt;1 kPa = 0.2953 inHg&lt;/li&gt;
+&lt;li&gt;1 kPa = 101010 mbar&lt;/li&gt;
+&lt;li&gt;1 kPa = 7.50062 Torr&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;正压状态常用数值表&#34;&gt;正压状态常用数值表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;PSI&lt;/th&gt;
+          &lt;th&gt;MPa&lt;/th&gt;
+          &lt;th&gt;KPa&lt;/th&gt;
+          &lt;th&gt;torr&lt;/th&gt;
+          &lt;th&gt;Bar&lt;/th&gt;
+          &lt;th&gt;atm&lt;/th&gt;
+          &lt;th&gt;kgf/cm²&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;0.0345&lt;/td&gt;
+          &lt;td&gt;34.4738&lt;/td&gt;
+          &lt;td&gt;258.57&lt;/td&gt;
+          &lt;td&gt;0.3447&lt;/td&gt;
+          &lt;td&gt;0.34&lt;/td&gt;
+          &lt;td&gt;0.3447&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;0.0689&lt;/td&gt;
+          &lt;td&gt;68.9476&lt;/td&gt;
+          &lt;td&gt;517.15&lt;/td&gt;
+          &lt;td&gt;0.6895&lt;/td&gt;
+          &lt;td&gt;0.69&lt;/td&gt;
+          &lt;td&gt;0.6895&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;15&lt;/td&gt;
+          &lt;td&gt;0.1034&lt;/td&gt;
+          &lt;td&gt;103.4214&lt;/td&gt;
+          &lt;td&gt;775.72&lt;/td&gt;
+          &lt;td&gt;1.0342&lt;/td&gt;
+          &lt;td&gt;1.03&lt;/td&gt;
+          &lt;td&gt;1.0342&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;20&lt;/td&gt;
+          &lt;td&gt;0.1379&lt;/td&gt;
+          &lt;td&gt;137.8952&lt;/td&gt;
+          &lt;td&gt;1034.30&lt;/td&gt;
+          &lt;td&gt;1.3790&lt;/td&gt;
+          &lt;td&gt;1.38&lt;/td&gt;
+          &lt;td&gt;1.3790&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;25&lt;/td&gt;
+          &lt;td&gt;0.1724&lt;/td&gt;
+          &lt;td&gt;172.369&lt;/td&gt;
+          &lt;td&gt;1292.87&lt;/td&gt;
+          &lt;td&gt;1.7237&lt;/td&gt;
+          &lt;td&gt;1.72&lt;/td&gt;
+          &lt;td&gt;1.7237&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;30&lt;/td&gt;
+          &lt;td&gt;0.2068&lt;/td&gt;
+          &lt;td&gt;206.8428&lt;/td&gt;
+          &lt;td&gt;1551.45&lt;/td&gt;
+          &lt;td&gt;2.0684&lt;/td&gt;
+          &lt;td&gt;2.07&lt;/td&gt;
+          &lt;td&gt;2.0684&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;35&lt;/td&gt;
+          &lt;td&gt;0.2413&lt;/td&gt;
+          &lt;td&gt;241.3166&lt;/td&gt;
+          &lt;td&gt;1810.02&lt;/td&gt;
+          &lt;td&gt;2.4132&lt;/td&gt;
+          &lt;td&gt;2.41&lt;/td&gt;
+          &lt;td&gt;2.4132&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;40&lt;/td&gt;
+          &lt;td&gt;0.2758&lt;/td&gt;
+          &lt;td&gt;275.7904&lt;/td&gt;
+          &lt;td&gt;2068.60&lt;/td&gt;
+          &lt;td&gt;2.7579&lt;/td&gt;
+          &lt;td&gt;2.76&lt;/td&gt;
+          &lt;td&gt;2.7579&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;0.3103&lt;/td&gt;
+          &lt;td&gt;310.2642&lt;/td&gt;
+          &lt;td&gt;2327.17&lt;/td&gt;
+          &lt;td&gt;3.1026&lt;/td&gt;
+          &lt;td&gt;3.10&lt;/td&gt;
+          &lt;td&gt;3.1026&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;50&lt;/td&gt;
+          &lt;td&gt;0.3447&lt;/td&gt;
+          &lt;td&gt;344.738&lt;/td&gt;
+          &lt;td&gt;2585.75&lt;/td&gt;
+          &lt;td&gt;3.4474&lt;/td&gt;
+          &lt;td&gt;3.45&lt;/td&gt;
+          &lt;td&gt;3.4474&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;55&lt;/td&gt;
+          &lt;td&gt;0.3792&lt;/td&gt;
+          &lt;td&gt;379.2118&lt;/td&gt;
+          &lt;td&gt;2844.32&lt;/td&gt;
+          &lt;td&gt;3.7921&lt;/td&gt;
+          &lt;td&gt;3.79&lt;/td&gt;
+          &lt;td&gt;3.7921&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;60&lt;/td&gt;
+          &lt;td&gt;0.4137&lt;/td&gt;
+          &lt;td&gt;413.6856&lt;/td&gt;
+          &lt;td&gt;3102.89&lt;/td&gt;
+          &lt;td&gt;4.1369&lt;/td&gt;
+          &lt;td&gt;4.14&lt;/td&gt;
+          &lt;td&gt;4.1369&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;65&lt;/td&gt;
+          &lt;td&gt;0.4482&lt;/td&gt;
+          &lt;td&gt;448.1594&lt;/td&gt;
+          &lt;td&gt;3361.47&lt;/td&gt;
+          &lt;td&gt;4.4816&lt;/td&gt;
+          &lt;td&gt;4.48&lt;/td&gt;
+          &lt;td&gt;4.4816&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;70&lt;/td&gt;
+          &lt;td&gt;0.4826&lt;/td&gt;
+          &lt;td&gt;482.6332&lt;/td&gt;
+          &lt;td&gt;3620.04&lt;/td&gt;
+          &lt;td&gt;4.8263&lt;/td&gt;
+          &lt;td&gt;4.83&lt;/td&gt;
+          &lt;td&gt;4.8263&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;75&lt;/td&gt;
+          &lt;td&gt;0.5171&lt;/td&gt;
+          &lt;td&gt;517.107&lt;/td&gt;
+          &lt;td&gt;3878.62&lt;/td&gt;
+          &lt;td&gt;5.1711&lt;/td&gt;
+          &lt;td&gt;5.17&lt;/td&gt;
+          &lt;td&gt;5.1711&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;80&lt;/td&gt;
+          &lt;td&gt;0.5516&lt;/td&gt;
+          &lt;td&gt;551.5808&lt;/td&gt;
+          &lt;td&gt;4137.19&lt;/td&gt;
+          &lt;td&gt;5.5158&lt;/td&gt;
+          &lt;td&gt;5.52&lt;/td&gt;
+          &lt;td&gt;5.5158&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;85&lt;/td&gt;
+          &lt;td&gt;0.5861&lt;/td&gt;
+          &lt;td&gt;586.0546&lt;/td&gt;
+          &lt;td&gt;4395.77&lt;/td&gt;
+          &lt;td&gt;5.8605&lt;/td&gt;
+          &lt;td&gt;5.86&lt;/td&gt;
+          &lt;td&gt;5.8605&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;90&lt;/td&gt;
+          &lt;td&gt;0.6205&lt;/td&gt;
+          &lt;td&gt;620.5284&lt;/td&gt;
+          &lt;td&gt;4654.34&lt;/td&gt;
+          &lt;td&gt;6.2053&lt;/td&gt;
+          &lt;td&gt;6.21&lt;/td&gt;
+          &lt;td&gt;6.2053&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;95&lt;/td&gt;
+          &lt;td&gt;0.6550&lt;/td&gt;
+          &lt;td&gt;655.0022&lt;/td&gt;
+          &lt;td&gt;4912.92&lt;/td&gt;
+          &lt;td&gt;6.5500&lt;/td&gt;
+          &lt;td&gt;6.55&lt;/td&gt;
+          &lt;td&gt;6.5500&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;100&lt;/td&gt;
+          &lt;td&gt;0.6895&lt;/td&gt;
+          &lt;td&gt;689.476&lt;/td&gt;
+          &lt;td&gt;5171.49&lt;/td&gt;
+          &lt;td&gt;6.8948&lt;/td&gt;
+          &lt;td&gt;6.90&lt;/td&gt;
+          &lt;td&gt;6.8948&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         </item>
         <item>
