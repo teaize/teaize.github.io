@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/ahk-%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/'>
 
-<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="AHK-切换输入法">
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="AHK-切换输入法">
 <meta property='og:description' content=" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 #Persistent #SingleInstance force hasSwitched := 0 SetTitleMatchMode, 2 SetTimer, CheckSWWindow, 500 CheckSWWindow: { IfWinActive, ahk_exe sldworks.exe { If (hasSwitched = 0) { ; 切换输入法为英文 SendInput, {LAlt Down}{Shift Down}{Shift Up}{LAlt Up} hasSwitched := 1 } } else { If (hasSwitched = 1) { ; 切换输入法为默认输入法 SendInput, {LAlt Down}{Shift Down}{Shift Up}{LAlt Up} hasSwitched := 0 } } return } ExitApp 这个修改后的脚本在切换出 SolidWorks 窗口时，会自动将输入法切换回默认输入法。当焦点离开 SolidWorks 窗口时，脚本会检查\u00a0hasSwitched\u00a0的值，如果为 1，则触发输入法切换回默认输入法，并将\u00a0hasSwitched\u00a0的值设置为 0。\n">
 <meta property='og:url' content='https://teaize.github.io/p/ahk-%E5%88%87%E6%8D%A2%E8%BE%93%E5%85%A5%E6%B3%95/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>

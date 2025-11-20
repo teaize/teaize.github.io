@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/sw%E5%AE%8F-%E5%88%A0%E9%99%A4%E9%9B%B6%E4%BB%B6%E6%89%80%E6%9C%89%E7%89%B9%E5%BE%81/'>
 
-<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="SW宏-删除零件所有特征">
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW宏-删除零件所有特征">
 <meta property='og:description' content=" 适用对象：零件 主要功能：删除所有特征，将零件所有特征删除的干干净净，只剩下最开始绘制的一个草图 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 Sub 删除零件特征() &#39; 获取SolidWorks应用程序对象 Set swApp = Application.SldWorks Set swModel = swApp.ActiveDoc &#39; 检查是否打开了文档 If swModel Is Nothing Then MsgBox &#34;请打开一个文档。&#34;, vbExclamation, &#34;错误&#34; Exit Sub End If &#39; 检查是否是零件文档 If Not TypeOf swModel Is SldWorks.partDoc Then MsgBox &#34;请在零件模式下运行。&#34;, vbExclamation, &#34;错误&#34; Exit Sub End If &#39; 获取第一个特征 Set swFeature = swModel.FirstFeature &#39; 遍历并删除所有特征 Do While Not swFeature Is Nothing Dim nextFeature As SldWorks.Feature Set nextFeature = swFeature.GetNextFeature swFeature.Select2 True, 0 swModel.EditDelete Set swFeature = nextFeature Loop &#39; 强制重新构建模型以显示更改 &#39;swModel.ForceRebuild3 True MsgBox &#34;已删除所有特征。&#34;, vbInformation, &#34;完成&#34; End Sub ">
 <meta property='og:url' content='https://teaize.github.io/p/sw%E5%AE%8F-%E5%88%A0%E9%99%A4%E9%9B%B6%E4%BB%B6%E6%89%80%E6%9C%89%E7%89%B9%E5%BE%81/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>

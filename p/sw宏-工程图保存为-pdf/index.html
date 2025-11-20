@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/sw%E5%AE%8F-%E5%B7%A5%E7%A8%8B%E5%9B%BE%E4%BF%9D%E5%AD%98%E4%B8%BA-pdf/'>
 
-<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="SW宏-工程图保存为 PDF">
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW宏-工程图保存为 PDF">
 <meta property='og:description' content="工程图保存为 PDF 宏的作用：在 SolidWorks 中打开一个文档后，自动将其保存为 .DWG 和 .PDF 两种格式，路径与当前文档的路径相同。具体步骤如下：\n获取当前打开文档的路径。 去掉原文件的扩展名。 将文档分别保存为 .DWG 和 .PDF 文件 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 Dim swApp As Object Dim Part As Object Dim Filename As String Dim No As Integer Dim Title As String Sub main() Set swApp = Application.SldWorks Set Part = swApp.ActiveDoc Filename = Part.GetPathName() No = Len(Filename) Filename = Left(Filename, No - 7) Part.SaveAs2 Filename &amp; &#34;.DWG&#34;, 0, True, False Part.SaveAs2 Filename &amp; &#34;.PDF&#34;, 0, True, False End Sub ">
 <meta property='og:url' content='https://teaize.github.io/p/sw%E5%AE%8F-%E5%B7%A5%E7%A8%8B%E5%9B%BE%E4%BF%9D%E5%AD%98%E4%B8%BA-pdf/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
