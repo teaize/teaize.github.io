@@ -7,7 +7,17 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 20 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 21 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>2025-11-21</title>
+        <link>https://teaize.github.io/p/2025-11-21/</link>
+        <pubDate>Fri, 21 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/2025-11-21/</guid>
+        <description>&lt;p&gt;Win7 测试 Hugo 博客同步&lt;/p&gt;
+&lt;p&gt;Obsidian 当中的 00-HugoBlod 和 HugoNotes 非 obsidian 同步文件夹，文件实体存放在各个不同的电脑当中，通过个 github desktop 进行同步&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>2025-11-20 测试发布</title>
         <link>https://teaize.github.io/p/2025-11-20-%E6%B5%8B%E8%AF%95%E5%8F%91%E5%B8%83/</link>
         <pubDate>Thu, 20 Nov 2025 00:00:00 +0000</pubDate>
