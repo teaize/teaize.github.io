@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基本概念 eDrawings 为开源软件，体积小巧。可将 Solidworks 模型导出为 eDrawings 格式\n出版到 eDrawings 时，可选择生成 exe 的可执行文件或者 html 的网页文件 ">
-<title>SW导出可方便查阅的模型</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 手动工具 螺丝刀：用于拧紧或拆卸螺丝，固定 PCB、电源板、端子、外壳等 内六角扳手：用于紧固内六角螺钉，常用于结构件或机壳连接 钳子（尖嘴钳、斜口钳）：尖嘴钳用于夹持、弯线；斜口钳用于剪电线、扎带 扳手/套筒：拧螺母、螺栓 镊子：夹小元器件、定位紧凑空间的螺丝 电气与焊接工具 烙铁：焊接电阻、电容、芯片等元件到电路板上 热熔胶枪：用于临时固定线束、插头、PCB，防止振动松动 热风枪：拆焊芯片、热缩管收缩、防水封线 万用表：测量电压、电流、电阻，检查电路是否正常 电笔：检测是否带电 材料与辅料 硅橡胶（RTV silicone）：用于密封、防水、减震、固定元件，常用于探头、电缆入口处 导热硅脂/导热垫片：用于功率器件（MOSFET、稳压器）与散热器之间，提高散热 绝缘胶带（PVC）：包线、绝缘、临时固定 高温胶带（Kapton）：隔离高温区域，如焊接附近 扎带：整理线束，避免干扰和拉扯 热缩管：包裹接线点，加强绝缘、防水 精密工具与测量工具 游标卡尺：测量尺寸，保证结构件间配合精确 扭力螺丝刀：用于控制紧固力度防止损坏塑料或螺纹 划线笔、记号笔：标记装配位置 放大灯/显微镜：观看小型贴片器件焊点 清洁与整理 酒精：清理焊锡残留、清洁探头表面 防静电刷：清理电路板不伤元件 防静电手环：防止静电损坏芯片 结构辅助件 垫片、螺母、螺丝、铆钉：用于结构固定与装配 橡胶减震垫：用于仪器内部减震、降低噪声提升可靠性 ">
+<title>装配辅助件</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/sw%E5%AF%BC%E5%87%BA%E5%8F%AF%E6%96%B9%E4%BE%BF%E6%9F%A5%E9%98%85%E7%9A%84%E6%A8%A1%E5%9E%8B/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E8%A3%85%E9%85%8D%E8%BE%85%E5%8A%A9%E4%BB%B6/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW导出可方便查阅的模型">
-<meta property='og:description' content="基本概念 eDrawings 为开源软件，体积小巧。可将 Solidworks 模型导出为 eDrawings 格式\n出版到 eDrawings 时，可选择生成 exe 的可执行文件或者 html 的网页文件 ">
-<meta property='og:url' content='https://teaize.github.io/p/sw%E5%AF%BC%E5%87%BA%E5%8F%AF%E6%96%B9%E4%BE%BF%E6%9F%A5%E9%98%85%E7%9A%84%E6%A8%A1%E5%9E%8B/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="装配辅助件">
+<meta property='og:description' content=" 手动工具 螺丝刀：用于拧紧或拆卸螺丝，固定 PCB、电源板、端子、外壳等 内六角扳手：用于紧固内六角螺钉，常用于结构件或机壳连接 钳子（尖嘴钳、斜口钳）：尖嘴钳用于夹持、弯线；斜口钳用于剪电线、扎带 扳手/套筒：拧螺母、螺栓 镊子：夹小元器件、定位紧凑空间的螺丝 电气与焊接工具 烙铁：焊接电阻、电容、芯片等元件到电路板上 热熔胶枪：用于临时固定线束、插头、PCB，防止振动松动 热风枪：拆焊芯片、热缩管收缩、防水封线 万用表：测量电压、电流、电阻，检查电路是否正常 电笔：检测是否带电 材料与辅料 硅橡胶（RTV silicone）：用于密封、防水、减震、固定元件，常用于探头、电缆入口处 导热硅脂/导热垫片：用于功率器件（MOSFET、稳压器）与散热器之间，提高散热 绝缘胶带（PVC）：包线、绝缘、临时固定 高温胶带（Kapton）：隔离高温区域，如焊接附近 扎带：整理线束，避免干扰和拉扯 热缩管：包裹接线点，加强绝缘、防水 精密工具与测量工具 游标卡尺：测量尺寸，保证结构件间配合精确 扭力螺丝刀：用于控制紧固力度防止损坏塑料或螺纹 划线笔、记号笔：标记装配位置 放大灯/显微镜：观看小型贴片器件焊点 清洁与整理 酒精：清理焊锡残留、清洁探头表面 防静电刷：清理电路板不伤元件 防静电手环：防止静电损坏芯片 结构辅助件 垫片、螺母、螺丝、铆钉：用于结构固定与装配 橡胶减震垫：用于仪器内部减震、降低噪声提升可靠性 ">
+<meta property='og:url' content='https://teaize.github.io/p/%E8%A3%85%E9%85%8D%E8%BE%85%E5%8A%A9%E4%BB%B6/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-22T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="SW导出可方便查阅的模型">
-<meta name="twitter:description" content="基本概念 eDrawings 为开源软件，体积小巧。可将 Solidworks 模型导出为 eDrawings 格式\n出版到 eDrawings 时，可选择生成 exe 的可执行文件或者 html 的网页文件 ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-29T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="装配辅助件">
+<meta name="twitter:description" content=" 手动工具 螺丝刀：用于拧紧或拆卸螺丝，固定 PCB、电源板、端子、外壳等 内六角扳手：用于紧固内六角螺钉，常用于结构件或机壳连接 钳子（尖嘴钳、斜口钳）：尖嘴钳用于夹持、弯线；斜口钳用于剪电线、扎带 扳手/套筒：拧螺母、螺栓 镊子：夹小元器件、定位紧凑空间的螺丝 电气与焊接工具 烙铁：焊接电阻、电容、芯片等元件到电路板上 热熔胶枪：用于临时固定线束、插头、PCB，防止振动松动 热风枪：拆焊芯片、热缩管收缩、防水封线 万用表：测量电压、电流、电阻，检查电路是否正常 电笔：检测是否带电 材料与辅料 硅橡胶（RTV silicone）：用于密封、防水、减震、固定元件，常用于探头、电缆入口处 导热硅脂/导热垫片：用于功率器件（MOSFET、稳压器）与散热器之间，提高散热 绝缘胶带（PVC）：包线、绝缘、临时固定 高温胶带（Kapton）：隔离高温区域，如焊接附近 扎带：整理线束，避免干扰和拉扯 热缩管：包裹接线点，加强绝缘、防水 精密工具与测量工具 游标卡尺：测量尺寸，保证结构件间配合精确 扭力螺丝刀：用于控制紧固力度防止损坏塑料或螺纹 划线笔、记号笔：标记装配位置 放大灯/显微镜：观看小型贴片器件焊点 清洁与整理 酒精：清理焊锡残留、清洁探头表面 防静电刷：清理电路板不伤元件 防静电手环：防止静电损坏芯片 结构辅助件 垫片、螺母、螺丝、铆钉：用于结构固定与装配 橡胶减震垫：用于仪器内部减震、降低噪声提升可靠性 ">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,42 +273,7 @@
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li>
-      <ol>
-        <li><a href="#基本概念">基本概念</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
             <main class="main full-width">
     <article class="main-article">
@@ -319,7 +284,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/sw%E5%AF%BC%E5%87%BA%E5%8F%AF%E6%96%B9%E4%BE%BF%E6%9F%A5%E9%98%85%E7%9A%84%E6%A8%A1%E5%9E%8B/">SW导出可方便查阅的模型</a>
+            <a href="/p/%E8%A3%85%E9%85%8D%E8%BE%85%E5%8A%A9%E4%BB%B6/">装配辅助件</a>
         </h2>
     
         
@@ -341,7 +306,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-03-22</time>
+                <time class="article-time--published">2025-11-29</time>
             </div>
         
 
@@ -357,25 +322,57 @@
     <section class="article-content">
     
     
-    <h3 id="基本概念">基本概念
-</h3><p>eDrawings 为开源软件，体积小巧。可将 Solidworks 模型导出为 eDrawings 格式</p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160648.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160648.png" alt="image.png"  />
-		</a>
-	</div>
-
-</p>
-<p>出版到 eDrawings 时，可选择生成 exe 的可执行文件或者 html 的网页文件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160700.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250322160700.png" alt="image.png"  />
-		</a>
-	</div>
-
-</p>
+    <ul>
+<li>手动工具
+<ul>
+<li>螺丝刀：用于拧紧或拆卸螺丝，固定 PCB、电源板、端子、外壳等</li>
+<li>内六角扳手：用于紧固内六角螺钉，常用于结构件或机壳连接</li>
+<li>钳子（尖嘴钳、斜口钳）：尖嘴钳用于夹持、弯线；斜口钳用于剪电线、扎带</li>
+<li>扳手/套筒：拧螺母、螺栓</li>
+<li>镊子：夹小元器件、定位紧凑空间的螺丝</li>
+</ul>
+</li>
+<li>电气与焊接工具
+<ul>
+<li>烙铁：焊接电阻、电容、芯片等元件到电路板上</li>
+<li>热熔胶枪：用于临时固定线束、插头、PCB，防止振动松动</li>
+<li>热风枪：拆焊芯片、热缩管收缩、防水封线</li>
+<li>万用表：测量电压、电流、电阻，检查电路是否正常</li>
+<li>电笔：检测是否带电</li>
+</ul>
+</li>
+<li>材料与辅料
+<ul>
+<li>硅橡胶（RTV silicone）：用于密封、防水、减震、固定元件，常用于探头、电缆入口处</li>
+<li>导热硅脂/导热垫片：用于功率器件（MOSFET、稳压器）与散热器之间，提高散热</li>
+<li>绝缘胶带（PVC）：包线、绝缘、临时固定</li>
+<li>高温胶带（Kapton）：隔离高温区域，如焊接附近</li>
+<li>扎带：整理线束，避免干扰和拉扯</li>
+<li>热缩管：包裹接线点，加强绝缘、防水</li>
+</ul>
+</li>
+<li>精密工具与测量工具
+<ul>
+<li>游标卡尺：测量尺寸，保证结构件间配合精确</li>
+<li>扭力螺丝刀：用于控制紧固力度防止损坏塑料或螺纹</li>
+<li>划线笔、记号笔：标记装配位置</li>
+<li>放大灯/显微镜：观看小型贴片器件焊点</li>
+</ul>
+</li>
+<li>清洁与整理
+<ul>
+<li>酒精：清理焊锡残留、清洁探头表面</li>
+<li>防静电刷：清理电路板不伤元件</li>
+<li>防静电手环：防止静电损坏芯片</li>
+</ul>
+</li>
+<li>结构辅助件
+<ul>
+<li>垫片、螺母、螺丝、铆钉：用于结构固定与装配</li>
+<li>橡胶减震垫：用于仪器内部减震、降低噪声提升可靠性</li>
+</ul>
+</li>
+</ul>
 
 </section>
 
