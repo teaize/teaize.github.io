@@ -7,7 +7,137 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 30 Nov 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 01 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>服役性能与工艺性能的博弈</title>
+        <link>https://teaize.github.io/p/%E6%9C%8D%E5%BD%B9%E6%80%A7%E8%83%BD%E4%B8%8E%E5%B7%A5%E8%89%BA%E6%80%A7%E8%83%BD%E7%9A%84%E5%8D%9A%E5%BC%88/</link>
+        <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%9C%8D%E5%BD%B9%E6%80%A7%E8%83%BD%E4%B8%8E%E5%B7%A5%E8%89%BA%E6%80%A7%E8%83%BD%E7%9A%84%E5%8D%9A%E5%BC%88/</guid>
+        <description>&lt;p&gt;复习到一张一年前的卡片，卡片内容：在某些方面，不锈钢刚度大是一种优点，但在压铆螺母压铆方面，却会带来一些问题，需要采用高强度特种不锈钢材料的压铆螺母，压铆螺母铆接不牢固经常需要再点焊&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251201102543.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251201102543.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;在普通碳钢板（如 SPCC、SECC）上压铆时，通常使用普通不锈钢螺母（CLS 型号，通常为 304 材质）。但在不锈钢板上，普通 CLS 螺母完全行不通。&lt;/p&gt;
+&lt;p&gt;其实，这涉及到一个核心的物理力学原理：压铆要想牢固，螺母必须显著硬于板材。压铆螺母是靠挤压压入板材的，螺母的压花齿和导向槽必须具备&lt;strong&gt;硬度优势&lt;/strong&gt;，迫使板材发生&lt;strong&gt;塑性变形&lt;/strong&gt;。
+另外，不锈钢有一种加工硬化的特性，当你试图挤压它时，它会瞬间变硬，结果就是硬碰硬，板材没有流动，反而是螺母的压花齿被压平了。所以需要采用高强度特种不锈钢材料的压铆螺母&lt;/p&gt;
+&lt;h3 id=&#34;二律背反-antinomy&#34;&gt;二律背反 Antinomy
+&lt;/h3&gt;&lt;p&gt;这其中就体现了一种二律背反的现象，或者说，是一种“服役性能”与“工艺性能”的博弈（Performance vs. Processability Trade-off）&lt;/p&gt;
+&lt;p&gt;这种思想的核心在于认识到，材料的物理属性是中性的，所谓的“优缺点”完全取决于它所处的时间段&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在“使用阶段”（服役期）： 我们希望不锈钢刚度大、硬度高、耐腐蚀。这时候，刚度大是优点，代表着产品结实、不变形。&lt;/li&gt;
+&lt;li&gt;在“制造阶段”（出生期）： 我们需要对材料进行塑形（折弯、压铆、切削）。这时候，刚度大就变成了阻力，意味着难以流动、损耗刀具、结合力差。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种思想的本质是：一个完美的工程设计，不能只盯着产品“做好了之后”的样子（功能），必须同时对产品“如何被造出来”的过程（工艺）表现出极大的敬畏&lt;/p&gt;
+&lt;h3 id=&#34;如何在未来的工作中多利用这种思想&#34;&gt;如何在未来的工作中多利用这种思想
+&lt;/h3&gt;&lt;p&gt;初级工程师看到的是材料的强度； 资深工程师看到的是材料的流变。需要我们养成&lt;strong&gt;分时段、分维度&lt;/strong&gt;审视材料属性的习惯，可以尝试下面这四种思维模型：&lt;/p&gt;
+&lt;h4 id=&#34;思维模型一时间轴切片法timeline-slicing&#34;&gt;思维模型一：时间轴切片法（Timeline Slicing）
+&lt;/h4&gt;&lt;p&gt;在选材时，不要只看一张物性表，要在脑海里画一条时间轴，把材料在不同阶段的表现列出来&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;练习： 当你想选一种“超强、超硬”的材料时，立刻反问自己：
+&lt;ul&gt;
+&lt;li&gt;切削时： 它会不会崩刀？&lt;/li&gt;
+&lt;li&gt;焊接时： 它会不会因为碳当量高而裂纹？&lt;/li&gt;
+&lt;li&gt;装配时： 它会不会太硬导致无法过盈配合？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;应用案例： 汽车齿轮。
+&lt;ul&gt;
+&lt;li&gt;使用时需要极高的表面硬度（耐磨）。&lt;/li&gt;
+&lt;li&gt;制造时需要较低的硬度（方便滚齿加工）。&lt;/li&gt;
+&lt;li&gt;解决方案： 利用时间轴思维，先用软状态加工齿形，再通过渗碳淬火在最后阶段改变表面属性。这就是“错峰”解决矛盾。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;思维模型二功能解耦法functional-decoupling&#34;&gt;思维模型二：功能解耦法（Functional Decoupling）
+&lt;/h4&gt;&lt;p&gt;如果不锈钢板又硬又难压铆是一个死结，那就不要试图用“一种材料”解决所有问题。将“结构支撑”和“连接功能”分开。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;思想： 既然基材硬度大导致压铆困难，那就引入第三者，或者改变连接界面。&lt;/li&gt;
+&lt;li&gt;应用案例：
+&lt;ul&gt;
+&lt;li&gt;镶件注塑： 塑料太软握不住螺钉，就埋入铜螺母；铝合金件中打入钢丝螺套。&lt;/li&gt;
+&lt;li&gt;涂层技术： 基体用廉价易加工的碳钢（解决工艺问题），表面镀镍或喷涂（解决防锈的功能问题），而不是死磕全不锈钢。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;思维模型三顺势而为法process-compensation&#34;&gt;思维模型三：顺势而为法（Process Compensation）
+&lt;/h4&gt;&lt;p&gt;既然材料的某个属性（如刚度大）在工艺上是劣势，我们可以通过改变工艺环境，暂时“抑制”这个属性，或者利用这个属性。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;思想： 如果硬碰硬不行，能不能换个物理环境？&lt;/li&gt;
+&lt;li&gt;应用案例：
+&lt;ul&gt;
+&lt;li&gt;温热成形： 钛合金在常温下很难冲压（回弹大、易裂），但在高温下延展性极好。我们在制造阶段加热它，利用它变软的瞬间加工，冷却后它又恢复了高强度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;思维模型四木桶短板的逆向思维&#34;&gt;思维模型四：木桶短板的逆向思维
+&lt;/h4&gt;&lt;p&gt;通常我们说短板决定容量，但在制造中，最难加工的那个特征决定了整个零件的成本和良率。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;思想： 既然不锈钢板压铆容易失效，那这是否是必须的结构？&lt;/li&gt;
+&lt;li&gt;应用案例：
+&lt;ul&gt;
+&lt;li&gt;如果你发现为了配合压铆，不得不把整块板材的选型变得很复杂，不如直接取消压铆。&lt;/li&gt;
+&lt;li&gt;改为&lt;strong&gt;拉铆螺母&lt;/strong&gt;（依靠螺母自身的变形，而不是板材变形，完美避开了不锈钢硬度高导致板材不流动的问题）。&lt;/li&gt;
+&lt;li&gt;这种思维会让你跳出“如何把这个铆钉压好”的战术陷阱，上升到“如何实现连接”的战略高度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>元认知Metacognition</title>
+        <link>https://teaize.github.io/p/%E5%85%83%E8%AE%A4%E7%9F%A5metacognition/</link>
+        <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%85%83%E8%AE%A4%E7%9F%A5metacognition/</guid>
+        <description>&lt;p&gt;如何训练出一种“对思考过程的思考”，也就是元认知能力（Metacognition）。这里摘抄了 AI 给的一些建议。通过如下四个步骤刻意练习，在大脑中建立起“模型库”&lt;/p&gt;
+&lt;h3 id=&#34;第一步抽象化训练给问题起名字&#34;&gt;第一步：抽象化训练（给问题“起名字”）
+&lt;/h3&gt;&lt;p&gt;很多工程师止步于“解决问题”，而高阶工程师强在“定义问题”。&lt;/p&gt;
+&lt;p&gt;当你解决完“不锈钢压铆不牢”的问题后，不要只在笔记本上写“下次要扩孔”。你要强迫自己&lt;strong&gt;把这个具体的物理现象，抽象成一个通用的概念&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;初级思考： 这个螺母硬度不够，要换硬的。&lt;/li&gt;
+&lt;li&gt;中级思考： 这是硬度匹配的问题，要保证 A 比 B 硬。&lt;/li&gt;
+&lt;li&gt;模型化思考（我的思考方式）： 这是**“加工性能与服役性能的矛盾”，或者是“二律背反”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如何练习： 每次解决一个技术难题后，问自己一句：“这件事如果在别的行业、别的领域发生，它叫什么？”&lt;/p&gt;
+&lt;h3 id=&#34;第二步跨界联想利用你的多重兴趣&#34;&gt;第二步：跨界联想（利用你的多重兴趣）
+&lt;/h3&gt;&lt;p&gt;思维模型最强大的时候，往往是跨学科借用的时候。你可以尝试把这些毫不相关的领域强行联系起来：&lt;/p&gt;
+&lt;p&gt;机械 vs 心理学：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你提到的 NPD（自恋型人格障碍）有一个特点：外表自大（刚度高），内心脆弱（韧性差）。&lt;/li&gt;
+&lt;li&gt;这不就是陶瓷材料或者未回火的马氏体钢吗？&lt;/li&gt;
+&lt;li&gt;思维模型： “高强低韧系统”。这种系统极其危险，看着很强，一受冲击就“崩塌”（人格崩塌/零件断裂）。&lt;/li&gt;
+&lt;li&gt;应用： 当你设计一个机构时，如果发现它太刚硬没有缓冲，你可以对自己说：“这结构太 NPD 了，容易暴雷，我得加点阻尼（同理心/韧性）。”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三步学习现成的工程师外挂triz-理论&#34;&gt;第三步：学习现成的“工程师外挂”——TRIZ 理论
+&lt;/h3&gt;&lt;p&gt;如果你觉得靠自己总结太慢，机械工程界其实有一套现成的“思维模型百科全书”，叫做 &lt;strong&gt;TRIZ（发明问题解决理论）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;苏联科学家分析了 200 万份专利，提炼出了 40 个发明原理和 39 个工程参数。我刚才提到的“矛盾”，在 TRIZ 里叫“物理矛盾”或“技术矛盾”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;刚才的例子： 不锈钢既要硬（使用）又要软（加工）。&lt;/li&gt;
+&lt;li&gt;TRIZ 解决方案： “分离原理”。
+&lt;ul&gt;
+&lt;li&gt;时间分离： 现在的状态（热）和未来的状态（冷）不一样。（比如温热成形）&lt;/li&gt;
+&lt;li&gt;空间分离： 核心部分硬，边缘部分软。（比如激光局部退火）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如何练习： 建议你把 TRIZ 的 40 个发明原理 打印出来贴在工位旁。遇到想不通的死结，挨个过一遍。比如“分割”、“抽取”、“局部质量”、“不对称”等。这相当于给你的大脑装了一个作弊器。&lt;/p&gt;
+&lt;h3 id=&#34;第四步从what到how再到why的深度挖掘&#34;&gt;第四步：从“What”到“How”再到“Why”的深度挖掘
+&lt;/h3&gt;&lt;p&gt;普通人看现象，高手看结构，大师看系统。&lt;/p&gt;
+&lt;p&gt;你可以养成“追问三层”的习惯：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;现象层（What）： 为什么压铆不牢？ -&amp;gt; 因为有硬化层。&lt;/li&gt;
+&lt;li&gt;原理层（How）： 为什么有硬化层会有影响？ -&amp;gt; 因为阻碍了塑性流动。&lt;/li&gt;
+&lt;li&gt;模型层（Why/Meta）： 为什么我们非要塑性流动？ -&amp;gt; 因为我们试图用形变来换取连接力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当你走到第三层，你就不再受困于“怎么把孔钻得更好”，而是可以思考“怎么把连接做得更稳”。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>干湿氧差减法</title>
         <link>https://teaize.github.io/p/%E5%B9%B2%E6%B9%BF%E6%B0%A7%E5%B7%AE%E5%87%8F%E6%B3%95/</link>
         <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
