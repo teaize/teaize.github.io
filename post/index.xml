@@ -7,7 +7,358 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Mon, 01 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 02 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>共模干扰</title>
+        <link>https://teaize.github.io/p/%E5%85%B1%E6%A8%A1%E5%B9%B2%E6%89%B0/</link>
+        <pubDate>Tue, 02 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%85%B1%E6%A8%A1%E5%B9%B2%E6%89%B0/</guid>
+        <description>&lt;h3 id=&#34;核心模型海浪与船直观理解&#34;&gt;核心模型：海浪与船（直观理解）
+&lt;/h3&gt;&lt;p&gt;想象你正在海边测量两艘船的高度差。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;信号（你要测的东西）： A 船比 B 船高出多少（比如 A 船上站了一个人，B 船是空的）。&lt;/li&gt;
+&lt;li&gt;干扰（噪声）： 大海的潮汐和海浪。&lt;/li&gt;
+&lt;li&gt;情况一：差模干扰（Differential Mode） 如果一个浪打过来，只把 A 船打翻了，或者把 A 船抬高了，而 B 船没动。 -&amp;gt; 这时候你测出来的高度差就乱了。这种“你变他不变”的干扰，叫差模干扰。&lt;/li&gt;
+&lt;li&gt;情况二：共模干扰（Common Mode） 如果涨潮了，或者一个巨大的涌浪过来，A 船和 B 船同时被抬高了 1 米。 -&amp;gt; 虽然两艘船的绝对海拔都变了，但它们之间的相对高度差（A - B）其实没变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就是共模干扰：作用在两根信号线上，幅度相同、相位相同（方向一致）的干扰信号。 它是“共同”拥有的干扰。&lt;/p&gt;
+&lt;h3 id=&#34;电路模型数学视角&#34;&gt;电路模型：数学视角
+&lt;/h3&gt;&lt;p&gt;在仪表设计中，我们通常用两根线传输信号（信号线 + 地线，或者 信号线 A+ 信号线 B）。&lt;/p&gt;
+&lt;p&gt;假设：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$S$ 是我们想要的真实信号（Signal）。&lt;/li&gt;
+&lt;li&gt;$N$ 是外界进来的噪声（Noise）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;共模干扰的数学表达：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线路 1 的电压： $V_1 = S + N$ （信号 + 噪声）&lt;/li&gt;
+&lt;li&gt;线路 2 的电压： $V_2 = 0 + N$ （参考地/负端 + 同样的噪声）&lt;/li&gt;
+&lt;li&gt;如果你用单端测量（只看 $V_1$ 对大地的电压）：你读到的结果是 $S + N$。干扰成功入侵了，数据不仅包含信号，还包含噪声。&lt;/li&gt;
+&lt;li&gt;如果你用差分测量（Differential）（看 $V_1$ 和 $V_2$ 的差值）：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$输出 = V_1 - V_2 = (S + N) - (0 + N) = S$$&lt;/p&gt;
+&lt;p&gt;神奇的事情发生了： $N$（噪声）被数学减法消掉了。这就是“差分设计思想”的威力——通过结构设计，让干扰变成“共模”，然后通过相减把它杀掉。&lt;/p&gt;
+&lt;h3 id=&#34;cems-现场的共模干扰来源&#34;&gt;CEMS 现场的共模干扰来源
+&lt;/h3&gt;&lt;h4 id=&#34;1地电位差ground-loop&#34;&gt;1、地电位差（Ground Loop）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;场景： CEMS 分析仪在控制室，采样探头在几十米外的烟囱上。&lt;/li&gt;
+&lt;li&gt;现象： 烟囱的金属架虽然接了地，控制室机柜也接了地。但因为距离远，两点的“地”之间可能存在几伏甚至几十伏的电压差（尤其是在大电机启动瞬间）。&lt;/li&gt;
+&lt;li&gt;结果： 这个电压差会同时叠加在你的信号线和回路上，形成巨大的共模电压。如果不处理，轻则数据乱跳，重则烧毁端口。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2空间电磁感应&#34;&gt;2、空间电磁感应
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;场景： 你的信号线旁边并行铺设了一根 380V 的大功率动力电缆。&lt;/li&gt;
+&lt;li&gt;现象： 动力电缆产生的交变磁场，会在你的两根信号线上同时感应出 50Hz 的交流电压。&lt;/li&gt;
+&lt;li&gt;结果： 这是一个典型的共模噪声，两根线都在“抖”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如何在设计中对付它&#34;&gt;如何在设计中对付它
+&lt;/h3&gt;&lt;p&gt;如何对付共模干扰呢：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“不让它进来” —— 双绞线
+&lt;ul&gt;
+&lt;li&gt;原理： 把两根信号线像麻花一样拧在一起。&lt;/li&gt;
+&lt;li&gt;效果： 这样保证了外界磁场穿过两根线的面积几乎相等，感应出的噪声电压 $N$ 也就几乎相等。只要 $N$ 相等，它就是标准的共模干扰，容易被后级电路滤除。 如果不绞合，一根线离干扰源近，一根远，那就变成难搞的差模干扰了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;“关门打狗” —— 差分放大器/仪表放大器
+&lt;ul&gt;
+&lt;li&gt;原理： 使用具有高共模抑制比的运放芯片。&lt;/li&gt;
+&lt;li&gt;效果：这种芯片天生只放大差值（$A-B$），对共模值（$A$ 和 $B$ 的平均值）视而不见。CEMS 里的微弱信号（如电化学传感器、热电偶）必须进这种放大器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;“物理隔离” —— 隔离变压器/光耦隔离
+&lt;ul&gt;
+&lt;li&gt;原理： 直接切断导线连接。用光或磁来传信号。&lt;/li&gt;
+&lt;li&gt;效果： 这是对付地电位差的终极武器。既然两边的“地”打架，我就把路断开，让信号“飞”过去。CEMS 的模拟量输出（4-20mA）通常都要求带光电隔离，就是为了防止 DCS 系统的地干扰反噬分析仪。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;共模干扰不可怕，可怕的是把共模变成了差模&lt;/strong&gt;。在设计仪表时，我们的核心任务之一，需尽可能保证干扰在两根线上是“对称”的（比如走线长度一样、阻抗匹配一样、双绞紧密），这样它就是&lt;strong&gt;纯净的共模干扰&lt;/strong&gt;，然后交给后端的&lt;strong&gt;差分放大器&lt;/strong&gt;一口吃掉它。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>间接测量之干湿氧法</title>
+        <link>https://teaize.github.io/p/%E9%97%B4%E6%8E%A5%E6%B5%8B%E9%87%8F%E4%B9%8B%E5%B9%B2%E6%B9%BF%E6%B0%A7%E6%B3%95/</link>
+        <pubDate>Tue, 02 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%97%B4%E6%8E%A5%E6%B5%8B%E9%87%8F%E4%B9%8B%E5%B9%B2%E6%B9%BF%E6%B0%A7%E6%B3%95/</guid>
+        <description>&lt;p&gt;继 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E5%B9%B2%E6%B9%BF%E6%B0%A7%E5%B7%AE%E5%87%8F%E6%B3%95/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;干湿氧差减法&lt;/a&gt; 后的想法，这种醉翁之意不在酒的工程思维，这种设计美感，值得进一步学习！&lt;/p&gt;
+&lt;h3 id=&#34;1侧面迂回间接测量思维&#34;&gt;1、侧面迂回：间接测量思维
+&lt;/h3&gt;&lt;p&gt;当直接测量目标（水分子）很难、很贵或者不准时，我们寻找一个&lt;strong&gt;与目标有强数学关联&lt;/strong&gt;的容易测量的“代理变量”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;思维逻辑： “我不直接抓嫌疑人，我通过监控他身边形影不离的伙伴来锁定他。”&lt;/li&gt;
+&lt;li&gt;在本例中：
+&lt;ul&gt;
+&lt;li&gt;直接测量水： 需要阻容法或激光法，成本高，且高温下容易损坏。&lt;/li&gt;
+&lt;li&gt;间接测量氧： 氧化锆氧量计极其成熟、耐高温、便宜。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;本质： 利用&lt;strong&gt;相关性&lt;/strong&gt;替代&lt;strong&gt;直接性&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2稀释挤占效应思维-dilutiondisplacement-effect&#34;&gt;2、稀释/挤占效应思维 (Dilution/Displacement Effect)
+&lt;/h3&gt;&lt;p&gt;这才是干湿氧法最底层的物理逻辑。这是一种“总量守恒下的占比分析”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;模型解释：想象一个电梯（单位体积的气体），里面只能装 100 个人（分子）。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;状态 A（湿）：&lt;/strong&gt; 里面混进了几个胖子（水分子），导致瘦子（氧分子）被挤得只剩 10 个了（浓度 10%）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态 B（干）：&lt;/strong&gt; 把胖子（水分子）赶出去。因为电梯空间是固定的，瘦子们分散开了，或者更多的瘦子补进来填补空缺，这时候数一数，瘦子变成了 12 个（浓度 12%）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;计算逻辑：
+&lt;ul&gt;
+&lt;li&gt;既然瘦子（氧气）的总量没变，仅仅是因为空间被胖子（水）挤占了。那么通过瘦子浓度的变化率，就能反推出胖子占了多大地方。
+&lt;ul&gt;
+&lt;li&gt;$$C_{wet} = C_{dry} \times (1 - H_{2}O%)$$&lt;/li&gt;
+&lt;li&gt;$$H_{2}O% = 1 - \frac{O_{2, wet}}{O_{2, dry}}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;这种思维的威力： 只要你能制造出“有它”和“没它”两种状态，利用归一化（Normalization）原理，就能算出它。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3差分状态对比思维-differential-state-comparison&#34;&gt;3、差分状态对比思维 (Differential State Comparison)
+&lt;/h3&gt;&lt;p&gt;如 [[如何训练工程系统思维]] 中所说的，这里也算是利用“两次测量，一次计算”逻辑的变体&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通常的差分是：信号 - 本底&lt;/li&gt;
+&lt;li&gt;这里的差分是：状态 A（含水） vs 状态 B（脱水）。 这种思维不再依赖传感器的绝对准确度（虽然氧传感器要准），它更依赖于物理过程（脱水）的彻底性。只要前处理系统把水除干净了，这个数学逻辑就没有问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4小结&#34;&gt;4、小结
+&lt;/h3&gt;&lt;p&gt;其实这种思维并不少见，例如阿基米德测皇冠体积，通过测排开水的体积来测量皇冠的总体积，这其实也是一种“挤占效应”；还有个例子和 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E5%B9%B2%E6%B9%BF%E6%B0%A7%E5%B7%AE%E5%87%8F%E6%B3%95/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;干湿氧差减法&lt;/a&gt; 的思想特别像：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;血液检查中的红细胞压积
+&lt;ul&gt;
+&lt;li&gt;现象： 当一个人严重脱水时，医生抽血化验，会发现他的血红蛋白浓度异常升高。&lt;/li&gt;
+&lt;li&gt;逻辑： 血红蛋白总量没变，是血里的水少了（溶剂减少）。医生通过测量“溶质变浓了多少”，反推出你“缺了多少水”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;另外，虽然干湿氧法这种方法应用的很巧妙，但需要注意他的&lt;strong&gt;边界条件&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分母陷阱： 公式是 $H_{2}O% = 1 - (O_{2, wet} / O_{2, dry})$。 如果氧含量极低（比如接近 0%），那么 $O_{2, wet}$ 和 $O_{2, dry}$ 都很小，传感器的一点点噪声会导致比值剧烈波动，计算出的水分数据会满天飞。
+&lt;ul&gt;
+&lt;li&gt;所以，这种方法并不适合低氧工况&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;假设前提：这种计算方法成立的前提是，除湿前和除湿后，气体中只是去除了水，并没有去除其他气体成分。如果预处理系统中使用了能吸附氧气的除湿剂，或者漏气导致氧气进入，计算公式将不再适用。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>如何训练工程系统思维</title>
+        <link>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/</link>
+        <pubDate>Tue, 02 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/</guid>
+        <description>&lt;h3 id=&#34;第一步从what到why--逆向工程思维&#34;&gt;第一步：从“What”到“Why” —— 逆向工程思维
+&lt;/h3&gt;&lt;p&gt;很多工程师看到一台高端进口仪表（比如西门子的 CEMS），看到的是“它有一个参比气室”。而设计思维要求你多问一步：“为什么它必须有这个气室？如果去掉它，哪条物理定律会惩罚这台机器？”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;练习方法：
+&lt;ul&gt;
+&lt;li&gt;看到任何一个奇怪的设计细节（比如一段弯曲的管路、一个多余的电容、一个看起来很多余的校准步骤），不要认为它是“惯例”。&lt;/li&gt;
+&lt;li&gt;多问： “设计师在防御什么？”&lt;/li&gt;
+&lt;li&gt;假设： “如果我把这个去掉，是在高温下会死？还是在零点漂移时会死？”&lt;/li&gt;
+&lt;li&gt;结论： 一旦你找到了它防御的那个“敌人”（共模干扰、热传导、电磁噪声），你就掌握了一个模型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第二步建立思维模型库--抽象化能力&#34;&gt;第二步：建立“思维模型库” —— 抽象化能力
+&lt;/h3&gt;&lt;p&gt;所谓模型思维，就是把具体的物理问题，抽象成通用的数学或逻辑结构。当你不再把“温度补偿”看作是修温度的，而是看作“&lt;strong&gt;输入 - 输出修正模型&lt;/strong&gt;”时，你就会发现：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修温度可以用这个公式。&lt;/li&gt;
+&lt;li&gt;修压力可以用这个公式。&lt;/li&gt;
+&lt;li&gt;甚至修“传感器老化导致的灵敏度下降”，本质上也是同一个数学模型（$y = kx + b$，其中 $k$ 和 $b$ 是随时间变化的函数）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你需要建立的核心模型库包括：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;黑盒模型： 任何器件都是 &lt;code&gt;输入 -&amp;gt; [传递函数 + 干扰] -&amp;gt; 输出&lt;/code&gt;。设计的目的就是最大化传递函数，最小化干扰。&lt;/li&gt;
+&lt;li&gt;负反馈模型： 系统必须知道自己“错”了，才能改。所以必须有回路（闭环）。&lt;/li&gt;
+&lt;li&gt;信噪比（SNR）模型： 世界上没有绝对精准，只有信号比噪声强多少。差分设计的本质就是压低分母（噪声）。&lt;/li&gt;
+&lt;li&gt;冗余模型： 既然一定会坏，那就准备两套（无论是硬件冗余还是信息冗余）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第三步回到第一性原理--物理直觉&#34;&gt;第三步：回到“第一性原理” —— 物理直觉
+&lt;/h3&gt;&lt;p&gt;所有的工程技巧，最终都服务于底层的物理定律。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;朗伯 - 比尔定律告诉我们要关注光强 $I$ 和路径 $L$。&lt;/li&gt;
+&lt;li&gt;理想气体状态方程告诉我们要关注 $P$ 和 $T$。&lt;/li&gt;
+&lt;li&gt;能斯特方程告诉我们氧化锆的电势与温度 $T$ 成正比。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;养成习惯： 在设计任何传感器应用时，把它的基础物理公式写在纸上，盯着公式里的每一个变量问自己：“这个变量在现场会变吗？如果变了，我怎么通过设计把它按住？”&lt;/p&gt;
+&lt;h3 id=&#34;第四步极限思维--把工况推向无穷大&#34;&gt;第四步：极限思维 —— 把工况推向无穷大
+&lt;/h3&gt;&lt;p&gt;这是发现设计漏洞的最好办法。在脑海里进行思想实验：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“如果环境温度变成了 $1000^\circ C$，我的设计哪里先挂？” -&amp;gt; 让你意识到热隔离的重要性。&lt;/li&gt;
+&lt;li&gt;“如果信号线断了（阻抗无穷大），我的读数是几？” -&amp;gt; 让你意识到 Fail-Safe 设计的重要性。&lt;/li&gt;
+&lt;li&gt;“如果背景气体全是水（100% 湿度），我的读数会偏多少？” -&amp;gt; 让你意识到交叉干扰补偿的重要性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;案例pt100&#34;&gt;案例：PT100
+&lt;/h2&gt;&lt;p&gt;工业用的 PT100 通常包含三根引线，网上看到的解释是第三根线上用来补偿的，但具体原理还没有研究过&lt;/p&gt;
+&lt;h3 id=&#34;1问题模型为什么-2-根线不行&#34;&gt;1、问题模型：为什么 2 根线不行
+&lt;/h3&gt;&lt;p&gt;PT100 的原理是电阻随温度变化（PT 表示铂、100 表示 $0^\circ C$ 时 $100\Omega$）。 CEMS 现场，探头在烟囱上，分析仪在小屋里，中间可能隔着十几米（例如 50m）长的电缆。&lt;/p&gt;
+&lt;p&gt;2 线制的困境： 当我们用万用表或变送器测量电阻时，电流必须流个来回
+$$R_{测量值} = R_{导线A} + R_{PT100} + R_{导线B}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;误差来源： 铜导线是有电阻的。50 米长的截面积 $1.0mm^2$ 铜线，往返电阻约为 $1.7\Omega$。&lt;/li&gt;
+&lt;li&gt;后果：PT100 的灵敏度约为 $0.385\Omega/^\circ C$。$$误差 = 1.7\Omega / 0.385 \approx 4.4^\circ C$$
+也就是说，CEMS 读数会凭空高出 $4.4^\circ C$。而且这个误差是不固定的——夏天电缆热，电阻变大；冬天电缆冷，电阻变小。&lt;strong&gt;这种不可控的漂移是仪器的大忌&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2解决方案3-线制的数学减法&#34;&gt;2、解决方案：3 线制的“数学减法”
+&lt;/h3&gt;&lt;p&gt;为了把 $R_{导线}$ 从公式里踢出去，工程师引入了第三根线。&lt;/p&gt;
+&lt;p&gt;物理结构：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PT100 电阻的一端接 1 根线（设为线 A）。&lt;/li&gt;
+&lt;li&gt;PT100 电阻的另一端接 2 根线（设为线 B 和 线 C）。&lt;/li&gt;
+&lt;li&gt;关键假设： 我们默认这三根线是同一根电缆里的，长度一样、材质一样、温度环境一样，所以它们的电阻相等：$R_A = R_B = R_C = r$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;补偿原理（电桥法/运算逻辑），现代仪表通常采用“两次测量，一次计算”的逻辑（或电桥平衡逻辑）：&lt;/p&gt;
+&lt;p&gt;1、回路 1（测量回路）：电流从 线 A 流入，经过 $R_{PT100}$，从 线 B 流回。
+$$阻值_1 = R_A + R_{PT100} + R_B = 2r + R_{PT100}$$
+2、回路 2（补偿回路）： 电流从 线 B 流入，直接从 线 C 流回（因为 B 和 C 在探头根部是短接的，电流不经过 PT100）。
+$$阻值_2 = R_B + R_C = 2r$$
+3、最终计算： 仪表内部算法执行减法：
+$$R_{真实} = 阻值_1 - 阻值_2$$
+$$R_{真实} = (2r + R_{PT100}) - 2r = R_{PT100}$$
+如此，导线电阻 $r$ 就被完美消除掉了。无论电缆是 10 米还是 100 米，无论夏天还是冬天，只要三根线变化一致，误差就会被自动扣除&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>仪表设计思想</title>
+        <link>https://teaize.github.io/p/%E4%BB%AA%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</link>
+        <pubDate>Tue, 02 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BB%AA%E8%A1%A8%E8%AE%BE%E8%AE%A1%E6%80%9D%E6%83%B3/</guid>
+        <description>&lt;p&gt;继上篇的 [[参数化补偿]]，这里汇总了一些在仪表研发和系统集成中，除了“补偿”之外的一些指导思想。&lt;/p&gt;
+&lt;h3 id=&#34;1差分设计思想differential-design&#34;&gt;1、差分设计思想（Differential Design）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 不要只测“绝对值”，要测“差异值”。通过物理架构抵消&lt;strong&gt;共模干扰&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在 CEMS 中，环境变化（光源波动、电源纹波、温度整体漂移）往往同时作用于所有通道。&lt;strong&gt;如果只看单路信号，很难分清是浓度变了还是灯泡暗了&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;典型应用：
+&lt;ul&gt;
+&lt;li&gt;参比光路（Reference Channel）： 比如非分散红外（NDIR）气体分析仪。设计两个探测器，一个前加滤光片只透过不被吸收的光（参比端），另一个透过被测气体吸收的光（测量端）。&lt;/li&gt;
+&lt;li&gt;算法逻辑： 不是看测量端电压 $V_{meas}$ 多少，而是看 $V_{meas} / V_{ref}$ 的比值。&lt;/li&gt;
+&lt;li&gt;价值： 光源亮度衰减了 50%，两个通道同时衰减，比值不变。这种物理层面的抵消，比软件补偿更底层、更可靠。&lt;/li&gt;
+&lt;li&gt;CEMS（DOAS）： CEMS 中测 $SO_2$/$NO_x$ 的主流技术。它利用气体的窄带吸收（快变信号）和宽带散射（慢变信号）的差异，直接在频谱上把粉尘干扰（宽带）像剥洋葱一样剥离掉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2闭环反馈与自动归零closed-loop--auto-zeroing&#34;&gt;2、闭环反馈与自动归零（Closed-loop &amp;amp; Auto-Zeroing）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 仪器不能是“开环”的，它必须有一个不断回到原点的机制，以此来锚定测量的基准&lt;/p&gt;
+&lt;p&gt;传感器最大的敌人是零点漂移。与其拼命制造不漂移的传感器，不如设计一套机制，让它每隔一段时间就“看一眼”什么是零。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;典型应用：
+&lt;ul&gt;
+&lt;li&gt;电磁阀切换： 几乎所有的 CEMS 分析仪内部都有电磁阀。每隔 4 小时或 24 小时，系统自动切断烟气，通入洁净空气（例如实现每 24h 自动校零一次）。&lt;/li&gt;
+&lt;li&gt;动态调整： 此时读数如果不是 0（比如漂移到了 2ppm），系统自动将当前电压定义为新的“零点”。&lt;/li&gt;
+&lt;li&gt;价值： 这种“分时复用”的设计思想，把长期的稳定性要求，降低为了“在两次自动校零间隔内稳定”即可。这极大降低了硬件设计难度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3失效安全与防御性设计fail-safe-design&#34;&gt;3、失效安全与防御性设计（Fail-Safe Design）
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 假设系统一定会出故障，那么出故障时，必须停留在最安全的状态，而不是破坏性最大的状态。&lt;/p&gt;
+&lt;p&gt;CEMS 涉及高温伴热和流体传输，一旦失控，后果往往是损坏昂贵的分析仪核心部件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;典型应用：
+&lt;ul&gt;
+&lt;li&gt;伴热管线低温连锁： 这是一个经典的防御设计。采样探头或管线温度如果低于设定值（如 120℃），必须强制停运采样泵。&lt;/li&gt;
+&lt;li&gt;为什么？ 因为温度不够会导致 $SO_2$ 和水结合成亚硫酸/硫酸，不仅腐蚀管路，液态水进入分析仪气室会直接导致传感器报废。&lt;/li&gt;
+&lt;li&gt;信号输出： 4-20mA 输出设计中，2mA 通常代表“故障”，0mA 代表“断电/断线”。不能让故障表现为“0 浓度”，误导环保部门以为排放达标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4模块化解耦与热隔离decoupling--isolation&#34;&gt;4、模块化解耦与热隔离（Decoupling &amp;amp; Isolation）
+&lt;/h3&gt;&lt;p&gt;核心逻辑： 将相互影响的物理量在空间上隔绝，让每个模块只处理单纯的任务。&lt;/p&gt;
+&lt;p&gt;在仪表设计中，最怕“热 - 电 - 气”混杂在一起互相打架。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;典型应用：
+&lt;ul&gt;
+&lt;li&gt;气电分离（Gas-Electronics Separation）： 优秀的分析仪机箱设计，&lt;strong&gt;气路部分（易漏气、有腐蚀性）和电路部分（怕腐蚀、怕热）是严格分仓的&lt;/strong&gt;，中间通过密封隔板隔开。&lt;/li&gt;
+&lt;li&gt;热隔离： 高温紫外分析仪的气室需要加热到 180℃以上，但光纤光谱仪和电路板只能承受 50℃。设计中会使用气凝胶隔热层、独立的散热风道，或者半导体制冷片制冷，确保“火热的心（气室）”和“冷静的头脑（电路）”互不干扰。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;在设计一款仪表时，我们可以按这个层级思考：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;架构层（差分设计）： 能用物理结构抵消的误差，绝不用算法去算。&lt;/li&gt;
+&lt;li&gt;流程层（闭环归零）： 利用时间换空间，通过频繁校准来维持精度。&lt;/li&gt;
+&lt;li&gt;算法层（参数化补偿）： 既然规律可循，就用数学模型把剩余的误差修补回来。&lt;/li&gt;
+&lt;li&gt;安全层（Fail-Safe）： 守住底线，保护核心器件不被次生灾害损坏。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>参数化补偿</title>
+        <link>https://teaize.github.io/p/%E5%8F%82%E6%95%B0%E5%8C%96%E8%A1%A5%E5%81%BF/</link>
+        <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8F%82%E6%95%B0%E5%8C%96%E8%A1%A5%E5%81%BF/</guid>
+        <description>&lt;p&gt;在二氧化硫紫外荧光分析仪当中，荧光灯会随着使用的老化，光强逐渐变弱，那么仪表参考的基准变了，自然测出来的数据就会和真值有所偏差。如下卡片内容所示，这是一种参数化补偿设计。&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251201193037.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251201193037.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;实际上，在 CEMS 领域，这是一个核心且无处不在的设计思想。因为 CEMS 系统处于极其恶劣的工况（高温、高湿、高腐蚀、高粉尘）下，且要求长期（3-6 个月）免维护运行，&lt;strong&gt;纯粹靠硬件的“刚性”往往无法抵抗物理定律带来的漂移和退化&lt;/strong&gt;。此时，我们就需要大量引入可测变量（传感器数据）作为补偿参数，通过软件算法来“拉回”偏差。&lt;/p&gt;
+&lt;h3 id=&#34;一些应用&#34;&gt;一些应用
+&lt;/h3&gt;&lt;h4 id=&#34;1工况参数补偿&#34;&gt;1、工况参数补偿
+&lt;/h4&gt;&lt;p&gt;这是参数化补偿在 CEMS 中最直观的应用。分析仪测得的通常是“特定状态下的浓度”，但法规要求的是“标况干基浓度”。温度和压力就是这里的“可测不一致性”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题背景： &lt;strong&gt;烟气温度和压力随锅炉负荷波动，导致气体摩尔体积变化，直接影响测量值的准确性&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;补偿参数： 温度（$t$）、压力（$P$）&lt;/li&gt;
+&lt;li&gt;补偿逻辑： 引入状态方程进行修正，将工况浓度折算为标况浓度：
+&lt;ul&gt;
+&lt;li&gt;$$C_{std} = C_{meas} \times \frac{273.15}{273.15 + t} \times \frac{P + P_{atm}}{101.325}$$&lt;/li&gt;
+&lt;li&gt;这里，$t$ 和 $P$ 就是动态补偿参数，抵消了环境物理量变化带来的“不一致”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2光源衰减与脏污补偿针对退化现象&#34;&gt;2、光源衰减与脏污补偿（针对“退化现象”）
+&lt;/h4&gt;&lt;p&gt;CEMS 的光学器件（透镜、反射镜、光源）随时间推移必然会老化或沾染灰尘。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题背景： 朗伯 - 比尔定律 $A = \lg(I_0/I)$ 依赖于初始光强 $I_0$。如果光源老化导致 $I_0$ 下降，或者视窗脏污导致透光率下降，测量值就会漂移。&lt;/li&gt;
+&lt;li&gt;补偿参数： 参考信号强度（Reference Signal）或 光强衰减系数。&lt;/li&gt;
+&lt;li&gt;设计实现：
+&lt;ul&gt;
+&lt;li&gt;双光路/双波长设计： 引入一个不被待测气体吸收的“参考波长”。&lt;/li&gt;
+&lt;li&gt;当参考波长的光强 $I_{ref}$ 下降时，系统认为这是由光源老化或灰尘引起的&lt;strong&gt;共模干扰&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;系统会自动根据 $I_{ref}$ 的衰减比例，对测量信号 $I_{meas}$ 进行等比例补偿，或者自动调整增益（AGC），从而抵消硬件退化的影响。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3传感器线性度与全温区补偿&#34;&gt;3、传感器线性度与全温区补偿
+&lt;/h4&gt;&lt;p&gt;没有完美的线性传感器，也没有完全不受环境温度影响的电子元器件。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题背景： 电化学传感器或某些光学检测器在不同环境温度下，灵敏度（Slope）和零点（Zero）会发生漂移。&lt;/li&gt;
+&lt;li&gt;补偿参数： 温度系数（Temperature Coefficient）与 多项式拟合系数。&lt;/li&gt;
+&lt;li&gt;设计实现：
+&lt;ul&gt;
+&lt;li&gt;在分析仪内部（如光学平台或传感器旁）安装高精度温度探头。&lt;/li&gt;
+&lt;li&gt;建立一个温度 - 修正量的数学模型（通常是二次或三次多项式）。&lt;/li&gt;
+&lt;li&gt;$$Output_{corrected} = Output_{raw} \times (1 + \alpha \times (T_{curr} - T_{cal}))$$&lt;/li&gt;
+&lt;li&gt;其中 $\alpha$ 就是温度补偿系数。这使得设备即使从 $20^\circ C$ 变到 $40^\circ C$，输出依然稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4氧化锆氧量计的内阻补偿&#34;&gt;4、氧化锆氧量计的内阻补偿
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题背景： 氧化锆头在长期高温运行后，电极会老化，内阻增加，导致响应变慢或本底电势变化。&lt;/li&gt;
+&lt;li&gt;补偿设计： 现代高端氧化锆变送器会周期性测量探头的内阻（作为监测参数）。当内阻发生可预期的变化时，变送器会调整加热电流或对电势信号进行算法补偿，延长探头的使用寿命（虽然最终还是需要更换，但在退化期能保持数据可用）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;参数化补偿设计在 CEMS 中的核心思想是：&lt;strong&gt;承认不完美，利用相关性&lt;/strong&gt;。我们不再试图制造一个在任何温度、压力、老化程度下都物理性质绝对不变的“完美仪器”(这会极大提高成本，或者物理上做不到)，而是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;承认&lt;/strong&gt;干扰和退化的存在（如光源会暗，承认水汽有干扰）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;量化&lt;/strong&gt;这些干扰（通过传感器测出温度、光强、干扰气浓度）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计算&lt;/strong&gt;出修正值并实时抵消。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种思想&lt;strong&gt;将硬件的制造难度转移到了软件算法和系统集成上&lt;/strong&gt;，也是是现代精密仪器的核心竞争力之一&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>服役性能与工艺性能的博弈</title>
         <link>https://teaize.github.io/p/%E6%9C%8D%E5%BD%B9%E6%80%A7%E8%83%BD%E4%B8%8E%E5%B7%A5%E8%89%BA%E6%80%A7%E8%83%BD%E7%9A%84%E5%8D%9A%E5%BC%88/</link>
         <pubDate>Mon, 01 Dec 2025 00:00:00 +0000</pubDate>
