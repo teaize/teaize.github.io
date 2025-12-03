@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="和亲密的人接触久了，非常明显的就能区别正常抱怨与 NPD 式抱怨：\n正常人： 抱怨是为了寻求建议或情感支持，说完后情绪会缓解，也会关心对方的感受。 NPD： 抱怨是单向的、无休止的，不寻求解决方案（如果你给建议他们反而会生气），并且完全无视这对听众造成的心理负担。 之前听到 Ta 给我抱怨 Ta 生活、工作中遇到的琐事，我会尽量安慰、提出一些我觉得可能有用的缓解方式、或者从 Ta 所认为的施暴者角度分析为什么会这么做。结果换来的结局是，Ta 认为我怎么帮着“施暴者”说话。 慢慢地，我意识到 Ta 向我抱怨时，我只能顺着 Ta 的想法给 Ta 回复，Ta 觉得 A 有问题，那我就绝对不能说“A 其实也没有怎么怎么样”。否则，Ta 与 A 之间的矛盾，会立刻马上转到 Ta 和你之间的矛盾 接触的越多，越觉得 Ta 将自己当作情绪垃圾桶，身边随便一点小事，都会向你抱怨个没完，要么表现出一种极度厌世和烦躁的行为。\n">
+<title>关于NPD的情绪倾倒行为</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%85%B3%E4%BA%8Enpd%E7%9A%84%E6%83%85%E7%BB%AA%E5%80%BE%E5%80%92%E8%A1%8C%E4%B8%BA/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="关于NPD的情绪倾倒行为">
+<meta property='og:description' content="和亲密的人接触久了，非常明显的就能区别正常抱怨与 NPD 式抱怨：\n正常人： 抱怨是为了寻求建议或情感支持，说完后情绪会缓解，也会关心对方的感受。 NPD： 抱怨是单向的、无休止的，不寻求解决方案（如果你给建议他们反而会生气），并且完全无视这对听众造成的心理负担。 之前听到 Ta 给我抱怨 Ta 生活、工作中遇到的琐事，我会尽量安慰、提出一些我觉得可能有用的缓解方式、或者从 Ta 所认为的施暴者角度分析为什么会这么做。结果换来的结局是，Ta 认为我怎么帮着“施暴者”说话。 慢慢地，我意识到 Ta 向我抱怨时，我只能顺着 Ta 的想法给 Ta 回复，Ta 觉得 A 有问题，那我就绝对不能说“A 其实也没有怎么怎么样”。否则，Ta 与 A 之间的矛盾，会立刻马上转到 Ta 和你之间的矛盾 接触的越多，越觉得 Ta 将自己当作情绪垃圾桶，身边随便一点小事，都会向你抱怨个没完，要么表现出一种极度厌世和烦躁的行为。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%85%B3%E4%BA%8Enpd%E7%9A%84%E6%83%85%E7%BB%AA%E5%80%BE%E5%80%92%E8%A1%8C%E4%B8%BA/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-03T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-03T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="关于NPD的情绪倾倒行为">
+<meta name="twitter:description" content="和亲密的人接触久了，非常明显的就能区别正常抱怨与 NPD 式抱怨：\n正常人： 抱怨是为了寻求建议或情感支持，说完后情绪会缓解，也会关心对方的感受。 NPD： 抱怨是单向的、无休止的，不寻求解决方案（如果你给建议他们反而会生气），并且完全无视这对听众造成的心理负担。 之前听到 Ta 给我抱怨 Ta 生活、工作中遇到的琐事，我会尽量安慰、提出一些我觉得可能有用的缓解方式、或者从 Ta 所认为的施暴者角度分析为什么会这么做。结果换来的结局是，Ta 认为我怎么帮着“施暴者”说话。 慢慢地，我意识到 Ta 向我抱怨时，我只能顺着 Ta 的想法给 Ta 回复，Ta 觉得 A 有问题，那我就绝对不能说“A 其实也没有怎么怎么样”。否则，Ta 与 A 之间的矛盾，会立刻马上转到 Ta 和你之间的矛盾 接触的越多，越觉得 Ta 将自己当作情绪垃圾桶，身边随便一点小事，都会向你抱怨个没完，要么表现出一种极度厌世和烦躁的行为。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#把你当作情绪垃圾桶外部调节机制">把你当作“情绪垃圾桶”（外部调节机制）</a></li>
+        <li><a href="#索取自恋供应即使是负面的">索取“自恋供应”（即使是负面的）</a></li>
+        <li><a href="#投射与逃避责任">投射与逃避责任</a></li>
+        <li><a href="#如何防御">如何防御</a>
+          <ol>
+            <li><a href="#核心心法不要做海绵要做雨衣">核心心法：不要做“海绵”，要做“雨衣”</a></li>
+            <li><a href="#战术动作改良版灰岩法">战术动作：改良版“灰岩法”</a></li>
+            <li><a href="#切断供能不要提供解决方案">切断供能：不要提供解决方案</a></li>
+            <li><a href="#心理建设把-ta幼体化">心理建设：把 Ta“幼体化”</a></li>
+            <li><a href="#小结">小结</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%85%B3%E4%BA%8Enpd%E7%9A%84%E6%83%85%E7%BB%AA%E5%80%BE%E5%80%92%E8%A1%8C%E4%B8%BA/">关于NPD的情绪倾倒行为</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-03</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>和亲密的人接触久了，非常明显的就能区别正常抱怨与 NPD 式抱怨：</p>
+<ul>
+<li>正常人： 抱怨是为了寻求建议或情感支持，说完后情绪会缓解，也会关心对方的感受。</li>
+<li>NPD： 抱怨是单向的、无休止的，不寻求解决方案（如果你给建议他们反而会生气），并且完全无视这对听众造成的心理负担。</li>
+</ul>
+<p>之前听到 Ta 给我抱怨 Ta 生活、工作中遇到的琐事，我会尽量安慰、提出一些我觉得可能有用的缓解方式、或者从 Ta 所认为的施暴者角度分析为什么会这么做。结果换来的结局是，Ta 认为我怎么帮着“施暴者”说话。
+慢慢地，我意识到 Ta 向我抱怨时，我只能顺着 Ta 的想法给 Ta 回复，Ta 觉得 A 有问题，那我就绝对不能说“A 其实也没有怎么怎么样”。否则，Ta 与 A 之间的矛盾，会立刻马上转到 Ta 和你之间的矛盾
+接触的越多，越觉得 Ta 将自己当作情绪垃圾桶，身边随便一点小事，都会向你抱怨个没完，要么表现出一种极度厌世和烦躁的行为。</p>
+<p>这种情绪倾倒（Emotional Dumping）的行为，主要目的是什么呢：</p>
+<h3 id="把你当作情绪垃圾桶外部调节机制">把你当作“情绪垃圾桶”（外部调节机制）
+</h3><p>NPD 患者通常缺乏自我调节负面情绪的能力。当他们感到羞耻、挫败、焦虑或空虚时，他们无法内部消化这些感受。</p>
+<ul>
+<li>机制： 他们需要一个外部容器来承载这些“坏情绪”。亲密伴侣作为最安全、最近的人，就成了这个容器。</li>
+<li>表现： 他们会把在外面受到的气（比如交通堵塞、同事的一句话、天气的变化）夸大，并不停地向你抱怨。一旦他们把这些负能量“倒”给了你，看着你变得焦虑、担忧或心情低落，他们自己反而会觉得轻松了。这是一种“痛苦转移”。</li>
+</ul>
+<h3 id="索取自恋供应即使是负面的">索取“自恋供应”（即使是负面的）
+</h3><p>NPD 的核心需求是关注（自恋供应）。<strong>关注不一定非要是赞美，同情、安抚，甚至是伴侣的惊慌失措，都是一种“供应”</strong>。</p>
+<ul>
+<li>受害者叙事： 通过抱怨琐事，他们把自己塑造成一个“被生活亏待的受害者”。潜台词是：“你看我多不容易，全世界都在针对我，你必须关注我、心疼我、哄我。”</li>
+<li>测试忠诚度： 他们通过这种令人窒息的负能量来测试你的底线：你是否愿意为了我忍受这些垃圾情绪？如果你忍受了，就证明我在你心中是至高无上的。</li>
+</ul>
+<h3 id="投射与逃避责任">投射与逃避责任
+</h3><p>NPD 内心深处往往有着深刻的空虚感和自我厌恶。</p>
+<ul>
+<li>投射： 他们无法接受自己内心的“坏”，所以把这种“坏”投射到外部世界。如果你觉得他们烦躁、厌世，那是因为他们内心就是混乱的。</li>
+<li>推卸责任： 如果生活不顺，绝对不是他们无能，而是“这个世界太烂了”、“周围的人太蠢了”。<strong>抱怨琐事是他们维护全能感、避免面对自身缺陷的一种方式</strong>。</li>
+</ul>
+<h3 id="如何防御">如何防御
+</h3><p>对于 NPD 制造的这种双重束缚：你不关心，你是冷血；你关心，你就是情绪垃圾桶。核心策略不是“对抗”或“完全冷漠”，而是“温和的情绪抽离”。你的目标不是解决 Ta 的问题（因为那些问题通常解决不完），而是保护你的能量场。下面是一些防御策略，或者称之为“有礼貌的敷衍”。</p>
+<h4 id="核心心法不要做海绵要做雨衣">核心心法：不要做“海绵”，要做“雨衣”
+</h4><ul>
+<li>海绵模式： 把 Ta 的情绪全都吸进来，感同身受，试图帮他分析、解决。结果你湿透了，Ta 干了。</li>
+<li>雨衣模式： 水（抱怨）打在你身上，你看见了，听到了，但让水直接滑走，不渗透进你的内心。</li>
+</ul>
+<h4 id="战术动作改良版灰岩法">战术动作：改良版“灰岩法”
+</h4><p>面对抱怨，彻底不理睬会引发暴怒，所以你需要给出反应，但必须是“低质量的反应”</p>
+<p>话术公式： “肯定情绪” + “不仅过脑子” + “不给建议/不提问”</p>
+<ul>
+<li>错误回应（高能量）： “天哪怎么会这样？这也太过分了！那你打算怎么办？要不要我帮你……”（这给了他极大的自恋供应）。</li>
+<li>错误回应（冷漠）： “这点小事有什么好说的。”（这会引发争吵）。</li>
+<li>正确回应（灰岩/雨衣）：
+<ul>
+<li>“嗯，确实挺让人心烦的。”</li>
+<li>“是啊，这事儿哪怕搁谁身上都不好受。”</li>
+<li>“噢，原来是这样。哎。”</li>
+<li>“听起来今天确实不顺。”</li>
+</ul>
+</li>
+</ul>
+<p>重点: <strong>你的回应要像是一个没有感情的客服机器人</strong>。你有礼貌，有回应，但是<strong>没有任何情绪波澜</strong>。当 Ta 发现无论怎么抱怨都只能换来这些枯燥的“嗯嗯啊啊”，Ta 从你这里获得的“情绪快感”就会减少，久而久之可能会觉得没劲，从而减少找你抱怨的频率。</p>
+<h4 id="切断供能不要提供解决方案">切断供能：不要提供解决方案
+</h4><p>NPD 抱怨时，最忌讳的就是你给他提建议。</p>
+<ul>
+<li>如果你说：“那你下次早点出门就不堵车了。”</li>
+<li>他会听到：“你在指责我做错了。”</li>
+<li>防御策略： 无论他说什么，<strong>千万别试图通过逻辑帮他解决问题</strong>。只要点头说是即可。他要的不是答案，而是你的情绪起伏。<strong>你不给建议，你就不会卷入辩论。</strong></li>
+</ul>
+<h4 id="心理建设把-ta幼体化">心理建设：把 Ta“幼体化”
+</h4><p>当他开始狂躁、抱怨琐事时，如果你把他看作一个成年伴侣，你会觉得失望和愤怒。 试着在心里把他想象成一个“穿着大人衣服的 3 岁小孩”。</p>
+<ul>
+<li>小孩摔倒了哭闹，你会觉得他坏吗？不会，你只会觉得“他又失控了”。</li>
+<li>这种<strong>临床视角的抽离</strong>能帮你保持冷静。你在心里看着他表演，心想：“哦，自恋型人格障碍的症状又发作了，真的很典型。”而不是想：“他为什么要折磨我？”</li>
+</ul>
+<h4 id="小结">小结
+</h4><p><strong>“即使是关心，也是有限度的资源。”</strong> 面对 NPD 的抱怨，最好的防御就是<strong>不再把他的情绪当作你的责任</strong>。保持礼貌，但要在内心竖起一道玻璃墙：他在墙那边狂风暴雨，你在墙这边看着，仅仅是看着而已。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
