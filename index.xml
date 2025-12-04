@@ -7,7 +7,55 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 03 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 04 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>O形圈沟槽</title>
+        <link>https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E6%B2%9F%E6%A7%BD/</link>
+        <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E6%B2%9F%E6%A7%BD/</guid>
+        <description>&lt;p&gt;复习到这张卡片时产生的疑问和想法，为什么建议 O 形圈沟槽填充率最大不超过 85%？&lt;/p&gt;
+&lt;p&gt;$$\text{填充率} = \frac{\text{O形圈截面面积}}{\text{沟槽截面面积}} \times 100%$$&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251204204859.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251204204859.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;橡胶不可压缩&#34;&gt;橡胶不可压缩
+&lt;/h3&gt;&lt;p&gt;这里有一个直觉误区，很多人认为橡胶像海绵，压一压体积就变小了。&lt;strong&gt;但橡胶在宏观上是不可压缩的液体&lt;/strong&gt;[^1]（泊松比 $\approx 0.5$）。你压扁它，它必须向旁边鼓出来。体积恒定，只是形状改变。&lt;/p&gt;
+&lt;p&gt;如果你设计的沟槽填充率达到了 100%（即橡胶体积 = 沟槽体积），当两个金属面合拢时，橡胶无处可去。 这时候，O 形圈就不再是密封件，而变成了一个&lt;strong&gt;液压千斤顶&lt;/strong&gt;。它会产生巨大的反作用力，导致法兰变形，或者 O 形圈自己被挤出缝隙切碎。 留出的 15% 空间，是给橡胶变形流动的“避难所”&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：这里指的“液体”，并非指它的物态是流动的，而是指它在力学行为上符合液体的特征。初中学的帕斯卡定律“&lt;strong&gt;加在密闭液体上的压强，能够大小不变地向各个方向传递&lt;/strong&gt;”，O 形圈就是这么工作的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当你拧紧法兰，或者流体压力施加在 O 形圈一侧时，O 形圈内部的压力会像水一样传递。&lt;/li&gt;
+&lt;li&gt;输入压力 = 接触面压力。&lt;/li&gt;
+&lt;li&gt;它会把自己承受的压力，1:1 地传递给沟槽壁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果橡胶是普通固体（像木头），你压它的一侧，它另一侧可能根本没反应，这就没法密封了。正因为它是“液体”，它才能把系统压力转化为密封接触力，形成自紧式密封&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;热膨胀&#34;&gt;热膨胀
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;物理现象： 橡胶的热膨胀系数远大于金属（钢或铝）。通常橡胶的 CTE 是钢的 10 倍到 15 倍。&lt;/li&gt;
+&lt;li&gt;场景推演： 假设你在 20℃ 装配好设备，沟槽填满了 98%。 当设备运行到 100℃ 时，钢槽没怎么变大，但橡胶体积膨胀了。 由于没有空隙（&amp;lt; 2%），膨胀的橡胶会产生极高的&lt;strong&gt;内压&lt;/strong&gt;。这种内压会导致密封失效，或者产生巨大的摩擦力（对于动密封）。&lt;/li&gt;
+&lt;li&gt;85% 的含义： 这预留的空间是为了容纳高温下橡胶相对于金属多出来的那些体积。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;化学溶胀&#34;&gt;化学溶胀
+&lt;/h3&gt;&lt;p&gt;此外，与 O 形圈热膨胀类型，O 形圈在接触介质（油、酸、气）时，可能也会发生&lt;strong&gt;溶胀&lt;/strong&gt;。
+即使是“兼容”的材料（例如 氟橡胶 Viton 在 汽油 中），也允许有 5%~15% 的体积膨胀。这在材料手册里是合格的。85% 的上限，也预留了“化学反应溶胀”的余量。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>自紧密封</title>
+        <link>https://teaize.github.io/p/%E8%87%AA%E7%B4%A7%E5%AF%86%E5%B0%81/</link>
+        <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%87%AA%E7%B4%A7%E5%AF%86%E5%B0%81/</guid>
+        <description>&lt;p&gt;继上篇&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>关于NPD的情绪倾倒行为</title>
         <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8Enpd%E7%9A%84%E6%83%85%E7%BB%AA%E5%80%BE%E5%80%92%E8%A1%8C%E4%B8%BA/</link>
         <pubDate>Wed, 03 Dec 2025 00:00:00 +0000</pubDate>
