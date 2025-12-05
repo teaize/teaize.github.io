@@ -7,7 +7,224 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 04 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 05 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>O形圈参数</title>
+        <link>https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E5%8F%82%E6%95%B0/</link>
+        <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E5%8F%82%E6%95%B0/</guid>
+        <description>&lt;h2 id=&#34;关于-o-形圈内径拉伸率&#34;&gt;关于 O 形圈内径拉伸率
+&lt;/h2&gt;&lt;p&gt;轴向密封时，建议内径拉伸率最大不超过 3%，为什么&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20251205085313.png]]&lt;/p&gt;
+&lt;h3 id=&#34;焦耳---高夫效应--热力学陷阱&#34;&gt;焦耳 - 高夫效应 —— 热力学陷阱
+&lt;/h3&gt;&lt;p&gt;这是限制拉伸率最核心、最物理的原因。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直觉模型： 大多数物体（如钢、水、空气）受热都会膨胀&lt;/li&gt;
+&lt;li&gt;反直觉模型（橡胶）： 处于拉伸状态的橡胶，&lt;strong&gt;受热时会收缩&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;当你拉伸橡胶时，你强行把那些卷曲的高分子链拉直了（有序度增加，熵减小）。根据热力学定律，系统倾向于回到高熵（混乱）状态。当你加热它，分子热运动加剧，长链更想卷回去。 表现出来的宏观现象就是：越热，拉紧的皮筋缩得越紧&lt;/p&gt;
+&lt;p&gt;假设设计了一个轴向密封，O 形圈内径拉伸了 6% 装进去。常温下，一切正常。仪表开始工作，温度开始上升，例如升温到 150℃时，根据焦耳 - 高夫效应，O 形圈不仅不膨胀密封，反而试图剧烈收缩。这种收缩力会产生巨大的内应力，导致 O 形圈在沟槽内崩断，或者产生龟裂&lt;/p&gt;
+&lt;h3 id=&#34;截面缩减&#34;&gt;截面缩减
+&lt;/h3&gt;&lt;p&gt;根据泊松比推算，O 形圈内径每拉伸 1%，其截面直径（线径 $d_2$）大约会减少 0.5%。&lt;/p&gt;
+&lt;p&gt;假设你选了线径 3.53mm 的 O 形圈，为了密封，设计压缩量是 20%。如果你将它拉伸了 10%：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;截面直径会减小约 5% $\rightarrow$ 变成了 3.35mm。&lt;/li&gt;
+&lt;li&gt;你原本设计的沟槽深度是按 3.53mm 算的。&lt;/li&gt;
+&lt;li&gt;现在 O 形圈变细了，实际压缩量（Squeeze）大幅下降，可能只剩 10% 甚至更低。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;造成的结果是，低压时可能还能封住，但一旦遇到压力波动或震动，因为压缩量不足（回弹力不够），直接泄漏。&lt;strong&gt;也就是说，如果大幅调整了 O 形圈拉伸率，那么 O 形圈沟槽深度可能也需要再重新设计&lt;/strong&gt;。限制 3%，是为了保证 O 形圈的“身材”不走样，维持预期的压缩率&lt;/p&gt;
+&lt;h3 id=&#34;安装工艺&#34;&gt;安装工艺
+&lt;/h3&gt;&lt;p&gt;这是一个很实际的工程问题。例如轴向密封为盖板，如果 O 形圈拉伸了 5%，它时刻都想缩回原形。 当工人试图把盖板合上时，O 形圈会不由自主地从沟槽里“跳”出来，或者向内卷曲。导致 O 形圈被盖板面切边或压扁，密封失效。&lt;/p&gt;
+&lt;h3 id=&#34;应力老化&#34;&gt;应力老化
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;模型： 紧绷的绳子 vs. 松弛的绳子。拿刀去割一根松弛的绳子，挺难割断；但如果把绳子崩到极限，轻轻一碰就断了。&lt;/li&gt;
+&lt;li&gt;化学原理：当橡胶分子链处于拉伸（张紧）状态时，化学键的键能处于高能态，极不稳定。这时候，空气中的臭氧或者 CEMS 样气中的腐蚀性气体（$SO_2, NO_2$），会优先攻击这些“紧绷”的化学键。&lt;/li&gt;
+&lt;li&gt;后果：拉伸率过大，会成倍加速 O 形圈的老化和龟裂。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;轴向密封设计原则&#34;&gt;轴向密封设计原则
+&lt;/h2&gt;&lt;p&gt;我们设计的核心目标是：&lt;strong&gt;压力往哪边推，O 形圈安装时就预先靠在哪边的墙上&lt;/strong&gt;（减少运动，防止磨损）&lt;/p&gt;
+&lt;h3 id=&#34;1-内压工况正压&#34;&gt;1. 内压工况（正压）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;物理流向： 气体从中心向外推。&lt;/li&gt;
+&lt;li&gt;O 形圈位置： 应该预先紧贴沟槽外壁。&lt;/li&gt;
+&lt;li&gt;尺寸设计：
+&lt;ul&gt;
+&lt;li&gt;外径 (OD)： O 形圈外径 $\approx$ 沟槽外径（&lt;strong&gt;甚至可以让 O 形圈外径比沟槽外径略大 1%~2%，形成外径过盈/干涉，让它稳稳地“撑”在沟槽外圈不动&lt;/strong&gt;）。&lt;/li&gt;
+&lt;li&gt;内径 (ID)： O 形圈内径 &amp;gt; 沟槽内径（必须留有余量，绝对不能小，否则就变成箍在内圈了）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-外压真空工况&#34;&gt;2. 外压/真空工况
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;物理流向： 大气压从外向中心推（或者由于内部是真空，被吸向中心）。&lt;/li&gt;
+&lt;li&gt;O 形圈位置： 应该预先紧贴沟槽内壁。&lt;/li&gt;
+&lt;li&gt;尺寸设计：
+&lt;ul&gt;
+&lt;li&gt;内径 (ID)： O 形圈内径 &amp;lt; 沟槽内径（这就是之前提到的内径拉伸，&lt;strong&gt;让 O 形圈比沟槽内圈略小 1%~3%，紧紧箍在内圈上&lt;/strong&gt;）。&lt;/li&gt;
+&lt;li&gt;外径 (OD)： O 形圈外径 &amp;lt; 沟槽外径（自然会有间隙）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;工况类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;压力方向&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;O 形圈的“靠山”&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;尺寸关系&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;内压/正压&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\rightarrow$ 向外推&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;外壁&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;O 形圈外径 $\ge$ 沟槽外径&lt;/strong&gt; (外径过盈)&lt;br&gt;&lt;strong&gt;O 形圈内径 &amp;gt; 沟槽内径&lt;/strong&gt; (内径有间隙)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;外压/真空&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\leftarrow$ 向内推&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;内壁&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;O 形圈内径 &amp;lt; 沟槽内径&lt;/strong&gt; (内径拉伸/过盈)&lt;br&gt;&lt;strong&gt;O 形圈外径 &amp;lt; 沟槽外径&lt;/strong&gt; (外径有间隙)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>关于接头与密封</title>
+        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%A4%B4%E4%B8%8E%E5%AF%86%E5%B0%81/</link>
+        <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%8E%A5%E5%A4%B4%E4%B8%8E%E5%AF%86%E5%B0%81/</guid>
+        <description>&lt;p&gt;参考资料：&lt;a class=&#34;link&#34; href=&#34;https://gemini.google.com/app/4c6f5f035f60257e&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Google Gemini&lt;/a&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在 CEMS 仪器仪表当中，接头用的比较多，你能给我介绍一下接头是靠什么方式密封的吗，卡套？还是什么&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>氧化锆氧传感器</title>
+        <link>https://teaize.github.io/p/%E6%B0%A7%E5%8C%96%E9%94%86%E6%B0%A7%E4%BC%A0%E6%84%9F%E5%99%A8/</link>
+        <pubDate>Fri, 05 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%A7%E5%8C%96%E9%94%86%E6%B0%A7%E4%BC%A0%E6%84%9F%E5%99%A8/</guid>
+        <description>&lt;p&gt;氧化锆（ZrO₂）氧传感器的“零点标定”，和红外/紫外分析仪的“零点标定”，在物理逻辑上是不同的。&lt;/p&gt;
+&lt;h3 id=&#34;不能使用纯氮标零&#34;&gt;不能使用“纯氮”标零
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;物理模型（能斯特方程）
+&lt;ul&gt;
+&lt;li&gt;$$E = A \cdot T \cdot \ln(\frac{\text{参考气浓度}}{\text{被测气浓度}})$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;数学陷阱： 如果被测气浓度为 0%（纯氮），那么分母为 0，$\ln(\infty)$ 趋向于无穷大。&lt;/li&gt;
+&lt;li&gt;后果： 理论上，通入纯氮，传感器应该输出无穷大的电压。实际上，它会&lt;strong&gt;输出一个极其不稳定、受微量杂质干扰巨大的高电压信号&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;正确做法：&lt;strong&gt;氧化锆的“零点标定”，实际上是“低点标定”&lt;/strong&gt;。 通常推荐使用 1% ~ 4% 的标气（氮气背景下的氧气）。例如使用 1% 的标气标定，那么标定时输入 1%，而不是 0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;情况 A：通入空气 ($20.95%$)
+&lt;ul&gt;
+&lt;li&gt;$$E = K \times \ln(1) = 0 \text{ mV}$$&lt;/li&gt;
+&lt;li&gt;这是氧化锆的物理零点，但通常作为量程点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;情况 B：通入 1% 标气
+&lt;ul&gt;
+&lt;li&gt;$$E = K \times \ln(20.95 / 1) \approx K \times 3.04 \approx 150 \text{ mV}$$&lt;/li&gt;
+&lt;li&gt;这是一个稳定、可测量的电压&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;情况 C：通入 0% 纯氮 ($0%$)
+&lt;ul&gt;
+&lt;li&gt;$$E = K \times \ln(20.95 / 0) = K \times \infty = \infty \text{ (无穷大)}$$&lt;/li&gt;
+&lt;li&gt;所以，对于氧化锆氧传感器，无法用纯氮气标定，因为数学上那是“奇点”，物理上那是“噪声放大器”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;线性关系&#34;&gt;线性关系
+&lt;/h2&gt;&lt;p&gt;其实，非线性才是大自然的常态&lt;/p&gt;
+&lt;p&gt;在 CEMS 和工业仪表中，有很多测量原理输入和输出之间存在指数、对数或者平方根关系。理解这些非线性，对于理解仪表的“量程比”、“灵敏度区间” 以及 “为什么低量程测不准”至关重要。&lt;/p&gt;
+&lt;h3 id=&#34;朗伯---比尔定律-ndiruv指数饱和模型&#34;&gt;朗伯 - 比尔定律 (NDIR/UV)：指数饱和模型
+&lt;/h3&gt;&lt;p&gt;这是所有光学气体分析仪（测 $SO_2, NO_x, CO$）的物理基石。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理公式：光强透射率 $T = \frac{I}{I_0} = e^{-k \cdot L \cdot C}$
+&lt;ul&gt;
+&lt;li&gt;$I$: 接收到的光强&lt;/li&gt;
+&lt;li&gt;$C$: 气体浓度&lt;/li&gt;
+&lt;li&gt;$L$: 光程长度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非线性特征：指数衰减，&lt;strong&gt;光并不是随浓度线性减少的，而是按百分比衰减的&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;模型思维： “刷油漆模型”
+&lt;ul&gt;
+&lt;li&gt;低浓度时（线性区）： 就像给透明玻璃刷第一层黑漆，挡光效果非常明显。此时灵敏度最高。&lt;/li&gt;
+&lt;li&gt;高浓度时（饱和区）： 就像已经刷了 10 层漆，玻璃已经黑了。再刷第 11 层（浓度增加），透过的光几乎没有变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;奇点/难点：当浓度 $C$ 过大时，探测器接收到的光强 $I \approx 0$。此时信号淹没在噪声中，无论浓度再怎么增加，仪器都“瞎”了。这就是光学饱和。所以 NDIR 分析仪严禁长时间超量程运行，否则读数会“切平头”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;皮托管测流速平方根模型&#34;&gt;皮托管测流速：平方根模型
+&lt;/h3&gt;&lt;p&gt;这是 CEMS 测量烟气流速最常用的方法&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理公式（伯努利方程）：$$v = K \cdot \sqrt{\frac{2 \cdot \Delta P}{\rho}}$$
+&lt;ul&gt;
+&lt;li&gt;$v$: 流速&lt;/li&gt;
+&lt;li&gt;$\Delta P$: 差压（动压）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非线性特征：抛物线关系，差压 $\Delta P$ 与流速 $v$ 的平方成正比。&lt;/li&gt;
+&lt;li&gt;模型思维： “动能 - 势能转换”
+&lt;ul&gt;
+&lt;li&gt;高速区（好测）： 流速 20m/s 时，差压很大，很容易测准。&lt;/li&gt;
+&lt;li&gt;低速区（难测）： 这是一个“死区”。
+&lt;ul&gt;
+&lt;li&gt;流速从 0 变到 2 m/s，差压的变化微乎其微（接近 0）。&lt;/li&gt;
+&lt;li&gt;$\sqrt{0.001}$ 和 $\sqrt{0.002}$ 的差异极难分辨。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;奇点/难点：&lt;strong&gt;在低流速（&amp;lt; 5m/s）下，皮托管几乎失效&lt;/strong&gt;。因为差压传感器在零点附近的漂移（比如 1Pa）会被开根号放大，导致流速读数在 0 和 3m/s 之间乱跳。这就是为什么低负荷工况下，烟气流速很难测准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;热式质量流量计kings-law-金氏定律&#34;&gt;热式质量流量计：King&amp;rsquo;s Law (金氏定律)
+&lt;/h3&gt;&lt;p&gt;这经常用来测 CEMS 采样流量或氨逃逸流量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理公式：$$P = A + B \cdot v^{n}$$
+&lt;ul&gt;
+&lt;li&gt;(通常 $n \approx 0.5$)，即功率 $P$ 与流速的 $n$ 次方成正比。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非线性特征：倒数敏感，它和皮托管正好相反&lt;/li&gt;
+&lt;li&gt;模型思维： “风冷效应”
+&lt;ul&gt;
+&lt;li&gt;低速区： 就像你出汗时吹微风，稍微有一点风，冷却效果就特别明显。（灵敏度极高）&lt;/li&gt;
+&lt;li&gt;高速区： 当风速已经很大了，再大的风，带走热量的能力增加得也很有限。（灵敏度下降）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;应用启示：如果你要测微小泄漏或者微小流量，选热式（它对小流量敏感）；如果你要测台风，选皮托管（它对大流量敏感）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ph-计-脱硫废水湿法脱硫对数模型&#34;&gt;pH 计 (脱硫废水/湿法脱硫)：对数模型
+&lt;/h3&gt;&lt;p&gt;这和氧化锆比较相似&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理公式：
+&lt;ul&gt;
+&lt;li&gt;$$E = E_0 - S \cdot \log[H^+]$$&lt;/li&gt;
+&lt;li&gt;$$pH = -\log[H^+]$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;非线性特征：pH 每变化 1 个单位，氢离子浓度 $[H^+]$ 变化 10 倍。&lt;/li&gt;
+&lt;li&gt;模型思维： “数量级压缩”
+&lt;ul&gt;
+&lt;li&gt;pH 6 变到 pH 7，我们需要中和掉的酸，是 pH 7 变到 pH 8 的 10 倍。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;这就是为什么在脱硫塔调节 pH 值时，越接近中性（pH 7），控制越难，稍微加一点碱就“过”了&lt;/strong&gt;。这是一个典型的非线性控制难题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>O形圈沟槽</title>
         <link>https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E6%B2%9F%E6%A7%BD/</link>
         <pubDate>Thu, 04 Dec 2025 00:00:00 +0000</pubDate>
@@ -67,8 +284,8 @@
 &lt;li&gt;NPD： 抱怨是单向的、无休止的，不寻求解决方案（如果你给建议他们反而会生气），并且完全无视这对听众造成的心理负担。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;之前听到 Ta 给我抱怨 Ta 生活、工作中遇到的琐事，我会尽量安慰、提出一些我觉得可能有用的缓解方式、或者从 Ta 所认为的施暴者角度分析为什么会这么做。结果换来的结局是，Ta 认为我怎么帮着“施暴者”说话。
-慢慢地，我意识到 Ta 向我抱怨时，我只能顺着 Ta 的想法给 Ta 回复，Ta 觉得 A 有问题，那我就绝对不能说“A 其实也没有怎么怎么样”。否则，Ta 与 A 之间的矛盾，会立刻马上转到 Ta 和你之间的矛盾
-接触的越多，越觉得 Ta 将自己当作情绪垃圾桶，身边随便一点小事，都会向你抱怨个没完，要么表现出一种极度厌世和烦躁的行为。&lt;/p&gt;
+慢慢地，我意识到 Ta 向我抱怨时，我只能顺着 Ta 的想法给 Ta 回复，Ta 觉得 A 有问题，那我就绝对不能说“A 其实也没有怎么怎么样”。否则，Ta 与 A 之间的矛盾，会立刻马上转到 Ta 和你之间的矛盾。&lt;/p&gt;
+&lt;p&gt;接触的越多，越觉得 Ta 将自己当作情绪垃圾桶，身边随便一点小事，都会向你抱怨个没完，要么表现出一种极度厌世和烦躁的行为。&lt;/p&gt;
 &lt;p&gt;这种情绪倾倒（Emotional Dumping）的行为，主要目的是什么呢：&lt;/p&gt;
 &lt;h3 id=&#34;把你当作情绪垃圾桶外部调节机制&#34;&gt;把你当作“情绪垃圾桶”（外部调节机制）
 &lt;/h3&gt;&lt;p&gt;NPD 患者通常缺乏自我调节负面情绪的能力。当他们感到羞耻、挫败、焦虑或空虚时，他们无法内部消化这些感受。&lt;/p&gt;
