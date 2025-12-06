@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="继上篇\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="继上篇 O形圈沟槽 所说的帕斯卡定律，为什么 O 形圈可以实现自紧密封\nO 形圈自紧原理 如果我们把橡胶看作普通固体（比如软木垫片），要密封 10MPa 的气体压力，你的螺栓必须提供大于 10MPa 的压紧力。一旦螺栓松了一点，压力大于压紧力，密封就失效了。\n">
 <title>自紧密封</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/%E8%87%AA%E7%B4%A7%E5%AF%86%E5%B0%81/'>
 
 <link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="自紧密封">
-<meta property='og:description' content="继上篇\n">
+<meta property='og:description' content="继上篇 O形圈沟槽 所说的帕斯卡定律，为什么 O 形圈可以实现自紧密封\nO 形圈自紧原理 如果我们把橡胶看作普通固体（比如软木垫片），要密封 10MPa 的气体压力，你的螺栓必须提供大于 10MPa 的压紧力。一旦螺栓松了一点，压力大于压紧力，密封就失效了。\n">
 <meta property='og:url' content='https://teaize.github.io/p/%E8%87%AA%E7%B4%A7%E5%AF%86%E5%B0%81/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-04T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="自紧密封">
-<meta name="twitter:description" content="继上篇\n">
+<meta name="twitter:description" content="继上篇 O形圈沟槽 所说的帕斯卡定律，为什么 O 形圈可以实现自紧密封\nO 形圈自紧原理 如果我们把橡胶看作普通固体（比如软木垫片），要密封 10MPa 的气体压力，你的螺栓必须提供大于 10MPa 的压紧力。一旦螺栓松了一点，压力大于压紧力，密封就失效了。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,7 +273,44 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#o-形圈自紧原理">O 形圈自紧原理</a></li>
+        <li><a href="#与垫片密封的区别">与垫片密封的区别</a></li>
+        <li><a href="#副作用间隙挤出">“副作用”间隙挤出</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -322,7 +359,49 @@
     <section class="article-content">
     
     
-    <p>继上篇</p>
+    <p>继上篇 <a class="link" href="https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E6%B2%9F%E6%A7%BD/"  target="_blank" rel="noopener"
+    >O形圈沟槽</a> 所说的帕斯卡定律，为什么 O 形圈可以实现自紧密封</p>
+<h3 id="o-形圈自紧原理">O 形圈自紧原理
+</h3><p>如果我们把橡胶看作普通固体（比如软木垫片），要密封 10MPa 的气体压力，你的螺栓必须提供大于 10MPa 的压紧力。一旦螺栓松了一点，压力大于压紧力，密封就失效了。</p>
+<p>但在<strong>帕斯卡定律</strong>的加持下，O 形圈便“活”了起来：</p>
+<ul>
+<li>初始状态（压力为 0）： 你安装好 O 形圈，给它一个初始压缩量（比如 20%）。此时，橡胶依靠自身的弹性（固体属性），产生了一个初始接触压力 $P_{init}$（例如 2MPa）。 此时：密封能力 = 2MPa。</li>
+<li>工作状态（系统压力 $P_{sys}$ = 10MPa）：高压气体进入沟槽，推挤 O 形圈。 帕斯卡定律生效： O 形圈作为“液体”，忠实地传递了这个 10MPa 的压力。它把这个压力叠加到了密封面上。
+<ul>
+<li>$$P_{final} = P_{init} + P_{sys}$$</li>
+<li>$$P_{final} = 2MPa + 10MPa = 12MPa$$</li>
+</ul>
+</li>
+<li>结论： 接触压力（12MPa） &gt; 系统压力（10MPa）。 无论系统压力怎么升高，密封面的反作用力永远比它高出一个 $P_{init}$。</li>
+</ul>
+<p><strong>这就是自紧：压力越大，封得越紧。</strong> 你不需要用巨大的螺栓去对抗 10MPa，你只需要提供那微不足道的 2MPa 初始压力，剩下的力气，是流体自己“帮”你封住的。</p>
+<h3 id="与垫片密封的区别">与垫片密封的区别
+</h3><ul>
+<li>垫片
+<ul>
+<li>对象：紫铜垫、石棉垫、聚四氟乙烯（PTFE）。</li>
+<li>物理模型：<strong>塑性变形</strong>。</li>
+<li>操作：拼命拧螺栓。 必须要让法兰变形，死死压住垫片。螺栓力就是一切。</li>
+<li>缺点：震动导致螺栓松动后，立马泄漏。</li>
+</ul>
+</li>
+<li>O 形圈
+<ul>
+<li>对象：橡胶、全氟醚。</li>
+<li>物理模型：<strong>帕斯卡传压</strong>。</li>
+<li>操作：金对金接触 。螺栓拧紧是为了让两个金属法兰面贴合，而不是为了压扁 O 形圈。O 形圈的压缩量是由沟槽深度锁死的（设计好的）。</li>
+<li>优点：螺栓即便微量松动，只要金属面不分开太多，流体压力依然会让 O 形圈膨胀补偿，维持密封。</li>
+</ul>
+</li>
+</ul>
+<h3 id="副作用间隙挤出">“副作用”间隙挤出
+</h3><p>当然，既然它是“液体”，在高压下，它就会像水一样，试图从哪怕最细微的缝隙里“射”出去。这就是为什么高压（&gt;10MPa）密封设计中，配合公差 比 表面光洁度 更重要。</p>
+<ul>
+<li>场景： 法兰面没对齐，留了 0.2mm 的缝隙。</li>
+<li>低压时： 它是固体，没事。</li>
+<li>高压时： 帕斯卡定律让它变成了高压水流。橡胶会被“挤”进这 0.2mm 的缝隙里，像削土豆皮一样被金属边缘切掉。</li>
+</ul>
+<p>解决办法： 既然它是液体，堵不住缝隙，那就加一个挡圈。挡圈通常是硬质特氟龙或 PEEK，它更像固体，用来堵住缝隙，让柔软的橡胶安心做它的“液体工作”。</p>
 
 </section>
 
