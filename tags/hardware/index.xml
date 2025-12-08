@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Hardware on Coffity&#39;s Blog</title>
+        <link>https://teaize.github.io/tags/hardware/</link>
+        <description>Recent content in Hardware on Coffity&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>zh-cn</language>
+        <copyright>Coffity</copyright>
+        <lastBuildDate>Sat, 06 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/hardware/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>去耦电容</title>
+        <link>https://teaize.github.io/p/%E5%8E%BB%E8%80%A6%E7%94%B5%E5%AE%B9/</link>
+        <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8E%BB%E8%80%A6%E7%94%B5%E5%AE%B9/</guid>
+        <description>&lt;p&gt;把电容跨接在芯片的 VCC 和 GND 之间，这个电容在工程上有一个专门的名字，叫 “&lt;strong&gt;去耦电容&lt;/strong&gt;”或者 “旁路电容”。如果没有它，芯片可能会莫名其妙地死机、重启，或者信号乱跳。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要加电容&#34;&gt;为什么要加电容
+&lt;/h3&gt;&lt;p&gt;你可以把 电源 想象成一个远处的 水库，把 导线 想象成 输水管，而 芯片 是家里必须要&lt;strong&gt;频繁开关的 水龙头&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;应对瞬时缺水--储能作用&#34;&gt;应对“瞬时缺水” —— 储能作用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题：芯片工作时不是一直在喝水，而是像机关枪一样，一会儿猛喝一口（电流瞬间增大），一会儿不喝。当芯片突然要“喝一大口水”时，远处水库的水流过来需要时间（因为导线有电感和电阻，水流有惯性）。结果就是，水还没流过来，芯片门口的水压（电压）瞬间就掉下去了（也叫作&lt;strong&gt;电压跌落&lt;/strong&gt;）。电压一掉，芯片就复位或死机了。&lt;/li&gt;
+&lt;li&gt;解决：在芯片门口（VCC 引脚旁）放一个小水桶（电容）。&lt;/li&gt;
+&lt;li&gt;效果：当芯片突然要喝水时，先喝小水桶里的水。因为水桶离得近，水立马就能供上，维持了水压（电压）的稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;滤除水管杂音--滤波作用&#34;&gt;滤除“水管杂音” —— 滤波作用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题：电源送过来的水流往往不干净，里面可能有波浪（高频噪声）。同时，芯片自己工作时也会产生震动，反向传回水管里，干扰别人。&lt;/li&gt;
+&lt;li&gt;解决：电容对高频信号相当于“短路”。&lt;/li&gt;
+&lt;li&gt;效果：高频噪声（波浪）过来时，直接通过电容流进地（GND）里消散掉了，不会进入芯片内部干扰核心电路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通常是如何应用的&#34;&gt;通常是如何应用的
+&lt;/h3&gt;&lt;p&gt;在画电路图和 画板时，有一套约定俗成的“组合拳”。&lt;/p&gt;
+&lt;h4 id=&#34;选什么值-大鬼和小鬼&#34;&gt;选什么值？—— “大鬼和小鬼”
+&lt;/h4&gt;&lt;p&gt;通常我们会看到一个引脚旁边并联了两个不一样大的电容，比如 10uF 和 0.1uF。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0.1uF (100nF, 也就是常说的 104 电容)：
+&lt;ul&gt;
+&lt;li&gt;角色：这是“&lt;strong&gt;标配&lt;/strong&gt;”。&lt;/li&gt;
+&lt;li&gt;作用：专门对付高频噪声（几 MHz 到几十 MHz）。因为小电容的内部卷绕少，寄生电感小，反应极快。&lt;/li&gt;
+&lt;li&gt;材质：通常用陶瓷电容（MLCC）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;10uF (或者 4.7uF, 100uF)：
+&lt;ul&gt;
+&lt;li&gt;角色：这是“&lt;strong&gt;蓄水池&lt;/strong&gt;”。&lt;/li&gt;
+&lt;li&gt;作用：对付低频波动或大电流需求。它存的电荷多，能撑得久一点。&lt;/li&gt;
+&lt;li&gt;材质：可能是钽电容、电解电容或大容量陶瓷电容。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;工程经验：如果只让加一个，对于大多数普通数字芯片（如逻辑门、低速单片机），加一个 0.1uF 是底线。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;放哪里-寸土寸金&#34;&gt;放哪里？—— “寸土寸金”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;黄金法则：电容必须尽可能靠近芯片的 VCC 和 GND 引脚&lt;/li&gt;
+&lt;li&gt;原因：还记得水桶理论吗？如果水桶离水龙头太远，水管还是很长，那这个水桶就没用了。电容离引脚越远，中间的走线产生的寄生电感就越大，去耦效果就越差。&lt;/li&gt;
+&lt;li&gt;顺序：如果同时有 10uF 和 0.1uF，&lt;strong&gt;小的（0.1uF）要紧贴着芯片放，大的（10uF）可以稍微放外面一点点&lt;/strong&gt;。因为高频噪声最难搞，必须第一时间干掉。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

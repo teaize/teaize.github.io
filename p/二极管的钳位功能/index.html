@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="电容充电时间常数 ($\\tau$) 就是电路的“**反应速度”，简单来说：\n$\\tau$ 小 $\\rightarrow$ 电容充放电快 $\\rightarrow$ 电路反应灵敏，波形陡峭。 $\\tau$ 大 $\\rightarrow$ 电容充放电慢 $\\rightarrow$ 电路反应迟钝，波形平缓。 它是怎么算的 $$\\tau = R \\times C$$\n">
-<title>电容充电时间常数</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="二极管导通之后，压降是恒定的，利用这一点特性，实现钳位功能。本质上是把电压“钉”在某个安全的范围内，不让它乱跑。想象一个疯狂跳跃的弹簧（电压信号），二极管就是一个坚固的“天花板”或者“地板”，强制让这个弹簧不能跳得比天花板高，或者比地板低。\n">
+<title>二极管的钳位功能</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%9A%84%E9%92%B3%E4%BD%8D%E5%8A%9F%E8%83%BD/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="电容充电时间常数">
-<meta property='og:description' content="电容充电时间常数 ($\\tau$) 就是电路的“**反应速度”，简单来说：\n$\\tau$ 小 $\\rightarrow$ 电容充放电快 $\\rightarrow$ 电路反应灵敏，波形陡峭。 $\\tau$ 大 $\\rightarrow$ 电容充放电慢 $\\rightarrow$ 电路反应迟钝，波形平缓。 它是怎么算的 $$\\tau = R \\times C$$\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="二极管的钳位功能">
+<meta property='og:description' content="二极管导通之后，压降是恒定的，利用这一点特性，实现钳位功能。本质上是把电压“钉”在某个安全的范围内，不让它乱跑。想象一个疯狂跳跃的弹簧（电压信号），二极管就是一个坚固的“天花板”或者“地板”，强制让这个弹簧不能跳得比天花板高，或者比地板低。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%9A%84%E9%92%B3%E4%BD%8D%E5%8A%9F%E8%83%BD/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-06T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="电容充电时间常数">
-<meta name="twitter:description" content="电容充电时间常数 ($\\tau$) 就是电路的“**反应速度”，简单来说：\n$\\tau$ 小 $\\rightarrow$ 电容充放电快 $\\rightarrow$ 电路反应灵敏，波形陡峭。 $\\tau$ 大 $\\rightarrow$ 电容充放电慢 $\\rightarrow$ 电路反应迟钝，波形平缓。 它是怎么算的 $$\\tau = R \\times C$$\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="二极管的钳位功能">
+<meta name="twitter:description" content="二极管导通之后，压降是恒定的，利用这一点特性，实现钳位功能。本质上是把电压“钉”在某个安全的范围内，不让它乱跑。想象一个疯狂跳跃的弹簧（电压信号），二极管就是一个坚固的“天花板”或者“地板”，强制让这个弹簧不能跳得比天花板高，或者比地板低。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,16 +297,9 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#它是怎么算的">它是怎么算的</a></li>
-        <li><a href="#它告诉了我们什么">它告诉了我们什么</a></li>
-        <li><a href="#拿它做什么">拿它做什么</a>
-          <ol>
-            <li><a href="#让子弹飞一会儿--上电复位电路">“让子弹飞一会儿” —— 上电复位电路</a></li>
-            <li><a href="#过滤杂音--按键去抖">“过滤杂音” —— 按键去抖</a></li>
-            <li><a href="#把方波变直流--pwm-转-dac-无源滤波">“把方波变直流” —— PWM 转 DAC (无源滤波)</a></li>
-          </ol>
-        </li>
-        <li><a href="#经验法则">经验法则</a></li>
+        <li><a href="#保护芯片引脚adc-或-gpio-输入保护">保护芯片引脚（ADC 或 GPIO 输入保护）</a></li>
+        <li><a href="#继电器电机线圈的续流保护">继电器/电机线圈的“续流保护”</a></li>
+        <li><a href="#注意点">注意点</a></li>
       </ol>
     </li>
   </ol>
@@ -328,7 +321,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/">电容充电时间常数</a>
+            <a href="/p/%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%9A%84%E9%92%B3%E4%BD%8D%E5%8A%9F%E8%83%BD/">二极管的钳位功能</a>
         </h2>
     
         
@@ -350,7 +343,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-06</time>
+                <time class="article-time--published">2025-12-07</time>
             </div>
         
 
@@ -366,64 +359,55 @@
     <section class="article-content">
     
     
-    <p>电容充电时间常数 ($\tau$) 就是电路的“**反应速度”，简单来说：</p>
+    <p><strong>二极管导通之后，压降是恒定的</strong>，利用这一点特性，实现钳位功能。本质上是把电压“<strong>钉</strong>”在某个安全的范围内，不让它乱跑。想象一个疯狂跳跃的弹簧（电压信号），二极管就是一个坚固的“天花板”或者“地板”，强制让这个弹簧不能跳得比天花板高，或者比地板低。</p>
+<p>下面是一些利用二极管钳位功能的实战场景：</p>
+<h3 id="保护芯片引脚adc-或-gpio-输入保护">保护芯片引脚（ADC 或 GPIO 输入保护）
+</h3><p>这是最常见的应用。芯片（比如单片机或 ADC 芯片）的引脚通常很脆弱，只能承受 -0.3V 到 VCC+0.3V 的电压。如果外部接了长线，可能会感应出高压静电或浪涌，瞬间击穿芯片。</p>
 <ul>
-<li>$\tau$ 小 $\rightarrow$ 电容充放电快 $\rightarrow$ 电路反应灵敏，波形陡峭。</li>
-<li>$\tau$ 大 $\rightarrow$ 电容充放电慢 $\rightarrow$ 电路反应迟钝，波形平缓。</li>
-</ul>
-<h3 id="它是怎么算的">它是怎么算的
-</h3><p>$$\tau = R \times C$$</p>
+<li><strong>做法</strong>：在输入引脚上，<strong>并联两个二极管</strong>（通常是肖特基二极管，因为正向压降小）。
 <ul>
-<li>$R$ (电阻)：单位是欧姆 ($\Omega$)</li>
-<li>$C$ (电容)：单位是法拉 ($F$)</li>
-<li>$\tau$ (时间常数)：单位是秒 ($s$)</li>
-</ul>
-<blockquote>
-<p>例子：如果你有一个 $10k\Omega$ 的电阻和一个 $10\mu F$ 的电容，时间常数就是：
-$10,000 \times 0.00001 = 0.1$ 秒 (即 100 毫秒)。</p>
-</blockquote>
-<h3 id="它告诉了我们什么">它告诉了我们什么
-</h3><p>电容不像一个水桶（装满就停），它更像一个有阻力的弹簧。时间常数 $\tau$ 告诉我们要等多久电容才能“跟上”电压的变化</p>
-<ul>
-<li>$1\tau$ (63.2%)：给电容充电时，经过 1 个时间常数 的时间，电压会充到总电压的 63.2%。</li>
-<li>$5\tau$ (99.3%)：经过 5 个时间常数 的时间，我们工程上认为电容已经充满了（或者放电放完了）。</li>
-</ul>
-<h3 id="拿它做什么">拿它做什么
-</h3><p>我们通常利用 $\tau$ 的“延时”和“平滑”这两个特性来设计电路。以下是三个最经典的应用</p>
-<h4 id="让子弹飞一会儿--上电复位电路">“让子弹飞一会儿” —— 上电复位电路
-</h4><p>芯片（比如单片机）刚通电时，电源电压可能不稳，如果芯片马上开始工作，容易出错（跑飞）。</p>
-<ul>
-<li>做法：我们在复位引脚（Reset）接一个 RC 电路。</li>
-<li>原理：电源上电了，但电容电压需要慢慢爬升（由 $\tau$ 决定）。只要电容电压还没爬到高电平，芯片就一直处于“被按住复位键”的状态。</li>
-<li>目的：给电源一点时间稳定下来，等 $\tau$ 时间过了，电容充满了，复位结束，芯片再安全启动。</li>
-</ul>
-<h4 id="过滤杂音--按键去抖">“过滤杂音” —— 按键去抖
-</h4><p>当你按下一个机械按键时，金属弹片会发生极其快速的物理抖动（几毫秒内通断几十次）。单片机会以为你按了几十次。</p>
-<ul>
-<li>做法：在按键旁边并联一个电容，串联一个电阻。</li>
-<li>原理：利用 $\tau$ 制造的“迟钝”。抖动太快了（时间极短），电容来不及充电和放电，电压就被“拉平”了，看不出抖动。</li>
-<li>目的：让单片机读到一个干净、平滑的按键信号。</li>
-</ul>
-<h4 id="把方波变直流--pwm-转-dac-无源滤波">“把方波变直流” —— PWM 转 DAC (无源滤波)
-</h4><p>如果你想用数字信号（PWM，只有 0V 和 3.3V）控制一个模拟设备（比如调节屏幕亮度或电机速度），你需要一个中间电压（比如 1.65V）。</p>
-<ul>
-<li>做法：让 PWM 信号通过一个 RC 低通滤波器。</li>
-<li>原理：如果 $\tau$ 远大于 PWM 的周期，电容就来不及随着 PWM 的高低电平快速充放电，而是维持在一个平均电压值上。</li>
-<li>目的：把“一顿一顿”的数字脉冲平滑成“连续”的模拟电压。</li>
-</ul>
-<h3 id="经验法则">经验法则
-</h3><p>在图纸上看到电阻和电容连在一起时，可以这样快速判断：</p>
-<ul>
-<li>看位置
-<ul>
-<li>如果是 信号线对地 接 RC：通常是为了<strong>滤除噪声</strong>（让高频干扰来不及反应）。</li>
-<li>如果是 芯片复位脚/电源脚：通常是为了<strong>延时启动</strong>或<strong>软启动</strong>（Soft Start）。</li>
+<li><strong>上钳位二极管</strong>：正极接引脚，负极接 VCC。如果输入电压超过 VCC，二极管导通，把多余的电压泄放到电源上去。</li>
+<li><strong>下钳位二极管</strong>：负极接引脚，正极接 GND。如果输入电压低于 GND（出现负压），二极管导通，把电压“钉”在 GND 附近（-0.3V 左右），防止芯片内部损坏。</li>
 </ul>
 </li>
-<li>估算时间
+<li><strong>应用</strong>：几乎所有暴露在机壳外的接口（USB, HDMI, 传感器接口）内部或外部都有这种结构</li>
+</ul>
+<p>【上钳位二极管】例如这个电路中，二极管后端接 3.3V，那么他的前端电压只要高于 3.3+0.7=4V，二极管就会被导通，也就是说二极管前端电压不可能超过 4V（同样也是运放的输入引脚）。这样也就防止电压过高将运放烧坏
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020250703193335.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020250703193335.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<p>【下钳位二极管】下图当中，就可以确保点 2 处的电压不能低于 -0.7V
+![[Pasted image 20251207102905.png]]</p>
+<h3 id="继电器电机线圈的续流保护">继电器/电机线圈的“续流保护”
+</h3><p>这也是一种“钳位”。我们在控制电感性负载（线圈、电机、继电器）时，断电瞬间线圈会产生几百伏的反向高压（电感尖峰），如果不处理，驱动三极管或 MOS 管必炸无疑。</p>
 <ul>
-<li>看到 $R=10k, C=10\mu F$，心里默念“0.1 秒”。</li>
-<li>看到 $R=1k, C=1nF$，心里默念“1 微秒”（非常快，通常用于滤除射频干扰）。</li>
+<li><strong>做法</strong>：在继电器线圈两端<strong>反向并联</strong>一个二极管。</li>
+<li><strong>原理</strong>：
+<ul>
+<li>正常通电时，二极管截止，不起作用。</li>
+<li>断电瞬间，线圈产生反向电压（下正上负），这时二极管被正向导通。</li>
+<li><strong>钳位效果</strong>：线圈两端的反向电压被二极管强行钳位在 <strong>0.7V</strong>（二极管压降），而不是几百伏。能量通过二极管和线圈自己形成的回路慢慢消耗掉（续流）。</li>
+</ul>
+</li>
+<li><strong>应用</strong>：所有继电器驱动电路、电机 H 桥电路。</li>
+</ul>
+<h3 id="注意点">注意点
+</h3><ul>
+<li><strong>电流去哪了？</strong>
+<ul>
+<li>比如在 <strong>ADC 保护</strong>场景中，当输入高压被二极管钳位到 VCC 时，多余的能量是灌入电源轨（VCC）的。如果这个浪涌电流太大，会把你的 VCC 电压抬高，甚至把整个板子的其他芯片烧掉！</li>
+<li><strong>对策</strong>：通常会在输入端串联一个电阻（限流电阻），限制灌入二极管的电流。</li>
+</ul>
+</li>
+<li><strong>二极管的速度</strong>
+<ul>
+<li>钳位通常是为了对付瞬态高压（ESD、浪涌），这些尖峰来得极快（纳秒级）。</li>
+<li><strong>对策</strong>：普通整流二极管（如 1N4007）太慢了，来不及反应芯片就挂了。必须用 <strong>快恢复二极管</strong> 或 <strong>肖特基二极管</strong>（如 BAT54S, 1N4148, 1N5819）。</li>
 </ul>
 </li>
 </ul>

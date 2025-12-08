@@ -7,7 +7,292 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sat, 06 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>二极管的钳位功能</title>
+        <link>https://teaize.github.io/p/%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%9A%84%E9%92%B3%E4%BD%8D%E5%8A%9F%E8%83%BD/</link>
+        <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%9A%84%E9%92%B3%E4%BD%8D%E5%8A%9F%E8%83%BD/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;二极管导通之后，压降是恒定的&lt;/strong&gt;，利用这一点特性，实现钳位功能。本质上是把电压“&lt;strong&gt;钉&lt;/strong&gt;”在某个安全的范围内，不让它乱跑。想象一个疯狂跳跃的弹簧（电压信号），二极管就是一个坚固的“天花板”或者“地板”，强制让这个弹簧不能跳得比天花板高，或者比地板低。&lt;/p&gt;
+&lt;p&gt;下面是一些利用二极管钳位功能的实战场景：&lt;/p&gt;
+&lt;h3 id=&#34;保护芯片引脚adc-或-gpio-输入保护&#34;&gt;保护芯片引脚（ADC 或 GPIO 输入保护）
+&lt;/h3&gt;&lt;p&gt;这是最常见的应用。芯片（比如单片机或 ADC 芯片）的引脚通常很脆弱，只能承受 -0.3V 到 VCC+0.3V 的电压。如果外部接了长线，可能会感应出高压静电或浪涌，瞬间击穿芯片。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;做法&lt;/strong&gt;：在输入引脚上，&lt;strong&gt;并联两个二极管&lt;/strong&gt;（通常是肖特基二极管，因为正向压降小）。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;上钳位二极管&lt;/strong&gt;：正极接引脚，负极接 VCC。如果输入电压超过 VCC，二极管导通，把多余的电压泄放到电源上去。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;下钳位二极管&lt;/strong&gt;：负极接引脚，正极接 GND。如果输入电压低于 GND（出现负压），二极管导通，把电压“钉”在 GND 附近（-0.3V 左右），防止芯片内部损坏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用&lt;/strong&gt;：几乎所有暴露在机壳外的接口（USB, HDMI, 传感器接口）内部或外部都有这种结构&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;【上钳位二极管】例如这个电路中，二极管后端接 3.3V，那么他的前端电压只要高于 3.3+0.7=4V，二极管就会被导通，也就是说二极管前端电压不可能超过 4V（同样也是运放的输入引脚）。这样也就防止电压过高将运放烧坏
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020250703193335.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020250703193335.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;【下钳位二极管】下图当中，就可以确保点 2 处的电压不能低于 -0.7V
+![[Pasted image 20251207102905.png]]&lt;/p&gt;
+&lt;h3 id=&#34;继电器电机线圈的续流保护&#34;&gt;继电器/电机线圈的“续流保护”
+&lt;/h3&gt;&lt;p&gt;这也是一种“钳位”。我们在控制电感性负载（线圈、电机、继电器）时，断电瞬间线圈会产生几百伏的反向高压（电感尖峰），如果不处理，驱动三极管或 MOS 管必炸无疑。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;做法&lt;/strong&gt;：在继电器线圈两端&lt;strong&gt;反向并联&lt;/strong&gt;一个二极管。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;原理&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;正常通电时，二极管截止，不起作用。&lt;/li&gt;
+&lt;li&gt;断电瞬间，线圈产生反向电压（下正上负），这时二极管被正向导通。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;钳位效果&lt;/strong&gt;：线圈两端的反向电压被二极管强行钳位在 &lt;strong&gt;0.7V&lt;/strong&gt;（二极管压降），而不是几百伏。能量通过二极管和线圈自己形成的回路慢慢消耗掉（续流）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;应用&lt;/strong&gt;：所有继电器驱动电路、电机 H 桥电路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;注意点&#34;&gt;注意点
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;电流去哪了？&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;比如在 &lt;strong&gt;ADC 保护&lt;/strong&gt;场景中，当输入高压被二极管钳位到 VCC 时，多余的能量是灌入电源轨（VCC）的。如果这个浪涌电流太大，会把你的 VCC 电压抬高，甚至把整个板子的其他芯片烧掉！&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对策&lt;/strong&gt;：通常会在输入端串联一个电阻（限流电阻），限制灌入二极管的电流。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;二极管的速度&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;钳位通常是为了对付瞬态高压（ESD、浪涌），这些尖峰来得极快（纳秒级）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对策&lt;/strong&gt;：普通整流二极管（如 1N4007）太慢了，来不及反应芯片就挂了。必须用 &lt;strong&gt;快恢复二极管&lt;/strong&gt; 或 &lt;strong&gt;肖特基二极管&lt;/strong&gt;（如 BAT54S, 1N4148, 1N5819）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>三极管下拉电阻</title>
+        <link>https://teaize.github.io/p/%E4%B8%89%E6%9E%81%E7%AE%A1%E4%B8%8B%E6%8B%89%E7%94%B5%E9%98%BB/</link>
+        <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%B8%89%E6%9E%81%E7%AE%A1%E4%B8%8B%E6%8B%89%E7%94%B5%E9%98%BB/</guid>
+        <description>&lt;p&gt;给 N 型三极管的基极加下拉电阻可以改善噪声的干扰；对于 PNP 三极管，接上拉电阻&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020250704090644.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020250704090644.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;在三极管基极（B）和地（GND）之间的电阻，主要隐藏着 &lt;strong&gt;三个核心设计意图&lt;/strong&gt;：&lt;/p&gt;
+&lt;h3 id=&#34;定海神针--防止引脚悬空导致误动作上电防误动&#34;&gt;“定海神针” —— 防止引脚悬空导致误动作（上电防误动）
+&lt;/h3&gt;&lt;p&gt;这是最主要的原因。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景：当你的单片机（MCU）刚通电、正在复位（Reset）、或者正在烧录程序时，它的 GPIO 引脚通常处于 高阻抗输入状态（Floating / 悬空）。&lt;/li&gt;
+&lt;li&gt;危险：这时候引脚的电平是不确定的，就像风中的树叶。外界的一点点静电、电磁干扰（EMI），甚至你手靠近一下，都可能在基极感应出一点电压。&lt;/li&gt;
+&lt;li&gt;后果：三极管非常灵敏，这点感应电压可能足以让它&lt;strong&gt;微导通&lt;/strong&gt;。如果这个三极管控制的是继电器或电机，你就会看到设备在上电瞬间莫名其妙地“动了一下”或者“哒”的一声。&lt;/li&gt;
+&lt;li&gt;电阻的作用：&lt;strong&gt;这个电阻把基极强行拉到地（GND）。在单片机“发呆”的时候，它就像一个锚，把基极电位死死钉在 0V，确保三极管保持 绝对的截止（关断） 状态&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;快速泄放通道--加速关断排水管&#34;&gt;“快速泄放通道” —— 加速关断（排水管）
+&lt;/h3&gt;&lt;p&gt;三极管是双极型器件（BJT），它的工作原理是靠基极只要存有&lt;strong&gt;电荷&lt;/strong&gt;，它就导通。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景：当你把单片机输出从“高”变“低”，想关掉三极管时。&lt;/li&gt;
+&lt;li&gt;微观世界：三极管内部的 PN 结（基极 - 发射极之间）其实有一个&lt;strong&gt;寄生电容&lt;/strong&gt; ($C_{be}$)。刚才导通时，这里面存满了电荷。&lt;/li&gt;
+&lt;li&gt;麻烦：如果你只是把输入断开，或者前级驱动不够强，这些存储的电荷没有地方去，它们得慢慢消散。只要电荷没散完，三极管就还处于“藕断丝连”的半导通状态。&lt;/li&gt;
+&lt;li&gt;电阻的作用：这个电阻提供了一条通往 GND 的&lt;strong&gt;高速公路&lt;/strong&gt;。当你发出关断指令时，基极积存的电荷会迅速通过这个电阻流进地里，让三极管干脆利落地关断。这在高频开关应用中尤其重要。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;高温保护伞--吸收漏电流高温抗漏电&#34;&gt;“高温保护伞” —— 吸收漏电流（高温抗漏电）
+&lt;/h3&gt;&lt;p&gt;还记得前面学习的漏电流吗？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景：高温环境下，三极管的集电极（C）和基极（B）之间会有漏电流 ($I_{CBO}$)。&lt;/li&gt;
+&lt;li&gt;危险：如果没有这个下拉电阻，这个漏电流会流向哪里？它只能流进发射极（E）。
+&lt;ul&gt;
+&lt;li&gt;注意：流进基极的电流是会被放大的！漏电流 $I_{CBO}$ 进入基极后，会被放大 $\beta$ 倍流过集电极。&lt;/li&gt;
+&lt;li&gt;这可能导致三极管在高温下自己就“失控导通”了，根本不受你控制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;电阻的作用：这个电阻为漏电流提供了一条&lt;strong&gt;旁路&lt;/strong&gt;。漏电流会优先走电阻这个“容易的路”流进 GND，而不会流进发射结去触发放大作用，从而提高了电路的高温稳定性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工程师经验这个电阻选多大&#34;&gt;工程师经验：这个电阻选多大
+&lt;/h3&gt;&lt;p&gt;通常这个电阻 ($R_{BE}$) 的阻值选取是有讲究的，不需要太精确，但有数量级要求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常见值：&lt;strong&gt;$10k\Omega$, $47k\Omega$, $100k\Omega$&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;原则：
+&lt;ul&gt;
+&lt;li&gt;不能太小：如果太小（比如 $100\Omega$），大部分驱动电流都顺着它跑去 GND 了，流进三极管基极的电流就少了，导致三极管推不开。&lt;/li&gt;
+&lt;li&gt;不能太大：如果太大（比如 $1M\Omega$），泄放电荷太慢，抗干扰能力也变弱。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;黄金比例：&lt;strong&gt;通常取基极串联限流电阻 ($R_B$) 的 5 到 10 倍&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;例如：基极串联电阻 $R_B = 1k\Omega$，那下拉电阻 $R_{BE}$ 就可以选 $10k\Omega$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>紫外荧光法</title>
+        <link>https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/</link>
+        <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/</guid>
+        <description>&lt;h2 id=&#34;textso_2-紫外荧光法&#34;&gt;$\text{SO}_2$ 紫外荧光法
+&lt;/h2&gt;&lt;p&gt;紫外荧光法通常用于测量微量 $\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：&lt;/p&gt;
+&lt;p&gt;$$
+\begin{aligned}
+\text{SO}_2 + h\nu (190-230,\text{nm}) &amp;amp;\rightarrow \text{SO}_2^* \
+\text{SO}_2^* &amp;amp;\rightarrow \text{SO}_2 + h\nu&amp;rsquo; (240-420,\text{nm})
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;在稀释法中可能存在的问题：&lt;/p&gt;
+&lt;h3 id=&#34;1芳香烃干扰-aromatic-hydrocarbon-interference&#34;&gt;1、芳香烃干扰 (Aromatic Hydrocarbon Interference)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;机理：&lt;/strong&gt; 某些芳香族碳氢化合物（如多环芳烃）在紫外光激发下也会产生荧光，且波长范围与 $\text{SO}_2$ 重叠。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果：&lt;/strong&gt; 导致测量结果&lt;strong&gt;假性偏高&lt;/strong&gt;。虽然稀释法降低了干扰物浓度，但在石化、焦化等行业，这种干扰依然存在。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对策：&lt;/strong&gt; 分析仪内部通常需要配备“除烃器”（Kicker），如果除烃器失效，数据就会飘高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2猝灭效应-quenching-effect--最核心问题&#34;&gt;2、猝灭效应 (Quenching Effect) —— 最核心问题
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;机理： 激发的 $\text{SO}_2^*$ 分子在回到基态发出光子之前，与背景气体分子（如 $\text{H}_2\text{O}$, $\text{CO}_2$, $\text{O}_2$, $\text{N}_2$）发生碰撞，将能量以热能形式转移，而不发光。&lt;/p&gt;
+&lt;p&gt;$$\text{SO}_2^* + M \rightarrow \text{SO}_2 + M + \text{Heat}$$&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;稀释法的优势与劣势： 稀释法的好处是用大量的空气（主要是 $\text{N}_2$ 和 $\text{O}_2$）稀释了 $\text{CO}_2$ 和 $\text{H}_2\text{O}$，从而稳定了猝灭系数。但如果背景气中 $\text{CO}_2$ 浓度波动极大，或者稀释比过低，猝灭效应仍会导致读数&lt;strong&gt;偏低&lt;/strong&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;场景假设猝灭效应带来的背景气欺诈&#34;&gt;场景假设：猝灭效应带来的背景气欺诈
+&lt;/h4&gt;&lt;p&gt;背景知识： 紫外荧光法是通过测量 $\text{SO}_2$ 分子受激发后发出的荧光强度来计算浓度的。 但是在物理上，有一个大敌叫“猝灭” 。&lt;strong&gt;简单说，就是 $\text{CO}_2$ 和 $\text{H}_2\text{O}$ 这些“胖子”分子，喜欢撞击受激发的 $\text{SO}_2$，把能量“偷走”变成热量，导致 $\text{SO}_2$ 发不出光&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;校准时刻（理想世界）：
+&lt;ul&gt;
+&lt;li&gt;你拿一瓶标气去校准。标气的背景气是什么？通常是 **$\text{N}_2$。&lt;/li&gt;
+&lt;li&gt;$\text{N}_2$ 很“老实”，不怎么产生猝灭。&lt;/li&gt;
+&lt;li&gt;结果： 100 个 $\text{SO}_2$ 分子，发出了 100 份光。分析仪记住了：100 光 = 100ppm。校准完美通过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;测量时刻（残酷现实）：
+&lt;ul&gt;
+&lt;li&gt;探头抽入烟气。虽然稀释法混入了很多空气（$\text{N}_2$ 和 $\text{O}_2$），但烟道里原本含有 12%~15% 的 $\text{CO}_2$ 和大量 水汽。&lt;/li&gt;
+&lt;li&gt;即便稀释了 50 倍，进入分析室的气体里依然混杂着微量的 $\text{CO}_2$ 和水分子。&lt;/li&gt;
+&lt;li&gt;结果： 同样的 100 个 $\text{SO}_2$ 分子，刚想发光，就被旁边的 $\text{CO}_2$ 撞了一下，能量没了。最终只有 95 份光 被探测器收到。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;欺骗结果：
+&lt;ul&gt;
+&lt;li&gt;分析仪按校准曲线计算：95 光 = 95ppm。&lt;/li&gt;
+&lt;li&gt;真相： 实际排放是 100ppm，你测出来只有 95ppm。&lt;/li&gt;
+&lt;li&gt;最可怕的点： &lt;strong&gt;无论你怎么通标气验证，它都是准的（因为标气里没有 $\text{CO}_2$）。你永远不知道你在测量实际烟气时，数据一直在负偏差&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如何破解这种骗局呢;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;看稀释比： &lt;strong&gt;稀释比越高，猝灭效应越小&lt;/strong&gt;（因为背景气越接近空气）。如果你为了提高灵敏度把稀释比调低（比如从 100:1 调到 20:1），这个误差会指数级上升。&lt;/li&gt;
+&lt;li&gt;不仅看标气，要看比对： 这种问题只能通过参比方法（手工采样）才能发现。如果手工数据总是比 CEMS 高 5%~10%，且标气校准又没问题，那基本就是&lt;strong&gt;猝灭系数&lt;/strong&gt;没修正。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如果确实是-co2-引起的淬灭反应如何解决&#34;&gt;如果确实是 CO2 引起的淬灭反应，如何解决
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;核心问题在于，&lt;strong&gt;我们通常无法在不损失 $\text{SO}_2$ 的前提下“物理剔除” $\text{CO}_2$&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;原因在于化学性质的相似性：$\text{CO}_2$ 和 $\text{SO}_2$ 都是酸性气体。任何能通过化学反应吸收 $\text{CO}_2$ 的物质（如碱石灰、强碱溶液），都会更贪婪地把你要测的 $\text{SO}_2$ 也一起吸收掉，导致测量结果归零。&lt;/li&gt;
+&lt;li&gt;因此，在工业 CEMS 应用中，我们应对猝灭效应的策略不是“剔除”，而是“&lt;strong&gt;稀释压制&lt;/strong&gt;”和“&lt;strong&gt;基质匹配&lt;/strong&gt;（Matrix Matching）”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方法一提高稀释比&#34;&gt;方法一：提高稀释比
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理： 猝灭效应与干扰物（$\text{CO}_2$）的分压（浓度）成正比。&lt;/li&gt;
+&lt;li&gt;计算推演：
+&lt;ul&gt;
+&lt;li&gt;假设烟道内 $\text{CO}_2$ 浓度为 15%（燃煤电厂典型值）。&lt;/li&gt;
+&lt;li&gt;低稀释比（20:1）： 进入分析仪的 $\text{CO}_2$ 浓度为 $15% \div 20 = \mathbf{0.75%}$。这个浓度足以引起可察觉的负偏差。&lt;/li&gt;
+&lt;li&gt;高稀释比（100:1）： 进入分析仪的 $\text{CO}_2$ 浓度为 $15% \div 100 = \mathbf{0.15%}$。在这个浓度下，$\text{N}_2$ 和 $\text{O}_2$（来自稀释风）占据了绝对主导，$\text{CO}_2$ 的猝灭影响几乎可以忽略不计。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;操作建议：
+&lt;ul&gt;
+&lt;li&gt;如果你现在的探头稀释比只有 20:1 或 50:1，且 $\text{CO}_2$ 干扰明显，可以尝试更换更小孔径的临界孔，将稀释比提升至 100:1 甚至更高。&lt;/li&gt;
+&lt;li&gt;代价： 稀释比提高了，进入分析仪的 $\text{SO}_2$ 浓度会变得更低，这对分析仪的检出限和信噪比提出了更高要求。你需要确认你的分析仪在测量 0.5 ppm 以下浓度时依然稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方法二基质匹配校准&#34;&gt;方法二：基质匹配校准
+&lt;/h4&gt;&lt;p&gt;既然 $\text{CO}_2$ 会把读数“压低”，那我们在校准的时候，就故意用含有 $\text{CO}_2$ 的标气来校准，让分析仪“习惯”这种压低的状态。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常规做法： 使用 $\text{SO}_2$ / $\text{N}_2$ 平衡气。
+&lt;ul&gt;
+&lt;li&gt;背景气是纯氮气，无猝灭。分析仪灵敏度最高。&lt;/li&gt;
+&lt;li&gt;一测样气（含 $\text{CO}_2$），灵敏度下降，读数偏低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;改进做法： 购买定制标气，例如 **$\text{SO}_2$ (50ppm) + $\text{CO}_2$ (15%) + $\text{N}_2$ (平衡)。
+&lt;ul&gt;
+&lt;li&gt;注意：这里的 15% 指的是稀释前的模拟浓度，或者直接按比例计算混合标气。&lt;/li&gt;
+&lt;li&gt;更具操作性的现场做法是：如果你的标气瓶只是 $\text{SO}_2/\text{N}_2$，你可以通过&lt;strong&gt;动态配气仪&lt;/strong&gt;，混入一定比例的纯 $\text{CO}_2$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结果： 你在校准时，分析仪就已经处于“被猝灭”的状态了。它确立的校准曲线斜率（Slope）已经包含了猝灭因子的修正。当你再去测含有 15% $\text{CO}_2$ 的烟气时，正好抵消。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;总结建议&#34;&gt;总结建议
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;第一步（查硬件）： 确认你的稀释比是多少？如果是 &lt;strong&gt;100:1&lt;/strong&gt; 甚至 &lt;strong&gt;200:1&lt;/strong&gt;，那么 $\text{CO}_2$ 的物理浓度已经非常低（&amp;lt;0.2%），理论上不应产生可见误差。如果此时还有很大误差，请排查是否有其他问题（如泄漏）。&lt;/li&gt;
+&lt;li&gt;第二步（改校准）： 如果无法改变稀释比（比如因为 $\text{SO}_2$ 浓度本身就太低，再稀释就测不到了），那么请联系标气供应商，&lt;strong&gt;定制含有 10%~15% $\text{CO}_2$ 背景的 $\text{SO}_2$ 标气&lt;/strong&gt;。这是成本最低、效果最立竿见影的方法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;加性干扰与乘性干扰&#34;&gt;加性干扰与乘性干扰
+&lt;/h3&gt;&lt;p&gt;这里还有个常见的误区：&lt;/p&gt;
+&lt;p&gt;例如运维人员发现 CO2 确实会对 SO2 的测量有干扰，于是拿一瓶 CO2 标气通入分析仪去测量，结果发现分析仪示数为 0（分析仪如果同时也开启了负值显示的功能），于是便认为 CO2 对 SO2 的测量没有正影响，也没有负影响。于是便得出 CO2 对 SO2 分析仪完全没有影响的结论
+&lt;strong&gt;这个误区之所以普遍，是因为很多人混淆了“加性干扰”（Additive Interference）和“乘性干扰”（Multiplicative Interference）的概念&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;加性干扰（如芳香烃）：$$测量值 = (\text{SO}_2 \text{真实值}) + (\text{干扰值})$$
+&lt;ul&gt;
+&lt;li&gt;当 $\text{SO}_2 = 0$，通入干扰物，测量值 = 干扰值。&lt;/li&gt;
+&lt;li&gt;结论： 这种干扰可以通过通纯气测出来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;乘性干扰（猝灭效应）：
+猝灭效应是按比例吃掉光强。它是一个效率因子 (Efficiency Factor)，通常小于 1。$$测量值 = (\text{SO}_2 \text{真实值}) \times (\text{1 - 猝灭率})$$
+&lt;ul&gt;
+&lt;li&gt;运维人员的测试： 他通入了纯 $\text{CO}_2$，意味着 $\text{SO}_2 \text{真实值} = 0$。&lt;/li&gt;
+&lt;li&gt;代入公式：$$测量值 = 0 \times (\text{1 - 猝灭率}) = \mathbf{0}$$&lt;/li&gt;
+&lt;li&gt;真相： 无论猝灭率有多大（哪怕 $\text{CO}_2$ 把光全吃没了），只要原本就没有光（$\text{SO}_2=0$），结果永远是 0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;猝灭效应是“杀手”。如果屋子里本来就没有人（没有 $\text{SO}_2$），杀手（$\text{CO}_2$）进去也杀不到人，但这并不代表杀手没有杀伤力。&lt;/p&gt;
+&lt;p&gt;正确的测试方法：要验证 $\text{CO}_2$ 的猝灭效应，必须进行“基质干扰测试”，必须有 $\text{SO}_2$ 在场，例如：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;步骤&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;通入气体成分&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;预期读数 (假设无干扰)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;实际读数 (存在猝灭)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;结论&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;1&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;标气 A:&lt;/strong&gt; 50ppm $\text{SO}_2$ + $\text{N}_2$ (平衡气)&lt;/td&gt;
+          &lt;td&gt;50.0 ppm&lt;/td&gt;
+          &lt;td&gt;50.0 ppm&lt;/td&gt;
+          &lt;td&gt;标定基准点&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;2&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;混气 B:&lt;/strong&gt; 50ppm $\text{SO}_2$ + &lt;strong&gt;15% $\text{CO}_2$&lt;/strong&gt; + $\text{N}_2$&lt;/td&gt;
+          &lt;td&gt;50.0 ppm&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;45~48 ppm&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;读数下降&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;判定： 步骤 2 的读数明显低于步骤 1（通常低 3%~8%），这个差值才是 $\text{CO}_2$ 的真实干扰（猝灭效应）&lt;/p&gt;
+&lt;p&gt;上面所说的分析仪负值显示功能，这其实是针对&lt;strong&gt;加性干扰&lt;/strong&gt;的反向漂移或零点漂移设计的，对于猝灭这种&lt;strong&gt;乘性干扰&lt;/strong&gt;没有任何帮助。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果读数是负的（例如 -2 ppm），通常是因为背景气比纯氮气更“干净”（背景噪声更低），或者是电路零点漂移。&lt;/li&gt;
+&lt;li&gt;$\text{CO}_2$ 的猝灭永远是**“乘以一个小于 1 的系数”&lt;strong&gt;，它不会把正数变成负数，它只会让正数&lt;/strong&gt;变小**。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Midisart 2000</title>
         <link>https://teaize.github.io/p/midisart-2000/</link>
         <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
@@ -65,64 +350,12 @@
 </description>
         </item>
         <item>
-        <title>VCC和GND之间的电容</title>
-        <link>https://teaize.github.io/p/vcc%E5%92%8Cgnd%E4%B9%8B%E9%97%B4%E7%9A%84%E7%94%B5%E5%AE%B9/</link>
-        <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/vcc%E5%92%8Cgnd%E4%B9%8B%E9%97%B4%E7%9A%84%E7%94%B5%E5%AE%B9/</guid>
-        <description>&lt;p&gt;把电容跨接在芯片的 VCC 和 GND 之间，这个电容在工程上有一个专门的名字，叫 “去耦电容”或者 “旁路电容”。如果没有它，芯片可能会莫名其妙地死机、重启，或者信号乱跳。&lt;/p&gt;
-&lt;h3 id=&#34;为什么要加电容&#34;&gt;为什么要加电容
-&lt;/h3&gt;&lt;p&gt;你可以把 电源 想象成一个远处的 水库，把 导线 想象成 输水管，而 芯片 是家里必须要&lt;strong&gt;频繁开关的 水龙头&lt;/strong&gt;&lt;/p&gt;
-&lt;h4 id=&#34;应对瞬时缺水--储能作用&#34;&gt;应对“瞬时缺水” —— 储能作用
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;问题：芯片工作时不是一直在喝水，而是像机关枪一样，一会儿猛喝一口（电流瞬间增大），一会儿不喝。当芯片突然要“喝一大口水”时，远处水库的水流过来需要时间（因为导线有电感和电阻，水流有惯性）。结果就是，水还没流过来，芯片门口的水压（电压）瞬间就掉下去了（也叫作&lt;strong&gt;电压跌落&lt;/strong&gt;）。电压一掉，芯片就复位或死机了。&lt;/li&gt;
-&lt;li&gt;解决：在芯片门口（VCC 引脚旁）放一个小水桶（电容）。&lt;/li&gt;
-&lt;li&gt;效果：当芯片突然要喝水时，先喝小水桶里的水。因为水桶离得近，水立马就能供上，维持了水压（电压）的稳定。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;滤除水管杂音--滤波作用&#34;&gt;滤除“水管杂音” —— 滤波作用
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;问题：电源送过来的水流往往不干净，里面可能有波浪（高频噪声）。同时，芯片自己工作时也会产生震动，反向传回水管里，干扰别人。&lt;/li&gt;
-&lt;li&gt;解决：电容对高频信号相当于“短路”。&lt;/li&gt;
-&lt;li&gt;效果：高频噪声（波浪）过来时，直接通过电容流进地（GND）里消散掉了，不会进入芯片内部干扰核心电路。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;通常是如何应用的&#34;&gt;通常是如何应用的
-&lt;/h3&gt;&lt;p&gt;在画电路图和 画板时，有一套约定俗成的“组合拳”。&lt;/p&gt;
-&lt;h4 id=&#34;选什么值-大鬼和小鬼&#34;&gt;选什么值？—— “大鬼和小鬼”
-&lt;/h4&gt;&lt;p&gt;通常我们会看到一个引脚旁边并联了两个不一样大的电容，比如 10uF 和 0.1uF。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;0.1uF (100nF, 也就是常说的 104 电容)：
-&lt;ul&gt;
-&lt;li&gt;角色：这是“&lt;strong&gt;标配&lt;/strong&gt;”。&lt;/li&gt;
-&lt;li&gt;作用：专门对付高频噪声（几 MHz 到几十 MHz）。因为小电容的内部卷绕少，寄生电感小，反应极快。&lt;/li&gt;
-&lt;li&gt;材质：通常用陶瓷电容（MLCC）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;10uF (或者 4.7uF, 100uF)：
-&lt;ul&gt;
-&lt;li&gt;角色：这是“&lt;strong&gt;蓄水池&lt;/strong&gt;”。&lt;/li&gt;
-&lt;li&gt;作用：对付低频波动或大电流需求。它存的电荷多，能撑得久一点。&lt;/li&gt;
-&lt;li&gt;材质：可能是钽电容、电解电容或大容量陶瓷电容。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;工程经验：如果只让加一个，对于大多数普通数字芯片（如逻辑门、低速单片机），加一个 0.1uF 是底线。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;h4 id=&#34;放哪里-寸土寸金&#34;&gt;放哪里？—— “寸土寸金”
-&lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;黄金法则：电容必须尽可能靠近芯片的 VCC 和 GND 引脚&lt;/li&gt;
-&lt;li&gt;原因：还记得水桶理论吗？如果水桶离水龙头太远，水管还是很长，那这个水桶就没用了。电容离引脚越远，中间的走线产生的寄生电感就越大，去耦效果就越差。&lt;/li&gt;
-&lt;li&gt;顺序：如果同时有 10uF 和 0.1uF，&lt;strong&gt;小的（0.1uF）要紧贴着芯片放，大的（10uF）可以稍微放外面一点点&lt;/strong&gt;。因为高频噪声最难搞，必须第一时间干掉。&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
         <title>电容充电时间常数</title>
         <link>https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/</link>
         <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/</guid>
-        <description>&lt;p&gt;电容充电时间常数 ($\tau$) 就是电路的“&lt;strong&gt;反应速度 (惯性)&lt;/strong&gt;”，简单来说：&lt;/p&gt;
+        <description>&lt;p&gt;电容充电时间常数 ($\tau$) 就是电路的“**反应速度”，简单来说：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;$\tau$ 小 $\rightarrow$ 电容充放电快 $\rightarrow$ 电路反应灵敏，波形陡峭。&lt;/li&gt;
 &lt;li&gt;$\tau$ 大 $\rightarrow$ 电容充放电慢 $\rightarrow$ 电路反应迟钝，波形平缓。&lt;/li&gt;
@@ -258,6 +491,86 @@ $10,000 \times 0.00001 = 0.1$ 秒 (即 100 毫秒)。&lt;/p&gt;
 &lt;li&gt;密封： 靠根部的&lt;strong&gt;垫片&lt;/strong&gt;（紫铜垫、组合垫圈）或 &lt;strong&gt;O 形圈&lt;/strong&gt; 被压扁来密封。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>截止频率</title>
+        <link>https://teaize.github.io/p/%E6%88%AA%E6%AD%A2%E9%A2%91%E7%8E%87/</link>
+        <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%88%AA%E6%AD%A2%E9%A2%91%E7%8E%87/</guid>
+        <description>&lt;p&gt;需要明白一个概念：在低通滤波电路当中，&lt;strong&gt;截止频率越大，是越能防止“高频噪声进来”还是越不能防止“高频噪声进来”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;假设截止频率是门卫，在低通滤波器里，截止频率就是“门卫放行的速度上限”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;比这个频率&lt;strong&gt;低&lt;/strong&gt;的信号（比如直流电、慢速信号）：门卫说“请进”。&lt;/li&gt;
+&lt;li&gt;比这个频率&lt;strong&gt;高&lt;/strong&gt;的信号（比如高频噪声）：门卫说“太快了，拦住”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;截止频率计算公式：
+$$f_c = \frac{1}{2\pi RC}$$
+&lt;strong&gt;电容 C 变小，截止频率 $f_c$ 变大，意味着门卫的标准放宽了&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;以前（大电容，$f_c$ 低）：门卫说“超过 100Hz 的都算噪音，全部拦住！” $\rightarrow$ 只有很干净的低频能过，滤波效果极好。&lt;/li&gt;
+&lt;li&gt;现在（小电容，$f_c$ 高）：门卫说“标准提高了，超过 10,000Hz (10kHz) 的才算噪音，拦住。” $\rightarrow$ 结果 100Hz 到 10,000Hz 之间的噪音全都大摇大摆进来了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也就是说，在低通滤波（滤除噪声）的应用中，截止频率越高，意味着能通过的高频成分越多，滤波效果反而越“差”（或者说越不敏感）。&lt;/p&gt;
+&lt;hr&gt;
+&lt;p&gt;既然电容越大，截止频率越小，越能去除掉高频噪声。是不是和之前所说的“&lt;strong&gt;大鬼和小鬼&lt;/strong&gt;”冲突了？【在前面“大鬼和小鬼”的介绍中，0.1uF 负责对付高频噪声，而 10uF 负责充当蓄水池】。不应该由大电容来负责对付高频噪声更合适吗？&lt;/p&gt;
+&lt;p&gt;因为大电容在高频时“失效”了。现实中的电容，因为制造工艺（还要卷绕、有引脚），内部其实隐藏着一个小电阻和一个微小的&lt;strong&gt;电感&lt;/strong&gt;（大电容相对于小电容，寄生电感更大）。
+当频率非常高（超过几 MHz）时，那点微小的寄生电感开始发威了！电感的特性是“频率越高，阻碍越大”。或者更简单的说，这个大电容存在着某一个频率，在这个频率下，电容的作用和所藏着的电感的作用打了个平手。低于这个频率，电容说了算。高于这个频率，反而是所藏着的电感说了算
+所以，在处理高频噪声（比如 10MHz 以上）时，$10\mu F$ 的大电容已经“变节”成电感了，根本不起滤波作用。这时候全靠 $0.1\mu F$ 这个动作灵敏的小鬼在死扛
+所以大小鬼的策略是：用&lt;strong&gt;大电容&lt;/strong&gt;搞定低频，用&lt;strong&gt;小电容&lt;/strong&gt;搞定高频，并且让&lt;strong&gt;小电容&lt;/strong&gt;站前排&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>去耦电容</title>
+        <link>https://teaize.github.io/p/%E5%8E%BB%E8%80%A6%E7%94%B5%E5%AE%B9/</link>
+        <pubDate>Sat, 06 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8E%BB%E8%80%A6%E7%94%B5%E5%AE%B9/</guid>
+        <description>&lt;p&gt;把电容跨接在芯片的 VCC 和 GND 之间，这个电容在工程上有一个专门的名字，叫 “&lt;strong&gt;去耦电容&lt;/strong&gt;”或者 “旁路电容”。如果没有它，芯片可能会莫名其妙地死机、重启，或者信号乱跳。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要加电容&#34;&gt;为什么要加电容
+&lt;/h3&gt;&lt;p&gt;你可以把 电源 想象成一个远处的 水库，把 导线 想象成 输水管，而 芯片 是家里必须要&lt;strong&gt;频繁开关的 水龙头&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;应对瞬时缺水--储能作用&#34;&gt;应对“瞬时缺水” —— 储能作用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题：芯片工作时不是一直在喝水，而是像机关枪一样，一会儿猛喝一口（电流瞬间增大），一会儿不喝。当芯片突然要“喝一大口水”时，远处水库的水流过来需要时间（因为导线有电感和电阻，水流有惯性）。结果就是，水还没流过来，芯片门口的水压（电压）瞬间就掉下去了（也叫作&lt;strong&gt;电压跌落&lt;/strong&gt;）。电压一掉，芯片就复位或死机了。&lt;/li&gt;
+&lt;li&gt;解决：在芯片门口（VCC 引脚旁）放一个小水桶（电容）。&lt;/li&gt;
+&lt;li&gt;效果：当芯片突然要喝水时，先喝小水桶里的水。因为水桶离得近，水立马就能供上，维持了水压（电压）的稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;滤除水管杂音--滤波作用&#34;&gt;滤除“水管杂音” —— 滤波作用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题：电源送过来的水流往往不干净，里面可能有波浪（高频噪声）。同时，芯片自己工作时也会产生震动，反向传回水管里，干扰别人。&lt;/li&gt;
+&lt;li&gt;解决：电容对高频信号相当于“短路”。&lt;/li&gt;
+&lt;li&gt;效果：高频噪声（波浪）过来时，直接通过电容流进地（GND）里消散掉了，不会进入芯片内部干扰核心电路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;通常是如何应用的&#34;&gt;通常是如何应用的
+&lt;/h3&gt;&lt;p&gt;在画电路图和 画板时，有一套约定俗成的“组合拳”。&lt;/p&gt;
+&lt;h4 id=&#34;选什么值-大鬼和小鬼&#34;&gt;选什么值？—— “大鬼和小鬼”
+&lt;/h4&gt;&lt;p&gt;通常我们会看到一个引脚旁边并联了两个不一样大的电容，比如 10uF 和 0.1uF。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0.1uF (100nF, 也就是常说的 104 电容)：
+&lt;ul&gt;
+&lt;li&gt;角色：这是“&lt;strong&gt;标配&lt;/strong&gt;”。&lt;/li&gt;
+&lt;li&gt;作用：专门对付高频噪声（几 MHz 到几十 MHz）。因为小电容的内部卷绕少，寄生电感小，反应极快。&lt;/li&gt;
+&lt;li&gt;材质：通常用陶瓷电容（MLCC）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;10uF (或者 4.7uF, 100uF)：
+&lt;ul&gt;
+&lt;li&gt;角色：这是“&lt;strong&gt;蓄水池&lt;/strong&gt;”。&lt;/li&gt;
+&lt;li&gt;作用：对付低频波动或大电流需求。它存的电荷多，能撑得久一点。&lt;/li&gt;
+&lt;li&gt;材质：可能是钽电容、电解电容或大容量陶瓷电容。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;工程经验：如果只让加一个，对于大多数普通数字芯片（如逻辑门、低速单片机），加一个 0.1uF 是底线。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;放哪里-寸土寸金&#34;&gt;放哪里？—— “寸土寸金”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;黄金法则：电容必须尽可能靠近芯片的 VCC 和 GND 引脚&lt;/li&gt;
+&lt;li&gt;原因：还记得水桶理论吗？如果水桶离水龙头太远，水管还是很长，那这个水桶就没用了。电容离引脚越远，中间的走线产生的寄生电感就越大，去耦效果就越差。&lt;/li&gt;
+&lt;li&gt;顺序：如果同时有 10uF 和 0.1uF，&lt;strong&gt;小的（0.1uF）要紧贴着芯片放，大的（10uF）可以稍微放外面一点点&lt;/strong&gt;。因为高频噪声最难搞，必须第一时间干掉。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

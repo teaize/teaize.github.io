@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="电容充电时间常数 ($\\tau$) 就是电路的“**反应速度”，简单来说：\n$\\tau$ 小 $\\rightarrow$ 电容充放电快 $\\rightarrow$ 电路反应灵敏，波形陡峭。 $\\tau$ 大 $\\rightarrow$ 电容充放电慢 $\\rightarrow$ 电路反应迟钝，波形平缓。 它是怎么算的 $$\\tau = R \\times C$$\n">
-<title>电容充电时间常数</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="$\\text{SO}_2$ 紫外荧光法 紫外荧光法通常用于测量微量 $\\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：\n$$ \\begin{aligned} \\text{SO}_2 + h\\nu (190-230,\\text{nm}) &amp;\\rightarrow \\text{SO}_2^* \\ \\text{SO}_2^* &amp;\\rightarrow \\text{SO}_2 + h\\nu&rsquo; (240-420,\\text{nm}) \\end{aligned} $$\n">
+<title>紫外荧光法</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="电容充电时间常数">
-<meta property='og:description' content="电容充电时间常数 ($\\tau$) 就是电路的“**反应速度”，简单来说：\n$\\tau$ 小 $\\rightarrow$ 电容充放电快 $\\rightarrow$ 电路反应灵敏，波形陡峭。 $\\tau$ 大 $\\rightarrow$ 电容充放电慢 $\\rightarrow$ 电路反应迟钝，波形平缓。 它是怎么算的 $$\\tau = R \\times C$$\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="紫外荧光法">
+<meta property='og:description' content="$\\text{SO}_2$ 紫外荧光法 紫外荧光法通常用于测量微量 $\\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：\n$$ \\begin{aligned} \\text{SO}_2 + h\\nu (190-230,\\text{nm}) &amp;\\rightarrow \\text{SO}_2^* \\ \\text{SO}_2^* &amp;\\rightarrow \\text{SO}_2 + h\\nu&rsquo; (240-420,\\text{nm}) \\end{aligned} $$\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-06T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="电容充电时间常数">
-<meta name="twitter:description" content="电容充电时间常数 ($\\tau$) 就是电路的“**反应速度”，简单来说：\n$\\tau$ 小 $\\rightarrow$ 电容充放电快 $\\rightarrow$ 电路反应灵敏，波形陡峭。 $\\tau$ 大 $\\rightarrow$ 电容充放电慢 $\\rightarrow$ 电路反应迟钝，波形平缓。 它是怎么算的 $$\\tau = R \\times C$$\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-07T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="紫外荧光法">
+<meta name="twitter:description" content="$\\text{SO}_2$ 紫外荧光法 紫外荧光法通常用于测量微量 $\\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：\n$$ \\begin{aligned} \\text{SO}_2 + h\\nu (190-230,\\text{nm}) &amp;\\rightarrow \\text{SO}_2^* \\ \\text{SO}_2^* &amp;\\rightarrow \\text{SO}_2 + h\\nu&rsquo; (240-420,\\text{nm}) \\end{aligned} $$\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -295,18 +295,22 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li>
+    <li><a href="#textso_2-紫外荧光法">$\text{SO}_2$ 紫外荧光法</a>
       <ol>
-        <li><a href="#它是怎么算的">它是怎么算的</a></li>
-        <li><a href="#它告诉了我们什么">它告诉了我们什么</a></li>
-        <li><a href="#拿它做什么">拿它做什么</a>
+        <li><a href="#1芳香烃干扰-aromatic-hydrocarbon-interference">1、芳香烃干扰 (Aromatic Hydrocarbon Interference)</a></li>
+        <li><a href="#2猝灭效应-quenching-effect--最核心问题">2、猝灭效应 (Quenching Effect) —— 最核心问题</a>
           <ol>
-            <li><a href="#让子弹飞一会儿--上电复位电路">“让子弹飞一会儿” —— 上电复位电路</a></li>
-            <li><a href="#过滤杂音--按键去抖">“过滤杂音” —— 按键去抖</a></li>
-            <li><a href="#把方波变直流--pwm-转-dac-无源滤波">“把方波变直流” —— PWM 转 DAC (无源滤波)</a></li>
+            <li><a href="#场景假设猝灭效应带来的背景气欺诈">场景假设：猝灭效应带来的背景气欺诈</a></li>
           </ol>
         </li>
-        <li><a href="#经验法则">经验法则</a></li>
+        <li><a href="#如果确实是-co2-引起的淬灭反应如何解决">如果确实是 CO2 引起的淬灭反应，如何解决</a>
+          <ol>
+            <li><a href="#方法一提高稀释比">方法一：提高稀释比</a></li>
+            <li><a href="#方法二基质匹配校准">方法二：基质匹配校准</a></li>
+            <li><a href="#总结建议">总结建议</a></li>
+          </ol>
+        </li>
+        <li><a href="#加性干扰与乘性干扰">加性干扰与乘性干扰</a></li>
       </ol>
     </li>
   </ol>
@@ -328,7 +332,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/">电容充电时间常数</a>
+            <a href="/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/">紫外荧光法</a>
         </h2>
     
         
@@ -350,7 +354,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-06</time>
+                <time class="article-time--published">2025-12-07</time>
             </div>
         
 
@@ -366,66 +370,160 @@
     <section class="article-content">
     
     
-    <p>电容充电时间常数 ($\tau$) 就是电路的“**反应速度”，简单来说：</p>
-<ul>
-<li>$\tau$ 小 $\rightarrow$ 电容充放电快 $\rightarrow$ 电路反应灵敏，波形陡峭。</li>
-<li>$\tau$ 大 $\rightarrow$ 电容充放电慢 $\rightarrow$ 电路反应迟钝，波形平缓。</li>
+    <h2 id="textso_2-紫外荧光法">$\text{SO}_2$ 紫外荧光法
+</h2><p>紫外荧光法通常用于测量微量 $\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：</p>
+<p>$$
+\begin{aligned}
+\text{SO}_2 + h\nu (190-230,\text{nm}) &amp;\rightarrow \text{SO}_2^* \
+\text{SO}_2^* &amp;\rightarrow \text{SO}_2 + h\nu&rsquo; (240-420,\text{nm})
+\end{aligned}
+$$</p>
+<p>在稀释法中可能存在的问题：</p>
+<h3 id="1芳香烃干扰-aromatic-hydrocarbon-interference">1、芳香烃干扰 (Aromatic Hydrocarbon Interference)
+</h3><ul>
+<li><strong>机理：</strong> 某些芳香族碳氢化合物（如多环芳烃）在紫外光激发下也会产生荧光，且波长范围与 $\text{SO}_2$ 重叠。</li>
+<li><strong>后果：</strong> 导致测量结果<strong>假性偏高</strong>。虽然稀释法降低了干扰物浓度，但在石化、焦化等行业，这种干扰依然存在。</li>
+<li><strong>对策：</strong> 分析仪内部通常需要配备“除烃器”（Kicker），如果除烃器失效，数据就会飘高。</li>
 </ul>
-<h3 id="它是怎么算的">它是怎么算的
-</h3><p>$$\tau = R \times C$$</p>
-<ul>
-<li>$R$ (电阻)：单位是欧姆 ($\Omega$)</li>
-<li>$C$ (电容)：单位是法拉 ($F$)</li>
-<li>$\tau$ (时间常数)：单位是秒 ($s$)</li>
+<h3 id="2猝灭效应-quenching-effect--最核心问题">2、猝灭效应 (Quenching Effect) —— 最核心问题
+</h3><ul>
+<li>
+<p>机理： 激发的 $\text{SO}_2^*$ 分子在回到基态发出光子之前，与背景气体分子（如 $\text{H}_2\text{O}$, $\text{CO}_2$, $\text{O}_2$, $\text{N}_2$）发生碰撞，将能量以热能形式转移，而不发光。</p>
+<p>$$\text{SO}_2^* + M \rightarrow \text{SO}_2 + M + \text{Heat}$$</p>
+</li>
+<li>
+<p>稀释法的优势与劣势： 稀释法的好处是用大量的空气（主要是 $\text{N}_2$ 和 $\text{O}_2$）稀释了 $\text{CO}_2$ 和 $\text{H}_2\text{O}$，从而稳定了猝灭系数。但如果背景气中 $\text{CO}_2$ 浓度波动极大，或者稀释比过低，猝灭效应仍会导致读数<strong>偏低</strong>。</p>
+</li>
 </ul>
-<blockquote>
-<p>例子：如果你有一个 $10k\Omega$ 的电阻和一个 $10\mu F$ 的电容，时间常数就是：
-$10,000 \times 0.00001 = 0.1$ 秒 (即 100 毫秒)。</p>
-</blockquote>
-<h3 id="它告诉了我们什么">它告诉了我们什么
-</h3><p>电容不像一个水桶（装满就停），它更像一个有阻力的弹簧。时间常数 $\tau$ 告诉我们要等多久电容才能“跟上”电压的变化</p>
+<h4 id="场景假设猝灭效应带来的背景气欺诈">场景假设：猝灭效应带来的背景气欺诈
+</h4><p>背景知识： 紫外荧光法是通过测量 $\text{SO}_2$ 分子受激发后发出的荧光强度来计算浓度的。 但是在物理上，有一个大敌叫“猝灭” 。<strong>简单说，就是 $\text{CO}_2$ 和 $\text{H}_2\text{O}$ 这些“胖子”分子，喜欢撞击受激发的 $\text{SO}_2$，把能量“偷走”变成热量，导致 $\text{SO}_2$ 发不出光</strong>。</p>
 <ul>
-<li>$1\tau$ (63.2%)：给电容充电时，经过 1 个时间常数 的时间，电压会充到总电压的 63.2%。</li>
-<li>$5\tau$ (99.3%)：经过 5 个时间常数 的时间，我们工程上认为电容已经充满了（或者放电放完了）。</li>
-</ul>
-<h3 id="拿它做什么">拿它做什么
-</h3><p>我们通常利用 $\tau$ 的“延时”和“平滑”这两个特性来设计电路。以下是三个最经典的应用</p>
-<h4 id="让子弹飞一会儿--上电复位电路">“让子弹飞一会儿” —— 上电复位电路
-</h4><p>芯片（比如单片机）刚通电时，电源电压可能不稳，如果芯片马上开始工作，容易出错（跑飞）。</p>
+<li>校准时刻（理想世界）：
 <ul>
-<li>做法：我们在复位引脚（Reset）接一个 RC 电路。</li>
-<li>原理：电源上电了，但电容电压需要慢慢爬升（由 $\tau$ 决定）。只要电容电压还没爬到高电平，芯片就一直处于“被按住复位键”的状态。</li>
-<li>目的：给电源一点时间稳定下来，等 $\tau$ 时间过了，电容充满了，复位结束，芯片再安全启动。</li>
-</ul>
-<h4 id="过滤杂音--按键去抖">“过滤杂音” —— 按键去抖
-</h4><p>当你按下一个机械按键时，金属弹片会发生极其快速的物理抖动（几毫秒内通断几十次）。单片机会以为你按了几十次。</p>
-<ul>
-<li>做法：在按键旁边并联一个电容，串联一个电阻。</li>
-<li>原理：利用 $\tau$ 制造的“迟钝”。抖动太快了（时间极短），电容来不及充电和放电，电压就被“拉平”了，看不出抖动。</li>
-<li>目的：让单片机读到一个干净、平滑的按键信号。</li>
-</ul>
-<h4 id="把方波变直流--pwm-转-dac-无源滤波">“把方波变直流” —— PWM 转 DAC (无源滤波)
-</h4><p>如果你想用数字信号（PWM，只有 0V 和 3.3V）控制一个模拟设备（比如调节屏幕亮度或电机速度），你需要一个中间电压（比如 1.65V）。</p>
-<ul>
-<li>做法：让 PWM 信号通过一个 RC 低通滤波器。</li>
-<li>原理：如果 $\tau$ 远大于 PWM 的周期，电容就来不及随着 PWM 的高低电平快速充放电，而是维持在一个平均电压值上。</li>
-<li>目的：把“一顿一顿”的数字脉冲平滑成“连续”的模拟电压。</li>
-</ul>
-<h3 id="经验法则">经验法则
-</h3><p>在图纸上看到电阻和电容连在一起时，可以这样快速判断：</p>
-<ul>
-<li>看位置
-<ul>
-<li>如果是 信号线对地 接 RC：通常是为了<strong>滤除噪声</strong>（让高频干扰来不及反应）。</li>
-<li>如果是 芯片复位脚/电源脚：通常是为了<strong>延时启动</strong>或<strong>软启动</strong>（Soft Start）。</li>
+<li>你拿一瓶标气去校准。标气的背景气是什么？通常是 **$\text{N}_2$。</li>
+<li>$\text{N}_2$ 很“老实”，不怎么产生猝灭。</li>
+<li>结果： 100 个 $\text{SO}_2$ 分子，发出了 100 份光。分析仪记住了：100 光 = 100ppm。校准完美通过。</li>
 </ul>
 </li>
-<li>估算时间
+<li>测量时刻（残酷现实）：
 <ul>
-<li>看到 $R=10k, C=10\mu F$，心里默念“0.1 秒”。</li>
-<li>看到 $R=1k, C=1nF$，心里默念“1 微秒”（非常快，通常用于滤除射频干扰）。</li>
+<li>探头抽入烟气。虽然稀释法混入了很多空气（$\text{N}_2$ 和 $\text{O}_2$），但烟道里原本含有 12%~15% 的 $\text{CO}_2$ 和大量 水汽。</li>
+<li>即便稀释了 50 倍，进入分析室的气体里依然混杂着微量的 $\text{CO}_2$ 和水分子。</li>
+<li>结果： 同样的 100 个 $\text{SO}_2$ 分子，刚想发光，就被旁边的 $\text{CO}_2$ 撞了一下，能量没了。最终只有 95 份光 被探测器收到。</li>
 </ul>
 </li>
+<li>欺骗结果：
+<ul>
+<li>分析仪按校准曲线计算：95 光 = 95ppm。</li>
+<li>真相： 实际排放是 100ppm，你测出来只有 95ppm。</li>
+<li>最可怕的点： <strong>无论你怎么通标气验证，它都是准的（因为标气里没有 $\text{CO}_2$）。你永远不知道你在测量实际烟气时，数据一直在负偏差</strong>。</li>
+</ul>
+</li>
+</ul>
+<p>如何破解这种骗局呢;</p>
+<ul>
+<li>看稀释比： <strong>稀释比越高，猝灭效应越小</strong>（因为背景气越接近空气）。如果你为了提高灵敏度把稀释比调低（比如从 100:1 调到 20:1），这个误差会指数级上升。</li>
+<li>不仅看标气，要看比对： 这种问题只能通过参比方法（手工采样）才能发现。如果手工数据总是比 CEMS 高 5%~10%，且标气校准又没问题，那基本就是<strong>猝灭系数</strong>没修正。</li>
+</ul>
+<h3 id="如果确实是-co2-引起的淬灭反应如何解决">如果确实是 CO2 引起的淬灭反应，如何解决
+</h3><ul>
+<li>核心问题在于，<strong>我们通常无法在不损失 $\text{SO}_2$ 的前提下“物理剔除” $\text{CO}_2$</strong>。</li>
+<li>原因在于化学性质的相似性：$\text{CO}_2$ 和 $\text{SO}_2$ 都是酸性气体。任何能通过化学反应吸收 $\text{CO}_2$ 的物质（如碱石灰、强碱溶液），都会更贪婪地把你要测的 $\text{SO}_2$ 也一起吸收掉，导致测量结果归零。</li>
+<li>因此，在工业 CEMS 应用中，我们应对猝灭效应的策略不是“剔除”，而是“<strong>稀释压制</strong>”和“<strong>基质匹配</strong>（Matrix Matching）”。</li>
+</ul>
+<h4 id="方法一提高稀释比">方法一：提高稀释比
+</h4><ul>
+<li>原理： 猝灭效应与干扰物（$\text{CO}_2$）的分压（浓度）成正比。</li>
+<li>计算推演：
+<ul>
+<li>假设烟道内 $\text{CO}_2$ 浓度为 15%（燃煤电厂典型值）。</li>
+<li>低稀释比（20:1）： 进入分析仪的 $\text{CO}_2$ 浓度为 $15% \div 20 = \mathbf{0.75%}$。这个浓度足以引起可察觉的负偏差。</li>
+<li>高稀释比（100:1）： 进入分析仪的 $\text{CO}_2$ 浓度为 $15% \div 100 = \mathbf{0.15%}$。在这个浓度下，$\text{N}_2$ 和 $\text{O}_2$（来自稀释风）占据了绝对主导，$\text{CO}_2$ 的猝灭影响几乎可以忽略不计。</li>
+</ul>
+</li>
+<li>操作建议：
+<ul>
+<li>如果你现在的探头稀释比只有 20:1 或 50:1，且 $\text{CO}_2$ 干扰明显，可以尝试更换更小孔径的临界孔，将稀释比提升至 100:1 甚至更高。</li>
+<li>代价： 稀释比提高了，进入分析仪的 $\text{SO}_2$ 浓度会变得更低，这对分析仪的检出限和信噪比提出了更高要求。你需要确认你的分析仪在测量 0.5 ppm 以下浓度时依然稳定。</li>
+</ul>
+</li>
+</ul>
+<h4 id="方法二基质匹配校准">方法二：基质匹配校准
+</h4><p>既然 $\text{CO}_2$ 会把读数“压低”，那我们在校准的时候，就故意用含有 $\text{CO}_2$ 的标气来校准，让分析仪“习惯”这种压低的状态。</p>
+<ul>
+<li>常规做法： 使用 $\text{SO}_2$ / $\text{N}_2$ 平衡气。
+<ul>
+<li>背景气是纯氮气，无猝灭。分析仪灵敏度最高。</li>
+<li>一测样气（含 $\text{CO}_2$），灵敏度下降，读数偏低。</li>
+</ul>
+</li>
+<li>改进做法： 购买定制标气，例如 **$\text{SO}_2$ (50ppm) + $\text{CO}_2$ (15%) + $\text{N}_2$ (平衡)。
+<ul>
+<li>注意：这里的 15% 指的是稀释前的模拟浓度，或者直接按比例计算混合标气。</li>
+<li>更具操作性的现场做法是：如果你的标气瓶只是 $\text{SO}_2/\text{N}_2$，你可以通过<strong>动态配气仪</strong>，混入一定比例的纯 $\text{CO}_2$。</li>
+</ul>
+</li>
+<li>结果： 你在校准时，分析仪就已经处于“被猝灭”的状态了。它确立的校准曲线斜率（Slope）已经包含了猝灭因子的修正。当你再去测含有 15% $\text{CO}_2$ 的烟气时，正好抵消。</li>
+</ul>
+<h4 id="总结建议">总结建议
+</h4><ul>
+<li>第一步（查硬件）： 确认你的稀释比是多少？如果是 <strong>100:1</strong> 甚至 <strong>200:1</strong>，那么 $\text{CO}_2$ 的物理浓度已经非常低（&lt;0.2%），理论上不应产生可见误差。如果此时还有很大误差，请排查是否有其他问题（如泄漏）。</li>
+<li>第二步（改校准）： 如果无法改变稀释比（比如因为 $\text{SO}_2$ 浓度本身就太低，再稀释就测不到了），那么请联系标气供应商，<strong>定制含有 10%~15% $\text{CO}_2$ 背景的 $\text{SO}_2$ 标气</strong>。这是成本最低、效果最立竿见影的方法。</li>
+</ul>
+<h3 id="加性干扰与乘性干扰">加性干扰与乘性干扰
+</h3><p>这里还有个常见的误区：</p>
+<p>例如运维人员发现 CO2 确实会对 SO2 的测量有干扰，于是拿一瓶 CO2 标气通入分析仪去测量，结果发现分析仪示数为 0（分析仪如果同时也开启了负值显示的功能），于是便认为 CO2 对 SO2 的测量没有正影响，也没有负影响。于是便得出 CO2 对 SO2 分析仪完全没有影响的结论
+<strong>这个误区之所以普遍，是因为很多人混淆了“加性干扰”（Additive Interference）和“乘性干扰”（Multiplicative Interference）的概念</strong>：</p>
+<ul>
+<li>加性干扰（如芳香烃）：$$测量值 = (\text{SO}_2 \text{真实值}) + (\text{干扰值})$$
+<ul>
+<li>当 $\text{SO}_2 = 0$，通入干扰物，测量值 = 干扰值。</li>
+<li>结论： 这种干扰可以通过通纯气测出来。</li>
+</ul>
+</li>
+<li>乘性干扰（猝灭效应）：
+猝灭效应是按比例吃掉光强。它是一个效率因子 (Efficiency Factor)，通常小于 1。$$测量值 = (\text{SO}_2 \text{真实值}) \times (\text{1 - 猝灭率})$$
+<ul>
+<li>运维人员的测试： 他通入了纯 $\text{CO}_2$，意味着 $\text{SO}_2 \text{真实值} = 0$。</li>
+<li>代入公式：$$测量值 = 0 \times (\text{1 - 猝灭率}) = \mathbf{0}$$</li>
+<li>真相： 无论猝灭率有多大（哪怕 $\text{CO}_2$ 把光全吃没了），只要原本就没有光（$\text{SO}_2=0$），结果永远是 0。</li>
+</ul>
+</li>
+</ul>
+<p>猝灭效应是“杀手”。如果屋子里本来就没有人（没有 $\text{SO}_2$），杀手（$\text{CO}_2$）进去也杀不到人，但这并不代表杀手没有杀伤力。</p>
+<p>正确的测试方法：要验证 $\text{CO}_2$ 的猝灭效应，必须进行“基质干扰测试”，必须有 $\text{SO}_2$ 在场，例如：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>步骤</strong></th>
+          <th><strong>通入气体成分</strong></th>
+          <th><strong>预期读数 (假设无干扰)</strong></th>
+          <th><strong>实际读数 (存在猝灭)</strong></th>
+          <th><strong>结论</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>1</strong></td>
+          <td><strong>标气 A:</strong> 50ppm $\text{SO}_2$ + $\text{N}_2$ (平衡气)</td>
+          <td>50.0 ppm</td>
+          <td>50.0 ppm</td>
+          <td>标定基准点</td>
+      </tr>
+      <tr>
+          <td><strong>2</strong></td>
+          <td><strong>混气 B:</strong> 50ppm $\text{SO}_2$ + <strong>15% $\text{CO}_2$</strong> + $\text{N}_2$</td>
+          <td>50.0 ppm</td>
+          <td><strong>45~48 ppm</strong></td>
+          <td><strong>读数下降</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>判定： 步骤 2 的读数明显低于步骤 1（通常低 3%~8%），这个差值才是 $\text{CO}_2$ 的真实干扰（猝灭效应）</p>
+<p>上面所说的分析仪负值显示功能，这其实是针对<strong>加性干扰</strong>的反向漂移或零点漂移设计的，对于猝灭这种<strong>乘性干扰</strong>没有任何帮助。</p>
+<ul>
+<li>如果读数是负的（例如 -2 ppm），通常是因为背景气比纯氮气更“干净”（背景噪声更低），或者是电路零点漂移。</li>
+<li>$\text{CO}_2$ 的猝灭永远是**“乘以一个小于 1 的系数”<strong>，它不会把正数变成负数，它只会让正数</strong>变小**。</li>
 </ul>
 
 </section>
