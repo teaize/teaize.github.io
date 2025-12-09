@@ -7,7 +7,366 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 07 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 08 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PMT金属屏蔽层</title>
+        <link>https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/</link>
+        <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/</guid>
+        <description>&lt;p&gt;这个金属层通常不只是为了“遮光”，它最核心、最容易被忽视的作用是抗磁干扰，其次才是静电屏蔽。&lt;/p&gt;
+&lt;h3 id=&#34;核心防御抗磁干扰&#34;&gt;核心防御：抗磁干扰
+&lt;/h3&gt;&lt;p&gt;这是 PMT 屏蔽层最独特的功能。这层金属通常不是普通的铁或铝，而是坡莫合金（Permalloy / Mu-metal），&lt;strong&gt;一种具有超高导磁率的材料。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理原理： PMT 的工作原理是光电子在真空中飞行，撞击一系列倍增极（Dynodes）。 电子带电且在运动，根据洛伦兹力公式：$$\vec{F} = q(\vec{v} \times \vec{B})$$
+&lt;ul&gt;
+&lt;li&gt;只要周围存在磁场（$\vec{B}$），电子的飞行轨迹就会发生偏转。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;后果： 如果电子因为磁场偏转，没有打中下一级倍增极，而是打到了管壁上，增益（Gain）就会大幅下降。
+&lt;ul&gt;
+&lt;li&gt;外部干扰源： 变压器、散热风扇的电机、电磁阀线圈，甚至是地磁场。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;屏蔽层的作用：&lt;/strong&gt; 坡莫合金就像磁场的“高速公路”。外部磁力线会优先沿着屏蔽层（磁阻最小路径）绕过 PMT 内部空间，从而&lt;strong&gt;在 PMT 内部营造一个“无磁环境”&lt;/strong&gt;，确保电子走直线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常规防御静电屏蔽&#34;&gt;常规防御：静电屏蔽
+&lt;/h3&gt;&lt;p&gt;PMT 通常工作在负高压状态（例如 -800V 到 -1000V），其输出信号却是极其微弱的电流（纳安 nA 级别），需要被放大电路（前置放大器）读取。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;干扰源： 分析仪内部到处都是噪声源：开关电源的高频噪声、紫外灯点火时的脉冲干扰、加热继电器的吸合噪声。&lt;/li&gt;
+&lt;li&gt;屏蔽层的作用： 这就如同&lt;strong&gt;法拉第笼（Faraday Cage）&lt;/strong&gt;。将金属屏蔽层接地（通常是模拟地 AGND），可以将外部的电场耦合屏蔽在外面，防止杂散电容将高频噪声引入信号链路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;blockquote&gt;
+&lt;p&gt;屏蔽层的作用： 这就如同&lt;strong&gt;法拉第笼（Faraday Cage）&lt;/strong&gt;。将金属屏蔽层接地（通常是模拟地 AGND），可以将外部的电场耦合屏蔽在外面，防止杂散电容将高频噪声引入信号链路。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;关于这一点的疑问：&lt;/p&gt;
+&lt;h3 id=&#34;1法拉第笼--电场的结界&#34;&gt;1、法拉第笼 —— “电场的结界”
+&lt;/h3&gt;&lt;h4 id=&#34;1如何理解法拉第笼&#34;&gt;1、如何理解法拉第笼
+&lt;/h4&gt;&lt;p&gt;想象一个由金属网或金属板做成的全封闭盒子。 &lt;strong&gt;物理原理：&lt;/strong&gt; 金属是导电的，意味着里面有大量的自由电子。 当外部有一个电场（比如旁边有个带高压电的变压器，或者空中的无线电波）打到这个盒子上时，金属盒子表面的自由电子会瞬间移动。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;电子移动的结果是：在盒子表面产生一个反向电场，刚好和外部电场抵消。&lt;/li&gt;
+&lt;li&gt;最终效果： &lt;strong&gt;盒子内部的合电场为 0&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2通俗类比&#34;&gt;2、通俗类比
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;避雷针/汽车： 下雷雨时，躲在汽车里是最安全的。即便闪电击中汽车，电流只会沿着金属外壳流到地下，车里的人毫发无损。汽车就是一个法拉第笼。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3为什么-pmt-需要它&#34;&gt;3、为什么 PMT 需要它
+&lt;/h4&gt;&lt;p&gt;PMT 内部处理的是纳安（nA）甚至更小级别的电流信号。 如果没有这个金属壳（法拉第笼）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;旁边 220V 的电源线 就像一个“发射塔”，不断向周围辐射 50Hz 的电场。&lt;/li&gt;
+&lt;li&gt;PMT 内部的信号线就像“天线”，会接收到这个 50Hz 干扰。&lt;/li&gt;
+&lt;li&gt;结果：你的测量数据里会叠加一个讨厌的正弦波噪声。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;加上屏蔽层后： 干扰被金属壳挡在外面，内部“风平浪静”&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2接地--电荷的下水道与海平面&#34;&gt;2、接地 —— “电荷的下水道”与“海平面”
+&lt;/h3&gt;&lt;p&gt;“地”不是真正的泥土，它是一个&lt;strong&gt;电位参考点&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;为什么要接地&#34;&gt;为什么要接地？
+&lt;/h4&gt;&lt;p&gt;金属屏蔽层（法拉第笼）挡住了外部的干扰电场，这意味着屏蔽层&lt;strong&gt;表面&lt;/strong&gt;感应了很多电荷（噪音）。 如果这个屏蔽层悬空（不接任何东西）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它上面积累的电荷无处可去。&lt;/li&gt;
+&lt;li&gt;当电荷积累多了，屏蔽层本身就变成了一个带电体（噪声源），反过来通过电容耦合干扰里面的 PMT。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;接地的作用：&lt;/strong&gt; 就像给浴缸接了一根排水管。 把屏蔽层接到“地”，就是给这些感应到的噪声电荷提供一条低阻抗的路径，让它们迅速流走，保证屏蔽层本身始终保持 0V 电位（干净）。&lt;/p&gt;
+&lt;h3 id=&#34;3模拟地-agnd-vs-数字地-dgnd--纯净水与污水&#34;&gt;3、模拟地 (AGND) vs. 数字地 (DGND) —— “纯净水”与“污水”
+&lt;/h3&gt;&lt;p&gt;为什么要特意强调接“模拟地 (AGND)”&lt;/p&gt;
+&lt;p&gt;在一块复杂的 CEMS 电路板上，虽然所有的“地”最终都会连在一起，但在局部，它们是分开管理的。&lt;/p&gt;
+&lt;h4 id=&#34;1数字地-dgnd--建筑工地&#34;&gt;1、数字地 (DGND) —— “建筑工地”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;谁在用： CPU、单片机、继电器、电机驱动、风扇。&lt;/li&gt;
+&lt;li&gt;特征： &lt;strong&gt;电流变化剧烈&lt;/strong&gt;。CPU 的时钟是以 MHz 频率开关的，电机启动会有大电流冲击。&lt;/li&gt;
+&lt;li&gt;水质： &lt;strong&gt;这里的“地”虽然名义上是 0V，但实际上因为电流波动大，上面充满了各种尖峰毛刺&lt;/strong&gt;。就像建筑工地的污水管，水流湍急且脏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2模拟地-agnd--精密实验室&#34;&gt;2、模拟地 (AGND) —— “精密实验室”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;谁在用： 传感器、运放、ADC（模数转换）、PMT 前置放大器。&lt;/li&gt;
+&lt;li&gt;特征： 处理的是微弱信号，要求极其安静的背景。&lt;/li&gt;
+&lt;li&gt;水质： 这里的“地”要求非常平稳，是一潭死水。就像实验室的纯净水管。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3为什么-pmt-屏蔽层不能接-dgnd&#34;&gt;3、为什么 PMT 屏蔽层不能接 DGND
+&lt;/h4&gt;&lt;p&gt;如果把 PMT 的屏蔽层接到了“数字地”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本来你是想让屏蔽层把噪声排走。&lt;/li&gt;
+&lt;li&gt;结果因为数字地太脏，电机转动产生的噪声反而顺着地线&lt;strong&gt;倒灌&lt;/strong&gt;到了屏蔽层上。&lt;/li&gt;
+&lt;li&gt;屏蔽层变成了发射天线，把数字噪声辐射给了 PMT。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;正确做法： 必须把屏蔽层接到最干净的 &lt;strong&gt;AGND&lt;/strong&gt;。确保它是整个系统中最宁静的参考平面。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>地环路</title>
+        <link>https://teaize.github.io/p/%E5%9C%B0%E7%8E%AF%E8%B7%AF/</link>
+        <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%9C%B0%E7%8E%AF%E8%B7%AF/</guid>
+        <description>&lt;p&gt;继 [[PMT金属屏蔽层]] 的引申。这篇学习法拉第笼的“死敌”——地环路。&lt;/p&gt;
+&lt;h3 id=&#34;屏蔽电缆&#34;&gt;屏蔽电缆
+&lt;/h3&gt;&lt;p&gt;除了前面所说 PMT 屏蔽层之外，其实很多传输信号的电缆线也是法拉第笼，更像是一条柔软的法拉第笼。例如探头上传感器连接到机柜的信号线，用的是同轴电缆或者屏蔽电缆&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251208193433.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251208193433.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;芯线 (Inner Conductor)： 传输信号。&lt;/li&gt;
+&lt;li&gt;编织屏蔽层 (Outer Conductor)： 就是那个法拉第笼。&lt;/li&gt;
+&lt;li&gt;外皮 (Jacket)： 绝缘保护。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;只要这个编织层接地，外部的电磁干扰就会像水流过雨衣一样，沿着屏蔽层流走，保护里面的芯线信号。听起来很完美，对吧？但是……&lt;/p&gt;
+&lt;h3 id=&#34;噩梦的开始地环路&#34;&gt;噩梦的开始：地环路
+&lt;/h3&gt;&lt;p&gt;场景假设： 你有一根信号线，连接着 探头 (在烟囱上) 和 分析仪 (在分析小屋里)。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;探头端： 探头装在几十米高的钢制烟囱上。烟囱是巨大的金属导体，也是巨大的天线（接收雷电、静电）。烟囱的“地”通常很“脏”，电压可能比大地高出几伏特。&lt;/li&gt;
+&lt;li&gt;机柜端： 分析仪小屋有专门的接地桩，这里的“地”很干净（0V）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;错误操作： 如果是毫无经验的接线工，他会非常负责任地：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在探头端，把屏蔽层接在烟囱的金属壳上（接地）。&lt;/li&gt;
+&lt;li&gt;在机柜端，把屏蔽层接在机柜的汇流排上（接地）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结果：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;两点接地！&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;物理现象： 烟囱的地电位（比如 5V）和机柜的地电位（0V）之间有&lt;strong&gt;电势差&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果：&lt;/strong&gt; 你的信号线屏蔽层，现在变成了一根&lt;strong&gt;导线&lt;/strong&gt;，连接了两个巨大的电源。强大的&lt;strong&gt;环路电流&lt;/strong&gt;（可能高达几安培！）开始在你的屏蔽层里疯狂流动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就叫“地环路”。你的“法拉第笼”现在不仅不防干扰，反而自己变成了一个&lt;strong&gt;发热的、带强电流的电磁铁&lt;/strong&gt;。这股电流通过互感（Transformer Effect），直接把巨大的 50Hz 嗡嗡声感应到里面的芯线上。&lt;/p&gt;
+&lt;p&gt;体现到数据上： 你的 CEMS 读数会在屏幕上剧烈跳动，或者叠加一个巨大的波浪线。&lt;/p&gt;
+&lt;h3 id=&#34;解决方案单点接地-single-point-grounding&#34;&gt;解决方案：单点接地 (Single-Point Grounding)
+&lt;/h3&gt;&lt;p&gt;如何在硬件安装上解决这个问题？答案是：&lt;strong&gt;物理隔断&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;黄金法则：&lt;strong&gt;对于低频信号屏蔽，屏蔽层只能在一端接地&lt;/strong&gt;！&lt;/p&gt;
+&lt;p&gt;通常的做法是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;机柜端接地： 在分析仪这一侧，把屏蔽层剥开，牢牢接在干净的仪表地上（AGND）。&lt;/li&gt;
+&lt;li&gt;探头端悬空（浮空）： 在探头那一侧，屏蔽层剪断，&lt;strong&gt;做绝缘处理，绝不能碰到烟囱金属壳&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样，屏蔽层依然是法拉第笼（电位是 0V），但回路被切断了，地电流流不过去。&lt;/p&gt;
+&lt;p&gt;为了防止探头壳体通过螺栓意外连接到烟囱的大地，我们在机械安装时，经常会用到&lt;strong&gt;绝缘法兰垫片&lt;/strong&gt;和&lt;strong&gt;绝缘螺栓套管&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这也是为什么在看某些进口探头的安装图纸时，会发现它们要求在安装法兰中间加一层厚厚的四氟垫片，这不仅仅是为了密封，更是为了电气隔离，切断地环路。&lt;/p&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;现在回头看 CEMS 系统，是不是感觉不一样了:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PMT 屏蔽罩： 小法拉第笼，保护心脏。&lt;/li&gt;
+&lt;li&gt;同轴电缆： 长法拉第笼，保护血管。&lt;/li&gt;
+&lt;li&gt;单点接地： 防止笼子变成通电线圈。&lt;/li&gt;
+&lt;li&gt;绝缘法兰： 机械层面的“断路器”。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>调制与解调</title>
+        <link>https://teaize.github.io/p/%E8%B0%83%E5%88%B6%E4%B8%8E%E8%A7%A3%E8%B0%83/</link>
+        <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%B0%83%E5%88%B6%E4%B8%8E%E8%A7%A3%E8%B0%83/</guid>
+        <description>&lt;p&gt;继 [[PMT金属屏蔽层]]、[[地环路]] 的引申。这篇学习调制与解调。在硬件上，这通常对应着一个关键部件：脉冲氙灯（或者闪烁氙灯）或者切光轮。&lt;/p&gt;
+&lt;h3 id=&#34;问题的根源直流漂移&#34;&gt;问题的根源：直流漂移
+&lt;/h3&gt;&lt;p&gt;场景假设：你把 PMT 的屏蔽做好了，地线也接好了。&lt;/p&gt;
+&lt;p&gt;但是，PMT 这个器件本身有个物理特性：暗电流。即使在完全没有光的情况下，它也会输出一点点电流（比如 0.1 nA）。更糟糕的是，这个“0.1 nA”不是固定的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;温度升高 1 度，它可能变成 0.12 nA。&lt;/li&gt;
+&lt;li&gt;器件老化一点，它可能变成 0.15 nA。&lt;/li&gt;
+&lt;li&gt;供电电压波动一点，它又变了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就是“漂移”。如果你用&lt;strong&gt;连续恒定&lt;/strong&gt;的紫外灯（Continuous Lamp）去照射 $\text{SO}_2$：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PMT 读到的总电流 = （$\text{SO}_2$ 荧光电流）+ （PMT 暗电流）+ （杂散光背景）。&lt;/li&gt;
+&lt;li&gt;困境： 当总电流变大了，你根本不知道是 $\text{SO}_2$ 浓度高了，还是 PMT 变热了，或者是灯泡老化亮度变了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就好比：&lt;strong&gt;你在一个黄昏的房间里读书，你不知道书本变暗是因为天黑了（背景变了），还是你的视力下降了（器件漂移）。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;硬件的破局让光闪起来&#34;&gt;硬件的破局：让光“闪”起来
+&lt;/h3&gt;&lt;p&gt;为了解决这个问题（漂移），工程师引入了“调制”。在紫外荧光法中，我们通常使用的是脉冲氙灯（比如 Thermo 43i 就用这个技术）。它的逻辑极其简单粗暴，但极其有效：“别一直开灯！闪着开！”&lt;/p&gt;
+&lt;h4 id=&#34;1-工作时序&#34;&gt;1. 工作时序
+&lt;/h4&gt;&lt;p&gt;分析仪的 CPU 会控制灯以固定的频率闪烁（例如 10Hz，每秒闪 10 次）。这就把时间切成了两半：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;状态 A（灯亮时刻）：
+&lt;ul&gt;
+&lt;li&gt;PMT 测到的值 = &lt;strong&gt;信号 ($\text{SO}_2$) + 噪声 (暗电流 + 背景)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;状态 B（灯灭时刻）：
+&lt;ul&gt;
+&lt;li&gt;PMT 测到的值 = &lt;strong&gt;0 + 噪声 (暗电流 + 背景)&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-算术魔法&#34;&gt;2. 算术魔法
+&lt;/h4&gt;&lt;p&gt;CPU 做一个简单的减法：$$\text{真实信号} = \text{状态 A} - \text{状态 B} = (\text{信号} + \text{噪声}) - (\text{噪声})= \text{信号}$$
+也就是说，不管你的 PMT 暗电流怎么漂移（今天 0.1，明天 0.2），也不管背景光怎么变化，只要它们在“灯亮”和“灯灭”的那一瞬间保持不变，它们就会被完美减掉！&lt;/p&gt;
+&lt;p&gt;这就是&lt;strong&gt;锁相放大&lt;/strong&gt;的雏形。&lt;/p&gt;
+&lt;h3 id=&#34;硬件工程师的噩梦同步与触发&#34;&gt;硬件工程师的“噩梦”：同步与触发
+&lt;/h3&gt;&lt;p&gt;虽然原理听起来很软件，但在硬件层面，这带来了一系列极具挑战的机械/电子问题。这也是区分“好仪器”和“烂仪器”的分水岭。&lt;/p&gt;
+&lt;h4 id=&#34;1-触发抖动&#34;&gt;1. 触发抖动
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;要求： 既然要做减法，PMT 的采集必须和灯的闪烁&lt;strong&gt;严丝合缝&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;故障： 氙灯的高压触发电路如果有延时，或者不稳定。
+&lt;ul&gt;
+&lt;li&gt;现象： CPU 以为灯亮了，开始采集“状态 A”，但其实灯还没完全亮到峰值。&lt;/li&gt;
+&lt;li&gt;结果： 测到的信号忽高忽低，读数剧烈跳动（噪声大）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;硬件排查： 很多时候是触发板上的电容老化，或者灯泡电极烧蚀导致击穿电压变化，引起了“时间轴错位”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-光强衰减与参考光路&#34;&gt;2. 光强衰减与“参考光路”
+&lt;/h4&gt;&lt;p&gt;脉冲灯解决了 PMT 漂移，但&lt;strong&gt;灯泡自己也会老啊&lt;/strong&gt;！氙灯闪了几亿次后，能量会下降。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果不处理： 灯暗了 $\to$ $\text{SO}_2$ 激发的荧光弱了 $\to$ 读数偏低。&lt;/li&gt;
+&lt;li&gt;硬件解决方案： 分光镜。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在光路设计中，你会看到一块成 45 度角的石英玻璃。它把紫外光分成两路：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;主路 (90%)：&lt;/strong&gt; 去照样气，产生荧光 $\to$ 给主 PMT 测。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;辅路 (10%)：&lt;/strong&gt; 照向一个小光电二极管。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最终算法进化：$$\text{浓度} \propto \frac{\text{主 PMT 信号 (扣除背景后)}}{\text{参考光强信号}}$$&lt;/p&gt;
+&lt;h3 id=&#34;从静到动的思维升华&#34;&gt;从“静”到“动”的思维升华
+&lt;/h3&gt;&lt;p&gt;这里有一个深刻的物理/工程思维模型，值得你记在心里：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;“如果是静态测不准的东西，就把它动起来测。”&lt;/strong&gt; (If you can&amp;rsquo;t measure it statically, modulate it.)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;测微弱光：&lt;/strong&gt; 别常亮，让它闪（脉冲/切光轮）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测微弱气：&lt;/strong&gt; 别一直通样气，让它和零气交替通（自动校零/参比法）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;测微弱力：&lt;/strong&gt; 别用力压，让它振动（原子力显微镜原理）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种&lt;strong&gt;将直流信号 (DC) 搬移到交流频段 (AC)&lt;/strong&gt; 的技术，避开了低频的 1/f 噪声（粉红噪声），是精密测量的基石。&lt;/p&gt;
+&lt;p&gt;从&lt;strong&gt;PMT 的屏蔽&lt;/strong&gt;（空间防御），到&lt;strong&gt;地环路的切断&lt;/strong&gt;（路径防御），再到&lt;strong&gt;脉冲调制&lt;/strong&gt;（时间防御），这一整套“海陆空”立体防御体系，是不是让你对这台仪器的设计逻辑有了全新的认识？&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>粉红噪声</title>
+        <link>https://teaize.github.io/p/%E7%B2%89%E7%BA%A2%E5%99%AA%E5%A3%B0/</link>
+        <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%B2%89%E7%BA%A2%E5%99%AA%E5%A3%B0/</guid>
+        <description>&lt;p&gt;目的：理解了粉红噪声，可能就能想明白为什么一些高端仪器都要把本来静止的信号“折腾”成动的。&lt;/p&gt;
+&lt;h3 id=&#34;什么是粉红噪声-pink-noise--1f-noise&#34;&gt;什么是粉红噪声 (Pink Noise / 1/f Noise)
+&lt;/h3&gt;&lt;p&gt;在电子电路和物理世界中，噪声按“频率分布”有着不同的颜色命名&lt;/p&gt;
+&lt;h4 id=&#34;1-白噪声-white-noise--沙沙声&#34;&gt;1. 白噪声 (White Noise) —— “沙沙声”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;特征： 能量在所有频率上是一样的。&lt;/li&gt;
+&lt;li&gt;物理来源： &lt;strong&gt;热噪声 (Thermal Noise)&lt;/strong&gt;。只要有温度，电子就会无规则乱动。&lt;/li&gt;
+&lt;li&gt;听感： 像收音机没台时的“沙沙”声。&lt;/li&gt;
+&lt;li&gt;图谱： 一条平的直线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-粉红噪声-pink-noise--低沉的轰鸣&#34;&gt;2. 粉红噪声 (Pink Noise) —— “低沉的轰鸣”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;特征： 频率越低，能量越大。
+&lt;ul&gt;
+&lt;li&gt;公式是：$$\text{噪声功率} \propto \frac{1}{f}$$&lt;/li&gt;
+&lt;li&gt;这意味着：0.1 Hz 的噪声能量是 10 Hz 的 100 倍！ &lt;strong&gt;当频率趋近于 0（也就是 DC 直流）时，噪声能量趋近于无穷大&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;物理来源： 元件老化、表面缺陷、温度缓慢漂移、半导体晶格缺陷。这些过程都很“慢”，所以集中在低频。&lt;/li&gt;
+&lt;li&gt;为什么叫“粉红”？ 在可见光里，红光的频率最低。既然这种噪声低频能量强（偏红），高频能量弱（偏蓝），我们就叫它“粉红噪声”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;更加透彻地理解粉红噪声&#34;&gt;更加透彻地理解粉红噪声
+&lt;/h3&gt;&lt;p&gt;想象你在高速公路上开车，试图保持车在车道正中间行驶。&lt;/p&gt;
+&lt;h4 id=&#34;白噪声white-noise路面的细碎颠簸&#34;&gt;白噪声（White Noise）：路面的细碎颠簸
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;感觉： 方向盘在你手里会有轻微的、快速的震动。这是因为路面不平、发动机震动造成的。&lt;/li&gt;
+&lt;li&gt;特点： 这种震动&lt;strong&gt;频率很快&lt;/strong&gt;，但是&lt;strong&gt;幅度很小&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;影响： 就算你不管它，这震动也不会让你的车翻到沟里去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;粉红噪声pink-noise车子的跑偏&#34;&gt;粉红噪声（Pink Noise）：车子的“跑偏”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;感觉： 假设你的四轮定位没做好，或者侧面一阵一阵地刮大风。你会发现车子&lt;strong&gt;慢慢地、不知不觉地&lt;/strong&gt;往右边偏。&lt;/li&gt;
+&lt;li&gt;特点： 这种变化&lt;strong&gt;动作很慢&lt;/strong&gt;（频率极低，可能几十秒才偏过去），但是&lt;strong&gt;幅度巨大&lt;/strong&gt;（如果不回正，车就撞护栏了）。&lt;/li&gt;
+&lt;li&gt;这就是粉红噪声！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;对应到 CEMS 仪表：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;白噪声 = 读数在 100.0, 100.1, 99.9 之间快速跳动。（只要平均一下就没事了）&lt;/li&gt;
+&lt;li&gt;粉红噪声 = 读数慢慢地从 100 变成了 105，又慢慢变成了 90。（这就是漂移，你平均它也没用，因为它代表了错误的趋势。）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;我们最怕的不是读数“突突突”地小跳（白噪声），那个容易滤掉。我们最怕的是读数“不知不觉地跑远了”（粉红噪声/漂移）。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要避开它&#34;&gt;为什么要避开它？
+&lt;/h3&gt;&lt;p&gt;想象一下噪音频谱图：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最左边 (0 Hz / DC)： 是一座高耸入云的“噪声大山”（温漂、零漂、老化）。&lt;/li&gt;
+&lt;li&gt;右边 (高频 AC)： 是一片平坦的“宁静平原”（只有微弱的热噪声）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你的测量困境：你要测量的 $\text{SO}_2$ 浓度，如果一直通气不动，它就是一个 DC 信号 (0 Hz)。如果你直接测量 DC 信号，就等于把房子建在了噪声大山的悬崖边上。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PMT 稍微热一点，读数就变了。&lt;/li&gt;
+&lt;li&gt;电压稍微动一下，读数又变了。&lt;/li&gt;
+&lt;li&gt;这些“慢”的噪声会把你微弱的 $\text{SO}_2$ 信号完全淹没。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;核心技术把信号搬到平原去&#34;&gt;核心技术：把信号“搬”到平原去
+&lt;/h3&gt;&lt;p&gt;既然左边的“低频沼泽”太吵了，我们就把信号&lt;strong&gt;搬运&lt;/strong&gt;到右边的“高频平原”去测。这就是 &lt;strong&gt;“调制 ”&lt;/strong&gt; 的本质。&lt;/p&gt;
+&lt;p&gt;让我们回到 CEMS 的 &lt;strong&gt;脉冲氙灯&lt;/strong&gt; 案例，看看这个“搬运”过程是如何发生的：&lt;/p&gt;
+&lt;h4 id=&#34;第一步原始状态-dc&#34;&gt;第一步：原始状态 (DC)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;信号： $\text{SO}_2$ 浓度恒定，信号频率 $f = 0$。&lt;/li&gt;
+&lt;li&gt;位置： 处于粉红噪声最强的区域。&lt;/li&gt;
+&lt;li&gt;结果： 信号被淹没。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第二步调制-modulation--搬运工&#34;&gt;第二步：调制 (Modulation) —— 搬运工
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;动作： 氙灯以 &lt;strong&gt;10 Hz&lt;/strong&gt; 的频率闪烁。&lt;/li&gt;
+&lt;li&gt;物理变化： 原本静止的 $\text{SO}_2$ 荧光信号，被迫变成了一个 &lt;strong&gt;10 Hz 的闪烁信号&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;位置变化： 信号的坐标从 0 Hz &lt;strong&gt;搬移&lt;/strong&gt; 到了 10 Hz 的位置。&lt;/li&gt;
+&lt;li&gt;环境变化： 在 10 Hz 这个位置，粉红噪声（1/f）已经衰减了很多，背景比 0 Hz 干净得多！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第三步解调-demodulation--提纯&#34;&gt;第三步：解调 (Demodulation) —— 提纯
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;动作： 使用 &lt;strong&gt;锁相放大 (Lock-in)&lt;/strong&gt; 技术（也就是前面说的“灯亮减灯灭”）。&lt;/li&gt;
+&lt;li&gt;逻辑： 分析仪只盯着 10 Hz 看。
+&lt;ul&gt;
+&lt;li&gt;0 Hz 的温漂？我不管，过滤掉。&lt;/li&gt;
+&lt;li&gt;50 Hz 的工频干扰？我不管，过滤掉。&lt;/li&gt;
+&lt;li&gt;我只提取 10 Hz 那个频段的信号。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结果： 你在最干净的频段，把信号毫发无损地拿了回来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;“仪表漂移”在数学和信号处理的语言里，就是典型的“粉红噪声”。那为什么好端端的仪器，放着不动，它自己就会“漂移”？为什么这些物理现象会产生“粉红噪声”（慢速、大幅度的波动）？&lt;/p&gt;
+&lt;p&gt;漂移主要来自这三个“物理元凶”：&lt;/p&gt;
+&lt;h4 id=&#34;元凶一热胀冷缩--仪器的呼吸&#34;&gt;元凶一：热胀冷缩 —— 仪器的“呼吸”
+&lt;/h4&gt;&lt;p&gt;这是最主要的漂移来源，尤其是在光学仪器中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理过程： 分析仪内部有加热盒，外部环境有昼夜温差。 金属的光学底板会随着温度微小变化而膨胀或收缩。&lt;/li&gt;
+&lt;li&gt;导致的后果（漂移）：
+&lt;ul&gt;
+&lt;li&gt;光路微偏： 氙灯发出的光，原本聚焦在中心，因为底板膨胀了 10 微米，光斑稍微偏了一点点。&lt;/li&gt;
+&lt;li&gt;滤光片波长漂移： 紫外滤光片的中心波长会随温度轻微移动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;为什么是粉红噪声？ 温度的变化是极慢的（以分钟或小时为单位）。这种变化在图谱上就是一条缓慢起伏的曲线，这就是典型的低频噪声。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;调制技术的降维打击：&lt;/strong&gt; 氙灯一秒钟闪 10 次。 在这 &lt;strong&gt;0.1 秒&lt;/strong&gt; 的瞬间里，温度根本来不及变，底板也来不及胀。所以调制技术完美忽略了温度漂移。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;元凶二器件老化与疲劳-仪器的衰老&#34;&gt;元凶二：器件老化与疲劳—— 仪器的“衰老”
+&lt;/h4&gt;&lt;p&gt;没有任何电子/光学元器件是永恒不变的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;光源（氙灯/紫外灯）：
+&lt;ul&gt;
+&lt;li&gt;电极烧蚀： 每次放电，电极都会损耗一点点原子，弧光的位置会一点点移动（Arc Wander）。&lt;/li&gt;
+&lt;li&gt;光强衰减： 灯泡玻璃壁会因为金属溅射变黑，透光率慢慢下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;探测器（PMT）：
+&lt;ul&gt;
+&lt;li&gt;倍增极疲劳： PMT 里面的倍增极（Dynode）长期受电子轰击，表面涂层会变化，发射电子的能力（增益 Gain）会&lt;strong&gt;缓慢下降&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;为什么是粉红噪声？ 这种衰减不是一瞬间发生的，而是随着几百个小时慢慢滑落的。这是一个&lt;strong&gt;超低频&lt;/strong&gt;的变化趋势。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;同样，在调制的“快变”短时间内，器件的老化与疲劳来不及反应，所以调制技术&lt;/p&gt;
+&lt;h4 id=&#34;元凶三半导体特性的随机游走--电子的拥堵&#34;&gt;元凶三：半导体特性的随机游走 —— 电子的“拥堵”
+&lt;/h4&gt;&lt;p&gt;这是最玄学的一个，但真实存在于放大器电路中。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理过程： 在半导体（比如运算放大器、电阻）的晶格内部，会有很多&lt;strong&gt;缺陷&lt;/strong&gt;或&lt;strong&gt;杂质&lt;/strong&gt;。 电流流过时，电子会被这些陷阱“卡住”一会，然后再释放出来。&lt;/li&gt;
+&lt;li&gt;导致的后果： 这种随机的“卡顿”和“释放”效应，会导致电阻值或放大倍数发生微小的、不规则的波动。&lt;/li&gt;
+&lt;li&gt;为什么是粉红噪声？ 物理学家发现，这种“卡顿”效应在慢速尺度上特别明显。它会让零点电压（Zero Offset）像喝醉了酒的人一样，毫无规律地瞎溜达。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在不仅知道它叫漂移，还知道了&lt;strong&gt;它的物理本质是“热、光、电的慢速不稳定性”&lt;/strong&gt;。 正是因为这些物理量变太慢了（即频率接近 0），所以我们才不能在 0 Hz 处测量，必须去 10 Hz（高频）处测量。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>二极管的钳位功能</title>
         <link>https://teaize.github.io/p/%E4%BA%8C%E6%9E%81%E7%AE%A1%E7%9A%84%E9%92%B3%E4%BD%8D%E5%8A%9F%E8%83%BD/</link>
         <pubDate>Sun, 07 Dec 2025 00:00:00 +0000</pubDate>
@@ -289,6 +648,57 @@ $$&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;如果读数是负的（例如 -2 ppm），通常是因为背景气比纯氮气更“干净”（背景噪声更低），或者是电路零点漂移。&lt;/li&gt;
 &lt;li&gt;$\text{CO}_2$ 的猝灭永远是**“乘以一个小于 1 的系数”&lt;strong&gt;，它不会把正数变成负数，它只会让正数&lt;/strong&gt;变小**。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;海绵效应---吸附滞后&#34;&gt;海绵效应 - 吸附滞后
+&lt;/h2&gt;&lt;p&gt;逻辑类型： 时间滞后型干扰。&lt;strong&gt;打破了“管路不参与反应”的假设&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常规认知：管路只是传输气体的通道，样气从探头到分析仪，只要流速恒定，延迟时间就是固定的（比如 30 秒）。&lt;/li&gt;
+&lt;li&gt;老鸟经验：对于 $\text{SO}_2$ 和 $\text{NH}_3$ 这种极性强、水溶性好的气体，采样管线（特别是老化或污染的特氟龙/PFA 管）不仅仅是通道，更是一块 “海绵”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;场景复盘：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;早晨（气温低）： 采样管线较冷。$\text{SO}_2$ 经过管线时，被管壁上的水膜或灰尘吸附。
+&lt;ul&gt;
+&lt;li&gt;现象：CEMS 读数比实际排放低。运维以为脱硫效率高，很开心。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;中午（气温高）： 太阳出来了，伴热管线温度也更稳定了。管壁温度升高。&lt;/li&gt;
+&lt;li&gt;午后惊魂： 早上吸附在管壁上的 $\text{SO}_2$ 开始解吸（Desorption），释放出来。
+&lt;ul&gt;
+&lt;li&gt;现象：哪怕锅炉停运了，或者排放很稳，CEMS 读数却莫名其妙地飘高，甚至超标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;物理本质：这是吸附/解吸平衡问题。你测到的浓度，是“现在的排放”加上“过去的债务（或存款）”。$$C_{measured}(t) = C_{source}(t) - R_{adsorption} + R_{desorption}(T)$$&lt;/p&gt;
+&lt;p&gt;如何识破：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;做“&lt;strong&gt;台阶测试&lt;/strong&gt;”： 通入高浓度标气（如 80% 量程），待稳定后，立刻切回零气。&lt;/li&gt;
+&lt;li&gt;观察下降曲线： 正常的系统应该像悬崖一样垂直下降（陡峭）。&lt;strong&gt;如果读数像“拖尾巴”一样，慢悠悠地往下掉&lt;/strong&gt;（比如从 100 降到 0 用了 5 分钟），说明管路吸附严重。这就叫“系统记忆效应”**。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;放大镜陷阱---稀释风的纯度&#34;&gt;放大镜陷阱 - 稀释风的纯度
+&lt;/h2&gt;&lt;p&gt;逻辑类型： 被放大的加性干扰。&lt;strong&gt;打破了“校准零气 = 工作零气”的假设&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;常规认知：稀释法 CEMS 需要洁净的压缩空气（零气）作为动力源。只要干燥、无油就行。一般的空气压缩机出来的气，含个 0.1 ppm 的杂质不算啥吧？&lt;/li&gt;
+&lt;li&gt;老鸟经验：在稀释法中，稀释风的微小脏污，会被“稀释比”成百倍地放大。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;数学逻辑：假设你的稀释比是 100:1。$$C_{reading} = C_{detector} \times 100$$&lt;/p&gt;
+&lt;p&gt;注意，分析仪探测器实际测量的是混合气体：&lt;/p&gt;
+&lt;p&gt;$$C_{detector} \approx \frac{C_{stack} \times 1 + C_{air} \times 99}{100}$$&lt;/p&gt;
+&lt;p&gt;如果你的稀释风（$C_{air}$）里含有 0.1 ppm 的 $\text{SO}_2$（比如空压机进气口吸入了烟气尾羽）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;分析仪测到的底数是 0.1 ppm。&lt;/li&gt;
+&lt;li&gt;系统反算： $0.1 \times 100 = \mathbf{10 \text{ ppm}}$。&lt;/li&gt;
+&lt;li&gt;结果： 你的 CEMS 读数平白无故多了 10 ppm 的底数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;场景复盘：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当你做零点校准时，你用的是&lt;strong&gt;瓶装高纯氮&lt;/strong&gt;。校准完美通过（读数为 0）。&lt;/li&gt;
+&lt;li&gt;当你切回测量模式时，你用的是&lt;strong&gt;现场空压机的气&lt;/strong&gt;。读数立刻跳升 10 ppm。&lt;/li&gt;
+&lt;li&gt;运维误判： “这就是现在的排放值。” 其实全是假数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;应对：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;稀释法的零气发生器（Zero Air Generator）必须配备高效的 $\text{SO}_2/\text{NO}_x$ 吸附柱（通常是紫色的高锰酸钾氧化铝或活性炭）。一旦这个变色失效，数据立马漂移。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这个金属层通常不只是为了“遮光”，它最核心、最容易被忽视的作用是抗磁干扰，其次才是静电屏蔽。\n核心防御：抗磁干扰 这是 PMT 屏蔽层最独特的功能。这层金属通常不是普通的铁或铝，而是坡莫合金（Permalloy / Mu-metal），一种具有超高导磁率的材料。\n">
+<title>PMT金属屏蔽层</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="PMT金属屏蔽层">
+<meta property='og:description' content="这个金属层通常不只是为了“遮光”，它最核心、最容易被忽视的作用是抗磁干扰，其次才是静电屏蔽。\n核心防御：抗磁干扰 这是 PMT 屏蔽层最独特的功能。这层金属通常不是普通的铁或铝，而是坡莫合金（Permalloy / Mu-metal），一种具有超高导磁率的材料。\n">
+<meta property='og:url' content='https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="PMT金属屏蔽层">
+<meta name="twitter:description" content="这个金属层通常不只是为了“遮光”，它最核心、最容易被忽视的作用是抗磁干扰，其次才是静电屏蔽。\n核心防御：抗磁干扰 这是 PMT 屏蔽层最独特的功能。这层金属通常不是普通的铁或铝，而是坡莫合金（Permalloy / Mu-metal），一种具有超高导磁率的材料。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#核心防御抗磁干扰">核心防御：抗磁干扰</a></li>
+        <li><a href="#常规防御静电屏蔽">常规防御：静电屏蔽</a></li>
+        <li><a href="#1法拉第笼--电场的结界">1、法拉第笼 —— “电场的结界”</a>
+          <ol>
+            <li><a href="#1如何理解法拉第笼">1、如何理解法拉第笼</a></li>
+            <li><a href="#2通俗类比">2、通俗类比</a></li>
+            <li><a href="#3为什么-pmt-需要它">3、为什么 PMT 需要它</a></li>
+          </ol>
+        </li>
+        <li><a href="#2接地--电荷的下水道与海平面">2、接地 —— “电荷的下水道”与“海平面”</a>
+          <ol>
+            <li><a href="#为什么要接地">为什么要接地？</a></li>
+          </ol>
+        </li>
+        <li><a href="#3模拟地-agnd-vs-数字地-dgnd--纯净水与污水">3、模拟地 (AGND) vs. 数字地 (DGND) —— “纯净水”与“污水”</a>
+          <ol>
+            <li><a href="#1数字地-dgnd--建筑工地">1、数字地 (DGND) —— “建筑工地”</a></li>
+            <li><a href="#2模拟地-agnd--精密实验室">2、模拟地 (AGND) —— “精密实验室”</a></li>
+            <li><a href="#3为什么-pmt-屏蔽层不能接-dgnd">3、为什么 PMT 屏蔽层不能接 DGND</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/">PMT金属屏蔽层</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-08</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>这个金属层通常不只是为了“遮光”，它最核心、最容易被忽视的作用是抗磁干扰，其次才是静电屏蔽。</p>
+<h3 id="核心防御抗磁干扰">核心防御：抗磁干扰
+</h3><p>这是 PMT 屏蔽层最独特的功能。这层金属通常不是普通的铁或铝，而是坡莫合金（Permalloy / Mu-metal），<strong>一种具有超高导磁率的材料。</strong></p>
+<ul>
+<li>物理原理： PMT 的工作原理是光电子在真空中飞行，撞击一系列倍增极（Dynodes）。 电子带电且在运动，根据洛伦兹力公式：$$\vec{F} = q(\vec{v} \times \vec{B})$$
+<ul>
+<li>只要周围存在磁场（$\vec{B}$），电子的飞行轨迹就会发生偏转。</li>
+</ul>
+</li>
+<li>后果： 如果电子因为磁场偏转，没有打中下一级倍增极，而是打到了管壁上，增益（Gain）就会大幅下降。
+<ul>
+<li>外部干扰源： 变压器、散热风扇的电机、电磁阀线圈，甚至是地磁场。</li>
+</ul>
+</li>
+<li><strong>屏蔽层的作用：</strong> 坡莫合金就像磁场的“高速公路”。外部磁力线会优先沿着屏蔽层（磁阻最小路径）绕过 PMT 内部空间，从而<strong>在 PMT 内部营造一个“无磁环境”</strong>，确保电子走直线。</li>
+</ul>
+<h3 id="常规防御静电屏蔽">常规防御：静电屏蔽
+</h3><p>PMT 通常工作在负高压状态（例如 -800V 到 -1000V），其输出信号却是极其微弱的电流（纳安 nA 级别），需要被放大电路（前置放大器）读取。</p>
+<ul>
+<li>干扰源： 分析仪内部到处都是噪声源：开关电源的高频噪声、紫外灯点火时的脉冲干扰、加热继电器的吸合噪声。</li>
+<li>屏蔽层的作用： 这就如同<strong>法拉第笼（Faraday Cage）</strong>。将金属屏蔽层接地（通常是模拟地 AGND），可以将外部的电场耦合屏蔽在外面，防止杂散电容将高频噪声引入信号链路。</li>
+</ul>
+<hr>
+<blockquote>
+<p>屏蔽层的作用： 这就如同<strong>法拉第笼（Faraday Cage）</strong>。将金属屏蔽层接地（通常是模拟地 AGND），可以将外部的电场耦合屏蔽在外面，防止杂散电容将高频噪声引入信号链路。</p>
+</blockquote>
+<p>关于这一点的疑问：</p>
+<h3 id="1法拉第笼--电场的结界">1、法拉第笼 —— “电场的结界”
+</h3><h4 id="1如何理解法拉第笼">1、如何理解法拉第笼
+</h4><p>想象一个由金属网或金属板做成的全封闭盒子。 <strong>物理原理：</strong> 金属是导电的，意味着里面有大量的自由电子。 当外部有一个电场（比如旁边有个带高压电的变压器，或者空中的无线电波）打到这个盒子上时，金属盒子表面的自由电子会瞬间移动。</p>
+<ul>
+<li>电子移动的结果是：在盒子表面产生一个反向电场，刚好和外部电场抵消。</li>
+<li>最终效果： <strong>盒子内部的合电场为 0</strong>。</li>
+</ul>
+<h4 id="2通俗类比">2、通俗类比
+</h4><ul>
+<li>避雷针/汽车： 下雷雨时，躲在汽车里是最安全的。即便闪电击中汽车，电流只会沿着金属外壳流到地下，车里的人毫发无损。汽车就是一个法拉第笼。</li>
+</ul>
+<h4 id="3为什么-pmt-需要它">3、为什么 PMT 需要它
+</h4><p>PMT 内部处理的是纳安（nA）甚至更小级别的电流信号。 如果没有这个金属壳（法拉第笼）：</p>
+<ul>
+<li>旁边 220V 的电源线 就像一个“发射塔”，不断向周围辐射 50Hz 的电场。</li>
+<li>PMT 内部的信号线就像“天线”，会接收到这个 50Hz 干扰。</li>
+<li>结果：你的测量数据里会叠加一个讨厌的正弦波噪声。</li>
+<li><strong>加上屏蔽层后： 干扰被金属壳挡在外面，内部“风平浪静”</strong>。</li>
+</ul>
+<h3 id="2接地--电荷的下水道与海平面">2、接地 —— “电荷的下水道”与“海平面”
+</h3><p>“地”不是真正的泥土，它是一个<strong>电位参考点</strong>。</p>
+<h4 id="为什么要接地">为什么要接地？
+</h4><p>金属屏蔽层（法拉第笼）挡住了外部的干扰电场，这意味着屏蔽层<strong>表面</strong>感应了很多电荷（噪音）。 如果这个屏蔽层悬空（不接任何东西）：</p>
+<ul>
+<li>它上面积累的电荷无处可去。</li>
+<li>当电荷积累多了，屏蔽层本身就变成了一个带电体（噪声源），反过来通过电容耦合干扰里面的 PMT。</li>
+</ul>
+<p><strong>接地的作用：</strong> 就像给浴缸接了一根排水管。 把屏蔽层接到“地”，就是给这些感应到的噪声电荷提供一条低阻抗的路径，让它们迅速流走，保证屏蔽层本身始终保持 0V 电位（干净）。</p>
+<h3 id="3模拟地-agnd-vs-数字地-dgnd--纯净水与污水">3、模拟地 (AGND) vs. 数字地 (DGND) —— “纯净水”与“污水”
+</h3><p>为什么要特意强调接“模拟地 (AGND)”</p>
+<p>在一块复杂的 CEMS 电路板上，虽然所有的“地”最终都会连在一起，但在局部，它们是分开管理的。</p>
+<h4 id="1数字地-dgnd--建筑工地">1、数字地 (DGND) —— “建筑工地”
+</h4><ul>
+<li>谁在用： CPU、单片机、继电器、电机驱动、风扇。</li>
+<li>特征： <strong>电流变化剧烈</strong>。CPU 的时钟是以 MHz 频率开关的，电机启动会有大电流冲击。</li>
+<li>水质： <strong>这里的“地”虽然名义上是 0V，但实际上因为电流波动大，上面充满了各种尖峰毛刺</strong>。就像建筑工地的污水管，水流湍急且脏。</li>
+</ul>
+<h4 id="2模拟地-agnd--精密实验室">2、模拟地 (AGND) —— “精密实验室”
+</h4><ul>
+<li>谁在用： 传感器、运放、ADC（模数转换）、PMT 前置放大器。</li>
+<li>特征： 处理的是微弱信号，要求极其安静的背景。</li>
+<li>水质： 这里的“地”要求非常平稳，是一潭死水。就像实验室的纯净水管。</li>
+</ul>
+<h4 id="3为什么-pmt-屏蔽层不能接-dgnd">3、为什么 PMT 屏蔽层不能接 DGND
+</h4><p>如果把 PMT 的屏蔽层接到了“数字地”：</p>
+<ul>
+<li>本来你是想让屏蔽层把噪声排走。</li>
+<li>结果因为数字地太脏，电机转动产生的噪声反而顺着地线<strong>倒灌</strong>到了屏蔽层上。</li>
+<li>屏蔽层变成了发射天线，把数字噪声辐射给了 PMT。</li>
+</ul>
+<p>正确做法： 必须把屏蔽层接到最干净的 <strong>AGND</strong>。确保它是整个系统中最宁静的参考平面。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
