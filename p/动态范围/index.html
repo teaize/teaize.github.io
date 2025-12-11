@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="$\\text{SO}_2$ 紫外荧光法 紫外荧光法通常用于测量微量 $\\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理： $$ \\begin{aligned} \\text{SO}_2 + h\\nu (190-230,\\text{nm}) &amp;\\rightarrow \\text{SO}_2^* \\end{aligned} $$ $$ \\begin{aligned} \\text{SO}_2^* &amp;\\rightarrow \\text{SO}_2 + h\\nu&rsquo; (240-420,\\text{nm}) \\end{aligned} $$\n">
-<title>紫外荧光法</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 为什么有的痕量分析仪，量程范围可以非常广，既可以测量小量程，又可以测量大量程。这台机器是如何做到：既能看清一只蚂蚁的腿毛（ppb 级痕量），又能看清一头大象（ppm 级常量），而且用的是同一双眼睛（PMT）\n">
+<title>动态范围</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="紫外荧光法">
-<meta property='og:description' content="$\\text{SO}_2$ 紫外荧光法 紫外荧光法通常用于测量微量 $\\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理： $$ \\begin{aligned} \\text{SO}_2 + h\\nu (190-230,\\text{nm}) &amp;\\rightarrow \\text{SO}_2^* \\end{aligned} $$ $$ \\begin{aligned} \\text{SO}_2^* &amp;\\rightarrow \\text{SO}_2 + h\\nu&rsquo; (240-420,\\text{nm}) \\end{aligned} $$\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="动态范围">
+<meta property='og:description' content=" 为什么有的痕量分析仪，量程范围可以非常广，既可以测量小量程，又可以测量大量程。这台机器是如何做到：既能看清一只蚂蚁的腿毛（ppb 级痕量），又能看清一头大象（ppm 级常量），而且用的是同一双眼睛（PMT）\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-07T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="紫外荧光法">
-<meta name="twitter:description" content="$\\text{SO}_2$ 紫外荧光法 紫外荧光法通常用于测量微量 $\\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理： $$ \\begin{aligned} \\text{SO}_2 + h\\nu (190-230,\\text{nm}) &amp;\\rightarrow \\text{SO}_2^* \\end{aligned} $$ $$ \\begin{aligned} \\text{SO}_2^* &amp;\\rightarrow \\text{SO}_2 + h\\nu&rsquo; (240-420,\\text{nm}) \\end{aligned} $$\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="动态范围">
+<meta name="twitter:description" content=" 为什么有的痕量分析仪，量程范围可以非常广，既可以测量小量程，又可以测量大量程。这台机器是如何做到：既能看清一只蚂蚁的腿毛（ppb 级痕量），又能看清一头大象（ppm 级常量），而且用的是同一双眼睛（PMT）\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -295,26 +295,41 @@
         <div class="widget--toc">
             <nav id="TableOfContents">
   <ol>
-    <li><a href="#textso_2-紫外荧光法">$\text{SO}_2$ 紫外荧光法</a>
+    <li>
       <ol>
-        <li><a href="#1芳香烃干扰-aromatic-hydrocarbon-interference">1、芳香烃干扰 (Aromatic Hydrocarbon Interference)</a></li>
-        <li><a href="#2猝灭效应-quenching-effect--最核心问题">2、猝灭效应 (Quenching Effect) —— 最核心问题</a>
+        <li><a href="#一-核心矛盾adc-的分辨率瓶颈">一、 核心矛盾：ADC 的分辨率瓶颈</a></li>
+        <li><a href="#二-硬件实现三级放大策略">二、 硬件实现：三级放大策略</a>
           <ol>
-            <li><a href="#场景假设猝灭效应带来的背景气欺诈">场景假设：猝灭效应带来的背景气欺诈</a></li>
+            <li><a href="#第一级iv-转换跨阻放大器-tia-最关键的电阻切换">第一级：I/V 转换（跨阻放大器 TIA）—— 最关键的“电阻切换”</a></li>
+            <li><a href="#第二级pga-可编程增益放大器--精细微调">第二级：PGA (可编程增益放大器) —— 精细微调</a></li>
+            <li><a href="#第三级pmt-高压调整-hv-adjustment--终极武器">第三级：PMT 高压调整 (HV Adjustment) —— 终极武器</a></li>
           </ol>
         </li>
-        <li><a href="#如果确实是-co2-引起的淬灭反应如何解决">如果确实是 CO2 引起的淬灭反应，如何解决</a>
+        <li><a href="#三-算法逻辑自动量程-auto-ranging-的傻瓜逻辑">三、 算法逻辑：自动量程 (Auto-Ranging) 的“傻瓜”逻辑</a>
           <ol>
-            <li><a href="#方法一提高稀释比">方法一：提高稀释比</a></li>
-            <li><a href="#方法二基质匹配校准">方法二：基质匹配校准</a></li>
-            <li><a href="#总结建议">总结建议</a></li>
+            <li><a href="#1-向上切换-upscale防止爆表">1. 向上切换 (Upscale)：防止爆表</a></li>
+            <li><a href="#2-向下切换-downscale防止丢失精度">2. 向下切换 (Downscale)：防止丢失精度</a></li>
+            <li><a href="#3-核心算法滞回区间-hysteresis--避免抽风">3. 核心算法：滞回区间 (Hysteresis) —— 避免“抽风”</a></li>
           </ol>
         </li>
-        <li><a href="#加性干扰与乘性干扰">加性干扰与乘性干扰</a></li>
+        <li><a href="#四-数据还原这一步最容易被忽视">四、 数据还原：这一步最容易被忽视</a></li>
       </ol>
     </li>
-    <li><a href="#海绵效应---吸附滞后">海绵效应 - 吸附滞后</a></li>
-    <li><a href="#放大镜陷阱---稀释风的纯度">放大镜陷阱 - 稀释风的纯度</a></li>
+    <li><a href="#痕量仪与常量仪">痕量仪与常量仪</a>
+      <ol>
+        <li><a href="#死敌一光学饱和效应--堵车了">死敌一：光学饱和效应 —— 堵车了</a></li>
+        <li><a href="#死敌二探测器的生理极限--亮瞎眼">死敌二：探测器的生理极限 —— “亮瞎眼”</a></li>
+        <li><a href="#死敌三系统的记忆效应--洗不干净">死敌三：系统的“记忆效应” —— “洗不干净”</a></li>
+        <li><a href="#工程师的作弊手段如果非要测怎么办">工程师的“作弊”手段：如果非要测，怎么办？</a>
+          <ol>
+            <li><a href="#1-物理衰减器-physical-attenuator--光圈">1. 物理衰减器 (Physical Attenuator) / 光圈</a></li>
+            <li><a href="#2-双光路--双气室-dual-bench">2. 双光路 / 双气室 (Dual Bench)</a></li>
+            <li><a href="#3-稀释采样-dilution">3. 稀释采样 (Dilution)</a></li>
+          </ol>
+        </li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
   </ol>
 </nav>
         </div>
@@ -334,7 +349,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/">紫外荧光法</a>
+            <a href="/p/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4/">动态范围</a>
         </h2>
     
         
@@ -356,7 +371,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-07</time>
+                <time class="article-time--published">2025-12-11</time>
             </div>
         
 
@@ -372,216 +387,183 @@
     <section class="article-content">
     
     
-    <h2 id="textso_2-紫外荧光法">$\text{SO}_2$ 紫外荧光法
-</h2><p>紫外荧光法通常用于测量微量 $\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：
-$$
-\begin{aligned}
-\text{SO}_2 + h\nu (190-230,\text{nm}) &amp;\rightarrow \text{SO}_2^*
-\end{aligned}
-$$
-$$
-\begin{aligned}
-\text{SO}_2^* &amp;\rightarrow \text{SO}_2 + h\nu&rsquo; (240-420,\text{nm})
-\end{aligned}
-$$</p>
-<p>在稀释法中可能存在的问题：</p>
-<h3 id="1芳香烃干扰-aromatic-hydrocarbon-interference">1、芳香烃干扰 (Aromatic Hydrocarbon Interference)
-</h3><ul>
-<li><strong>机理：</strong> 某些芳香族碳氢化合物（如多环芳烃）在紫外光激发下也会产生荧光，且波长范围与 $\text{SO}_2$ 重叠。</li>
-<li><strong>后果：</strong> 导致测量结果<strong>假性偏高</strong>。虽然稀释法降低了干扰物浓度，但在石化、焦化等行业，这种干扰依然存在。</li>
-<li><strong>对策：</strong> 分析仪内部通常需要配备“除烃器”（Kicker），如果除烃器失效，数据就会飘高。</li>
-</ul>
-<h3 id="2猝灭效应-quenching-effect--最核心问题">2、猝灭效应 (Quenching Effect) —— 最核心问题
-</h3><ul>
-<li>
-<p>机理： 激发的 $\text{SO}_2^*$ 分子在回到基态发出光子之前，与背景气体分子（如 $\text{H}_2\text{O}$, $\text{CO}_2$, $\text{O}_2$, $\text{N}_2$）发生碰撞，将能量以热能形式转移，而不发光。</p>
-<p>$$\text{SO}_2^* + M \rightarrow \text{SO}_2 + M + \text{Heat}$$</p>
-</li>
-<li>
-<p>稀释法的优势与劣势： 稀释法的好处是用大量的空气（主要是 $\text{N}_2$ 和 $\text{O}_2$）稀释了 $\text{CO}_2$ 和 $\text{H}_2\text{O}$，从而稳定了猝灭系数。但如果背景气中 $\text{CO}_2$ 浓度波动极大，或者稀释比过低，猝灭效应仍会导致读数<strong>偏低</strong>。</p>
-</li>
-</ul>
-<h4 id="场景假设猝灭效应带来的背景气欺诈">场景假设：猝灭效应带来的背景气欺诈
-</h4><p>背景知识： 紫外荧光法是通过测量 $\text{SO}_2$ 分子受激发后发出的荧光强度来计算浓度的。 但是在物理上，有一个大敌叫“猝灭” 。<strong>简单说，就是 $\text{CO}_2$ 和 $\text{H}_2\text{O}$ 这些“胖子”分子，喜欢撞击受激发的 $\text{SO}_2$，把能量“偷走”变成热量，导致 $\text{SO}_2$ 发不出光</strong>。</p>
-<ul>
-<li>校准时刻（理想世界）：
-<ul>
-<li>你拿一瓶标气去校准。标气的背景气是什么？通常是 **$\text{N}_2$。</li>
-<li>$\text{N}_2$ 很“老实”，不怎么产生猝灭。</li>
-<li>结果： 100 个 $\text{SO}_2$ 分子，发出了 100 份光。分析仪记住了：100 光 = 100ppm。校准完美通过。</li>
-</ul>
-</li>
-<li>测量时刻（残酷现实）：
-<ul>
-<li>探头抽入烟气。虽然稀释法混入了很多空气（$\text{N}_2$ 和 $\text{O}_2$），但烟道里原本含有 12%~15% 的 $\text{CO}_2$ 和大量 水汽。</li>
-<li>即便稀释了 50 倍，进入分析室的气体里依然混杂着微量的 $\text{CO}_2$ 和水分子。</li>
-<li>结果： 同样的 100 个 $\text{SO}_2$ 分子，刚想发光，就被旁边的 $\text{CO}_2$ 撞了一下，能量没了。最终只有 95 份光 被探测器收到。</li>
-</ul>
-</li>
-<li>欺骗结果：
-<ul>
-<li>分析仪按校准曲线计算：95 光 = 95ppm。</li>
-<li>真相： 实际排放是 100ppm，你测出来只有 95ppm。</li>
-<li>最可怕的点： <strong>无论你怎么通标气验证，它都是准的（因为标气里没有 $\text{CO}_2$）。你永远不知道你在测量实际烟气时，数据一直在负偏差</strong>。</li>
-</ul>
-</li>
-</ul>
-<p>如何破解这种骗局呢;</p>
-<ul>
-<li>看稀释比： <strong>稀释比越高，猝灭效应越小</strong>（因为背景气越接近空气）。如果你为了提高灵敏度把稀释比调低（比如从 100:1 调到 20:1），这个误差会指数级上升。</li>
-<li>不仅看标气，要看比对： 这种问题只能通过参比方法（手工采样）才能发现。如果手工数据总是比 CEMS 高 5%~10%，且标气校准又没问题，那基本就是<strong>猝灭系数</strong>没修正。</li>
-</ul>
-<h3 id="如果确实是-co2-引起的淬灭反应如何解决">如果确实是 CO2 引起的淬灭反应，如何解决
-</h3><ul>
-<li>核心问题在于，<strong>我们通常无法在不损失 $\text{SO}_2$ 的前提下“物理剔除” $\text{CO}_2$</strong>。</li>
-<li>原因在于化学性质的相似性：$\text{CO}_2$ 和 $\text{SO}_2$ 都是酸性气体。任何能通过化学反应吸收 $\text{CO}_2$ 的物质（如碱石灰、强碱溶液），都会更贪婪地把你要测的 $\text{SO}_2$ 也一起吸收掉，导致测量结果归零。</li>
-<li>因此，在工业 CEMS 应用中，我们应对猝灭效应的策略不是“剔除”，而是“<strong>稀释压制</strong>”和“<strong>基质匹配</strong>（Matrix Matching）”。</li>
-</ul>
-<h4 id="方法一提高稀释比">方法一：提高稀释比
-</h4><ul>
-<li>原理： 猝灭效应与干扰物（$\text{CO}_2$）的分压（浓度）成正比。</li>
-<li>计算推演：
-<ul>
-<li>假设烟道内 $\text{CO}_2$ 浓度为 15%（燃煤电厂典型值）。</li>
-<li>低稀释比（20:1）： 进入分析仪的 $\text{CO}_2$ 浓度为 $15% \div 20 = \mathbf{0.75%}$。这个浓度足以引起可察觉的负偏差。</li>
-<li>高稀释比（100:1）： 进入分析仪的 $\text{CO}_2$ 浓度为 $15% \div 100 = \mathbf{0.15%}$。在这个浓度下，$\text{N}_2$ 和 $\text{O}_2$（来自稀释风）占据了绝对主导，$\text{CO}_2$ 的猝灭影响几乎可以忽略不计。</li>
-</ul>
-</li>
-<li>操作建议：
-<ul>
-<li>如果你现在的探头稀释比只有 20:1 或 50:1，且 $\text{CO}_2$ 干扰明显，可以尝试更换更小孔径的临界孔，将稀释比提升至 100:1 甚至更高。</li>
-<li>代价： 稀释比提高了，进入分析仪的 $\text{SO}_2$ 浓度会变得更低，这对分析仪的检出限和信噪比提出了更高要求。你需要确认你的分析仪在测量 0.5 ppm 以下浓度时依然稳定。</li>
-</ul>
-</li>
-</ul>
-<h4 id="方法二基质匹配校准">方法二：基质匹配校准
-</h4><p>既然 $\text{CO}_2$ 会把读数“压低”，那我们在校准的时候，就故意用含有 $\text{CO}_2$ 的标气来校准，让分析仪“习惯”这种压低的状态。</p>
-<ul>
-<li>常规做法： 使用 $\text{SO}_2$ / $\text{N}_2$ 平衡气。
-<ul>
-<li>背景气是纯氮气，无猝灭。分析仪灵敏度最高。</li>
-<li>一测样气（含 $\text{CO}_2$），灵敏度下降，读数偏低。</li>
-</ul>
-</li>
-<li>改进做法： 购买定制标气，例如 **$\text{SO}_2$ (50ppm) + $\text{CO}_2$ (15%) + $\text{N}_2$ (平衡)。
-<ul>
-<li>注意：这里的 15% 指的是稀释前的模拟浓度，或者直接按比例计算混合标气。</li>
-<li>更具操作性的现场做法是：如果你的标气瓶只是 $\text{SO}_2/\text{N}_2$，你可以通过<strong>动态配气仪</strong>，混入一定比例的纯 $\text{CO}_2$。</li>
-</ul>
-</li>
-<li>结果： 你在校准时，分析仪就已经处于“被猝灭”的状态了。它确立的校准曲线斜率（Slope）已经包含了猝灭因子的修正。当你再去测含有 15% $\text{CO}_2$ 的烟气时，正好抵消。</li>
-</ul>
-<h4 id="总结建议">总结建议
-</h4><ul>
-<li>第一步（查硬件）： 确认你的稀释比是多少？如果是 <strong>100:1</strong> 甚至 <strong>200:1</strong>，那么 $\text{CO}_2$ 的物理浓度已经非常低（&lt;0.2%），理论上不应产生可见误差。如果此时还有很大误差，请排查是否有其他问题（如泄漏）。</li>
-<li>第二步（改校准）： 如果无法改变稀释比（比如因为 $\text{SO}_2$ 浓度本身就太低，再稀释就测不到了），那么请联系标气供应商，<strong>定制含有 10%~15% $\text{CO}_2$ 背景的 $\text{SO}_2$ 标气</strong>。这是成本最低、效果最立竿见影的方法。</li>
-</ul>
-<h3 id="加性干扰与乘性干扰">加性干扰与乘性干扰
-</h3><p>这里还有个常见的误区：</p>
-<p>例如运维人员发现 CO2 确实会对 SO2 的测量有干扰，于是拿一瓶 CO2 标气通入分析仪去测量，结果发现分析仪示数为 0（分析仪如果同时也开启了负值显示的功能），于是便认为 CO2 对 SO2 的测量没有正影响，也没有负影响。于是便得出 CO2 对 SO2 分析仪完全没有影响的结论
-<strong>这个误区之所以普遍，是因为很多人混淆了“加性干扰”（Additive Interference）和“乘性干扰”（Multiplicative Interference）的概念</strong>：</p>
-<ul>
-<li>加性干扰（如芳香烃）：$$测量值 = (\text{SO}_2 \text{真实值}) + (\text{干扰值})$$
-<ul>
-<li>当 $\text{SO}_2 = 0$，通入干扰物，测量值 = 干扰值。</li>
-<li>结论： 这种干扰可以通过通纯气测出来。</li>
-</ul>
-</li>
-<li>乘性干扰（猝灭效应）：
-猝灭效应是按比例吃掉光强。它是一个效率因子 (Efficiency Factor)，通常小于 1。$$测量值 = (\text{SO}_2 \text{真实值}) \times (\text{1 - 猝灭率})$$
-<ul>
-<li>运维人员的测试： 他通入了纯 $\text{CO}_2$，意味着 $\text{SO}_2 \text{真实值} = 0$。</li>
-<li>代入公式：$$测量值 = 0 \times (\text{1 - 猝灭率}) = \mathbf{0}$$</li>
-<li>真相： 无论猝灭率有多大（哪怕 $\text{CO}_2$ 把光全吃没了），只要原本就没有光（$\text{SO}_2=0$），结果永远是 0。</li>
-</ul>
-</li>
-</ul>
-<p>猝灭效应是“杀手”。如果屋子里本来就没有人（没有 $\text{SO}_2$），杀手（$\text{CO}_2$）进去也杀不到人，但这并不代表杀手没有杀伤力。</p>
-<p>正确的测试方法：要验证 $\text{CO}_2$ 的猝灭效应，必须进行“基质干扰测试”，必须有 $\text{SO}_2$ 在场，例如：</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>步骤</strong></th>
-          <th><strong>通入气体成分</strong></th>
-          <th><strong>预期读数 (假设无干扰)</strong></th>
-          <th><strong>实际读数 (存在猝灭)</strong></th>
-          <th><strong>结论</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>1</strong></td>
-          <td><strong>标气 A:</strong> 50ppm $\text{SO}_2$ + $\text{N}_2$ (平衡气)</td>
-          <td>50.0 ppm</td>
-          <td>50.0 ppm</td>
-          <td>标定基准点</td>
-      </tr>
-      <tr>
-          <td><strong>2</strong></td>
-          <td><strong>混气 B:</strong> 50ppm $\text{SO}_2$ + <strong>15% $\text{CO}_2$</strong> + $\text{N}_2$</td>
-          <td>50.0 ppm</td>
-          <td><strong>45~48 ppm</strong></td>
-          <td><strong>读数下降</strong></td>
-      </tr>
-  </tbody>
-</table></div>
-<p>判定： 步骤 2 的读数明显低于步骤 1（通常低 3%~8%），这个差值才是 $\text{CO}_2$ 的真实干扰（猝灭效应）</p>
-<p>上面所说的分析仪负值显示功能，这其实是针对<strong>加性干扰</strong>的反向漂移或零点漂移设计的，对于猝灭这种<strong>乘性干扰</strong>没有任何帮助。</p>
-<ul>
-<li>如果读数是负的（例如 -2 ppm），通常是因为背景气比纯氮气更“干净”（背景噪声更低），或者是电路零点漂移。</li>
-<li>$\text{CO}_2$ 的猝灭永远是**“乘以一个小于 1 的系数”<strong>，它不会把正数变成负数，它只会让正数</strong>变小**。</li>
-</ul>
-<h2 id="海绵效应---吸附滞后">海绵效应 - 吸附滞后
-</h2><p>逻辑类型： 时间滞后型干扰。<strong>打破了“管路不参与反应”的假设</strong></p>
-<ul>
-<li>常规认知：管路只是传输气体的通道，样气从探头到分析仪，只要流速恒定，延迟时间就是固定的（比如 30 秒）。</li>
-<li>老鸟经验：对于 $\text{SO}_2$ 和 $\text{NH}_3$ 这种极性强、水溶性好的气体，采样管线（特别是老化或污染的特氟龙/PFA 管）不仅仅是通道，更是一块 “海绵”。</li>
-</ul>
-<p>场景复盘：</p>
+    <blockquote>
+<p>为什么有的痕量分析仪，量程范围可以非常广，既可以测量小量程，又可以测量大量程。这台机器是如何做到：既能看清一只蚂蚁的腿毛（ppb 级痕量），又能看清一头大象（ppm 级常量），而且用的是同一双眼睛（PMT）</p>
+</blockquote>
+<p>这个魔法的核心在于：<strong>可变增益链</strong> (Variable Gain Chain)。在电路实现上，主要依靠 TIA（跨阻放大器）的量程切换和 PGA（可编程增益放大器）。我把这个过程比作<strong>显微镜的换镜头</strong>（或者说电子变速箱）</p>
+<h3 id="一-核心矛盾adc-的分辨率瓶颈">一、 核心矛盾：ADC 的分辨率瓶颈
+</h3><p>首先，我们要明白为什么要调整增益。现在的仪器最终都要把模拟信号变成数字信号（ADC，模数转换）。</p>
+<p>假设你的 ADC 是 0~5V 输入范围。</p>
 <ol>
-<li>早晨（气温低）： 采样管线较冷。$\text{SO}_2$ 经过管线时，被管壁上的水膜或灰尘吸附。
+<li><strong>如果不调增益（固定量程）：</strong>
 <ul>
-<li>现象：CEMS 读数比实际排放低。运维以为脱硫效率高，很开心。</li>
+<li>为了测 <strong>100 ppm</strong> (大信号)，你设定 5V = 100 ppm。</li>
+<li>那么 <strong>1 ppb</strong> (0.001 ppm) 对应的电压就是 $0.00005\text{V}$ (50 微伏)。</li>
+<li><strong>后果：</strong> 50 微伏的有用信号早就被电路板上的<strong>白噪声</strong>和<strong>底噪</strong>淹没了，根本测不出来。</li>
 </ul>
 </li>
-<li>中午（气温高）： 太阳出来了，伴热管线温度也更稳定了。管壁温度升高。</li>
-<li>午后惊魂： 早上吸附在管壁上的 $\text{SO}_2$ 开始解吸（Desorption），释放出来。
+<li>解决思路：
 <ul>
-<li>现象：哪怕锅炉停运了，或者排放很稳，CEMS 读数却莫名其妙地飘高，甚至超标。</li>
+<li>测大信号时：把倍数调低（5V = 100 ppm）。</li>
+<li>测小信号时：<strong>把倍数放大 1000 倍</strong>（5V = 100 ppb）。这样 1 ppb 的信号就变成了 0.05V (50 毫伏)，这就能测准了！</li>
 </ul>
 </li>
 </ol>
-<p>物理本质：这是吸附/解吸平衡问题。你测到的浓度，是“现在的排放”加上“过去的债务（或存款）”。$$C_{measured}(t) = C_{source}(t) - R_{adsorption} + R_{desorption}(T)$$</p>
-<p>如何识破：</p>
+<h3 id="二-硬件实现三级放大策略">二、 硬件实现：三级放大策略
+</h3><p>在紫外荧光法 $\text{SO}_2$ 分析仪中，电路通常分为三级来处理 PMT 输出的微弱电流。</p>
+<h4 id="第一级iv-转换跨阻放大器-tia-最关键的电阻切换">第一级：I/V 转换（跨阻放大器 TIA）—— 最关键的“电阻切换”
+</h4><p>PMT 输出的是电流 ($I_{pmt}$)，通常在 皮安 (pA, $10^{-12}$) 到 微安 ($\mu\text{A}, 10^{-6}$) 级别。我们需要把它变成电压 ($V$) 给 ADC 读。</p>
+<p>公式：$V_{out} = I_{pmt} \times R_f$ (<strong>反馈电阻</strong>)</p>
+<p>这是物理层面的量程切换，也是最常用的一招。</p>
 <ul>
-<li>做“<strong>台阶测试</strong>”： 通入高浓度标气（如 80% 量程），待稳定后，立刻切回零气。</li>
-<li>观察下降曲线： 正常的系统应该像悬崖一样垂直下降（陡峭）。<strong>如果读数像“拖尾巴”一样，慢悠悠地往下掉</strong>（比如从 100 降到 0 用了 5 分钟），说明管路吸附严重。这就叫“系统记忆效应”**。</li>
-</ul>
-<h2 id="放大镜陷阱---稀释风的纯度">放大镜陷阱 - 稀释风的纯度
-</h2><p>逻辑类型： 被放大的加性干扰。<strong>打破了“校准零气 = 工作零气”的假设</strong></p>
+<li>低量程模式 (Trace Mode)：
 <ul>
-<li>常规认知：稀释法 CEMS 需要洁净的压缩空气（零气）作为动力源。只要干燥、无油就行。一般的空气压缩机出来的气，含个 0.1 ppm 的杂质不算啥吧？</li>
-<li>老鸟经验：在稀释法中，稀释风的微小脏污，会被“稀释比”成百倍地放大。</li>
+<li>我们需要极大的放大倍数。</li>
+<li>电路会自动接通一个 1G$\Omega$ ($10^9$ 欧姆) 的超大电阻。</li>
+<li>哪怕只有 1pA 的电流，也能产生 $1\text{pA} \times 1\text{G}\Omega = 1\text{mV}$ 的电压。</li>
 </ul>
-<p>数学逻辑：假设你的稀释比是 100:1。$$C_{reading} = C_{detector} \times 100$$</p>
-<p>注意，分析仪探测器实际测量的是混合气体：</p>
-<p>$$C_{detector} \approx \frac{C_{stack} \times 1 + C_{air} \times 99}{100}$$</p>
-<p>如果你的稀释风（$C_{air}$）里含有 0.1 ppm 的 $\text{SO}_2$（比如空压机进气口吸入了烟气尾羽）：</p>
+</li>
+<li>高量程模式 (High Range)：
+<ul>
+<li>电流太大了，用大电阻会瞬间让电压“爆表”（超过 5V）。</li>
+<li>电路通过继电器或模拟开关，切换成一个 1M$\Omega$ ($10^6$ 欧姆) 的电阻。</li>
+<li>倍数瞬间缩小了 1000 倍。</li>
+</ul>
+</li>
+</ul>
+<h4 id="第二级pga-可编程增益放大器--精细微调">第二级：PGA (可编程增益放大器) —— 精细微调
+</h4><p>TIA 负责粗调（比如 x1, x100, x1000），PGA 负责细调（x1, x2, x4, x8…）。这是一个集成芯片，CPU 可以通过发指令，瞬间改变它的放大倍数。它的作用是把第一级出来的电压，尽可能拉伸到 ADC 的最佳工作区（比如 2V~4V）。</p>
+<h4 id="第三级pmt-高压调整-hv-adjustment--终极武器">第三级：PMT 高压调整 (HV Adjustment) —— 终极武器
+</h4><p>如果光强实在太强了，把电阻换到最小、PGA 设为 1 还是爆表怎么办？</p>
+<p>降低 PMT 的供电电压（负高压）。</p>
+<ul>
+<li>PMT 的增益对高压极其敏感。高压从 -800V 降到 -600V，PMT 输出的电流可能直接衰减 10 倍。</li>
+<li>注：这种方法响应慢，通常不用于快速量程切换，只用于基准设定。</li>
+</ul>
+<h3 id="三-算法逻辑自动量程-auto-ranging-的傻瓜逻辑">三、 算法逻辑：自动量程 (Auto-Ranging) 的“傻瓜”逻辑
+</h3><p>硬件准备好了，软件（算法）是怎么指挥的呢？这就涉及到了<strong>阈值判定</strong> 和 <strong>滞回</strong>。CPU 会在一个循环里不断监视 ADC 的读数（假设 ADC 满量程是 65535）：</p>
+<h4 id="1-向上切换-upscale防止爆表">1. 向上切换 (Upscale)：防止爆表
+</h4><ul>
+<li>逻辑： 如果 ADC 读数连续 N 次超过 90% (比如 &gt; 59000)。</li>
+<li>判断： “危险！信号快到顶了，要被削顶了！”</li>
+<li>动作：
 <ol>
-<li>分析仪测到的底数是 0.1 ppm。</li>
-<li>系统反算： $0.1 \times 100 = \mathbf{10 \text{ ppm}}$。</li>
-<li>结果： 你的 CEMS 读数平白无故多了 10 ppm 的底数。</li>
+<li>命令 PGA 增益 除以 10（或者切换 TIA 电阻）。</li>
+<li>软件内部记录：现在的 硬件放大倍数 (Gain Factor) 变了。</li>
+<li>丢弃切换瞬间不稳定的那几个数据。</li>
 </ol>
-<p>场景复盘：</p>
-<ul>
-<li>当你做零点校准时，你用的是<strong>瓶装高纯氮</strong>。校准完美通过（读数为 0）。</li>
-<li>当你切回测量模式时，你用的是<strong>现场空压机的气</strong>。读数立刻跳升 10 ppm。</li>
-<li>运维误判： “这就是现在的排放值。” 其实全是假数。</li>
+</li>
 </ul>
-<p>应对：</p>
-<ul>
-<li>稀释法的零气发生器（Zero Air Generator）必须配备高效的 $\text{SO}_2/\text{NO}_x$ 吸附柱（通常是紫色的高锰酸钾氧化铝或活性炭）。一旦这个变色失效，数据立马漂移。</li>
+<h4 id="2-向下切换-downscale防止丢失精度">2. 向下切换 (Downscale)：防止丢失精度
+</h4><ul>
+<li>逻辑： 如果 ADC 读数连续 N 次低于 <strong>10%</strong> (比如 &lt; 6500)。</li>
+<li>判断： “信号太小了，分辨率不够用了，我要放大看细节！”</li>
+<li>动作：
+<ol>
+<li>命令 PGA 增益 乘以 10。</li>
+<li>等待电路稳定。</li>
+</ol>
+</li>
 </ul>
+<h4 id="3-核心算法滞回区间-hysteresis--避免抽风">3. 核心算法：滞回区间 (Hysteresis) —— 避免“抽风”
+</h4><p>这是一个非常重要的工程经验。</p>
+<ul>
+<li>如果你设定： &gt;90% 升档，&lt;90% 降档。</li>
+<li>后果： 如果读数刚好在 90% 附近跳动，继电器就会“咔哒咔哒”疯狂切换，系统就崩溃了。</li>
+<li>做法：
+<ul>
+<li>升档阈值设为 <strong>95%</strong>。</li>
+<li>降档阈值设为 <strong>15%</strong>。</li>
+<li>中间这巨大的空白区，保持当前量程不动。</li>
+</ul>
+</li>
+</ul>
+<h3 id="四-数据还原这一步最容易被忽视">四、 数据还原：这一步最容易被忽视
+</h3><p>硬件切换了，电压变了，那屏幕上显示的浓度数值会不会突然跳变？当然不能跳！ 软件必须把电压归一化。
+$$\text{最终显示浓度} = \frac{\text{ADC读数电压}}{\text{当前的硬件总增益}} \times \text{校准系数}$$</p>
+<ul>
+<li>场景 A（低量程）：
+<ul>
+<li>ADC 读到 4.0V。</li>
+<li>当前增益是 x1000。</li>
+<li>反算原始信号：$4.0 / 1000 = 0.004$。</li>
+</ul>
+</li>
+<li>场景 B（高量程）：
+<ul>
+<li>切换后，硬件增益变成了 x1。</li>
+<li>同样的浓度，ADC 读数变成了 0.004V。</li>
+<li>反算原始信号：$0.004 / 1 = 0.004$。</li>
+</ul>
+</li>
+</ul>
+<p>结果： 虽然 ADC 读到的电压天差地别，但经过软件除以增益后，最终算出来的浓度是平滑连接的。</p>
+<h2 id="痕量仪与常量仪">痕量仪与常量仪
+</h2><p>那按照上面的思路，分析仪就可以通过电路的调整来实现量程的扩大了，不是吗？那为什么现实中很多分析仪并没有这么做。为什么大量程小量程不能用一台机器“通吃”？</p>
+<p>这么做，<strong>电路的瓶颈确实被打破了，但物理和化学的瓶颈还在</strong>。</p>
+<h3 id="死敌一光学饱和效应--堵车了">死敌一：光学饱和效应 —— 堵车了
+</h3><p>这是紫外荧光法（$\text{SO}_2$）和化学发光法（$\text{NO}_x$）无法测量高浓度的最主要原因。</p>
+<p>场景类比：</p>
+<ul>
+<li>低浓度（正常）： 广场上站着 10 个人（$\text{SO}_2$）。我用一束光照过去，每个人都能被照到，每个人都发光。光强 $\propto$ 人数。线性很好。</li>
+<li>超高浓度（扩大量程后）： 广场上密密麻麻挤了 10,000 个人。
+<ul>
+<li>问题来了： 我手电筒的光，只能照亮最前面那几排人。</li>
+<li>后面的人： <strong>被前面的人挡住了（阴影区），根本没受到激发，不发光</strong>。</li>
+<li>发出的光： 甚至发出来的荧光，在飞向 PMT 的过程中，又被旁边没发光的人给“吸收”了（自吸收）。
+结果（非线性）：即使电路能读数，但你会发现：浓度 1000 ppm 时读数是 1V；浓度 5000 ppm 时读数可能只有 1.2V。曲线趴下了。 这时候算法再怎么拟合也救不回来。</li>
+</ul>
+</li>
+</ul>
+<h3 id="死敌二探测器的生理极限--亮瞎眼">死敌二：探测器的生理极限 —— “亮瞎眼”
+</h3><p>即使我们假设气体没有自吸收，发出了巨大的光，PMT（光电倍增管）也受不了。</p>
+<ul>
+<li>PMT 的原理： 一个光子进来，变成 100 万个电子出去。</li>
+<li>高浓度下： 进来的光子太多了。
+<ul>
+<li>电流限制： PMT 内部的倍增极（Dynode）电流是有上限的。电子云太密集，空间电荷效应会排斥后续的电子。</li>
+<li>不可逆损伤： 如果你强行用痕量仪去测高浓度（比如锅炉爆表），巨大的阳极电流会把 PMT 的最后一级“烧坏”，导致灵敏度永久下降。</li>
+</ul>
+</li>
+</ul>
+<p>电路能调增益，但救不了探测器的命。 就像你能把照片亮度调低，但不能让你的视网膜盯着太阳看。</p>
+<h3 id="死敌三系统的记忆效应--洗不干净">死敌三：系统的“记忆效应” —— “洗不干净”
+</h3><p>这是机械和气路设计的痛。</p>
+<p>痕量分析仪（比如测 ppb 级的）为了追求灵敏度，其管路、反应室材料虽然也是特氟龙或不锈钢，但只要接触过一次高浓度气体（比如 1% 的 $\text{SO}_2$）：</p>
+<ol>
+<li>吸附： 高浓度的气体会深深“钻”进管路表面的微孔里。</li>
+<li>清洗： 当你切回测量低浓度（ppb）时，那些钻进去的气体开始慢慢释放。</li>
+<li>后果： 你的背景噪声（本底）会变得极高。原本能测 1 ppb，现在因为管路脏了，起步就是 50 ppb。</li>
+</ol>
+<p>结论：测过一次高浓度，这台“痕量仪”就废了，可能需要吹扫几天几夜才能恢复“视力”。</p>
+<h3 id="工程师的作弊手段如果非要测怎么办">工程师的“作弊”手段：如果非要测，怎么办？
+</h3><h4 id="1-物理衰减器-physical-attenuator--光圈">1. 物理衰减器 (Physical Attenuator) / 光圈
+</h4><ul>
+<li>原理： 既然光太强会“亮瞎眼”，那我就戴墨镜。</li>
+<li>做法： 在 PMT 前面加一个带小孔的金属片（光阑）或者中性密度滤光片。</li>
+<li>代价： 牺牲了低浓度的检出限（看不清微量了），但把量程上限扩大了 100 倍。</li>
+</ul>
+<h4 id="2-双光路--双气室-dual-bench">2. 双光路 / 双气室 (Dual Bench)
+</h4><ul>
+<li>原理： 既然不能通吃，那我就装两套系统。</li>
+<li>结构：
+<ul>
+<li>长气室： 光程长，灵敏度高，用来测低浓度。</li>
+<li>短气室： 光程极短（比如只有 1mm），专门测高浓度（避免光学饱和）。</li>
+</ul>
+</li>
+<li>切换： 很多 NDIR 分析仪里，你会看到一个切光轮上同时有长短两个气室，CPU 自动判断：浓度高了就读短的，浓度低了就读长的。</li>
+</ul>
+<h4 id="3-稀释采样-dilution">3. 稀释采样 (Dilution)
+</h4><p>这就回到了我们最开始聊的。既然仪器测不了高浓度，那我就在进气口把它稀释 100 倍再送进去。这是最彻底的解决办法。</p>
+<h3 id="总结">总结
+</h3><p>在纯信号处理领域，通过可变增益链确实可以非常“简单”的扩大量程 (比如数字万用表，靠切电阻就能从 mV 测到 kV），但在分析仪器领域，我们要处理的是物质和光：</p>
+<ul>
+<li>光会饱和（非线性）。</li>
+<li>物质会吸附（污染）。</li>
+<li>器件会损坏（PMT 过载）。</li>
+</ul>
+<p>所以，分析仪厂家才会把产品严格分为 “环境级（Ambient / Trace, ppb）” 和 “污染源级（Source / Emission, ppm）。这不仅仅是软件设置的不同，而是光路长度、气室体积、管路材质、甚至探测器选型的<strong>全方位物理差异</strong>。</p>
 
 </section>
 

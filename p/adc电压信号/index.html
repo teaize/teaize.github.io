@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="NOx 化学发光法 (Chemiluminescence) 这是测量 $\\text{NO}_x$ 的标准方法，利用 $\\text{NO}$ 与臭氧反应发光。原理： $$ \\text{NO} + \\text{O}_3 \\rightarrow \\text{NO}_2^* + \\text{O}_2 $$ $$ \\text{NO}_2^* \\rightarrow \\text{NO}_2 + h\\nu (600-3000nm) $$ 在稀释法中存在的问题：\n1、NO2 转化效率 问题： 化学发光法只能测 $\\text{NO}$。烟气中的 $\\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\\text{NO}$。$$\\text{NO}_2 \\xrightarrow{\\text{Converter}} \\text{NO}$$ 稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\\text{NO}_x$ 总量测量就会偏低。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。 场景假设：化学发光法 $\\text{NO}_x$ 的“偷梁换柱” 背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\\text{NO}$。 对于烟气里的 $\\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\\text{NO}_2$ 变成 $\\text{NO}$ 才能测。$$\\text{NO}_x = \\text{NO} (\\text{直接测}) + \\text{NO}_2 (\\text{转化后测})$$\n">
-<title>化学发光法</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="基本上所有的 ADC（模数转换器）只能直接“听懂”电压信号，而非电流信号\n为什么 ADC 偏爱电压 ADC 的内部核心部件——比较器 (Comparator) 和 采样保持电路 (Sample and Hold) 。\n比较器的工作原理（电压的战争）： ADC 内部其实是在做无数次“天平称重”。 一端： 你的输入信号。 另一端： 内部的参考电压（$V_{ref}$）。 动作： 比较器问：“现在的输入比参考电压高还是低？” 在晶体管级别，电压（电势能）是驱动门电路开关的最直接力量（场效应管 FET 就是电压控制型器件）。 采样保持（电容存电）： ADC 在抓取数据的那一瞬间，需要把信号“冻结”住。 做法： 它是用一个小电容（Capacitor）来存电荷的。 物理公式： $V = Q / C$。 电容存下来的电荷量，直接体现为两端的电压差。 那 4-20mA 信号呢？ 你可能会问：“不对啊，现场很多变送器输出的是 4-20mA 电流信号，PLC 的 AI 模块不是直接读进去了吗？”\n">
+<title>ADC电压信号</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/'>
+<link rel='canonical' href='https://teaize.github.io/p/adc%E7%94%B5%E5%8E%8B%E4%BF%A1%E5%8F%B7/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="化学发光法">
-<meta property='og:description' content="NOx 化学发光法 (Chemiluminescence) 这是测量 $\\text{NO}_x$ 的标准方法，利用 $\\text{NO}$ 与臭氧反应发光。原理： $$ \\text{NO} + \\text{O}_3 \\rightarrow \\text{NO}_2^* + \\text{O}_2 $$ $$ \\text{NO}_2^* \\rightarrow \\text{NO}_2 + h\\nu (600-3000nm) $$ 在稀释法中存在的问题：\n1、NO2 转化效率 问题： 化学发光法只能测 $\\text{NO}$。烟气中的 $\\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\\text{NO}$。$$\\text{NO}_2 \\xrightarrow{\\text{Converter}} \\text{NO}$$ 稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\\text{NO}_x$ 总量测量就会偏低。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。 场景假设：化学发光法 $\\text{NO}_x$ 的“偷梁换柱” 背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\\text{NO}$。 对于烟气里的 $\\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\\text{NO}_2$ 变成 $\\text{NO}$ 才能测。$$\\text{NO}_x = \\text{NO} (\\text{直接测}) + \\text{NO}_2 (\\text{转化后测})$$\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ADC电压信号">
+<meta property='og:description' content="基本上所有的 ADC（模数转换器）只能直接“听懂”电压信号，而非电流信号\n为什么 ADC 偏爱电压 ADC 的内部核心部件——比较器 (Comparator) 和 采样保持电路 (Sample and Hold) 。\n比较器的工作原理（电压的战争）： ADC 内部其实是在做无数次“天平称重”。 一端： 你的输入信号。 另一端： 内部的参考电压（$V_{ref}$）。 动作： 比较器问：“现在的输入比参考电压高还是低？” 在晶体管级别，电压（电势能）是驱动门电路开关的最直接力量（场效应管 FET 就是电压控制型器件）。 采样保持（电容存电）： ADC 在抓取数据的那一瞬间，需要把信号“冻结”住。 做法： 它是用一个小电容（Capacitor）来存电荷的。 物理公式： $V = Q / C$。 电容存下来的电荷量，直接体现为两端的电压差。 那 4-20mA 信号呢？ 你可能会问：“不对啊，现场很多变送器输出的是 4-20mA 电流信号，PLC 的 AI 模块不是直接读进去了吗？”\n">
+<meta property='og:url' content='https://teaize.github.io/p/adc%E7%94%B5%E5%8E%8B%E4%BF%A1%E5%8F%B7/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-09T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="化学发光法">
-<meta name="twitter:description" content="NOx 化学发光法 (Chemiluminescence) 这是测量 $\\text{NO}_x$ 的标准方法，利用 $\\text{NO}$ 与臭氧反应发光。原理： $$ \\text{NO} + \\text{O}_3 \\rightarrow \\text{NO}_2^* + \\text{O}_2 $$ $$ \\text{NO}_2^* \\rightarrow \\text{NO}_2 + h\\nu (600-3000nm) $$ 在稀释法中存在的问题：\n1、NO2 转化效率 问题： 化学发光法只能测 $\\text{NO}$。烟气中的 $\\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\\text{NO}$。$$\\text{NO}_2 \\xrightarrow{\\text{Converter}} \\text{NO}$$ 稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\\text{NO}_x$ 总量测量就会偏低。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。 场景假设：化学发光法 $\\text{NO}_x$ 的“偷梁换柱” 背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\\text{NO}$。 对于烟气里的 $\\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\\text{NO}_2$ 变成 $\\text{NO}$ 才能测。$$\\text{NO}_x = \\text{NO} (\\text{直接测}) + \\text{NO}_2 (\\text{转化后测})$$\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ADC电压信号">
+<meta name="twitter:description" content="基本上所有的 ADC（模数转换器）只能直接“听懂”电压信号，而非电流信号\n为什么 ADC 偏爱电压 ADC 的内部核心部件——比较器 (Comparator) 和 采样保持电路 (Sample and Hold) 。\n比较器的工作原理（电压的战争）： ADC 内部其实是在做无数次“天平称重”。 一端： 你的输入信号。 另一端： 内部的参考电压（$V_{ref}$）。 动作： 比较器问：“现在的输入比参考电压高还是低？” 在晶体管级别，电压（电势能）是驱动门电路开关的最直接力量（场效应管 FET 就是电压控制型器件）。 采样保持（电容存电）： ADC 在抓取数据的那一瞬间，需要把信号“冻结”住。 做法： 它是用一个小电容（Capacitor）来存电荷的。 物理公式： $V = Q / C$。 电容存下来的电荷量，直接体现为两端的电压差。 那 4-20mA 信号呢？ 你可能会问：“不对啊，现场很多变送器输出的是 4-20mA 电流信号，PLC 的 AI 模块不是直接读进去了吗？”\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,20 +297,8 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#nox-化学发光法-chemiluminescence">NOx 化学发光法 (Chemiluminescence)</a></li>
-        <li><a href="#1no2-转化效率">1、NO2 转化效率</a>
-          <ol>
-            <li><a href="#场景假设化学发光法-textno_x-的偷梁换柱">场景假设：化学发光法 $\text{NO}_x$ 的“偷梁换柱”</a></li>
-          </ol>
-        </li>
-        <li><a href="#2h2o-和-co2-的猝灭效应">2、H2O 和 CO2 的猝灭效应</a></li>
-        <li><a href="#3臭氧发生器的稳定性">3、臭氧发生器的稳定性</a></li>
-      </ol>
-    </li>
-    <li><a href="#案例-1nox-转换炉的好心办坏事">案例 1：NOx 转换炉的“好心办坏事”</a>
-      <ol>
-        <li><a href="#逻辑陷阱场景重现">逻辑陷阱（场景重现）：</a></li>
-        <li><a href="#那么如何排查这个问题">那么如何排查这个问题</a></li>
+        <li><a href="#为什么-adc-偏爱电压">为什么 ADC 偏爱电压</a></li>
+        <li><a href="#那-4-20ma-信号呢">那 4-20mA 信号呢？</a></li>
       </ol>
     </li>
   </ol>
@@ -332,7 +320,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/">化学发光法</a>
+            <a href="/p/adc%E7%94%B5%E5%8E%8B%E4%BF%A1%E5%8F%B7/">ADC电压信号</a>
         </h2>
     
         
@@ -354,7 +342,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-09</time>
+                <time class="article-time--published">2025-12-11</time>
             </div>
         
 
@@ -370,106 +358,45 @@
     <section class="article-content">
     
     
-    <h3 id="nox-化学发光法-chemiluminescence">NOx 化学发光法 (Chemiluminescence)
-</h3><p>这是测量 $\text{NO}_x$ 的标准方法，利用 $\text{NO}$ 与臭氧反应发光。原理：
-$$
-\text{NO} + \text{O}_3 \rightarrow \text{NO}_2^* + \text{O}_2
-$$
-$$
-\text{NO}_2^* \rightarrow \text{NO}_2 + h\nu (600-3000nm)
-$$
-在稀释法中存在的问题：</p>
-<h3 id="1no2-转化效率">1、NO2 转化效率
-</h3><ul>
-<li>问题： 化学发光法只能测 $\text{NO}$。烟气中的 $\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\text{NO}$。$$\text{NO}_2 \xrightarrow{\text{Converter}} \text{NO}$$</li>
-<li>稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\text{NO}_x$ 总量测量就会<strong>偏低</strong>。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。</li>
-</ul>
-<h4 id="场景假设化学发光法-textno_x-的偷梁换柱">场景假设：化学发光法 $\text{NO}_x$ 的“偷梁换柱”
-</h4><p>背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\text{NO}$。 对于烟气里的 $\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\text{NO}_2$ 变成 $\text{NO}$ 才能测。$$\text{NO}_x = \text{NO} (\text{直接测}) + \text{NO}_2 (\text{转化后测})$$</p>
+    <p>基本上所有的 ADC（模数转换器）只能直接“听懂”电压信号，而非电流信号</p>
+<h3 id="为什么-adc-偏爱电压">为什么 ADC 偏爱电压
+</h3><p>ADC 的内部核心部件——比较器 (Comparator) 和 采样保持电路 (Sample and Hold) 。</p>
 <ul>
-<li>校准时刻（偷懒的代价）：
+<li>比较器的工作原理（电压的战争）：
 <ul>
-<li>绝大多数现场，运维只会买一瓶 **$\text{NO}$ 标气。</li>
-<li>通入 100 ppm 的 $\text{NO}$。</li>
-<li>气体流过旁路（不经过转换炉） -&gt; 测得 100。</li>
-<li>气体流过转换炉（经过转换炉） -&gt; $\text{NO}$ 还是 $\text{NO}$，测得 100。</li>
-<li>结果： 校准通过。</li>
-</ul>
-</li>
-<li>故障时刻：
+<li>ADC 内部其实是在做无数次“天平称重”。
 <ul>
-<li>转换炉用久了，或者因为前面说的稀释探头加热不好，导致一点点冷凝水或铵盐进去了，<strong>转换炉中毒失效了</strong>。效率降到了 0%。</li>
-<li>此时你再用 $\text{NO}$ 标气校准。因为 $\text{NO}$ 不需要转换，所以<strong>校准依然是合格的！</strong></li>
-</ul>
-</li>
-<li>测量时刻（致命漏测）：
-<ul>
-<li>工况烟气来了。假设里面有 80 ppm $\text{NO}$ 和 20 ppm $\text{NO}_2$（总 $\text{NO}_x$ = 100）。</li>
-<li>分析仪读数： 只能测到那 80 ppm 的 $\text{NO}$。那 20 ppm 的 $\text{NO}_2$ 因为转换炉坏了，没变成 $\text{NO}$，直接被分析仪无视了。</li>
-<li>显示结果： 80 ppm。</li>
-</ul>
-</li>
-<li>欺骗结果：
-<ul>
-<li>你少测了 20% 的排放量。</li>
-<li>而且，因为你也只用 $\text{NO}$ 标气校验，你根本发现不了转换炉已经挂了。</li>
+<li>一端： 你的输入信号。</li>
+<li>另一端： 内部的参考电压（$V_{ref}$）。</li>
+<li>动作： 比较器问：“现在的输入比参考电压高还是低？”</li>
+<li><strong>在晶体管级别，电压（电势能）是驱动门电路开关的最直接力量</strong>（场效应管 FET 就是电压控制型器件）。</li>
 </ul>
 </li>
 </ul>
-<p>如何破解这种骗局呢：</p>
-<ul>
-<li>必须使用 $\text{NO}_2$ 标气：只有通入 $\text{NO}_2$ 标气，看能不能读出数来，才能验证转换炉的好坏。</li>
-<li>观察 $\text{NO}_x$ 与 $\text{NO}$ 的差值：在正常燃烧工况下，$\text{NO}_2$ 通常占 $\text{NO}_x$ 的 5% 左右。如果你发现你的表上，$\text{NO}$ 的数值永远等于 $\text{NO}_x$ 的数值（即 $\text{NO}_2$ 读数长期为 0），那很可能是转换炉出问题了。</li>
-</ul>
-<h3 id="2h2o-和-co2-的猝灭效应">2、H2O 和 CO2 的猝灭效应
-</h3><ul>
-<li>痛点： 与紫外荧光法类似，$\text{H}_2\text{O}$ 和 $\text{CO}_2$ 也是化学发光法的强猝灭剂。</li>
-<li>现象： 如果稀释空气干燥度不够（露点高），水分进入反应室，会显著降低发光强度，导致 $\text{NO}_x$ 读数<strong>偏低</strong>。这就是为什么稀释风的露点通常要求在 -40°C 以下。</li>
-</ul>
-<h3 id="3臭氧发生器的稳定性">3、臭氧发生器的稳定性
-</h3><ul>
-<li>系统隐患： 分析仪内部自带高压臭氧发生器。如果<strong>供电电压不稳</strong>或发生器老化，臭氧浓度下降，反应就不完全（不再是富氧反应），导致测量线性变差。</li>
-</ul>
-<h2 id="案例-1nox-转换炉的好心办坏事">案例 1：NOx 转换炉的“好心办坏事”
-</h2><p>背景知识： 前面我们说过，化学发光法为了测 $\text{NO}_2$，需要用转换炉（钼炉或不锈钢炉）把 $\text{NO}_2$ 还原成 $\text{NO}$。我们希望这个炉子只干这一件事。$$\text{NO}_2 \xrightarrow{\text{高温 + 催化剂}} \text{NO}$$</p>
-<h3 id="逻辑陷阱场景重现">逻辑陷阱（场景重现）：
-</h3><ul>
-<li>工况背景：为了降低 $\text{NO}_x$ 排放，电厂都会喷氨水（SCR/SNCR 脱硝）。如果不小心喷多了，烟气里就会有逃逸的氨气 ($\text{NH}_3$)。</li>
-<li>分析仪的“过度热情”：常用的钼炉（Moly Converter）工作温度在 315°C~350°C 左右。在这个温度下，钼炉不仅能把 $\text{NO}_2$ 还原成 $\text{NO}$，它也能把 $\text{NH}_3$ 氧化成 $\text{NO}$。$$\text{NH}_3 + \text{O}_2 \xrightarrow{\text{Mo, 350°C}} \text{NO} + \text{H}_2\text{O}$$</li>
-<li>现场的“死亡螺旋”：
-<ul>
-<li>状态： 此时 $\text{NO}_x$ 实际上有点高。</li>
-<li>操作： 运行人员加大喷氨量。</li>
-<li>物理结果： 实际 $\text{NO}_x$ 降下来了，但逃逸的 $\text{NH}_3$ 变多了。</li>
-<li>CEMS 读数： 逃逸的 $\text{NH}_3$ 进入转换炉，变成了 $\text{NO}$。分析仪把这部分 $\text{NH}_3$ 当作 $\text{NO}_x$ 计入了读数。读数不仅没降，反而可能升高了！</li>
-<li>误判： 运行人员一看屏幕：“卧槽，喷了氨怎么 $\text{NO}_x$ 还没降？肯定是喷得不够！再加大喷氨！”</li>
-<li>结局： 氨水耗尽，设备腐蚀，CEMS 数据依然超标。</li>
-</ul>
 </li>
 </ul>
-<h3 id="那么如何排查这个问题">那么如何排查这个问题
-</h3><ol>
-<li>准备工作： 找一个氨逃逸比较大的工况（或者让运行稍微多喷点氨）。</li>
-<li>正常测量： 记录此时的 $\text{NO}_x$ 读数（例如 50 ppm）。</li>
-<li>切断转换炉：
+<ol start="2">
+<li>采样保持（电容存电）：
 <ul>
-<li>如果是高温炉，把温度设定降到室温（或者直接拔掉加热棒电源，让它自然冷却）。</li>
-<li>或者切换气路，让样气绕过转换炉。</li>
+<li>ADC 在抓取数据的那一瞬间，需要把信号“冻结”住。
+<ul>
+<li>做法： 它是用一个小电容（Capacitor）来存电荷的。</li>
+<li>物理公式： $V = Q / C$。</li>
+<li>电容存下来的电荷量，直接体现为两端的<strong>电压差</strong>。</li>
 </ul>
 </li>
-<li>观察读数变化：
-<ul>
-<li>理论上： 绕过转换炉后，$\text{NO}_2$ 不被转化了，读数应该下降（只剩 $\text{NO}$）。</li>
-<li>如果读数下降得非常剧烈（例如从 50 降到 10）： 说明之前那 40 ppm 的差值里，包含着大量的 $\text{NO}_2$ 或者 被转化了的 $\text{NH}_3$。</li>
-</ul>
-</li>
-<li>氨气过滤器：
-<ul>
-<li>在取样管路中临时加装一个<strong>磷酸浸渍的过滤器</strong>（专门吸附氨气，不吸附 $\text{NO}_x$）。</li>
-<li>如果加了过滤器后，$\text{NO}_x$ 读数瞬间下降了，那就实锤了：你的转换炉在把氨气当成 $\text{NO}_x$ 测！</li>
 </ul>
 </li>
 </ol>
+<h3 id="那-4-20ma-信号呢">那 4-20mA 信号呢？
+</h3><p>你可能会问：“不对啊，现场很多变送器输出的是 <strong>4-20mA</strong> 电流信号，PLC 的 AI 模块不是直接读进去了吗？”</p>
+<p>这其实是个“假象”。如果你拆开 PLC 的模拟量输入模块，或者拆开采集卡，你会发现在那个接线端子的背后，悄悄藏着一个<strong>精密电阻</strong>（通常是 $250\Omega$ 或 $500\Omega$）。</p>
+<ul>
+<li>外部： 你送进来的是 4-20 mA 电流。</li>
+<li>内部采样： 电流流过 $250\Omega$ 电阻。</li>
+<li>ADC： 它实际上测的是这个电阻两端的 1-5V 电压。$$V = 0.02\text{A} \times 250\Omega = \mathbf{5V}$$
+所以，所谓的“电流型输入模块”，本质上就是“电压型 ADC + 一个采样电阻”**。</li>
+</ul>
 
 </section>
 

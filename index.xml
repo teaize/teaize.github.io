@@ -7,7 +7,545 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Tue, 09 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 11 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ADC电压信号</title>
+        <link>https://teaize.github.io/p/adc%E7%94%B5%E5%8E%8B%E4%BF%A1%E5%8F%B7/</link>
+        <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/adc%E7%94%B5%E5%8E%8B%E4%BF%A1%E5%8F%B7/</guid>
+        <description>&lt;p&gt;基本上所有的 ADC（模数转换器）只能直接“听懂”电压信号，而非电流信号&lt;/p&gt;
+&lt;h3 id=&#34;为什么-adc-偏爱电压&#34;&gt;为什么 ADC 偏爱电压
+&lt;/h3&gt;&lt;p&gt;ADC 的内部核心部件——比较器 (Comparator) 和 采样保持电路 (Sample and Hold) 。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;比较器的工作原理（电压的战争）：
+&lt;ul&gt;
+&lt;li&gt;ADC 内部其实是在做无数次“天平称重”。
+&lt;ul&gt;
+&lt;li&gt;一端： 你的输入信号。&lt;/li&gt;
+&lt;li&gt;另一端： 内部的参考电压（$V_{ref}$）。&lt;/li&gt;
+&lt;li&gt;动作： 比较器问：“现在的输入比参考电压高还是低？”&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;在晶体管级别，电压（电势能）是驱动门电路开关的最直接力量&lt;/strong&gt;（场效应管 FET 就是电压控制型器件）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;采样保持（电容存电）：
+&lt;ul&gt;
+&lt;li&gt;ADC 在抓取数据的那一瞬间，需要把信号“冻结”住。
+&lt;ul&gt;
+&lt;li&gt;做法： 它是用一个小电容（Capacitor）来存电荷的。&lt;/li&gt;
+&lt;li&gt;物理公式： $V = Q / C$。&lt;/li&gt;
+&lt;li&gt;电容存下来的电荷量，直接体现为两端的&lt;strong&gt;电压差&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;那-4-20ma-信号呢&#34;&gt;那 4-20mA 信号呢？
+&lt;/h3&gt;&lt;p&gt;你可能会问：“不对啊，现场很多变送器输出的是 &lt;strong&gt;4-20mA&lt;/strong&gt; 电流信号，PLC 的 AI 模块不是直接读进去了吗？”&lt;/p&gt;
+&lt;p&gt;这其实是个“假象”。如果你拆开 PLC 的模拟量输入模块，或者拆开采集卡，你会发现在那个接线端子的背后，悄悄藏着一个&lt;strong&gt;精密电阻&lt;/strong&gt;（通常是 $250\Omega$ 或 $500\Omega$）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;外部： 你送进来的是 4-20 mA 电流。&lt;/li&gt;
+&lt;li&gt;内部采样： 电流流过 $250\Omega$ 电阻。&lt;/li&gt;
+&lt;li&gt;ADC： 它实际上测的是这个电阻两端的 1-5V 电压。$$V = 0.02\text{A} \times 250\Omega = \mathbf{5V}$$
+所以，所谓的“电流型输入模块”，本质上就是“电压型 ADC + 一个采样电阻”**。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>动态范围</title>
+        <link>https://teaize.github.io/p/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4/</link>
+        <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8A%A8%E6%80%81%E8%8C%83%E5%9B%B4/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;为什么有的痕量分析仪，量程范围可以非常广，既可以测量小量程，又可以测量大量程。这台机器是如何做到：既能看清一只蚂蚁的腿毛（ppb 级痕量），又能看清一头大象（ppm 级常量），而且用的是同一双眼睛（PMT）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这个魔法的核心在于：&lt;strong&gt;可变增益链&lt;/strong&gt; (Variable Gain Chain)。在电路实现上，主要依靠 TIA（跨阻放大器）的量程切换和 PGA（可编程增益放大器）。我把这个过程比作&lt;strong&gt;显微镜的换镜头&lt;/strong&gt;（或者说电子变速箱）&lt;/p&gt;
+&lt;h3 id=&#34;一-核心矛盾adc-的分辨率瓶颈&#34;&gt;一、 核心矛盾：ADC 的分辨率瓶颈
+&lt;/h3&gt;&lt;p&gt;首先，我们要明白为什么要调整增益。现在的仪器最终都要把模拟信号变成数字信号（ADC，模数转换）。&lt;/p&gt;
+&lt;p&gt;假设你的 ADC 是 0~5V 输入范围。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;如果不调增益（固定量程）：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;为了测 &lt;strong&gt;100 ppm&lt;/strong&gt; (大信号)，你设定 5V = 100 ppm。&lt;/li&gt;
+&lt;li&gt;那么 &lt;strong&gt;1 ppb&lt;/strong&gt; (0.001 ppm) 对应的电压就是 $0.00005\text{V}$ (50 微伏)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果：&lt;/strong&gt; 50 微伏的有用信号早就被电路板上的&lt;strong&gt;白噪声&lt;/strong&gt;和&lt;strong&gt;底噪&lt;/strong&gt;淹没了，根本测不出来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;解决思路：
+&lt;ul&gt;
+&lt;li&gt;测大信号时：把倍数调低（5V = 100 ppm）。&lt;/li&gt;
+&lt;li&gt;测小信号时：&lt;strong&gt;把倍数放大 1000 倍&lt;/strong&gt;（5V = 100 ppb）。这样 1 ppb 的信号就变成了 0.05V (50 毫伏)，这就能测准了！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;二-硬件实现三级放大策略&#34;&gt;二、 硬件实现：三级放大策略
+&lt;/h3&gt;&lt;p&gt;在紫外荧光法 $\text{SO}_2$ 分析仪中，电路通常分为三级来处理 PMT 输出的微弱电流。&lt;/p&gt;
+&lt;h4 id=&#34;第一级iv-转换跨阻放大器-tia-最关键的电阻切换&#34;&gt;第一级：I/V 转换（跨阻放大器 TIA）—— 最关键的“电阻切换”
+&lt;/h4&gt;&lt;p&gt;PMT 输出的是电流 ($I_{pmt}$)，通常在 皮安 (pA, $10^{-12}$) 到 微安 ($\mu\text{A}, 10^{-6}$) 级别。我们需要把它变成电压 ($V$) 给 ADC 读。&lt;/p&gt;
+&lt;p&gt;公式：$V_{out} = I_{pmt} \times R_f$ (&lt;strong&gt;反馈电阻&lt;/strong&gt;)&lt;/p&gt;
+&lt;p&gt;这是物理层面的量程切换，也是最常用的一招。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;低量程模式 (Trace Mode)：
+&lt;ul&gt;
+&lt;li&gt;我们需要极大的放大倍数。&lt;/li&gt;
+&lt;li&gt;电路会自动接通一个 1G$\Omega$ ($10^9$ 欧姆) 的超大电阻。&lt;/li&gt;
+&lt;li&gt;哪怕只有 1pA 的电流，也能产生 $1\text{pA} \times 1\text{G}\Omega = 1\text{mV}$ 的电压。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;高量程模式 (High Range)：
+&lt;ul&gt;
+&lt;li&gt;电流太大了，用大电阻会瞬间让电压“爆表”（超过 5V）。&lt;/li&gt;
+&lt;li&gt;电路通过继电器或模拟开关，切换成一个 1M$\Omega$ ($10^6$ 欧姆) 的电阻。&lt;/li&gt;
+&lt;li&gt;倍数瞬间缩小了 1000 倍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第二级pga-可编程增益放大器--精细微调&#34;&gt;第二级：PGA (可编程增益放大器) —— 精细微调
+&lt;/h4&gt;&lt;p&gt;TIA 负责粗调（比如 x1, x100, x1000），PGA 负责细调（x1, x2, x4, x8…）。这是一个集成芯片，CPU 可以通过发指令，瞬间改变它的放大倍数。它的作用是把第一级出来的电压，尽可能拉伸到 ADC 的最佳工作区（比如 2V~4V）。&lt;/p&gt;
+&lt;h4 id=&#34;第三级pmt-高压调整-hv-adjustment--终极武器&#34;&gt;第三级：PMT 高压调整 (HV Adjustment) —— 终极武器
+&lt;/h4&gt;&lt;p&gt;如果光强实在太强了，把电阻换到最小、PGA 设为 1 还是爆表怎么办？&lt;/p&gt;
+&lt;p&gt;降低 PMT 的供电电压（负高压）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PMT 的增益对高压极其敏感。高压从 -800V 降到 -600V，PMT 输出的电流可能直接衰减 10 倍。&lt;/li&gt;
+&lt;li&gt;注：这种方法响应慢，通常不用于快速量程切换，只用于基准设定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-算法逻辑自动量程-auto-ranging-的傻瓜逻辑&#34;&gt;三、 算法逻辑：自动量程 (Auto-Ranging) 的“傻瓜”逻辑
+&lt;/h3&gt;&lt;p&gt;硬件准备好了，软件（算法）是怎么指挥的呢？这就涉及到了&lt;strong&gt;阈值判定&lt;/strong&gt; 和 &lt;strong&gt;滞回&lt;/strong&gt;。CPU 会在一个循环里不断监视 ADC 的读数（假设 ADC 满量程是 65535）：&lt;/p&gt;
+&lt;h4 id=&#34;1-向上切换-upscale防止爆表&#34;&gt;1. 向上切换 (Upscale)：防止爆表
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;逻辑： 如果 ADC 读数连续 N 次超过 90% (比如 &amp;gt; 59000)。&lt;/li&gt;
+&lt;li&gt;判断： “危险！信号快到顶了，要被削顶了！”&lt;/li&gt;
+&lt;li&gt;动作：
+&lt;ol&gt;
+&lt;li&gt;命令 PGA 增益 除以 10（或者切换 TIA 电阻）。&lt;/li&gt;
+&lt;li&gt;软件内部记录：现在的 硬件放大倍数 (Gain Factor) 变了。&lt;/li&gt;
+&lt;li&gt;丢弃切换瞬间不稳定的那几个数据。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-向下切换-downscale防止丢失精度&#34;&gt;2. 向下切换 (Downscale)：防止丢失精度
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;逻辑： 如果 ADC 读数连续 N 次低于 &lt;strong&gt;10%&lt;/strong&gt; (比如 &amp;lt; 6500)。&lt;/li&gt;
+&lt;li&gt;判断： “信号太小了，分辨率不够用了，我要放大看细节！”&lt;/li&gt;
+&lt;li&gt;动作：
+&lt;ol&gt;
+&lt;li&gt;命令 PGA 增益 乘以 10。&lt;/li&gt;
+&lt;li&gt;等待电路稳定。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-核心算法滞回区间-hysteresis--避免抽风&#34;&gt;3. 核心算法：滞回区间 (Hysteresis) —— 避免“抽风”
+&lt;/h4&gt;&lt;p&gt;这是一个非常重要的工程经验。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你设定： &amp;gt;90% 升档，&amp;lt;90% 降档。&lt;/li&gt;
+&lt;li&gt;后果： 如果读数刚好在 90% 附近跳动，继电器就会“咔哒咔哒”疯狂切换，系统就崩溃了。&lt;/li&gt;
+&lt;li&gt;做法：
+&lt;ul&gt;
+&lt;li&gt;升档阈值设为 &lt;strong&gt;95%&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;降档阈值设为 &lt;strong&gt;15%&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;中间这巨大的空白区，保持当前量程不动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;四-数据还原这一步最容易被忽视&#34;&gt;四、 数据还原：这一步最容易被忽视
+&lt;/h3&gt;&lt;p&gt;硬件切换了，电压变了，那屏幕上显示的浓度数值会不会突然跳变？当然不能跳！ 软件必须把电压归一化。
+$$\text{最终显示浓度} = \frac{\text{ADC读数电压}}{\text{当前的硬件总增益}} \times \text{校准系数}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景 A（低量程）：
+&lt;ul&gt;
+&lt;li&gt;ADC 读到 4.0V。&lt;/li&gt;
+&lt;li&gt;当前增益是 x1000。&lt;/li&gt;
+&lt;li&gt;反算原始信号：$4.0 / 1000 = 0.004$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;场景 B（高量程）：
+&lt;ul&gt;
+&lt;li&gt;切换后，硬件增益变成了 x1。&lt;/li&gt;
+&lt;li&gt;同样的浓度，ADC 读数变成了 0.004V。&lt;/li&gt;
+&lt;li&gt;反算原始信号：$0.004 / 1 = 0.004$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结果： 虽然 ADC 读到的电压天差地别，但经过软件除以增益后，最终算出来的浓度是平滑连接的。&lt;/p&gt;
+&lt;h2 id=&#34;痕量仪与常量仪&#34;&gt;痕量仪与常量仪
+&lt;/h2&gt;&lt;p&gt;那按照上面的思路，分析仪就可以通过电路的调整来实现量程的扩大了，不是吗？那为什么现实中很多分析仪并没有这么做。为什么大量程小量程不能用一台机器“通吃”？&lt;/p&gt;
+&lt;p&gt;这么做，&lt;strong&gt;电路的瓶颈确实被打破了，但物理和化学的瓶颈还在&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;死敌一光学饱和效应--堵车了&#34;&gt;死敌一：光学饱和效应 —— 堵车了
+&lt;/h3&gt;&lt;p&gt;这是紫外荧光法（$\text{SO}_2$）和化学发光法（$\text{NO}_x$）无法测量高浓度的最主要原因。&lt;/p&gt;
+&lt;p&gt;场景类比：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;低浓度（正常）： 广场上站着 10 个人（$\text{SO}_2$）。我用一束光照过去，每个人都能被照到，每个人都发光。光强 $\propto$ 人数。线性很好。&lt;/li&gt;
+&lt;li&gt;超高浓度（扩大量程后）： 广场上密密麻麻挤了 10,000 个人。
+&lt;ul&gt;
+&lt;li&gt;问题来了： 我手电筒的光，只能照亮最前面那几排人。&lt;/li&gt;
+&lt;li&gt;后面的人： &lt;strong&gt;被前面的人挡住了（阴影区），根本没受到激发，不发光&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;发出的光： 甚至发出来的荧光，在飞向 PMT 的过程中，又被旁边没发光的人给“吸收”了（自吸收）。
+结果（非线性）：即使电路能读数，但你会发现：浓度 1000 ppm 时读数是 1V；浓度 5000 ppm 时读数可能只有 1.2V。曲线趴下了。 这时候算法再怎么拟合也救不回来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;死敌二探测器的生理极限--亮瞎眼&#34;&gt;死敌二：探测器的生理极限 —— “亮瞎眼”
+&lt;/h3&gt;&lt;p&gt;即使我们假设气体没有自吸收，发出了巨大的光，PMT（光电倍增管）也受不了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PMT 的原理： 一个光子进来，变成 100 万个电子出去。&lt;/li&gt;
+&lt;li&gt;高浓度下： 进来的光子太多了。
+&lt;ul&gt;
+&lt;li&gt;电流限制： PMT 内部的倍增极（Dynode）电流是有上限的。电子云太密集，空间电荷效应会排斥后续的电子。&lt;/li&gt;
+&lt;li&gt;不可逆损伤： 如果你强行用痕量仪去测高浓度（比如锅炉爆表），巨大的阳极电流会把 PMT 的最后一级“烧坏”，导致灵敏度永久下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;电路能调增益，但救不了探测器的命。 就像你能把照片亮度调低，但不能让你的视网膜盯着太阳看。&lt;/p&gt;
+&lt;h3 id=&#34;死敌三系统的记忆效应--洗不干净&#34;&gt;死敌三：系统的“记忆效应” —— “洗不干净”
+&lt;/h3&gt;&lt;p&gt;这是机械和气路设计的痛。&lt;/p&gt;
+&lt;p&gt;痕量分析仪（比如测 ppb 级的）为了追求灵敏度，其管路、反应室材料虽然也是特氟龙或不锈钢，但只要接触过一次高浓度气体（比如 1% 的 $\text{SO}_2$）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;吸附： 高浓度的气体会深深“钻”进管路表面的微孔里。&lt;/li&gt;
+&lt;li&gt;清洗： 当你切回测量低浓度（ppb）时，那些钻进去的气体开始慢慢释放。&lt;/li&gt;
+&lt;li&gt;后果： 你的背景噪声（本底）会变得极高。原本能测 1 ppb，现在因为管路脏了，起步就是 50 ppb。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;结论：测过一次高浓度，这台“痕量仪”就废了，可能需要吹扫几天几夜才能恢复“视力”。&lt;/p&gt;
+&lt;h3 id=&#34;工程师的作弊手段如果非要测怎么办&#34;&gt;工程师的“作弊”手段：如果非要测，怎么办？
+&lt;/h3&gt;&lt;h4 id=&#34;1-物理衰减器-physical-attenuator--光圈&#34;&gt;1. 物理衰减器 (Physical Attenuator) / 光圈
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理： 既然光太强会“亮瞎眼”，那我就戴墨镜。&lt;/li&gt;
+&lt;li&gt;做法： 在 PMT 前面加一个带小孔的金属片（光阑）或者中性密度滤光片。&lt;/li&gt;
+&lt;li&gt;代价： 牺牲了低浓度的检出限（看不清微量了），但把量程上限扩大了 100 倍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-双光路--双气室-dual-bench&#34;&gt;2. 双光路 / 双气室 (Dual Bench)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理： 既然不能通吃，那我就装两套系统。&lt;/li&gt;
+&lt;li&gt;结构：
+&lt;ul&gt;
+&lt;li&gt;长气室： 光程长，灵敏度高，用来测低浓度。&lt;/li&gt;
+&lt;li&gt;短气室： 光程极短（比如只有 1mm），专门测高浓度（避免光学饱和）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;切换： 很多 NDIR 分析仪里，你会看到一个切光轮上同时有长短两个气室，CPU 自动判断：浓度高了就读短的，浓度低了就读长的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-稀释采样-dilution&#34;&gt;3. 稀释采样 (Dilution)
+&lt;/h4&gt;&lt;p&gt;这就回到了我们最开始聊的。既然仪器测不了高浓度，那我就在进气口把它稀释 100 倍再送进去。这是最彻底的解决办法。&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;p&gt;在纯信号处理领域，通过可变增益链确实可以非常“简单”的扩大量程 (比如数字万用表，靠切电阻就能从 mV 测到 kV），但在分析仪器领域，我们要处理的是物质和光：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;光会饱和（非线性）。&lt;/li&gt;
+&lt;li&gt;物质会吸附（污染）。&lt;/li&gt;
+&lt;li&gt;器件会损坏（PMT 过载）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以，分析仪厂家才会把产品严格分为 “环境级（Ambient / Trace, ppb）” 和 “污染源级（Source / Emission, ppm）。这不仅仅是软件设置的不同，而是光路长度、气室体积、管路材质、甚至探测器选型的&lt;strong&gt;全方位物理差异&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>快与稳的悖论</title>
+        <link>https://teaize.github.io/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/</link>
+        <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/</guid>
+        <description>&lt;p&gt;现在，我们要解决两个更让现场工程师抓狂的问题：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“&lt;strong&gt;快与稳的悖论&lt;/strong&gt;”： 想要读数稳，反应就慢；想要反应快，读数就乱跳。怎么兼得？&lt;/li&gt;
+&lt;li&gt;“&lt;strong&gt;幽灵漂移&lt;/strong&gt;”： 明明采用了切光轮/脉冲灯，为什么过了一周零点还是歪了？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里涉及到两个非常经典的信号处理策略：自适应数字滤波 和 自动调零。&lt;/p&gt;
+&lt;h3 id=&#34;第一关自适应滤波--智能减震器&#34;&gt;第一关：自适应滤波 —— “智能减震器”
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;工程师的困境：T90 vs. 噪声&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;T90 (响应时间)： 环保局要求，当烟气浓度突变时，你的仪表要在几十秒内反应过来。&lt;/li&gt;
+&lt;li&gt;噪声 (Noise)： 信号里总是有白噪声在跳动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;常规解法（滑动平均 Moving Average）：CPU 像一个收银员，手里拿着一个计算器：“我不看现在的瞬时值，我看过去 10 秒的平均值。”$$\text{显示值} = \frac{V_1 + V_2 + … + V_{10}}{10}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题来了：
+&lt;ul&gt;
+&lt;li&gt;如果你平均 100 个 数据（重滤波）：读数稳如老狗，但是反应迟钝。烟气都超标一分钟了，你还在慢慢爬坡。&lt;/li&gt;
+&lt;li&gt;如果你只平均 5 个 数据（轻滤波）：反应极快，但读数像心电图一样乱跳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-高端解法自适应滤波器-smart-filter&#34;&gt;2. 高端解法：自适应滤波器 (Smart Filter)
+&lt;/h3&gt;&lt;p&gt;聪明的算法不会死板地用固定的平均时间，它会“看人下菜碟”。它会实时计算“当前的变化率” (Delta)。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景 A：平稳工况
+&lt;ul&gt;
+&lt;li&gt;监测： 现在的测量值 $V_{now}$ 和上一秒的值 $V_{last}$ 差值很小（比如变化 &amp;lt; 1%）。&lt;/li&gt;
+&lt;li&gt;判断： “现在锅炉运行很稳，这点波动肯定是噪声。”&lt;/li&gt;
+&lt;li&gt;动作： &lt;strong&gt;加大滤波力度！&lt;/strong&gt; 把过去 60 秒的数据拿来平均。&lt;/li&gt;
+&lt;li&gt;效果： 屏幕上的线条平滑得像直线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;场景 B：突发工况（如喷氨、起炉）
+&lt;ul&gt;
+&lt;li&gt;监测： 突然， $V_{now}$ 比 $V_{last}$ 激增了 20%！&lt;/li&gt;
+&lt;li&gt;判断： “这不是噪声！这是真的浓度突变！出大事了！”&lt;/li&gt;
+&lt;li&gt;动作： &lt;strong&gt;瞬间扔掉滤波器！&lt;/strong&gt; 甚至直接显示瞬时值，或者把平均时间缩短到 1 秒。&lt;/li&gt;
+&lt;li&gt;效果： 读数直线飙升，瞬间跟上工况变化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就是为什么你在看仪表时，平时它很稳，但一旦给标气，它“噌”地一下就上去了。不是它反应本来就那么快，是算法帮你“换挡”了。&lt;/p&gt;
+&lt;h3 id=&#34;第二关自动调零-auto-zero--给仪表清零&#34;&gt;第二关：自动调零 (Auto-Zero) —— 给仪表“清零”
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;为什么还需要调零？&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你可能会问：“我们不是用了切光轮/脉冲灯了吗？不是已经把温漂减掉了吗？”很遗憾，减得不彻底。切光轮只能扣除探测器和电路的漂移。但它&lt;strong&gt;扣除不了光路本身的物理变化&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例子： 如果测量室的窗片（Window）慢慢蒙上了一层极其均匀的薄雾（油气），或者镜片慢慢变黄了。&lt;/li&gt;
+&lt;li&gt;后果： $I_{meas}$ 会慢慢变小。仪表会以为是有气体在吸收光，导致读数正漂。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种几小时甚至几天的极慢速漂移，切光轮（几十 Hz）是无能为力的。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;解决方案：电磁阀的“偷梁换柱”&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在痕量分析仪（特别是测 CO 或 UVF SO2）里，你会听到每隔几小时，机柜里就“咔哒”一声响。这是 Auto-Zero Solenoid Valve (自动调零电磁阀) 在动作。&lt;/p&gt;
+&lt;p&gt;算法逻辑：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;测量模式 ：
+&lt;ul&gt;
+&lt;li&gt;阀门让样气进入气室。&lt;/li&gt;
+&lt;li&gt;读数 = 样气信号 + 脏背景。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;调零模式 （比如每 4 小时一次）：
+&lt;ul&gt;
+&lt;li&gt;CPU 启动电磁阀，切断样气。&lt;/li&gt;
+&lt;li&gt;让样气通过一个内部的 Scrubber (吸附剂/洗涤器)，把 $\text{SO}_2$ 或是 CO 过滤干净，变成零气。&lt;/li&gt;
+&lt;li&gt;此时气室里只有“脏背景”。&lt;/li&gt;
+&lt;li&gt;CPU 记录： “哦，原来现在就算没有气，也有 0.5V 的电压啊。记下来，这是新的零点偏置 (Zero Offset)。”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;恢复测量：
+&lt;ul&gt;
+&lt;li&gt;切回样气。&lt;/li&gt;
+&lt;li&gt;$$\text{最终读数} = \text{当前测量值} - \text{刚才记下的 0.5V}$$
+这就是为什么高端仪表可以无人值守运行好几个月，零点依然不飘。因为它自己会“每天洗几次澡”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第三关温度系数--电阻的热胀冷缩&#34;&gt;第三关：温度系数 —— 电阻的“热胀冷缩”
+&lt;/h3&gt;&lt;p&gt;这是硬件电路设计中最隐蔽的“精度杀手”。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;那个 1G$\Omega$ 的大电阻&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;还记得我们用来做 I/V 转换的那个 1G$\Omega$ (10 亿欧姆) 反馈电阻吗？$$V = I \times R$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理想情况： 电阻永远是 1,000,000,000 $\Omega$。&lt;/li&gt;
+&lt;li&gt;现实情况： 所有电阻都有 温度系数 (TCR, Temperature Coefficient of Resistance)。
+&lt;ul&gt;
+&lt;li&gt;普通电阻的 TCR 可能是 100 ppm/°C。&lt;/li&gt;
+&lt;li&gt;这意味着：温度每变 1°C，电阻值就变万分之一。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;灾难推演&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;早晚温差 20°C。&lt;/li&gt;
+&lt;li&gt;电阻值变化：$20 \times 100\text{ppm} = 2000\text{ppm} = 0.2%$。&lt;/li&gt;
+&lt;li&gt;后果： 你的测量结果会凭空产生 0.2% 的误差。对于痕量分析来说，0.2% 的满量程误差可能就是几十 ppb，直接导致数据超标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;解决方案：&lt;strong&gt;恒温舱&lt;/strong&gt; (The Oven)&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这也是为什么 CEMS 分析仪的核心光具座通常都要包裹厚厚的保温棉，并且要加热到 &lt;strong&gt;45°C 或 50°C&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;目的： 不是为了让气体舒服，而是为了“烤电阻”和“烤探测器”**。&lt;/li&gt;
+&lt;li&gt;逻辑： 既然电阻随温度变，那我就死死地&lt;strong&gt;把温度锁在 45°C&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;硬件细节： 你会发现前置放大板通常直接贴在发热的光学底板上，或者有一个专门的铝盒罩着它。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;p&gt;信号处理不仅仅是公式，&lt;strong&gt;它是对物理世界缺陷的补救&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;问题&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;物理缺陷&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;信号处理补救&lt;/strong&gt; (补丁)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;读数乱跳&lt;/td&gt;
+          &lt;td&gt;瞬时噪声大&lt;/td&gt;
+          &lt;td&gt;滑动平均 (Moving Average)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;反应太慢&lt;/td&gt;
+          &lt;td&gt;滤波导致滞后&lt;/td&gt;
+          &lt;td&gt;自适应滤波 (Adaptive Filter)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;长期漂移&lt;/td&gt;
+          &lt;td&gt;镜片脏/光路变&lt;/td&gt;
+          &lt;td&gt;自动调零 (Auto-Zero Valve)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;量程不够&lt;/td&gt;
+          &lt;td&gt;ADC 位数有限&lt;/td&gt;
+          &lt;td&gt;自动增益 (Auto-Ranging)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;昼夜温差&lt;/td&gt;
+          &lt;td&gt;电阻阻值变化&lt;/td&gt;
+          &lt;td&gt;恒温控制 (Oven Control)&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;现在的分析仪，其实就是 &lt;strong&gt;20% 的物理/化学原理 + 80% 的信号处理“补丁”&lt;/strong&gt;。你看懂了这些补丁，你就看懂了这台仪器的灵魂。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>氧气的测量</title>
+        <link>https://teaize.github.io/p/%E6%B0%A7%E6%B0%94%E7%9A%84%E6%B5%8B%E9%87%8F/</link>
+        <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%A7%E6%B0%94%E7%9A%84%E6%B5%8B%E9%87%8F/</guid>
+        <description>&lt;p&gt;本篇继 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;紫外荧光法&lt;/a&gt;&lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;化学发光法&lt;/a&gt; 之后。&lt;/p&gt;
+&lt;p&gt;今天，我们学习 CEMS 系统中地位最高、却最容易被轻视的“修正之王” —— 氧气的测量。
+为什么说它地位最高？因为环保局看的数据是“&lt;strong&gt;折算浓度&lt;/strong&gt;”。公式是这样的：$$\text{折算浓度} = \text{实测浓度} \times \frac{21 - \text{基准氧}}{21 - \text{实测氧}}$$
+也就是说，如果 $\text{O}_2$ 测不准（比如把 6% 测成了 5%），你的 $\text{SO}_2$ 和 $\text{NO}_x$ 数据会瞬间产生巨大的误差。&lt;/p&gt;
+&lt;h2 id=&#34;第一部分顺磁法--氧气是磁铁吗&#34;&gt;第一部分：顺磁法 —— 氧气是“磁铁”吗？
+&lt;/h2&gt;&lt;p&gt;我们通常认为气体是没有磁性的，但&lt;strong&gt;氧气是个异类&lt;/strong&gt;。 &lt;strong&gt;氧气分子 ($\text{O}_2$) 具有很强的顺磁性&lt;/strong&gt; 。简单说，如果有一块强力磁铁，氧气会被吸过去！而氮气、二氧化碳这些大多数气体是抗磁性的（会被磁铁排斥）。&lt;/p&gt;
+&lt;p&gt;利用这个物理特性，工程师设计了两种极为精巧的机械结构来测量氧气&lt;/p&gt;
+&lt;h3 id=&#34;1-哑铃式-气体天平&#34;&gt;1. 哑铃式—— “气体天平”
+&lt;/h3&gt;&lt;p&gt;哑铃式氧分析仪基于磁力机械式顺磁原理工作。 &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;顺磁性&lt;/strong&gt;：氧气是少数具有强顺磁性的气体之一，会被磁场吸引；而大多数其他气体（如氮气、二氧化碳）是抗磁性的。&lt;/li&gt;
+&lt;li&gt;测量装置：仪器的核心是一个由细金属丝（通常是铂金丝）水平悬挂的玻璃哑铃，哑铃内部充有氮气，并被放置在一个不均匀的磁场中。&lt;/li&gt;
+&lt;li&gt;偏转与平衡：当含有氧气的待测气体流入测量室时，氧分子被吸引到磁场较强的区域，从而对玻璃哑铃产生一个扭转力，使其偏转。偏转角度与氧气浓度成正比。&lt;/li&gt;
+&lt;li&gt;信号检测与反馈：一个光源、反射镜和光接收元件系统会检测哑铃的偏转。一个反馈回路会施加电流产生一个反向力矩，使哑铃回到初始平衡位置。&lt;strong&gt;保持平衡所需的电流大小与氧气浓度成正比&lt;/strong&gt;，从而实现氧气含量的精确测量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;主要优势: 由于是基于纯物理效应（顺磁性）的直接测量，传感器本身没有消耗，理论上寿命无限长，维护成本低。&lt;/p&gt;
+&lt;h3 id=&#34;2-磁风式-没有运动部件的风扇&#34;&gt;2. 磁风式—— “没有运动部件的风扇”
+&lt;/h3&gt;&lt;p&gt;如果你嫌哑铃太娇气，还有一种更硬核的设计。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原理： &lt;strong&gt;居里定律告诉我们，氧气的磁化率与温度成反比&lt;/strong&gt;（越热，磁性越弱）。&lt;/li&gt;
+&lt;li&gt;结构： 设计一个环形气室，一边加磁场，同时加热电阻丝。&lt;/li&gt;
+&lt;li&gt;过程：
+&lt;ol&gt;
+&lt;li&gt;冷的氧气被磁铁强力吸过来。&lt;/li&gt;
+&lt;li&gt;氧气接触到电阻丝，变热了。&lt;/li&gt;
+&lt;li&gt;变热后的氧气磁性减弱，被后面源源不断吸过来的冷氧气推走。&lt;/li&gt;
+&lt;li&gt;结果： 形成了一股持续的“磁风” 。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;测量： 这股风吹过热敏电阻，带走热量。通过测量热敏电阻的冷却程度，算出氧气浓度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第二部分氧化锆法--浓差电池&#34;&gt;第二部分：氧化锆法 —— 浓差电池
+&lt;/h2&gt;&lt;p&gt;如果说顺磁法是物理机械的艺术，氧化锆法就是&lt;strong&gt;电化学&lt;/strong&gt;的魔法。它主要用于原位测量（直接插在烟道里）或高温采样。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;核心元件： 氧化锆 ($ZrO_2$) 陶瓷管。
+&lt;ul&gt;
+&lt;li&gt;这种陶瓷在高温（&amp;gt;600°C）下，变成了一种固体电解质。&lt;strong&gt;它允许氧离子 ($O^{2-}$) 在里面自由穿梭，但电子过不去&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结构：
+陶瓷管像一个试管。
+&lt;ul&gt;
+&lt;li&gt;内侧： 通参比空气（氧浓度 20.95%）。&lt;/li&gt;
+&lt;li&gt;外侧： 接触烟气（氧浓度低，比如 3%）。&lt;/li&gt;
+&lt;li&gt;两侧都涂上多孔铂电极。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;原理（能斯特方程 Nernst Equation）：
+&lt;ul&gt;
+&lt;li&gt;因为内外氧浓度不同，高浓度一侧的氧分子抢着穿过陶瓷壁跑到低浓度一侧去。&lt;/li&gt;
+&lt;li&gt;这就形成了一个“氧气浓差电池”。&lt;/li&gt;
+&lt;li&gt;$$E = \frac{RT}{4F} \ln\left(\frac{P_{ref}}{P_{meas}}\right)$$
+&lt;ul&gt;
+&lt;li&gt;E： 产生的电压（毫伏级）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$P_{ref}$：&lt;/strong&gt; 21%（空气）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$P_{meas}$：&lt;/strong&gt; 待测氧浓度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;特点：
+&lt;ul&gt;
+&lt;li&gt;反直觉： &lt;strong&gt;氧气越少（贫氧），电压反而越高&lt;/strong&gt;！&lt;/li&gt;
+&lt;li&gt;对数关系： &lt;strong&gt;在低浓度（比如 1ppm）时灵敏度极高&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第三部分专家经验--著名的湿干之争&#34;&gt;第三部分：专家经验 —— 著名的“湿干之争”
+&lt;/h2&gt;&lt;p&gt;这是现场最容易掉进去的坑，尤其是当你混合使用不同原理的仪表时。&lt;/p&gt;
+&lt;p&gt;问题场景：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A 表（氧化锆）： 测出来氧量 4.0%。&lt;/li&gt;
+&lt;li&gt;B 表（顺磁）： 测出来氧量 4.5%。&lt;/li&gt;
+&lt;li&gt;谁是准的？&lt;strong&gt;可能都准！&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;逻辑陷阱：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;氧化锆法：
+&lt;ul&gt;
+&lt;li&gt;通常需要在高温下工作。如果它是原位式（In-situ）探头，它直接插在烟道里测。&lt;/li&gt;
+&lt;li&gt;烟道里有大量的水蒸气（比如 10%）。&lt;strong&gt;氧化锆测的是包含水蒸气的湿基氧&lt;/strong&gt; (Wet Basis)。&lt;/li&gt;
+&lt;li&gt;$$\text{湿基氧} = \frac{V_{O2}}{V_{dry} + V_{water}}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;顺磁法：
+&lt;ul&gt;
+&lt;li&gt;通常安装在 CEMS 机柜里。样气在进入机柜前，必须经过冷凝器除水（为了保护精密机械哑铃）。所以水蒸气被去掉了，体积变小了，氧气的占比自然就“浓缩”了。&lt;/li&gt;
+&lt;li&gt;它测的是干基氧 。$$\text{干基氧} = \frac{V_{O2}}{V_{dry}}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;换算公式：$$\text{干基氧} = \frac{\text{湿基氧}}{1 - \text{湿度%}}$$&lt;/li&gt;
+&lt;li&gt;假设湿度是 10%：$$4.5% (\text{干}) \approx \frac{4.0% (\text{湿})}{1 - 0.1}$$
+&lt;ul&gt;
+&lt;li&gt;$4.0 / 0.9 = 4.44%$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结论：如果不搞清楚你的表是测干的还是湿的，你的折算浓度可能会差出 10%~15% 的误差，这在环保验收时是致命的。&lt;/p&gt;
+&lt;h2 id=&#34;关于发现和发明的辩证关系&#34;&gt;关于发现和发明的辩证关系
+&lt;/h2&gt;&lt;p&gt;如果氧气恰好没有顺磁性，或者氧化锆恰好不能传导氧离子，那么今天这两种主流的分析仪是不是就不会存在？&lt;/p&gt;
+&lt;h3 id=&#34;所谓的巧合其实是物质的指纹&#34;&gt;所谓的“巧合”，其实是物质的“指纹”
+&lt;/h3&gt;&lt;p&gt;我们在工程上测量任何一种东西，本质上都不是在测量它本身，&lt;strong&gt;而是在测量它的“特异性指纹”&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;氧气 (O2)： 它的指纹刚好是“顺磁性”。&lt;/li&gt;
+&lt;li&gt;二氧化硫 (SO2)： 它的指纹刚好是“被紫外光激发发荧光”。&lt;/li&gt;
+&lt;li&gt;一氧化碳 (CO)： 它的指纹刚好是“吸收 4.6 微米的红外光”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这并不是因为运气好才发现了这些指纹，而是因为科学家把物质的所有属性（光、电、磁、热、力）都测了一遍，然后“按图索骥”。&lt;/p&gt;
+&lt;p&gt;历史上是先有了法拉第早在 1845 年就发现了氧气的顺磁性（当时只觉得是个有趣的物理现象），过了几十年，当工业界需要测量氧气时，工程师们翻开物理书：“嘿，大家都不导磁，就这货导磁，咱们就用这个特性来抓它！”&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所以，不是为了做传感器才发现了特性，而是特性一直都在，等着我们去把它们变成工具。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;实际上，如果没有这些“巧合”，我们也一样还有其他方法可以测氧气，这里暂时就不展开了。&lt;/p&gt;
+&lt;h3 id=&#34;为什么是顺磁和氧化锆胜出了&#34;&gt;为什么是顺磁和氧化锆胜出了？
+&lt;/h3&gt;&lt;p&gt;这两种特性之所以统治了 CEMS 领域，是因为它们满足了工业现场最挑剔的三个要求：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;特异性强&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;顺磁法：几乎只有氧气顺磁，别的气体不干扰。（抗干扰）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;耐操（Robustness）：
+&lt;ul&gt;
+&lt;li&gt;氧化锆：哪怕在 800°C 的肮脏烟道里，它是一块陶瓷，烧不坏、腐蚀不动。（耐高温、耐腐蚀）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;简单：
+&lt;ul&gt;
+&lt;li&gt;哑铃就是个力学结构，氧化锆就是个管子。结构越简单，故障率越低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;并不是因为巧合才有了氧传感器。而是因为氧气恰好有这两个“又独特、又好用”的物理特性，导致利用这两个特性的传感器成本最低、寿命最长，从而淘汰了其他竞争对手，让你产生了“只有它们”的错觉。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;所有的工程技术，本质上都是在把大自然微观层面的“BUG”（特异性），通过放大器，变成了宏观层面的“FEATURE”（功能）&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这也是为什么我们要学习物理——&lt;strong&gt;为了在上帝留下的代码里，找到那些可以被利用的“后门”。&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>化学发光法</title>
         <link>https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/</link>
         <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
@@ -16,12 +554,12 @@
         <description>&lt;h3 id=&#34;nox-化学发光法-chemiluminescence&#34;&gt;NOx 化学发光法 (Chemiluminescence)
 &lt;/h3&gt;&lt;p&gt;这是测量 $\text{NO}_x$ 的标准方法，利用 $\text{NO}$ 与臭氧反应发光。原理：
 $$
-\begin{aligned}
-\text{NO} + \text{O}_3 \rightarrow \text{NO}_2^* + \text{O}_2 \
+\text{NO} + \text{O}_3 \rightarrow \text{NO}_2^* + \text{O}_2
+$$
+$$
 \text{NO}_2^* \rightarrow \text{NO}_2 + h\nu (600-3000nm)
-\end{aligned}
-$$&lt;/p&gt;
-&lt;p&gt;在稀释法中存在的问题：&lt;/p&gt;
+$$
+在稀释法中存在的问题：&lt;/p&gt;
 &lt;h3 id=&#34;1no2-转化效率&#34;&gt;1、NO2 转化效率
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;问题： 化学发光法只能测 $\text{NO}$。烟气中的 $\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\text{NO}$。$$\text{NO}_2 \xrightarrow{\text{Converter}} \text{NO}$$&lt;/li&gt;
@@ -859,10 +1397,14 @@ $$&lt;/p&gt;
         
         <guid>https://teaize.github.io/p/%E7%B4%AB%E5%A4%96%E8%8D%A7%E5%85%89%E6%B3%95/</guid>
         <description>&lt;h2 id=&#34;textso_2-紫外荧光法&#34;&gt;$\text{SO}_2$ 紫外荧光法
-&lt;/h2&gt;&lt;p&gt;紫外荧光法通常用于测量微量 $\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：&lt;/p&gt;
-&lt;p&gt;$$
+&lt;/h2&gt;&lt;p&gt;紫外荧光法通常用于测量微量 $\text{SO}_2$（ppb 级），非常适合稀释后的低浓度样气。原理：
+$$
 \begin{aligned}
-\text{SO}_2 + h\nu (190-230,\text{nm}) &amp;amp;\rightarrow \text{SO}_2^* \
+\text{SO}_2 + h\nu (190-230,\text{nm}) &amp;amp;\rightarrow \text{SO}_2^*
+\end{aligned}
+$$
+$$
+\begin{aligned}
 \text{SO}_2^* &amp;amp;\rightarrow \text{SO}_2 + h\nu&amp;rsquo; (240-420,\text{nm})
 \end{aligned}
 $$&lt;/p&gt;
