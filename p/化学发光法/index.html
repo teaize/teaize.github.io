@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="继 [[PMT金属屏蔽层]]、[[地环路]] 的引申。这篇学习调制与解调。在硬件上，这通常对应着一个关键部件：脉冲氙灯（或者闪烁氙灯）或者切光轮。\n">
-<title>调制与解调</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="NOx 化学发光法 (Chemiluminescence) 这是测量 $\\text{NO}_x$ 的标准方法，利用 $\\text{NO}$ 与臭氧反应发光。原理： $$ \\begin{aligned} \\text{NO} + \\text{O}_3 \\rightarrow \\text{NO}_2^* + \\text{O}_2 \\ \\text{NO}_2^* \\rightarrow \\text{NO}_2 + h\\nu (600-3000nm) \\end{aligned} $$\n在稀释法中存在的问题：\n1、NO2 转化效率 问题： 化学发光法只能测 $\\text{NO}$。烟气中的 $\\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\\text{NO}$。$$\\text{NO}_2 \\xrightarrow{\\text{Converter}} \\text{NO}$$ 稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\\text{NO}_x$ 总量测量就会偏低。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。 场景假设：化学发光法 $\\text{NO}_x$ 的“偷梁换柱” 背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\\text{NO}$。 对于烟气里的 $\\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\\text{NO}_2$ 变成 $\\text{NO}$ 才能测。$$\\text{NO}_x = \\text{NO} (\\text{直接测}) + \\text{NO}_2 (\\text{转化后测})$$\n">
+<title>化学发光法</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E8%B0%83%E5%88%B6%E4%B8%8E%E8%A7%A3%E8%B0%83/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="调制与解调">
-<meta property='og:description' content="继 [[PMT金属屏蔽层]]、[[地环路]] 的引申。这篇学习调制与解调。在硬件上，这通常对应着一个关键部件：脉冲氙灯（或者闪烁氙灯）或者切光轮。\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E8%B0%83%E5%88%B6%E4%B8%8E%E8%A7%A3%E8%B0%83/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="化学发光法">
+<meta property='og:description' content="NOx 化学发光法 (Chemiluminescence) 这是测量 $\\text{NO}_x$ 的标准方法，利用 $\\text{NO}$ 与臭氧反应发光。原理： $$ \\begin{aligned} \\text{NO} + \\text{O}_3 \\rightarrow \\text{NO}_2^* + \\text{O}_2 \\ \\text{NO}_2^* \\rightarrow \\text{NO}_2 + h\\nu (600-3000nm) \\end{aligned} $$\n在稀释法中存在的问题：\n1、NO2 转化效率 问题： 化学发光法只能测 $\\text{NO}$。烟气中的 $\\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\\text{NO}$。$$\\text{NO}_2 \\xrightarrow{\\text{Converter}} \\text{NO}$$ 稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\\text{NO}_x$ 总量测量就会偏低。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。 场景假设：化学发光法 $\\text{NO}_x$ 的“偷梁换柱” 背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\\text{NO}$。 对于烟气里的 $\\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\\text{NO}_2$ 变成 $\\text{NO}$ 才能测。$$\\text{NO}_x = \\text{NO} (\\text{直接测}) + \\text{NO}_2 (\\text{转化后测})$$\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-08T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="调制与解调">
-<meta name="twitter:description" content="继 [[PMT金属屏蔽层]]、[[地环路]] 的引申。这篇学习调制与解调。在硬件上，这通常对应着一个关键部件：脉冲氙灯（或者闪烁氙灯）或者切光轮。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-09T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="化学发光法">
+<meta name="twitter:description" content="NOx 化学发光法 (Chemiluminescence) 这是测量 $\\text{NO}_x$ 的标准方法，利用 $\\text{NO}$ 与臭氧反应发光。原理： $$ \\begin{aligned} \\text{NO} + \\text{O}_3 \\rightarrow \\text{NO}_2^* + \\text{O}_2 \\ \\text{NO}_2^* \\rightarrow \\text{NO}_2 + h\\nu (600-3000nm) \\end{aligned} $$\n在稀释法中存在的问题：\n1、NO2 转化效率 问题： 化学发光法只能测 $\\text{NO}$。烟气中的 $\\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\\text{NO}$。$$\\text{NO}_2 \\xrightarrow{\\text{Converter}} \\text{NO}$$ 稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\\text{NO}_x$ 总量测量就会偏低。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。 场景假设：化学发光法 $\\text{NO}_x$ 的“偷梁换柱” 背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\\text{NO}$。 对于烟气里的 $\\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\\text{NO}_2$ 变成 $\\text{NO}$ 才能测。$$\\text{NO}_x = \\text{NO} (\\text{直接测}) + \\text{NO}_2 (\\text{转化后测})$$\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,20 +297,20 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#问题的根源直流漂移">问题的根源：直流漂移</a></li>
-        <li><a href="#硬件的破局让光闪起来">硬件的破局：让光“闪”起来</a>
+        <li><a href="#nox-化学发光法-chemiluminescence">NOx 化学发光法 (Chemiluminescence)</a></li>
+        <li><a href="#1no2-转化效率">1、NO2 转化效率</a>
           <ol>
-            <li><a href="#1-工作时序">1. 工作时序</a></li>
-            <li><a href="#2-算术魔法">2. 算术魔法</a></li>
+            <li><a href="#场景假设化学发光法-textno_x-的偷梁换柱">场景假设：化学发光法 $\text{NO}_x$ 的“偷梁换柱”</a></li>
           </ol>
         </li>
-        <li><a href="#硬件工程师的噩梦同步与触发">硬件工程师的“噩梦”：同步与触发</a>
-          <ol>
-            <li><a href="#1-触发抖动">1. 触发抖动</a></li>
-            <li><a href="#2-光强衰减与参考光路">2. 光强衰减与“参考光路”</a></li>
-          </ol>
-        </li>
-        <li><a href="#从静到动的思维升华">从“静”到“动”的思维升华</a></li>
+        <li><a href="#2h2o-和-co2-的猝灭效应">2、H2O 和 CO2 的猝灭效应</a></li>
+        <li><a href="#3臭氧发生器的稳定性">3、臭氧发生器的稳定性</a></li>
+      </ol>
+    </li>
+    <li><a href="#案例-1nox-转换炉的好心办坏事">案例 1：NOx 转换炉的“好心办坏事”</a>
+      <ol>
+        <li><a href="#逻辑陷阱场景重现">逻辑陷阱（场景重现）：</a></li>
+        <li><a href="#那么如何排查这个问题">那么如何排查这个问题</a></li>
       </ol>
     </li>
   </ol>
@@ -332,7 +332,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E8%B0%83%E5%88%B6%E4%B8%8E%E8%A7%A3%E8%B0%83/">调制与解调</a>
+            <a href="/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/">化学发光法</a>
         </h2>
     
         
@@ -354,7 +354,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-08</time>
+                <time class="article-time--published">2025-12-09</time>
             </div>
         
 
@@ -370,76 +370,106 @@
     <section class="article-content">
     
     
-    <p>继 [[PMT金属屏蔽层]]、[[地环路]] 的引申。这篇学习调制与解调。在硬件上，这通常对应着一个关键部件：脉冲氙灯（或者闪烁氙灯）或者切光轮。</p>
-<h3 id="问题的根源直流漂移">问题的根源：直流漂移
-</h3><p>场景假设：你把 PMT 的屏蔽做好了，地线也接好了。</p>
-<p>但是，PMT 这个器件本身有个物理特性：暗电流。即使在完全没有光的情况下，它也会输出一点点电流（比如 0.1 nA）。更糟糕的是，这个“0.1 nA”不是固定的：</p>
-<ul>
-<li>温度升高 1 度，它可能变成 0.12 nA。</li>
-<li>器件老化一点，它可能变成 0.15 nA。</li>
-<li>供电电压波动一点，它又变了。</li>
+    <h3 id="nox-化学发光法-chemiluminescence">NOx 化学发光法 (Chemiluminescence)
+</h3><p>这是测量 $\text{NO}_x$ 的标准方法，利用 $\text{NO}$ 与臭氧反应发光。原理：
+$$
+\begin{aligned}
+\text{NO} + \text{O}_3 \rightarrow \text{NO}_2^* + \text{O}_2 \
+\text{NO}_2^* \rightarrow \text{NO}_2 + h\nu (600-3000nm)
+\end{aligned}
+$$</p>
+<p>在稀释法中存在的问题：</p>
+<h3 id="1no2-转化效率">1、NO2 转化效率
+</h3><ul>
+<li>问题： 化学发光法只能测 $\text{NO}$。烟气中的 $\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\text{NO}$。$$\text{NO}_2 \xrightarrow{\text{Converter}} \text{NO}$$</li>
+<li>稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\text{NO}_x$ 总量测量就会<strong>偏低</strong>。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。</li>
 </ul>
-<p>这就是“漂移”。如果你用<strong>连续恒定</strong>的紫外灯（Continuous Lamp）去照射 $\text{SO}_2$：</p>
+<h4 id="场景假设化学发光法-textno_x-的偷梁换柱">场景假设：化学发光法 $\text{NO}_x$ 的“偷梁换柱”
+</h4><p>背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\text{NO}$。 对于烟气里的 $\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\text{NO}_2$ 变成 $\text{NO}$ 才能测。$$\text{NO}_x = \text{NO} (\text{直接测}) + \text{NO}_2 (\text{转化后测})$$</p>
 <ul>
-<li>PMT 读到的总电流 = （$\text{SO}_2$ 荧光电流）+ （PMT 暗电流）+ （杂散光背景）。</li>
-<li>困境： 当总电流变大了，你根本不知道是 $\text{SO}_2$ 浓度高了，还是 PMT 变热了，或者是灯泡老化亮度变了。</li>
-</ul>
-<p>这就好比：<strong>你在一个黄昏的房间里读书，你不知道书本变暗是因为天黑了（背景变了），还是你的视力下降了（器件漂移）。</strong></p>
-<h3 id="硬件的破局让光闪起来">硬件的破局：让光“闪”起来
-</h3><p>为了解决这个问题（漂移），工程师引入了“调制”。在紫外荧光法中，我们通常使用的是脉冲氙灯（比如 Thermo 43i 就用这个技术）。它的逻辑极其简单粗暴，但极其有效：“别一直开灯！闪着开！”</p>
-<h4 id="1-工作时序">1. 工作时序
-</h4><p>分析仪的 CPU 会控制灯以固定的频率闪烁（例如 10Hz，每秒闪 10 次）。这就把时间切成了两半：</p>
+<li>校准时刻（偷懒的代价）：
 <ul>
-<li>状态 A（灯亮时刻）：
-<ul>
-<li>PMT 测到的值 = <strong>信号 ($\text{SO}_2$) + 噪声 (暗电流 + 背景)</strong></li>
+<li>绝大多数现场，运维只会买一瓶 **$\text{NO}$ 标气。</li>
+<li>通入 100 ppm 的 $\text{NO}$。</li>
+<li>气体流过旁路（不经过转换炉） -&gt; 测得 100。</li>
+<li>气体流过转换炉（经过转换炉） -&gt; $\text{NO}$ 还是 $\text{NO}$，测得 100。</li>
+<li>结果： 校准通过。</li>
 </ul>
 </li>
-<li>状态 B（灯灭时刻）：
+<li>故障时刻：
 <ul>
-<li>PMT 测到的值 = <strong>0 + 噪声 (暗电流 + 背景)</strong></li>
+<li>转换炉用久了，或者因为前面说的稀释探头加热不好，导致一点点冷凝水或铵盐进去了，<strong>转换炉中毒失效了</strong>。效率降到了 0%。</li>
+<li>此时你再用 $\text{NO}$ 标气校准。因为 $\text{NO}$ 不需要转换，所以<strong>校准依然是合格的！</strong></li>
+</ul>
+</li>
+<li>测量时刻（致命漏测）：
+<ul>
+<li>工况烟气来了。假设里面有 80 ppm $\text{NO}$ 和 20 ppm $\text{NO}_2$（总 $\text{NO}_x$ = 100）。</li>
+<li>分析仪读数： 只能测到那 80 ppm 的 $\text{NO}$。那 20 ppm 的 $\text{NO}_2$ 因为转换炉坏了，没变成 $\text{NO}$，直接被分析仪无视了。</li>
+<li>显示结果： 80 ppm。</li>
+</ul>
+</li>
+<li>欺骗结果：
+<ul>
+<li>你少测了 20% 的排放量。</li>
+<li>而且，因为你也只用 $\text{NO}$ 标气校验，你根本发现不了转换炉已经挂了。</li>
 </ul>
 </li>
 </ul>
-<h4 id="2-算术魔法">2. 算术魔法
-</h4><p>CPU 做一个简单的减法：$$\text{真实信号} = \text{状态 A} - \text{状态 B} = (\text{信号} + \text{噪声}) - (\text{噪声})= \text{信号}$$
-也就是说，不管你的 PMT 暗电流怎么漂移（今天 0.1，明天 0.2），也不管背景光怎么变化，只要它们在“灯亮”和“灯灭”的那一瞬间保持不变，它们就会被完美减掉！</p>
-<p>这就是<strong>锁相放大</strong>的雏形。</p>
-<h3 id="硬件工程师的噩梦同步与触发">硬件工程师的“噩梦”：同步与触发
-</h3><p>虽然原理听起来很软件，但在硬件层面，这带来了一系列极具挑战的机械/电子问题。这也是区分“好仪器”和“烂仪器”的分水岭。</p>
-<h4 id="1-触发抖动">1. 触发抖动
-</h4><ul>
-<li>要求： 既然要做减法，PMT 的采集必须和灯的闪烁<strong>严丝合缝</strong>。</li>
-<li>故障： 氙灯的高压触发电路如果有延时，或者不稳定。
+<p>如何破解这种骗局呢：</p>
 <ul>
-<li>现象： CPU 以为灯亮了，开始采集“状态 A”，但其实灯还没完全亮到峰值。</li>
-<li>结果： 测到的信号忽高忽低，读数剧烈跳动（噪声大）。</li>
+<li>必须使用 $\text{NO}_2$ 标气：只有通入 $\text{NO}_2$ 标气，看能不能读出数来，才能验证转换炉的好坏。</li>
+<li>观察 $\text{NO}_x$ 与 $\text{NO}$ 的差值：在正常燃烧工况下，$\text{NO}_2$ 通常占 $\text{NO}_x$ 的 5% 左右。如果你发现你的表上，$\text{NO}$ 的数值永远等于 $\text{NO}_x$ 的数值（即 $\text{NO}_2$ 读数长期为 0），那很可能是转换炉出问题了。</li>
+</ul>
+<h3 id="2h2o-和-co2-的猝灭效应">2、H2O 和 CO2 的猝灭效应
+</h3><ul>
+<li>痛点： 与紫外荧光法类似，$\text{H}_2\text{O}$ 和 $\text{CO}_2$ 也是化学发光法的强猝灭剂。</li>
+<li>现象： 如果稀释空气干燥度不够（露点高），水分进入反应室，会显著降低发光强度，导致 $\text{NO}_x$ 读数<strong>偏低</strong>。这就是为什么稀释风的露点通常要求在 -40°C 以下。</li>
+</ul>
+<h3 id="3臭氧发生器的稳定性">3、臭氧发生器的稳定性
+</h3><ul>
+<li>系统隐患： 分析仪内部自带高压臭氧发生器。如果<strong>供电电压不稳</strong>或发生器老化，臭氧浓度下降，反应就不完全（不再是富氧反应），导致测量线性变差。</li>
+</ul>
+<h2 id="案例-1nox-转换炉的好心办坏事">案例 1：NOx 转换炉的“好心办坏事”
+</h2><p>背景知识： 前面我们说过，化学发光法为了测 $\text{NO}_2$，需要用转换炉（钼炉或不锈钢炉）把 $\text{NO}_2$ 还原成 $\text{NO}$。我们希望这个炉子只干这一件事。$$\text{NO}_2 \xrightarrow{\text{高温 + 催化剂}} \text{NO}$$</p>
+<h3 id="逻辑陷阱场景重现">逻辑陷阱（场景重现）：
+</h3><ul>
+<li>工况背景：为了降低 $\text{NO}_x$ 排放，电厂都会喷氨水（SCR/SNCR 脱硝）。如果不小心喷多了，烟气里就会有逃逸的氨气 ($\text{NH}_3$)。</li>
+<li>分析仪的“过度热情”：常用的钼炉（Moly Converter）工作温度在 315°C~350°C 左右。在这个温度下，钼炉不仅能把 $\text{NO}_2$ 还原成 $\text{NO}$，它也能把 $\text{NH}_3$ 氧化成 $\text{NO}$。$$\text{NH}_3 + \text{O}_2 \xrightarrow{\text{Mo, 350°C}} \text{NO} + \text{H}_2\text{O}$$</li>
+<li>现场的“死亡螺旋”：
+<ul>
+<li>状态： 此时 $\text{NO}_x$ 实际上有点高。</li>
+<li>操作： 运行人员加大喷氨量。</li>
+<li>物理结果： 实际 $\text{NO}_x$ 降下来了，但逃逸的 $\text{NH}_3$ 变多了。</li>
+<li>CEMS 读数： 逃逸的 $\text{NH}_3$ 进入转换炉，变成了 $\text{NO}$。分析仪把这部分 $\text{NH}_3$ 当作 $\text{NO}_x$ 计入了读数。读数不仅没降，反而可能升高了！</li>
+<li>误判： 运行人员一看屏幕：“卧槽，喷了氨怎么 $\text{NO}_x$ 还没降？肯定是喷得不够！再加大喷氨！”</li>
+<li>结局： 氨水耗尽，设备腐蚀，CEMS 数据依然超标。</li>
 </ul>
 </li>
-<li>硬件排查： 很多时候是触发板上的电容老化，或者灯泡电极烧蚀导致击穿电压变化，引起了“时间轴错位”。</li>
 </ul>
-<h4 id="2-光强衰减与参考光路">2. 光强衰减与“参考光路”
-</h4><p>脉冲灯解决了 PMT 漂移，但<strong>灯泡自己也会老啊</strong>！氙灯闪了几亿次后，能量会下降。</p>
+<h3 id="那么如何排查这个问题">那么如何排查这个问题
+</h3><ol>
+<li>准备工作： 找一个氨逃逸比较大的工况（或者让运行稍微多喷点氨）。</li>
+<li>正常测量： 记录此时的 $\text{NO}_x$ 读数（例如 50 ppm）。</li>
+<li>切断转换炉：
 <ul>
-<li>如果不处理： 灯暗了 $\to$ $\text{SO}_2$ 激发的荧光弱了 $\to$ 读数偏低。</li>
-<li>硬件解决方案： 分光镜。</li>
+<li>如果是高温炉，把温度设定降到室温（或者直接拔掉加热棒电源，让它自然冷却）。</li>
+<li>或者切换气路，让样气绕过转换炉。</li>
 </ul>
-<p>在光路设计中，你会看到一块成 45 度角的石英玻璃。它把紫外光分成两路：</p>
+</li>
+<li>观察读数变化：
 <ul>
-<li><strong>主路 (90%)：</strong> 去照样气，产生荧光 $\to$ 给主 PMT 测。</li>
-<li><strong>辅路 (10%)：</strong> 照向一个小光电二极管。</li>
+<li>理论上： 绕过转换炉后，$\text{NO}_2$ 不被转化了，读数应该下降（只剩 $\text{NO}$）。</li>
+<li>如果读数下降得非常剧烈（例如从 50 降到 10）： 说明之前那 40 ppm 的差值里，包含着大量的 $\text{NO}_2$ 或者 被转化了的 $\text{NH}_3$。</li>
 </ul>
-<p>最终算法进化：$$\text{浓度} \propto \frac{\text{主 PMT 信号 (扣除背景后)}}{\text{参考光强信号}}$$</p>
-<h3 id="从静到动的思维升华">从“静”到“动”的思维升华
-</h3><p>这里有一个工程思维模型，值得记在心里：</p>
-<p><strong>“如果是静态测不准的东西，就把它动起来测。”</strong> (If you can&rsquo;t measure it statically, modulate it.)</p>
+</li>
+<li>氨气过滤器：
 <ul>
-<li><strong>测微弱光：</strong> 别常亮，让它闪（脉冲/切光轮）。</li>
-<li><strong>测微弱气：</strong> 别一直通样气，让它和零气交替通（自动校零/参比法）。</li>
-<li><strong>测微弱力：</strong> 别用力压，让它振动（原子力显微镜原理）。</li>
+<li>在取样管路中临时加装一个<strong>磷酸浸渍的过滤器</strong>（专门吸附氨气，不吸附 $\text{NO}_x$）。</li>
+<li>如果加了过滤器后，$\text{NO}_x$ 读数瞬间下降了，那就实锤了：你的转换炉在把氨气当成 $\text{NO}_x$ 测！</li>
 </ul>
-<p>这种<strong>将直流信号 (DC) 搬移到交流频段 (AC)</strong> 的技术，避开了低频的 1/f 噪声（粉红噪声），是精密测量的基石。</p>
-<p>从<strong>PMT 的屏蔽</strong>（空间防御），到<strong>地环路的切断</strong>（路径防御），再到<strong>脉冲调制</strong>（时间防御），这一整套“海陆空”立体防御体系，是不是让你对这台仪器的设计逻辑有了全新的认识？</p>
+</li>
+</ol>
 
 </section>
 

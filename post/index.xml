@@ -7,7 +7,371 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Mon, 08 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 09 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>化学发光法</title>
+        <link>https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/</link>
+        <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/</guid>
+        <description>&lt;h3 id=&#34;nox-化学发光法-chemiluminescence&#34;&gt;NOx 化学发光法 (Chemiluminescence)
+&lt;/h3&gt;&lt;p&gt;这是测量 $\text{NO}_x$ 的标准方法，利用 $\text{NO}$ 与臭氧反应发光。原理：
+$$
+\begin{aligned}
+\text{NO} + \text{O}_3 \rightarrow \text{NO}_2^* + \text{O}_2 \
+\text{NO}_2^* \rightarrow \text{NO}_2 + h\nu (600-3000nm)
+\end{aligned}
+$$&lt;/p&gt;
+&lt;p&gt;在稀释法中存在的问题：&lt;/p&gt;
+&lt;h3 id=&#34;1no2-转化效率&#34;&gt;1、NO2 转化效率
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;问题： 化学发光法只能测 $\text{NO}$。烟气中的 $\text{NO}_2$ 必须先通过转换炉（通常是钼炉或不锈钢炉）还原成 $\text{NO}$。$$\text{NO}_2 \xrightarrow{\text{Converter}} \text{NO}$$&lt;/li&gt;
+&lt;li&gt;稀释法的挑战： 虽然稀释降低了中毒风险，但转换炉有寿命。如果转化率低于 95%，$\text{NO}_x$ 总量测量就会&lt;strong&gt;偏低&lt;/strong&gt;。特别是在氨逃逸较高的情况下，可能会生成铵盐堵塞转换器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;场景假设化学发光法-textno_x-的偷梁换柱&#34;&gt;场景假设：化学发光法 $\text{NO}_x$ 的“偷梁换柱”
+&lt;/h4&gt;&lt;p&gt;背景知识： 化学发光法其实是个“独眼龙”，它只能直接看见 $\text{NO}$。 对于烟气里的 $\text{NO}_2$，它必须先通过一个高温炉（转换器），把 $\text{NO}_2$ 变成 $\text{NO}$ 才能测。$$\text{NO}_x = \text{NO} (\text{直接测}) + \text{NO}_2 (\text{转化后测})$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;校准时刻（偷懒的代价）：
+&lt;ul&gt;
+&lt;li&gt;绝大多数现场，运维只会买一瓶 **$\text{NO}$ 标气。&lt;/li&gt;
+&lt;li&gt;通入 100 ppm 的 $\text{NO}$。&lt;/li&gt;
+&lt;li&gt;气体流过旁路（不经过转换炉） -&amp;gt; 测得 100。&lt;/li&gt;
+&lt;li&gt;气体流过转换炉（经过转换炉） -&amp;gt; $\text{NO}$ 还是 $\text{NO}$，测得 100。&lt;/li&gt;
+&lt;li&gt;结果： 校准通过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;故障时刻：
+&lt;ul&gt;
+&lt;li&gt;转换炉用久了，或者因为前面说的稀释探头加热不好，导致一点点冷凝水或铵盐进去了，&lt;strong&gt;转换炉中毒失效了&lt;/strong&gt;。效率降到了 0%。&lt;/li&gt;
+&lt;li&gt;此时你再用 $\text{NO}$ 标气校准。因为 $\text{NO}$ 不需要转换，所以&lt;strong&gt;校准依然是合格的！&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;测量时刻（致命漏测）：
+&lt;ul&gt;
+&lt;li&gt;工况烟气来了。假设里面有 80 ppm $\text{NO}$ 和 20 ppm $\text{NO}_2$（总 $\text{NO}_x$ = 100）。&lt;/li&gt;
+&lt;li&gt;分析仪读数： 只能测到那 80 ppm 的 $\text{NO}$。那 20 ppm 的 $\text{NO}_2$ 因为转换炉坏了，没变成 $\text{NO}$，直接被分析仪无视了。&lt;/li&gt;
+&lt;li&gt;显示结果： 80 ppm。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;欺骗结果：
+&lt;ul&gt;
+&lt;li&gt;你少测了 20% 的排放量。&lt;/li&gt;
+&lt;li&gt;而且，因为你也只用 $\text{NO}$ 标气校验，你根本发现不了转换炉已经挂了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如何破解这种骗局呢：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须使用 $\text{NO}_2$ 标气：只有通入 $\text{NO}_2$ 标气，看能不能读出数来，才能验证转换炉的好坏。&lt;/li&gt;
+&lt;li&gt;观察 $\text{NO}_x$ 与 $\text{NO}$ 的差值：在正常燃烧工况下，$\text{NO}_2$ 通常占 $\text{NO}_x$ 的 5% 左右。如果你发现你的表上，$\text{NO}$ 的数值永远等于 $\text{NO}_x$ 的数值（即 $\text{NO}_2$ 读数长期为 0），那很可能是转换炉出问题了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2h2o-和-co2-的猝灭效应&#34;&gt;2、H2O 和 CO2 的猝灭效应
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;痛点： 与紫外荧光法类似，$\text{H}_2\text{O}$ 和 $\text{CO}_2$ 也是化学发光法的强猝灭剂。&lt;/li&gt;
+&lt;li&gt;现象： 如果稀释空气干燥度不够（露点高），水分进入反应室，会显著降低发光强度，导致 $\text{NO}_x$ 读数&lt;strong&gt;偏低&lt;/strong&gt;。这就是为什么稀释风的露点通常要求在 -40°C 以下。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3臭氧发生器的稳定性&#34;&gt;3、臭氧发生器的稳定性
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;系统隐患： 分析仪内部自带高压臭氧发生器。如果&lt;strong&gt;供电电压不稳&lt;/strong&gt;或发生器老化，臭氧浓度下降，反应就不完全（不再是富氧反应），导致测量线性变差。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;案例-1nox-转换炉的好心办坏事&#34;&gt;案例 1：NOx 转换炉的“好心办坏事”
+&lt;/h2&gt;&lt;p&gt;背景知识： 前面我们说过，化学发光法为了测 $\text{NO}_2$，需要用转换炉（钼炉或不锈钢炉）把 $\text{NO}_2$ 还原成 $\text{NO}$。我们希望这个炉子只干这一件事。$$\text{NO}_2 \xrightarrow{\text{高温 + 催化剂}} \text{NO}$$&lt;/p&gt;
+&lt;h3 id=&#34;逻辑陷阱场景重现&#34;&gt;逻辑陷阱（场景重现）：
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;工况背景：为了降低 $\text{NO}_x$ 排放，电厂都会喷氨水（SCR/SNCR 脱硝）。如果不小心喷多了，烟气里就会有逃逸的氨气 ($\text{NH}_3$)。&lt;/li&gt;
+&lt;li&gt;分析仪的“过度热情”：常用的钼炉（Moly Converter）工作温度在 315°C~350°C 左右。在这个温度下，钼炉不仅能把 $\text{NO}_2$ 还原成 $\text{NO}$，它也能把 $\text{NH}_3$ 氧化成 $\text{NO}$。$$\text{NH}_3 + \text{O}_2 \xrightarrow{\text{Mo, 350°C}} \text{NO} + \text{H}_2\text{O}$$&lt;/li&gt;
+&lt;li&gt;现场的“死亡螺旋”：
+&lt;ul&gt;
+&lt;li&gt;状态： 此时 $\text{NO}_x$ 实际上有点高。&lt;/li&gt;
+&lt;li&gt;操作： 运行人员加大喷氨量。&lt;/li&gt;
+&lt;li&gt;物理结果： 实际 $\text{NO}_x$ 降下来了，但逃逸的 $\text{NH}_3$ 变多了。&lt;/li&gt;
+&lt;li&gt;CEMS 读数： 逃逸的 $\text{NH}_3$ 进入转换炉，变成了 $\text{NO}$。分析仪把这部分 $\text{NH}_3$ 当作 $\text{NO}_x$ 计入了读数。读数不仅没降，反而可能升高了！&lt;/li&gt;
+&lt;li&gt;误判： 运行人员一看屏幕：“卧槽，喷了氨怎么 $\text{NO}_x$ 还没降？肯定是喷得不够！再加大喷氨！”&lt;/li&gt;
+&lt;li&gt;结局： 氨水耗尽，设备腐蚀，CEMS 数据依然超标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;那么如何排查这个问题&#34;&gt;那么如何排查这个问题
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;准备工作： 找一个氨逃逸比较大的工况（或者让运行稍微多喷点氨）。&lt;/li&gt;
+&lt;li&gt;正常测量： 记录此时的 $\text{NO}_x$ 读数（例如 50 ppm）。&lt;/li&gt;
+&lt;li&gt;切断转换炉：
+&lt;ul&gt;
+&lt;li&gt;如果是高温炉，把温度设定降到室温（或者直接拔掉加热棒电源，让它自然冷却）。&lt;/li&gt;
+&lt;li&gt;或者切换气路，让样气绕过转换炉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;观察读数变化：
+&lt;ul&gt;
+&lt;li&gt;理论上： 绕过转换炉后，$\text{NO}_2$ 不被转化了，读数应该下降（只剩 $\text{NO}$）。&lt;/li&gt;
+&lt;li&gt;如果读数下降得非常剧烈（例如从 50 降到 10）： 说明之前那 40 ppm 的差值里，包含着大量的 $\text{NO}_2$ 或者 被转化了的 $\text{NH}_3$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;氨气过滤器：
+&lt;ul&gt;
+&lt;li&gt;在取样管路中临时加装一个&lt;strong&gt;磷酸浸渍的过滤器&lt;/strong&gt;（专门吸附氨气，不吸附 $\text{NO}_x$）。&lt;/li&gt;
+&lt;li&gt;如果加了过滤器后，$\text{NO}_x$ 读数瞬间下降了，那就实锤了：你的转换炉在把氨气当成 $\text{NO}_x$ 测！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>锁相放大器</title>
+        <link>https://teaize.github.io/p/%E9%94%81%E7%9B%B8%E6%94%BE%E5%A4%A7%E5%99%A8/</link>
+        <pubDate>Tue, 09 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%94%81%E7%9B%B8%E6%94%BE%E5%A4%A7%E5%99%A8/</guid>
+        <description>&lt;p&gt;继 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E7%B2%89%E7%BA%A2%E5%99%AA%E5%A3%B0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;粉红噪声&lt;/a&gt; 后篇，这篇学习&lt;strong&gt;锁相放大器&lt;/strong&gt; (Lock-in Amplifier)，或者更具体一点，叫相敏检波器 (PSD, Phase Sensitive Detector)&lt;/p&gt;
+&lt;p&gt;为了明白这个概念，举一个推秋千的例子。想象你是一个“相敏检波器 (PSD)”，你的任务是让秋千荡得越高越好（提取出信号）&lt;/p&gt;
+&lt;h3 id=&#34;场景设定&#34;&gt;场景设定
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;信号 (Input Signal)： 坐在秋千上的孩子。
+&lt;ul&gt;
+&lt;li&gt;他有规律地&lt;strong&gt;荡来荡去&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;向前荡&lt;/strong&gt;代表正电压 (+V)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;向后荡&lt;/strong&gt;代表负电压 (-V)。&lt;/li&gt;
+&lt;li&gt;这就是我们一直在说的交流信号 (AC)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;噪声 (Noise)： 一群捣乱的风。
+&lt;ul&gt;
+&lt;li&gt;风一会儿从前吹，一会儿从后吹，完全没规律。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;参考信号 (Reference Signal)： 你的大脑指令（推还是拉）。
+&lt;ul&gt;
+&lt;li&gt;你的大脑里有一个节拍器，频率和秋千完全同步。&lt;/li&gt;
+&lt;li&gt;指令 +1（正指令）： 用力推。&lt;/li&gt;
+&lt;li&gt;指令 -1（负指令）： 用力拉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;核心机制同步乘法&#34;&gt;核心机制：同步乘法
+&lt;/h3&gt;&lt;p&gt;所谓的“乘法”，在这里就是你的动作（&lt;strong&gt;参考信号&lt;/strong&gt;）与秋千运动（&lt;strong&gt;输入信号&lt;/strong&gt;）的相互作用。我们来看三种情况：&lt;/p&gt;
+&lt;h4 id=&#34;情况一完美的信号提取同步乘法生效&#34;&gt;情况一：完美的信号提取（同步乘法生效）
+&lt;/h4&gt;&lt;p&gt;你想让信号变大（提取信号），你必须配合秋千的节奏。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一半周期（秋千向前荡 +）：
+&lt;ul&gt;
+&lt;li&gt;输入信号： 正 (+)（孩子向前冲）。&lt;/li&gt;
+&lt;li&gt;你的动作： 你的节拍器告诉你，现在是前半拍，指令是 推 (+)。&lt;/li&gt;
+&lt;li&gt;乘法运算： $(+) \times (+) = \mathbf{+}$ (获得正向的能量，秋千变高)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第二半周期（秋千向后荡 -）：
+&lt;ul&gt;
+&lt;li&gt;输入信号： 负 (-)（孩子荡回来了）。&lt;/li&gt;
+&lt;li&gt;你的动作： 你的节拍器告诉你，现在是后半拍，指令是 拉 (-)。
+&lt;ul&gt;
+&lt;li&gt;注意：这里是关键！你不是推，你是顺势往回拉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;乘法运算： $(-) \times (-) = \mathbf{+}$ (负负得正！你顺着他回来的劲用力拉，秋千依然获得正向能量，变得更高)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结果： 无论秋千是向前还是向后，因为你的动作（参考信号）总是和它&lt;strong&gt;同步反转&lt;/strong&gt;，你做的每一次功都是&lt;strong&gt;正功&lt;/strong&gt;。经过一段时间（积分），秋千荡得非常高（输出一个稳定的直流高电压）。&lt;/p&gt;
+&lt;h4 id=&#34;情况二噪声的过滤随机信号被抵消&#34;&gt;情况二：噪声的过滤（随机信号被抵消）
+&lt;/h4&gt;&lt;p&gt;现在看看那阵乱吹的风（噪声）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一回合：
+&lt;ul&gt;
+&lt;li&gt;风向前吹 (+)。&lt;/li&gt;
+&lt;li&gt;你的动作是 推 (+)。&lt;/li&gt;
+&lt;li&gt;结果：$(+) \times (+) = +$ (风帮你省力了，产生正能量)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第二回合：
+&lt;ul&gt;
+&lt;li&gt;风依然向前吹 (+)（因为风是随机的，没必要跟着你换方向）。&lt;/li&gt;
+&lt;li&gt;你的动作变成了 拉 (-)。&lt;/li&gt;
+&lt;li&gt;结果：$(+) \times (-) = \mathbf{-}$ (你和风对着干，抵消了能量)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结果： 因为风（噪声）没有你的节拍器，它一会儿帮你，一会儿阻碍你。当你做 1000 次动作后，这些帮助和阻碍互相抵消，平均下来等于 &lt;strong&gt;0&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;这就是“只选想要的频率，过滤掉所有其他频率”的物理本质。&lt;/p&gt;
+&lt;h4 id=&#34;情况三相位的诅咒不同步会怎样&#34;&gt;情况三：相位的诅咒（不同步会怎样？）
+&lt;/h4&gt;&lt;p&gt;这也解释了为什么要有 “相位设置”。假设你的节拍器虽然频率对了（也是 1 秒一次），但是慢了半拍（相位差 90 度）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;秋千已经荡到最高点准备往回落了（速度为 0），你才刚开始用力推。&lt;/li&gt;
+&lt;li&gt;秋千已经荡到最低点速度最快了，你却停手了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这时候，你做功的效率就会大打折扣，甚至有时候会起反作用（阻碍秋千）。 在仪表上，这就表现为：&lt;strong&gt;虽然有信号，但读数很小，甚至接近于 0。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;所以，工程师调校仪器，就是为了让你的“推拉节奏”和“秋千的摆动”&lt;strong&gt;严丝合缝（同频同相）&lt;/strong&gt;，从而获得最大的推力（最大的输出信号）。&lt;/p&gt;
+&lt;h2 id=&#34;实际案例红外气体分析仪&#34;&gt;实际案例：红外气体分析仪
+&lt;/h2&gt;&lt;p&gt;CEMS 机柜中的 CO 和 CO2 分析仪，它们通常用的是 &lt;strong&gt;非分散红外法 (NDIR)&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;在老式或者经典的 NDIR 分析仪里，有一个核心的机械部件叫 &lt;strong&gt;切光轮&lt;/strong&gt;（实际上，在电子调制技术（像脉冲氙灯那样直接开关灯）还不成熟，或者光源无法快速开关的年代，工程师们用纯机械的方式解决信号处理问题的杰作）。&lt;/p&gt;
+&lt;h3 id=&#34;一-为什么要切物理约束&#34;&gt;一、 为什么要“切”？（物理约束）
+&lt;/h3&gt;&lt;p&gt;在讲结构之前，我们要先解决一个核心矛盾。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;红外光源的惰性： CEMS 用的红外光源通常是&lt;strong&gt;黑体辐射源&lt;/strong&gt;（比如陶瓷加热棒、MEMS 热源）。 想象一个烧红的电炉丝，你能让它每秒钟开关 10 次吗？ 不能。 你断电了，它还要几秒钟才冷却。它的&lt;strong&gt;热惯性&lt;/strong&gt;（Thermal Inertia）太大了，没法像氙灯那样做“电子脉冲”。它只能常亮。&lt;/li&gt;
+&lt;li&gt;探测器的“怪癖”： NDIR 最常用的探测器是热释电探测器 或 气动探测器 。 它们有一个致命的特性：**只对“变化”敏感。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;如果光强恒定（哪怕很强），探测器输出电荷会逐渐中和，输出信号归零&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;只有光强发生跳变时，它才会输出一个尖峰电压。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;矛盾出现了： 光源只能常亮（DC），但探测器只吃跳变信号（AC） —&amp;gt; “既然灯关不掉，那我就用手挡住它！快点挡，快点松开！” —— &lt;strong&gt;这就是切光轮。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;二切光轮结构拆解&#34;&gt;二、切光轮结构拆解
+&lt;/h3&gt;&lt;p&gt;一个典型的 NDIR 切光组件包含三个核心部分：&lt;/p&gt;
+&lt;h4 id=&#34;1-切光轮本体&#34;&gt;1. 切光轮本体
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;材质： 通常是轻质铝合金或不锈钢，表面发黑处理（防止反光）。&lt;/li&gt;
+&lt;li&gt;形状： 像电风扇叶片。最简单的是半圆盘（50% 透光，50% 遮光）。&lt;/li&gt;
+&lt;li&gt;转速： 通常由一个无刷直流电机带动，转速极其稳定。频率通常设定在 10 Hz ~ 60 Hz 之间。
+&lt;ul&gt;
+&lt;li&gt;太慢了：避不开粉红噪声。&lt;/li&gt;
+&lt;li&gt;太快了：红外探测器反应慢，来不及响应。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-光路截断&#34;&gt;2. 光路截断
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;切光轮安装在 光源 和 气室/探测器 之间。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态 A（透光）：&lt;/strong&gt; 叶片转走，红外光穿过样气，打在探测器上。
+&lt;ul&gt;
+&lt;li&gt;信号 = 气体吸收后的光强 + 背景杂散光 + 探测器热漂移。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;状态 B（遮光）：&lt;/strong&gt; 叶片挡住光路。探测器处于“黑暗”中。
+&lt;ul&gt;
+&lt;li&gt;信号 = &lt;strong&gt;切光轮自身的辐射&lt;/strong&gt; + 背景杂散光 + 探测器热漂移。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-同步信号发生器&#34;&gt;3. 同步信号发生器
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;在切光轮的边缘，通常会开一个小孔，或者切光轮本身就是齿轮状的。&lt;/li&gt;
+&lt;li&gt;旁边装有一个 U 型光电开关。&lt;/li&gt;
+&lt;li&gt;轮子每转一圈，光电开关就输出一个方波脉冲。&lt;/li&gt;
+&lt;li&gt;作用： 这个方波直接发给 CPU，告诉 CPU：“现在是亮的时候！”或者“现在是暗的时候！”。这就是&lt;strong&gt;参考信号 (Reference Signal)&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-信号处理流程把直流变成交流&#34;&gt;三、 信号处理流程（把“直流”变成“交流”）
+&lt;/h3&gt;&lt;p&gt;让我们看看探测器实际输出了什么波形，以及 PSD 是怎么处理的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;原始光强 (Optical Input)：是一个方波。有光 -&amp;gt; 无光 -&amp;gt; 有光 -&amp;gt; 无光。&lt;/li&gt;
+&lt;li&gt;探测器输出 (Detector Output)：由于探测器有热容（反应慢），它输出的不是完美的方波，而是像鲨鱼鳍一样的三角波/锯齿波。
+&lt;ul&gt;
+&lt;li&gt;光来了，电压慢慢爬升。&lt;/li&gt;
+&lt;li&gt;光断了，电压慢慢下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;锁相放大 (PSD Processing)：CPU 拿着光电开关给的“参考信号”，对探测器的“锯齿波”进行同步解调。$$\text{最终值} = (\text{爬升的峰值}) - (\text{下降的谷值})$$&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;核心优势：假设探测器因为环境温度升高，产生了一个巨大的直流漂移（比如电压整体抬升了 5V）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爬升峰值变成了 5.1V。&lt;/li&gt;
+&lt;li&gt;下降谷值变成了 5.0V。&lt;/li&gt;
+&lt;li&gt;相减： $5.1 - 5.0 = \mathbf{0.1V}$。&lt;/li&gt;
+&lt;li&gt;结果： 那个 5V 的温漂被机械切光轮完美干掉了！&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;进阶玩法gfc-气体相关滤波&#34;&gt;“进阶玩法”：GFC (气体相关滤波)
+&lt;/h3&gt;&lt;p&gt;既然轮子都要转，“为什么只做挡光和透光？能不能干点更高级的？”于是诞生了 &lt;strong&gt;气体相关滤波轮 (Gas Filter Correlation, GFC)&lt;/strong&gt;。这是 NDIR 抗干扰的终极武器。&lt;/p&gt;
+&lt;p&gt;切光轮上不再是空的，而是装了两个充满气体的透明小盒子：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;测量室 (Measure Cell)：&lt;/strong&gt; 里面充的是&lt;strong&gt;纯氮气 ($N_2$)&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;作用：透光。红外光穿过去，被烟道里的样气吸收。这是“有信号”的状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参比室 (Reference Cell)：&lt;/strong&gt; 里面充的是&lt;strong&gt;极高浓度的待测气体&lt;/strong&gt;（比如 100% 的 CO）。
+&lt;ul&gt;
+&lt;li&gt;作用：“光学饱和”。&lt;/li&gt;
+&lt;li&gt;因为浓度太高，CO 对应的吸收波长的光被这个小盒子全部吃光了。&lt;/li&gt;
+&lt;li&gt;此时打到探测器上的光，已经不包含任何 CO 的信息了（因为那个频段已经黑了）。这相当于一个“特异性极强的物理挡板”**。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;工作逻辑：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;轮子转到氮气格： 测得 $I_{meas}$（包含样气吸收信息）。&lt;/li&gt;
+&lt;li&gt;轮子转到 CO 格： 测得 $I_{ref}$（样气里的 CO 吸无可吸，因为光已经被小盒子吸干了，所以这个信号不受样气浓度影响，只受粉尘、光源衰减影响）。&lt;/li&gt;
+&lt;li&gt;计算： 通过对比这两个信号，不仅扣除了背景，还&lt;strong&gt;完美扣除了粉尘干扰&lt;/strong&gt;和&lt;strong&gt;窗口污染&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;疑问解答&#34;&gt;疑问解答
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;如何理解这句话：通过对比这两个信号，不仅扣除了背景，还完美扣除了粉尘干扰和窗口污染&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;为了解开这个结，我们需要引入一个核心物理概念：“光谱指纹”与“饱和”。&lt;/p&gt;
+&lt;h3 id=&#34;第一步理解前提--光不是铁板一块&#34;&gt;第一步：理解前提 —— 光不是“铁板一块”
+&lt;/h3&gt;&lt;p&gt;红外光不是单纯的一束白光，它像一条包含各种颜色糖果的传送带（光谱）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;糖果 A（特定波长）：&lt;/strong&gt; 只有 CO 喜欢吃（比如 4.6 微米波段）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;糖果 B（其他波长）：&lt;/strong&gt; CO 根本不碰，只有灰尘（墨镜）会挡住它们。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;比尔定律的基础： 我们通过数“糖果 A 少了多少”，来算出 CO 有多少。&lt;/p&gt;
+&lt;h3 id=&#34;第二步解密吸无可吸&#34;&gt;第二步：解密“吸无可吸”
+&lt;/h3&gt;&lt;p&gt;现在的场景是：光（传送带）先经过烟道（样气），再经过切光轮上的小盒子。&lt;/p&gt;
+&lt;h4 id=&#34;场景-1轮子转到测量室纯氮气-n_2&#34;&gt;场景 1：轮子转到“测量室”（纯氮气 $N_2$）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;设定： $N_2$ 啥都不吃。&lt;/li&gt;
+&lt;li&gt;过程：
+&lt;ol&gt;
+&lt;li&gt;传送带上有 100 颗“糖果 A”。&lt;/li&gt;
+&lt;li&gt;经过烟道（样气），样气里的 CO 比较少，偷吃了 20 颗。&lt;/li&gt;
+&lt;li&gt;经过 $N_2$ 盒子，没变化。&lt;/li&gt;
+&lt;li&gt;到达探测器： 收到 80 颗。&lt;/li&gt;
+&lt;li&gt;结论： 探测器发现少了 20 颗，算出样气里有 CO。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;场景-2轮子转到参比室高浓度-co&#34;&gt;场景 2：轮子转到“参比室”（高浓度 CO）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;设定： 这个小盒子里塞满了高压 CO，它是超级大胃王，能把所有的“糖果 A”&lt;strong&gt;全部吃光&lt;/strong&gt;，一颗不剩。&lt;/li&gt;
+&lt;li&gt;过程：
+&lt;ol&gt;
+&lt;li&gt;传送带上有 100 颗“糖果 A”。&lt;/li&gt;
+&lt;li&gt;阶段一（经过烟道）： 样气里的 CO 还是偷吃了那 20 颗。剩下 80 颗。&lt;/li&gt;
+&lt;li&gt;阶段二（经过 CO 盒子）： 剩下的 80 颗糖果 A 进入盒子。因为盒子里的 CO 浓度极高（饱和），它会把进来的所有“糖果 A”统统吃掉。&lt;/li&gt;
+&lt;li&gt;到达探测器： 收到 0 颗 “糖果 A”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在我们来做一个思想实验：如果样气里的 CO 浓度变高了，它在阶段一偷吃了 50 颗（而不是 20 颗），结果会怎样？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;阶段一： 100 颗 -&amp;gt; 剩下 50 颗。&lt;/li&gt;
+&lt;li&gt;阶段二（CO 盒子）： 盒子里的超级大胃王把剩下的 50 颗统统吃掉。&lt;/li&gt;
+&lt;li&gt;到达探测器： 依然收到 0 颗 “糖果 A”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结论：无论样气里的 CO 偷吃了多少（是 0 颗、20 颗还是 50 颗），只要后面跟着一个“通吃”的参比室，最终到达探测器的“糖果 A”永远是 0。这就是为什么我说：&lt;strong&gt;$I_{ref}$ 信号不受样气中 CO 浓度的影响。&lt;/strong&gt; 对于 CO 敏感的那个波段来说，光已经被彻底“拉黑”了，谁也改变不了结局。&lt;/p&gt;
+&lt;h3 id=&#34;第三步那-i_ref-到底是测什么的&#34;&gt;第三步：那 $I_{ref}$ 到底是测什么的？
+&lt;/h3&gt;&lt;p&gt;你可能会问：“既然糖果 A 都是 0 了，那探测器读到的信号 $I_{ref}$ 是哪里来的？”别忘了传送带上还有 “糖果 B”（其他波长的光）！&lt;/p&gt;
+&lt;p&gt;CO 不吃糖果 B，所以糖果 B 会穿过样气，也会穿过 CO 盒子，最终打在探测器上。&lt;/p&gt;
+&lt;p&gt;这时候，灰尘（粉尘）的作用就显现了：灰尘是不挑食的，它像一块半透明的布，既挡糖果 A，也挡糖果 B。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果有灰尘： 糖果 B 的数量会减少（比如从 1000 减到 900）。&lt;/li&gt;
+&lt;li&gt;如果有光源老化： 糖果 B 的初始数量就会减少。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以，&lt;strong&gt;$I_{ref}$ 测量的是“除了 CO 吸收波段以外的背景光强”&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;第四步最终的算术魔法&#34;&gt;第四步：最终的算术魔法
+&lt;/h3&gt;&lt;p&gt;分析仪 CPU 做的是这样一个对比运算：$$浓度 \propto \frac{I_{meas} - I_{ref}}{I_{ref}}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$I_{meas}$ (测量信号)：背景光 + 剩余 CO 波段的敏感光&lt;/li&gt;
+&lt;li&gt;$I_{ref}$ (参比信号)： 仅包含（背景光）。注：因为 CO 波段已经黑了，剩下的全是背景。&lt;/li&gt;
+&lt;li&gt;$I_{meas} - I_{ref}$ (差值)： 这代表 “样气到底吃掉了多少光”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;![[Pasted image 20251209232443.png]]&lt;/p&gt;
+&lt;p&gt;通过这个公式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;抵消干扰：&lt;/strong&gt; 灰尘是非选择性吸收，无论光是“背景光成分”还是“CO 敏感光成分”，灰尘都一视同仁，统统挡掉一半。通过比值之后，抵消掉这个干扰&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提取浓度：&lt;/strong&gt; 分子和分母的&lt;strong&gt;差值&lt;/strong&gt;，正好就是“样气 CO 吃掉的那部分光”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;测量室（$N_2$）：&lt;/strong&gt; 像一块透明玻璃。样气里的 CO 吃多少，我就能看到光少多少。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;参比室（高浓度 CO）：&lt;/strong&gt; 像一块&lt;strong&gt;特定颜色的黑布&lt;/strong&gt;（针对 CO 波段）。它强制把 CO 的波段“清零”。
+&lt;ul&gt;
+&lt;li&gt;既然已经强制清零了，样气之前吃没吃过这口光，对结果（0）没有影响。&lt;/li&gt;
+&lt;li&gt;它剩下的光，反映的是“光路脏不脏、灯泡亮不亮”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>PMT金属屏蔽层</title>
         <link>https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/</link>
         <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
@@ -223,7 +587,7 @@
 &lt;/ul&gt;
 &lt;p&gt;最终算法进化：$$\text{浓度} \propto \frac{\text{主 PMT 信号 (扣除背景后)}}{\text{参考光强信号}}$$&lt;/p&gt;
 &lt;h3 id=&#34;从静到动的思维升华&#34;&gt;从“静”到“动”的思维升华
-&lt;/h3&gt;&lt;p&gt;这里有一个深刻的物理/工程思维模型，值得你记在心里：&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;这里有一个工程思维模型，值得记在心里：&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;“如果是静态测不准的东西，就把它动起来测。”&lt;/strong&gt; (If you can&amp;rsquo;t measure it statically, modulate it.)&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;测微弱光：&lt;/strong&gt; 别常亮，让它闪（脉冲/切光轮）。&lt;/li&gt;

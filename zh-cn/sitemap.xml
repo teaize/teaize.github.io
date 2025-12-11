@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2025-12-08T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-09T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,10 +15,16 @@
                 href="https://teaize.github.io/"
                 />
   </url><url>
-    <loc>https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/</loc>
-    <lastmod>2025-12-08T00:00:00+00:00</lastmod>
-  </url><url>
     <loc>https://teaize.github.io/post/</loc>
+    <lastmod>2025-12-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/%E5%8C%96%E5%AD%A6%E5%8F%91%E5%85%89%E6%B3%95/</loc>
+    <lastmod>2025-12-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/%E9%94%81%E7%9B%B8%E6%94%BE%E5%A4%A7%E5%99%A8/</loc>
+    <lastmod>2025-12-09T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/</loc>
     <lastmod>2025-12-08T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/%E5%9C%B0%E7%8E%AF%E8%B7%AF/</loc>
