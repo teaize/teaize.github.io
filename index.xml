@@ -7,7 +7,406 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 11 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 12 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>稀释法CEMS</title>
+        <link>https://teaize.github.io/p/%E7%A8%80%E9%87%8A%E6%B3%95cems/</link>
+        <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%A8%80%E9%87%8A%E6%B3%95cems/</guid>
+        <description>&lt;h2 id=&#34;一-稀释法系统的核心痛点与通用问题&#34;&gt;一、 稀释法系统的核心痛点与通用问题
+&lt;/h2&gt;&lt;p&gt;稀释法的核心在于“稀释比”（Dilution Ratio）的稳定性。如果稀释比变了，所有的测量数据都是错误的。&lt;/p&gt;
+&lt;h3 id=&#34;1-临界孔的堵塞与腐蚀&#34;&gt;1. 临界孔的堵塞与腐蚀
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;问题描述：&lt;/strong&gt; 临界孔通常是宝石或玻璃材质，孔径极小。虽然有烧结滤芯保护，但在高粉尘或由于探头加热失效导致结晶（如铵盐）时，临界孔容易发生微堵塞。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果：&lt;/strong&gt; 样气流量减小，导致稀释比变大，测量读数偏低。&lt;strong&gt;这是最隐蔽的故障，因为校准时通入标气也会被稀释，可能掩盖部分问题&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;场景假设正常状态&#34;&gt;场景假设：正常状态
+&lt;/h4&gt;&lt;p&gt;假设你的系统设定如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;稀释比 (DR): 100:1 (即 1 份样气 : 99 份稀释风)&lt;/li&gt;
+&lt;li&gt;标气浓度: 100 ppm 的 $\text{SO}_2$&lt;/li&gt;
+&lt;li&gt;分析仪量程: 0-2 ppm (稀释后浓度)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;正常时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;你通入 100 ppm 标气。&lt;/li&gt;
+&lt;li&gt;经过正常的临界孔，稀释 100 倍。&lt;/li&gt;
+&lt;li&gt;进入分析仪的气体浓度是 1 ppm。&lt;/li&gt;
+&lt;li&gt;分析仪读数显示 1 ppm $\to$ 反算排放浓度 100 ppm。&lt;/li&gt;
+&lt;li&gt;结论： 校验合格，系统正常&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;场景假设临界孔微堵&#34;&gt;场景假设：临界孔微堵
+&lt;/h4&gt;&lt;p&gt;假设由于烟气脏或者加热不够，&lt;strong&gt;临界孔发生微堵塞&lt;/strong&gt;（孔径变小了，或者结晶了）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理变化： 进样流量 ($Q_{sample}$) 减半。但稀释风流量 ($Q_{air}$) 是由文丘里管或压力控制的，基本不变。&lt;/li&gt;
+&lt;li&gt;结果： 稀释比从 100:1 变成了 200:1（大致估算）。&lt;/li&gt;
+&lt;li&gt;此时测量烟气： 烟气被稀释了 200 倍，读数直接减半。数据明显偏低，不准了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;运维人员校准隐蔽的故障&#34;&gt;运维人员校准（隐蔽的故障）
+&lt;/h4&gt;&lt;p&gt;此时，运维人员通标气进行校准。通入 100ppm 标气进入探头，但此时由于临界孔堵塞稀释比变成了 200，也就是说标气被稀释了 200 倍，进入分析仪的浓度自然只有 0.5ppm。分析仪上还是按旧系数折算的，显示 50ppm。
+运维人员的操作：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;运维人员看到：“咦？通 100 ppm，怎么只显示 50 ppm？看来是&lt;strong&gt;分析仪漂移&lt;/strong&gt;了，或者灵敏度下降了。”&lt;/li&gt;
+&lt;li&gt;修正动作： 他在分析仪或工控机上执行 &lt;strong&gt;&amp;ldquo;Calibration / Span Adjust&amp;rdquo;（量程校准）&lt;/strong&gt; 操作。&lt;/li&gt;
+&lt;li&gt;系统内部逻辑： 强行把这个 0.5 ppm 的电信号定义为 100 ppm。也就是把斜率（Gain）放大了一倍。&lt;/li&gt;
+&lt;li&gt;结果：屏幕显示 100ppm。运维人员心理： “校准通过，设备修好了。”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;为什么说这是隐蔽的故障&#34;&gt;为什么说这是“隐蔽的故障”
+&lt;/h4&gt;&lt;p&gt;表面上看，你把数校准回来了，测量似乎又“准”了。但实际上，&lt;strong&gt;硬件故障（堵塞）依然存在，且被软件系数掩盖了&lt;/strong&gt;。这带来了以下严重的后续隐患：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;极不稳定的平衡：&lt;/strong&gt; 你现在的校准是建立在“临界孔堵了一半”这个特定状态下的。堵塞物（如灰尘或铵盐）是不稳定的。
+&lt;ul&gt;
+&lt;li&gt;情况 A： 如果反吹系统突然起作用，把堵塞物吹掉了，稀释比瞬间变回 100:1。你的读数会突然翻倍（显示 200 ppm），导致数据超标异常。&lt;/li&gt;
+&lt;li&gt;情况 B： 堵塞进一步加重，稀释比变成 300:1，数据又开始缓慢下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;响应时间（$T_{90}$）变差：
+&lt;ul&gt;
+&lt;li&gt;临界孔堵塞意味着吸入样气的流速变慢。虽然浓度数被你调准了，但气体置换速度变慢了。&lt;/li&gt;
+&lt;li&gt;原本烟气变化只需 30 秒就能反应在数据上，现在可能需要 2 分钟。这在工况剧烈波动时，会导致 CEMS 数据严重滞后，甚至无法通过环保验收的响应时间测试。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;真空度报警失效的边缘： 虽然还能抽气，但采样泵的负载变了，或者探头内部的真空度已经处于临界边缘。一旦工况负压波动，很容易触发低流量报警。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;工程师如何识别这个骗局&#34;&gt;工程师如何识别这个“骗局”
+&lt;/h4&gt;&lt;p&gt;在做校准时，不能只看“能不能校准到标气值”，还要关注“校准系数（Slope/Gain）”的变化&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看分析仪的 Gain/Slope 值： 如果平时这个系数是 1.0 左右，突然你需要把它调到 1.5 甚至 2.0 才能标定成功，&lt;strong&gt;绝对不是分析仪漂移了，而是稀释比变了（探头堵了）。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;测量探头真空度： 大部分稀释法探头都有一个真空表。&lt;strong&gt;如果临界孔堵塞，真空度通常会变得更高&lt;/strong&gt;（更接近真空），因为进气阻力大了。&lt;/li&gt;
+&lt;li&gt;检查响应时间： 通标气时，观察读数上升的速度。如果发现读数爬升得很慢，即使最后能稳在 100 ppm，也说明临界孔大概率堵了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-稀释比随工况漂移&#34;&gt;2. 稀释比随工况漂移
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;物理原理： 稀释比 $DR$ 受到烟道压力和温度的影响。公式大概如下：$$Q \propto \frac{P}{\sqrt{T}}$$&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;问题：&lt;/strong&gt; 虽然现代系统有压力和温度补偿，但如果烟道负压剧烈波动，或者探头加热温度控制不稳（例如伴热管线故障），稀释比就会波动，导致数据震荡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-稀释空气zero-air的质量&#34;&gt;3. 稀释空气（Zero Air）的质量
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;关键点：&lt;/strong&gt; 稀释法的稀释比通常在 20:1 到 100:1 之间。这意味着你测量的 95%~99% 的气体其实是你自己提供的稀释风。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;隐患：&lt;/strong&gt; 如果空气压缩机或零气发生器（Zero Air Generator）出现问题（例如油雾、水分穿透），这些杂质会被放大几十倍计入背景噪声，直接摧毁微量分析仪的检出限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-湿基转干基的误差&#34;&gt;4. 湿基转干基的误差
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;法规要求：&lt;/strong&gt; 环保上传数据通常要求&lt;strong&gt;干基&lt;/strong&gt;（Dry Basis）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;痛点：&lt;/strong&gt; 稀释法天然测出来是&lt;strong&gt;湿基&lt;/strong&gt;。必须依靠氧化锆氧量计或其他方式测算湿度来折算。湿度的测量误差会直接叠加到 $\text{SO}_2$ 和 $\text{NO}_x$ 的最终排放数据上。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>系统状态流转图</title>
+        <link>https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81%E6%B5%81%E8%BD%AC%E5%9B%BE/</link>
+        <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E7%8A%B6%E6%80%81%E6%B5%81%E8%BD%AC%E5%9B%BE/</guid>
+        <description>&lt;p&gt;如果没有 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E7%8A%B6%E6%80%81%E6%9C%BA/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;状态机&lt;/a&gt; 的逻辑，分析仪就是一堆乱飞的继电器和乱跳的数字。状态机逻辑不仅决定了仪器怎么动，更决定了环保局收到的数据上打什么“标记”。例如：反吹时数据不能算超标，必须打上“保持 (Hold)”标记。&lt;/p&gt;
+&lt;h3 id=&#34;一-cems-系统状态流转图&#34;&gt;一、 CEMS 系统状态流转图
+&lt;/h3&gt;&lt;p&gt;下面这张图展示了一个典型的完全抽取式 CEMS 系统（含反吹、自动校准功能）的软件逻辑&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;stateDiagram-v2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 定义全局样式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef measure fill:#90EE90,color:black,stroke:#006400,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef maintain fill:#FFD700,color:black,stroke:#DAA520,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef fault fill:#FF6347,color:white,stroke:#8B0000,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef init fill:#D3D3D3,color:black,stroke:#696969;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 初始状态 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    [*] --&amp;gt; WARMUP : 上电启动
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 1. 预热状态
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;预热/自检 (Warm-up)&amp;#34; as WARMUP
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP : 动作：加热炉/探头升温
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP : 数据：无效 (Invalid)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP : 泵：关闭
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP --&amp;gt; MEASURE : 温度达标 &amp;amp;&amp;amp; 无故障
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP --&amp;gt; FAULT : 自检失败 (如传感器断路)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 2. 测量主循环
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;正常测量 (Measurement)&amp;#34; as MEASURE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class MEASURE measure
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE : 动作：采样阀开，泵开
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE : 数据：正常输出 (Valid)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE : 逻辑：实时计算浓度
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 周期性任务 (中断测量) ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 3. 反吹流程
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;系统反吹 (Blowback)&amp;#34; as PURGE_CYCLE {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;高压反吹 (Purging)&amp;#34; as BLOW
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;样气置换/恢复 (Recovery)&amp;#34; as RECOV
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        BLOW --&amp;gt; RECOV : 反吹时间到 (如30s)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        BLOW : 动作：反吹阀开，采样泵停/隔离
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        RECOV : 动作：切回采样，等待气体稳定
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class PURGE_CYCLE maintain
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE --&amp;gt; PURGE_CYCLE : 定时器触发 (如每4小时)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PURGE_CYCLE --&amp;gt; MEASURE : 恢复时间到 (如120s)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 4. 校准流程
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;校准 (Calibration)&amp;#34; as CALIBRATION {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;校零 (Zero Cal)&amp;#34; as ZERO
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;校标 (Span Cal)&amp;#34; as SPAN
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ZERO --&amp;gt; SPAN : 零点成功 -&amp;gt; 切标气
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ZERO : 动作：切零气阀
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        SPAN : 动作：切标气阀
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class CALIBRATION maintain
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE --&amp;gt; CALIBRATION : 用户指令 或 定时触发
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CALIBRATION --&amp;gt; MEASURE : 校准完成/退出
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 5. 故障状态
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;系统故障 (System Fault)&amp;#34; as FAULT
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class FAULT fault
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT : 触发条件：温度低、流量低、通讯断
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT : 动作：切断加热、停泵 (保护)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT : 数据：故障标记 (Fault Flag)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 全局故障中断
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE --&amp;gt; FAULT : 发生故障
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PURGE_CYCLE --&amp;gt; FAULT : 发生故障
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CALIBRATION --&amp;gt; FAULT : 发生故障
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT --&amp;gt; WARMUP : 故障复位/重启
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT --&amp;gt; MEASURE : 故障清除 (非致命)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 数据标记说明
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    note right of PURGE_CYCLE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        关键逻辑：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        进入非测量状态时，
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        数据必须 &amp;#34;保持 (Hold)&amp;#34;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        不能输出 0 或 20.9%
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end note
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;二-深度解剖状态背后的潜规则&#34;&gt;二、 深度解剖：状态背后的“潜规则”
+&lt;/h3&gt;&lt;p&gt;看懂了图，我们还要看懂图背后的工程逻辑。这是写 PLC 程序或嵌入式代码的核心。&lt;/p&gt;
+&lt;h4 id=&#34;1-预热状态-warm-up--严厉的门卫&#34;&gt;1. 预热状态 (Warm-up) —— 严厉的门卫
+&lt;/h4&gt;&lt;p&gt;为什么不能一上电就测量？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理原因： 钼炉没到 315°C，$\text{NO}_2$ 转换效率极低；氧化锆没到 700°C，内阻无穷大；光具座没恒温，漂移巨大。&lt;/li&gt;
+&lt;li&gt;软件逻辑： 这是一个 &lt;code&gt;While Loop&lt;/code&gt;。只要温度（Temp）不在设定范围内（比如 $Set \pm 5^{\circ}C$），系统死锁，禁止开启采样泵。
+&lt;ul&gt;
+&lt;li&gt;防止冷凝水吸入冷光路，这是保护仪器的第一道防线&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-反吹与恢复-blowback--recovery--容易被遗忘的死时间&#34;&gt;2. 反吹与恢复 (Blowback &amp;amp; Recovery) —— 容易被遗忘的“死时间”
+&lt;/h4&gt;&lt;p&gt;新手写程序，往往只写“反吹动作”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;错误逻辑：&lt;/strong&gt; 反吹阀关 $\rightarrow$ 马上输出数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果：&lt;/strong&gt; 反吹时管路里全是压缩空气（$\text{O}_2 \approx 21%, \text{SO}_2 = 0$）。反吹刚结束那几十秒，样气还没抽上来。如果这时候输出数据，DCS 会记录到一个“排放跌零”的异常数据。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;正确逻辑：&lt;/strong&gt; 必须加一个 &lt;strong&gt;Recovery Time (恢复时间)&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;反吹 10 秒。&lt;/li&gt;
+&lt;li&gt;等待 120 秒（让样气置换掉管路里的空气）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;这 130 秒内，数据全部打上“保持 (Hold)”标记，DCS 维持显示反吹前一刻的数值。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-故障状态-fault--优先级最高的中断&#34;&gt;3. 故障状态 (Fault) —— 优先级最高的中断
+&lt;/h4&gt;&lt;p&gt;注意看图中的红线，故障是可以从&lt;strong&gt;任何状态&lt;/strong&gt;切入的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;安全逻辑：
+&lt;ul&gt;
+&lt;li&gt;如果在“校准”时，突然检测到&lt;strong&gt;伴热管线温度低&lt;/strong&gt;（可能断了），必须立即强行中断校准，跳到 Fault 状态，并&lt;strong&gt;关闭采样泵&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;为什么？因为低温会导致结露，含水的酸性气体吸进来会腐蚀分析仪。&lt;strong&gt;保命优先于干活。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-测量状态-measure--唯一的有效数据时刻&#34;&gt;4. 测量状态 (Measure) —— 唯一的“有效数据”时刻
+&lt;/h4&gt;&lt;p&gt;只有在这个状态下，软件输出的状态位（Status Bit）才是 &lt;strong&gt;&amp;ldquo;Valid&amp;rdquo; (有效)&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;环保局的数采仪（DAS）只统计标记为 Valid 的数据来计算日均值。&lt;/li&gt;
+&lt;li&gt;如果你的仪器老是跳到故障或反吹，有效数据率不足 75%，企业就会面临环保处罚。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;从图到码的映射法则&#34;&gt;从“图”到“码”的映射法则
+&lt;/h2&gt;&lt;p&gt;在工业控制领域，只要你的状态机（State Machine）设计得足够完善，将它“翻译”成代码，确实就是一个非常机械、甚至可以自动化的过程。&lt;/p&gt;
+&lt;p&gt;如果我们以前面的 CEMS 状态图为例，写成 C 语言（单片机）或者 ST 语言（PLC），几乎是一一对应的：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;状态图要素 (Mermaid)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;代码要素 (C/C++)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;例子&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;圆角矩形 (State)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Case 分支&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;case MEASURE:&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;箭头 (Transition)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;If 判断&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;if (Temp &amp;gt; 300) …&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;文本描述 (Action)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;函数调用&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;OpenValve();&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;状态变量&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;枚举 (Enum)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;enum {WARMUP, MEASURE…}&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;为什么说其实就比较简单&#34;&gt;为什么说“其实就比较简单”？
+&lt;/h3&gt;&lt;p&gt;因为状态机图帮你解决了编程中最让人头秃的三个问题：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;互斥问题：
+&lt;ul&gt;
+&lt;li&gt;没图时：你可能会担心“反吹的时候会不会同时在测量？”&lt;/li&gt;
+&lt;li&gt;有图后：不可能。因为 &lt;code&gt;case BLOWBACK&lt;/code&gt; 和 &lt;code&gt;case MEASURE&lt;/code&gt; 是互斥的，程序永远只能跑在一个分支里。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;死锁问题：
+&lt;ul&gt;
+&lt;li&gt;没图时：容易出现“卡在校准里出不来”。&lt;/li&gt;
+&lt;li&gt;有图后：你会盯着图看，发现“校准”状态必须有一条箭头指出去（比如超时退出），否则图就是断的。图没断，代码就不会死锁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;优先级问题：
+&lt;ul&gt;
+&lt;li&gt;没图时：故障发生了，但程序还在跑校准。&lt;/li&gt;
+&lt;li&gt;有图后：你在图上画了 &lt;code&gt;FAULT&lt;/code&gt; 可以从任何地方切入，写代码时就会把 &lt;code&gt;if (Error)&lt;/code&gt; 放在最外层，优先级自然就清楚了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;既然这么简单难点剩下什么&#34;&gt;既然这么简单，难点剩下什么？
+&lt;/h3&gt;&lt;p&gt;虽然**“逻辑流”（骨架）简单了，但作为 CEMS 专家，我要提醒你，在转换成代码时，真正的难点转移到了“血肉”（底层驱动）上。&lt;/p&gt;
+&lt;h4 id=&#34;1-动作函数的实现-the-drivers&#34;&gt;1. 动作函数的实现 (The Drivers)
+&lt;/h4&gt;&lt;p&gt;状态机里写一句 OpenValve(V1) 很简单。但在代码里，你得去写这个函数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GPIO 是哪个引脚？&lt;/li&gt;
+&lt;li&gt;是高电平开还是低电平开？&lt;/li&gt;
+&lt;li&gt;有没有防抖动处理？&lt;/li&gt;
+&lt;li&gt;这部分是“脏活累活”，状态图帮不了你，得查硬件原理图。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-非阻塞计时-non-blocking-timing&#34;&gt;2. 非阻塞计时 (Non-blocking Timing)
+&lt;/h4&gt;&lt;p&gt;这是一个大坑。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;状态图上写：“等待 120 秒”。&lt;/li&gt;
+&lt;li&gt;新手写代码： &lt;code&gt;delay(120000);&lt;/code&gt; (死等)。
+&lt;ul&gt;
+&lt;li&gt;后果：这 120 秒内，CPU 睡着了，按键没反应，串口不通讯，看门狗可能会叫，程序会崩溃。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;高手写代码：必须使用“时间戳轮询”。你需要构建一个软件定时器架构，这比画图要难一些。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-故障检测的灵敏度&#34;&gt;3. 故障检测的灵敏度
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;状态图上写： “温度低 $\rightarrow$ 故障”。&lt;/li&gt;
+&lt;li&gt;实际代码：
+&lt;ul&gt;
+&lt;li&gt;是一瞬间低于 315°C 就报警吗？（那风一吹就误报了）。&lt;/li&gt;
+&lt;li&gt;还是连续 10 秒低于 315°C 才报警？&lt;/li&gt;
+&lt;li&gt;这需要**“滤波算法”，这也是图上体现不出来的细节。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;终极境界代码是生成出来的&#34;&gt;终极境界：代码是“生成”出来的
+&lt;/h3&gt;&lt;p&gt;正如我之前提到的，在现代高端工程中（如汽车电子、航空、高端医疗仪器），工程师甚至&lt;strong&gt;不写&lt;/strong&gt;这部分 C 代码。&lt;/p&gt;
+&lt;p&gt;他们使用 &lt;strong&gt;Model-Based Design (MBD)&lt;/strong&gt; 工具（如 MATLAB/Simulink 或 现在的 AI 辅助编程）：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在软件里画好你刚才看到的那个 Mermaid 状态图。&lt;/li&gt;
+&lt;li&gt;点击 &amp;ldquo;Generate Code&amp;rdquo; 按钮。&lt;/li&gt;
+&lt;li&gt;软件自动生成几千行完美无缺、符合工业标准（MISRA-C）的 C 代码。&lt;/li&gt;
+&lt;li&gt;工程师只需要负责画图和写底层驱动。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>ADC电压信号</title>
         <link>https://teaize.github.io/p/adc%E7%94%B5%E5%8E%8B%E4%BF%A1%E5%8F%B7/</link>
         <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
@@ -1001,7 +1400,8 @@ $$
         <pubDate>Mon, 08 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E5%9C%B0%E7%8E%AF%E8%B7%AF/</guid>
-        <description>&lt;p&gt;继 [[PMT金属屏蔽层]] 的引申。这篇学习法拉第笼的“死敌”——地环路。&lt;/p&gt;
+        <description>&lt;p&gt;继 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/pmt%E9%87%91%E5%B1%9E%E5%B1%8F%E8%94%BD%E5%B1%82/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PMT金属屏蔽层&lt;/a&gt; 的引申。这篇学习法拉第笼的“死敌”——地环路。&lt;/p&gt;
 &lt;h3 id=&#34;屏蔽电缆&#34;&gt;屏蔽电缆
 &lt;/h3&gt;&lt;p&gt;除了前面所说 PMT 屏蔽层之外，其实很多传输信号的电缆线也是法拉第笼，更像是一条柔软的法拉第笼。例如探头上传感器连接到机柜的信号线，用的是同轴电缆或者屏蔽电缆&lt;/p&gt;
 &lt;p&gt;
@@ -1035,7 +1435,7 @@ $$
 &lt;li&gt;物理现象： 烟囱的地电位（比如 5V）和机柜的地电位（0V）之间有&lt;strong&gt;电势差&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;后果：&lt;/strong&gt; 你的信号线屏蔽层，现在变成了一根&lt;strong&gt;导线&lt;/strong&gt;，连接了两个巨大的电源。强大的&lt;strong&gt;环路电流&lt;/strong&gt;（可能高达几安培！）开始在你的屏蔽层里疯狂流动。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;这就叫“地环路”。你的“法拉第笼”现在不仅不防干扰，反而自己变成了一个&lt;strong&gt;发热的、带强电流的电磁铁&lt;/strong&gt;。这股电流通过互感（Transformer Effect），直接把巨大的 50Hz 嗡嗡声感应到里面的芯线上。&lt;/p&gt;
+&lt;p&gt;这就叫“地环路”。你的“法拉第笼”现在不仅不防干扰，反而自己变成了一个&lt;strong&gt;发热的、带强电流的电磁铁&lt;/strong&gt;。这股电流通过互感，直接把巨大的 50Hz 嗡嗡声感应到里面的芯线上。&lt;/p&gt;
 &lt;p&gt;体现到数据上： 你的 CEMS 读数会在屏幕上剧烈跳动，或者叠加一个巨大的波浪线。&lt;/p&gt;
 &lt;h3 id=&#34;解决方案单点接地-single-point-grounding&#34;&gt;解决方案：单点接地 (Single-Point Grounding)
 &lt;/h3&gt;&lt;p&gt;如何在硬件安装上解决这个问题？答案是：&lt;strong&gt;物理隔断&lt;/strong&gt;。&lt;/p&gt;
