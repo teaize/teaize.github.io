@@ -8,6 +8,329 @@
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
         <lastBuildDate>Fri, 12 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>P&amp;ID 设计</title>
+        <link>https://teaize.github.io/p/pid-%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pid-%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;p&gt;P&amp;amp;ID (Piping and Instrumentation Diagram，管道及仪表流程图) 是 CEMS 系统设计的“宪法”。一旦这张图定稿，采购清单（BOM）、电气接线图、PLC 程序逻辑也就基本定死了。&lt;/p&gt;
+&lt;p&gt;接下来从“水、尘、压、标”四个维度解析 P&amp;amp;ID 设计的实战经验&lt;/p&gt;
+&lt;h3 id=&#34;一-水的处理逻辑防守反击&#34;&gt;一、 “水”的处理逻辑：防守反击
+&lt;/h3&gt;&lt;p&gt;CEMS 的头号敌人就是液态水。只要进水，分析仪必挂。在 P&amp;amp;ID 上，你必须构建三道防线。&lt;/p&gt;
+&lt;h4 id=&#34;1-第一道防线伴热管线-heated-line&#34;&gt;1. 第一道防线：伴热管线 (Heated Line)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;P&amp;amp;ID 画法： 在从探头到机柜的管线上，必须画上伴热符号（通常是虚线包裹或者标注 &lt;code&gt;H&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;经验： 必须在图纸上标注温度设定点（如 120°C 或 180°C）。
+&lt;ul&gt;
+&lt;li&gt;陷阱： 很多图纸画进机柜就断了。错！ 伴热管线必须一直画到制冷器（冷凝器）的入口接头处。中间不能裸露任何一段 PTFE 管，否则就是“冷点”，必结露。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-第二道防线制冷器与排水-cooler--drain&#34;&gt;2. 第二道防线：制冷器与排水 (Cooler &amp;amp; Drain)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;P&amp;amp;ID 画法： 制冷器下方必须画出蠕动泵 (Peristaltic Pump)。&lt;/li&gt;
+&lt;li&gt;经验：
+&lt;ul&gt;
+&lt;li&gt;位置： &lt;strong&gt;采样泵（抽气泵）必须画在制冷器之后&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;原理： 泵前是负压，泵后是正压。如果在泵后冷凝，水会被压出，但泵本身会吸入湿热气体，皮膜容易坏。&lt;strong&gt;让泵抽干气，寿命长&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;排水回路： 蠕动泵出口绝不能直接通大气！图纸上必须画一个“水封” (Water Seal) 或者接废液桶。否则空气会倒吸进去，导致测量氧气偏高（假数据）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-第三道防线湿度报警-moisture-alarm&#34;&gt;3. 第三道防线：湿度报警 (Moisture Alarm)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;P&amp;amp;ID 画法： 在制冷器出口和过滤器之间，必须画一个湿度传感器或 阻水过滤器。&lt;/li&gt;
+&lt;li&gt;逻辑： 这是一个联锁点 (Interlock)。
+&lt;ul&gt;
+&lt;li&gt;图纸上要注明：&lt;code&gt;If MT = High, Then Stop Pump&lt;/code&gt;（如果湿度高，立即停泵）。这是保护分析仪的最后一道闸门。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-尘的处理逻辑级联过滤&#34;&gt;二、 “尘”的处理逻辑：级联过滤
+&lt;/h3&gt;&lt;p&gt;不要指望探头上的那个陶瓷滤芯能挡住所有灰尘。P&amp;amp;ID 上必须体现“由粗到细”的过滤思想。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;一级过滤（探头端）： 图上标注精度（如 $20\mu m$）。&lt;/li&gt;
+&lt;li&gt;二级过滤（泵前保护）： 在制冷器和采样泵之间，画一个通用过滤器（如 $5\mu m$）。
+&lt;ul&gt;
+&lt;li&gt;目的：保护采样泵的阀片不被颗粒物卡住。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;三级过滤（表前精滤）： 在分析仪入口前，画一个&lt;strong&gt;精密过滤器&lt;/strong&gt;（如 $0.5\mu m$ 或 $0.1\mu m$）。
+&lt;ul&gt;
+&lt;li&gt;经验：这里的过滤器材质必须注明 PVDF 或 玻璃纤维，不能用普通纸滤芯（吸附 $\text{SO}2$）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;三-压的处理逻辑测点布局&#34;&gt;三、 “压”的处理逻辑：测点布局
+&lt;/h3&gt;&lt;p&gt;很多新手画 P&amp;amp;ID 忘了画压力表，导致现场故障根本没法查。你必须在图上埋下“诊断点”**。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;探头反吹压力表：
+&lt;ul&gt;
+&lt;li&gt;画在反吹储气罐上。&lt;/li&gt;
+&lt;li&gt;作用： 没气了能不能报警？反吹压力够不够？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;采样真空表：
+&lt;ul&gt;
+&lt;li&gt;黄金位置： 画在&lt;strong&gt;采样泵的入口处&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;诊断逻辑：
+&lt;ul&gt;
+&lt;li&gt;平时读数 -20 kPa。&lt;/li&gt;
+&lt;li&gt;突然变成 -60 kPa $\rightarrow$ 说明前端（探头/管线）堵了。&lt;/li&gt;
+&lt;li&gt;突然变成 -5 kPa $\rightarrow$ 说明前端漏气或者泵皮膜破了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;经验： 最好上带远传功能的压力变送器，这样中控室能看到趋势。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;分析仪背压表：
+&lt;ul&gt;
+&lt;li&gt;如果后面接了复杂的排气管，最好在分析仪出口画个微压表。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;四-标的处理逻辑合法性注入&#34;&gt;四、 “标”的处理逻辑：合法性注入
+&lt;/h3&gt;&lt;p&gt;标气从哪里注进去，决定了你这套系统合不合规。P&amp;amp;ID 上必须明确画出“系统校准”的路径。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;错误画法（直接校准）： 标气直接接在分析仪屁股后面。
+&lt;ul&gt;
+&lt;li&gt;后果：只能证明分析仪是好的，不能证明采样管线没漏气/没吸附。环保局不认。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;正确画法（全程校准）：
+&lt;ul&gt;
+&lt;li&gt;标气管路必须一路画到探头 (Probe) 处。&lt;/li&gt;
+&lt;li&gt;通过探头内部的切换阀，让标气走一遍全流程（伴热管 $\to$ 冷凝器 $\to$ 泵 $\to$ 分析仪）。&lt;/li&gt;
+&lt;li&gt;图纸细节： 注明标气管路也是 $\Phi 6$ PTFE 材质，防止吸附。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;五-mermaid-实战一张标准的完全抽取法-pid&#34;&gt;五、 Mermaid 实战：一张标准的完全抽取法 P&amp;amp;ID
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 定义样式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef liquid stroke:#1E90FF,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef gas stroke:#2E8B57,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef electrical stroke:#FFA500,stroke-dasharray: 5 5;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef key_component fill:#fff,stroke:#d00,stroke-width:3px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 1. 探头与伴热区 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    STACK(烟囱) --&amp;gt; PROBE[采样探头]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PROBE --&amp;gt; |&amp;#34;伴热管线 (180°C)&amp;#34;| COOLER_IN((制冷器入口))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 校准气路 (全程校准)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CAL_GAS[标气瓶] --&amp;gt; |&amp;#34;校准管 (去探头)&amp;#34;| PROBE
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 2. 除水区 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    COOLER_IN --&amp;gt; COOLER[双级电子冷凝器]:::key_component
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 排水回路 (关键)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    COOLER -.-&amp;gt; |冷凝水| PERI_PUMP(蠕动泵)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PERI_PUMP -.-&amp;gt; |废液| DRAIN[废液桶/水封]:::liquid
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 3. 预处理与保护区 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    COOLER --&amp;gt; MT[湿度报警器/阻水器]:::key_component
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MT --&amp;gt; FILTER2[二级过滤器 5μm]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 湿度联锁逻辑 (虚线)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MT -.- |&amp;#34;Interlock: 停泵&amp;#34;| PUMP_CTRL((控制逻辑)):::electrical
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 4. 动力区 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FILTER2 --&amp;gt; PUMP[采样泵]:::key_component
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PUMP_CTRL -.- PUMP
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 泵后加旁路 (调节流量/压力)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PUMP --&amp;gt; T_BYPASS((三通))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    T_BYPASS --&amp;gt; |&amp;#34;旁路泄压 (针阀)&amp;#34;| VENT1[排空]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 5. 分析区 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    T_BYPASS --&amp;gt; FILTER3[三级精滤 0.5μm]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FILTER3 --&amp;gt; FLOW_METER[转子流量计]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FLOW_METER --&amp;gt; ANALYZER[气体分析仪 SO2/NOx/O2]:::key_component
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 6. 排放区 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ANALYZER --&amp;gt; EXHAUST[大气平衡排气口]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 样式应用
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class STACK,PROBE,CAL_GAS,COOLER,MT,FILTER2,PUMP,FILTER3,FLOW_METER,ANALYZER,EXHAUST gas
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;设计中的潜规则&#34;&gt;设计中的“潜规则”
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;管径标注 (Line Sizing)：
+&lt;ul&gt;
+&lt;li&gt;P&amp;amp;ID 上的每一条线旁边都要标代码。例如 &lt;code&gt;G-01-6mm-PTFE&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;潜规则： 采样主路一般用 $\Phi 6$ 或 $\Phi 8$。但&lt;strong&gt;冷凝器的排水管&lt;/strong&gt;建议用粗一点的软管（如 $\Phi 3$ ID 的 Viton 管），防止水垢堵塞。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;失效安全位置&lt;/strong&gt; (Fail-Safe Position)：
+&lt;ul&gt;
+&lt;li&gt;所有的气动阀/电磁阀旁边要画上 &lt;code&gt;FC&lt;/code&gt; (Fail Closed) 或 &lt;code&gt;FO&lt;/code&gt; (Fail Open)。&lt;/li&gt;
+&lt;li&gt;反吹阀必须是 &lt;code&gt;FC&lt;/code&gt;（断电关闭）。防止断电时压缩空气把探头吹爆。&lt;/li&gt;
+&lt;li&gt;采样阀通常也是 &lt;code&gt;FC&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;材料代码 (Material Code)：
+&lt;ul&gt;
+&lt;li&gt;在图纸右下角的 Note 里必须写明：All wetted parts must be SS316L or PTFE/PFA.(所有接触气体的部件必须是 316L 不锈钢或特氟龙)。这是防止腐蚀的底线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>蠕动泵</title>
+        <link>https://teaize.github.io/p/%E8%A0%95%E5%8A%A8%E6%B3%B5/</link>
+        <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%A0%95%E5%8A%A8%E6%B3%B5/</guid>
+        <description>&lt;p&gt;![[Pasted image 20251212203407.png]]&lt;/p&gt;
+&lt;h2 id=&#34;蠕动泵与密封&#34;&gt;蠕动泵与密封
+&lt;/h2&gt;&lt;p&gt;烟气冷凝后，通过蠕动泵排水。按常理说，既然要排水，肯定要有个“口子”。既然有口子，那样气（比如 SO2、NO）不就顺着水一起跑 (泄露) 了吗？或者如果管路是负压，外面的空气不就倒吸进来了吗？&lt;/p&gt;
+&lt;p&gt;答案在于蠕动泵独特的“机械闭合”原理。简单来说：&lt;strong&gt;蠕动泵不仅是一个“泵”，它天然还是一个“截止阀”。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;核心原理时刻被掐死的管子&#34;&gt;核心原理：时刻被“掐死”的管子
+&lt;/h3&gt;&lt;p&gt;蠕动泵的工作方式，并不是像离心泵那样“敞开”甩水的，而是像你用手指捏住一根吸管往下滑。&lt;/p&gt;
+&lt;h4 id=&#34;1-结构解剖&#34;&gt;1. 结构解剖
+&lt;/h4&gt;&lt;p&gt;蠕动泵头里通常有 2 个或 3 个滚轮，以及一根弹性极好的软管（泵管）。&lt;/p&gt;
+&lt;h4 id=&#34;2-运动过程&#34;&gt;2. 运动过程
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;状态 A： 滚轮滚过泵管，将管壁完全压扁（压死），直到两层管壁紧紧贴合。&lt;/li&gt;
+&lt;li&gt;状态 B： 只要设计合格，在任何时刻，至少有一个滚轮是将管子彻底压死的。&lt;/li&gt;
+&lt;li&gt;结果： 这个被“压死”的点，就是一个物理密封点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这就是秘密所在： 管子虽然是通的，但因为时刻都被滚轮“掐住”了，气体根本没有“直通”的路径跑出去，外面的空气也进不来。&lt;/p&gt;
+&lt;p&gt;在防止气体泄露的同时，还能排除系统中的水，&lt;strong&gt;简直是优雅 (Elegant)&lt;/strong&gt;。本质上来说，是&lt;strong&gt;通过移动的闭合点，实现物质的定向输送与隔离&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;蠕动泵与波动&#34;&gt;蠕动泵与波动
+&lt;/h2&gt;</description>
+        </item>
+        <item>
+        <title>设计文档</title>
+        <link>https://teaize.github.io/p/%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/</link>
+        <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%AE%BE%E8%AE%A1%E6%96%87%E6%A1%A3/</guid>
+        <description>&lt;p&gt;对于一台复杂的精密仪器（特别是 CEMS 这种涉及光、机、电、算、化系统的设备），在动工前，必须集齐以下四大设计文档。&lt;/p&gt;
+&lt;h3 id=&#34;第一张图pid-图-仪器的血脉&#34;&gt;第一张图：P&amp;amp;ID 图—— 仪器的“血脉”
+&lt;/h3&gt;&lt;p&gt;在动手买任何一个阀门之前，必须先有这张图。这是机械/流体设计的宪法。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它是什么：它不是简单的管路连接图，它包含了所有流体部件的逻辑符号。它定义了气体怎么走、哪里测压、哪里调节、哪里放空。&lt;/li&gt;
+&lt;li&gt;它决定了什么：
+&lt;ul&gt;
+&lt;li&gt;控制逻辑：看到图上的球阀符号，软工就知道这需要一个 DO（开关量输出）信号。看到压力变送器，就知道需要一个 AI（模拟量输入）接口。&lt;/li&gt;
+&lt;li&gt;安全逻辑：哪里必须加单向阀防止倒灌？哪里必须加安全阀防止憋压？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;你的盲区可能在于：很多新手只画“管子怎么连”，却不画“测点在哪里”和“&lt;strong&gt;控制点在哪里&lt;/strong&gt;”。
+&lt;ul&gt;
+&lt;li&gt;比如： 你想做闭环控制稀释比，那你的 P&amp;amp;ID 上必须在临界孔前画一个压力传感器符号。如果不画，电路板设计时就不会留这个接口，最后软件就没法写闭环算法。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第二张图硬件互连图--仪器的骨骼&#34;&gt;第二张图：硬件互连图 —— 仪器的“骨骼”
+&lt;/h3&gt;&lt;p&gt;你之前问了电源板、驱动板、主板……这张图就是用来规划这些板子之间怎么连线的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它是什么：&lt;strong&gt;它不关心电路板内部怎么画（那是原理图 Schematic 的事），它只关心板子与板子、板子与部件之间的线束定义&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;它决定了什么：
+&lt;ul&gt;
+&lt;li&gt;供电拓扑：24V 是从电源板直接给风扇，还是先经过主板再给风扇？（决定了电流负载和走线粗细）。&lt;/li&gt;
+&lt;li&gt;信号流向：PMT 的信号是先去前放板，再去主板？还是直接去 IO 板？&lt;/li&gt;
+&lt;li&gt;接口定义：主板上需要留几个插座？是 10 Pin 的还是 20 Pin 的？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;你的盲区可能在于：“地线规划”。在这张图上，必须明确画出：哪根是信号地（AGND），哪根是电源地（PGND），它们在哪里汇合（单点接地）。如果这张图没画好，后期干扰问题会让你崩溃。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三张图io-列表--软硬件的字典&#34;&gt;第三张图：I/O 列表 —— 软硬件的“字典”
+&lt;/h3&gt;&lt;p&gt;这是连接“硬件工程师”和“软件工程师”的唯一桥梁。也是你画状态机图的前提。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它是什么：一个巨大的 Excel 表格。每一行代表仪器的一个“手”或“眼”。&lt;/li&gt;
+&lt;li&gt;内容包含：
+&lt;ul&gt;
+&lt;li&gt;位号 (Tag Name)：如 &lt;code&gt;V1_Sample_Valve&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;物理接口：如 &lt;code&gt;IO_Board_J3_Pin5&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;信号类型：DO (继电器输出), DI (光耦输入), AI (4-20mA), AO。&lt;/li&gt;
+&lt;li&gt;逻辑定义：高电平是开还是关？（常开还是常闭）。&lt;/li&gt;
+&lt;li&gt;供电要求：这个阀门是 24V 还是 12V？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;为什么必须最先做：如果不先列出这张表，硬件工程师不知道选多大的 CPU（管脚够不够用），软件工程师不知道变量怎么定义。它是软硬件分工的契约。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第四张图时序图--仪器的剧本&#34;&gt;第四张图：时序图 —— 仪器的“剧本”
+&lt;/h3&gt;&lt;p&gt;状态机图是宏观逻辑，时序图是微观动作。这是解决你之前担心的“两位三通阀乱套”问题的关键。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它是什么：横轴是时间，纵轴是各个部件（泵、阀、灯、加热器）的状态。&lt;/li&gt;
+&lt;li&gt;它解决了什么细节：
+&lt;ul&gt;
+&lt;li&gt;比如切校准时：是先关采样阀，还是先开标气阀？&lt;/li&gt;
+&lt;li&gt;如果先关采样阀，中间有 0.1 秒 两个阀都关了，泵会不会憋死？&lt;/li&gt;
+&lt;li&gt;如果先开标气阀，中间有 0.1 秒 两个阀都开了，标气会不会倒灌进采样管？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;你的盲区可能在于：“死区时间 (Dead Time)”的设计。所有的动作都不可能瞬间完成，必须在时序图上预留出 500ms 或 1s 的缓冲期。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;如果你现在要重新设计一台 CEMS 分析仪，正确的顺序应该是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先画 P&amp;amp;ID (气路逻辑)： 搞定物理原理。确定要几个阀、几个泵、几个传感器。（这是根本）&lt;/li&gt;
+&lt;li&gt;列 I/O List (资源统计)： 数一数上一共有多少个控制点和采集点。（这是量化）&lt;/li&gt;
+&lt;li&gt;画 硬件互连图 (电气架构)： 决定用几块板子，怎么给这些 I/O 供电和通讯。（这是骨架）&lt;/li&gt;
+&lt;li&gt;画 状态机 &amp;amp; 时序图 (软件逻辑)： 决定这些 I/O 按照什么顺序动。（这是灵魂）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你之前的提问顺序（先问电路板、再问气路、最后问状态机），其实是“自下而上”的学习过程，这完全正常。但现在你要开始“设计”了，就必须“自上而下”，先有这四份顶层设计文档，再去画具体的电路图或写代码。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>稀释法CEMS</title>
         <link>https://teaize.github.io/p/%E7%A8%80%E9%87%8A%E6%B3%95cems/</link>
         <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
@@ -405,6 +728,15 @@
 &lt;li&gt;工程师只需要负责画图和写底层驱动。&lt;/li&gt;
 &lt;/ol&gt;
 </description>
+        </item>
+        <item>
+        <title>信号处理</title>
+        <link>https://teaize.github.io/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/</link>
+        <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/</guid>
+        <description>&lt;h3 id=&#34;曲线是如何变直的-线性化处理&#34;&gt;曲线是如何“变直”的？—— 线性化处理
+&lt;/h3&gt;</description>
         </item>
         <item>
         <title>ADC电压信号</title>
