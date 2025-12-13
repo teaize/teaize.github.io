@@ -1,0 +1,868 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Python 代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 import pandas as pd import numpy as np import matplotlib.pyplot as plt from scipy.fft import fft, fftfreq from scipy.signal import find_peaks # ========================================== # 【配置区域】请修改这里的信息 # ========================================== # 1. 文件路径 (注意：Windows路径请用反斜杠 / 或 双斜杠 \\\\) FILE_PATH = &#39;sensor_data.csv&#39; # 举例: &#39;D:/data/test_01.xlsx&#39; # 2. 你要分析的那一列的表头名称 (Excel第一行的名字) COLUMN_NAME = &#39;Voltage&#39; # 举例: &#39;NOx_ppm&#39; 或 &#39;AI_01&#39; # 3. 采样率 (Hz): 每秒采集多少个点？ # 警告：这个数字错了，分析出来的频率全都是错的！ FS = 1000.0 # 举例: 100Hz, 1000Hz # ========================================== # 代码逻辑开始 # ========================================== # 设置绘图风格和字体 plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;] plt.rcParams[&#39;axes.unicode_minus&#39;] = False plt.style.use(&#39;bmh&#39;) # 使用一种比较专业的科研绘图风格 def load_and_analyze(): # --- 1. 读取数据 --- try: print(f&#34;正在读取文件: {FILE_PATH} ...&#34;) if FILE_PATH.endswith(&#39;.csv&#39;): df = pd.read_csv(FILE_PATH) elif FILE_PATH.endswith((&#39;.xls&#39;, &#39;.xlsx&#39;)): df = pd.read_excel(FILE_PATH) else: print(&#34;错误：只支持 .csv 或 .xlsx 格式文件&#34;) return # 检查列名是否存在 if COLUMN_NAME not in df.columns: print(f&#34;错误：在文件中找不到列名 &#39;{COLUMN_NAME}&#39;&#34;) print(f&#34;文件包含的列名有: {list(df.columns)}&#34;) return # 提取数据并转为 numpy 数组 # dropna() 是为了防止空值报错 data_raw = df[COLUMN_NAME].dropna().values print(f&#34;成功读取 {len(data_raw)} 个数据点&#34;) except FileNotFoundError: print(&#34;------------------------------------------------------&#34;) print(f&#34;【没找到文件】: {FILE_PATH}&#34;) print(&#34;为了演示效果，我将自动生成一段带 50Hz 干扰的模拟数据...&#34;) print(&#34;------------------------------------------------------&#34;) # 生成模拟数据 (如果没找到文件) N_sim = 2000 t_sim = np.linspace(0, N_sim/FS, N_sim) # 真实信号(2Hz) + 工频干扰(50Hz) + 随机噪声 data_raw = 2.0 + 0.5*np.sin(2*np.pi*2*t_sim) + 0.2*np.sin(2*np.pi*50*t_sim) + np.random.normal(0, 0.1, N_sim) # --- 2. 预处理 (去直流/去偏移) --- # FFT 对直流分量(0Hz)非常敏感，如果不减去平均值，0Hz的柱子会通天高， # 导致你看不清后面的干扰。 data_detrend = data_raw - np.mean(data_raw) # --- 3. 执行 FFT --- N = len(data_detrend) yf = fft(data_detrend) xf = fftfreq(N, 1 / FS) # 取前半部分 (正频率) x_plot = xf[:N//2] y_plot = np.abs(yf[:N//2]) * 2 / N # --- 4. 自动抓鬼 (寻找峰值) --- # 寻找频谱中显著的尖峰 (高度超过最大值的 10%) peaks, _ = find_peaks(y_plot, height=np.max(y_plot)*0.1) print(&#34;\\n【诊断报告】&#34;) print(&#34;-&#34; * 30) print(&#34;发现潜在干扰源 (能量Top 5):&#34;) # 对峰值按高度排序 peak_indices = peaks[np.argsort(y_plot[peaks])[::-1]][:5] for i in peak_indices: freq_val = x_plot[i] amp_val = y_plot[i] # 忽略接近 0Hz 的低频 (那是信号本身) if freq_val &gt; 1.0: print(f&#34;-&gt; 频率: {freq_val:.1f} Hz (强度: {amp_val:.4f})&#34;) if 48 &lt; freq_val &lt; 52: print(&#34; [警报] 疑似工频干扰 (电源/接地问题)&#34;) elif 98 &lt; freq_val &lt; 102: print(&#34; [警报] 疑似整流纹波 (电源板滤波电容问题)&#34;) # --- 5. 绘图 --- fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10)) # 图1: 时域 (原始波形) # 为了防止数据量太大卡死，只画前 1000 个点预览 preview_N = min(1000, N) time_axis = np.arange(preview_N) / FS ax1.plot(time_axis, data_raw[:preview_N], &#39;k-&#39;, linewidth=1) ax1.set_title(f&#34;原始信号波形 (仅显示前 {preview_N} 点)&#34;, fontsize=14) ax1.set_xlabel(&#34;时间 (s)&#34;) ax1.set_ylabel(&#34;幅值&#34;) # 图2: 频域 (FFT 结果) ax2.plot(x_plot, y_plot, &#39;r-&#39;, linewidth=1) # 标记出找到的干扰峰 ax2.plot(x_plot[peaks], y_plot[peaks], &#39;bx&#39;, label=&#39;检测到的峰值&#39;) ax2.set_title(&#34;频谱分析 (FFT Spectrum) - 干扰侦查&#34;, fontsize=14) ax2.set_xlabel(&#34;频率 (Hz)&#34;) ax2.set_ylabel(&#34;干扰强度&#34;) ax2.set_xlim(0, FS/2) # 只显示到奈奎斯特频率 ax2.legend() plt.tight_layout() plt.show() if __name__ == &#34;__main__&#34;: load_and_analyze() 这段代码做了三件贴心的事：\n">
+<title>Python脚本-本地CSV快速傅里叶变换</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/python%E8%84%9A%E6%9C%AC-%E6%9C%AC%E5%9C%B0csv%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Python脚本-本地CSV快速傅里叶变换">
+<meta property='og:description' content="Python 代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 import pandas as pd import numpy as np import matplotlib.pyplot as plt from scipy.fft import fft, fftfreq from scipy.signal import find_peaks # ========================================== # 【配置区域】请修改这里的信息 # ========================================== # 1. 文件路径 (注意：Windows路径请用反斜杠 / 或 双斜杠 \\\\) FILE_PATH = &#39;sensor_data.csv&#39; # 举例: &#39;D:/data/test_01.xlsx&#39; # 2. 你要分析的那一列的表头名称 (Excel第一行的名字) COLUMN_NAME = &#39;Voltage&#39; # 举例: &#39;NOx_ppm&#39; 或 &#39;AI_01&#39; # 3. 采样率 (Hz): 每秒采集多少个点？ # 警告：这个数字错了，分析出来的频率全都是错的！ FS = 1000.0 # 举例: 100Hz, 1000Hz # ========================================== # 代码逻辑开始 # ========================================== # 设置绘图风格和字体 plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;] plt.rcParams[&#39;axes.unicode_minus&#39;] = False plt.style.use(&#39;bmh&#39;) # 使用一种比较专业的科研绘图风格 def load_and_analyze(): # --- 1. 读取数据 --- try: print(f&#34;正在读取文件: {FILE_PATH} ...&#34;) if FILE_PATH.endswith(&#39;.csv&#39;): df = pd.read_csv(FILE_PATH) elif FILE_PATH.endswith((&#39;.xls&#39;, &#39;.xlsx&#39;)): df = pd.read_excel(FILE_PATH) else: print(&#34;错误：只支持 .csv 或 .xlsx 格式文件&#34;) return # 检查列名是否存在 if COLUMN_NAME not in df.columns: print(f&#34;错误：在文件中找不到列名 &#39;{COLUMN_NAME}&#39;&#34;) print(f&#34;文件包含的列名有: {list(df.columns)}&#34;) return # 提取数据并转为 numpy 数组 # dropna() 是为了防止空值报错 data_raw = df[COLUMN_NAME].dropna().values print(f&#34;成功读取 {len(data_raw)} 个数据点&#34;) except FileNotFoundError: print(&#34;------------------------------------------------------&#34;) print(f&#34;【没找到文件】: {FILE_PATH}&#34;) print(&#34;为了演示效果，我将自动生成一段带 50Hz 干扰的模拟数据...&#34;) print(&#34;------------------------------------------------------&#34;) # 生成模拟数据 (如果没找到文件) N_sim = 2000 t_sim = np.linspace(0, N_sim/FS, N_sim) # 真实信号(2Hz) + 工频干扰(50Hz) + 随机噪声 data_raw = 2.0 + 0.5*np.sin(2*np.pi*2*t_sim) + 0.2*np.sin(2*np.pi*50*t_sim) + np.random.normal(0, 0.1, N_sim) # --- 2. 预处理 (去直流/去偏移) --- # FFT 对直流分量(0Hz)非常敏感，如果不减去平均值，0Hz的柱子会通天高， # 导致你看不清后面的干扰。 data_detrend = data_raw - np.mean(data_raw) # --- 3. 执行 FFT --- N = len(data_detrend) yf = fft(data_detrend) xf = fftfreq(N, 1 / FS) # 取前半部分 (正频率) x_plot = xf[:N//2] y_plot = np.abs(yf[:N//2]) * 2 / N # --- 4. 自动抓鬼 (寻找峰值) --- # 寻找频谱中显著的尖峰 (高度超过最大值的 10%) peaks, _ = find_peaks(y_plot, height=np.max(y_plot)*0.1) print(&#34;\\n【诊断报告】&#34;) print(&#34;-&#34; * 30) print(&#34;发现潜在干扰源 (能量Top 5):&#34;) # 对峰值按高度排序 peak_indices = peaks[np.argsort(y_plot[peaks])[::-1]][:5] for i in peak_indices: freq_val = x_plot[i] amp_val = y_plot[i] # 忽略接近 0Hz 的低频 (那是信号本身) if freq_val &gt; 1.0: print(f&#34;-&gt; 频率: {freq_val:.1f} Hz (强度: {amp_val:.4f})&#34;) if 48 &lt; freq_val &lt; 52: print(&#34; [警报] 疑似工频干扰 (电源/接地问题)&#34;) elif 98 &lt; freq_val &lt; 102: print(&#34; [警报] 疑似整流纹波 (电源板滤波电容问题)&#34;) # --- 5. 绘图 --- fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10)) # 图1: 时域 (原始波形) # 为了防止数据量太大卡死，只画前 1000 个点预览 preview_N = min(1000, N) time_axis = np.arange(preview_N) / FS ax1.plot(time_axis, data_raw[:preview_N], &#39;k-&#39;, linewidth=1) ax1.set_title(f&#34;原始信号波形 (仅显示前 {preview_N} 点)&#34;, fontsize=14) ax1.set_xlabel(&#34;时间 (s)&#34;) ax1.set_ylabel(&#34;幅值&#34;) # 图2: 频域 (FFT 结果) ax2.plot(x_plot, y_plot, &#39;r-&#39;, linewidth=1) # 标记出找到的干扰峰 ax2.plot(x_plot[peaks], y_plot[peaks], &#39;bx&#39;, label=&#39;检测到的峰值&#39;) ax2.set_title(&#34;频谱分析 (FFT Spectrum) - 干扰侦查&#34;, fontsize=14) ax2.set_xlabel(&#34;频率 (Hz)&#34;) ax2.set_ylabel(&#34;干扰强度&#34;) ax2.set_xlim(0, FS/2) # 只显示到奈奎斯特频率 ax2.legend() plt.tight_layout() plt.show() if __name__ == &#34;__main__&#34;: load_and_analyze() 这段代码做了三件贴心的事：\n">
+<meta property='og:url' content='https://teaize.github.io/p/python%E8%84%9A%E6%9C%AC-%E6%9C%AC%E5%9C%B0csv%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Python脚本-本地CSV快速傅里叶变换">
+<meta name="twitter:description" content="Python 代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 42 43 44 45 46 47 48 49 50 51 52 53 54 55 56 57 58 59 60 61 62 63 64 65 66 67 68 69 70 71 72 73 74 75 76 77 78 79 80 81 82 83 84 85 86 87 88 89 90 91 92 93 94 95 96 97 98 99 100 101 102 103 104 105 106 107 108 109 110 111 112 113 114 115 116 117 118 119 120 121 122 123 124 125 import pandas as pd import numpy as np import matplotlib.pyplot as plt from scipy.fft import fft, fftfreq from scipy.signal import find_peaks # ========================================== # 【配置区域】请修改这里的信息 # ========================================== # 1. 文件路径 (注意：Windows路径请用反斜杠 / 或 双斜杠 \\\\) FILE_PATH = &#39;sensor_data.csv&#39; # 举例: &#39;D:/data/test_01.xlsx&#39; # 2. 你要分析的那一列的表头名称 (Excel第一行的名字) COLUMN_NAME = &#39;Voltage&#39; # 举例: &#39;NOx_ppm&#39; 或 &#39;AI_01&#39; # 3. 采样率 (Hz): 每秒采集多少个点？ # 警告：这个数字错了，分析出来的频率全都是错的！ FS = 1000.0 # 举例: 100Hz, 1000Hz # ========================================== # 代码逻辑开始 # ========================================== # 设置绘图风格和字体 plt.rcParams[&#39;font.sans-serif&#39;] = [&#39;SimHei&#39;] plt.rcParams[&#39;axes.unicode_minus&#39;] = False plt.style.use(&#39;bmh&#39;) # 使用一种比较专业的科研绘图风格 def load_and_analyze(): # --- 1. 读取数据 --- try: print(f&#34;正在读取文件: {FILE_PATH} ...&#34;) if FILE_PATH.endswith(&#39;.csv&#39;): df = pd.read_csv(FILE_PATH) elif FILE_PATH.endswith((&#39;.xls&#39;, &#39;.xlsx&#39;)): df = pd.read_excel(FILE_PATH) else: print(&#34;错误：只支持 .csv 或 .xlsx 格式文件&#34;) return # 检查列名是否存在 if COLUMN_NAME not in df.columns: print(f&#34;错误：在文件中找不到列名 &#39;{COLUMN_NAME}&#39;&#34;) print(f&#34;文件包含的列名有: {list(df.columns)}&#34;) return # 提取数据并转为 numpy 数组 # dropna() 是为了防止空值报错 data_raw = df[COLUMN_NAME].dropna().values print(f&#34;成功读取 {len(data_raw)} 个数据点&#34;) except FileNotFoundError: print(&#34;------------------------------------------------------&#34;) print(f&#34;【没找到文件】: {FILE_PATH}&#34;) print(&#34;为了演示效果，我将自动生成一段带 50Hz 干扰的模拟数据...&#34;) print(&#34;------------------------------------------------------&#34;) # 生成模拟数据 (如果没找到文件) N_sim = 2000 t_sim = np.linspace(0, N_sim/FS, N_sim) # 真实信号(2Hz) + 工频干扰(50Hz) + 随机噪声 data_raw = 2.0 + 0.5*np.sin(2*np.pi*2*t_sim) + 0.2*np.sin(2*np.pi*50*t_sim) + np.random.normal(0, 0.1, N_sim) # --- 2. 预处理 (去直流/去偏移) --- # FFT 对直流分量(0Hz)非常敏感，如果不减去平均值，0Hz的柱子会通天高， # 导致你看不清后面的干扰。 data_detrend = data_raw - np.mean(data_raw) # --- 3. 执行 FFT --- N = len(data_detrend) yf = fft(data_detrend) xf = fftfreq(N, 1 / FS) # 取前半部分 (正频率) x_plot = xf[:N//2] y_plot = np.abs(yf[:N//2]) * 2 / N # --- 4. 自动抓鬼 (寻找峰值) --- # 寻找频谱中显著的尖峰 (高度超过最大值的 10%) peaks, _ = find_peaks(y_plot, height=np.max(y_plot)*0.1) print(&#34;\\n【诊断报告】&#34;) print(&#34;-&#34; * 30) print(&#34;发现潜在干扰源 (能量Top 5):&#34;) # 对峰值按高度排序 peak_indices = peaks[np.argsort(y_plot[peaks])[::-1]][:5] for i in peak_indices: freq_val = x_plot[i] amp_val = y_plot[i] # 忽略接近 0Hz 的低频 (那是信号本身) if freq_val &gt; 1.0: print(f&#34;-&gt; 频率: {freq_val:.1f} Hz (强度: {amp_val:.4f})&#34;) if 48 &lt; freq_val &lt; 52: print(&#34; [警报] 疑似工频干扰 (电源/接地问题)&#34;) elif 98 &lt; freq_val &lt; 102: print(&#34; [警报] 疑似整流纹波 (电源板滤波电容问题)&#34;) # --- 5. 绘图 --- fig, (ax1, ax2) = plt.subplots(2, 1, figsize=(12, 10)) # 图1: 时域 (原始波形) # 为了防止数据量太大卡死，只画前 1000 个点预览 preview_N = min(1000, N) time_axis = np.arange(preview_N) / FS ax1.plot(time_axis, data_raw[:preview_N], &#39;k-&#39;, linewidth=1) ax1.set_title(f&#34;原始信号波形 (仅显示前 {preview_N} 点)&#34;, fontsize=14) ax1.set_xlabel(&#34;时间 (s)&#34;) ax1.set_ylabel(&#34;幅值&#34;) # 图2: 频域 (FFT 结果) ax2.plot(x_plot, y_plot, &#39;r-&#39;, linewidth=1) # 标记出找到的干扰峰 ax2.plot(x_plot[peaks], y_plot[peaks], &#39;bx&#39;, label=&#39;检测到的峰值&#39;) ax2.set_title(&#34;频谱分析 (FFT Spectrum) - 干扰侦查&#34;, fontsize=14) ax2.set_xlabel(&#34;频率 (Hz)&#34;) ax2.set_ylabel(&#34;干扰强度&#34;) ax2.set_xlim(0, FS/2) # 只显示到奈奎斯特频率 ax2.legend() plt.tight_layout() plt.show() if __name__ == &#34;__main__&#34;: load_and_analyze() 这段代码做了三件贴心的事：\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#python-代码">Python 代码</a></li>
+        <li><a href="#你的准备工作">你的准备工作</a></li>
+        <li><a href="#程序输出">程序输出</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/python%E8%84%9A%E6%9C%AC-%E6%9C%AC%E5%9C%B0csv%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/">Python脚本-本地CSV快速傅里叶变换</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-13</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="python-代码">Python 代码
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.fft</span> <span class="kn">import</span> <span class="n">fft</span><span class="p">,</span> <span class="n">fftfreq</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">scipy.signal</span> <span class="kn">import</span> <span class="n">find_peaks</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ==========================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 【配置区域】请修改这里的信息</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ==========================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. 文件路径 (注意：Windows路径请用反斜杠 / 或 双斜杠 \\)</span>
+</span></span><span class="line"><span class="cl"><span class="n">FILE_PATH</span> <span class="o">=</span> <span class="s1">&#39;sensor_data.csv&#39;</span>  <span class="c1"># 举例: &#39;D:/data/test_01.xlsx&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. 你要分析的那一列的表头名称 (Excel第一行的名字)</span>
+</span></span><span class="line"><span class="cl"><span class="n">COLUMN_NAME</span> <span class="o">=</span> <span class="s1">&#39;Voltage&#39;</span>        <span class="c1"># 举例: &#39;NOx_ppm&#39; 或 &#39;AI_01&#39;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. 采样率 (Hz): 每秒采集多少个点？</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 警告：这个数字错了，分析出来的频率全都是错的！</span>
+</span></span><span class="line"><span class="cl"><span class="n">FS</span> <span class="o">=</span> <span class="mf">1000.0</span>                    <span class="c1"># 举例: 100Hz, 1000Hz</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># ==========================================</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 代码逻辑开始</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># ==========================================</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 设置绘图风格和字体</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;font.sans-serif&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;SimHei&#39;</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">rcParams</span><span class="p">[</span><span class="s1">&#39;axes.unicode_minus&#39;</span><span class="p">]</span> <span class="o">=</span> <span class="kc">False</span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">style</span><span class="o">.</span><span class="n">use</span><span class="p">(</span><span class="s1">&#39;bmh&#39;</span><span class="p">)</span> <span class="c1"># 使用一种比较专业的科研绘图风格</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">load_and_analyze</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- 1. 读取数据 ---</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;正在读取文件: </span><span class="si">{</span><span class="n">FILE_PATH</span><span class="si">}</span><span class="s2"> ...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">FILE_PATH</span><span class="o">.</span><span class="n">endswith</span><span class="p">(</span><span class="s1">&#39;.csv&#39;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">FILE_PATH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">elif</span> <span class="n">FILE_PATH</span><span class="o">.</span><span class="n">endswith</span><span class="p">((</span><span class="s1">&#39;.xls&#39;</span><span class="p">,</span> <span class="s1">&#39;.xlsx&#39;</span><span class="p">)):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_excel</span><span class="p">(</span><span class="n">FILE_PATH</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;错误：只支持 .csv 或 .xlsx 格式文件&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="c1"># 检查列名是否存在</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">COLUMN_NAME</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;错误：在文件中找不到列名 &#39;</span><span class="si">{</span><span class="n">COLUMN_NAME</span><span class="si">}</span><span class="s2">&#39;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;文件包含的列名有: </span><span class="si">{</span><span class="nb">list</span><span class="p">(</span><span class="n">df</span><span class="o">.</span><span class="n">columns</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">return</span>
+</span></span><span class="line"><span class="cl">            
+</span></span><span class="line"><span class="cl">        <span class="c1"># 提取数据并转为 numpy 数组</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># dropna() 是为了防止空值报错</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_raw</span> <span class="o">=</span> <span class="n">df</span><span class="p">[</span><span class="n">COLUMN_NAME</span><span class="p">]</span><span class="o">.</span><span class="n">dropna</span><span class="p">()</span><span class="o">.</span><span class="n">values</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;成功读取 </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">data_raw</span><span class="p">)</span><span class="si">}</span><span class="s2"> 个数据点&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">FileNotFoundError</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;------------------------------------------------------&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;【没找到文件】: </span><span class="si">{</span><span class="n">FILE_PATH</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;为了演示效果，我将自动生成一段带 50Hz 干扰的模拟数据...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;------------------------------------------------------&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 生成模拟数据 (如果没找到文件)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">N_sim</span> <span class="o">=</span> <span class="mi">2000</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t_sim</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">N_sim</span><span class="o">/</span><span class="n">FS</span><span class="p">,</span> <span class="n">N_sim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 真实信号(2Hz) + 工频干扰(50Hz) + 随机噪声</span>
+</span></span><span class="line"><span class="cl">        <span class="n">data_raw</span> <span class="o">=</span> <span class="mf">2.0</span> <span class="o">+</span> <span class="mf">0.5</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">2</span><span class="o">*</span><span class="n">t_sim</span><span class="p">)</span> <span class="o">+</span> <span class="mf">0.2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">sin</span><span class="p">(</span><span class="mi">2</span><span class="o">*</span><span class="n">np</span><span class="o">.</span><span class="n">pi</span><span class="o">*</span><span class="mi">50</span><span class="o">*</span><span class="n">t_sim</span><span class="p">)</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="n">N_sim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- 2. 预处理 (去直流/去偏移) ---</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># FFT 对直流分量(0Hz)非常敏感，如果不减去平均值，0Hz的柱子会通天高，</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 导致你看不清后面的干扰。</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_detrend</span> <span class="o">=</span> <span class="n">data_raw</span> <span class="o">-</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">data_raw</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- 3. 执行 FFT ---</span>
+</span></span><span class="line"><span class="cl">    <span class="n">N</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">data_detrend</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">yf</span> <span class="o">=</span> <span class="n">fft</span><span class="p">(</span><span class="n">data_detrend</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">xf</span> <span class="o">=</span> <span class="n">fftfreq</span><span class="p">(</span><span class="n">N</span><span class="p">,</span> <span class="mi">1</span> <span class="o">/</span> <span class="n">FS</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 取前半部分 (正频率)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x_plot</span> <span class="o">=</span> <span class="n">xf</span><span class="p">[:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y_plot</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">abs</span><span class="p">(</span><span class="n">yf</span><span class="p">[:</span><span class="n">N</span><span class="o">//</span><span class="mi">2</span><span class="p">])</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">/</span> <span class="n">N</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- 4. 自动抓鬼 (寻找峰值) ---</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 寻找频谱中显著的尖峰 (高度超过最大值的 10%)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">peaks</span><span class="p">,</span> <span class="n">_</span> <span class="o">=</span> <span class="n">find_peaks</span><span class="p">(</span><span class="n">y_plot</span><span class="p">,</span> <span class="n">height</span><span class="o">=</span><span class="n">np</span><span class="o">.</span><span class="n">max</span><span class="p">(</span><span class="n">y_plot</span><span class="p">)</span><span class="o">*</span><span class="mf">0.1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;</span><span class="se">\n</span><span class="s2">【诊断报告】&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;-&#34;</span> <span class="o">*</span> <span class="mi">30</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;发现潜在干扰源 (能量Top 5):&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 对峰值按高度排序</span>
+</span></span><span class="line"><span class="cl">    <span class="n">peak_indices</span> <span class="o">=</span> <span class="n">peaks</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">argsort</span><span class="p">(</span><span class="n">y_plot</span><span class="p">[</span><span class="n">peaks</span><span class="p">])[::</span><span class="o">-</span><span class="mi">1</span><span class="p">]][:</span><span class="mi">5</span><span class="p">]</span> 
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="n">peak_indices</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">freq_val</span> <span class="o">=</span> <span class="n">x_plot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="n">amp_val</span> <span class="o">=</span> <span class="n">y_plot</span><span class="p">[</span><span class="n">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># 忽略接近 0Hz 的低频 (那是信号本身)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">freq_val</span> <span class="o">&gt;</span> <span class="mf">1.0</span><span class="p">:</span> 
+</span></span><span class="line"><span class="cl">            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;-&gt; 频率: </span><span class="si">{</span><span class="n">freq_val</span><span class="si">:</span><span class="s2">.1f</span><span class="si">}</span><span class="s2"> Hz  (强度: </span><span class="si">{</span><span class="n">amp_val</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="mi">48</span> <span class="o">&lt;</span> <span class="n">freq_val</span> <span class="o">&lt;</span> <span class="mi">52</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;   [警报] 疑似工频干扰 (电源/接地问题)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="k">elif</span> <span class="mi">98</span> <span class="o">&lt;</span> <span class="n">freq_val</span> <span class="o">&lt;</span> <span class="mi">102</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">                <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;   [警报] 疑似整流纹波 (电源板滤波电容问题)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># --- 5. 绘图 ---</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fig</span><span class="p">,</span> <span class="p">(</span><span class="n">ax1</span><span class="p">,</span> <span class="n">ax2</span><span class="p">)</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">12</span><span class="p">,</span> <span class="mi">10</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 图1: 时域 (原始波形)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 为了防止数据量太大卡死，只画前 1000 个点预览</span>
+</span></span><span class="line"><span class="cl">    <span class="n">preview_N</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time_axis</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">arange</span><span class="p">(</span><span class="n">preview_N</span><span class="p">)</span> <span class="o">/</span> <span class="n">FS</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax1</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">time_axis</span><span class="p">,</span> <span class="n">data_raw</span><span class="p">[:</span><span class="n">preview_N</span><span class="p">],</span> <span class="s1">&#39;k-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax1</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;原始信号波形 (仅显示前 </span><span class="si">{</span><span class="n">preview_N</span><span class="si">}</span><span class="s2"> 点)&#34;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax1</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&#34;时间 (s)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax1</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&#34;幅值&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1"># 图2: 频域 (FFT 结果)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">,</span> <span class="n">y_plot</span><span class="p">,</span> <span class="s1">&#39;r-&#39;</span><span class="p">,</span> <span class="n">linewidth</span><span class="o">=</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 标记出找到的干扰峰</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">x_plot</span><span class="p">[</span><span class="n">peaks</span><span class="p">],</span> <span class="n">y_plot</span><span class="p">[</span><span class="n">peaks</span><span class="p">],</span> <span class="s1">&#39;bx&#39;</span><span class="p">,</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;检测到的峰值&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s2">&#34;频谱分析 (FFT Spectrum) - 干扰侦查&#34;</span><span class="p">,</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">14</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s2">&#34;频率 (Hz)&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s2">&#34;干扰强度&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">FS</span><span class="o">/</span><span class="mi">2</span><span class="p">)</span> <span class="c1"># 只显示到奈奎斯特频率</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ax2</span><span class="o">.</span><span class="n">legend</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="vm">__name__</span> <span class="o">==</span> <span class="s2">&#34;__main__&#34;</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">load_and_analyze</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这段代码做了三件贴心的事：</p>
+<ol>
+<li>自动识别格式： 支持 <code>.csv</code> 和 <code>.xlsx</code> (Excel)。</li>
+<li>自动去直流 (Detrend)： 很多传感器数据有一个固定的电压底数（比如 2.5V），如果不去掉，0Hz 的能量会特别大，把干扰信号淹没。代码会自动把数据“拉平”到 0 基准线。</li>
+<li>自动抓鬼 (Peak Detection)： 不仅画图，还会自动打印出能量最大的前 3 个频率点（告诉你干扰到底是多少 Hz）。</li>
+</ol>
+<h3 id="你的准备工作">你的准备工作
+</h3><p>你需要知道三个信息：</p>
+<ol>
+<li>文件路径： 你的数据文件放在哪？(例如 <code>D:/data/sensor_log.csv</code>)</li>
+<li>列名： 哪一列是你要分析的数据？(例如 <code>voltage</code> 或 <code>concentration</code>)</li>
+<li><strong>采样率</strong> (Fs)： 当时是以什么速度采的？(例如 1 秒 1 个点就是 1Hz，1 秒 100 个点就是 100Hz)。这个必须准，否则算出来的频率是错的。</li>
+</ol>
+<h3 id="程序输出">程序输出
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">正在读取文件</span><span class="p">:</span> <span class="n">cems_fault_data</span><span class="o">.</span><span class="n">csv</span> <span class="o">...</span>
+</span></span><span class="line"><span class="cl"><span class="n">成功读取</span> <span class="mi">5000</span> <span class="n">个数据点</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">【</span><span class="n">诊断报告</span><span class="err">】</span>
+</span></span><span class="line"><span class="cl"><span class="o">------------------------------</span>
+</span></span><span class="line"><span class="cl"><span class="n">发现潜在干扰源</span> <span class="p">(</span><span class="n">能量Top</span> <span class="mi">5</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl"><span class="o">-&gt;</span> <span class="n">频率</span><span class="p">:</span> <span class="mf">2.0</span> <span class="n">Hz</span>  <span class="p">(</span><span class="n">强度</span><span class="p">:</span> <span class="mf">0.4991</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="o">-&gt;</span> <span class="n">频率</span><span class="p">:</span> <span class="mf">50.0</span> <span class="n">Hz</span>  <span class="p">(</span><span class="n">强度</span><span class="p">:</span> <span class="mf">0.1984</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">[</span><span class="n">警报</span><span class="p">]</span> <span class="n">疑似工频干扰</span> <span class="p">(</span><span class="n">电源</span><span class="o">/</span><span class="n">接地问题</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>![[Pasted image 20251213135552.png]]</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
