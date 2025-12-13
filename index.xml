@@ -308,7 +308,14 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;警报&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;疑似工频干扰&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;电源&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;接地问题&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;![[Pasted image 20251213135552.png]]&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213135552.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213135552.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -978,8 +985,15 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;输出结果&lt;/p&gt;
-&lt;p&gt;![[Pasted image 20251213100107.png]]&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;输出结果
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213100107.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213100107.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1622,7 +1636,14 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;![[Pasted image 20251213132615.png]]&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213132615.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213132615.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h3 id=&#34;运行结果解读&#34;&gt;运行结果解读
 &lt;/h3&gt;&lt;p&gt;当你运行这段代码，你会看到三张图，讲了一个完整的故事：&lt;/p&gt;
 &lt;ol&gt;
@@ -1846,7 +1867,14 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;![[Pasted image 20251213115959.png]]&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213115959.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213115959.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;p&gt;如果你运行这段代码，你会看到：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;黑色点（原始数据）： 上蹿下跳，根本没法看。&lt;/li&gt;
@@ -2153,7 +2181,14 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;![[Pasted image 20251213125537.png]]&lt;/p&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213125537.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213125537.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h4 id=&#34;观察仿真结果&#34;&gt;观察仿真结果
 &lt;/h4&gt;&lt;p&gt;运行代码后，你会看到极其鲜明的对比：&lt;/p&gt;
 &lt;ol&gt;
@@ -2498,7 +2533,14 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
         <pubDate>Fri, 12 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E8%A0%95%E5%8A%A8%E6%B3%B5/</guid>
-        <description>&lt;p&gt;![[Pasted image 20251212203407.png]]&lt;/p&gt;
+        <description>&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251212203407.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251212203407.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h2 id=&#34;蠕动泵与密封&#34;&gt;蠕动泵与密封
 &lt;/h2&gt;&lt;p&gt;烟气冷凝后，通过蠕动泵排水。按常理说，既然要排水，肯定要有个“口子”。既然有口子，那样气（比如 SO2、NO）不就顺着水一起跑 (泄露) 了吗？或者如果管路是负压，外面的空气不就倒吸进来了吗？&lt;/p&gt;
 &lt;p&gt;答案在于蠕动泵独特的“机械闭合”原理。简单来说：&lt;strong&gt;蠕动泵不仅是一个“泵”，它天然还是一个“截止阀”。&lt;/strong&gt;&lt;/p&gt;
