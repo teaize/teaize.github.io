@@ -1,8 +1,635 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="仪器仪表的机箱、机柜、面板上印字、标识、Logo，常见方法如下：\n丝网印刷（丝印） 原理：用丝网油墨直接印在面板上，再烘干固化 优点：成本低、颜色鲜艳、适用于批量生产 缺点：耐磨一般，时间久了可能掉字 常用材质：金属喷漆面板、塑料面板 使用场景：批量仪表外壳、按钮面板 激光雕刻（激光打标） 原理：用激光烧蚀材料形成文字或图形 优点：永久性、不掉色、精度高、耐腐蚀、耐高温 缺点：只能做单色（通常白/黑/金属色），图案较简单 常用材质：铝、不锈钢、工程塑料 适用场景：工业级仪器、高端设备、户外设备 UV 数码打印 原理：喷墨 +UV 光固化，类似“打印机直接在面板上打印” 优点：可彩色、高分辨率、适合复杂图案、速度快 缺点：表面硬度比喷漆低，容易刮花（但可加保护透明漆） 适用场景：LOGO、彩色图标、少量生产、定制版 金属铭牌 / 标牌（蚀刻、丝印、激光） 形式：独立金属片，固定在机箱上（铆接或粘贴） 优点：坚固、耐腐蚀、显专业 缺点：成本高、需要安装工序 适用：型号铭牌、参数铭牌、品牌标识 热转印 / 水转印 优点：可做非常复杂的图案，立体感强、效果好 缺点：工艺要求高、适合塑料壳 场景：外观要求高、消费类产品 贴纸（普通 / 透明 PET / PVC / 强粘 / 背胶） 优点：成本低、灵活、快速、适用于小批量 缺点：容易翘边、老化、掉色 场景：试产阶段、型号区分标签、临时标识 移印（Pad printing） 优点：适合弧面、凹凸表面印字 缺点：不如激光耐用 场景：按钮、旋钮、曲面外壳 选择建议 工控仪表、CEMS、户外设备：激光雕刻 / 金属铭牌（耐久） 批量塑料外壳：丝印 LOGO 彩色、高质量外观：UV 打印 小批量或者研发阶段：贴纸 曲面按键：移印 ">
+<title>仪器仪表外壳印字与Logo工艺方法</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E4%BB%AA%E5%99%A8%E4%BB%AA%E8%A1%A8%E5%A4%96%E5%A3%B3%E5%8D%B0%E5%AD%97%E4%B8%8Elogo%E5%B7%A5%E8%89%BA%E6%96%B9%E6%B3%95/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="仪器仪表外壳印字与Logo工艺方法">
+<meta property='og:description' content="仪器仪表的机箱、机柜、面板上印字、标识、Logo，常见方法如下：\n丝网印刷（丝印） 原理：用丝网油墨直接印在面板上，再烘干固化 优点：成本低、颜色鲜艳、适用于批量生产 缺点：耐磨一般，时间久了可能掉字 常用材质：金属喷漆面板、塑料面板 使用场景：批量仪表外壳、按钮面板 激光雕刻（激光打标） 原理：用激光烧蚀材料形成文字或图形 优点：永久性、不掉色、精度高、耐腐蚀、耐高温 缺点：只能做单色（通常白/黑/金属色），图案较简单 常用材质：铝、不锈钢、工程塑料 适用场景：工业级仪器、高端设备、户外设备 UV 数码打印 原理：喷墨 +UV 光固化，类似“打印机直接在面板上打印” 优点：可彩色、高分辨率、适合复杂图案、速度快 缺点：表面硬度比喷漆低，容易刮花（但可加保护透明漆） 适用场景：LOGO、彩色图标、少量生产、定制版 金属铭牌 / 标牌（蚀刻、丝印、激光） 形式：独立金属片，固定在机箱上（铆接或粘贴） 优点：坚固、耐腐蚀、显专业 缺点：成本高、需要安装工序 适用：型号铭牌、参数铭牌、品牌标识 热转印 / 水转印 优点：可做非常复杂的图案，立体感强、效果好 缺点：工艺要求高、适合塑料壳 场景：外观要求高、消费类产品 贴纸（普通 / 透明 PET / PVC / 强粘 / 背胶） 优点：成本低、灵活、快速、适用于小批量 缺点：容易翘边、老化、掉色 场景：试产阶段、型号区分标签、临时标识 移印（Pad printing） 优点：适合弧面、凹凸表面印字 缺点：不如激光耐用 场景：按钮、旋钮、曲面外壳 选择建议 工控仪表、CEMS、户外设备：激光雕刻 / 金属铭牌（耐久） 批量塑料外壳：丝印 LOGO 彩色、高质量外观：UV 打印 小批量或者研发阶段：贴纸 曲面按键：移印 ">
+<meta property='og:url' content='https://teaize.github.io/p/%E4%BB%AA%E5%99%A8%E4%BB%AA%E8%A1%A8%E5%A4%96%E5%A3%B3%E5%8D%B0%E5%AD%97%E4%B8%8Elogo%E5%B7%A5%E8%89%BA%E6%96%B9%E6%B3%95/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-11-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-11-29T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="仪器仪表外壳印字与Logo工艺方法">
+<meta name="twitter:description" content="仪器仪表的机箱、机柜、面板上印字、标识、Logo，常见方法如下：\n丝网印刷（丝印） 原理：用丝网油墨直接印在面板上，再烘干固化 优点：成本低、颜色鲜艳、适用于批量生产 缺点：耐磨一般，时间久了可能掉字 常用材质：金属喷漆面板、塑料面板 使用场景：批量仪表外壳、按钮面板 激光雕刻（激光打标） 原理：用激光烧蚀材料形成文字或图形 优点：永久性、不掉色、精度高、耐腐蚀、耐高温 缺点：只能做单色（通常白/黑/金属色），图案较简单 常用材质：铝、不锈钢、工程塑料 适用场景：工业级仪器、高端设备、户外设备 UV 数码打印 原理：喷墨 +UV 光固化，类似“打印机直接在面板上打印” 优点：可彩色、高分辨率、适合复杂图案、速度快 缺点：表面硬度比喷漆低，容易刮花（但可加保护透明漆） 适用场景：LOGO、彩色图标、少量生产、定制版 金属铭牌 / 标牌（蚀刻、丝印、激光） 形式：独立金属片，固定在机箱上（铆接或粘贴） 优点：坚固、耐腐蚀、显专业 缺点：成本高、需要安装工序 适用：型号铭牌、参数铭牌、品牌标识 热转印 / 水转印 优点：可做非常复杂的图案，立体感强、效果好 缺点：工艺要求高、适合塑料壳 场景：外观要求高、消费类产品 贴纸（普通 / 透明 PET / PVC / 强粘 / 背胶） 优点：成本低、灵活、快速、适用于小批量 缺点：容易翘边、老化、掉色 场景：试产阶段、型号区分标签、临时标识 移印（Pad printing） 优点：适合弧面、凹凸表面印字 缺点：不如激光耐用 场景：按钮、旋钮、曲面外壳 选择建议 工控仪表、CEMS、户外设备：激光雕刻 / 金属铭牌（耐久） 批量塑料外壳：丝印 LOGO 彩色、高质量外观：UV 打印 小批量或者研发阶段：贴纸 曲面按键：移印 ">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#丝网印刷丝印">丝网印刷（丝印）</a></li>
+        <li><a href="#激光雕刻激光打标">激光雕刻（激光打标）</a></li>
+        <li><a href="#uv-数码打印">UV 数码打印</a></li>
+        <li><a href="#金属铭牌--标牌蚀刻丝印激光">金属铭牌 / 标牌（蚀刻、丝印、激光）</a></li>
+        <li><a href="#热转印--水转印">热转印 / 水转印</a></li>
+        <li><a href="#贴纸普通--透明-pet--pvc--强粘--背胶">贴纸（普通 / 透明 PET / PVC / 强粘 / 背胶）</a></li>
+        <li><a href="#移印pad-printing">移印（Pad printing）</a></li>
+        <li><a href="#选择建议">选择建议</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BB%AA%E5%99%A8%E4%BB%AA%E8%A1%A8%E5%A4%96%E5%A3%B3%E5%8D%B0%E5%AD%97%E4%B8%8Elogo%E5%B7%A5%E8%89%BA%E6%96%B9%E6%B3%95/">仪器仪表外壳印字与Logo工艺方法</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-11-29</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>仪器仪表的机箱、机柜、面板上印字、标识、Logo，常见方法如下：</p>
+<h3 id="丝网印刷丝印">丝网印刷（丝印）
+</h3><ul>
+<li>原理：用丝网油墨直接印在面板上，再烘干固化</li>
+<li>优点：成本低、颜色鲜艳、适用于批量生产</li>
+<li>缺点：耐磨一般，时间久了可能掉字</li>
+<li>常用材质：金属喷漆面板、塑料面板</li>
+<li>使用场景：批量仪表外壳、按钮面板</li>
+</ul>
+<h3 id="激光雕刻激光打标">激光雕刻（激光打标）
+</h3><ul>
+<li>原理：用激光烧蚀材料形成文字或图形</li>
+<li>优点：永久性、不掉色、精度高、耐腐蚀、耐高温</li>
+<li>缺点：只能做单色（通常白/黑/金属色），图案较简单</li>
+<li>常用材质：铝、不锈钢、工程塑料</li>
+<li>适用场景：工业级仪器、高端设备、户外设备</li>
+</ul>
+<h3 id="uv-数码打印">UV 数码打印
+</h3><ul>
+<li>原理：喷墨 +UV 光固化，类似“打印机直接在面板上打印”</li>
+<li>优点：可彩色、高分辨率、适合复杂图案、速度快</li>
+<li>缺点：表面硬度比喷漆低，容易刮花（但可加保护透明漆）</li>
+<li>适用场景：LOGO、彩色图标、少量生产、定制版</li>
+</ul>
+<h3 id="金属铭牌--标牌蚀刻丝印激光">金属铭牌 / 标牌（蚀刻、丝印、激光）
+</h3><ul>
+<li>形式：独立金属片，固定在机箱上（铆接或粘贴）</li>
+<li>优点：坚固、耐腐蚀、显专业</li>
+<li>缺点：成本高、需要安装工序</li>
+<li>适用：型号铭牌、参数铭牌、品牌标识</li>
+</ul>
+<h3 id="热转印--水转印">热转印 / 水转印
+</h3><ul>
+<li>优点：可做非常复杂的图案，立体感强、效果好</li>
+<li>缺点：工艺要求高、适合塑料壳</li>
+<li>场景：外观要求高、消费类产品</li>
+</ul>
+<h3 id="贴纸普通--透明-pet--pvc--强粘--背胶">贴纸（普通 / 透明 PET / PVC / 强粘 / 背胶）
+</h3><ul>
+<li>优点：成本低、灵活、快速、适用于小批量</li>
+<li>缺点：容易翘边、老化、掉色</li>
+<li>场景：试产阶段、型号区分标签、临时标识</li>
+</ul>
+<h3 id="移印pad-printing">移印（Pad printing）
+</h3><ul>
+<li>优点：适合弧面、凹凸表面印字</li>
+<li>缺点：不如激光耐用</li>
+<li>场景：按钮、旋钮、曲面外壳</li>
+</ul>
+<h3 id="选择建议">选择建议
+</h3><ul>
+<li>工控仪表、CEMS、户外设备：激光雕刻 / 金属铭牌（耐久）</li>
+<li>批量塑料外壳：丝印</li>
+<li>LOGO 彩色、高质量外观：UV 打印</li>
+<li>小批量或者研发阶段：贴纸</li>
+<li>曲面按键：移印</li>
+</ul>
+<hr>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

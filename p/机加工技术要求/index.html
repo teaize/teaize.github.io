@@ -1,8 +1,752 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="机加工技术要求 材料要求 指定零件的材质，例如钢材（45#钢、不锈钢）、铝合金、铜合金等 材料牌号和执行的标准（如 GB、ASTM 等） 热处理要求 例如调质、淬火、退火、正火等热处理工艺及其具体要求 硬度指标（如 HRC 45~50） 表面处理要求 表面涂层（如镀锌、镀镍、阳极氧化、发黑处理等） 印字：字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置 底色：RAL 7035 镀黑色PTFE表面要求光洁，无划痕。 XXX 焊接好后整体喷塑 内表面喷氟处理，涂层厚度 20~30um，可在200℃环境下长期使用 镀镍后螺纹二次攻牙处理 棱边倒钝，去毛刺 涂层厚度或质量要求 表面粗糙度（Ra 值） 尺寸公差 关键尺寸的公差要求，例如±0.01mm 未标注的尺寸公差执行 GB/T 1804-2000M 标准 对装配或功能影响较大的尺寸标注具体的公差等级（如 H7/g6） 形位公差 包括平面度、平行度、垂直度、同轴度、圆跳动等要求 通常以符号和数值标注（例如平行度≤0.01mm） 未注形位公差值应按GB/T 1184-H 配合公差 孔和轴的配合公差等级（如 H7/g6） 对重要配合部位标注特定的配合关系 孔加工要求 孔间距公差（例如±0.02mm） 孔的加工形式（钻孔、攻丝、沉头孔等） 孔的直径公差和表面粗糙度要求 压铆螺母在背面/正面压铆 所有螺纹在喷涂时需要保护。 工艺孔加工完焊死，外表面走平整，工艺孔打压测试0.2MPa下零泄漏 表面粗糙度 各部位的表面粗糙度要求（例如 Ra≤1.6μm） 重要表面可能单独注明粗糙度要求 装配及工艺要求 标注装配要求，如装配间隙或过盈要求 具体工艺说明，如需要夹具辅助加工或特定的焊接方法 其他技术要求 防锈处理（如油封、防锈涂层等） 清洗要求（例如无油污、无残渣） 整体酸洗，超声波酒精清洗，烘干 验收标准和方法（如关键尺寸需全检或抽检标准） 焊接要求 明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等 氩弧焊，零件位置关系如图，保证焊接不漏气 焊缝形式和尺寸 焊接质量要求 焊接部位的焊后处理要求（如清除焊渣、抛光等） 焊接完外表面电抛光 焊接处不可有焊瘤 示例技术要求书写：\n">
+<title>机加工技术要求</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="机加工技术要求">
+<meta property='og:description' content="机加工技术要求 材料要求 指定零件的材质，例如钢材（45#钢、不锈钢）、铝合金、铜合金等 材料牌号和执行的标准（如 GB、ASTM 等） 热处理要求 例如调质、淬火、退火、正火等热处理工艺及其具体要求 硬度指标（如 HRC 45~50） 表面处理要求 表面涂层（如镀锌、镀镍、阳极氧化、发黑处理等） 印字：字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置 底色：RAL 7035 镀黑色PTFE表面要求光洁，无划痕。 XXX 焊接好后整体喷塑 内表面喷氟处理，涂层厚度 20~30um，可在200℃环境下长期使用 镀镍后螺纹二次攻牙处理 棱边倒钝，去毛刺 涂层厚度或质量要求 表面粗糙度（Ra 值） 尺寸公差 关键尺寸的公差要求，例如±0.01mm 未标注的尺寸公差执行 GB/T 1804-2000M 标准 对装配或功能影响较大的尺寸标注具体的公差等级（如 H7/g6） 形位公差 包括平面度、平行度、垂直度、同轴度、圆跳动等要求 通常以符号和数值标注（例如平行度≤0.01mm） 未注形位公差值应按GB/T 1184-H 配合公差 孔和轴的配合公差等级（如 H7/g6） 对重要配合部位标注特定的配合关系 孔加工要求 孔间距公差（例如±0.02mm） 孔的加工形式（钻孔、攻丝、沉头孔等） 孔的直径公差和表面粗糙度要求 压铆螺母在背面/正面压铆 所有螺纹在喷涂时需要保护。 工艺孔加工完焊死，外表面走平整，工艺孔打压测试0.2MPa下零泄漏 表面粗糙度 各部位的表面粗糙度要求（例如 Ra≤1.6μm） 重要表面可能单独注明粗糙度要求 装配及工艺要求 标注装配要求，如装配间隙或过盈要求 具体工艺说明，如需要夹具辅助加工或特定的焊接方法 其他技术要求 防锈处理（如油封、防锈涂层等） 清洗要求（例如无油污、无残渣） 整体酸洗，超声波酒精清洗，烘干 验收标准和方法（如关键尺寸需全检或抽检标准） 焊接要求 明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等 氩弧焊，零件位置关系如图，保证焊接不漏气 焊缝形式和尺寸 焊接质量要求 焊接部位的焊后处理要求（如清除焊渣、抛光等） 焊接完外表面电抛光 焊接处不可有焊瘤 示例技术要求书写：\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="机加工技术要求">
+<meta name="twitter:description" content="机加工技术要求 材料要求 指定零件的材质，例如钢材（45#钢、不锈钢）、铝合金、铜合金等 材料牌号和执行的标准（如 GB、ASTM 等） 热处理要求 例如调质、淬火、退火、正火等热处理工艺及其具体要求 硬度指标（如 HRC 45~50） 表面处理要求 表面涂层（如镀锌、镀镍、阳极氧化、发黑处理等） 印字：字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置 底色：RAL 7035 镀黑色PTFE表面要求光洁，无划痕。 XXX 焊接好后整体喷塑 内表面喷氟处理，涂层厚度 20~30um，可在200℃环境下长期使用 镀镍后螺纹二次攻牙处理 棱边倒钝，去毛刺 涂层厚度或质量要求 表面粗糙度（Ra 值） 尺寸公差 关键尺寸的公差要求，例如±0.01mm 未标注的尺寸公差执行 GB/T 1804-2000M 标准 对装配或功能影响较大的尺寸标注具体的公差等级（如 H7/g6） 形位公差 包括平面度、平行度、垂直度、同轴度、圆跳动等要求 通常以符号和数值标注（例如平行度≤0.01mm） 未注形位公差值应按GB/T 1184-H 配合公差 孔和轴的配合公差等级（如 H7/g6） 对重要配合部位标注特定的配合关系 孔加工要求 孔间距公差（例如±0.02mm） 孔的加工形式（钻孔、攻丝、沉头孔等） 孔的直径公差和表面粗糙度要求 压铆螺母在背面/正面压铆 所有螺纹在喷涂时需要保护。 工艺孔加工完焊死，外表面走平整，工艺孔打压测试0.2MPa下零泄漏 表面粗糙度 各部位的表面粗糙度要求（例如 Ra≤1.6μm） 重要表面可能单独注明粗糙度要求 装配及工艺要求 标注装配要求，如装配间隙或过盈要求 具体工艺说明，如需要夹具辅助加工或特定的焊接方法 其他技术要求 防锈处理（如油封、防锈涂层等） 清洗要求（例如无油污、无残渣） 整体酸洗，超声波酒精清洗，烘干 验收标准和方法（如关键尺寸需全检或抽检标准） 焊接要求 明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等 氩弧焊，零件位置关系如图，保证焊接不漏气 焊缝形式和尺寸 焊接质量要求 焊接部位的焊后处理要求（如清除焊渣、抛光等） 焊接完外表面电抛光 焊接处不可有焊瘤 示例技术要求书写：\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#机加工技术要求">机加工技术要求</a>
+      <ol>
+        <li><a href="#材料要求">材料要求</a></li>
+        <li><a href="#热处理要求">热处理要求</a></li>
+        <li><a href="#表面处理要求">表面处理要求</a></li>
+        <li><a href="#尺寸公差">尺寸公差</a></li>
+        <li><a href="#形位公差">形位公差</a></li>
+        <li><a href="#配合公差">配合公差</a></li>
+        <li><a href="#孔加工要求">孔加工要求</a></li>
+        <li><a href="#表面粗糙度">表面粗糙度</a></li>
+        <li><a href="#装配及工艺要求">装配及工艺要求</a></li>
+        <li><a href="#其他技术要求">其他技术要求</a></li>
+        <li><a href="#焊接要求">焊接要求</a></li>
+      </ol>
+    </li>
+    <li><a href="#焊接要求-1">焊接要求</a>
+      <ol>
+        <li><a href="#示例焊接技术要求书写">示例焊接技术要求书写</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/">机加工技术要求</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-01-21</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="机加工技术要求">机加工技术要求
+</h2><h3 id="材料要求">材料要求
+</h3><ul>
+<li>指定零件的材质，例如钢材（45#钢、不锈钢）、铝合金、铜合金等</li>
+<li>材料牌号和执行的标准（如 GB、ASTM 等）</li>
+</ul>
+<h3 id="热处理要求">热处理要求
+</h3><ul>
+<li>例如调质、淬火、退火、正火等热处理工艺及其具体要求</li>
+<li>硬度指标（如 HRC 45~50）</li>
+</ul>
+<h3 id="表面处理要求">表面处理要求
+</h3><ul>
+<li>表面涂层（如镀锌、镀镍、阳极氧化、发黑处理等）
+<ul>
+<li>印字：<code>字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置</code></li>
+<li>底色：RAL 7035</li>
+<li><code>镀黑色PTFE表面要求光洁，无划痕</code>。</li>
+<li>XXX 焊接好后整体喷塑</li>
+<li><code>内表面喷氟处理，涂层厚度 20~30um，可在200℃环境下长期使用</code></li>
+<li><code>镀镍后螺纹二次攻牙处理</code></li>
+</ul>
+</li>
+<li><strong>棱边倒钝，去毛刺</strong></li>
+<li>涂层厚度或质量要求</li>
+<li>表面粗糙度（Ra 值）</li>
+</ul>
+<h3 id="尺寸公差">尺寸公差
+</h3><ul>
+<li>关键尺寸的公差要求，例如±0.01mm</li>
+<li><strong>未标注的尺寸公差执行 GB/T 1804-2000M 标准</strong></li>
+<li>对装配或功能影响较大的尺寸标注具体的公差等级（如 H7/g6）</li>
+</ul>
+<h3 id="形位公差">形位公差
+</h3><ul>
+<li>包括平面度、平行度、垂直度、同轴度、圆跳动等要求</li>
+<li>通常以符号和数值标注（例如平行度≤0.01mm）</li>
+<li><code>未注形位公差值应按GB/T 1184-H</code></li>
+</ul>
+<h3 id="配合公差">配合公差
+</h3><ul>
+<li>孔和轴的配合公差等级（如 H7/g6）</li>
+<li>对重要配合部位标注特定的配合关系</li>
+</ul>
+<h3 id="孔加工要求">孔加工要求
+</h3><ul>
+<li>孔间距公差（例如±0.02mm）</li>
+<li>孔的加工形式（钻孔、攻丝、沉头孔等）</li>
+<li>孔的直径公差和表面粗糙度要求</li>
+<li><strong>压铆螺母在背面/正面压铆</strong></li>
+<li>所有螺纹在喷涂时需要保护。</li>
+<li><code>工艺孔加工完焊死，外表面走平整，工艺孔打压测试0.2MPa下零泄漏</code></li>
+</ul>
+<h3 id="表面粗糙度">表面粗糙度
+</h3><ul>
+<li>各部位的表面粗糙度要求（例如 Ra≤1.6μm）</li>
+<li>重要表面可能单独注明粗糙度要求</li>
+</ul>
+<h3 id="装配及工艺要求">装配及工艺要求
+</h3><ul>
+<li>标注装配要求，如装配间隙或过盈要求</li>
+<li>具体工艺说明，如需要夹具辅助加工或特定的焊接方法</li>
+</ul>
+<h3 id="其他技术要求">其他技术要求
+</h3><ul>
+<li>防锈处理（如油封、防锈涂层等）</li>
+<li>清洗要求（例如无油污、无残渣）
+<ul>
+<li><strong>整体酸洗，超声波酒精清洗，烘干</strong></li>
+</ul>
+</li>
+<li>验收标准和方法（如关键尺寸需全检或抽检标准）</li>
+</ul>
+<h3 id="焊接要求">焊接要求
+</h3><ul>
+<li>明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等
+<ul>
+<li><strong>氩弧焊，零件位置关系如图，保证焊接不漏气</strong></li>
+</ul>
+</li>
+<li>焊缝形式和尺寸</li>
+<li>焊接质量要求
+<ul>
+<li>焊接部位的焊后处理要求（如清除焊渣、抛光等）</li>
+<li><strong>焊接完外表面电抛光</strong></li>
+<li><strong>焊接处不可有焊瘤</strong></li>
+</ul>
+</li>
+</ul>
+<p>示例技术要求书写：</p>
+<ul>
+<li>材料：45#钢，执行 GB/T 699-2015 标准</li>
+<li>热处理：调质处理，硬度 HRC 28~32</li>
+<li>表面粗糙度：未注表面 Ra3.2μm，配合面 Ra1.6μm</li>
+<li>孔径公差：φ20H7，孔间距公差±0.02mm</li>
+<li>表面处理：发黑处理，涂防锈油</li>
+<li>检验要求：关键尺寸需全检，其他尺寸按抽检标准检验</li>
+</ul>
+<h2 id="焊接要求-1">焊接要求
+</h2><p>在机加工图纸的技术要求中，如果涉及焊接工艺，通常包括以下焊接要求：</p>
+<ol>
+<li>焊接方法</li>
+</ol>
+<ul>
+<li>明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等。</li>
+<li>对于特殊焊接方法，需要注明具体标准或工艺规范。</li>
+</ul>
+<ol start="2">
+<li>焊接材料</li>
+</ol>
+<ul>
+<li>指定焊接材料或焊丝型号，例如 E6013、ER70S-6 等。</li>
+<li>如果需要，注明焊接材料的执行标准。</li>
+</ul>
+<ol start="3">
+<li>焊缝形式和尺寸</li>
+</ol>
+<ul>
+<li>标明焊缝类型（如对接焊缝、角焊缝、T 型焊缝等）。</li>
+<li>焊缝尺寸，包括焊缝高度、焊角尺寸、坡口角度等。</li>
+<li>焊缝的具体位置在图纸中应清晰标注。</li>
+</ul>
+<ol start="4">
+<li>焊接质量要求</li>
+</ol>
+<ul>
+<li>标明焊缝等级（如按 GB/T 3323 规定的等级：一级、二级、三级）。</li>
+<li>对焊缝的外观要求（如无气孔、裂纹、咬边等缺陷）。</li>
+<li>焊接部位的焊后处理要求（如清除焊渣、抛光等）。</li>
+</ul>
+<ol start="5">
+<li>焊后热处理要求</li>
+</ol>
+<ul>
+<li>如果有必要，要求进行焊后热处理（如消除应力处理）。</li>
+<li>热处理温度范围和保温时间。</li>
+</ul>
+<ol start="6">
+<li>无损检测要求</li>
+</ol>
+<ul>
+<li>指定检测方法（如射线探伤 RT、超声波探伤 UT、磁粉检测 MT、渗透检测 PT）。</li>
+<li>标明检测范围和验收标准。</li>
+</ul>
+<ol start="7">
+<li>表面处理要求</li>
+</ol>
+<ul>
+<li>对焊接后的表面处理，如打磨光滑、喷漆或防锈处理。</li>
+<li>涂层厚度和质量要求。</li>
+</ul>
+<ol start="8">
+<li>特殊工艺要求</li>
+</ol>
+<ul>
+<li>明确焊接过程中的特殊要求，例如预热温度、焊接顺序、层间温度等。</li>
+<li>对焊接环境的要求（如防止风吹或潮湿）。</li>
+</ul>
+<h3 id="示例焊接技术要求书写">示例焊接技术要求书写
+</h3><ul>
+<li>焊接方法：手工电弧焊（SMAW），使用 E6013 焊条。</li>
+<li>焊缝形式：角焊缝，焊脚尺寸 4mm，焊缝长度为 50mm。</li>
+<li>焊接质量：符合 GB/T 3323 二级焊缝标准。</li>
+<li>无损检测：关键焊缝进行超声波探伤（UT），探伤比例为 100%。</li>
+<li>焊后处理：焊后进行打磨并喷涂防锈漆，漆膜厚度≥30μm。</li>
+<li>特殊要求：焊接前母材需预热至 100℃，焊后消除应力热处理（550℃，保温 2 小时）。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

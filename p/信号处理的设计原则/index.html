@@ -1,8 +1,747 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="就像 P&amp;ID 是气路的宪法一样，在信号处理领域，也有一个铁打的“五层金字塔”框架。我们将这个框架称为 “信号净化提纯流水线” 。\n第一层：物理获取层 —— “原矿开采” 这一层负责把物理世界变成数字世界。核心原则是“保真”**。\n">
+<title>信号处理的设计原则</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="信号处理的设计原则">
+<meta property='og:description' content="就像 P&amp;ID 是气路的宪法一样，在信号处理领域，也有一个铁打的“五层金字塔”框架。我们将这个框架称为 “信号净化提纯流水线” 。\n第一层：物理获取层 —— “原矿开采” 这一层负责把物理世界变成数字世界。核心原则是“保真”**。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="信号处理的设计原则">
+<meta name="twitter:description" content="就像 P&amp;ID 是气路的宪法一样，在信号处理领域，也有一个铁打的“五层金字塔”框架。我们将这个框架称为 “信号净化提纯流水线” 。\n第一层：物理获取层 —— “原矿开采” 这一层负责把物理世界变成数字世界。核心原则是“保真”**。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#第一层物理获取层--原矿开采">第一层：物理获取层 —— “原矿开采”</a></li>
+        <li><a href="#第二层清洗滤波层--洗去泥沙">第二层：清洗滤波层 —— “洗去泥沙”</a></li>
+        <li><a href="#第三层物理修正层--化学反应">第三层：物理修正层 —— “化学反应”</a></li>
+        <li><a href="#第四层逻辑裁决层--盖章认证">第四层：逻辑裁决层 —— “盖章认证”</a></li>
+        <li><a href="#五层输出格式层--打包发货">五层：输出格式层 —— “打包发货”</a></li>
+        <li><a href="#框架中的三个反直觉经验">框架中的三个“反直觉”经验</a></li>
+        <li><a href="#mermaid-信号流转框架图">Mermaid 信号流转框架图</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E7%9A%84%E8%AE%BE%E8%AE%A1%E5%8E%9F%E5%88%99/">信号处理的设计原则</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-13</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>就像 P&amp;ID 是气路的宪法一样，在信号处理领域，也有一个铁打的“五层金字塔”框架。我们将这个框架称为 “信号净化提纯流水线” 。</p>
+<h3 id="第一层物理获取层--原矿开采">第一层：物理获取层 —— “原矿开采”
+</h3><p>这一层负责把物理世界变成数字世界。核心原则是“保真”**。</p>
+<ul>
+<li>输入： 光子、离子、电子（模拟量）。</li>
+<li>动作：
+<ol>
+<li>IV 转换 (TIA)： 把微弱电流变成电压（前放板的任务）。</li>
+<li>量程匹配 (Auto-Ranging)： 如果信号太小，放大 100 倍；太大，放大 1 倍。确保 ADC 能吃饱，但不撑死。</li>
+<li>过采样 (Oversampling)： 比如 ADC 是 1000Hz 采样的，我采 100 个点只取 1 个平均值。这能物理提升 ADC 的信噪比（每 4 倍过采样，增加 1 位分辨率）。</li>
+</ol>
+</li>
+<li>输出： Raw Counts (原始码值)。
+<ul>
+<li>特征： 这通常是一个 0~65535 的整数，甚至可能是负数，没有任何物理单位，充满噪声。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第二层清洗滤波层--洗去泥沙">第二层：清洗滤波层 —— “洗去泥沙”
+</h3><p>这一层负责把噪声（Noise）去掉，留下信号（Signal）。<strong>核心原则是“时域与频域的结合”</strong>。</p>
+<ul>
+<li>输入： 充满毛刺的 Raw Counts。</li>
+<li>核心算法：
+<ol>
+<li>锁相放大 (PSD)： （针对 NDIR/GFC）剔除所有非 30Hz 的光干扰。</li>
+<li>剔除脉冲噪声 (Spike Rejection)： 如果突然有一个点飞到了天上去（可能是静电干扰），直接删掉，不算。</li>
+<li>滑动平均 / 卡尔曼滤波： 根据当前的工况（稳态还是突变），平滑数据。</li>
+</ol>
+</li>
+<li>输出： Filtered Voltage (纯净电压)。
+<ul>
+<li>特征：这是一个很稳的电压值（如 2.500V），但它还不是浓度。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第三层物理修正层--化学反应">第三层：物理修正层 —— “化学反应”
+</h3><p>这是最体现仪器技术含量的部分。我们要用数学公式去修补物理传感器的缺陷。<strong>顺序绝对不能乱！</strong></p>
+<ul>
+<li>输入： Filtered Voltage。</li>
+<li>步骤顺序（黄金法则）：
+<ol>
+<li>零点扣除 (Zero Subtraction)： 先减去“暗电流”或“零点背景”。$$V_{net} = V_{meas} - V_{zero}$$</li>
+<li>线性化 (Linearization)： 把弯曲的电压拉直。$$C_{raw} = f(V_{net})$$</li>
+<li>温压补偿 (P/T Comp)： 理想气体状态方程修正。$$C_{std} = C_{raw} \times \frac{101.3}{P_{cur}} \times \frac{T_{cur}}{273}$$</li>
+<li>交叉干扰补偿 (Cross-Interference)： 扣除水和 CO2 的影响。$$C_{final} = C_{std} - (K \times C_{H2O})$$</li>
+</ol>
+</li>
+<li>输出： Physics Concentration (物理浓度)。
+<ul>
+<li>特征：此时已经是 ppm 或 mg/m³ 了，是真实的物理值。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第四层逻辑裁决层--盖章认证">第四层：逻辑裁决层 —— “盖章认证”
+</h3><p>这一层不处理数值大小，只处理“数据身份”。结合我们讲的状态机。</p>
+<ul>
+<li>输入： 物理浓度 + 系统状态（测量/校准/故障）。</li>
+<li>动作：
+<ol>
+<li>有效性判断： 现在的状态机是在 MEASURE 吗？
+<ul>
+<li>如果是 CAL (校准) $\rightarrow$ 标记为 <strong>Calibration</strong>，数值照发（供调试看），但环保局不统计。</li>
+<li>如果是 FAULT (故障) $\rightarrow$ 标记为 <strong>Invalid</strong>，数值可能强制归零或保持。</li>
+<li>如果是 PURGE (反吹) $\rightarrow$ 标记为 <strong>Hold</strong>，数值锁定在反吹前一刻。</li>
+</ul>
+</li>
+<li>上下限报警： 是否超过量程？是否低于 -5%（仪表漂移异常）？</li>
+</ol>
+</li>
+<li>输出： Display Value (显示值) + Status Flag (状态旗)。</li>
+</ul>
+<h3 id="五层输出格式层--打包发货">五层：输出格式层 —— “打包发货”
+</h3><p>这一层负责把数据翻译成别人（PLC、DCS）能听懂的语言。</p>
+<ul>
+<li>输入： 显示值 + 状态旗。</li>
+<li>动作：
+<ol>
+<li>D/A 转换： 把 0<del>100 ppm 映射到 4.00</del>20.00 mA。
+<ul>
+<li>注意：如果状态是 Invalid，可能输出 2 mA (故障电流) 告诉 DCS。</li>
+</ul>
+</li>
+<li>协议打包： 放入 Modbus 寄存器（40001 = 浓度，40002 = 状态）。</li>
+<li>统计存储： 存入硬盘，生成“分钟均值”、“小时均值”。</li>
+</ol>
+</li>
+</ul>
+<h3 id="框架中的三个反直觉经验">框架中的三个“反直觉”经验
+</h3><ol>
+<li>先线性化，再做补偿：
+<ul>
+<li>一定要先用多项式把电压变成浓度（线性化），然后再去减干扰气体的浓度。</li>
+<li>错误做法：在电压阶段就减去干扰信号。这是错的，因为电压是非线性的，不能直接加减。</li>
+</ul>
+</li>
+<li>滤波放在线性化之前：
+<ul>
+<li>一定要在电压阶段（L2）把噪声滤干净，再进公式（L3）。</li>
+<li>原因：线性化公式通常是高次方程（$V^3, V^4$）。如果电压里有噪声，经过 3 次方放大，噪声会变成巨大的误差。</li>
+</ul>
+</li>
+<li>显示值 $\neq$ 4-20mA 值：**
+<ul>
+<li>在 L5 层，屏幕显示通常为了好看，会保留 2 位小数。</li>
+<li>但给 DAC（4-20mA）的数据，必须经过<strong>量程缩放</strong>。</li>
+<li>坑点：很多时候屏幕显示 50.00，但后台 DAC 芯片只有 12 位精度，输出可能是 49.8。调试时要区分“显示层”和“硬件输出层”。</li>
+</ul>
+</li>
+</ol>
+<h3 id="mermaid-信号流转框架图">Mermaid 信号流转框架图
+</h3><div class="mermaid">
+  graph TD
+    %% 样式定义
+    classDef physical fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef clean fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef math fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    classDef logic fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
+    classDef output fill:#ffebee,stroke:#c62828,stroke-width:2px;
+
+    %% 1. 物理层
+    subgraph L1 ["第一层：物理获取 (Acquisition)"]
+        Sens(("传感器")) --> TIA["前置放大 TIA"]
+        TIA --> ADC["ADC 模数转换"]
+        ADC --> |"Raw Counts (原始码)"| OS["过采样/均值"]
+    end
+    class Sens,TIA,ADC,OS physical
+
+    %% 2. 清洗层
+    subgraph L2 ["第二层：清洗滤波 (Cleaning)"]
+        OS --> PSD["锁相放大/解调"]
+        PSD --> SPIKE["剔除脉冲噪声"]
+        SPIKE --> FILTER["自适应滤波/卡尔曼"]
+        FILTER --> |"Filtered Voltage (净电压)"| NEXT2
+    end
+    class PSD,SPIKE,FILTER clean
+
+    %% 3. 修正层
+    subgraph L3 ["第三层：物理修正 (Correction)"]
+        NEXT2(("V")) --> ZERO_SUB["减零点背景"]
+        ZERO_SUB --> LIN["多项式线性化"]
+        LIN --> PT_COMP["温度/压力补偿"]
+        PT_COMP --> INTER_COMP["交叉干扰补偿"]
+        INTER_COMP --> |"Physics Conc. (真浓度)"| NEXT3
+    end
+    class ZERO_SUB,LIN,PT_COMP,INTER_COMP math
+
+    %% 4. 逻辑层
+    subgraph L4 ["第四层：逻辑裁决 (Logic)"]
+        NEXT3(("C")) --> STATE_CHECK{"状态机检查"}
+        STATE_Check_Logic --> STATE_CHECK
+        
+        STATE_CHECK --"正常测量"--> VALID["标记: Valid"]
+        STATE_CHECK --"反吹/校准"--> HOLD["标记: Hold/Cal"]
+        STATE_CHECK --"硬件报错"--> FAULT["标记: Invalid"]
+    end
+    class STATE_CHECK,VALID,HOLD,FAULT logic
+
+    %% 5. 输出层
+    subgraph L5 ["第五层：输出格式 (Output)"]
+        VALID --> DAC["4-20mA 输出"]
+        HOLD --> DAC
+        FAULT --> DAC
+        
+        VALID --> MODBUS["Modbus/RS485"]
+        VALID --> LOG["历史数据存储"]
+    end
+    class DAC,MODBUS,LOG output
+
+    %% 外部输入
+    STATE_Check_Logic["系统状态机"] -.-> STATE_CHECK
+</div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

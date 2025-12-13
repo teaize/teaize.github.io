@@ -1,8 +1,720 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="目的：理解了粉红噪声，可能就能想明白为什么一些高端仪器都要把本来静止的信号“折腾”成动的。\n什么是粉红噪声 (Pink Noise / 1/f Noise) 在电子电路和物理世界中，噪声按“频率分布”有着不同的颜色命名\n">
+<title>粉红噪声</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E7%B2%89%E7%BA%A2%E5%99%AA%E5%A3%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="粉红噪声">
+<meta property='og:description' content="目的：理解了粉红噪声，可能就能想明白为什么一些高端仪器都要把本来静止的信号“折腾”成动的。\n什么是粉红噪声 (Pink Noise / 1/f Noise) 在电子电路和物理世界中，噪声按“频率分布”有着不同的颜色命名\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E7%B2%89%E7%BA%A2%E5%99%AA%E5%A3%B0/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="粉红噪声">
+<meta name="twitter:description" content="目的：理解了粉红噪声，可能就能想明白为什么一些高端仪器都要把本来静止的信号“折腾”成动的。\n什么是粉红噪声 (Pink Noise / 1/f Noise) 在电子电路和物理世界中，噪声按“频率分布”有着不同的颜色命名\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#什么是粉红噪声-pink-noise--1f-noise">什么是粉红噪声 (Pink Noise / 1/f Noise)</a>
+          <ol>
+            <li><a href="#1-白噪声-white-noise--沙沙声">1. 白噪声 (White Noise) —— “沙沙声”</a></li>
+            <li><a href="#2-粉红噪声-pink-noise--低沉的轰鸣">2. 粉红噪声 (Pink Noise) —— “低沉的轰鸣”</a></li>
+          </ol>
+        </li>
+        <li><a href="#更加透彻地理解粉红噪声">更加透彻地理解粉红噪声</a>
+          <ol>
+            <li><a href="#白噪声white-noise路面的细碎颠簸">白噪声（White Noise）：路面的细碎颠簸</a></li>
+            <li><a href="#粉红噪声pink-noise车子的跑偏">粉红噪声（Pink Noise）：车子的“跑偏”</a></li>
+          </ol>
+        </li>
+        <li><a href="#为什么要避开它">为什么要避开它？</a></li>
+        <li><a href="#核心技术把信号搬到平原去">核心技术：把信号“搬”到平原去</a>
+          <ol>
+            <li><a href="#第一步原始状态-dc">第一步：原始状态 (DC)</a></li>
+            <li><a href="#第二步调制-modulation--搬运工">第二步：调制 (Modulation) —— 搬运工</a></li>
+            <li><a href="#第三步解调-demodulation--提纯">第三步：解调 (Demodulation) —— 提纯</a></li>
+          </ol>
+        </li>
+        <li><a href="#小结">小结</a>
+          <ol>
+            <li><a href="#元凶一热胀冷缩--仪器的呼吸">元凶一：热胀冷缩 —— 仪器的“呼吸”</a></li>
+            <li><a href="#元凶二器件老化与疲劳-仪器的衰老">元凶二：器件老化与疲劳—— 仪器的“衰老”</a></li>
+            <li><a href="#元凶三半导体特性的随机游走--电子的拥堵">元凶三：半导体特性的随机游走 —— 电子的“拥堵”</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E7%B2%89%E7%BA%A2%E5%99%AA%E5%A3%B0/">粉红噪声</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-08</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>目的：理解了粉红噪声，可能就能想明白为什么一些高端仪器都要把本来静止的信号“折腾”成动的。</p>
+<h3 id="什么是粉红噪声-pink-noise--1f-noise">什么是粉红噪声 (Pink Noise / 1/f Noise)
+</h3><p>在电子电路和物理世界中，噪声按“频率分布”有着不同的颜色命名</p>
+<h4 id="1-白噪声-white-noise--沙沙声">1. 白噪声 (White Noise) —— “沙沙声”
+</h4><ul>
+<li>特征： 能量在所有频率上是一样的。</li>
+<li>物理来源： <strong>热噪声 (Thermal Noise)</strong>。只要有温度，电子就会无规则乱动。</li>
+<li>听感： 像收音机没台时的“沙沙”声。</li>
+<li>图谱： 一条平的直线。</li>
+</ul>
+<h4 id="2-粉红噪声-pink-noise--低沉的轰鸣">2. 粉红噪声 (Pink Noise) —— “低沉的轰鸣”
+</h4><ul>
+<li>特征： 频率越低，能量越大。
+<ul>
+<li>公式是：$$\text{噪声功率} \propto \frac{1}{f}$$</li>
+<li>这意味着：0.1 Hz 的噪声能量是 10 Hz 的 100 倍！ <strong>当频率趋近于 0（也就是 DC 直流）时，噪声能量趋近于无穷大</strong>。</li>
+</ul>
+</li>
+<li>物理来源： 元件老化、表面缺陷、温度缓慢漂移、半导体晶格缺陷。这些过程都很“慢”，所以集中在低频。</li>
+<li>为什么叫“粉红”？ 在可见光里，红光的频率最低。既然这种噪声低频能量强（偏红），高频能量弱（偏蓝），我们就叫它“粉红噪声”。</li>
+</ul>
+<h3 id="更加透彻地理解粉红噪声">更加透彻地理解粉红噪声
+</h3><p>想象你在高速公路上开车，试图保持车在车道正中间行驶。</p>
+<h4 id="白噪声white-noise路面的细碎颠簸">白噪声（White Noise）：路面的细碎颠簸
+</h4><ul>
+<li>感觉： 方向盘在你手里会有轻微的、快速的震动。这是因为路面不平、发动机震动造成的。</li>
+<li>特点： 这种震动<strong>频率很快</strong>，但是<strong>幅度很小</strong>。</li>
+<li>影响： 就算你不管它，这震动也不会让你的车翻到沟里去。</li>
+</ul>
+<h4 id="粉红噪声pink-noise车子的跑偏">粉红噪声（Pink Noise）：车子的“跑偏”
+</h4><ul>
+<li>感觉： 假设你的四轮定位没做好，或者侧面一阵一阵地刮大风。你会发现车子<strong>慢慢地、不知不觉地</strong>往右边偏。</li>
+<li>特点： 这种变化<strong>动作很慢</strong>（频率极低，可能几十秒才偏过去），但是<strong>幅度巨大</strong>（如果不回正，车就撞护栏了）。</li>
+<li>这就是粉红噪声！</li>
+</ul>
+<p>对应到 CEMS 仪表：</p>
+<ul>
+<li>白噪声 = 读数在 100.0, 100.1, 99.9 之间快速跳动。（只要平均一下就没事了）</li>
+<li>粉红噪声 = 读数慢慢地从 100 变成了 105，又慢慢变成了 90。（这就是漂移，你平均它也没用，因为它代表了错误的趋势。）</li>
+</ul>
+<p>我们最怕的不是读数“突突突”地小跳（白噪声），那个容易滤掉。我们最怕的是读数“不知不觉地跑远了”（粉红噪声/漂移）。</p>
+<h3 id="为什么要避开它">为什么要避开它？
+</h3><p>想象一下噪音频谱图：</p>
+<ul>
+<li>最左边 (0 Hz / DC)： 是一座高耸入云的“噪声大山”（温漂、零漂、老化）。</li>
+<li>右边 (高频 AC)： 是一片平坦的“宁静平原”（只有微弱的热噪声）。</li>
+</ul>
+<p>你的测量困境：你要测量的 $\text{SO}_2$ 浓度，如果一直通气不动，它就是一个 DC 信号 (0 Hz)。如果你直接测量 DC 信号，就等于把房子建在了噪声大山的悬崖边上。</p>
+<ul>
+<li>PMT 稍微热一点，读数就变了。</li>
+<li>电压稍微动一下，读数又变了。</li>
+<li>这些“慢”的噪声会把你微弱的 $\text{SO}_2$ 信号完全淹没。</li>
+</ul>
+<h3 id="核心技术把信号搬到平原去">核心技术：把信号“搬”到平原去
+</h3><p>既然左边的“低频沼泽”太吵了，我们就把信号<strong>搬运</strong>到右边的“高频平原”去测。这就是 <strong>“调制 ”</strong> 的本质。</p>
+<p>让我们回到 CEMS 的 <strong>脉冲氙灯</strong> 案例，看看这个“搬运”过程是如何发生的：</p>
+<h4 id="第一步原始状态-dc">第一步：原始状态 (DC)
+</h4><ul>
+<li>信号： $\text{SO}_2$ 浓度恒定，信号频率 $f = 0$。</li>
+<li>位置： 处于粉红噪声最强的区域。</li>
+<li>结果： 信号被淹没。</li>
+</ul>
+<h4 id="第二步调制-modulation--搬运工">第二步：调制 (Modulation) —— 搬运工
+</h4><ul>
+<li>动作： 氙灯以 <strong>10 Hz</strong> 的频率闪烁。</li>
+<li>物理变化： 原本静止的 $\text{SO}_2$ 荧光信号，被迫变成了一个 <strong>10 Hz 的闪烁信号</strong>。</li>
+<li>位置变化： 信号的坐标从 0 Hz <strong>搬移</strong> 到了 10 Hz 的位置。</li>
+<li>环境变化： 在 10 Hz 这个位置，粉红噪声（1/f）已经衰减了很多，背景比 0 Hz 干净得多！</li>
+</ul>
+<h4 id="第三步解调-demodulation--提纯">第三步：解调 (Demodulation) —— 提纯
+</h4><ul>
+<li>动作： 使用 <strong>锁相放大 (Lock-in)</strong> 技术（也就是前面说的“灯亮减灯灭”）。</li>
+<li>逻辑： 分析仪只盯着 10 Hz 看。
+<ul>
+<li>0 Hz 的温漂？我不管，过滤掉。</li>
+<li>50 Hz 的工频干扰？我不管，过滤掉。</li>
+<li>我只提取 10 Hz 那个频段的信号。</li>
+</ul>
+</li>
+<li>结果： 你在最干净的频段，把信号毫发无损地拿了回来。</li>
+</ul>
+<h3 id="小结">小结
+</h3><p>“仪表漂移”在数学和信号处理的语言里，就是典型的“粉红噪声”。那为什么好端端的仪器，放着不动，它自己就会“漂移”？为什么这些物理现象会产生“粉红噪声”（慢速、大幅度的波动）？</p>
+<p>漂移主要来自这三个“物理元凶”：</p>
+<h4 id="元凶一热胀冷缩--仪器的呼吸">元凶一：热胀冷缩 —— 仪器的“呼吸”
+</h4><p>这是最主要的漂移来源，尤其是在光学仪器中。</p>
+<ul>
+<li>物理过程： 分析仪内部有加热盒，外部环境有昼夜温差。 金属的光学底板会随着温度微小变化而膨胀或收缩。</li>
+<li>导致的后果（漂移）：
+<ul>
+<li>光路微偏： 氙灯发出的光，原本聚焦在中心，因为底板膨胀了 10 微米，光斑稍微偏了一点点。</li>
+<li>滤光片波长漂移： 紫外滤光片的中心波长会随温度轻微移动。</li>
+</ul>
+</li>
+<li>为什么是粉红噪声？ 温度的变化是极慢的（以分钟或小时为单位）。这种变化在图谱上就是一条缓慢起伏的曲线，这就是典型的低频噪声。</li>
+</ul>
+<blockquote>
+<p><strong>调制技术的降维打击：</strong> 氙灯一秒钟闪 10 次。 在这 <strong>0.1 秒</strong> 的瞬间里，温度根本来不及变，底板也来不及胀。所以调制技术完美忽略了温度漂移。</p>
+</blockquote>
+<h4 id="元凶二器件老化与疲劳-仪器的衰老">元凶二：器件老化与疲劳—— 仪器的“衰老”
+</h4><p>没有任何电子/光学元器件是永恒不变的。</p>
+<ul>
+<li>光源（氙灯/紫外灯）：
+<ul>
+<li>电极烧蚀： 每次放电，电极都会损耗一点点原子，弧光的位置会一点点移动（Arc Wander）。</li>
+<li>光强衰减： 灯泡玻璃壁会因为金属溅射变黑，透光率慢慢下降。</li>
+</ul>
+</li>
+<li>探测器（PMT）：
+<ul>
+<li>倍增极疲劳： PMT 里面的倍增极（Dynode）长期受电子轰击，表面涂层会变化，发射电子的能力（增益 Gain）会<strong>缓慢下降</strong>。</li>
+</ul>
+</li>
+<li>为什么是粉红噪声？ 这种衰减不是一瞬间发生的，而是随着几百个小时慢慢滑落的。这是一个<strong>超低频</strong>的变化趋势。</li>
+</ul>
+<p>同样，在调制的“快变”短时间内，器件的老化与疲劳来不及反应，所以调制技术</p>
+<h4 id="元凶三半导体特性的随机游走--电子的拥堵">元凶三：半导体特性的随机游走 —— 电子的“拥堵”
+</h4><p>这是最玄学的一个，但真实存在于放大器电路中。</p>
+<ul>
+<li>物理过程： 在半导体（比如运算放大器、电阻）的晶格内部，会有很多<strong>缺陷</strong>或<strong>杂质</strong>。 电流流过时，电子会被这些陷阱“卡住”一会，然后再释放出来。</li>
+<li>导致的后果： 这种随机的“卡顿”和“释放”效应，会导致电阻值或放大倍数发生微小的、不规则的波动。</li>
+<li>为什么是粉红噪声？ 物理学家发现，这种“卡顿”效应在慢速尺度上特别明显。它会让零点电压（Zero Offset）像喝醉了酒的人一样，毫无规律地瞎溜达。</li>
+</ul>
+<p>现在不仅知道它叫漂移，还知道了<strong>它的物理本质是“热、光、电的慢速不稳定性”</strong>。 正是因为这些物理量变太慢了（即频率接近 0），所以我们才不能在 0 Hz 处测量，必须去 10 Hz（高频）处测量。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

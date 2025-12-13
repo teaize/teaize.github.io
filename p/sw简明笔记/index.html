@@ -1,8 +1,683 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="界面与基本操作 界面布局：包含工具栏、特征树、文件管理器等 基本操作：视图操作（缩放、旋转、平移）、选择工具、快捷键使用等 软件设置 [[SW软件优化设置]] 零件建模 草图绘制：二维草图创建，包含直线、圆、矩形、弧线等基本几何元素 特征操作：拉伸、切割、旋转、扫掠、放样等 [[SW裁剪]] [[SW基准面]] [[23-NewNote/SW-装饰螺纹线]] [[SW异形孔向导]] 参数化设计：通过尺寸和约束实现设计的可变性和自适应性 [[基于规则的模块化设计]] 镜像与阵列：在设计中实现对称或多次重复元素 [[SW阵列]] 实体建模与曲面建模：进行复杂的曲面设计和分析 装配设计 组件插入与约束：将零件添加到装配体中并定义相对位置与运动限制 装配体运动分析：模拟各组件之间的运动和干涉检查 虚拟装配：在没有实际零件的情况下，测试装配效果 工程图与注释 工程图创建：从零件或装配模型生成二维工程图，自动生成视图（如主视图、剖视图、局部视图等） [[SW-工程图模板的制作]] [[SW注解小技巧]] 标注与尺寸：对工程图中的几何体添加尺寸、角度和公差 [[SW工程图切边处理]] 符号与注释：加入焊接符号、表面处理符号等，提升图纸的可读性与完整性 渲染与可视化 材质与纹理：给零件或装配体添加材质、颜色和纹理，以提高视觉效果 [[SW-开启小金球]] 光照与相机设置：调整场景中的光照、相机视角，生成更真实的渲染效果 动画与仿真：通过动画功能演示装配体的运动过程 [[SW动画]] [[SW-SMG文件]] 仿真与分析 静力学分析：进行受力、变形、应力分布的分析 热分析：分析零件或装配体在不同温度条件下的热传导和热膨胀 流体分析：进行流体流动、压力分布等的仿真 运动学分析：模拟装配体的动态运动，计算运动轨迹、速度、加速度等 数控加工与制造 CAM 功能：生成数控机床的加工路径（如铣削、车削等） 切削模拟：模拟工具与工件的接触，优化加工路径 加工工艺与材料选择：结合具体的加工工艺要求，进行材料、工艺的选择和优化 数据管理与协作 PDM 系统：SolidWorks 与产品数据管理（PDM）系统集成，管理设计文件的版本、权限及协作 Pack and Go：打包文件，进行项目分享或备份 配置管理：在同一文件中管理不同版本的设计配置（如尺寸变化、材料变化等） [[SW收藏]] [[SW链接数值]] [[SW装配体中的方程式]] 自定义功能 宏与 API 编程：通过宏或 API 接口进行自定义功能的开发，自动化常规操作 用户界面定制：根据需要定制工具栏、快捷键等，提升操作效率 协同设计与分享 设计协同：多人协作设计和实时反馈 文件导入与导出：支持多种格式的文件导入（如 STEP、IGES、STL 等），便于与其他设计软件之间的兼容与共享 ">
+<title>SW简明笔记</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/sw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW简明笔记">
+<meta property='og:description' content="界面与基本操作 界面布局：包含工具栏、特征树、文件管理器等 基本操作：视图操作（缩放、旋转、平移）、选择工具、快捷键使用等 软件设置 [[SW软件优化设置]] 零件建模 草图绘制：二维草图创建，包含直线、圆、矩形、弧线等基本几何元素 特征操作：拉伸、切割、旋转、扫掠、放样等 [[SW裁剪]] [[SW基准面]] [[23-NewNote/SW-装饰螺纹线]] [[SW异形孔向导]] 参数化设计：通过尺寸和约束实现设计的可变性和自适应性 [[基于规则的模块化设计]] 镜像与阵列：在设计中实现对称或多次重复元素 [[SW阵列]] 实体建模与曲面建模：进行复杂的曲面设计和分析 装配设计 组件插入与约束：将零件添加到装配体中并定义相对位置与运动限制 装配体运动分析：模拟各组件之间的运动和干涉检查 虚拟装配：在没有实际零件的情况下，测试装配效果 工程图与注释 工程图创建：从零件或装配模型生成二维工程图，自动生成视图（如主视图、剖视图、局部视图等） [[SW-工程图模板的制作]] [[SW注解小技巧]] 标注与尺寸：对工程图中的几何体添加尺寸、角度和公差 [[SW工程图切边处理]] 符号与注释：加入焊接符号、表面处理符号等，提升图纸的可读性与完整性 渲染与可视化 材质与纹理：给零件或装配体添加材质、颜色和纹理，以提高视觉效果 [[SW-开启小金球]] 光照与相机设置：调整场景中的光照、相机视角，生成更真实的渲染效果 动画与仿真：通过动画功能演示装配体的运动过程 [[SW动画]] [[SW-SMG文件]] 仿真与分析 静力学分析：进行受力、变形、应力分布的分析 热分析：分析零件或装配体在不同温度条件下的热传导和热膨胀 流体分析：进行流体流动、压力分布等的仿真 运动学分析：模拟装配体的动态运动，计算运动轨迹、速度、加速度等 数控加工与制造 CAM 功能：生成数控机床的加工路径（如铣削、车削等） 切削模拟：模拟工具与工件的接触，优化加工路径 加工工艺与材料选择：结合具体的加工工艺要求，进行材料、工艺的选择和优化 数据管理与协作 PDM 系统：SolidWorks 与产品数据管理（PDM）系统集成，管理设计文件的版本、权限及协作 Pack and Go：打包文件，进行项目分享或备份 配置管理：在同一文件中管理不同版本的设计配置（如尺寸变化、材料变化等） [[SW收藏]] [[SW链接数值]] [[SW装配体中的方程式]] 自定义功能 宏与 API 编程：通过宏或 API 接口进行自定义功能的开发，自动化常规操作 用户界面定制：根据需要定制工具栏、快捷键等，提升操作效率 协同设计与分享 设计协同：多人协作设计和实时反馈 文件导入与导出：支持多种格式的文件导入（如 STEP、IGES、STL 等），便于与其他设计软件之间的兼容与共享 ">
+<meta property='og:url' content='https://teaize.github.io/p/sw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-01-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-01-04T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="SW简明笔记">
+<meta name="twitter:description" content="界面与基本操作 界面布局：包含工具栏、特征树、文件管理器等 基本操作：视图操作（缩放、旋转、平移）、选择工具、快捷键使用等 软件设置 [[SW软件优化设置]] 零件建模 草图绘制：二维草图创建，包含直线、圆、矩形、弧线等基本几何元素 特征操作：拉伸、切割、旋转、扫掠、放样等 [[SW裁剪]] [[SW基准面]] [[23-NewNote/SW-装饰螺纹线]] [[SW异形孔向导]] 参数化设计：通过尺寸和约束实现设计的可变性和自适应性 [[基于规则的模块化设计]] 镜像与阵列：在设计中实现对称或多次重复元素 [[SW阵列]] 实体建模与曲面建模：进行复杂的曲面设计和分析 装配设计 组件插入与约束：将零件添加到装配体中并定义相对位置与运动限制 装配体运动分析：模拟各组件之间的运动和干涉检查 虚拟装配：在没有实际零件的情况下，测试装配效果 工程图与注释 工程图创建：从零件或装配模型生成二维工程图，自动生成视图（如主视图、剖视图、局部视图等） [[SW-工程图模板的制作]] [[SW注解小技巧]] 标注与尺寸：对工程图中的几何体添加尺寸、角度和公差 [[SW工程图切边处理]] 符号与注释：加入焊接符号、表面处理符号等，提升图纸的可读性与完整性 渲染与可视化 材质与纹理：给零件或装配体添加材质、颜色和纹理，以提高视觉效果 [[SW-开启小金球]] 光照与相机设置：调整场景中的光照、相机视角，生成更真实的渲染效果 动画与仿真：通过动画功能演示装配体的运动过程 [[SW动画]] [[SW-SMG文件]] 仿真与分析 静力学分析：进行受力、变形、应力分布的分析 热分析：分析零件或装配体在不同温度条件下的热传导和热膨胀 流体分析：进行流体流动、压力分布等的仿真 运动学分析：模拟装配体的动态运动，计算运动轨迹、速度、加速度等 数控加工与制造 CAM 功能：生成数控机床的加工路径（如铣削、车削等） 切削模拟：模拟工具与工件的接触，优化加工路径 加工工艺与材料选择：结合具体的加工工艺要求，进行材料、工艺的选择和优化 数据管理与协作 PDM 系统：SolidWorks 与产品数据管理（PDM）系统集成，管理设计文件的版本、权限及协作 Pack and Go：打包文件，进行项目分享或备份 配置管理：在同一文件中管理不同版本的设计配置（如尺寸变化、材料变化等） [[SW收藏]] [[SW链接数值]] [[SW装配体中的方程式]] 自定义功能 宏与 API 编程：通过宏或 API 接口进行自定义功能的开发，自动化常规操作 用户界面定制：根据需要定制工具栏、快捷键等，提升操作效率 协同设计与分享 设计协同：多人协作设计和实时反馈 文件导入与导出：支持多种格式的文件导入（如 STEP、IGES、STL 等），便于与其他设计软件之间的兼容与共享 ">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#界面与基本操作">界面与基本操作</a></li>
+        <li><a href="#零件建模">零件建模</a></li>
+        <li><a href="#装配设计">装配设计</a></li>
+        <li><a href="#工程图与注释">工程图与注释</a></li>
+        <li><a href="#渲染与可视化">渲染与可视化</a></li>
+        <li><a href="#仿真与分析">仿真与分析</a></li>
+        <li><a href="#数控加工与制造">数控加工与制造</a></li>
+        <li><a href="#数据管理与协作">数据管理与协作</a></li>
+        <li><a href="#自定义功能">自定义功能</a></li>
+        <li><a href="#协同设计与分享">协同设计与分享</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/sw%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/">SW简明笔记</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-01-04</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="界面与基本操作">界面与基本操作
+</h3><ul>
+<li>界面布局：包含工具栏、特征树、文件管理器等</li>
+<li>基本操作：视图操作（缩放、旋转、平移）、选择工具、快捷键使用等</li>
+<li>软件设置
+<ul>
+<li>[[SW软件优化设置]]</li>
+</ul>
+</li>
+</ul>
+<h3 id="零件建模">零件建模
+</h3><ul>
+<li>草图绘制：二维草图创建，包含直线、圆、矩形、弧线等基本几何元素</li>
+<li>特征操作：拉伸、切割、旋转、扫掠、放样等
+<ul>
+<li>[[SW裁剪]]</li>
+<li>[[SW基准面]]</li>
+<li>[[23-NewNote/SW-装饰螺纹线]]</li>
+<li>[[SW异形孔向导]]</li>
+</ul>
+</li>
+<li>参数化设计：通过尺寸和约束实现设计的可变性和自适应性
+<ul>
+<li>[[基于规则的模块化设计]]</li>
+</ul>
+</li>
+<li>镜像与阵列：在设计中实现对称或多次重复元素
+<ul>
+<li>[[SW阵列]]</li>
+</ul>
+</li>
+<li>实体建模与曲面建模：进行复杂的曲面设计和分析</li>
+</ul>
+<h3 id="装配设计">装配设计
+</h3><ul>
+<li>组件插入与约束：将零件添加到装配体中并定义相对位置与运动限制</li>
+<li>装配体运动分析：模拟各组件之间的运动和干涉检查</li>
+<li>虚拟装配：在没有实际零件的情况下，测试装配效果</li>
+</ul>
+<h3 id="工程图与注释">工程图与注释
+</h3><ul>
+<li>工程图创建：从零件或装配模型生成二维工程图，自动生成视图（如主视图、剖视图、局部视图等）
+<ul>
+<li>[[SW-工程图模板的制作]]</li>
+<li>[[SW注解小技巧]]</li>
+</ul>
+</li>
+<li>标注与尺寸：对工程图中的几何体添加尺寸、角度和公差
+<ul>
+<li>[[SW工程图切边处理]]</li>
+</ul>
+</li>
+<li>符号与注释：加入焊接符号、表面处理符号等，提升图纸的可读性与完整性</li>
+</ul>
+<h3 id="渲染与可视化">渲染与可视化
+</h3><ul>
+<li>材质与纹理：给零件或装配体添加材质、颜色和纹理，以提高视觉效果
+<ul>
+<li>[[SW-开启小金球]]</li>
+</ul>
+</li>
+<li>光照与相机设置：调整场景中的光照、相机视角，生成更真实的渲染效果</li>
+<li>动画与仿真：通过动画功能演示装配体的运动过程
+<ul>
+<li>[[SW动画]]</li>
+<li>[[SW-SMG文件]]</li>
+</ul>
+</li>
+</ul>
+<h3 id="仿真与分析">仿真与分析
+</h3><ul>
+<li>静力学分析：进行受力、变形、应力分布的分析</li>
+<li>热分析：分析零件或装配体在不同温度条件下的热传导和热膨胀</li>
+<li>流体分析：进行流体流动、压力分布等的仿真</li>
+<li>运动学分析：模拟装配体的动态运动，计算运动轨迹、速度、加速度等</li>
+</ul>
+<h3 id="数控加工与制造">数控加工与制造
+</h3><ul>
+<li>CAM 功能：生成数控机床的加工路径（如铣削、车削等）</li>
+<li>切削模拟：模拟工具与工件的接触，优化加工路径</li>
+<li>加工工艺与材料选择：结合具体的加工工艺要求，进行材料、工艺的选择和优化</li>
+</ul>
+<h3 id="数据管理与协作">数据管理与协作
+</h3><ul>
+<li>PDM 系统：SolidWorks 与产品数据管理（PDM）系统集成，管理设计文件的版本、权限及协作</li>
+<li>Pack and Go：打包文件，进行项目分享或备份</li>
+<li>配置管理：在同一文件中管理不同版本的设计配置（如尺寸变化、材料变化等）
+<ul>
+<li>[[SW收藏]]</li>
+<li>[[SW链接数值]]</li>
+<li>[[SW装配体中的方程式]]</li>
+</ul>
+</li>
+</ul>
+<h3 id="自定义功能">自定义功能
+</h3><ul>
+<li>宏与 API 编程：通过宏或 API 接口进行自定义功能的开发，自动化常规操作</li>
+<li>用户界面定制：根据需要定制工具栏、快捷键等，提升操作效率</li>
+</ul>
+<h3 id="协同设计与分享">协同设计与分享
+</h3><ul>
+<li>设计协同：多人协作设计和实时反馈</li>
+<li>文件导入与导出：支持多种格式的文件导入（如 STEP、IGES、STL 等），便于与其他设计软件之间的兼容与共享</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

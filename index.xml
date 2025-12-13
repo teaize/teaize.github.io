@@ -1266,131 +1266,68 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;h3 id=&#34;mermaid-信号流转框架图&#34;&gt;Mermaid 信号流转框架图
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;graph TD
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 样式定义
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef physical fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef clean fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef math fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef logic fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef output fill:#ffebee,stroke:#c62828,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 1. 物理层
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph L1 [&amp;#34;第一层：物理获取 (Acquisition)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Sens((&amp;#34;传感器&amp;#34;)) --&amp;gt; TIA[&amp;#34;前置放大 TIA&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        TIA --&amp;gt; ADC[&amp;#34;ADC 模数转换&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ADC --&amp;gt; |&amp;#34;Raw Counts (原始码)&amp;#34;| OS[&amp;#34;过采样/均值&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Sens,TIA,ADC,OS physical
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 2. 清洗层
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph L2 [&amp;#34;第二层：清洗滤波 (Cleaning)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        OS --&amp;gt; PSD[&amp;#34;锁相放大/解调&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        PSD --&amp;gt; SPIKE[&amp;#34;剔除脉冲噪声&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        SPIKE --&amp;gt; FILTER[&amp;#34;自适应滤波/卡尔曼&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        FILTER --&amp;gt; |&amp;#34;Filtered Voltage (净电压)&amp;#34;| NEXT2
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class PSD,SPIKE,FILTER clean
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 3. 修正层
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph L3 [&amp;#34;第三层：物理修正 (Correction)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        NEXT2((&amp;#34;V&amp;#34;)) --&amp;gt; ZERO_SUB[&amp;#34;减零点背景&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ZERO_SUB --&amp;gt; LIN[&amp;#34;多项式线性化&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        LIN --&amp;gt; PT_COMP[&amp;#34;温度/压力补偿&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        PT_COMP --&amp;gt; INTER_COMP[&amp;#34;交叉干扰补偿&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        INTER_COMP --&amp;gt; |&amp;#34;Physics Conc. (真浓度)&amp;#34;| NEXT3
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class ZERO_SUB,LIN,PT_COMP,INTER_COMP math
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 4. 逻辑层
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph L4 [&amp;#34;第四层：逻辑裁决 (Logic)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        NEXT3((&amp;#34;C&amp;#34;)) --&amp;gt; STATE_CHECK{&amp;#34;状态机检查&amp;#34;}
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        STATE_Check_Logic --&amp;gt; STATE_CHECK
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        STATE_CHECK --&amp;#34;正常测量&amp;#34;--&amp;gt; VALID[&amp;#34;标记: Valid&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        STATE_CHECK --&amp;#34;反吹/校准&amp;#34;--&amp;gt; HOLD[&amp;#34;标记: Hold/Cal&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        STATE_CHECK --&amp;#34;硬件报错&amp;#34;--&amp;gt; FAULT[&amp;#34;标记: Invalid&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class STATE_CHECK,VALID,HOLD,FAULT logic
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 5. 输出层
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph L5 [&amp;#34;第五层：输出格式 (Output)&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        VALID --&amp;gt; DAC[&amp;#34;4-20mA 输出&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        HOLD --&amp;gt; DAC
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        FAULT --&amp;gt; DAC
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        VALID --&amp;gt; MODBUS[&amp;#34;Modbus/RS485&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        VALID --&amp;gt; LOG[&amp;#34;历史数据存储&amp;#34;]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class DAC,MODBUS,LOG output
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 外部输入
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    STATE_Check_Logic[&amp;#34;系统状态机&amp;#34;] -.-&amp;gt; STATE_CHECK
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    %% 样式定义
+    classDef physical fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef clean fill:#e8f5e9,stroke:#2e7d32,stroke-width:2px;
+    classDef math fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    classDef logic fill:#f3e5f5,stroke:#7b1fa2,stroke-width:2px;
+    classDef output fill:#ffebee,stroke:#c62828,stroke-width:2px;
+
+    %% 1. 物理层
+    subgraph L1 [&#34;第一层：物理获取 (Acquisition)&#34;]
+        Sens((&#34;传感器&#34;)) --&gt; TIA[&#34;前置放大 TIA&#34;]
+        TIA --&gt; ADC[&#34;ADC 模数转换&#34;]
+        ADC --&gt; |&#34;Raw Counts (原始码)&#34;| OS[&#34;过采样/均值&#34;]
+    end
+    class Sens,TIA,ADC,OS physical
+
+    %% 2. 清洗层
+    subgraph L2 [&#34;第二层：清洗滤波 (Cleaning)&#34;]
+        OS --&gt; PSD[&#34;锁相放大/解调&#34;]
+        PSD --&gt; SPIKE[&#34;剔除脉冲噪声&#34;]
+        SPIKE --&gt; FILTER[&#34;自适应滤波/卡尔曼&#34;]
+        FILTER --&gt; |&#34;Filtered Voltage (净电压)&#34;| NEXT2
+    end
+    class PSD,SPIKE,FILTER clean
+
+    %% 3. 修正层
+    subgraph L3 [&#34;第三层：物理修正 (Correction)&#34;]
+        NEXT2((&#34;V&#34;)) --&gt; ZERO_SUB[&#34;减零点背景&#34;]
+        ZERO_SUB --&gt; LIN[&#34;多项式线性化&#34;]
+        LIN --&gt; PT_COMP[&#34;温度/压力补偿&#34;]
+        PT_COMP --&gt; INTER_COMP[&#34;交叉干扰补偿&#34;]
+        INTER_COMP --&gt; |&#34;Physics Conc. (真浓度)&#34;| NEXT3
+    end
+    class ZERO_SUB,LIN,PT_COMP,INTER_COMP math
+
+    %% 4. 逻辑层
+    subgraph L4 [&#34;第四层：逻辑裁决 (Logic)&#34;]
+        NEXT3((&#34;C&#34;)) --&gt; STATE_CHECK{&#34;状态机检查&#34;}
+        STATE_Check_Logic --&gt; STATE_CHECK
+        
+        STATE_CHECK --&#34;正常测量&#34;--&gt; VALID[&#34;标记: Valid&#34;]
+        STATE_CHECK --&#34;反吹/校准&#34;--&gt; HOLD[&#34;标记: Hold/Cal&#34;]
+        STATE_CHECK --&#34;硬件报错&#34;--&gt; FAULT[&#34;标记: Invalid&#34;]
+    end
+    class STATE_CHECK,VALID,HOLD,FAULT logic
+
+    %% 5. 输出层
+    subgraph L5 [&#34;第五层：输出格式 (Output)&#34;]
+        VALID --&gt; DAC[&#34;4-20mA 输出&#34;]
+        HOLD --&gt; DAC
+        FAULT --&gt; DAC
+        
+        VALID --&gt; MODBUS[&#34;Modbus/RS485&#34;]
+        VALID --&gt; LOG[&#34;历史数据存储&#34;]
+    end
+    class DAC,MODBUS,LOG output
+
+    %% 外部输入
+    STATE_Check_Logic[&#34;系统状态机&#34;] -.-&gt; STATE_CHECK
 &lt;/div&gt;
-&lt;/div&gt;</description>
+</description>
         </item>
         <item>
         <title>信号处理之频域分析</title>
@@ -2331,105 +2268,55 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;五-mermaid-实战一张标准的完全抽取法-pid&#34;&gt;五、 Mermaid 实战：一张标准的完全抽取法 P&amp;amp;ID
-&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;graph TD
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 定义样式
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef liquid stroke:#1E90FF,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef gas stroke:#2E8B57,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef electrical stroke:#FFA500,stroke-dasharray: 5 5;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef key_component fill:#fff,stroke:#d00,stroke-width:3px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 1. 探头与伴热区 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    STACK(烟囱) --&amp;gt; PROBE[采样探头]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PROBE --&amp;gt; |&amp;#34;伴热管线 (180°C)&amp;#34;| COOLER_IN((制冷器入口))
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 校准气路 (全程校准)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CAL_GAS[标气瓶] --&amp;gt; |&amp;#34;校准管 (去探头)&amp;#34;| PROBE
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 2. 除水区 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    COOLER_IN --&amp;gt; COOLER[双级电子冷凝器]:::key_component
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 排水回路 (关键)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    COOLER -.-&amp;gt; |冷凝水| PERI_PUMP(蠕动泵)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PERI_PUMP -.-&amp;gt; |废液| DRAIN[废液桶/水封]:::liquid
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 3. 预处理与保护区 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    COOLER --&amp;gt; MT[湿度报警器/阻水器]:::key_component
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MT --&amp;gt; FILTER2[二级过滤器 5μm]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 湿度联锁逻辑 (虚线)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MT -.- |&amp;#34;Interlock: 停泵&amp;#34;| PUMP_CTRL((控制逻辑)):::electrical
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 4. 动力区 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FILTER2 --&amp;gt; PUMP[采样泵]:::key_component
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PUMP_CTRL -.- PUMP
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 泵后加旁路 (调节流量/压力)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PUMP --&amp;gt; T_BYPASS((三通))
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    T_BYPASS --&amp;gt; |&amp;#34;旁路泄压 (针阀)&amp;#34;| VENT1[排空]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 5. 分析区 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    T_BYPASS --&amp;gt; FILTER3[三级精滤 0.5μm]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FILTER3 --&amp;gt; FLOW_METER[转子流量计]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FLOW_METER --&amp;gt; ANALYZER[气体分析仪 SO2/NOx/O2]:::key_component
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 6. 排放区 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    ANALYZER --&amp;gt; EXHAUST[大气平衡排气口]
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 样式应用
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class STACK,PROBE,CAL_GAS,COOLER,MT,FILTER2,PUMP,FILTER3,FLOW_METER,ANALYZER,EXHAUST gas
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    %% 定义样式
+    classDef liquid stroke:#1E90FF,stroke-width:2px;
+    classDef gas stroke:#2E8B57,stroke-width:2px;
+    classDef electrical stroke:#FFA500,stroke-dasharray: 5 5;
+    classDef key_component fill:#fff,stroke:#d00,stroke-width:3px;
+
+    %% --- 1. 探头与伴热区 ---
+    STACK(烟囱) --&gt; PROBE[采样探头]
+    PROBE --&gt; |&#34;伴热管线 (180°C)&#34;| COOLER_IN((制冷器入口))
+    
+    %% 校准气路 (全程校准)
+    CAL_GAS[标气瓶] --&gt; |&#34;校准管 (去探头)&#34;| PROBE
+
+    %% --- 2. 除水区 ---
+    COOLER_IN --&gt; COOLER[双级电子冷凝器]:::key_component
+    
+    %% 排水回路 (关键)
+    COOLER -.-&gt; |冷凝水| PERI_PUMP(蠕动泵)
+    PERI_PUMP -.-&gt; |废液| DRAIN[废液桶/水封]:::liquid
+
+    %% --- 3. 预处理与保护区 ---
+    COOLER --&gt; MT[湿度报警器/阻水器]:::key_component
+    MT --&gt; FILTER2[二级过滤器 5μm]
+    
+    %% 湿度联锁逻辑 (虚线)
+    MT -.- |&#34;Interlock: 停泵&#34;| PUMP_CTRL((控制逻辑)):::electrical
+
+    %% --- 4. 动力区 ---
+    FILTER2 --&gt; PUMP[采样泵]:::key_component
+    PUMP_CTRL -.- PUMP
+    
+    %% 泵后加旁路 (调节流量/压力)
+    PUMP --&gt; T_BYPASS((三通))
+    T_BYPASS --&gt; |&#34;旁路泄压 (针阀)&#34;| VENT1[排空]
+    
+    %% --- 5. 分析区 ---
+    T_BYPASS --&gt; FILTER3[三级精滤 0.5μm]
+    FILTER3 --&gt; FLOW_METER[转子流量计]
+    FLOW_METER --&gt; ANALYZER[气体分析仪 SO2/NOx/O2]:::key_component
+    
+    %% --- 6. 排放区 ---
+    ANALYZER --&gt; EXHAUST[大气平衡排气口]
+
+    %% 样式应用
+    class STACK,PROBE,CAL_GAS,COOLER,MT,FILTER2,PUMP,FILTER3,FLOW_METER,ANALYZER,EXHAUST gas
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;设计中的潜规则&#34;&gt;设计中的“潜规则”
+&lt;h3 id=&#34;设计中的潜规则&#34;&gt;设计中的“潜规则”
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;管径标注 (Line Sizing)：
 &lt;ul&gt;
@@ -2729,171 +2616,88 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
     &gt;状态机&lt;/a&gt; 的逻辑，分析仪就是一堆乱飞的继电器和乱跳的数字。状态机逻辑不仅决定了仪器怎么动，更决定了环保局收到的数据上打什么“标记”。例如：反吹时数据不能算超标，必须打上“保持 (Hold)”标记。&lt;/p&gt;
 &lt;h3 id=&#34;一-cems-系统状态流转图&#34;&gt;一、 CEMS 系统状态流转图
 &lt;/h3&gt;&lt;p&gt;下面这张图展示了一个典型的完全抽取式 CEMS 系统（含反吹、自动校准功能）的软件逻辑&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;stateDiagram-v2
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 定义全局样式
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef measure fill:#90EE90,color:black,stroke:#006400,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef maintain fill:#FFD700,color:black,stroke:#DAA520,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef fault fill:#FF6347,color:white,stroke:#8B0000,stroke-width:2px;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef init fill:#D3D3D3,color:black,stroke:#696969;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 初始状态 ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    [*] --&amp;gt; WARMUP : 上电启动
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 1. 预热状态
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;预热/自检 (Warm-up)&amp;#34; as WARMUP
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP : 动作：加热炉/探头升温
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP : 数据：无效 (Invalid)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP : 泵：关闭
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP --&amp;gt; MEASURE : 温度达标 &amp;amp;&amp;amp; 无故障
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    WARMUP --&amp;gt; FAULT : 自检失败 (如传感器断路)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 2. 测量主循环
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;正常测量 (Measurement)&amp;#34; as MEASURE
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class MEASURE measure
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE : 动作：采样阀开，泵开
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE : 数据：正常输出 (Valid)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE : 逻辑：实时计算浓度
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 周期性任务 (中断测量) ---
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 3. 反吹流程
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;系统反吹 (Blowback)&amp;#34; as PURGE_CYCLE {
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;高压反吹 (Purging)&amp;#34; as BLOW
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;样气置换/恢复 (Recovery)&amp;#34; as RECOV
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        BLOW --&amp;gt; RECOV : 反吹时间到 (如30s)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        BLOW : 动作：反吹阀开，采样泵停/隔离
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        RECOV : 动作：切回采样，等待气体稳定
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class PURGE_CYCLE maintain
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE --&amp;gt; PURGE_CYCLE : 定时器触发 (如每4小时)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PURGE_CYCLE --&amp;gt; MEASURE : 恢复时间到 (如120s)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 4. 校准流程
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;校准 (Calibration)&amp;#34; as CALIBRATION {
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;校零 (Zero Cal)&amp;#34; as ZERO
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        state &amp;#34;校标 (Span Cal)&amp;#34; as SPAN
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ZERO --&amp;gt; SPAN : 零点成功 -&amp;gt; 切标气
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        ZERO : 动作：切零气阀
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        SPAN : 动作：切标气阀
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class CALIBRATION maintain
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE --&amp;gt; CALIBRATION : 用户指令 或 定时触发
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CALIBRATION --&amp;gt; MEASURE : 校准完成/退出
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 5. 故障状态
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;系统故障 (System Fault)&amp;#34; as FAULT
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class FAULT fault
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT : 触发条件：温度低、流量低、通讯断
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT : 动作：切断加热、停泵 (保护)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT : 数据：故障标记 (Fault Flag)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 全局故障中断
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    MEASURE --&amp;gt; FAULT : 发生故障
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    PURGE_CYCLE --&amp;gt; FAULT : 发生故障
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CALIBRATION --&amp;gt; FAULT : 发生故障
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT --&amp;gt; WARMUP : 故障复位/重启
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    FAULT --&amp;gt; MEASURE : 故障清除 (非致命)
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 数据标记说明
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    note right of PURGE_CYCLE
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        关键逻辑：
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        进入非测量状态时，
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        数据必须 &amp;#34;保持 (Hold)&amp;#34;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        不能输出 0 或 20.9%
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end note
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  stateDiagram-v2
+    %% 定义全局样式
+    classDef measure fill:#90EE90,color:black,stroke:#006400,stroke-width:2px;
+    classDef maintain fill:#FFD700,color:black,stroke:#DAA520,stroke-width:2px;
+    classDef fault fill:#FF6347,color:white,stroke:#8B0000,stroke-width:2px;
+    classDef init fill:#D3D3D3,color:black,stroke:#696969;
+
+    %% --- 初始状态 ---
+    [*] --&gt; WARMUP : 上电启动
+
+    %% 1. 预热状态
+    state &#34;预热/自检 (Warm-up)&#34; as WARMUP
+    WARMUP : 动作：加热炉/探头升温
+    WARMUP : 数据：无效 (Invalid)
+    WARMUP : 泵：关闭
+    
+    WARMUP --&gt; MEASURE : 温度达标 &amp;&amp; 无故障
+    WARMUP --&gt; FAULT : 自检失败 (如传感器断路)
+
+    %% 2. 测量主循环
+    state &#34;正常测量 (Measurement)&#34; as MEASURE
+    class MEASURE measure
+    MEASURE : 动作：采样阀开，泵开
+    MEASURE : 数据：正常输出 (Valid)
+    MEASURE : 逻辑：实时计算浓度
+
+    %% --- 周期性任务 (中断测量) ---
+    
+    %% 3. 反吹流程
+    state &#34;系统反吹 (Blowback)&#34; as PURGE_CYCLE {
+        state &#34;高压反吹 (Purging)&#34; as BLOW
+        state &#34;样气置换/恢复 (Recovery)&#34; as RECOV
+        
+        BLOW --&gt; RECOV : 反吹时间到 (如30s)
+        BLOW : 动作：反吹阀开，采样泵停/隔离
+        
+        RECOV : 动作：切回采样，等待气体稳定
+    }
+    class PURGE_CYCLE maintain
+
+    MEASURE --&gt; PURGE_CYCLE : 定时器触发 (如每4小时)
+    PURGE_CYCLE --&gt; MEASURE : 恢复时间到 (如120s)
+    
+    %% 4. 校准流程
+    state &#34;校准 (Calibration)&#34; as CALIBRATION {
+        state &#34;校零 (Zero Cal)&#34; as ZERO
+        state &#34;校标 (Span Cal)&#34; as SPAN
+        
+        ZERO --&gt; SPAN : 零点成功 -&gt; 切标气
+        ZERO : 动作：切零气阀
+        SPAN : 动作：切标气阀
+    }
+    class CALIBRATION maintain
+
+    MEASURE --&gt; CALIBRATION : 用户指令 或 定时触发
+    CALIBRATION --&gt; MEASURE : 校准完成/退出
+
+    %% 5. 故障状态
+    state &#34;系统故障 (System Fault)&#34; as FAULT
+    class FAULT fault
+    FAULT : 触发条件：温度低、流量低、通讯断
+    FAULT : 动作：切断加热、停泵 (保护)
+    FAULT : 数据：故障标记 (Fault Flag)
+
+    %% 全局故障中断
+    MEASURE --&gt; FAULT : 发生故障
+    PURGE_CYCLE --&gt; FAULT : 发生故障
+    CALIBRATION --&gt; FAULT : 发生故障
+    
+    FAULT --&gt; WARMUP : 故障复位/重启
+    FAULT --&gt; MEASURE : 故障清除 (非致命)
+
+    %% 数据标记说明
+    note right of PURGE_CYCLE
+        关键逻辑：
+        进入非测量状态时，
+        数据必须 &#34;保持 (Hold)&#34;
+        不能输出 0 或 20.9%
+    end note
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;二-深度解剖状态背后的潜规则&#34;&gt;二、 深度解剖：状态背后的“潜规则”
+&lt;h3 id=&#34;二-深度解剖状态背后的潜规则&#34;&gt;二、 深度解剖：状态背后的“潜规则”
 &lt;/h3&gt;&lt;p&gt;看懂了图，我们还要看懂图背后的工程逻辑。这是写 PLC 程序或嵌入式代码的核心。&lt;/p&gt;
 &lt;h4 id=&#34;1-预热状态-warm-up--严厉的门卫&#34;&gt;1. 预热状态 (Warm-up) —— 严厉的门卫
 &lt;/h4&gt;&lt;p&gt;为什么不能一上电就测量？&lt;/p&gt;

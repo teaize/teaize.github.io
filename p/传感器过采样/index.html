@@ -1,8 +1,750 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="通常我们认为：如果你的尺子最小刻度是 1mm，你就绝对读不出 0.1mm 的长度。 但在信号处理里，我们能！ 只要你的手“抖”得够均匀。\n这是一个非常反直觉，但却让电子工程师为之着迷的魔法，叫做 “过采样技术” (Oversampling)。\n">
+<title>传感器过采样</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E4%BC%A0%E6%84%9F%E5%99%A8%E8%BF%87%E9%87%87%E6%A0%B7/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="传感器过采样">
+<meta property='og:description' content="通常我们认为：如果你的尺子最小刻度是 1mm，你就绝对读不出 0.1mm 的长度。 但在信号处理里，我们能！ 只要你的手“抖”得够均匀。\n这是一个非常反直觉，但却让电子工程师为之着迷的魔法，叫做 “过采样技术” (Oversampling)。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E4%BC%A0%E6%84%9F%E5%99%A8%E8%BF%87%E9%87%87%E6%A0%B7/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="传感器过采样">
+<meta name="twitter:description" content="通常我们认为：如果你的尺子最小刻度是 1mm，你就绝对读不出 0.1mm 的长度。 但在信号处理里，我们能！ 只要你的手“抖”得够均匀。\n这是一个非常反直觉，但却让电子工程师为之着迷的魔法，叫做 “过采样技术” (Oversampling)。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#一-核心原理为什么平均能增加精度">一、 核心原理：为什么平均能增加精度？</a>
+          <ol>
+            <li><a href="#1-静态测量失败">1. 静态测量（失败）</a></li>
+            <li><a href="#2-动态测量过采样成功">2. 动态测量（过采样成功！）</a></li>
+          </ol>
+        </li>
+        <li><a href="#二-那个4-倍--1-位的公式是怎么来的">二、 那个“4 倍 = 1 位”的公式是怎么来的？</a></li>
+        <li><a href="#三-一个必须满足的坑抖动-dithering">三、 一个必须满足的“坑”：抖动 (Dithering)</a></li>
+        <li><a href="#四案例代码">四、案例代码</a></li>
+        <li><a href="#小结">小结</a></li>
+        <li><a href="#思考">思考🤔</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BC%A0%E6%84%9F%E5%99%A8%E8%BF%87%E9%87%87%E6%A0%B7/">传感器过采样</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-13</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>通常我们认为：如果你的尺子最小刻度是 1mm，你就绝对读不出 0.1mm 的长度。 但在信号处理里，<strong>我们能！</strong> 只要你的手“抖”得够均匀。</p>
+<p>这是一个非常反直觉，但却让电子工程师为之着迷的魔法，叫做 “过采样技术” (Oversampling)。</p>
+<h3 id="一-核心原理为什么平均能增加精度">一、 核心原理：为什么平均能增加精度？
+</h3><p>假设你有一个 10 位的 ADC，它的电压测量范围是 0~5V。</p>
+<ul>
+<li>最小刻度 (LSB)： $\approx 5\text{mV}$。</li>
+<li>现状： 只要电压在 3.000V 到 3.004V 之间，ADC 读出来的数永远是 3.000V。你丢失了小数点后的精度。</li>
+</ul>
+<h4 id="1-静态测量失败">1. 静态测量（失败）
+</h4><p>如果你测一个 3.002V 的真实信号。</p>
+<ul>
+<li>第 1 次测：3.000V</li>
+<li>第 100 次测：3.000V</li>
+<li>平均值： 3.000V。</li>
+<li>结论： 无论你平均多少次，精度没变，还是丢失了 0.002V。</li>
+</ul>
+<h4 id="2-动态测量过采样成功">2. 动态测量（过采样成功！）
+</h4><p>现在，我们在信号上叠加一点<strong>白噪声</strong>（或者信号本身自带噪声），让信号在 3.002V 上下抖动，抖动幅度大约 5mV。这就意味着，信号有时候会瞬间跳过 <strong>3.0025V</strong> 这个门槛（ADC 四舍五入的边界）。</p>
+<ul>
+<li>真实情况： 信号在抖动，有 40% 的概率跳到了 3.005V 以上（被 ADC 读作 3.005V），有 60% 的概率在下面（被 ADC 读作 3.000V）。</li>
+<li>测量 10 次的结果：
+<ul>
+<li>3.000, 3.000, 3.005, 3.000, 3.005, 3.000, 3.005, 3.000, 3.000, 3.005</li>
+<li>(6 个 3.000，4 个 3.005)</li>
+</ul>
+</li>
+<li>算平均值：$$\frac{(6 \times 3.000) + (4 \times 3.005)}{10} = \mathbf{3.002V}$$</li>
+</ul>
+<p>见证奇迹：虽然你的 ADC 每次只能读 3.000 或 3.005，但通过平均，你竟然算出了 3.002V 这个本来读不出来的数值！</p>
+<p>这就是过采样的本质：<strong>利用噪声（抖动），把“看不见的小数位”转化为了“出现的概率”，再通过统计平均把它还原出来</strong>。</p>
+<h3 id="二-那个4-倍--1-位的公式是怎么来的">二、 那个“4 倍 = 1 位”的公式是怎么来的？
+</h3><p>这里有一个非常漂亮的数学推导（信噪比公式）。</p>
+<ol>
+<li>信号 (Signal) 的累加特性：
+<ul>
+<li>如果你把 4 个样本相加。信号是同相位的（直流或慢变信号）。</li>
+<li>总信号强度 = $4 \times S$。</li>
+</ul>
+</li>
+<li>噪声 (Noise) 的累加特性：
+<ul>
+<li><strong>白噪声是随机的（不相关）。统计学告诉我们，随机噪声相加，不是线性增加，而是按平方根增加</strong>。</li>
+<li>总噪声强度 = $\sqrt{4} \times N = 2 \times N$。</li>
+</ul>
+</li>
+<li>信噪比 (SNR) 的变化：$$\text{新的SNR} = \frac{\text{总信号}}{\text{总噪声}} = \frac{4S}{2N} = 2 \times \frac{S}{N}$$
+<ul>
+<li><strong>结论：</strong> 采样次数翻 4 倍，信噪比翻 2 倍。</li>
+</ul>
+</li>
+<li>位数的含义：
+<ul>
+<li>在二进制里，翻 2 倍 = 增加 1 位 (1 bit)。</li>
+<li>比如：二进制 <code>11</code> (3) $\to$ 左移一位/乘 2 $\to$ <code>110</code> (6)。
+最终公式：
+想要增加 $w$ 位分辨率，需要的过采样倍数 $f_{os}$ 是：$$f_{os} = 4^w$$</li>
+</ul>
+</li>
+</ol>
+<ul>
+<li>增加 1 位 (分辨率翻倍)： 需要 $4^1 = 4$ 倍采样。</li>
+<li>增加 2 位 (分辨率 x4)： 需要 $4^2 = 16$ 倍采样。</li>
+<li>增加 3 位 (分辨率 x8)： 需要 $4^3 = 64$ 倍采样。</li>
+<li>增加 4 位 (分辨率 x16)： 需要 $4^4 = 256$ 倍采样。</li>
+</ul>
+<h3 id="三-一个必须满足的坑抖动-dithering">三、 一个必须满足的“坑”：抖动 (Dithering)
+</h3><p>你可能注意到了，我刚才强调了一个前提：<strong>必须有噪声</strong>。如果你的信号非常非常干净，就像一潭死水，完全不抖动（或者噪声小于 0.5 LSB）。</p>
+<ul>
+<li>那么无论你采多少次，读数永远是固定的。平均值也变不了。</li>
+<li>这时候，过采样失效。</li>
+</ul>
+<p>工程师的骚操作： 在高端仪器设计中，如果信号太干净，我们甚至会<strong>故意人为注入一点白噪声</strong>（这一步叫 <strong>Dithering / 抖动</strong>），然后再进行过采样。</p>
+<ul>
+<li>第一步： 加噪声（把信号弄脏）。</li>
+<li>第二步： 快速采样（捕捉概率）。</li>
+<li>第三步： 求平均（把噪声滤掉，同时提取出高精度信号）。</li>
+</ul>
+<p>这就像为了把地扫干净，先把灰尘扬起来再吸走一样，听起来疯狂，但非常有效。</p>
+<h3 id="四案例代码">四、案例代码
+</h3><p>我们可以用几行 Python 代码来验证这个“4 倍定律”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 1. 设定真实电压 (这是上帝视角，ADC不知道)</span>
+</span></span><span class="line"><span class="cl"><span class="n">true_voltage</span> <span class="o">=</span> <span class="mf">3.14159</span>  <span class="c1"># 我们想测出小数点后5位</span>
+</span></span><span class="line"><span class="cl"><span class="n">adc_resolution</span> <span class="o">=</span> <span class="mf">1.0</span>    <span class="c1"># ADC只能分辨整数 (0, 1, 2, 3, 4...)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 2. 模拟单次测量 (1000次)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 如果没有噪声，np.round(3.14159) 永远是 3.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">measurements_raw</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">np</span><span class="o">.</span><span class="n">full</span><span class="p">(</span><span class="mi">1000</span><span class="p">,</span> <span class="n">true_voltage</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;单次测量平均值 (无噪声): </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">measurements_raw</span><span class="p">)</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 结果: 3.0 (误差巨大)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 3. 模拟过采样 (加入噪声 + 平均)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 增加 4 位分辨率 -&gt; 需要 4^4 = 256 倍过采样</span>
+</span></span><span class="line"><span class="cl"><span class="n">n_samples</span> <span class="o">=</span> <span class="mi">256</span>
+</span></span><span class="line"><span class="cl"><span class="n">noise_level</span> <span class="o">=</span> <span class="mf">0.5</span> <span class="c1"># 噪声必须足够跨越量化台阶</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 进行 100 组实验</span>
+</span></span><span class="line"><span class="cl"><span class="n">results</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">100</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 模拟采集 256 个点，每个点都带有随机噪声</span>
+</span></span><span class="line"><span class="cl">    <span class="n">samples</span> <span class="o">=</span> <span class="n">true_voltage</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">random</span><span class="o">.</span><span class="n">normal</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">noise_level</span><span class="p">,</span> <span class="n">n_samples</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 模拟 ADC 的量化过程 (强制变成整数)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">digitized_samples</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">round</span><span class="p">(</span><span class="n">samples</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1"># 过采样核心：求平均</span>
+</span></span><span class="line"><span class="cl">    <span class="n">avg_result</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">digitized_samples</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">results</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">avg_result</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;过采样(</span><span class="si">{</span><span class="n">n_samples</span><span class="si">}</span><span class="s2">倍)测量平均值: </span><span class="si">{</span><span class="n">np</span><span class="o">.</span><span class="n">mean</span><span class="p">(</span><span class="n">results</span><span class="p">)</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="c1"># 结果通常是: 3.14xx (非常接近真实值！)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>程序输出</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">单次测量平均值</span> <span class="p">(</span><span class="n">无噪声</span><span class="p">):</span> <span class="mf">3.0</span>
+</span></span><span class="line"><span class="cl"><span class="n">过采样</span><span class="p">(</span><span class="mi">256</span><span class="n">倍</span><span class="p">)</span><span class="n">测量平均值</span><span class="p">:</span> <span class="mf">3.1372</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="小结">小结
+</h3><ul>
+<li>过采样 (Oversampling) 是用“<strong>时间换精度</strong>”的策略。</li>
+<li>代价： 你的 ADC 速度要非常快。
+<ul>
+<li>为了得到 1 个高精度的 10Hz 数据，你可能需要让 ADC 以 2560Hz 的速度狂奔。</li>
+</ul>
+</li>
+<li>公式： <strong>$4^n$</strong>。每多采 4 倍，分辨率加 1 位。</li>
+<li>灵魂： <strong>噪声 (Noise)</strong>。在这里，噪声不是敌人，而是帮我们“撬开”精度大门的助攻手。</li>
+</ul>
+<h3 id="思考">思考🤔
+</h3><p>这和前面讲的调制与解调非常的相似</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -1,8 +1,727 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="现在，我们要解决两个更让现场工程师抓狂的问题：\n“快与稳的悖论”： 想要读数稳，反应就慢；想要反应快，读数就乱跳。怎么兼得？ “幽灵漂移”： 明明采用了切光轮/脉冲灯，为什么过了一周零点还是歪了？ 这里涉及到两个非常经典的信号处理策略：自适应数字滤波 和 自动调零。\n">
+<title>快与稳的悖论</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="快与稳的悖论">
+<meta property='og:description' content="现在，我们要解决两个更让现场工程师抓狂的问题：\n“快与稳的悖论”： 想要读数稳，反应就慢；想要反应快，读数就乱跳。怎么兼得？ “幽灵漂移”： 明明采用了切光轮/脉冲灯，为什么过了一周零点还是歪了？ 这里涉及到两个非常经典的信号处理策略：自适应数字滤波 和 自动调零。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-11T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-11T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="快与稳的悖论">
+<meta name="twitter:description" content="现在，我们要解决两个更让现场工程师抓狂的问题：\n“快与稳的悖论”： 想要读数稳，反应就慢；想要反应快，读数就乱跳。怎么兼得？ “幽灵漂移”： 明明采用了切光轮/脉冲灯，为什么过了一周零点还是歪了？ 这里涉及到两个非常经典的信号处理策略：自适应数字滤波 和 自动调零。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#第一关自适应滤波--智能减震器">第一关：自适应滤波 —— “智能减震器”</a></li>
+        <li><a href="#2-高端解法自适应滤波器-smart-filter">2. 高端解法：自适应滤波器 (Smart Filter)</a></li>
+        <li><a href="#第二关自动调零-auto-zero--给仪表清零">第二关：自动调零 (Auto-Zero) —— 给仪表“清零”</a></li>
+        <li><a href="#第三关温度系数--电阻的热胀冷缩">第三关：温度系数 —— 电阻的“热胀冷缩”</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/">快与稳的悖论</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-11</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>现在，我们要解决两个更让现场工程师抓狂的问题：</p>
+<ul>
+<li>“<strong>快与稳的悖论</strong>”： 想要读数稳，反应就慢；想要反应快，读数就乱跳。怎么兼得？</li>
+<li>“<strong>幽灵漂移</strong>”： 明明采用了切光轮/脉冲灯，为什么过了一周零点还是歪了？</li>
+</ul>
+<p>这里涉及到两个非常经典的信号处理策略：自适应数字滤波 和 自动调零。</p>
+<h3 id="第一关自适应滤波--智能减震器">第一关：自适应滤波 —— “智能减震器”
+</h3><ol>
+<li>工程师的困境：T90 vs. 噪声</li>
+</ol>
+<ul>
+<li>T90 (响应时间)： 环保局要求，当烟气浓度突变时，你的仪表要在几十秒内反应过来。</li>
+<li>噪声 (Noise)： 信号里总是有白噪声在跳动。</li>
+</ul>
+<p>常规解法（滑动平均 Moving Average）：CPU 像一个收银员，手里拿着一个计算器：“我不看现在的瞬时值，我看过去 10 秒的平均值。”$$\text{显示值} = \frac{V_1 + V_2 + … + V_{10}}{10}$$</p>
+<ul>
+<li>问题来了：
+<ul>
+<li>如果你平均 100 个 数据（重滤波）：读数稳如老狗，但是反应迟钝。烟气都超标一分钟了，你还在慢慢爬坡。</li>
+<li>如果你只平均 5 个 数据（轻滤波）：反应极快，但读数像心电图一样乱跳。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-高端解法自适应滤波器-smart-filter">2. 高端解法：自适应滤波器 (Smart Filter)
+</h3><p>聪明的算法不会死板地用固定的平均时间，它会“看人下菜碟”。它会实时计算“当前的变化率” (Delta)。</p>
+<ul>
+<li>场景 A：平稳工况
+<ul>
+<li>监测： 现在的测量值 $V_{now}$ 和上一秒的值 $V_{last}$ 差值很小（比如变化 &lt; 1%）。</li>
+<li>判断： “现在锅炉运行很稳，这点波动肯定是噪声。”</li>
+<li>动作： <strong>加大滤波力度！</strong> 把过去 60 秒的数据拿来平均。</li>
+<li>效果： 屏幕上的线条平滑得像直线。</li>
+</ul>
+</li>
+<li>场景 B：突发工况（如喷氨、起炉）
+<ul>
+<li>监测： 突然， $V_{now}$ 比 $V_{last}$ 激增了 20%！</li>
+<li>判断： “这不是噪声！这是真的浓度突变！出大事了！”</li>
+<li>动作： <strong>瞬间扔掉滤波器！</strong> 甚至直接显示瞬时值，或者把平均时间缩短到 1 秒。</li>
+<li>效果： 读数直线飙升，瞬间跟上工况变化。</li>
+</ul>
+</li>
+</ul>
+<p>这就是为什么你在看仪表时，平时它很稳，但一旦给标气，它“噌”地一下就上去了。不是它反应本来就那么快，是算法帮你“换挡”了。</p>
+<h3 id="第二关自动调零-auto-zero--给仪表清零">第二关：自动调零 (Auto-Zero) —— 给仪表“清零”
+</h3><ol>
+<li>为什么还需要调零？</li>
+</ol>
+<p>你可能会问：“我们不是用了切光轮/脉冲灯了吗？不是已经把温漂减掉了吗？”很遗憾，减得不彻底。切光轮只能扣除探测器和电路的漂移。但它<strong>扣除不了光路本身的物理变化</strong>。</p>
+<ul>
+<li>例子： 如果测量室的窗片（Window）慢慢蒙上了一层极其均匀的薄雾（油气），或者镜片慢慢变黄了。</li>
+<li>后果： $I_{meas}$ 会慢慢变小。仪表会以为是有气体在吸收光，导致读数正漂。</li>
+</ul>
+<p>这种几小时甚至几天的极慢速漂移，切光轮（几十 Hz）是无能为力的。</p>
+<ol start="2">
+<li>解决方案：电磁阀的“偷梁换柱”</li>
+</ol>
+<p>在痕量分析仪（特别是测 CO 或 UVF SO2）里，你会听到每隔几小时，机柜里就“咔哒”一声响。这是 Auto-Zero Solenoid Valve (自动调零电磁阀) 在动作。</p>
+<p>算法逻辑：</p>
+<ol>
+<li>测量模式 ：
+<ul>
+<li>阀门让样气进入气室。</li>
+<li>读数 = 样气信号 + 脏背景。</li>
+</ul>
+</li>
+<li>调零模式 （比如每 4 小时一次）：
+<ul>
+<li>CPU 启动电磁阀，切断样气。</li>
+<li>让样气通过一个内部的 Scrubber (吸附剂/洗涤器)，把 $\text{SO}_2$ 或是 CO 过滤干净，变成零气。</li>
+<li>此时气室里只有“脏背景”。</li>
+<li>CPU 记录： “哦，原来现在就算没有气，也有 0.5V 的电压啊。记下来，这是新的零点偏置 (Zero Offset)。”</li>
+</ul>
+</li>
+<li>恢复测量：
+<ul>
+<li>切回样气。</li>
+<li>$$\text{最终读数} = \text{当前测量值} - \text{刚才记下的 0.5V}$$
+这就是为什么高端仪表可以无人值守运行好几个月，零点依然不飘。因为它自己会“每天洗几次澡”。</li>
+</ul>
+</li>
+</ol>
+<h3 id="第三关温度系数--电阻的热胀冷缩">第三关：温度系数 —— 电阻的“热胀冷缩”
+</h3><p>这是硬件电路设计中最隐蔽的“精度杀手”。</p>
+<ol>
+<li>那个 1G$\Omega$ 的大电阻</li>
+</ol>
+<p>还记得我们用来做 I/V 转换的那个 1G$\Omega$ (10 亿欧姆) 反馈电阻吗？$$V = I \times R$$</p>
+<ul>
+<li>理想情况： 电阻永远是 1,000,000,000 $\Omega$。</li>
+<li>现实情况： 所有电阻都有 温度系数 (TCR, Temperature Coefficient of Resistance)。
+<ul>
+<li>普通电阻的 TCR 可能是 100 ppm/°C。</li>
+<li>这意味着：温度每变 1°C，电阻值就变万分之一。</li>
+</ul>
+</li>
+</ul>
+<ol start="2">
+<li>灾难推演</li>
+</ol>
+<ul>
+<li>早晚温差 20°C。</li>
+<li>电阻值变化：$20 \times 100\text{ppm} = 2000\text{ppm} = 0.2%$。</li>
+<li>后果： 你的测量结果会凭空产生 0.2% 的误差。对于痕量分析来说，0.2% 的满量程误差可能就是几十 ppb，直接导致数据超标。</li>
+</ul>
+<ol start="2">
+<li>解决方案：<strong>恒温舱</strong> (The Oven)</li>
+</ol>
+<p>这也是为什么 CEMS 分析仪的核心光具座通常都要包裹厚厚的保温棉，并且要加热到 <strong>45°C 或 50°C</strong>。</p>
+<ul>
+<li>目的： 不是为了让气体舒服，而是为了“烤电阻”和“烤探测器”**。</li>
+<li>逻辑： 既然电阻随温度变，那我就死死地<strong>把温度锁在 45°C</strong>。</li>
+<li>硬件细节： 你会发现前置放大板通常直接贴在发热的光学底板上，或者有一个专门的铝盒罩着它。</li>
+</ul>
+<h3 id="总结">总结
+</h3><p>信号处理不仅仅是公式，<strong>它是对物理世界缺陷的补救</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>问题</strong></th>
+          <th><strong>物理缺陷</strong></th>
+          <th><strong>信号处理补救</strong> (补丁)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>读数乱跳</td>
+          <td>瞬时噪声大</td>
+          <td>滑动平均 (Moving Average)</td>
+      </tr>
+      <tr>
+          <td>反应太慢</td>
+          <td>滤波导致滞后</td>
+          <td>自适应滤波 (Adaptive Filter)</td>
+      </tr>
+      <tr>
+          <td>长期漂移</td>
+          <td>镜片脏/光路变</td>
+          <td>自动调零 (Auto-Zero Valve)</td>
+      </tr>
+      <tr>
+          <td>量程不够</td>
+          <td>ADC 位数有限</td>
+          <td>自动增益 (Auto-Ranging)</td>
+      </tr>
+      <tr>
+          <td>昼夜温差</td>
+          <td>电阻阻值变化</td>
+          <td>恒温控制 (Oven Control)</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>现在的分析仪，其实就是 <strong>20% 的物理/化学原理 + 80% 的信号处理“补丁”</strong>。你看懂了这些补丁，你就看懂了这台仪器的灵魂。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

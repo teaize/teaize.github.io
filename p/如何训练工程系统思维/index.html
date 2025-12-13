@@ -1,8 +1,648 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第一步：从“What”到“Why” —— 逆向工程思维 很多工程师看到一台高端进口仪表（比如西门子的 CEMS），看到的是“它有一个参比气室”。而设计思维要求你多问一步：“为什么它必须有这个气室？如果去掉它，哪条物理定律会惩罚这台机器？”\n">
+<title>如何训练工程系统思维</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="如何训练工程系统思维">
+<meta property='og:description' content="第一步：从“What”到“Why” —— 逆向工程思维 很多工程师看到一台高端进口仪表（比如西门子的 CEMS），看到的是“它有一个参比气室”。而设计思维要求你多问一步：“为什么它必须有这个气室？如果去掉它，哪条物理定律会惩罚这台机器？”\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-02T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="如何训练工程系统思维">
+<meta name="twitter:description" content="第一步：从“What”到“Why” —— 逆向工程思维 很多工程师看到一台高端进口仪表（比如西门子的 CEMS），看到的是“它有一个参比气室”。而设计思维要求你多问一步：“为什么它必须有这个气室？如果去掉它，哪条物理定律会惩罚这台机器？”\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#第一步从what到why--逆向工程思维">第一步：从“What”到“Why” —— 逆向工程思维</a></li>
+        <li><a href="#第二步建立思维模型库--抽象化能力">第二步：建立“思维模型库” —— 抽象化能力</a></li>
+        <li><a href="#第三步回到第一性原理--物理直觉">第三步：回到“第一性原理” —— 物理直觉</a></li>
+        <li><a href="#第四步极限思维--把工况推向无穷大">第四步：极限思维 —— 把工况推向无穷大</a></li>
+      </ol>
+    </li>
+    <li><a href="#案例pt100">案例：PT100</a>
+      <ol>
+        <li><a href="#1问题模型为什么-2-根线不行">1、问题模型：为什么 2 根线不行</a></li>
+        <li><a href="#2解决方案3-线制的数学减法">2、解决方案：3 线制的“数学减法”</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%A6%82%E4%BD%95%E8%AE%AD%E7%BB%83%E5%B7%A5%E7%A8%8B%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/">如何训练工程系统思维</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-02</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="第一步从what到why--逆向工程思维">第一步：从“What”到“Why” —— 逆向工程思维
+</h3><p>很多工程师看到一台高端进口仪表（比如西门子的 CEMS），看到的是“它有一个参比气室”。而设计思维要求你多问一步：“为什么它必须有这个气室？如果去掉它，哪条物理定律会惩罚这台机器？”</p>
+<ul>
+<li>练习方法：
+<ul>
+<li>看到任何一个奇怪的设计细节（比如一段弯曲的管路、一个多余的电容、一个看起来很多余的校准步骤），不要认为它是“惯例”。</li>
+<li>多问： “设计师在防御什么？”</li>
+<li>假设： “如果我把这个去掉，是在高温下会死？还是在零点漂移时会死？”</li>
+<li>结论： 一旦你找到了它防御的那个“敌人”（共模干扰、热传导、电磁噪声），你就掌握了一个模型。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第二步建立思维模型库--抽象化能力">第二步：建立“思维模型库” —— 抽象化能力
+</h3><p>所谓模型思维，就是把具体的物理问题，抽象成通用的数学或逻辑结构。当你不再把“温度补偿”看作是修温度的，而是看作“<strong>输入 - 输出修正模型</strong>”时，你就会发现：</p>
+<ul>
+<li>修温度可以用这个公式。</li>
+<li>修压力可以用这个公式。</li>
+<li>甚至修“传感器老化导致的灵敏度下降”，本质上也是同一个数学模型（$y = kx + b$，其中 $k$ 和 $b$ 是随时间变化的函数）。</li>
+</ul>
+<p>你需要建立的核心模型库包括：</p>
+<ol>
+<li>黑盒模型： 任何器件都是 <code>输入 -&gt; [传递函数 + 干扰] -&gt; 输出</code>。设计的目的就是最大化传递函数，最小化干扰。</li>
+<li>负反馈模型： 系统必须知道自己“错”了，才能改。所以必须有回路（闭环）。</li>
+<li>信噪比（SNR）模型： 世界上没有绝对精准，只有信号比噪声强多少。差分设计的本质就是压低分母（噪声）。</li>
+<li>冗余模型： 既然一定会坏，那就准备两套（无论是硬件冗余还是信息冗余）。</li>
+</ol>
+<h3 id="第三步回到第一性原理--物理直觉">第三步：回到“第一性原理” —— 物理直觉
+</h3><p>所有的工程技巧，最终都服务于底层的物理定律。</p>
+<ul>
+<li>朗伯 - 比尔定律告诉我们要关注光强 $I$ 和路径 $L$。</li>
+<li>理想气体状态方程告诉我们要关注 $P$ 和 $T$。</li>
+<li>能斯特方程告诉我们氧化锆的电势与温度 $T$ 成正比。</li>
+</ul>
+<p>养成习惯： 在设计任何传感器应用时，把它的基础物理公式写在纸上，盯着公式里的每一个变量问自己：“这个变量在现场会变吗？如果变了，我怎么通过设计把它按住？”</p>
+<h3 id="第四步极限思维--把工况推向无穷大">第四步：极限思维 —— 把工况推向无穷大
+</h3><p>这是发现设计漏洞的最好办法。在脑海里进行思想实验：</p>
+<ul>
+<li>“如果环境温度变成了 $1000^\circ C$，我的设计哪里先挂？” -&gt; 让你意识到热隔离的重要性。</li>
+<li>“如果信号线断了（阻抗无穷大），我的读数是几？” -&gt; 让你意识到 Fail-Safe 设计的重要性。</li>
+<li>“如果背景气体全是水（100% 湿度），我的读数会偏多少？” -&gt; 让你意识到交叉干扰补偿的重要性。</li>
+</ul>
+<h2 id="案例pt100">案例：PT100
+</h2><p>工业用的 PT100 通常包含三根引线，网上看到的解释是第三根线上用来补偿的，但具体原理还没有研究过</p>
+<h3 id="1问题模型为什么-2-根线不行">1、问题模型：为什么 2 根线不行
+</h3><p>PT100 的原理是电阻随温度变化（PT 表示铂、100 表示 $0^\circ C$ 时 $100\Omega$）。 CEMS 现场，探头在烟囱上，分析仪在小屋里，中间可能隔着十几米（例如 50m）长的电缆。</p>
+<p>2 线制的困境： 当我们用万用表或变送器测量电阻时，电流必须流个来回
+$$R_{测量值} = R_{导线A} + R_{PT100} + R_{导线B}$$</p>
+<ul>
+<li>误差来源： 铜导线是有电阻的。50 米长的截面积 $1.0mm^2$ 铜线，往返电阻约为 $1.7\Omega$。</li>
+<li>后果：PT100 的灵敏度约为 $0.385\Omega/^\circ C$。$$误差 = 1.7\Omega / 0.385 \approx 4.4^\circ C$$
+也就是说，CEMS 读数会凭空高出 $4.4^\circ C$。而且这个误差是不固定的——夏天电缆热，电阻变大；冬天电缆冷，电阻变小。<strong>这种不可控的漂移是仪器的大忌</strong></li>
+</ul>
+<h3 id="2解决方案3-线制的数学减法">2、解决方案：3 线制的“数学减法”
+</h3><p>为了把 $R_{导线}$ 从公式里踢出去，工程师引入了第三根线。</p>
+<p>物理结构：</p>
+<ul>
+<li>PT100 电阻的一端接 1 根线（设为线 A）。</li>
+<li>PT100 电阻的另一端接 2 根线（设为线 B 和 线 C）。</li>
+<li>关键假设： 我们默认这三根线是同一根电缆里的，长度一样、材质一样、温度环境一样，所以它们的电阻相等：$R_A = R_B = R_C = r$。</li>
+</ul>
+<p>补偿原理（电桥法/运算逻辑），现代仪表通常采用“两次测量，一次计算”的逻辑（或电桥平衡逻辑）：</p>
+<p>1、回路 1（测量回路）：电流从 线 A 流入，经过 $R_{PT100}$，从 线 B 流回。
+$$阻值_1 = R_A + R_{PT100} + R_B = 2r + R_{PT100}$$
+2、回路 2（补偿回路）： 电流从 线 B 流入，直接从 线 C 流回（因为 B 和 C 在探头根部是短接的，电流不经过 PT100）。
+$$阻值_2 = R_B + R_C = 2r$$
+3、最终计算： 仪表内部算法执行减法：
+$$R_{真实} = 阻值_1 - 阻值_2$$
+$$R_{真实} = (2r + R_{PT100}) - 2r = R_{PT100}$$
+如此，导线电阻 $r$ 就被完美消除掉了。无论电缆是 10 米还是 100 米，无论夏天还是冬天，只要三根线变化一致，误差就会被自动扣除</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

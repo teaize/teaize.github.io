@@ -1,8 +1,1256 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="DHT11 模块介绍 DHT11 模块：一款结合了温湿度检测以及信号处理 IC 的传感器模块，通信方式采用单总线串行通信\n信号类型：数字信号 精度：温度精度 ±2°C，湿度 ±5% 取样周期：2S 工作电压：3-5.5V 工作电流：2.5mA（测量时），150μA（待机） 温度范围：0-50℃ 湿度范围：20-90% 电路复杂度：直接连接，无需额外电路 代码复杂度：直接调用库函数读取温度 接线 DHT11 模块已集成上拉电阻，无需额外添加（如果 DHT11 模块无内置上拉电阻，需在 DATA 引脚和 5V 之间外接一个 4.7kΩ 电阻）\n">
+<title>ESP32-DHT11温湿度传感器</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/esp32-dht11%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ESP32-DHT11温湿度传感器">
+<meta property='og:description' content="DHT11 模块介绍 DHT11 模块：一款结合了温湿度检测以及信号处理 IC 的传感器模块，通信方式采用单总线串行通信\n信号类型：数字信号 精度：温度精度 ±2°C，湿度 ±5% 取样周期：2S 工作电压：3-5.5V 工作电流：2.5mA（测量时），150μA（待机） 温度范围：0-50℃ 湿度范围：20-90% 电路复杂度：直接连接，无需额外电路 代码复杂度：直接调用库函数读取温度 接线 DHT11 模块已集成上拉电阻，无需额外添加（如果 DHT11 模块无内置上拉电阻，需在 DATA 引脚和 5V 之间外接一个 4.7kΩ 电阻）\n">
+<meta property='og:url' content='https://teaize.github.io/p/esp32-dht11%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-09T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-09T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ESP32-DHT11温湿度传感器">
+<meta name="twitter:description" content="DHT11 模块介绍 DHT11 模块：一款结合了温湿度检测以及信号处理 IC 的传感器模块，通信方式采用单总线串行通信\n信号类型：数字信号 精度：温度精度 ±2°C，湿度 ±5% 取样周期：2S 工作电压：3-5.5V 工作电流：2.5mA（测量时），150μA（待机） 温度范围：0-50℃ 湿度范围：20-90% 电路复杂度：直接连接，无需额外电路 代码复杂度：直接调用库函数读取温度 接线 DHT11 模块已集成上拉电阻，无需额外添加（如果 DHT11 模块无内置上拉电阻，需在 DATA 引脚和 5V 之间外接一个 4.7kΩ 电阻）\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
 
 
 
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
 
 
 
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
 
 
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#dht11-模块介绍">DHT11 模块介绍</a></li>
+        <li><a href="#接线">接线</a></li>
+        <li><a href="#程序">程序</a></li>
+        <li><a href="#dht11-的局限性">DHT11 的局限性</a></li>
+        <li><a href="#通讯方式">通讯方式</a></li>
+      </ol>
+    </li>
+    <li><a href="#拓展">拓展</a>
+      <ol>
+        <li><a href="#为什么-dht11-模块直接返回数字信号">为什么 DHT11 模块直接返回数字信号</a></li>
+        <li><a href="#能否查看或自定义修改-asic-的底层代码">能否查看或自定义修改 ASIC 的底层代码</a></li>
+        <li><a href="#通过上位机读取-dht11-模块数据">通过上位机读取 DHT11 模块数据</a>
+          <ol>
+            <li><a href="#使用-wifisocket通信">使用 WiFi（Socket）通信</a></li>
+            <li><a href="#不同方式的比较">不同方式的比较</a></li>
+          </ol>
+        </li>
+        <li><a href="#拓展-2">拓展 2</a>
+          <ol>
+            <li><a href="#如何理解-wifi-socket">如何理解 Wifi Socket</a></li>
+          </ol>
+        </li>
+        <li><a href="#拓展-3">拓展 3</a>
+          <ol>
+            <li><a href="#图表动态展示数据">图表动态展示数据</a></li>
+            <li><a href="#进一步优化程序">进一步优化程序</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/esp32-dht11%E6%B8%A9%E6%B9%BF%E5%BA%A6%E4%BC%A0%E6%84%9F%E5%99%A8/">ESP32-DHT11温湿度传感器</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-03-09</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="dht11-模块介绍">DHT11 模块介绍
+</h3><p>DHT11 模块：一款结合了温湿度检测以及信号处理 IC 的传感器模块，通信方式采用单总线串行通信</p>
+<ul>
+<li>信号类型：数字信号</li>
+<li>精度：温度精度 ±2°C，湿度 ±5%</li>
+<li>取样周期：2S</li>
+<li>工作电压：3-5.5V</li>
+<li>工作电流：2.5mA（测量时），150μA（待机）</li>
+<li>温度范围：0-50℃</li>
+<li>湿度范围：20-90%</li>
+<li>电路复杂度：直接连接，无需额外电路</li>
+<li>代码复杂度：直接调用库函数读取温度</li>
+</ul>
+<h3 id="接线">接线
+</h3><p>DHT11 模块已集成上拉电阻，无需额外添加（如果 DHT11 模块无内置上拉电阻，需在 DATA 引脚和 5V 之间外接一个 4.7kΩ 电阻）</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309174948.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309174948.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<h3 id="程序">程序
+</h3><p>MicroPython 内置的 DHT11 程序库（dht），通过 dht 程序库获取温湿度数据，需要如下四个步骤</p>
+<ul>
+<li>导入 dht 库</li>
+<li>创建 DHT11 对象</li>
+<li>执行 measure 方法
+<ul>
+<li>注意读取频率：DHT11 的采样间隔需 ≥1 秒，建议设为 2 秒，否则可能读取失败</li>
+</ul>
+</li>
+<li>通过两个方法分别获取温度和湿度</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span><span class="p">,</span> <span class="n">Timer</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">dht</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">time</span> <span class="kn">import</span> <span class="n">sleep_ms</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">d</span> <span class="o">=</span> <span class="n">dht</span><span class="o">.</span><span class="n">DHT11</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span> <span class="c1"># 创建一个 DHT11 实例，连接到 GPIO 4</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="o">.</span><span class="n">measure</span><span class="p">()</span>  <span class="c1"># 触发测量</span>
+</span></span><span class="line"><span class="cl">    <span class="n">temp</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">temperature</span><span class="p">()</span>  <span class="c1"># 获取温度值</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hum</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">humidity</span><span class="p">()</span>  <span class="c1"># 获取湿度值</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;temperature:&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;℃&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="nb">print</span><span class="p">(</span><span class="s2">&#34;humidity:&#34;</span><span class="o">+</span><span class="nb">str</span><span class="p">(</span><span class="n">hum</span><span class="p">)</span><span class="o">+</span><span class="s2">&#34;%&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sleep_ms</span><span class="p">(</span><span class="mi">2000</span><span class="p">)</span>  <span class="c1"># 每 2 秒测量一次</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>返回结果</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">temperature</span><span class="p">:</span><span class="mi">22</span><span class="err">℃</span>
+</span></span><span class="line"><span class="cl"><span class="n">humidity</span><span class="p">:</span><span class="mi">66</span><span class="o">%</span>
+</span></span><span class="line"><span class="cl"><span class="n">temperature</span><span class="p">:</span><span class="mi">22</span><span class="err">℃</span>
+</span></span><span class="line"><span class="cl"><span class="n">humidity</span><span class="p">:</span><span class="mi">68</span><span class="o">%</span>
+</span></span><span class="line"><span class="cl"><span class="o">......</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="dht11-的局限性">DHT11 的局限性
+</h3><ul>
+<li>精度较低：温度误差 ±2°C，湿度 ±5%，适用于一般场景（如室内环境监测），不适用于高精度实验。</li>
+<li>响应速度慢：每次读取需等待 1~2 秒，不适合高速采样场景。</li>
+<li>单总线协议：同一引脚只能连接一个 DHT11，无法并联多个传感器。</li>
+</ul>
+<h3 id="通讯方式">通讯方式
+</h3><p>DHT11 通过单总线（1-Wire）协议与外部设备（如 Arduino、ESP32）通信：</p>
+<ol>
+<li>主机（Arduino）发送启动信号：拉低总线至少 18ms，然后释放。</li>
+<li>DHT11 响应：拉低总线 80μs，再拉高 80μs，表示准备发送数据。</li>
+<li>数据传输：DHT11 发送 40 位数据（16 位湿度 + 16 位温度 + 8 位校验和），每位通过高低电平的持续时间表示 0 或 1。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309175700.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309175700.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">湿度整数部分 | 湿度小数部分 | 温度整数部分 | 温度小数部分 | 校验和
+</span></span><span class="line"><span class="cl">0001 1001    | 0000 0000    | 0001 1000    | 0000 0000    | 0011 0001
+</span></span><span class="line"><span class="cl">（25% RH）    | （0% RH）     | （24°C）      | （0°C）       | 校验和=49
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="拓展">拓展
+</h2><h3 id="为什么-dht11-模块直接返回数字信号">为什么 DHT11 模块直接返回数字信号
+</h3><p>DHT11 内部集成了一个专用集成电路（ASIC），负责以下任务：</p>
+<ul>
+<li>模拟信号采集：
+<ul>
+<li>读取热敏电阻的电阻值（温度）</li>
+<li>读取电容式元件的电容值（湿度）</li>
+</ul>
+</li>
+<li>模拟信号调理：
+<ul>
+<li>对原始信号进行放大、滤波，消除噪声</li>
+</ul>
+</li>
+<li>模数转换（ADC）
+<ul>
+<li>将调理后的模拟信号转换为数字信号（例如，温度值用 8 位二进制表示，湿度值用 8 位二进制表示）</li>
+</ul>
+</li>
+<li>校准与补偿
+<ul>
+<li>根据预存的校准参数（如非线性补偿、温度漂移补偿）修正数字信号</li>
+</ul>
+</li>
+<li>数字编码：
+<ul>
+<li>将温度和湿度数据打包成固定格式的二进制数据</li>
+</ul>
+</li>
+</ul>
+<h3 id="能否查看或自定义修改-asic-的底层代码">能否查看或自定义修改 ASIC 的底层代码
+</h3><p>不能，原因如下：</p>
+<ul>
+<li>硬件固化设计：ASIC 的逻辑功能是通过物理电路实现的（如晶体管布局），而非运行在通用处理器上的软件代码。它的“逻辑”被固化在硅片中，无法通过软件更新或调试接口修改。</li>
+<li>封闭式协议与知识产权：DHT11 的通信协议和数据格式是厂商定义的，其内部校准参数、ADC 算法等属于商业机密，未开放给用户访问。</li>
+<li>缺乏调试接口：DHT11 没有提供 JTAG、SWD 等硬件调试接口，无法通过常规手段读取内部逻辑。</li>
+</ul>
+<h3 id="通过上位机读取-dht11-模块数据">通过上位机读取 DHT11 模块数据
+</h3><p>需要考虑的问题：</p>
+<ol>
+<li><strong>通信方式选择</strong>：ESP32 和笔记本电脑之间可以通过哪些方式通信？常见的有串口、Wi-Fi、蓝牙等。用户需要选择一种适合他们应用场景的方式。</li>
+<li><strong>数据传输协议</strong>：确定使用哪种协议来发送数据。比如，通过串口发送简单的文本格式，或者使用 HTTP、MQTT 等更复杂的协议。</li>
+<li><strong>上位机程序开发</strong>：用户需要在笔记本电脑上编写程序来接收和显示数据。这可能涉及到 Python、Java、C#或其他语言，取决于用户的熟悉程度和需求。</li>
+<li><strong>代码实现细节</strong>：如何在 ESP32 上编写代码，将传感器数据发送到上位机？需要确保数据格式正确，传输稳定。</li>
+<li><strong>错误处理和稳定性</strong>：考虑通信过程中可能出现的错误，如连接中断、数据丢失等，如何进行处理以保证系统的稳定性。</li>
+<li><strong>用户友好性</strong>：上位机程序是否易于使用，是否需要图形界面，还是简单的命令行输出即可。</li>
+</ol>
+<p>实现步骤大致如下：</p>
+<ol>
+<li>配置 ESP32 连接 Wi-Fi。</li>
+<li>在 ESP32 上创建 TCP 服务器或 HTTP 服务器。</li>
+<li>读取传感器数据并发送到连接的客户端。</li>
+<li>在上位机编写程序连接 ESP32，接收并显示数据</li>
+</ol>
+<h4 id="使用-wifisocket通信">使用 WiFi（Socket）通信
+</h4><p>ESP32 若连接了 WiFi，可以在 ESP32 上开启一个 Socket 服务器，让上位机通过 TCP 访问它</p>
+<p>1、ESP32 代码（作为服务器）；可将代码运行在一个 Thonny 实例上</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">network</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">machine</span> <span class="kn">import</span> <span class="n">Pin</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">dht</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">time</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SSID</span> <span class="o">=</span> <span class="s2">&#34;coffeelize&#34;</span> <span class="c1">#你的WiFi名称</span>
+</span></span><span class="line"><span class="cl"><span class="n">PASSWORD</span> <span class="o">=</span> <span class="s2">&#34;xxxxxxxx&#34;</span> <span class="c1">#你的WiFi密码</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 连接WiFi</span>
+</span></span><span class="line"><span class="cl"><span class="n">wifi</span> <span class="o">=</span> <span class="n">network</span><span class="o">.</span><span class="n">WLAN</span><span class="p">(</span><span class="n">network</span><span class="o">.</span><span class="n">STA_IF</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">wifi</span><span class="o">.</span><span class="n">active</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">wifi</span><span class="o">.</span><span class="n">connect</span><span class="p">(</span><span class="n">SSID</span><span class="p">,</span> <span class="n">PASSWORD</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="ow">not</span> <span class="n">wifi</span><span class="o">.</span><span class="n">isconnected</span><span class="p">():</span>
+</span></span><span class="line"><span class="cl">    <span class="k">pass</span>  <span class="c1"># 等待WiFi连接</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 打印IP地址</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;Connected, IP:&#34;</span><span class="p">,</span> <span class="n">wifi</span><span class="o">.</span><span class="n">ifconfig</span><span class="p">()[</span><span class="mi">0</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 初始化DHT11</span>
+</span></span><span class="line"><span class="cl"><span class="n">d</span> <span class="o">=</span> <span class="n">dht</span><span class="o">.</span><span class="n">DHT11</span><span class="p">(</span><span class="n">Pin</span><span class="p">(</span><span class="mi">4</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建TCP服务器</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">bind</span><span class="p">((</span><span class="s1">&#39;&#39;</span><span class="p">,</span> <span class="mi">8080</span><span class="p">))</span> <span class="c1"># 监听端口8080</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">listen</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;等待客户端连接...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">conn</span><span class="p">,</span> <span class="n">addr</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">accept</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="s2">&#34;客户端连接:&#34;</span><span class="p">,</span> <span class="n">addr</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">d</span><span class="o">.</span><span class="n">measure</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">temp</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">temperature</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">hum</span> <span class="o">=</span> <span class="n">d</span><span class="o">.</span><span class="n">humidity</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="sa">f</span><span class="s2">&#34;</span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">,</span><span class="si">{</span><span class="n">hum</span><span class="si">}</span><span class="se">\n</span><span class="s2">&#34;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">conn</span><span class="o">.</span><span class="n">send</span><span class="p">(</span><span class="n">data</span><span class="o">.</span><span class="n">encode</span><span class="p">())</span>  <span class="c1"># 发送数据</span>
+</span></span><span class="line"><span class="cl">    <span class="n">time</span><span class="o">.</span><span class="n">sleep</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">Connected</span><span class="p">,</span> <span class="n">IP</span><span class="p">:</span> <span class="mf">192.168.31.35</span>
+</span></span><span class="line"><span class="cl"><span class="n">等待客户端连接</span><span class="o">...</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、在 Windows 上运行另一个 Thonny 实例</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">ESP32_IP</span> <span class="o">=</span> <span class="s2">&#34;192.168.31.35&#34;</span>  <span class="c1"># ESP32 IP</span>
+</span></span><span class="line"><span class="cl"><span class="n">PORT</span> <span class="o">=</span> <span class="mi">8080</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">ESP32_IP</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">data</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">temp</span><span class="p">,</span> <span class="n">hum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;温度: </span><span class="si">{</span><span class="n">temp</span><span class="si">}</span><span class="s2">℃, 湿度: </span><span class="si">{</span><span class="n">hum</span><span class="si">}</span><span class="s2">%&#34;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309192255.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309192255.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309192807.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309192807.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<p>3、两边都运行起来后：
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309193044.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309193044.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<h4 id="不同方式的比较">不同方式的比较
+</h4><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>方法</th>
+          <th>适用场景</th>
+          <th>传输方式</th>
+          <th>优点</th>
+          <th>缺点</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>串口通信（UART）</strong></td>
+          <td>直接连接笔记本</td>
+          <td>USB 串口</td>
+          <td>简单，适合调试</td>
+          <td>需 USB 线，距离受限</td>
+      </tr>
+      <tr>
+          <td><strong>WiFi Socket</strong></td>
+          <td>同一局域网内</td>
+          <td>TCP/IP</td>
+          <td>可无线读取，速度快</td>
+          <td>需 WiFi 网络</td>
+      </tr>
+      <tr>
+          <td><strong>MQTT</strong></td>
+          <td>远程监控</td>
+          <td>MQTT 协议</td>
+          <td>适合云端，支持多个设备</td>
+          <td>需 MQTT 服务器</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="拓展-2">拓展 2
+</h3><h4 id="如何理解-wifi-socket">如何理解 Wifi Socket
+</h4><p>可以把 Socket 理解成两台设备（比如 ESP32 和笔记本）之间的“电话线”。这条“电话线”允许两台设备 通过 WiFi 进行数据传输，就像两个人在打电话一样，一个人说，另一个人听。</p>
+<ul>
+<li>服务器（ESP32）：<strong>负责监听和等待连接</strong>，它是数据的“提供者”</li>
+<li>客户端（笔记本）：主动连接服务器，它是数据的“使用者”</li>
+<li>服务器 不会主动给客户端发消息，它只是等着客户端来“点单”，然后才会提供数据</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>需求</th>
+          <th>服务器（ESP32）</th>
+          <th>客户端（笔记本）</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>网络要求</strong></td>
+          <td>连接同一 WiFi，获取 IP</td>
+          <td>连接同一 WiFi，知道 ESP32 的 IP</td>
+      </tr>
+      <tr>
+          <td><strong>通信端口</strong></td>
+          <td>监听特定端口（如 8080）</td>
+          <td>连接到 ESP32 的 IP 和端口</td>
+      </tr>
+      <tr>
+          <td><strong>数据格式</strong></td>
+          <td>按一定格式发送数据</td>
+          <td>按格式解析数据</td>
+      </tr>
+      <tr>
+          <td><strong>可能问题</strong></td>
+          <td>WiFi 连接失败、IP 变动、端口被占用</td>
+          <td>连接不上 ESP32、数据丢失</td>
+      </tr>
+      <tr>
+          <td><strong>解决方案</strong></td>
+          <td>确保 WiFi 稳定、检查 IP、换端口</td>
+          <td>确保同一 WiFi、确认 IP、用 <code>ping</code> 测试</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="拓展-3">拓展 3
+</h3><h4 id="图表动态展示数据">图表动态展示数据
+</h4><p>客户端通过图像形式动态展示数据，这里切换成 Pycharm 作为 IDE 了，因为涉及到 matplotlib 模块</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">socket</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.pyplot</span> <span class="k">as</span> <span class="nn">plt</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="nn">matplotlib.animation</span> <span class="k">as</span> <span class="nn">animation</span>  
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">deque</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># ESP32的IP和端口  </span>
+</span></span><span class="line"><span class="cl"><span class="n">ESP32_IP</span> <span class="o">=</span> <span class="s2">&#34;192.168.31.35&#34;</span>  <span class="c1"># 替换为 ESP32 IP 地址  </span>
+</span></span><span class="line"><span class="cl"><span class="n">PORT</span> <span class="o">=</span> <span class="mi">8080</span>  <span class="c1"># 端口号  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建Socket连接  </span>
+</span></span><span class="line"><span class="cl"><span class="n">s</span> <span class="o">=</span> <span class="n">socket</span><span class="o">.</span><span class="n">socket</span><span class="p">(</span><span class="n">socket</span><span class="o">.</span><span class="n">AF_INET</span><span class="p">,</span> <span class="n">socket</span><span class="o">.</span><span class="n">SOCK_STREAM</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">s</span><span class="o">.</span><span class="n">connect</span><span class="p">((</span><span class="n">ESP32_IP</span><span class="p">,</span> <span class="n">PORT</span><span class="p">))</span>  <span class="c1"># 连接ESP32  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 维护最近 30 个数据点（最多 1 分钟）  </span>
+</span></span><span class="line"><span class="cl"><span class="n">MAX_POINTS</span> <span class="o">=</span> <span class="mi">30</span>  
+</span></span><span class="line"><span class="cl"><span class="n">times</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">MAX_POINTS</span><span class="p">)</span>  <span class="c1"># 时间数据  </span>
+</span></span><span class="line"><span class="cl"><span class="n">temps</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">MAX_POINTS</span><span class="p">)</span>  <span class="c1"># 温度数据  </span>
+</span></span><span class="line"><span class="cl"><span class="n">hums</span> <span class="o">=</span> <span class="n">deque</span><span class="p">(</span><span class="n">maxlen</span><span class="o">=</span><span class="n">MAX_POINTS</span><span class="p">)</span>   <span class="c1"># 湿度数据  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 创建图形窗口  </span>
+</span></span><span class="line"><span class="cl"><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">10</span><span class="p">,</span> <span class="mi">8</span><span class="p">))</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 温度曲线  </span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Temperature (°C)&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 添加网格  </span>
+</span></span><span class="line"><span class="cl"><span class="n">line_temp</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Temperature&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;r&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 湿度曲线  </span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_title</span><span class="p">(</span><span class="s1">&#39;Humidity (%)&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlabel</span><span class="p">(</span><span class="s1">&#39;Time (s)&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylabel</span><span class="p">(</span><span class="s1">&#39;Humidity (%)&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>  <span class="c1"># 添加网格  </span>
+</span></span><span class="line"><span class="cl"><span class="n">line_hum</span><span class="p">,</span> <span class="o">=</span> <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">plot</span><span class="p">([],</span> <span class="p">[],</span> <span class="n">label</span><span class="o">=</span><span class="s1">&#39;Humidity&#39;</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s1">&#39;b&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 设定初始 X 轴范围  </span>
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl"><span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">60</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># **更新数据并绘制**  </span>
+</span></span><span class="line"><span class="cl"><span class="k">def</span> <span class="nf">update_data</span><span class="p">(</span><span class="n">frame</span><span class="p">):</span>  
+</span></span><span class="line"><span class="cl">    <span class="k">try</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">        <span class="c1"># 从ESP32接收数据  </span>
+</span></span><span class="line"><span class="cl">        <span class="n">data</span> <span class="o">=</span> <span class="n">s</span><span class="o">.</span><span class="n">recv</span><span class="p">(</span><span class="mi">1024</span><span class="p">)</span><span class="o">.</span><span class="n">decode</span><span class="p">()</span><span class="o">.</span><span class="n">strip</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">data</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">            <span class="c1"># 解析温度和湿度  </span>
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span><span class="p">,</span> <span class="n">hum</span> <span class="o">=</span> <span class="n">data</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s1">&#39;,&#39;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">temp</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">hum</span> <span class="o">=</span> <span class="nb">float</span><span class="p">(</span><span class="n">hum</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">            <span class="c1"># 计算当前时间戳（假设每次更新间隔 2s）  </span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">times</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">new_time</span> <span class="o">=</span> <span class="n">times</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span> <span class="o">+</span> <span class="mi">2</span>  <span class="c1"># 继续增加 2s 时间  </span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">new_time</span> <span class="o">=</span> <span class="mi">0</span>  <span class="c1"># 第一帧从 0 开始  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">            <span class="c1"># 更新数据  </span>
+</span></span><span class="line"><span class="cl">            <span class="n">times</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">new_time</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">temps</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">temp</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">hums</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">hum</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">            <span class="c1"># 更新曲线数据  </span>
+</span></span><span class="line"><span class="cl">            <span class="n">line_temp</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">temps</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">            <span class="n">line_hum</span><span class="o">.</span><span class="n">set_data</span><span class="p">(</span><span class="n">times</span><span class="p">,</span> <span class="n">hums</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">            <span class="c1"># **更新 X 轴范围（防止 `min == max` 报错）**  </span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">times</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="nb">min</span><span class="p">(</span><span class="n">times</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">times</span><span class="p">))</span>  
+</span></span><span class="line"><span class="cl">            <span class="k">else</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">new_time</span><span class="p">,</span> <span class="n">new_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_xlim</span><span class="p">(</span><span class="n">new_time</span><span class="p">,</span> <span class="n">new_time</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">            <span class="c1"># **动态更新 Y 轴范围**  </span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">temps</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ymin_t</span><span class="p">,</span> <span class="n">ymax_t</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">temps</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">temps</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin_t</span> <span class="o">-</span> <span class="mi">2</span><span class="p">,</span> <span class="n">ymax_t</span> <span class="o">+</span> <span class="mi">2</span><span class="p">)</span>  <span class="c1"># 温度 Y 轴增加 2°C 缓冲区  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="n">hums</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ymin_h</span><span class="p">,</span> <span class="n">ymax_h</span> <span class="o">=</span> <span class="nb">min</span><span class="p">(</span><span class="n">hums</span><span class="p">),</span> <span class="nb">max</span><span class="p">(</span><span class="n">hums</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">                <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set_ylim</span><span class="p">(</span><span class="n">ymin_h</span> <span class="o">-</span> <span class="mi">5</span><span class="p">,</span> <span class="n">ymax_h</span> <span class="o">+</span> <span class="mi">5</span><span class="p">)</span>  <span class="c1"># 湿度 Y 轴增加 5% 缓冲区  </span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">line_temp</span><span class="p">,</span> <span class="n">line_hum</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">    <span class="k">except</span> <span class="ne">Exception</span> <span class="k">as</span> <span class="n">e</span><span class="p">:</span>  
+</span></span><span class="line"><span class="cl">        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;Error: </span><span class="si">{</span><span class="n">e</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">line_temp</span><span class="p">,</span> <span class="n">line_hum</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 动画更新，避免缓存问题  </span>
+</span></span><span class="line"><span class="cl"><span class="n">ani</span> <span class="o">=</span> <span class="n">animation</span><span class="o">.</span><span class="n">FuncAnimation</span><span class="p">(</span><span class="n">fig</span><span class="p">,</span> <span class="n">update_data</span><span class="p">,</span> <span class="n">interval</span><span class="o">=</span><span class="mi">2000</span><span class="p">,</span> <span class="n">cache_frame_data</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>  
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl"><span class="c1"># 显示图表  </span>
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">()</span>  
+</span></span><span class="line"><span class="cl"><span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309203043.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309203043.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<ul>
+<li>自动调整 Y 轴范围
+<ul>
+<li>温度 Y 轴范围：<code>min(temps) - 2</code> 到 <code>max(temps) + 2</code></li>
+<li>湿度 Y 轴范围：<code>min(hums) - 5</code> 到 <code>max(hums) + 5</code></li>
+</ul>
+</li>
+<li>添加网格线 <code>grid(True)</code>，让纵坐标数据更清晰。</li>
+<li>X 轴范围固定为最近 60 秒
+<ul>
+<li><code>times</code> 只存储最近 30 个数据点（每 2s 采样一次，60s = 30 点）</li>
+</ul>
+</li>
+</ul>
+<h4 id="进一步优化程序">进一步优化程序
+</h4><ul>
+<li>提高性能，减少不必要的 <code>set_xlim/set_ylim</code> 计算
+<ul>
+<li><code>set_xlim()</code> 和 <code>set_ylim()</code> 只有在数据更新时才调用，而不是每帧都执行。</li>
+</ul>
+</li>
+<li>让温湿度数据绘制更平滑
+<ul>
+<li>可以使用 <code>Line2D.set_xdata()</code> 和 <code>Line2D.set_ydata()</code> 来更新数据，而不是 <code>set_data()</code>，减少不必要的计算</li>
+</ul>
+</li>
+<li>让 X 轴时间显示更加友好
+<ul>
+<li>用 <code>datetime.now()</code> 记录真实时间，而不是 <code>times[-1] + 2</code> 这样模拟的时间，避免时间误差累积</li>
+</ul>
+</li>
+<li>增加异常处理，避免程序崩溃
+<ul>
+<li>如果 ESP32 断开连接，程序不会直接崩溃，而是尝试重连。</li>
+<li>在 <code>recv()</code> 读取数据时，添加 <code>try-except</code> 捕获 <code>socket.error</code> 以防止网络问题导致程序崩溃。</li>
+</ul>
+</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309204512.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250309204512.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
