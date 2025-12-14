@@ -1,0 +1,792 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="普通的二极管防反接虽然简单，但有一个致命弱点：压降（约 0.7V）。 如果你是电池供电，这 0.7V 的损耗太心疼了；如果是大电流（比如 5A），发热就是 $0.7V \\times 5A = 3.5W$，甚至需要加散热片。\n">
+<title>PMOS防反接电路设计</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="PMOS防反接电路设计">
+<meta property='og:description' content="普通的二极管防反接虽然简单，但有一个致命弱点：压降（约 0.7V）。 如果你是电池供电，这 0.7V 的损耗太心疼了；如果是大电流（比如 5A），发热就是 $0.7V \\times 5A = 3.5W$，甚至需要加散热片。\n">
+<meta property='og:url' content='https://teaize.github.io/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="PMOS防反接电路设计">
+<meta name="twitter:description" content="普通的二极管防反接虽然简单，但有一个致命弱点：压降（约 0.7V）。 如果你是电池供电，这 0.7V 的损耗太心疼了；如果是大电流（比如 5A），发热就是 $0.7V \\times 5A = 3.5W$，甚至需要加散热片。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-核心原理图注意这里反直觉">1. 核心原理图（注意这里反直觉！）</a></li>
+        <li><a href="#2-工作原理详解">2. 工作原理详解</a>
+          <ol>
+            <li><a href="#a-正确连接时正常工作">A. 正确连接时（正常工作）</a></li>
+            <li><a href="#b-反接时保护生效">B. 反接时（保护生效）</a></li>
+            <li><a href="#第一关体二极管被反向截止">第一关：体二极管被“反向截止”</a></li>
+            <li><a href="#第二关mos-管沟道打不开">第二关：MOS 管沟道“打不开”</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#注意事项">注意事项</a>
+      <ol>
+        <li><a href="#栅极耐压保护必加-zener-齐纳二极管">栅极耐压保护（必加 Zener 齐纳二极管）</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/">PMOS防反接电路设计</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-14</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>普通的二极管防反接虽然简单，但有一个致命弱点：<strong>压降</strong>（约 0.7V）。 如果你是电池供电，这 0.7V 的损耗太心疼了；如果是大电流（比如 5A），发热就是 $0.7V \times 5A = 3.5W$，甚至需要加散热片。</p>
+<p><strong>PMOS 防反接电路</strong> 就是为了解决这个问题而生的，它能做到<strong>近乎零压降</strong>的保护。</p>
+<h3 id="1-核心原理图注意这里反直觉">1. 核心原理图（注意这里反直觉！）
+</h3><p>这是 PMOS 防反接最容易搞错的地方：它的接法和普通开关电路是“反”的（开关电源接法时，S 级接在电源端，这里是 D 级接在电源端）。在防反接电路中，我们<strong>利用了 PMOS 内部自带的 体二极管（Body Diode） 来辅助启动</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">		<span class="p">[</span><span class="n">输入正极</span> <span class="n">Vin</span><span class="o">+</span><span class="p">]</span>                                <span class="p">[</span><span class="n">输出</span> <span class="n">Vout</span><span class="o">+</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                                           <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">+------------------+</span>     <span class="o">+------------------+</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                  <span class="o">|</span>     <span class="o">|</span>                  <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>              <span class="n">D</span> <span class="p">(</span><span class="n">漏极</span><span class="p">)</span>  <span class="n">S</span> <span class="p">(</span><span class="n">源极</span><span class="p">)</span>           <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                <span class="o">+---------+</span>                <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                <span class="o">|</span>  <span class="n">PMOS</span>   <span class="o">|</span>                <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                <span class="o">|</span> <span class="p">(</span><span class="n">Q1</span><span class="p">)</span>    <span class="o">|</span>                <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                <span class="o">+---------+</span>                <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                     <span class="o">|</span> <span class="n">G</span> <span class="p">(</span><span class="n">栅极</span><span class="p">)</span>            <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                     <span class="o">|</span>                     <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>            <span class="o">+--------+</span>                     <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>            <span class="o">|</span>                              <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>           <span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="p">(</span><span class="n">电阻</span> <span class="mi">10</span><span class="n">k</span><span class="o">-</span><span class="mi">100</span><span class="n">k</span><span class="p">)</span>             <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>            <span class="o">|</span>                              <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="p">[</span><span class="n">GND</span><span class="p">]</span>                            <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                                           <span class="o">|</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">输入地</span> <span class="n">GND</span><span class="p">]</span> <span class="o">----------------------------------</span> <span class="p">[</span><span class="n">输出地</span> <span class="n">GND</span><span class="p">]</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>关键连接点：</p>
+<ul>
+<li>输入电源 接 漏极 (Drain, D)。</li>
+<li>负载/输出 接 源极 (Source, S)。</li>
+<li>栅极 (Gate, G) 通过电阻接 地 (GND)。</li>
+<li>体二极管方向：从 D 指向 S（正向）。</li>
+</ul>
+<h3 id="2-工作原理详解">2. 工作原理详解
+</h3><p>让我们把时间拆解成微秒级，看看上电瞬间发生了什么：</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214112154710.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214112154710.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="a-正确连接时正常工作">A. 正确连接时（正常工作）
+</h4><ol>
+<li>第一阶段：体二极管导通
+刚插上电池时，PMOS 还没醒。电流顺着 PMOS 内部的 体二极管（从 D 到 S）流向负载。
+<ul>
+<li>此时输出电压 $V_{out} \approx V_{in} - 0.7V$。</li>
+<li><strong>关键点</strong>：因为 $S$ 极有了电压（比如 11.3V），而 $G$ 极被电阻拉到了 GND（0V）。</li>
+</ul>
+</li>
+<li>第二阶段：MOS 管开启
+<ul>
+<li>此时，$V_{GS} = V_G - V_S = 0V - 11.3V = -11.3V$。</li>
+<li>因为 $V_{GS}$ 变成了负值，且绝对值远大于开启阈值（$V_{th}$，通常是 -2V 左右），PMOS <strong>完全导通</strong>。</li>
+</ul>
+</li>
+<li>第三阶段：低损耗运行
+<ul>
+<li>一旦 PMOS 导通，电流就会选择走 “低阻抗通道”（$R_{DS(on)}$，比如 $0.01\Omega$）（也就相当于将直接 PMOS 直接短路了），而不走那条拥挤的体二极管通道。</li>
+<li>结果：压降变得极小。$V_{drop} = I \times R_{DS(on)} = 5A \times 0.01\Omega = 0.05V$。</li>
+<li>对比二极管的 0.7V，这简直是完美的。</li>
+</ul>
+</li>
+</ol>
+<h4 id="b-反接时保护生效">B. 反接时（保护生效）
+</h4><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214114142324.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214114142324.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<ol>
+<li>输入变成了负压（或者地接正，正接地）。</li>
+<li>体二极管处于反向截止状态，电流过不去。</li>
+<li>$V_{GS}$ 状态：由于 $D$ 极电位低，$S$ 极没电，$G$ 极通过电阻接地。栅极和源极之间没有建立起足够的负压差（甚至 $V_{GS} &gt; 0$），PMOS 保持 关断 (OFF)。</li>
+<li>结果：电路完全切断，保护了后级电路。</li>
+</ol>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">		<span class="p">[</span><span class="n">输入端</span> <span class="n">Vin</span><span class="p">]</span>                              <span class="p">[</span><span class="n">输出端</span> <span class="n">Vout</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">接了电池负极</span> <span class="o">-</span><span class="mi">12</span><span class="n">V</span><span class="p">)</span>                        <span class="p">(</span><span class="n">期望是</span> <span class="mi">0</span><span class="n">V</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                                       <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span> <span class="n">D</span> <span class="p">(</span><span class="n">漏极</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="mi">12</span><span class="n">V</span>                       <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">源极</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="n">V</span>
+</span></span><span class="line"><span class="cl">            <span class="o">+---------------------------------------+</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span> <span class="n">体二极管</span> <span class="p">(</span><span class="n">Body</span> <span class="n">Diode</span><span class="p">)</span>      <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>        <span class="n">__</span><span class="o">|</span><span class="n">__</span>  <span class="p">(</span><span class="n">截止</span><span class="err">!</span><span class="p">)</span>                 <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>        <span class="o">/</span>   \  <span class="o">&lt;--</span> <span class="n">也就是</span> <span class="n">D指向S</span>       <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>       <span class="o">/</span><span class="n">_____</span>\     <span class="n">但此时</span> <span class="n">D是负压</span>      <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span>        <span class="n">S是0V</span>               <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span>        <span class="n">所以二极管不通</span><span class="err">!</span>     <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                                       <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span>  <span class="n">MOS沟道</span> <span class="p">(</span><span class="n">Channel</span><span class="p">)</span>         <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>        <span class="n">__</span><span class="o">|</span><span class="n">__</span>  <span class="p">(</span><span class="n">关闭</span><span class="err">!</span><span class="p">)</span>                 <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>        \   <span class="o">/</span>  <span class="o">&lt;--</span> <span class="n">Vgs</span> <span class="o">=</span> <span class="mi">0</span><span class="n">V</span>            <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>         \ <span class="o">/</span>       <span class="n">不够开启电压</span>         <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span>                            <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">+----------+----------------------------+</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span> <span class="n">G</span> <span class="p">(</span><span class="n">栅极</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>          <span class="o">+-------+</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                  <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                 <span class="p">[</span><span class="n">R</span><span class="p">]</span> <span class="p">(</span><span class="n">电阻</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                  <span class="o">|</span>
+</span></span><span class="line"><span class="cl">            <span class="o">|</span>                  <span class="o">|</span>
+</span></span><span class="line"><span class="cl">      <span class="p">[</span><span class="n">输入端</span> <span class="n">GND</span><span class="p">]</span> <span class="o">------------+----------------</span> <span class="p">[</span><span class="n">输出端</span> <span class="n">GND</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">接了电池正极</span> <span class="mi">0</span><span class="n">V</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为什么它能“防反接”？（两道关卡）</p>
+<h4 id="第一关体二极管被反向截止">第一关：体二极管被“反向截止”
+</h4><ul>
+<li>结构：PMOS 的体二极管方向是 <strong>D $\rightarrow$ S</strong>。</li>
+<li>现状：
+<ul>
+<li>D 极（漏极）：接了 -12V。</li>
+<li>S 极（源极）：接了负载（0V）。</li>
+</ul>
+</li>
+<li>判定：二极管的阳极（D）电压 小于 阴极（S）电压。</li>
+<li>结果：二极管处于<strong>反向偏置</strong>状态，路不通！电流没法通过二极管流过去。</li>
+</ul>
+<h4 id="第二关mos-管沟道打不开">第二关：MOS 管沟道“打不开”
+</h4><ul>
+<li>开启条件：PMOS 需要 $V_{GS} &lt; V_{th}$ (比如 -2V) 才能导通。即 G 极电压要比 S 极电压低很多。</li>
+<li>现状：
+<ul>
+<li>G 极（栅极）：通过电阻 R 接到了输入 GND（也就是电池正极，0V）。所以 $V_G = 0V$。</li>
+<li>S 极（源极）：因为二极管不通，负载没电，所以 $V_S \approx 0V$。</li>
+</ul>
+</li>
+<li>判定：$$V_{GS} = V_G - V_S \approx 0V - 0V = 0V$$</li>
+<li>结果：$V_{GS}$ 是 0，完全没达到开启阈值。MOS 管处于<strong>关断 (Cut-off)</strong> 状态，沟道也是断的。</li>
+</ul>
+<h2 id="注意事项">注意事项
+</h2><h3 id="栅极耐压保护必加-zener-齐纳二极管">栅极耐压保护（必加 Zener 齐纳二极管）
+</h3><p>如果你的输入电压是 <strong>24V</strong>。</p>
+<ul>
+<li>正常导通时，$V_{GS} \approx -24V$。</li>
+<li>危险：绝大多数 PMOS 的栅极只能承受 $\pm 20V$。这一上电，MOS 管的栅极就击穿了。</li>
+<li>对策：必须在 G 和 S 之间并联一个 <strong>10V~15V 的稳压二极管</strong>，并在 G 极回路串联一个限流电阻。</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214120842268.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214120842268.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<p>核心要点总结：</p>
+<ul>
+<li>【反常规接法】：输入电源接 D，负载接 S。（利用体二极管辅助启动，导通后走低阻沟道）。</li>
+<li>【R1 (100k) 关门弹簧】：跨在 G-S 间。没电时把 G 和 S 拉平，保证 MOS 管死死关住，不误导通。</li>
+<li>【R2 (10k) 保镖电阻】：串在 G-GND 间。当输入电压过高（如 24V），稳压管动作时，R2 负责承担多余电压，限制电流，防止稳压管烧毁。</li>
+<li>【Z1 稳压管】：防止 Vgs 超过 20V 把 MOS 栅极击穿。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

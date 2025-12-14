@@ -7,7 +7,703 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sat, 13 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 14 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PMOS防反接电路设计</title>
+        <link>https://teaize.github.io/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;p&gt;普通的二极管防反接虽然简单，但有一个致命弱点：&lt;strong&gt;压降&lt;/strong&gt;（约 0.7V）。 如果你是电池供电，这 0.7V 的损耗太心疼了；如果是大电流（比如 5A），发热就是 $0.7V \times 5A = 3.5W$，甚至需要加散热片。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;PMOS 防反接电路&lt;/strong&gt; 就是为了解决这个问题而生的，它能做到&lt;strong&gt;近乎零压降&lt;/strong&gt;的保护。&lt;/p&gt;
+&lt;h3 id=&#34;1-核心原理图注意这里反直觉&#34;&gt;1. 核心原理图（注意这里反直觉！）
+&lt;/h3&gt;&lt;p&gt;这是 PMOS 防反接最容易搞错的地方：它的接法和普通开关电路是“反”的（开关电源接法时，S 级接在电源端，这里是 D 级接在电源端）。在防反接电路中，我们&lt;strong&gt;利用了 PMOS 内部自带的 体二极管（Body Diode） 来辅助启动&lt;/strong&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入正极&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                                           &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;+------------------+&lt;/span&gt;     &lt;span class=&#34;o&#34;&gt;+------------------+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;              &lt;span class=&#34;n&#34;&gt;D&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;漏极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;源极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;           &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;+---------+&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;PMOS&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Q1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;    &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;+---------+&lt;/span&gt;                &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;G&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;栅极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;+--------+&lt;/span&gt;                     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                              &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;           &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;电阻&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;k&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;             &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                              &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GND&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                                           &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入地&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GND&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;----------------------------------&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出地&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GND&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;关键连接点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入电源 接 漏极 (Drain, D)。&lt;/li&gt;
+&lt;li&gt;负载/输出 接 源极 (Source, S)。&lt;/li&gt;
+&lt;li&gt;栅极 (Gate, G) 通过电阻接 地 (GND)。&lt;/li&gt;
+&lt;li&gt;体二极管方向：从 D 指向 S（正向）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-工作原理详解&#34;&gt;2. 工作原理详解
+&lt;/h3&gt;&lt;p&gt;让我们把时间拆解成微秒级，看看上电瞬间发生了什么：&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214112154710.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214112154710.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;a-正确连接时正常工作&#34;&gt;A. 正确连接时（正常工作）
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;第一阶段：体二极管导通
+刚插上电池时，PMOS 还没醒。电流顺着 PMOS 内部的 体二极管（从 D 到 S）流向负载。
+&lt;ul&gt;
+&lt;li&gt;此时输出电压 $V_{out} \approx V_{in} - 0.7V$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：因为 $S$ 极有了电压（比如 11.3V），而 $G$ 极被电阻拉到了 GND（0V）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第二阶段：MOS 管开启
+&lt;ul&gt;
+&lt;li&gt;此时，$V_{GS} = V_G - V_S = 0V - 11.3V = -11.3V$。&lt;/li&gt;
+&lt;li&gt;因为 $V_{GS}$ 变成了负值，且绝对值远大于开启阈值（$V_{th}$，通常是 -2V 左右），PMOS &lt;strong&gt;完全导通&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第三阶段：低损耗运行
+&lt;ul&gt;
+&lt;li&gt;一旦 PMOS 导通，电流就会选择走 “低阻抗通道”（$R_{DS(on)}$，比如 $0.01\Omega$）（也就相当于将直接 PMOS 直接短路了），而不走那条拥挤的体二极管通道。&lt;/li&gt;
+&lt;li&gt;结果：压降变得极小。$V_{drop} = I \times R_{DS(on)} = 5A \times 0.01\Omega = 0.05V$。&lt;/li&gt;
+&lt;li&gt;对比二极管的 0.7V，这简直是完美的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;b-反接时保护生效&#34;&gt;B. 反接时（保护生效）
+&lt;/h4&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214114142324.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214114142324.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;输入变成了负压（或者地接正，正接地）。&lt;/li&gt;
+&lt;li&gt;体二极管处于反向截止状态，电流过不去。&lt;/li&gt;
+&lt;li&gt;$V_{GS}$ 状态：由于 $D$ 极电位低，$S$ 极没电，$G$ 极通过电阻接地。栅极和源极之间没有建立起足够的负压差（甚至 $V_{GS} &amp;gt; 0$），PMOS 保持 关断 (OFF)。&lt;/li&gt;
+&lt;li&gt;结果：电路完全切断，保护了后级电路。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                              &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;接了电池负极&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;期望是&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                                       &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;D&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;漏极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;                       &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;源极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;+---------------------------------------+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;体二极管&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Body&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Diode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;      &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;__&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;截止&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                 &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;        &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;   \  &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;也就是&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;D指向S&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;_____&lt;/span&gt;\     &lt;span class=&#34;n&#34;&gt;但此时&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;D是负压&lt;/span&gt;      &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;S是0V&lt;/span&gt;               &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;所以二极管不通&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;!&lt;/span&gt;     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                                       &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;MOS沟道&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Channel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;         &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;        &lt;span class=&#34;n&#34;&gt;__&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;__&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;关闭&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                 &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;        \   &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vgs&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;         \ &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;       &lt;span class=&#34;n&#34;&gt;不够开启电压&lt;/span&gt;         &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;+----------+----------------------------+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;G&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;栅极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;          &lt;span class=&#34;o&#34;&gt;+-------+&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                 &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;电阻&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GND&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;------------+----------------&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GND&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;接了电池正极&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;为什么它能“防反接”？（两道关卡）&lt;/p&gt;
+&lt;h4 id=&#34;第一关体二极管被反向截止&#34;&gt;第一关：体二极管被“反向截止”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;结构：PMOS 的体二极管方向是 &lt;strong&gt;D $\rightarrow$ S&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;现状：
+&lt;ul&gt;
+&lt;li&gt;D 极（漏极）：接了 -12V。&lt;/li&gt;
+&lt;li&gt;S 极（源极）：接了负载（0V）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;判定：二极管的阳极（D）电压 小于 阴极（S）电压。&lt;/li&gt;
+&lt;li&gt;结果：二极管处于&lt;strong&gt;反向偏置&lt;/strong&gt;状态，路不通！电流没法通过二极管流过去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第二关mos-管沟道打不开&#34;&gt;第二关：MOS 管沟道“打不开”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;开启条件：PMOS 需要 $V_{GS} &amp;lt; V_{th}$ (比如 -2V) 才能导通。即 G 极电压要比 S 极电压低很多。&lt;/li&gt;
+&lt;li&gt;现状：
+&lt;ul&gt;
+&lt;li&gt;G 极（栅极）：通过电阻 R 接到了输入 GND（也就是电池正极，0V）。所以 $V_G = 0V$。&lt;/li&gt;
+&lt;li&gt;S 极（源极）：因为二极管不通，负载没电，所以 $V_S \approx 0V$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;判定：$$V_{GS} = V_G - V_S \approx 0V - 0V = 0V$$&lt;/li&gt;
+&lt;li&gt;结果：$V_{GS}$ 是 0，完全没达到开启阈值。MOS 管处于&lt;strong&gt;关断 (Cut-off)&lt;/strong&gt; 状态，沟道也是断的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h2&gt;&lt;h3 id=&#34;栅极耐压保护必加-zener-齐纳二极管&#34;&gt;栅极耐压保护（必加 Zener 齐纳二极管）
+&lt;/h3&gt;&lt;p&gt;如果你的输入电压是 &lt;strong&gt;24V&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正常导通时，$V_{GS} \approx -24V$。&lt;/li&gt;
+&lt;li&gt;危险：绝大多数 PMOS 的栅极只能承受 $\pm 20V$。这一上电，MOS 管的栅极就击穿了。&lt;/li&gt;
+&lt;li&gt;对策：必须在 G 和 S 之间并联一个 &lt;strong&gt;10V~15V 的稳压二极管&lt;/strong&gt;，并在 G 极回路串联一个限流电阻。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214120842268.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214120842268.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;核心要点总结：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;【反常规接法】：输入电源接 D，负载接 S。（利用体二极管辅助启动，导通后走低阻沟道）。&lt;/li&gt;
+&lt;li&gt;【R1 (100k) 关门弹簧】：跨在 G-S 间。没电时把 G 和 S 拉平，保证 MOS 管死死关住，不误导通。&lt;/li&gt;
+&lt;li&gt;【R2 (10k) 保镖电阻】：串在 G-GND 间。当输入电压过高（如 24V），稳压管动作时，R2 负责承担多余电压，限制电流，防止稳压管烧毁。&lt;/li&gt;
+&lt;li&gt;【Z1 稳压管】：防止 Vgs 超过 20V 把 MOS 栅极击穿。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>PMOS开关电源设计</title>
+        <link>https://teaize.github.io/p/pmos%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pmos%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;p&gt;在 P-MOS 作为一个&lt;strong&gt;高边开关（High-Side Switch）&lt;/strong&gt;（即放在电源和负载之间）时，栅极（G）和源极（S）之间并联的那个电阻 $R_{GS}$，通常被称为“上拉电阻”或“泄放电阻”**。&lt;/p&gt;
+&lt;h3 id=&#34;一-g-s-之间电阻-r_gs-的作用&#34;&gt;一、 G-S 之间电阻 ($R_{GS}$) 的作用
+&lt;/h3&gt;&lt;h4 id=&#34;1-确保默认关断状态防误触&#34;&gt;1. 确保默认“关断”状态（防误触）
+&lt;/h4&gt;&lt;p&gt;这是最根本的原因。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原理：P-MOS 是 &lt;strong&gt;$V_{GS} &amp;lt; 0$&lt;/strong&gt;（即栅极电压低于源极电压）时导通。要让它关断，必须使 &lt;strong&gt;$V_G = V_S$&lt;/strong&gt;（即 $V_{GS} = 0$）。&lt;/li&gt;
+&lt;li&gt;危险场景：当驱动 P-MOS 的控制信号（比如单片机引脚或前级三极管）处于 高阻态（High-Z）（例如单片机刚上电复位、还没初始化时），栅极是&lt;strong&gt;悬空&lt;/strong&gt;的。&lt;/li&gt;
+&lt;li&gt;后果：MOS 管的栅极极其灵敏，悬空的栅极会感应周围的静电或干扰，导致 $V_G$ 飘忽不定。如果 $V_G$ 碰巧飘得比 $V_S$ 低，P-MOS 就会&lt;strong&gt;意外导通&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;想象一下，你一上电，还没控制呢，电机就狂转，或者设备就误动作了，这是非常危险的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;电阻的作用：$R_{GS}$ 像一根强力的弹簧，把栅极电位强行“拉”到和源极（电源电压）一样高。&lt;strong&gt;只要你没给控制信号，它就死死地锁在“关断”状态&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-积存电荷的泄放通道&#34;&gt;2. 积存电荷的“泄放通道”
+&lt;/h4&gt;&lt;p&gt;MOS 管的栅极&lt;strong&gt;寄生电容&lt;/strong&gt;（$C_{GS}$）很大。当你撤销驱动信号想关断它时，栅极里存的电荷需要流走，电压才能升上去。&lt;/p&gt;
+&lt;p&gt;$R_{GS}$ 提供了一条物理通道，帮助电荷泄放，加快关断速度（虽然在大电流驱动电路中，主要靠驱动器吸走电荷，但这个电阻提供了最后的保障）。&lt;/p&gt;
+&lt;h2 id=&#34;二驱动电平匹配问题最常见&#34;&gt;二、驱动电平匹配问题（最常见！）
+&lt;/h2&gt;&lt;p&gt;新手最容易犯的错：&lt;strong&gt;用 3.3V/5V 单片机直接驱动 12V/24V 电源上的 P-MOS。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;错误做法：P-MOS 源极接 12V，栅极直接接单片机 IO 口。&lt;/li&gt;
+&lt;li&gt;后果：
+&lt;ul&gt;
+&lt;li&gt;单片机输出低电平（0V）：$V_{GS} = 0 - 12 = -12V$，P-MOS 导通。（正常）&lt;/li&gt;
+&lt;li&gt;单片机输出高电平（3.3V）：$V_{GS} = 3.3 - 12 = -8.7V$，P-MOS 还是导通的！（因为 $V_{GS}$ 依然小于阈值电压）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;无法关断：&lt;strong&gt;你根本关不掉这个开关&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;正确做法：必须加一个 NPN 三极管 或 N-MOS 作为“前级驱动”来进行电平转换。利用小管子拉低 P-MOS 的栅极，关断时靠 $R_{GS}$ 拉高。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214105741416.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214105741416.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;三栅极耐压保护v_gsmax-限制&#34;&gt;三、栅极耐压保护（$V_{GS(max)}$ 限制）
+&lt;/h2&gt;&lt;p&gt;MOS 管的栅极非常脆弱，绝缘层很薄。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;数据手册：大多数 P-MOS 的 $V_{GS}$ 最大承受电压是 &lt;strong&gt;$\pm 20V$&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;危险：如果你的电源电压是 24V 或 48V。
+&lt;ul&gt;
+&lt;li&gt;当你把栅极拉到地（0V）导通时，$V_{GS} = 0 - 24 = -24V$。&lt;/li&gt;
+&lt;li&gt;结果：栅极氧化层瞬间击穿，P-MOS 永久损坏（短路）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;对策：
+&lt;ol&gt;
+&lt;li&gt;电阻分压：不要直接拉到地，利用两个电阻分压，让栅极电压只下降一半（比如 12V）。&lt;/li&gt;
+&lt;li&gt;稳压二极管：在 G 和 S 之间并联一个 10V~15V 的稳压二极管（Zener），强行限制 $V_{GS}$ 的幅度。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;一个标准的 P-MOS 开关电路通常长这样：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;电源 $\rightarrow$ S 极。&lt;/li&gt;
+&lt;li&gt;$R_{GS}$ (10k-100k) $\rightarrow$ 跨接在 G 和 S 之间（负责默认关断）。&lt;/li&gt;
+&lt;li&gt;$R_{limit}$ (限流电阻) $\rightarrow$ 串联在 G 极回路中。&lt;/li&gt;
+&lt;li&gt;稳压二极管 $\rightarrow$ 并联在 G-S 之间（如果电源 &amp;gt; 20V）。&lt;/li&gt;
+&lt;li&gt;控制端 $\rightarrow$ 使用 NPN 三极管拉低栅极，而不是 MCU 直驱。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>比较器颤振问题</title>
+        <link>https://teaize.github.io/p/%E6%AF%94%E8%BE%83%E5%99%A8%E9%A2%A4%E6%8C%AF%E9%97%AE%E9%A2%98/</link>
+        <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%AF%94%E8%BE%83%E5%99%A8%E9%A2%A4%E6%8C%AF%E9%97%AE%E9%A2%98/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;在使用比较器时，可能会遇到颤振的问题，通常的做法是在比较器的输出端接一个电阻到他的同相输入端，给他的输入端一个正反馈，这样就可以避免颤振问题。
+—&amp;gt; 简单来说，这就一个人拿不定主意时，请求另一个人帮忙做决定，然后通过这个人的反馈后，就更加坚信了自己该如何做选择了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在工程上有一个响亮的名字，施密特触发器 (Schmitt Trigger)，或者叫 带迟滞功能的比较器 (Comparator with Hysteresis)&lt;/p&gt;
+&lt;h3 id=&#34;1-为什么要加没有电阻时的纠结&#34;&gt;1. 为什么要加？（没有电阻时的“纠结”）
+&lt;/h3&gt;&lt;p&gt;想象一下，你设定了一个 2.5V 的基准电压（门槛），去检测一个传感器的电压。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题：现实中的信号总是有噪声的（毛刺）。当输入信号刚好慢慢爬升到 &lt;strong&gt;2.5V&lt;/strong&gt; 附近时，可能上一微秒是 2.501V（高），下一微秒因为干扰变成了 2.499V（低），再下一微秒又变成 2.501V。&lt;/li&gt;
+&lt;li&gt;后果：比较器非常灵敏，它会忠实地跟着跳变。&lt;strong&gt;结果输出端就会在“高”和“低”之间疯狂切换（颤振）&lt;/strong&gt;。如果后面接的是继电器，继电器会“哒哒哒”乱响直到烧坏；如果是单片机，可能会计数错误。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-加了电阻后发生了什么迟滞效应&#34;&gt;2. 加了电阻后发生了什么？（迟滞效应）
+&lt;/h3&gt;&lt;p&gt;当你把 &lt;strong&gt;输出端&lt;/strong&gt; 通过一个电阻接回 &lt;strong&gt;同相输入端 (+)&lt;/strong&gt; 时，奇迹发生了：&lt;strong&gt;门槛（阈值）变了，而且是会动的！&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;这就是 &lt;strong&gt;正反馈&lt;/strong&gt; 的核心机制：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;当输出是高电平时&lt;/strong&gt;：输出的高电压通过电阻“拉高”了同相输入端的基准电压。
+&lt;ul&gt;
+&lt;li&gt;潜台词：“想让我变低？你得把电压降得&lt;strong&gt;更低&lt;/strong&gt;才行。”（比如门槛从 2.5V 变成了 2.6V）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;当输出是低电平时&lt;/strong&gt;：输出的低电压通过电阻“拉低”了同相输入端的基准电压。
+&lt;ul&gt;
+&lt;li&gt;潜台词：“想让我变高？你得把电压升得&lt;strong&gt;更高&lt;/strong&gt;才行。”（比如门槛从 2.5V 变成了 2.4V）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-一个生活的例子空调最经典的迟滞&#34;&gt;3. 一个生活的例子：空调（最经典的迟滞）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;没有迟滞（傻瓜模式）： 设定 25 度。气温 25.01 度 -&amp;gt; 开机；气温 24.99 度 -&amp;gt; 关机。
+&lt;ul&gt;
+&lt;li&gt;结果：空调压缩机一秒钟开关十次，立马报废。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;有迟滞（正反馈模式）： 设定 25 度。
+&lt;ul&gt;
+&lt;li&gt;制冷时：一口气降到 23 度（下门槛）才停机。&lt;/li&gt;
+&lt;li&gt;升温时：一直等到热到 27 度（上门槛）才重新启动。&lt;/li&gt;
+&lt;li&gt;结果：中间的 23~27 度 是“安全区”，在这个区域里怎么波动，空调都不动作，这就消除了“颤振”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-硬件设计细节&#34;&gt;4. 硬件设计细节
+&lt;/h3&gt;&lt;p&gt;在电路图中，通常涉及两个电阻：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;输入电阻 ($R_1$)&lt;/strong&gt;：连接基准电压（Vref 也就是参考电压）和同相输入端。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反馈电阻 ($R_f$)&lt;/strong&gt;：连接输出端和同相输入端（就是你说的那个电阻）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这两个电阻组成了&lt;strong&gt;分压器&lt;/strong&gt;，决定了“迟滞电压”（Hysteresis Band）有多宽。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$R_f$ 越&lt;strong&gt;小&lt;/strong&gt;，反馈越强，迟滞窗口越&lt;strong&gt;宽&lt;/strong&gt;（抗干扰越强，但灵敏度下降）。&lt;/li&gt;
+&lt;li&gt;$R_f$ 越&lt;strong&gt;大&lt;/strong&gt;，反馈越弱，迟滞窗口越&lt;strong&gt;窄&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214155434328.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214155434328.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;手段：引入正反馈（输出接电阻回同相输入端）。&lt;/li&gt;
+&lt;li&gt;目的：制造迟滞（Hysteresis）。&lt;/li&gt;
+&lt;li&gt;效果：消除因噪声引起的输出颤振。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>运放输入失调电压</title>
+        <link>https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%BE%93%E5%85%A5%E5%A4%B1%E8%B0%83%E7%94%B5%E5%8E%8B/</link>
+        <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%BE%93%E5%85%A5%E5%A4%B1%E8%B0%83%E7%94%B5%E5%8E%8B/</guid>
+        <description>&lt;p&gt;在电流低端检测电路中，如果检测很小的电流，输入失调电压 ($V_{os}$) 往往是决定测量精度的“头号杀手”&lt;/p&gt;
+&lt;h2 id=&#34;关于-v_os&#34;&gt;关于 $V_{os}$
+&lt;/h2&gt;&lt;h3 id=&#34;什么是-v_os-input-offset-voltage&#34;&gt;什么是 $V_{os}$ (Input Offset Voltage)
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;定义（书本版）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;当运放的两个输入端（+ 和 -）完全接地（电位相同）时，理论上输出应该是 0V。但实际上，输出端总会有一个非零电压。为了让输出强行变成 0V，你必须在输入端反向加上的那个微小补偿电压，就是 $V_{os}$。&lt;/p&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;工程师的直观理解（模型版）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;你可以&lt;strong&gt;把 $V_{os}$ 想象成运放内部自带了一个捣乱的干电池&lt;/strong&gt;，它串联在运放的输入端。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;即使外部没有信号，这个“内部电池”也会一直产生电压。&lt;/li&gt;
+&lt;li&gt;运放分不清哪个是你要测的信号，哪个是这个电池的电压，它会把它们加在一起放大。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么在电流检测中它很致命&#34;&gt;为什么在“电流检测”中它很致命？
+&lt;/h3&gt;&lt;p&gt;在低端检测中，我们通过测量采样电阻（$R_{sense}$）上的压降来算电流。&lt;/p&gt;
+&lt;p&gt;$$V_{sense} = I \times R_{sense}$$&lt;/p&gt;
+&lt;p&gt;悲剧的场景推演：假设你要测 10mA 的小电流，为了减小功耗，你选了 0.1Ω 的电阻。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;有效信号：$V_{signal} = 0.01A \times 0.1\Omega = 1mV$。&lt;/li&gt;
+&lt;li&gt;运放误差：假设你用了一个普通的运放（比如 LM358），它的 $V_{os}$ 大约是 &lt;strong&gt;2mV&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;结果：
+&lt;ul&gt;
+&lt;li&gt;运放看到的总输入 = $1mV \text{ (信号)} + 2mV \text{ (误差)} = 3mV$。&lt;/li&gt;
+&lt;li&gt;误差高达 200%！ 你根本分不清这是电流产生的，还是运放自己产生的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这就是为什么对于小电流检测，$V_{os}$ 必须被严肃对待。&lt;/p&gt;
+&lt;h3 id=&#34;如何处理这个问题&#34;&gt;如何处理这个问题？
+&lt;/h3&gt;&lt;h4 id=&#34;1--钞能力--法--选用低失调运放最推荐&#34;&gt;1. &amp;quot; 钞能力 &amp;quot; 法 —— 选用低失调运放（最推荐）
+&lt;/h4&gt;&lt;p&gt;既然普通运放不行，那就换好的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;普通运放 (General Purpose)：如 LM358。$V_{os} \approx 3mV$。（此时不能用）&lt;/li&gt;
+&lt;li&gt;精密运放 (Precision)：如 OP07。$V_{os} \approx 75\mu V$。&lt;/li&gt;
+&lt;li&gt;零漂移/斩波运放 (Zero-Drift / Chopper)：这是终极武器。
+&lt;ul&gt;
+&lt;li&gt;如 ADA4528, OPA333, SGM8953（国产）。&lt;/li&gt;
+&lt;li&gt;它们的 $V_{os}$ 可以低至 1\mu V 甚至更低。&lt;/li&gt;
+&lt;li&gt;原理：这种运放内部有一个自动校准电路，每秒钟自动校准几千次，把 $V_{os}$ &amp;quot; 切碎 &amp;quot; 并扔掉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;建议&lt;/strong&gt;：在电流检测电路中，直接选用 Zero-Drift (斩波) 运放是性价比最高的解决方案，省去了复杂的校准工作。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;2--大力出奇迹--法--增大采样电阻-r_sense&#34;&gt;2. &amp;quot; 大力出奇迹 &amp;quot; 法 —— 增大采样电阻 ($R_{sense}$)
+&lt;/h4&gt;&lt;p&gt;如果不想换贵的运放，那就想办法把信号变大。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;做法：把 0.1Ω 的电阻换成 1Ω。&lt;/li&gt;
+&lt;li&gt;效果：10mA 电流产生的压降变成了 10mV。&lt;/li&gt;
+&lt;li&gt;对比：此时 2mV 的 $V_{os}$ 带来的误差从 200% 降到了 20%。&lt;/li&gt;
+&lt;li&gt;代价：功耗增加，发热增加。满量程大电流流过时，电阻可能会烧烫，且压降过大可能影响负载供电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3--软件补丁--法--软件校准-calibration&#34;&gt;3. &amp;quot; 软件补丁 &amp;quot; 法 —— 软件校准 (Calibration)
+&lt;/h4&gt;&lt;p&gt;如果你必须用便宜的运放，也没法增大电阻，那就靠单片机来补。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;做法：
+&lt;ol&gt;
+&lt;li&gt;出厂归零（去皮）：在电流为 0 时，读取 ADC 的数值（这个值就是 $V_{os}$ 放大后的结果）。&lt;/li&gt;
+&lt;li&gt;存储：把这个偏差值存在 EEPROM 里。&lt;/li&gt;
+&lt;li&gt;运算：每次测量时，&lt;code&gt;实际结果 = 读取结果 - 偏差值&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;缺点：$V_{os}$ 是会随&lt;strong&gt;温度&lt;/strong&gt;漂移的（温漂）。你在 25°C 校准了，到了 60°C，偏差值变了，测量又不准了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;非理想特性&#34;&gt;非理想特性
+&lt;/h2&gt;&lt;p&gt;实际上，理想元件不存在，真实元件总带点“毛病”。这也是为什么精密仪器即使什么都不测，开机也得先“归零（Zeroing）”或“校准（Calibration）”的原因&lt;/p&gt;
+&lt;h3 id=&#34;第一类明明没给输入它却有输出--零点偏置-zero-offset&#34;&gt;第一类：明明没给输入，它却有输出 —— “零点偏置” (Zero Offset)
+&lt;/h3&gt;&lt;p&gt;这和运放的 $V_{os}$ 是一模一样的亲兄弟。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;传感器（重灾区）
+&lt;ul&gt;
+&lt;li&gt;现象：你买一个电子秤（压力传感器），上面什么都没放，它却显示 &lt;code&gt;0.05g&lt;/code&gt;。你买一个陀螺仪，放在桌上纹丝不动，读数却显示它在以 &lt;code&gt;0.1度/秒&lt;/code&gt; 的速度旋转。&lt;/li&gt;
+&lt;li&gt;术语：&lt;strong&gt;零点漂移 (Zero Offset / Zero Drift)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;原因：传感器内部的微机械结构（MEMS）或惠斯通电桥不可能做得完全对称。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ADC（模数转换器）
+&lt;ul&gt;
+&lt;li&gt;现象：你把 ADC 的输入端短路接到地（0V），你期望读出来的数字是 &lt;code&gt;0000&lt;/code&gt;，但实际读出来可能是 &lt;code&gt;0003&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;术语：&lt;strong&gt;失调误差 (Offset Error)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;原因：ADC 内部比较器的不匹配。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第二类明明关断了它却在偷偷导电--漏电流-leakage&#34;&gt;第二类：明明关断了，它却在偷偷导电 —— “漏电流” (Leakage)
+&lt;/h3&gt;&lt;p&gt;理想情况下，断开就是断开，电阻无穷大。但现实中，没有绝对的绝缘。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;二极管 / 三极管 / MOS 管
+&lt;ul&gt;
+&lt;li&gt;现象：你把二极管反接截止了，理应没有电流。但实际上，总会有微安（uA）甚至纳安（nA）级的电流偷偷流过去。高温下这个电流还会翻倍。&lt;/li&gt;
+&lt;li&gt;术语：&lt;strong&gt;反向漏电流 ($I_R$)&lt;/strong&gt; 或 &lt;strong&gt;关断漏电流 ($I_{DSS}$)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;影响：这就是为什么电池供电的设备，关机放一年电池也会没电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;电容
+&lt;ul&gt;
+&lt;li&gt;现象：你给电容充饱了电，拔掉电源放在那儿。理论上电荷应该永远存着，但过几天它就没电了。&lt;/li&gt;
+&lt;li&gt;术语：&lt;strong&gt;自放电&lt;/strong&gt; 或 &lt;strong&gt;绝缘电阻 (Insulation Resistance)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;本质：电容内部相当于并联了一个很大的电阻（几百兆欧），一直在偷偷放电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第三类明明没通电它却在吵闹--热噪声-thermal-noise&#34;&gt;第三类：明明没通电，它却在“吵闹” —— “热噪声” (Thermal Noise)
+&lt;/h3&gt;&lt;p&gt;这个最神奇，属于物理定律层面的“偏置”。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;电阻
+&lt;ul&gt;
+&lt;li&gt;现象：拿一个电阻放在桌子上，两头接上示波器（假设示波器精度无限高），你会发现电阻两端竟然有微小的电压波形在乱跳！哪怕你根本没给它通电。&lt;/li&gt;
+&lt;li&gt;术语：&lt;strong&gt;约翰逊噪声 (Johnson Noise)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;原因：只要温度高于绝对零度，电阻内部的电子就会做热运动，这种无规则运动就产生了电压噪声。&lt;/li&gt;
+&lt;li&gt;影响：这是精密信号测量的物理极限，你永远无法消除，只能通过降温（比如液氮冷却）来减小。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;工程师的应对哲学&#34;&gt;工程师的应对哲学
+&lt;/h3&gt;&lt;p&gt;既然这种“自带偏置”无法避免（因为是制造工艺和物理定律决定的），工程师们是怎么解决的呢？通常有三板斧：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;硬件上“差分” (Differential)：
+&lt;ul&gt;
+&lt;li&gt;既然大家都有偏置，那我就用两路一样的电路。假设都有 +0.1V 的误差，那我用 $A - B$，误差就相减抵消了。这是差分放大电路的核心思想。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;软件上“校准” (Calibration)：
+&lt;ul&gt;
+&lt;li&gt;出厂校准：生产时先测出这个误差（比如 +2mV），写进芯片里。以后每次读数都自动减去 2mV。&lt;/li&gt;
+&lt;li&gt;上电自校准：现在的万用表、电子秤，开机时都会自检一下零点，把你说的那个“自带偏置”当成当前的“0”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;工艺上“配对” (Matching)：
+&lt;ul&gt;
+&lt;li&gt;在芯片制造时，如果需要两个电阻一样，就把它们画得挨得很近，形状一模一样。虽然它们都不准，但它们“不准的程度”是一样的，这样在电路里也能用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>运放虚短和虚断</title>
+        <link>https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%99%9A%E7%9F%AD%E5%92%8C%E8%99%9A%E6%96%AD/</link>
+        <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%99%9A%E7%9F%AD%E5%92%8C%E8%99%9A%E6%96%AD/</guid>
+        <description>&lt;p&gt;这两个概念并不是物理上真的发生了短路或断路，而是基于运放的&lt;strong&gt;理想特性&lt;/strong&gt;推导出来的“等效状态”。&lt;/p&gt;
+&lt;h2 id=&#34;前置条件必须是负反馈&#34;&gt;前置条件：必须是“负反馈”
+&lt;/h2&gt;&lt;p&gt;在讲之前，必须强调一个&lt;strong&gt;绝对前提&lt;/strong&gt;： &lt;strong&gt;“虚短”原则只存在于运放工作在线性区（即接了负反馈）的时候。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;如果运放是开环工作（做比较器），或者接了正反馈（做触发器），那么“虚短”是不成立的！&lt;/p&gt;
+&lt;h2 id=&#34;虚短-virtual-short&#34;&gt;虚短 (Virtual Short)
+&lt;/h2&gt;&lt;p&gt;&lt;strong&gt;一句话解释：&lt;/strong&gt; 两个输入端的电压相等，就像它们被短路了一样，但其实没连在一起。&lt;/p&gt;
+&lt;h3 id=&#34;1-现象&#34;&gt;1. 现象
+&lt;/h3&gt;&lt;p&gt;即：同相输入端电压 = 反相输入端电压。$$V_+ = V_-$$&lt;/p&gt;
+&lt;h3 id=&#34;2-为什么会有这个现象&#34;&gt;2. 为什么会有这个现象？
+&lt;/h3&gt;&lt;p&gt;这得益于运放的&lt;strong&gt;开环增益 ($A_{vo}$) 无穷大&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公式：$V_{out} = A_{vo} \times (V_+ - V_-)$&lt;/li&gt;
+&lt;li&gt;推导：$(V_+ - V_-) = V_{out} / A_{vo}$&lt;/li&gt;
+&lt;li&gt;现实：运放的开环增益通常在 10 万 到 100 万倍以上。&lt;/li&gt;
+&lt;li&gt;结论：即使输出 $V_{out}$ 是 10V，输入端的压差 $(V_+ - V_-)$ 也只有 $10V / 100,000 = 0.0001V$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工程视角&lt;/strong&gt;：0.0001V 对于我们来说就是 0。所以我们认为 $V_+$ 和 $V_-$ 的电位是死死咬合在一起的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;比喻&lt;/strong&gt;：想象运放是一个超级灵敏的平衡大师（负反馈机制）。只要 $V_-$ 比 $V_+$ 低那么一丁点，输出端就会疯狂输出高电压，通过反馈电阻把 $V_-$ 拉高，直到 $V_-$ 和 $V_+$ 持平。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;从物理本质看为什么-v_--会自动等于-v_&#34;&gt;从物理本质看为什么 $V_-$ 会自动等于 $V_+$？
+&lt;/h3&gt;&lt;p&gt;从物理本质和控制过程来看，“虚短”其实是一个动态的、暴力的、实时的自我调节过程，是“负反馈”机制强行制造出来的结果&lt;/p&gt;
+&lt;p&gt;以最经典的反相放大器为例，假设 $V_+$ 接地（0V），$V_-$ 还没接地时：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;扰动开始：
+&lt;ul&gt;
+&lt;li&gt;假设你给输入端来了一个微小的电压，让 $V_-$ 稍微升高了 0.1V（此时 $V_- &amp;gt; V_+$）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;运放察觉：
+&lt;ul&gt;
+&lt;li&gt;运放内部的差分放大器瞬间察觉到了这个偏差：$V_+ - V_- = -0.1V$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;暴力反应（核心物理过程）：
+&lt;ul&gt;
+&lt;li&gt;因为运放增益极大（比如 100 万倍），它会想：“该死，反相端竟然高了！我要把输出端狠狠地往下拉！”&lt;/li&gt;
+&lt;li&gt;于是输出端 $V_{out}$ 瞬间输出一个巨大的负电压趋势（试图达到 $-0.1V \times 100万 = -100kV$）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;负反馈生效：
+&lt;ul&gt;
+&lt;li&gt;但是！输出端通过 反馈电阻 $R_f$ 连回了 $V_-$。&lt;/li&gt;
+&lt;li&gt;当输出端 $V_{out}$ 猛烈下降时，它通过电阻 $R_f$ 把 $V_-$ 的电位也死命往下拉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;达到平衡：
+&lt;ul&gt;
+&lt;li&gt;$V_-$ 被拉低了，直到它被拉回到和 $V_+$ 几乎一样的 0V 为止。&lt;/li&gt;
+&lt;li&gt;一旦 $V_-$ 降到 0V，运放觉得“没有偏差了”，就不再继续往下拉输出电压了，系统稳定下来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;物理结论：&lt;/p&gt;
+&lt;p&gt;“虚短”的本质，是运放利用巨大的输出能量，通过反馈电阻这条“绳子”，强行把 $V_-$ 拽到了和 $V_+$ 一样的水平线上。只要这根绳子（负反馈）还在，运放就会一直实时调整输出，维持这个平衡。&lt;/p&gt;
+&lt;h3 id=&#34;条件&#34;&gt;条件
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;存在负反馈回路【减少 V+ 和 V- 差距的就是负反馈，增大这种差异的就是正反馈】&lt;/li&gt;
+&lt;li&gt;Vout 的输出不能饱和&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如下面这张图，假设运放的电源为 5V，如果 Vin 进来 1V，运放就算饱和输出了，也只能输出到 5V。但是通过反馈回路，V- 最多也只能分压达到 0.5V。反过来，要想 V+=V-，那么运放的输出端就不可能刚好输出饱和，否则 V+ 和 V- 就不能相等了 
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214170412.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214170412.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;虚断-virtual-open&#34;&gt;虚断 (Virtual Open)
+&lt;/h2&gt;&lt;p&gt;一句话解释： 两个输入端没有电流流进去，就像引脚内部断路了一样。&lt;/p&gt;
+&lt;h3 id=&#34;1-现象-1&#34;&gt;1. 现象
+&lt;/h3&gt;&lt;p&gt;即：运放的输入引脚不吃电流。$$I_+ = 0, \quad I_- = 0$$&lt;/p&gt;
+&lt;p&gt;例如在分析 V- 处的电压时，可以忽略运放对 V- 的影响
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214171836370.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214171836370.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;2-为什么会有这个现象-1&#34;&gt;2. 为什么会有这个现象？
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;例如下面这张电路图，10M 电阻对于前端的这两个电阻网络来说，加不加它，对于整个电路来说其实没什么影响。那就可以简单认为 10M 这块是一个断路状态
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214171314.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214171314.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这得益于运放的&lt;strong&gt;输入阻抗 ($R_{in}$) 无穷大&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公式：$I = U / R$&lt;/li&gt;
+&lt;li&gt;现实：&lt;strong&gt;运放（尤其是 CMOS 工艺的）输入阻抗通常是 兆欧 ($M\Omega$) 甚至 吉欧 ($G\Omega$) 级别的&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;结论：流进引脚的电流通常是纳安 (nA) 甚至皮安 (pA) 级别的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;工程视角&lt;/strong&gt;：这点电流对电路分流影响极小，我们可以直接忽略，认为电流根本进不去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;运放的两个输入端就像是&lt;strong&gt;电压表&lt;/strong&gt;的探针，只负责“感知”电压，绝不“消耗”电流。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;工程师经验&#34;&gt;工程师经验
+&lt;/h2&gt;&lt;p&gt;在分析任何线性运放电路时，可按这个&lt;strong&gt;三板斧&lt;/strong&gt;流程走&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先找 $V_+$：看同相端接了什么电压。&lt;/li&gt;
+&lt;li&gt;用虚短：强行让 $V_- = V_+$，列出第一个方程。&lt;/li&gt;
+&lt;li&gt;用虚断：针对 $V_-$ 节点列写 KCL（基尔霍夫电流定律） —— “流进来的电流 = 流出去的电流”，因为没有电流流进运放肚子。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo渲染Mermaid</title>
+        <link>https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/</link>
+        <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/</guid>
+        <description>&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定&lt;/p&gt;
+&lt;h3 id=&#34;第一步创建-mermaid-的渲染钩子&#34;&gt;第一步：创建 Mermaid 的渲染钩子
+&lt;/h3&gt;&lt;p&gt;这个步骤是为了告诉 Hugo：当遇到语言标记为 &lt;code&gt;mermaid&lt;/code&gt; 的代码块时，不要高亮代码，而是将其包装在一个 &lt;code&gt;div&lt;/code&gt; 中，以便 JavaScript 库进行渲染。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在你的 Hugo 站点根目录下（注意&lt;strong&gt;不是&lt;/strong&gt;在 &lt;code&gt;themes&lt;/code&gt; 目录里），找到或创建 &lt;code&gt;layouts&lt;/code&gt; 文件夹。&lt;/li&gt;
+&lt;li&gt;建立如下目录结构和文件： &lt;code&gt;layouts/_default/_markup/render-codeblock-mermaid.html&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;在该文件中粘贴以下代码：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-HTML&#34; data-lang=&#34;HTML&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;class&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;mermaid&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  {{ .Inner | safeHTML }}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;div&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ .Page.Store.Set &amp;#34;hasMermaid&amp;#34; true }}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;第二步引入-mermaid-javascript-库&#34;&gt;第二步：引入 Mermaid JavaScript 库
+&lt;/h3&gt;&lt;p&gt;我们需要将 Mermaid 的核心 JS 脚本注入到页面底部。&lt;code&gt;hugo-theme-stack&lt;/code&gt; 主题预留了自定义页脚文件的位置。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在站点根目录下，创建文件： &lt;code&gt;layouts/partials/footer/custom.html&lt;/code&gt; (如果该文件已存在，直接在里面追加代码即可)&lt;/li&gt;
+&lt;li&gt;在该文件中粘贴以下代码：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-HTML&#34; data-lang=&#34;HTML&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ if .Page.Store.Get &amp;#34;hasMermaid&amp;#34; }}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;type&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;module&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;mermaid&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;mermaid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;startOnLoad&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;theme&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;base&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 或者 &amp;#39;default&amp;#39;, &amp;#39;forest&amp;#39;, &amp;#39;neutral&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;securityLevel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;loose&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ end }}
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;大功告成！&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Python脚本-本地CSV快速傅里叶变换</title>
         <link>https://teaize.github.io/p/python%E8%84%9A%E6%9C%AC-%E6%9C%AC%E5%9C%B0csv%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</link>
         <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
@@ -316,6 +1012,149 @@
 	&lt;/div&gt;
 
 &lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>补偿原则</title>
+        <link>https://teaize.github.io/p/%E8%A1%A5%E5%81%BF%E5%8E%9F%E5%88%99/</link>
+        <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%A1%A5%E5%81%BF%E5%8E%9F%E5%88%99/</guid>
+        <description>&lt;p&gt;美国 Teledyne API 的 T100U 型二氧化硫分析仪性能优化介绍如下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;光学快门与参考探测器：使用光学快门和参考探测器来&lt;strong&gt;补偿光电倍增管的漂移和紫外灯强度的变化&lt;/strong&gt;，确保长期稳定性。&lt;/li&gt;
+&lt;li&gt;氢碳干扰抑制器（Kicker）：内置氢碳干扰抑制器，减少氢碳类气体对测量的干扰，提高选择性。&lt;/li&gt;
+&lt;li&gt;电子噪声校正：利用紫外光源的亮暗阶段，持续检测和校正电子噪声，增强仪器的稳定性和灵敏度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这里涉及到仪器设计的核心权衡（Trade-off）：&lt;strong&gt;在“完美精度”与“成本/复杂度”之间寻找平衡点&lt;/strong&gt;。仪器里几乎所有东西都在老化：电阻会漂、电容会漏液、滤光片会霉变、泵膜会变硬等等，如果给每个部件都设计一套“补偿回路”，这台仪器将造价上百万，且极其复杂以至于无法维修。&lt;/p&gt;
+&lt;p&gt;那么，&lt;strong&gt;如何决定谁值得被补偿，而谁可以被忽略的呢&lt;/strong&gt;，这主要遵循以下四大判据：&lt;/p&gt;
+&lt;h3 id=&#34;判据一处于信号链的最前端吗权重最高&#34;&gt;判据一：处于“信号链的最前端”吗？（权重最高）
+&lt;/h3&gt;&lt;p&gt;这是最重要的原则。&lt;strong&gt;误差在源头会被放大，在末端会被缩小。&lt;/strong&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;必须要补偿的：光源 (Source) 和 探测器 (Detector)&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;理由： 它们处于信号链的&lt;strong&gt;最上游&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;光源（如紫外灯）： 根据比尔定律 $I = I_0 \cdot e^{-kc}$，光源强度 $I_0$ 是公式的基准。如果灯亮暗波动 1%，最终浓度的误差可能就是 10% 甚至更多（取决于吸光度）。&lt;/li&gt;
+&lt;li&gt;探测器（如 PMT）： 它是把光变成电的第一步。它的增益（Gain）对温度和高压极其敏感。&lt;/li&gt;
+&lt;li&gt;设计： 所以我们看到了&lt;strong&gt;参考探测器&lt;/strong&gt;（补偿灯）、&lt;strong&gt;光学快门&lt;/strong&gt;（补偿 PMT 暗电流）、&lt;strong&gt;温控模块&lt;/strong&gt;（补偿光路变形）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可以忽略的：后级放大电路的电阻电容
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;理由：&lt;/strong&gt; 主板上的 ADC 前面的运放电阻，虽然也会老化（温漂），但现在的精密电阻温漂只有 10ppm/°C。相对于 PMT 动不动 10% 的漂移，电阻这 0.001% 的误差完全是“大巫见小巫”，可以忽略不计。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;判据二老化是快变量还是慢变量&#34;&gt;判据二：老化是“快变量”还是“慢变量”？
+&lt;/h3&gt;&lt;p&gt;我们要看这个老化的时间尺度，是“秒级/分钟级”，还是“月级/年级”。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;必须要补偿的：快变量 (Fast Drift)
+&lt;ul&gt;
+&lt;li&gt;例子： 温度对半导体激光器 (TDLAS) 波长的影响。&lt;/li&gt;
+&lt;li&gt;特征： 只要环境温度变 0.1°C（几秒钟的事），激光波长就跑偏了，测不到气体了。&lt;/li&gt;
+&lt;li&gt;设计： 必须上 &lt;strong&gt;TEC (半导体制冷器)&lt;/strong&gt; 进行毫秒级的实时闭环控制补偿。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可以忽略（交给标定）：慢变量 (Slow Drift)
+&lt;ul&gt;
+&lt;li&gt;例子： 滤光片 (Optical Filter) 的透光率下降、气路管壁的轻微吸附增加。&lt;/li&gt;
+&lt;li&gt;特征： 这种变化是按“月”发生的。&lt;/li&gt;
+&lt;li&gt;设计： 不需要做硬件补偿。&lt;/li&gt;
+&lt;li&gt;解决方案： &lt;strong&gt;定期校准 (Calibration)&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;为什么让你每周通一次“标气”？其实通标气就是在&lt;strong&gt;软件上&lt;/strong&gt;一次性把这些“慢速老化”的部件误差全补回来（重新计算斜率 $K$ 和截距 $B$）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;判据三是否具有可预测的物理模型&#34;&gt;判据三：是否具有“可预测的物理模型”？
+&lt;/h3&gt;&lt;p&gt;如果这个老化是有规律的（遵循物理公式），我们就能用软件（数学）补偿；如果是随机的，就必须加硬件。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;用软件补偿：气体密度受温度/压力的影响
+&lt;ul&gt;
+&lt;li&gt;原理： 理想气体状态方程 $PV=nRT$。&lt;/li&gt;
+&lt;li&gt;设计： 我们不需要把气室做成恒压的（硬件成本高），我们只需要装一个便宜的压力传感器。&lt;/li&gt;
+&lt;li&gt;算法： 测到压力变了，直接套公式 $C_{new} = C_{old} \times (P_0/P)$ 算回去就行。这叫 P/T 补偿。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;必须用硬件补偿：PMT 的灵敏度衰减
+&lt;ul&gt;
+&lt;li&gt;原理： PMT 的衰减是量子层面的，非常玄学，没法写出一个通用的数学公式说“使用了 100 小时衰减 1%”。&lt;/li&gt;
+&lt;li&gt;设计： 既然算不出来，就必须加&lt;strong&gt;参考光路&lt;/strong&gt;去实时“盯着”它测。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;判据四成本与寿命的博弈-cost-benefit&#34;&gt;判据四：成本与寿命的博弈 (Cost-Benefit)
+&lt;/h3&gt;&lt;p&gt;有些部件老化了，补偿它的成本比换一个新的还贵，那就选择“耗材化”**。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不补偿，直接换：蠕动泵管、过滤器滤芯
+&lt;ul&gt;
+&lt;li&gt;泵管老化会导致流量下降。理论上，你可以加一个昂贵的“质量流量计 (MFC)”来实时调节泵的转速以补偿流量。&lt;/li&gt;
+&lt;li&gt;决策： 但一个 MFC 要 5000 块，一根泵管才 50 块。&lt;/li&gt;
+&lt;li&gt;结果： 还可以用的时候就凑合用（流量波动通常不影响浓度测量原理），用坏了就报警让你换。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不补偿，直接用：转子流量计
+&lt;ul&gt;
+&lt;li&gt;玻璃管上的刻度其实会因为脏污而看不清，或者浮子磨损导致读数不准。&lt;/li&gt;
+&lt;li&gt;决策： CEMS 对流速要求不高（只要有气就行），所以不需要补偿，只要看到浮子在飘就行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;总结设计师的补偿决策矩阵&#34;&gt;总结：设计师的“补偿决策矩阵”
+&lt;/h3&gt;&lt;p&gt;当审视一台分析仪时，可以按这个逻辑去看：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;部件老化特性&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;影响程度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;变化速度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;决策方案&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;典型例子&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;源头、非线性&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;致命 (Fatal)&lt;/td&gt;
+          &lt;td&gt;快 (分/秒)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;硬件实时补偿&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;光源参考探测器、PMT 快门、激光器温控&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;物理规律明确&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;显著 (Significant)&lt;/td&gt;
+          &lt;td&gt;中 (小时/天)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;软件算法补偿&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;压力补偿、温度补偿 (P/T Comp)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;线性、缓慢&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;一般 (Moderate)&lt;/td&gt;
+          &lt;td&gt;慢 (周/月)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;定期标定 (校准)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;滤光片老化、光路积灰、传感器灵敏度漂移&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;机械磨损&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;轻微 (Minor)&lt;/td&gt;
+          &lt;td&gt;慢 (月/年)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;定期更换 (维护)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;泵管、密封圈、滤芯&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;电路元件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;极微 (Negligible)&lt;/td&gt;
+          &lt;td&gt;极慢 (年)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;忽略&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;电阻电容、PCB 板材&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;所以，&lt;strong&gt;“忽略”并不是真的不管，而是因为它的变化太慢，已经被“每周校准”这个操作给覆盖掉了&lt;/strong&gt;；或者它的变化太快且无规律，被“硬件参考路”给抵消掉了。&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -1030,6 +1869,197 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 </description>
         </item>
         <item>
+        <title>气路设计</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;h2 id=&#34;一-核心心法流体不停车-flow-continuity&#34;&gt;一、 核心心法：“流体不停车” (Flow Continuity)
+&lt;/h2&gt;&lt;p&gt;新手设计的最大误区是：不用它的时候，就堵住它。 高手设计的核心原则是：&lt;strong&gt;不用它的时候，让它走旁路（Bypass）。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-为什么要旁路反面教材&#34;&gt;1. 为什么要旁路？（反面教材）
+&lt;/h3&gt;&lt;p&gt;假设你有一根 50 米长的采样管，接在分析仪入口。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;错误设计： 校准时，三通阀切到标气，把采样管堵死（切断）。&lt;/li&gt;
+&lt;li&gt;后果：
+&lt;ul&gt;
+&lt;li&gt;憋压： 采样泵还在工作，管路压力飙升。&lt;/li&gt;
+&lt;li&gt;滞后： 采样气在管子里停滞了。等你校准完（比如 10 分钟）切回采样时，你测到的是 10 分钟前 抽上来的“&lt;strong&gt;旧气&lt;/strong&gt;”。你需要花很久把它排空，响应时间极其漫长。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-正确设计快速回路&#34;&gt;2. 正确设计：快速回路
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;动作： 校准时，三通阀把标气切进分析仪，同时把采样气切到“旁路排空口”。&lt;/li&gt;
+&lt;li&gt;效果： 采样气一直在流动，一直保持新鲜。切回来的瞬间，你测到的就是当下的实时数据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;二-两位三通阀的拓扑防乱指南&#34;&gt;二、 两位三通阀的“拓扑防乱指南”
+&lt;/h2&gt;&lt;p&gt;当系统里有“零气、标气、反吹、采样”四个功能时，至少需要 3-4 个三通阀。新手很容易把 NO（常开）、NC（常闭）、COM（公共）接乱。这里可以用“倒推法”，&lt;strong&gt;不要从气源顺着画，要从分析仪入口倒着画&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;可以尝试下面两种设计方式&lt;/p&gt;
+&lt;h3 id=&#34;级联式主从式设计逻辑&#34;&gt;级联式/主从式设计逻辑
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;V1（主裁判）： 决定大方向，是看“样气”还是看“校准气”。&lt;/li&gt;
+&lt;li&gt;V2（副裁判）： 负责给 V1 输送弹药，决定那个“校准气”到底是“零气”还是“标气”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这种设计的优点是逻辑层次分明，缺点是如果不加旁路，管路会有死体积。为了符合我们之前讲的“流体不停车”原则，我在图中特意为您加上了采样气的旁路设计。&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    %% --- 样式定义 ---
+    classDef sample stroke:#006400,stroke-width:2px;
+    classDef zero stroke:#1E90FF,stroke-width:2px;
+    classDef span stroke:#FF8C00,stroke-width:2px;
+    classDef common stroke:#333,stroke-width:3px;
+    classDef bypass stroke:#999,stroke-dasharray: 5 5;
+
+    %% --- 气源定义 ---
+    SAMPLE_GAS[&#34;取样探头样气&#34;]
+    ZERO_GAS[&#34;零气 (Zero)&#34;]
+    SPAN_GAS[&#34;标气 (Span)&#34;]
+
+    %% --- 旁路排空设计 (关键细节) ---
+    %% 为了防止V1切到校准时，样气泵被憋死，必须在V1前加三通排空
+    T_SAMPLE((&#34;三通&#34;))
+    SAMPLE_GAS --&gt; T_SAMPLE
+    T_SAMPLE --&#34;旁路排空&lt;br/&gt;(保持流动)&#34;--&gt; NV_S[&#34;针阀 (阻力模拟)&#34;]
+    NV_S --&gt; VENT_S[&#34;排空&#34;]:::bypass
+
+    %% --- V2：校准气选择级 (副阀) ---
+    %% 逻辑：断电=零气，通电=标气
+    V2[&#34;V2 - 校准选择阀&lt;br/&gt;(两位三通)&#34;]
+    
+    ZERO_GAS --&#34;NO (断电常开)&#34;--&gt; V2
+    SPAN_GAS --&#34;NC (通电常闭)&#34;--&gt; V2
+
+    %% --- V1：主功能切换级 (主阀) ---
+    %% 逻辑：断电=采样，通电=校准
+    V1[&#34;V1 - 测量/校准切换阀&lt;br/&gt;(两位三通)&#34;]
+
+    %% 采样气进 V1 的 NO
+    T_SAMPLE --&#34;NO (断电常开)&lt;br/&gt;采样模式&#34;--&gt; V1
+    
+    %% V2 的出口进 V1 的 NC (级联点)
+    V2 --&#34;COM (出口)&lt;br/&gt;输送校准气&#34;--&gt; V1_NC_PORT(((&#34;级联点&lt;br/&gt;V1-NC&#34;)))
+    V1_NC_PORT --&gt; V1
+
+    %% --- 分析仪 ---
+    V1 --&#34;COM (公共出口)&#34;--&gt; ANALYZER[&#34;分析仪&#34;]:::common
+
+    %% --- 样式应用 ---
+    class SAMPLE_GAS,T_SAMPLE,NV_S,VENT_S sample
+    class ZERO_GAS zero
+    class SPAN_GAS span
+    class V1,V2,ANALYZER common
+    class NV_S,VENT_S bypass
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;优点：
+&lt;ul&gt;
+&lt;li&gt;节省阀门接口： 只需要 2 个阀门就能搞定 3 路气。&lt;/li&gt;
+&lt;li&gt;故障导向安全： 如果断电（V1 OFF），系统自动回到&lt;strong&gt;测量状态&lt;/strong&gt;。这是环保监测非常喜欢的逻辑（断电不断数）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;缺点（需要注意）：
+&lt;ul&gt;
+&lt;li&gt;标气置换慢： 当你从“校零”切到“校标”时，V2 到 V1 之间那一段管子里的“旧零气”必须先被吹走，需要一点置换时间（死体积）。&lt;/li&gt;
+&lt;li&gt;逻辑耦合： 必须先开 V1，V2 的动作才有效。如果 V1 坏了（卡在 NO），V2 怎么动都没用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;独立旁路设计&#34;&gt;独立旁路设计
+&lt;/h3&gt;&lt;p&gt;所谓的“双两位三通阀组”（独立旁路设计）接法，其实是工业气路设计中用来彻底解决“死体积”和“流体滞后”的标准架构。&lt;/p&gt;
+&lt;p&gt;它的核心逻辑不再是“一个阀门切两个气”，而是“&lt;strong&gt;每个气配一个专属的看门阀&lt;/strong&gt;”&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    %% 定义样式
+    classDef sample stroke:#2E8B57,stroke-width:2px;
+    classDef cal stroke:#1E90FF,stroke-width:2px;
+    classDef bypass stroke:#A9A9A9,stroke-dasharray: 5 5;
+    classDef analyzer fill:#f9f,stroke:#333,stroke-width:2px;
+
+    %% --- 气源部分 ---
+    S_GAS[&#34;取样探头样气&#34;] --&gt; PUMP[&#34;取样泵&#34;]
+    CAL_GAS[&#34;标准气体钢瓶&#34;] --&gt; REG[&#34;减压阀&#34;]
+
+    %% --- 阀门组 (核心逻辑) ---
+    %% 阀门1：控制采样
+    PUMP --&#34;COM (进气)&#34;--&gt; V1[&#34;V1-采样切换阀&lt;br/&gt;两位三通&#34;]
+    
+    %% 阀门2：控制标气
+    REG --&#34;COM (进气)&#34;--&gt; V2[&#34;V2-标气切换阀&lt;br/&gt;两位三通&#34;]
+
+    %% --- 旁路设计 (Bypass) ---
+    %% 没通电时走这里 (NO口)
+    V1 --&#34;NO (断电常开)&lt;br/&gt;保持流动/不停车&#34;--&gt; NV1[&#34;针阀/毛细管&lt;br/&gt;(模拟阻力)&#34;]
+    V2 --&#34;NO (断电常开)&lt;br/&gt;放空/预吹扫&#34;--&gt; NV2[&#34;针阀/毛细管&lt;br/&gt;(模拟阻力)&#34;]
+    
+    NV1 --&gt; VENT1[&#34;排空/回流总管&#34;]:::bypass
+    NV2 --&gt; VENT2[&#34;排空&#34;]:::bypass
+
+    %% --- 测量主路 (Main Line) ---
+    %% 通电时走这里 (NC口)
+    V1 --&#34;NC (通电常闭)&lt;br/&gt;采样模式&#34;--&gt; T1((&#34;汇流三通/歧管&#34;))
+    V2 --&#34;NC (通电常闭)&lt;br/&gt;校准模式&#34;--&gt; T1
+
+    %% --- 分析仪部分 ---
+    T1 --&gt; FL1[&#34;流量计&#34;]
+    FL1 --&gt; ANALYZER[&#34;分析仪/传感器&#34;]:::analyzer
+    ANALYZER --&gt; EXHAUST[&#34;废气排出&#34;]
+
+    %% 应用样式
+    class S_GAS,PUMP,V1 sample
+    class CAL_GAS,REG,V2 cal
+    class NV1,NV2,VENT1,VENT2 bypass
+&lt;/div&gt;
+&lt;h4 id=&#34;为什么要这么接对比传统接法&#34;&gt;为什么要这么接？（对比传统接法）
+&lt;/h4&gt;&lt;p&gt;1、传统接法（单个三通阀切换）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;接口 A 接采样，接口 B 接标气，公共口接分析仪。&lt;/li&gt;
+&lt;li&gt;致命缺陷： 当你测采样时，标气那条管子是死胡同。 当你测标气时，采样那条管子是死胡同（泵会被憋死，或者你得在前面再加三通，很麻烦）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、双阀组接法（推荐接法）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优势 1：无死体积。 每一路气体在进入分析仪之前，都在自己的旁路里流动，没有“死水”。&lt;/li&gt;
+&lt;li&gt;优势 2：无交叉污染。 两个阀门的 NC 口平时都是关死的，物理隔离非常好。&lt;/li&gt;
+&lt;li&gt;优势 3：压力平衡。 你可以通过调节各自旁路上的针阀，让排空的阻力和进分析仪的阻力接近，切换时没有压力跳变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;三-避坑经验防止压力台阶&#34;&gt;三、 避坑经验：防止“压力台阶”
+&lt;/h2&gt;&lt;p&gt;阀门一多，最怕的就是&lt;strong&gt;压力不平衡&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;现象： 采样时压力是 -20 kPa，一切换到标气，压力变成了 +50 kPa。&lt;/li&gt;
+&lt;li&gt;后果： 这种瞬间的压力跳变会让分析仪读数剧烈震荡，甚至冲坏传感器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;解决办法： 所有进入同一个“选通阀”的气路，压力必须预先调节到一致。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;采样路： 如果是负压，无法改变。&lt;/li&gt;
+&lt;li&gt;校准路： 必须加装旁路溢流口。
+&lt;ul&gt;
+&lt;li&gt;让标气在进入阀门前，先对大气敞开排空一部分。&lt;/li&gt;
+&lt;li&gt;目的： 强行把标气压力拉低到常压，尽量接近采样压力，减小切换时的冲击。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;四-终极方案使用歧管汇流板&#34;&gt;四、 终极方案：使用“歧管/汇流板”
+&lt;/h2&gt;&lt;p&gt;如果你的阀门超过 3 个，别再用管子把一个个阀门拧在一起了。那是一团乱麻，而且漏点极多。&lt;/p&gt;
+&lt;p&gt;工程经验： 直接上 集成汇流板 (Manifold Block)。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;结构： 一块金属铝块，内部钻好了孔道。你只需要把阀门像插积木一样插上去。&lt;/li&gt;
+&lt;li&gt;优点：
+&lt;ul&gt;
+&lt;li&gt;无死体积： 内部流道极短，换气极快。&lt;/li&gt;
+&lt;li&gt;逻辑清晰： 通常是“公共出气口”和“独立进气口”。&lt;/li&gt;
+&lt;li&gt;排查简单： 不用去撸管子，看阀门上的灯就行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;气路走到底的“单线思维”是电路思维（导线没电流也没事），但不是流体思维。流体设计三定律：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;死水必臭： 不要让气体在管子里停滞，不用它时就把它放空。&lt;/li&gt;
+&lt;li&gt;压力要平： 切换阀两端的压力差越小越好。&lt;/li&gt;
+&lt;li&gt;倒着思考： 从分析仪入口往回推，先决定“进谁”，再决定“谁备选”。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
         <title>实战之频域分析</title>
         <link>https://teaize.github.io/p/%E5%AE%9E%E6%88%98%E4%B9%8B%E9%A2%91%E5%9F%9F%E5%88%86%E6%9E%90/</link>
         <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
@@ -1327,6 +2357,285 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
     %% 外部输入
     STATE_Check_Logic[&#34;系统状态机&#34;] -.-&gt; STATE_CHECK
 &lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>信号处理之卡尔曼滤波</title>
+        <link>https://teaize.github.io/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/</link>
+        <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86%E4%B9%8B%E5%8D%A1%E5%B0%94%E6%9B%BC%E6%BB%A4%E6%B3%A2/</guid>
+        <description>&lt;p&gt;之前我们聊的“滑动平均”和“自适应滤波”，本质上都是“事后诸葛亮”（基于过去的数据来推测现在）。今天认识一位“预言家” —— 卡尔曼滤波 (Kalman Filter)。&lt;/p&gt;
+&lt;p&gt;它是阿波罗登月飞船导航的核心算法，也是现在自动驾驶汽车、大疆无人机悬停不动的秘密。在高端仪器（如 TDLAS 分析仪）中，它是&lt;strong&gt;解决“响应速度 (T90)”与“读数稳定性”这对死敌&lt;/strong&gt;的唯一解药。&lt;/p&gt;
+&lt;h3 id=&#34;一-核心哲学你相信理论还是相信眼睛&#34;&gt;一、 核心哲学：你相信“理论”还是相信“眼睛”？
+&lt;/h3&gt;&lt;p&gt;卡尔曼滤波最牛的地方在于，它不单纯依赖传感器，而是结合了&lt;strong&gt;两个信息源&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;想象你在开车进隧道，GPS 信号突然变弱了（噪声变大）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;传感器（眼睛）： GPS 告诉你：“你现在在坐标 (100, 50)……不对，下一秒在 (100, 500)……不对，在 (100, -20)。” —— 数据不可靠，乱跳。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;物理模型&lt;/strong&gt;（理论）： 你的车速表显示 100km/h，方向盘没动。根据牛顿定律，你下一秒应该只前进了 27 米。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;卡尔曼的灵魂追问： 此刻，你信谁？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是普通滤波：它会傻傻地把 GPS 的乱跳值取平均，结果你的车在地图上乱飞。&lt;/li&gt;
+&lt;li&gt;卡尔曼滤波：它会算出一个“信任权重” (Kalman Gain, $K$)**。
+&lt;ul&gt;
+&lt;li&gt;它发现 GPS 噪声（方差）太大了，于是屏蔽掉 90% 的 GPS 数据。&lt;/li&gt;
+&lt;li&gt;它选择相信 90% 的物理模型（根据上一秒位置 + 车速算出来的位置）。&lt;/li&gt;
+&lt;li&gt;结果： 哪怕 GPS 信号烂成渣，你的车在地图上依然画出了一条平滑的直线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-cems-里的实战如何消灭滞后&#34;&gt;二、 CEMS 里的实战：如何消灭滞后？
+&lt;/h3&gt;&lt;p&gt;在 CEMS 分析仪中，我们面临一个痛点：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为了让读数稳，我们加了很重的滤波（电容大，积分时间长）。&lt;/li&gt;
+&lt;li&gt;后果： 气体浓度真的突变时（比如喷氨了），读数慢吞吞地爬坡，&lt;strong&gt;T90 响应时间超标&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;卡尔曼怎么解决？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;建立模型（Predict）：
+&lt;ul&gt;
+&lt;li&gt;仪器内部知道气体流速和管路体积。&lt;/li&gt;
+&lt;li&gt;它预测：如果进气口浓度变了，传感器腔室里的浓度应该按什么曲线变化（指数上升）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;测量修正（Update）：
+&lt;ul&gt;
+&lt;li&gt;传感器实测到了一个电压值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;融合：
+&lt;ul&gt;
+&lt;li&gt;当实测值突然跳变，且跳变趋势符合流体力学模型时 $\to$ 卡尔曼说：“这是真信号，不是噪声！&lt;strong&gt;信任实测值，立刻跟进！&lt;/strong&gt;”&lt;/li&gt;
+&lt;li&gt;当实测值跳变，但完全违背物理模型（比如 1ms 内变了 50%） $\to$ 卡尔曼说：“这不科学，肯定是干扰（Spike）。&lt;strong&gt;无视它，相信模型！&lt;/strong&gt;”
+最终效果： 平时稳如老狗（滤除噪声），变时动如脱兔（T90 极快）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;三-python-实战手搓一个-1d-卡尔曼滤波器&#34;&gt;三、 Python 实战：手搓一个 1D 卡尔曼滤波器
+&lt;/h3&gt;&lt;p&gt;卡尔曼滤波的矩阵公式（$P = FPF^T + Q$）看着很吓人，但对于单变量（只测一个浓度）的情况，它可以简化成&lt;strong&gt;5 行代码&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;我们要模拟：一个真实的温度信号（平稳），中间突然被一个巨大的噪声干扰，看看卡尔曼能不能把它识别出来。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;62
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;63
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;64
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;65
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;66
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;67
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;68
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;69
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;70
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;71
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;72
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;73
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;74
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;75
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;76
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;77
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;81
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;82
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;83
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;84
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;85
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;np&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;matplotlib.pyplot&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;plt&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 配置中文&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rcParams&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;font.sans-serif&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;SimHei&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rcParams&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;axes.unicode_minus&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;False&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 1. 模拟数据生成&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;n_iter&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sz&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n_iter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 数组大小&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;25.0&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;# 真实温度 (Constant)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 真实值：一直是 25度&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;truth&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;full&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sz&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 观测值：真实值 + 严重的白噪声 (模拟传感器)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 噪声标准差 sigma = 2.0 (抖动很大)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;z&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;truth&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;random&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;normal&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sz&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 在第 50 个点，加一个巨大的脉冲干扰 (Spike)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;z&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;50&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;100.0&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 2. 卡尔曼滤波初始化&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 这里的参数是&amp;#34;玄学&amp;#34;，需要根据物理系统去调&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# Q: 过程噪声协方差 (Process Noise)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 代表：你觉得物理世界本身有多不稳定？&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 设得极小 (1e-5)，代表我相信物理世界是连续的，温度不会瞬变。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Q&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1e-5&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# R: 测量噪声协方差 (Measurement Noise)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 代表：你觉得你的传感器有多烂？&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 设得大 (0.1)，代表传感器噪声很大，我不信它。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;R&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;**&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 初始化状态&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;x_est&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;# 初始估计值&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;P&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1.0&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;# 初始估计误差 (不确定性)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;K&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.0&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;# 卡尔曼增益 (信任度)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;result_kalman&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 3. 卡尔曼滤波主循环 (5步心法)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n_iter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# --- 阶段 A: 预测 (Predict) ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 1. 预测状态: 既然是测恒温，我预测下一刻温度和这一刻一样&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x_pred&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x_est&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 2. 预测误差: 加上物理世界的不确定性&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;P_pred&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Q&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# --- 阶段 B: 更新 (Update) ---&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 3. 计算卡尔曼增益 (K): 权衡 预测误差 vs 传感器误差&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 如果传感器误差 R 很大，K 就会很小 (不信传感器)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;K&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P_pred&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;P_pred&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;R&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 4. 更新估计值: 核心公式！&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 新估计 = 预测值 + K * (实测值 - 预测值)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# K 决定了我们要接受多少&amp;#34;实测偏差&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x_est&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x_pred&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;K&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;z&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x_pred&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;# 5. 更新误差: 这一轮做完了，我会变得更自信 (P变小)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;P&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;K&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P_pred&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;result_kalman&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;append&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x_est&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 4. 绘图对比&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# ==========================================&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figure&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;figsize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;z&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;k.&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;传感器测量值 (带噪声+尖峰)&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;alpha&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0.3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;truth&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;g-&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;真实值 (25℃)&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;linewidth&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;plot&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;result_kalman&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;r-&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;label&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;卡尔曼滤波结果&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;linewidth&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;卡尔曼滤波实战：从噪声中还原真相&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fontsize&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;16&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;xlabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;时间点&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ylabel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;温度&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;legend&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;grid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kc&#34;&gt;True&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;show&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213164712.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213164712.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;运行后的观察点&#34;&gt;运行后的观察点
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;看整体： 尽管黑色的点（测量值）上下乱跳幅度很大，红色的线（卡尔曼）却非常平滑，紧贴着绿线（真实值）。这说明它滤除白噪声的能力极强。&lt;/li&gt;
+&lt;li&gt;看第 50 点（尖峰）：
+&lt;ul&gt;
+&lt;li&gt;测量值瞬间跳到了 100。&lt;/li&gt;
+&lt;li&gt;卡尔曼滤波的红线仅仅微微向上动了一点点，甚至几乎没受影响。&lt;/li&gt;
+&lt;li&gt;原因： 因为我们设置了 $Q$ 很小。卡尔曼认为：“根据物理定律，温度不可能在 0.1 秒内从 25 度 变到 100 度。这肯定是传感器疯了。” 于是它通过极小的 $K$ 值，拒绝了这次“诈骗”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;四-进阶它比滑动平均强在哪&#34;&gt;四、 进阶：它比滑动平均强在哪？
+&lt;/h3&gt;&lt;p&gt;你可能会问：“滑动平均也能滤除那个尖峰啊，为什么要搞这么复杂的公式？”主要区别在于“&lt;strong&gt;动态适应性&lt;/strong&gt;”：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;不确定性的动态追踪 ($P$ 值)：**
+&lt;ul&gt;
+&lt;li&gt;刚开机时，卡尔曼知道自己“没底”（$P$ 很大），它会非常听传感器的话（$K$ 大），读数收敛极快。&lt;/li&gt;
+&lt;li&gt;运行一段时间后，它摸清了规律（$P$ 变小），就开始变得“自信”，不再受噪声干扰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;滑动平均是死的，卡尔曼是活的。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;多传感器融合 (Sensor Fusion)：
+&lt;ul&gt;
+&lt;li&gt;这是卡尔曼的杀手锏。&lt;/li&gt;
+&lt;li&gt;如果你不仅有光电传感器，还有一个流速传感器。&lt;/li&gt;
+&lt;li&gt;你可以告诉卡尔曼：“流速变快了，所以浓度应该会变快。”&lt;/li&gt;
+&lt;li&gt;卡尔曼会利用流速信息，在光电传感器还没反应过来之前，就提前把浓度推上去。&lt;/li&gt;
+&lt;li&gt;这就是 &lt;strong&gt;Model-Based (基于模型)&lt;/strong&gt; 的力量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;FFT 是用来找病因的（看成分）。&lt;/li&gt;
+&lt;li&gt;PID 是用来做控制的（给动作）。&lt;/li&gt;
+&lt;li&gt;卡尔曼滤波 是用来做估计的（猜真相）。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>

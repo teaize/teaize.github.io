@@ -1,0 +1,776 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、 核心心法：“流体不停车” (Flow Continuity) 新手设计的最大误区是：不用它的时候，就堵住它。 高手设计的核心原则是：不用它的时候，让它走旁路（Bypass）。\n">
+<title>气路设计</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="气路设计">
+<meta property='og:description' content="一、 核心心法：“流体不停车” (Flow Continuity) 新手设计的最大误区是：不用它的时候，就堵住它。 高手设计的核心原则是：不用它的时候，让它走旁路（Bypass）。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="气路设计">
+<meta name="twitter:description" content="一、 核心心法：“流体不停车” (Flow Continuity) 新手设计的最大误区是：不用它的时候，就堵住它。 高手设计的核心原则是：不用它的时候，让它走旁路（Bypass）。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一-核心心法流体不停车-flow-continuity">一、 核心心法：“流体不停车” (Flow Continuity)</a>
+      <ol>
+        <li><a href="#1-为什么要旁路反面教材">1. 为什么要旁路？（反面教材）</a></li>
+        <li><a href="#2-正确设计快速回路">2. 正确设计：快速回路</a></li>
+      </ol>
+    </li>
+    <li><a href="#二-两位三通阀的拓扑防乱指南">二、 两位三通阀的“拓扑防乱指南”</a>
+      <ol>
+        <li><a href="#级联式主从式设计逻辑">级联式/主从式设计逻辑</a></li>
+        <li><a href="#独立旁路设计">独立旁路设计</a>
+          <ol>
+            <li><a href="#为什么要这么接对比传统接法">为什么要这么接？（对比传统接法）</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#三-避坑经验防止压力台阶">三、 避坑经验：防止“压力台阶”</a></li>
+    <li><a href="#四-终极方案使用歧管汇流板">四、 终极方案：使用“歧管/汇流板”</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1/">气路设计</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-13</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="一-核心心法流体不停车-flow-continuity">一、 核心心法：“流体不停车” (Flow Continuity)
+</h2><p>新手设计的最大误区是：不用它的时候，就堵住它。 高手设计的核心原则是：<strong>不用它的时候，让它走旁路（Bypass）。</strong></p>
+<h3 id="1-为什么要旁路反面教材">1. 为什么要旁路？（反面教材）
+</h3><p>假设你有一根 50 米长的采样管，接在分析仪入口。</p>
+<ul>
+<li>错误设计： 校准时，三通阀切到标气，把采样管堵死（切断）。</li>
+<li>后果：
+<ul>
+<li>憋压： 采样泵还在工作，管路压力飙升。</li>
+<li>滞后： 采样气在管子里停滞了。等你校准完（比如 10 分钟）切回采样时，你测到的是 10 分钟前 抽上来的“<strong>旧气</strong>”。你需要花很久把它排空，响应时间极其漫长。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-正确设计快速回路">2. 正确设计：快速回路
+</h3><ul>
+<li>动作： 校准时，三通阀把标气切进分析仪，同时把采样气切到“旁路排空口”。</li>
+<li>效果： 采样气一直在流动，一直保持新鲜。切回来的瞬间，你测到的就是当下的实时数据。</li>
+</ul>
+<h2 id="二-两位三通阀的拓扑防乱指南">二、 两位三通阀的“拓扑防乱指南”
+</h2><p>当系统里有“零气、标气、反吹、采样”四个功能时，至少需要 3-4 个三通阀。新手很容易把 NO（常开）、NC（常闭）、COM（公共）接乱。这里可以用“倒推法”，<strong>不要从气源顺着画，要从分析仪入口倒着画</strong>。</p>
+<p>可以尝试下面两种设计方式</p>
+<h3 id="级联式主从式设计逻辑">级联式/主从式设计逻辑
+</h3><ul>
+<li>V1（主裁判）： 决定大方向，是看“样气”还是看“校准气”。</li>
+<li>V2（副裁判）： 负责给 V1 输送弹药，决定那个“校准气”到底是“零气”还是“标气”。</li>
+</ul>
+<p>这种设计的优点是逻辑层次分明，缺点是如果不加旁路，管路会有死体积。为了符合我们之前讲的“流体不停车”原则，我在图中特意为您加上了采样气的旁路设计。</p>
+<div class="mermaid">
+  graph TD
+    %% --- 样式定义 ---
+    classDef sample stroke:#006400,stroke-width:2px;
+    classDef zero stroke:#1E90FF,stroke-width:2px;
+    classDef span stroke:#FF8C00,stroke-width:2px;
+    classDef common stroke:#333,stroke-width:3px;
+    classDef bypass stroke:#999,stroke-dasharray: 5 5;
+
+    %% --- 气源定义 ---
+    SAMPLE_GAS["取样探头样气"]
+    ZERO_GAS["零气 (Zero)"]
+    SPAN_GAS["标气 (Span)"]
+
+    %% --- 旁路排空设计 (关键细节) ---
+    %% 为了防止V1切到校准时，样气泵被憋死，必须在V1前加三通排空
+    T_SAMPLE(("三通"))
+    SAMPLE_GAS --> T_SAMPLE
+    T_SAMPLE --"旁路排空<br/>(保持流动)"--> NV_S["针阀 (阻力模拟)"]
+    NV_S --> VENT_S["排空"]:::bypass
+
+    %% --- V2：校准气选择级 (副阀) ---
+    %% 逻辑：断电=零气，通电=标气
+    V2["V2 - 校准选择阀<br/>(两位三通)"]
+    
+    ZERO_GAS --"NO (断电常开)"--> V2
+    SPAN_GAS --"NC (通电常闭)"--> V2
+
+    %% --- V1：主功能切换级 (主阀) ---
+    %% 逻辑：断电=采样，通电=校准
+    V1["V1 - 测量/校准切换阀<br/>(两位三通)"]
+
+    %% 采样气进 V1 的 NO
+    T_SAMPLE --"NO (断电常开)<br/>采样模式"--> V1
+    
+    %% V2 的出口进 V1 的 NC (级联点)
+    V2 --"COM (出口)<br/>输送校准气"--> V1_NC_PORT((("级联点<br/>V1-NC")))
+    V1_NC_PORT --> V1
+
+    %% --- 分析仪 ---
+    V1 --"COM (公共出口)"--> ANALYZER["分析仪"]:::common
+
+    %% --- 样式应用 ---
+    class SAMPLE_GAS,T_SAMPLE,NV_S,VENT_S sample
+    class ZERO_GAS zero
+    class SPAN_GAS span
+    class V1,V2,ANALYZER common
+    class NV_S,VENT_S bypass
+</div>
+<ul>
+<li>优点：
+<ul>
+<li>节省阀门接口： 只需要 2 个阀门就能搞定 3 路气。</li>
+<li>故障导向安全： 如果断电（V1 OFF），系统自动回到<strong>测量状态</strong>。这是环保监测非常喜欢的逻辑（断电不断数）。</li>
+</ul>
+</li>
+<li>缺点（需要注意）：
+<ul>
+<li>标气置换慢： 当你从“校零”切到“校标”时，V2 到 V1 之间那一段管子里的“旧零气”必须先被吹走，需要一点置换时间（死体积）。</li>
+<li>逻辑耦合： 必须先开 V1，V2 的动作才有效。如果 V1 坏了（卡在 NO），V2 怎么动都没用。</li>
+</ul>
+</li>
+</ul>
+<h3 id="独立旁路设计">独立旁路设计
+</h3><p>所谓的“双两位三通阀组”（独立旁路设计）接法，其实是工业气路设计中用来彻底解决“死体积”和“流体滞后”的标准架构。</p>
+<p>它的核心逻辑不再是“一个阀门切两个气”，而是“<strong>每个气配一个专属的看门阀</strong>”</p>
+<div class="mermaid">
+  graph TD
+    %% 定义样式
+    classDef sample stroke:#2E8B57,stroke-width:2px;
+    classDef cal stroke:#1E90FF,stroke-width:2px;
+    classDef bypass stroke:#A9A9A9,stroke-dasharray: 5 5;
+    classDef analyzer fill:#f9f,stroke:#333,stroke-width:2px;
+
+    %% --- 气源部分 ---
+    S_GAS["取样探头样气"] --> PUMP["取样泵"]
+    CAL_GAS["标准气体钢瓶"] --> REG["减压阀"]
+
+    %% --- 阀门组 (核心逻辑) ---
+    %% 阀门1：控制采样
+    PUMP --"COM (进气)"--> V1["V1-采样切换阀<br/>两位三通"]
+    
+    %% 阀门2：控制标气
+    REG --"COM (进气)"--> V2["V2-标气切换阀<br/>两位三通"]
+
+    %% --- 旁路设计 (Bypass) ---
+    %% 没通电时走这里 (NO口)
+    V1 --"NO (断电常开)<br/>保持流动/不停车"--> NV1["针阀/毛细管<br/>(模拟阻力)"]
+    V2 --"NO (断电常开)<br/>放空/预吹扫"--> NV2["针阀/毛细管<br/>(模拟阻力)"]
+    
+    NV1 --> VENT1["排空/回流总管"]:::bypass
+    NV2 --> VENT2["排空"]:::bypass
+
+    %% --- 测量主路 (Main Line) ---
+    %% 通电时走这里 (NC口)
+    V1 --"NC (通电常闭)<br/>采样模式"--> T1(("汇流三通/歧管"))
+    V2 --"NC (通电常闭)<br/>校准模式"--> T1
+
+    %% --- 分析仪部分 ---
+    T1 --> FL1["流量计"]
+    FL1 --> ANALYZER["分析仪/传感器"]:::analyzer
+    ANALYZER --> EXHAUST["废气排出"]
+
+    %% 应用样式
+    class S_GAS,PUMP,V1 sample
+    class CAL_GAS,REG,V2 cal
+    class NV1,NV2,VENT1,VENT2 bypass
+</div>
+<h4 id="为什么要这么接对比传统接法">为什么要这么接？（对比传统接法）
+</h4><p>1、传统接法（单个三通阀切换）</p>
+<ul>
+<li>接口 A 接采样，接口 B 接标气，公共口接分析仪。</li>
+<li>致命缺陷： 当你测采样时，标气那条管子是死胡同。 当你测标气时，采样那条管子是死胡同（泵会被憋死，或者你得在前面再加三通，很麻烦）。</li>
+</ul>
+<p>2、双阀组接法（推荐接法）</p>
+<ul>
+<li>优势 1：无死体积。 每一路气体在进入分析仪之前，都在自己的旁路里流动，没有“死水”。</li>
+<li>优势 2：无交叉污染。 两个阀门的 NC 口平时都是关死的，物理隔离非常好。</li>
+<li>优势 3：压力平衡。 你可以通过调节各自旁路上的针阀，让排空的阻力和进分析仪的阻力接近，切换时没有压力跳变。</li>
+</ul>
+<h2 id="三-避坑经验防止压力台阶">三、 避坑经验：防止“压力台阶”
+</h2><p>阀门一多，最怕的就是<strong>压力不平衡</strong>。</p>
+<ul>
+<li>现象： 采样时压力是 -20 kPa，一切换到标气，压力变成了 +50 kPa。</li>
+<li>后果： 这种瞬间的压力跳变会让分析仪读数剧烈震荡，甚至冲坏传感器。</li>
+</ul>
+<p>解决办法： 所有进入同一个“选通阀”的气路，压力必须预先调节到一致。</p>
+<ul>
+<li>采样路： 如果是负压，无法改变。</li>
+<li>校准路： 必须加装旁路溢流口。
+<ul>
+<li>让标气在进入阀门前，先对大气敞开排空一部分。</li>
+<li>目的： 强行把标气压力拉低到常压，尽量接近采样压力，减小切换时的冲击。</li>
+</ul>
+</li>
+</ul>
+<h2 id="四-终极方案使用歧管汇流板">四、 终极方案：使用“歧管/汇流板”
+</h2><p>如果你的阀门超过 3 个，别再用管子把一个个阀门拧在一起了。那是一团乱麻，而且漏点极多。</p>
+<p>工程经验： 直接上 集成汇流板 (Manifold Block)。</p>
+<ul>
+<li>结构： 一块金属铝块，内部钻好了孔道。你只需要把阀门像插积木一样插上去。</li>
+<li>优点：
+<ul>
+<li>无死体积： 内部流道极短，换气极快。</li>
+<li>逻辑清晰： 通常是“公共出气口”和“独立进气口”。</li>
+<li>排查简单： 不用去撸管子，看阀门上的灯就行。</li>
+</ul>
+</li>
+</ul>
+<h2 id="总结">总结
+</h2><p>气路走到底的“单线思维”是电路思维（导线没电流也没事），但不是流体思维。流体设计三定律：</p>
+<ol>
+<li>死水必臭： 不要让气体在管子里停滞，不用它时就把它放空。</li>
+<li>压力要平： 切换阀两端的压力差越小越好。</li>
+<li>倒着思考： 从分析仪入口往回推，先决定“进谁”，再决定“谁备选”。</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

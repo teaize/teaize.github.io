@@ -1,0 +1,690 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这两个概念并不是物理上真的发生了短路或断路，而是基于运放的理想特性推导出来的“等效状态”。\n前置条件：必须是“负反馈” 在讲之前，必须强调一个绝对前提： “虚短”原则只存在于运放工作在线性区（即接了负反馈）的时候。\n">
+<title>运放虚短和虚断</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%99%9A%E7%9F%AD%E5%92%8C%E8%99%9A%E6%96%AD/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="运放虚短和虚断">
+<meta property='og:description' content="这两个概念并不是物理上真的发生了短路或断路，而是基于运放的理想特性推导出来的“等效状态”。\n前置条件：必须是“负反馈” 在讲之前，必须强调一个绝对前提： “虚短”原则只存在于运放工作在线性区（即接了负反馈）的时候。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%99%9A%E7%9F%AD%E5%92%8C%E8%99%9A%E6%96%AD/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="运放虚短和虚断">
+<meta name="twitter:description" content="这两个概念并不是物理上真的发生了短路或断路，而是基于运放的理想特性推导出来的“等效状态”。\n前置条件：必须是“负反馈” 在讲之前，必须强调一个绝对前提： “虚短”原则只存在于运放工作在线性区（即接了负反馈）的时候。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前置条件必须是负反馈">前置条件：必须是“负反馈”</a></li>
+    <li><a href="#虚短-virtual-short">虚短 (Virtual Short)</a>
+      <ol>
+        <li><a href="#1-现象">1. 现象</a></li>
+        <li><a href="#2-为什么会有这个现象">2. 为什么会有这个现象？</a></li>
+        <li><a href="#从物理本质看为什么-v_--会自动等于-v_">从物理本质看为什么 $V_-$ 会自动等于 $V_+$？</a></li>
+        <li><a href="#条件">条件</a></li>
+      </ol>
+    </li>
+    <li><a href="#虚断-virtual-open">虚断 (Virtual Open)</a>
+      <ol>
+        <li><a href="#1-现象-1">1. 现象</a></li>
+        <li><a href="#2-为什么会有这个现象-1">2. 为什么会有这个现象？</a></li>
+      </ol>
+    </li>
+    <li><a href="#工程师经验">工程师经验</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%BF%90%E6%94%BE%E8%99%9A%E7%9F%AD%E5%92%8C%E8%99%9A%E6%96%AD/">运放虚短和虚断</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-14</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>这两个概念并不是物理上真的发生了短路或断路，而是基于运放的<strong>理想特性</strong>推导出来的“等效状态”。</p>
+<h2 id="前置条件必须是负反馈">前置条件：必须是“负反馈”
+</h2><p>在讲之前，必须强调一个<strong>绝对前提</strong>： <strong>“虚短”原则只存在于运放工作在线性区（即接了负反馈）的时候。</strong></p>
+<p>如果运放是开环工作（做比较器），或者接了正反馈（做触发器），那么“虚短”是不成立的！</p>
+<h2 id="虚短-virtual-short">虚短 (Virtual Short)
+</h2><p><strong>一句话解释：</strong> 两个输入端的电压相等，就像它们被短路了一样，但其实没连在一起。</p>
+<h3 id="1-现象">1. 现象
+</h3><p>即：同相输入端电压 = 反相输入端电压。$$V_+ = V_-$$</p>
+<h3 id="2-为什么会有这个现象">2. 为什么会有这个现象？
+</h3><p>这得益于运放的<strong>开环增益 ($A_{vo}$) 无穷大</strong>。</p>
+<ul>
+<li>公式：$V_{out} = A_{vo} \times (V_+ - V_-)$</li>
+<li>推导：$(V_+ - V_-) = V_{out} / A_{vo}$</li>
+<li>现实：运放的开环增益通常在 10 万 到 100 万倍以上。</li>
+<li>结论：即使输出 $V_{out}$ 是 10V，输入端的压差 $(V_+ - V_-)$ 也只有 $10V / 100,000 = 0.0001V$。</li>
+<li><strong>工程视角</strong>：0.0001V 对于我们来说就是 0。所以我们认为 $V_+$ 和 $V_-$ 的电位是死死咬合在一起的。</li>
+</ul>
+<blockquote>
+<p><strong>比喻</strong>：想象运放是一个超级灵敏的平衡大师（负反馈机制）。只要 $V_-$ 比 $V_+$ 低那么一丁点，输出端就会疯狂输出高电压，通过反馈电阻把 $V_-$ 拉高，直到 $V_-$ 和 $V_+$ 持平。</p>
+</blockquote>
+<h3 id="从物理本质看为什么-v_--会自动等于-v_">从物理本质看为什么 $V_-$ 会自动等于 $V_+$？
+</h3><p>从物理本质和控制过程来看，“虚短”其实是一个动态的、暴力的、实时的自我调节过程，是“负反馈”机制强行制造出来的结果</p>
+<p>以最经典的反相放大器为例，假设 $V_+$ 接地（0V），$V_-$ 还没接地时：</p>
+<ol>
+<li>扰动开始：
+<ul>
+<li>假设你给输入端来了一个微小的电压，让 $V_-$ 稍微升高了 0.1V（此时 $V_- &gt; V_+$）。</li>
+</ul>
+</li>
+<li>运放察觉：
+<ul>
+<li>运放内部的差分放大器瞬间察觉到了这个偏差：$V_+ - V_- = -0.1V$。</li>
+</ul>
+</li>
+<li>暴力反应（核心物理过程）：
+<ul>
+<li>因为运放增益极大（比如 100 万倍），它会想：“该死，反相端竟然高了！我要把输出端狠狠地往下拉！”</li>
+<li>于是输出端 $V_{out}$ 瞬间输出一个巨大的负电压趋势（试图达到 $-0.1V \times 100万 = -100kV$）。</li>
+</ul>
+</li>
+<li>负反馈生效：
+<ul>
+<li>但是！输出端通过 反馈电阻 $R_f$ 连回了 $V_-$。</li>
+<li>当输出端 $V_{out}$ 猛烈下降时，它通过电阻 $R_f$ 把 $V_-$ 的电位也死命往下拉。</li>
+</ul>
+</li>
+<li>达到平衡：
+<ul>
+<li>$V_-$ 被拉低了，直到它被拉回到和 $V_+$ 几乎一样的 0V 为止。</li>
+<li>一旦 $V_-$ 降到 0V，运放觉得“没有偏差了”，就不再继续往下拉输出电压了，系统稳定下来。</li>
+</ul>
+</li>
+</ol>
+<p>物理结论：</p>
+<p>“虚短”的本质，是运放利用巨大的输出能量，通过反馈电阻这条“绳子”，强行把 $V_-$ 拽到了和 $V_+$ 一样的水平线上。只要这根绳子（负反馈）还在，运放就会一直实时调整输出，维持这个平衡。</p>
+<h3 id="条件">条件
+</h3><ul>
+<li>存在负反馈回路【减少 V+ 和 V- 差距的就是负反馈，增大这种差异的就是正反馈】</li>
+<li>Vout 的输出不能饱和</li>
+</ul>
+<p>例如下面这张图，假设运放的电源为 5V，如果 Vin 进来 1V，运放就算饱和输出了，也只能输出到 5V。但是通过反馈回路，V- 最多也只能分压达到 0.5V。反过来，要想 V+=V-，那么运放的输出端就不可能刚好输出饱和，否则 V+ 和 V- 就不能相等了 
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214170412.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214170412.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h2 id="虚断-virtual-open">虚断 (Virtual Open)
+</h2><p>一句话解释： 两个输入端没有电流流进去，就像引脚内部断路了一样。</p>
+<h3 id="1-现象-1">1. 现象
+</h3><p>即：运放的输入引脚不吃电流。$$I_+ = 0, \quad I_- = 0$$</p>
+<p>例如在分析 V- 处的电压时，可以忽略运放对 V- 的影响
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214171836370.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251214171836370.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="2-为什么会有这个现象-1">2. 为什么会有这个现象？
+</h3><blockquote>
+<p>例如下面这张电路图，10M 电阻对于前端的这两个电阻网络来说，加不加它，对于整个电路来说其实没什么影响。那就可以简单认为 10M 这块是一个断路状态
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214171314.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251214171314.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+</blockquote>
+<p>这得益于运放的<strong>输入阻抗 ($R_{in}$) 无穷大</strong>。</p>
+<ul>
+<li>公式：$I = U / R$</li>
+<li>现实：<strong>运放（尤其是 CMOS 工艺的）输入阻抗通常是 兆欧 ($M\Omega$) 甚至 吉欧 ($G\Omega$) 级别的</strong>。</li>
+<li>结论：流进引脚的电流通常是纳安 (nA) 甚至皮安 (pA) 级别的。</li>
+<li><strong>工程视角</strong>：这点电流对电路分流影响极小，我们可以直接忽略，认为电流根本进不去。</li>
+</ul>
+<blockquote>
+<p>运放的两个输入端就像是<strong>电压表</strong>的探针，只负责“感知”电压，绝不“消耗”电流。</p>
+</blockquote>
+<h2 id="工程师经验">工程师经验
+</h2><p>在分析任何线性运放电路时，可按这个<strong>三板斧</strong>流程走</p>
+<ul>
+<li>先找 $V_+$：看同相端接了什么电压。</li>
+<li>用虚短：强行让 $V_- = V_+$，列出第一个方程。</li>
+<li>用虚断：针对 $V_-$ 节点列写 KCL（基尔霍夫电流定律） —— “流进来的电流 = 流出去的电流”，因为没有电流流进运放肚子。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

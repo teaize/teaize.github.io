@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在电流低端检测电路中，如果检测很小的电流，输入失调电压 ($V_{os}$) 往往是决定测量精度的“头号杀手”\n关于 $V_{os}$ 什么是 $V_{os}$ (Input Offset Voltage) 定义（书本版） 当运放的两个输入端（+ 和 -）完全接地（电位相同）时，理论上输出应该是 0V。但实际上，输出端总会有一个非零电压。为了让输出强行变成 0V，你必须在输入端反向加上的那个微小补偿电压，就是 $V_{os}$。\n">
+<title>运放输入失调电压</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%BE%93%E5%85%A5%E5%A4%B1%E8%B0%83%E7%94%B5%E5%8E%8B/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="运放输入失调电压">
+<meta property='og:description' content="在电流低端检测电路中，如果检测很小的电流，输入失调电压 ($V_{os}$) 往往是决定测量精度的“头号杀手”\n关于 $V_{os}$ 什么是 $V_{os}$ (Input Offset Voltage) 定义（书本版） 当运放的两个输入端（+ 和 -）完全接地（电位相同）时，理论上输出应该是 0V。但实际上，输出端总会有一个非零电压。为了让输出强行变成 0V，你必须在输入端反向加上的那个微小补偿电压，就是 $V_{os}$。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%BE%93%E5%85%A5%E5%A4%B1%E8%B0%83%E7%94%B5%E5%8E%8B/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="运放输入失调电压">
+<meta name="twitter:description" content="在电流低端检测电路中，如果检测很小的电流，输入失调电压 ($V_{os}$) 往往是决定测量精度的“头号杀手”\n关于 $V_{os}$ 什么是 $V_{os}$ (Input Offset Voltage) 定义（书本版） 当运放的两个输入端（+ 和 -）完全接地（电位相同）时，理论上输出应该是 0V。但实际上，输出端总会有一个非零电压。为了让输出强行变成 0V，你必须在输入端反向加上的那个微小补偿电压，就是 $V_{os}$。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#关于-v_os">关于 $V_{os}$</a>
+      <ol>
+        <li><a href="#什么是-v_os-input-offset-voltage">什么是 $V_{os}$ (Input Offset Voltage)</a></li>
+        <li><a href="#为什么在电流检测中它很致命">为什么在“电流检测”中它很致命？</a></li>
+        <li><a href="#如何处理这个问题">如何处理这个问题？</a>
+          <ol>
+            <li><a href="#1--钞能力--法--选用低失调运放最推荐">1. &quot; 钞能力 &quot; 法 —— 选用低失调运放（最推荐）</a></li>
+            <li><a href="#2--大力出奇迹--法--增大采样电阻-r_sense">2. &quot; 大力出奇迹 &quot; 法 —— 增大采样电阻 ($R_{sense}$)</a></li>
+            <li><a href="#3--软件补丁--法--软件校准-calibration">3. &quot; 软件补丁 &quot; 法 —— 软件校准 (Calibration)</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#非理想特性">非理想特性</a>
+      <ol>
+        <li><a href="#第一类明明没给输入它却有输出--零点偏置-zero-offset">第一类：明明没给输入，它却有输出 —— “零点偏置” (Zero Offset)</a></li>
+        <li><a href="#第二类明明关断了它却在偷偷导电--漏电流-leakage">第二类：明明关断了，它却在偷偷导电 —— “漏电流” (Leakage)</a></li>
+        <li><a href="#第三类明明没通电它却在吵闹--热噪声-thermal-noise">第三类：明明没通电，它却在“吵闹” —— “热噪声” (Thermal Noise)</a></li>
+        <li><a href="#工程师的应对哲学">工程师的应对哲学</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E8%BF%90%E6%94%BE%E8%BE%93%E5%85%A5%E5%A4%B1%E8%B0%83%E7%94%B5%E5%8E%8B/">运放输入失调电压</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-14</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在电流低端检测电路中，如果检测很小的电流，输入失调电压 ($V_{os}$) 往往是决定测量精度的“头号杀手”</p>
+<h2 id="关于-v_os">关于 $V_{os}$
+</h2><h3 id="什么是-v_os-input-offset-voltage">什么是 $V_{os}$ (Input Offset Voltage)
+</h3><ol>
+<li>定义（书本版）</li>
+</ol>
+<p>当运放的两个输入端（+ 和 -）完全接地（电位相同）时，理论上输出应该是 0V。但实际上，输出端总会有一个非零电压。为了让输出强行变成 0V，你必须在输入端反向加上的那个微小补偿电压，就是 $V_{os}$。</p>
+<ol start="2">
+<li>工程师的直观理解（模型版）</li>
+</ol>
+<p>你可以<strong>把 $V_{os}$ 想象成运放内部自带了一个捣乱的干电池</strong>，它串联在运放的输入端。</p>
+<ul>
+<li>即使外部没有信号，这个“内部电池”也会一直产生电压。</li>
+<li>运放分不清哪个是你要测的信号，哪个是这个电池的电压，它会把它们加在一起放大。</li>
+</ul>
+<h3 id="为什么在电流检测中它很致命">为什么在“电流检测”中它很致命？
+</h3><p>在低端检测中，我们通过测量采样电阻（$R_{sense}$）上的压降来算电流。</p>
+<p>$$V_{sense} = I \times R_{sense}$$</p>
+<p>悲剧的场景推演：假设你要测 10mA 的小电流，为了减小功耗，你选了 0.1Ω 的电阻。</p>
+<ol>
+<li>有效信号：$V_{signal} = 0.01A \times 0.1\Omega = 1mV$。</li>
+<li>运放误差：假设你用了一个普通的运放（比如 LM358），它的 $V_{os}$ 大约是 <strong>2mV</strong>。</li>
+<li>结果：
+<ul>
+<li>运放看到的总输入 = $1mV \text{ (信号)} + 2mV \text{ (误差)} = 3mV$。</li>
+<li>误差高达 200%！ 你根本分不清这是电流产生的，还是运放自己产生的。</li>
+</ul>
+</li>
+</ol>
+<p>这就是为什么对于小电流检测，$V_{os}$ 必须被严肃对待。</p>
+<h3 id="如何处理这个问题">如何处理这个问题？
+</h3><h4 id="1--钞能力--法--选用低失调运放最推荐">1. &quot; 钞能力 &quot; 法 —— 选用低失调运放（最推荐）
+</h4><p>既然普通运放不行，那就换好的。</p>
+<ul>
+<li>普通运放 (General Purpose)：如 LM358。$V_{os} \approx 3mV$。（此时不能用）</li>
+<li>精密运放 (Precision)：如 OP07。$V_{os} \approx 75\mu V$。</li>
+<li>零漂移/斩波运放 (Zero-Drift / Chopper)：这是终极武器。
+<ul>
+<li>如 ADA4528, OPA333, SGM8953（国产）。</li>
+<li>它们的 $V_{os}$ 可以低至 1\mu V 甚至更低。</li>
+<li>原理：这种运放内部有一个自动校准电路，每秒钟自动校准几千次，把 $V_{os}$ &quot; 切碎 &quot; 并扔掉。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>建议</strong>：在电流检测电路中，直接选用 Zero-Drift (斩波) 运放是性价比最高的解决方案，省去了复杂的校准工作。</p>
+</blockquote>
+<h4 id="2--大力出奇迹--法--增大采样电阻-r_sense">2. &quot; 大力出奇迹 &quot; 法 —— 增大采样电阻 ($R_{sense}$)
+</h4><p>如果不想换贵的运放，那就想办法把信号变大。</p>
+<ul>
+<li>做法：把 0.1Ω 的电阻换成 1Ω。</li>
+<li>效果：10mA 电流产生的压降变成了 10mV。</li>
+<li>对比：此时 2mV 的 $V_{os}$ 带来的误差从 200% 降到了 20%。</li>
+<li>代价：功耗增加，发热增加。满量程大电流流过时，电阻可能会烧烫，且压降过大可能影响负载供电。</li>
+</ul>
+<h4 id="3--软件补丁--法--软件校准-calibration">3. &quot; 软件补丁 &quot; 法 —— 软件校准 (Calibration)
+</h4><p>如果你必须用便宜的运放，也没法增大电阻，那就靠单片机来补。</p>
+<ul>
+<li>做法：
+<ol>
+<li>出厂归零（去皮）：在电流为 0 时，读取 ADC 的数值（这个值就是 $V_{os}$ 放大后的结果）。</li>
+<li>存储：把这个偏差值存在 EEPROM 里。</li>
+<li>运算：每次测量时，<code>实际结果 = 读取结果 - 偏差值</code>。</li>
+</ol>
+</li>
+<li>缺点：$V_{os}$ 是会随<strong>温度</strong>漂移的（温漂）。你在 25°C 校准了，到了 60°C，偏差值变了，测量又不准了。</li>
+</ul>
+<h2 id="非理想特性">非理想特性
+</h2><p>实际上，理想元件不存在，真实元件总带点“毛病”。这也是为什么精密仪器即使什么都不测，开机也得先“归零（Zeroing）”或“校准（Calibration）”的原因</p>
+<h3 id="第一类明明没给输入它却有输出--零点偏置-zero-offset">第一类：明明没给输入，它却有输出 —— “零点偏置” (Zero Offset)
+</h3><p>这和运放的 $V_{os}$ 是一模一样的亲兄弟。</p>
+<ol>
+<li>传感器（重灾区）
+<ul>
+<li>现象：你买一个电子秤（压力传感器），上面什么都没放，它却显示 <code>0.05g</code>。你买一个陀螺仪，放在桌上纹丝不动，读数却显示它在以 <code>0.1度/秒</code> 的速度旋转。</li>
+<li>术语：<strong>零点漂移 (Zero Offset / Zero Drift)</strong>。</li>
+<li>原因：传感器内部的微机械结构（MEMS）或惠斯通电桥不可能做得完全对称。</li>
+</ul>
+</li>
+<li>ADC（模数转换器）
+<ul>
+<li>现象：你把 ADC 的输入端短路接到地（0V），你期望读出来的数字是 <code>0000</code>，但实际读出来可能是 <code>0003</code>。</li>
+<li>术语：<strong>失调误差 (Offset Error)</strong>。</li>
+<li>原因：ADC 内部比较器的不匹配。</li>
+</ul>
+</li>
+</ol>
+<h3 id="第二类明明关断了它却在偷偷导电--漏电流-leakage">第二类：明明关断了，它却在偷偷导电 —— “漏电流” (Leakage)
+</h3><p>理想情况下，断开就是断开，电阻无穷大。但现实中，没有绝对的绝缘。</p>
+<ol>
+<li>二极管 / 三极管 / MOS 管
+<ul>
+<li>现象：你把二极管反接截止了，理应没有电流。但实际上，总会有微安（uA）甚至纳安（nA）级的电流偷偷流过去。高温下这个电流还会翻倍。</li>
+<li>术语：<strong>反向漏电流 ($I_R$)</strong> 或 <strong>关断漏电流 ($I_{DSS}$)</strong>。</li>
+<li>影响：这就是为什么电池供电的设备，关机放一年电池也会没电。</li>
+</ul>
+</li>
+<li>电容
+<ul>
+<li>现象：你给电容充饱了电，拔掉电源放在那儿。理论上电荷应该永远存着，但过几天它就没电了。</li>
+<li>术语：<strong>自放电</strong> 或 <strong>绝缘电阻 (Insulation Resistance)</strong>。</li>
+<li>本质：电容内部相当于并联了一个很大的电阻（几百兆欧），一直在偷偷放电。</li>
+</ul>
+</li>
+</ol>
+<h3 id="第三类明明没通电它却在吵闹--热噪声-thermal-noise">第三类：明明没通电，它却在“吵闹” —— “热噪声” (Thermal Noise)
+</h3><p>这个最神奇，属于物理定律层面的“偏置”。</p>
+<ol>
+<li>电阻
+<ul>
+<li>现象：拿一个电阻放在桌子上，两头接上示波器（假设示波器精度无限高），你会发现电阻两端竟然有微小的电压波形在乱跳！哪怕你根本没给它通电。</li>
+<li>术语：<strong>约翰逊噪声 (Johnson Noise)</strong>。</li>
+<li>原因：只要温度高于绝对零度，电阻内部的电子就会做热运动，这种无规则运动就产生了电压噪声。</li>
+<li>影响：这是精密信号测量的物理极限，你永远无法消除，只能通过降温（比如液氮冷却）来减小。</li>
+</ul>
+</li>
+</ol>
+<h3 id="工程师的应对哲学">工程师的应对哲学
+</h3><p>既然这种“自带偏置”无法避免（因为是制造工艺和物理定律决定的），工程师们是怎么解决的呢？通常有三板斧：</p>
+<ol>
+<li>硬件上“差分” (Differential)：
+<ul>
+<li>既然大家都有偏置，那我就用两路一样的电路。假设都有 +0.1V 的误差，那我用 $A - B$，误差就相减抵消了。这是差分放大电路的核心思想。</li>
+</ul>
+</li>
+<li>软件上“校准” (Calibration)：
+<ul>
+<li>出厂校准：生产时先测出这个误差（比如 +2mV），写进芯片里。以后每次读数都自动减去 2mV。</li>
+<li>上电自校准：现在的万用表、电子秤，开机时都会自检一下零点，把你说的那个“自带偏置”当成当前的“0”。</li>
+</ul>
+</li>
+<li>工艺上“配对” (Matching)：
+<ul>
+<li>在芯片制造时，如果需要两个电阻一样，就把它们画得挨得很近，形状一模一样。虽然它们都不准，但它们“不准的程度”是一样的，这样在电路里也能用。</li>
+</ul>
+</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
