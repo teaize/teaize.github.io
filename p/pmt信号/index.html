@@ -1,0 +1,685 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 问题：质控仪输出固定 NO 浓度的气体，对于仪表 A，流速是一个值；对于仪表 B，流速是另一个值，那 PMT 产生的信号强度是一样的，还是根据流速不同是不一样的\n">
+<title>PMT信号</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/pmt%E4%BF%A1%E5%8F%B7/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="PMT信号">
+<meta property='og:description' content=" 问题：质控仪输出固定 NO 浓度的气体，对于仪表 A，流速是一个值；对于仪表 B，流速是另一个值，那 PMT 产生的信号强度是一样的，还是根据流速不同是不一样的\n">
+<meta property='og:url' content='https://teaize.github.io/p/pmt%E4%BF%A1%E5%8F%B7/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="PMT信号">
+<meta name="twitter:description" content=" 问题：质控仪输出固定 NO 浓度的气体，对于仪表 A，流速是一个值；对于仪表 B，流速是另一个值，那 PMT 产生的信号强度是一样的，还是根据流速不同是不一样的\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#原理剖析">原理剖析</a></li>
+    <li><a href="#为什么流速对-cems-如此重要">为什么流速对 CEMS 如此重要？</a></li>
+    <li><a href="#引入泵的因素">引入泵的因素</a>
+      <ol>
+        <li><a href="#核心原因泵的特性曲线">核心原因：泵的“特性曲线”</a></li>
+        <li><a href="#深度细节临界流-critical-flow-的失效">深度细节：临界流 (Critical Flow) 的失效</a></li>
+        <li><a href="#解决方案与建议">解决方案与建议</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/pmt%E4%BF%A1%E5%8F%B7/">PMT信号</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-14</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <blockquote>
+<p>问题：质控仪输出固定 NO 浓度的气体，对于仪表 A，流速是一个值；对于仪表 B，流速是另一个值，那 PMT 产生的信号强度是一样的，还是根据流速不同是不一样的</p>
+</blockquote>
+<p>PMT 产生的原始信号强度（光子数/电流值），本质上是和单位时间内进入反应室的 <strong>NO 分子总数</strong>（Mass Flow Rate / 质量流量）有关。</p>
+<h2 id="原理剖析">原理剖析
+</h2><p>我们要看化学发光反应的微观过程：
+$$NO + O_3 \rightarrow NO_2^* + O_2$$
+$$NO_2^* \rightarrow NO_2 + h\nu \text{ (光子)}$$</p>
+<p>在这个反应室里，有一个关键的前提条件：<strong>臭氧 ($O_3$) 是过量的</strong>。这意味着，每一个进入反应室的 $NO$ 分子，都会被“抓住”并发生反应，产生一个光子（理想情况下）。</p>
+<p>PMT 是一个<strong>计数器</strong>，它统计的是“每秒钟有多少个光子打在我的脸上”。</p>
+<ul>
+<li>浓度 (Concentration, C)： 比如 200 ppb，意思是每 10 亿个气体分子里有 200 个 NO。这只是一个“比例”。</li>
+<li>流速 (Flow Rate, Q)： 比如 1 L/min，意思是每分钟有多少气体跑进来。</li>
+<li>PMT 信号 (Signal, I)：
+$$I \propto \text{每秒反应掉的 NO 分子数}$$
+$$I \propto \text{浓度 (C)} \times \text{流速 (Q)}$$</li>
+</ul>
+<h2 id="为什么流速对-cems-如此重要">为什么流速对 CEMS 如此重要？
+</h2><p>这也解释了为什么化学发光法分析仪对<strong>流量控制</strong>和<strong>压力控制</strong>要求极高。</p>
+<ol>
+<li><strong>限流孔 (Critical Orifice) 的作用：</strong> 你会发现每一台 NO 分析仪的反应室入口前，都有一个极小的孔（宝石喷嘴或玻璃毛细管）。 它的作用就是<strong>锁死流速</strong>。
+<ul>
+<li>如果这个孔脏了、堵了，流速变小了。</li>
+<li>后果： 即使标气浓度没变，进入反应室的 NO 分子数少了，PMT 信号就会变弱，导致读数偏低。</li>
+</ul>
+</li>
+<li><strong>反应室压力 (Chamber Pressure) 的影响：</strong> 通常反应室是负压的。如果真空泵衰减，负压变小（压力升高）。
+<ul>
+<li>一方面：气体密度变大，单位体积分子数变多（信号变大）。</li>
+<li>另一方面：猝灭效应 (Quenching) 增强（光子被撞没了，信号变小）。</li>
+<li>这之间有个复杂的平衡，但总之，<strong>流速和压力的波动都会直接改变 PMT 的原始信号。</strong></li>
+</ul>
+</li>
+</ol>
+<h2 id="引入泵的因素">引入泵的因素
+</h2><blockquote>
+<p>在现场中，经常会发现有的泵接了两台分析仪（用于给分析仪提供动力）。在这种情况下校准了仪器；然后过了一段时间，泵只接一台分析仪，只给一台分析仪提供动力，此时再通同样浓度的标气，分析仪显示的示数却不同了</p>
+</blockquote>
+<h3 id="核心原因泵的特性曲线">核心原因：泵的“特性曲线”
+</h3><p>所有的泵（无论是隔膜泵、旋片泵还是活塞泵），其输出能力都不是恒定的。它们都遵循一条<strong>P-Q 曲线（压力 - 流量曲线）</strong>。</p>
+<ul>
+<li>双机模式（接两台）：
+<ul>
+<li>泵同时拖两个负载。<strong>此时管路总阻力较小（因为是并联）</strong>，但需要的总流量大。</li>
+<li>泵工作在 <strong>“低真空度（或低压力）、大流量”</strong> 的状态。</li>
+<li>假设此时供给每台仪器的有效压力差是 $\Delta P_1$，对应的流速是 $Q_1$。</li>
+<li>你在这个状态下进行了校准，告诉分析仪：“当流速是 $Q_1$ 时，这个电流对应 200 ppm。”</li>
+</ul>
+</li>
+<li>单机模式（接一台）：
+<ul>
+<li>你拔掉了一台，堵死了那个接口。</li>
+<li>泵的负载突然变轻了（或者说气路阻力特性变了）。</li>
+<li>根据泵的曲线，当流量需求减半时，泵能够提供的<strong>真空度（或压力）会显著升高</strong>。</li>
+<li>此时，剩余那台仪器面临的压力差变成了 $\Delta P_2$（且 $|\Delta P_2| &gt; |\Delta P_1|$）。</li>
+<li><strong>后果： 压力差变大，导致流过这台仪器的实际气体流速 $Q_2$ 变大了</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="深度细节临界流-critical-flow-的失效">深度细节：临界流 (Critical Flow) 的失效
+</h3><p>你可能会问：<strong>“分析仪内部不是有限流孔吗？它不是应该能锁住流速吗？”</strong></p>
+<p>理论上，只要真空度达到一定阈值（比如 -40 kPa 以下），气体通过小孔的速度就会达到声速，此时流速应该恒定，不再随真空度的加深而增加。这就是“临界流”原理。但现实中为什么还会变？</p>
+<ol>
+<li>“伪”临界流：
+<ul>
+<li>在接两台仪器时，泵可能比较吃力，真空度可能只有 -35 kPa。此时并未完全达到临界流条件。流速依然受压力波动影响很大。</li>
+<li>当变成一台时，真空度瞬间抽到 -60 kPa，进入了真临界流，或者流速进一步提升。从“非饱和”到“饱和”，流速肯定变了。</li>
+</ul>
+</li>
+<li>压力侧的影响（如果泵在前端）：
+<ul>
+<li>如果你的泵是用来推气（正压输送）的，那就更明显了。</li>
+<li>少了一路泄压，所有的压力都灌进剩下那一路，流速必然暴涨，读数必然飙升。</li>
+</ul>
+</li>
+<li>反应室压力的变化：
+<ul>
+<li>抽力变大，不仅影响流速，还会让反应室内部的绝对压力降低。
+<ul>
+<li>压力低 $\to$ 分子密度低 $\to$ 读数偏低。</li>
+<li>流速快 $\to$ 分子总数多 $\to$ 读数偏高。</li>
+<li>这两个效应会“打架”，但通常流速的影响占主导。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="解决方案与建议">解决方案与建议
+</h3><ul>
+<li>下策（凑合用）：
+<ul>
+<li>保持现在的“单机模式”。</li>
+<li>立刻重新校准。</li>
+<li>让仪器重新记住现在这个新流速下的电流对应关系。</li>
+<li>隐患：如果哪天你又把另一台接回来了，读数又会不准。</li>
+</ul>
+</li>
+<li>中策（欺骗泵）：
+<ul>
+<li>如果不接第二台仪器，可以在那个空出来的接口上接一个一个针阀，调节它的开度，人为制造一个“假负载”漏气。【<strong>或者接一个同样大小的限流孔更省事</strong>】</li>
+<li>调整针阀，直到真空表读数恢复到接两台仪器时的水平。</li>
+<li>这样可以维持原有的流速平衡。</li>
+</ul>
+</li>
+<li><strong>上策（系统设计）：</strong>
+<ul>
+<li><strong>一机一泵。 这种并联共用动力源的设计，本身就是 CEMS 里的大忌</strong>。</li>
+<li>因为一旦一台仪器管路堵塞或断开，会直接通过压力耦合影响另一台仪器的读数。为了省一个泵的钱，牺牲了整个系统的可靠性，得不偿失。</li>
+</ul>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

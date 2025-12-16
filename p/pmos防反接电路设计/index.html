@@ -396,7 +396,7 @@
 </span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">		<span class="p">[</span><span class="n">输入正极</span> <span class="n">Vin</span><span class="o">+</span><span class="p">]</span>                                <span class="p">[</span><span class="n">输出</span> <span class="n">Vout</span><span class="o">+</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span><span class="n">输入正极</span> <span class="n">Vin</span><span class="o">+</span><span class="p">]</span>                                <span class="p">[</span><span class="n">输出</span> <span class="n">Vout</span><span class="o">+</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">            <span class="o">|</span>                                           <span class="o">|</span>
 </span></span><span class="line"><span class="cl">            <span class="o">+------------------+</span>     <span class="o">+------------------+</span>
 </span></span><span class="line"><span class="cl">            <span class="o">|</span>                  <span class="o">|</span>     <span class="o">|</span>                  <span class="o">|</span>
@@ -468,7 +468,7 @@
 <ol>
 <li>输入变成了负压（或者地接正，正接地）。</li>
 <li>体二极管处于反向截止状态，电流过不去。</li>
-<li>$V_{GS}$ 状态：由于 $D$ 极电位低，$S$ 极没电，$G$ 极通过电阻接地。栅极和源极之间没有建立起足够的负压差（甚至 $V_{GS} &gt; 0$），PMOS 保持 关断 (OFF)。</li>
+<li>$V_{GS}$ 状态：由于 $D$ 极电位低，$S$ 极没电，$G$ 极通过电阻接地。栅极和源极之间没有建立起足够的负压差（甚至 $P$），PMOS 保持 关断 (OFF)。</li>
 <li>结果：电路完全切断，保护了后级电路。</li>
 </ol>
 <div class="highlight"><div class="chroma">
@@ -502,7 +502,7 @@
 </span><span class="lnt">27
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">		<span class="p">[</span><span class="n">输入端</span> <span class="n">Vin</span><span class="p">]</span>                              <span class="p">[</span><span class="n">输出端</span> <span class="n">Vout</span><span class="p">]</span>
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="p">[</span><span class="n">输入端</span> <span class="n">Vin</span><span class="p">]</span>                              <span class="p">[</span><span class="n">输出端</span> <span class="n">Vout</span><span class="p">]</span>
 </span></span><span class="line"><span class="cl">      <span class="p">(</span><span class="n">接了电池负极</span> <span class="o">-</span><span class="mi">12</span><span class="n">V</span><span class="p">)</span>                        <span class="p">(</span><span class="n">期望是</span> <span class="mi">0</span><span class="n">V</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">            <span class="o">|</span>                                       <span class="o">|</span>
 </span></span><span class="line"><span class="cl">            <span class="o">|</span> <span class="n">D</span> <span class="p">(</span><span class="n">漏极</span><span class="p">)</span> <span class="o">=</span> <span class="o">-</span><span class="mi">12</span><span class="n">V</span>                       <span class="o">|</span> <span class="n">S</span> <span class="p">(</span><span class="n">源极</span><span class="p">)</span> <span class="o">=</span> <span class="mi">0</span><span class="n">V</span>

@@ -7,7 +7,95 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 14 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 16 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>带载启动</title>
+        <link>https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/</link>
+        <pubDate>Tue, 16 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>恒流源与恒压源</title>
+        <link>https://teaize.github.io/p/%E6%81%92%E6%B5%81%E6%BA%90%E4%B8%8E%E6%81%92%E5%8E%8B%E6%BA%90/</link>
+        <pubDate>Mon, 15 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%81%92%E6%B5%81%E6%BA%90%E4%B8%8E%E6%81%92%E5%8E%8B%E6%BA%90/</guid>
+        <description>&lt;p&gt;弄懂&lt;strong&gt;恒压源 (Constant Voltage, CV)&lt;/strong&gt; 和 &lt;strong&gt;恒流源 (Constant Current, CC)&lt;/strong&gt;，是从“只会接线”进阶到“能设计系统”的关键一步。&lt;/p&gt;
+&lt;p&gt;其实，我们生活中接触的 99% 的电源都是恒压源，而恒流源通常隐藏在设备内部，专门服务于特定的器件。&lt;/p&gt;
+&lt;h2 id=&#34;一-恒压源-cv生活中最熟悉的老朋友&#34;&gt;一、 恒压源 (CV)：生活中最熟悉的“老朋友”
+&lt;/h2&gt;&lt;h3 id=&#34;1-它的性格&#34;&gt;1. 它的性格
+&lt;/h3&gt;&lt;p&gt;“不管你怎么用水，我的水压永远不变。”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义：无论负载电阻 ($R$) 怎么变，输出端的&lt;strong&gt;电压 ($U$) 保持不变&lt;/strong&gt;，电流 ($I$) 随负载需求自动变化。&lt;/li&gt;
+&lt;li&gt;公式：$U = \text{Const}$，$I = U / R$。&lt;/li&gt;
+&lt;li&gt;例子：你家墙上的 &lt;strong&gt;220V 插座&lt;/strong&gt;、手机充电器 &lt;strong&gt;5V&lt;/strong&gt;、干电池 &lt;strong&gt;1.5V&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-水流比方&#34;&gt;2. 水流比方
+&lt;/h3&gt;&lt;p&gt;想象一个巨大的水库（恒压源）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你接一根细管子（大电阻），水流很小。&lt;/li&gt;
+&lt;li&gt;你接一根粗管子（小电阻），水流很大。&lt;/li&gt;
+&lt;li&gt;核心：不管你接什么管子，水库的水位高度（电压）是不会变的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-应用场景&#34;&gt;3. 应用场景
+&lt;/h3&gt;&lt;p&gt;几乎所有给芯片供电的场合。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;单片机 (MCU)：必须稳定在 3.3V 或 5V，电压高了烧芯片，低了不工作。&lt;/li&gt;
+&lt;li&gt;电机：通常用恒压供电（速度通过 PWM 斩波来调，而不是直接调源电压）。&lt;/li&gt;
+&lt;li&gt;逻辑电路：TTL、CMOS 电平都需要稳定的电压轨。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;二-恒流源-cc专治坏脾气的专家&#34;&gt;二、 恒流源 (CC)：专治“坏脾气”的专家
+&lt;/h2&gt;&lt;h3 id=&#34;1-它的性格-1&#34;&gt;1. 它的性格
+&lt;/h3&gt;&lt;p&gt;“不管路有多难走，我必须保证每秒钟流过去的水量一样多。”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;定义：无论负载电阻 ($R$) 怎么变，输出端的&lt;strong&gt;电流 ($I$) 保持不变&lt;/strong&gt;，为了维持这个电流，电压 ($U$) 会自动调整。&lt;/li&gt;
+&lt;li&gt;公式：$I = \text{Const}$，$U = I \times R$。&lt;/li&gt;
+&lt;li&gt;反直觉点：如果负载电阻 $R$ 变大，为了维持 $I$ 不变，恒流源必须&lt;strong&gt;拼命提高电压&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-水流比方-1&#34;&gt;2. 水流比方
+&lt;/h3&gt;&lt;p&gt;想象一个针筒注射器，有一个机械臂以恒定的速度推活塞。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果针头很粗（阻力小），推起来很轻松（电压低）。&lt;/li&gt;
+&lt;li&gt;如果针头堵住了（阻力大），机械臂会用力推，甚至把针筒压爆（电压飙升），只为了保证药液流出的速度不变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-为什么需要它核心应用场景&#34;&gt;3. 为什么需要它？（核心应用场景）
+&lt;/h3&gt;&lt;p&gt;恒流源通常用于驱动那些&lt;strong&gt;对电流敏感&lt;/strong&gt;，或者&lt;strong&gt;自身电阻会剧烈变化&lt;/strong&gt;的器件。&lt;/p&gt;
+&lt;h4 id=&#34;场景-a驱动-led-发光二极管--最经典的应用&#34;&gt;场景 A：驱动 LED (发光二极管) —— 最经典的应用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原因：LED 的亮度直接取决于电流，而不是电压。&lt;/li&gt;
+&lt;li&gt;风险：LED 是非线性器件。电压只要升高一点点（比如从 3.0V 到 3.2V），电流可能会翻倍！&lt;strong&gt;如果用恒压源驱动，随着 LED 发热，它的导通电压会下降，电流会进一步暴增，导致 “热失控” 烧毁&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;解决：必须用恒流源。不管 LED 热了还是冷了，我都只给它 &lt;strong&gt;20mA&lt;/strong&gt;，它就永远安全且亮度恒定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如二氧化硫紫外荧光分析仪当中，荧光灯&lt;strong&gt;锌（Zn）灯&lt;/strong&gt;就是使用的恒流源。这类气体放电灯和 LED 一样，具有“负阻特性”或极陡峭的伏安特性。如果电压稍微升高一点点，电流就会暴增。&lt;/p&gt;
+&lt;h4 id=&#34;场景-b锂电池充电-cc-cv-模式&#34;&gt;场景 B：锂电池充电 (CC-CV 模式)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原因：当电池电量耗尽（比如 3.0V）时，如果你直接用 4.2V 的恒压源去充，压差太大 ($4.2 - 3.0 = 1.2V$)，电池内阻又极小，瞬间电流会巨大无比，电池会爆炸。&lt;/li&gt;
+&lt;li&gt;解决：
+&lt;ol&gt;
+&lt;li&gt;第一阶段 (CC)：先用恒流（比如 1A）慢慢充，此时电池电压会慢慢上升。&lt;/li&gt;
+&lt;li&gt;第二阶段 (CV)：等电池电压快到了（比如 4.15V），再切换成&lt;strong&gt;恒压&lt;/strong&gt;充，直到电流慢慢降为 0。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;场景-c工业-4-20ma-传感器-cems-系统里全是这个&#34;&gt;场景 C：工业 4-20mA 传感器 (CEMS 系统里全是这个)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原因：工厂里的线缆可能长达几百米，导线本身有电阻。如果传输电压信号，到了终点电压就衰减了（$U_{end} = U_{source} - I \times R_{wire}$）。&lt;/li&gt;
+&lt;li&gt;解决：传输&lt;strong&gt;电流信号&lt;/strong&gt;。因为串联回路里，&lt;strong&gt;电流处处相等&lt;/strong&gt;！不管导线是 10 米 还是 1000 米，恒流源发出的 4mA，到了接收端依然是 4mA。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;三总结&#34;&gt;三、总结
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;恒压源 (CV)：你是芯片、电机，你需要稳定的环境，我给你&lt;strong&gt;稳压&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;恒流源 (CC)：你是&lt;strong&gt;LED、电池、远程传感器&lt;/strong&gt;，你对电流敏感，或者由于电阻不稳定，我给你&lt;strong&gt;稳流&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在实际的&lt;strong&gt;实验室直流电源&lt;/strong&gt;上，通常都有 &lt;code&gt;CV&lt;/code&gt; 和 &lt;code&gt;CC&lt;/code&gt; 两个灯。当你设置好电压（比如 5V）和限流（比如 1A）后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;负载小，它是 5V 恒压源（CV 灯亮）。&lt;/li&gt;
+&lt;li&gt;负载短路或太大，它自动变成 1A 恒流源（CC 灯亮），保护电路不烧毁。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>PMOS防反接电路设计</title>
         <link>https://teaize.github.io/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/</link>
         <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
@@ -39,7 +127,7 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入正极&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入正极&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                                &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vout&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;+&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                                           &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;+------------------+&lt;/span&gt;     &lt;span class=&#34;o&#34;&gt;+------------------+&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;     &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                  &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
@@ -111,7 +199,7 @@
 &lt;ol&gt;
 &lt;li&gt;输入变成了负压（或者地接正，正接地）。&lt;/li&gt;
 &lt;li&gt;体二极管处于反向截止状态，电流过不去。&lt;/li&gt;
-&lt;li&gt;$V_{GS}$ 状态：由于 $D$ 极电位低，$S$ 极没电，$G$ 极通过电阻接地。栅极和源极之间没有建立起足够的负压差（甚至 $V_{GS} &amp;gt; 0$），PMOS 保持 关断 (OFF)。&lt;/li&gt;
+&lt;li&gt;$V_{GS}$ 状态：由于 $D$ 极电位低，$S$ 极没电，$G$ 极通过电阻接地。栅极和源极之间没有建立起足够的负压差（甚至 $P$），PMOS 保持 关断 (OFF)。&lt;/li&gt;
 &lt;li&gt;结果：电路完全切断，保护了后级电路。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -145,7 +233,7 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;		&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                              &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输入端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;                              &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;输出端&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Vout&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;接了电池负极&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;                        &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;期望是&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;                                       &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;D&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;漏极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;                       &lt;span class=&#34;o&#34;&gt;|&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;源极&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;V&lt;/span&gt;
@@ -293,6 +381,125 @@
 &lt;li&gt;$R_{limit}$ (限流电阻) $\rightarrow$ 串联在 G 极回路中。&lt;/li&gt;
 &lt;li&gt;稳压二极管 $\rightarrow$ 并联在 G-S 之间（如果电源 &amp;gt; 20V）。&lt;/li&gt;
 &lt;li&gt;控制端 $\rightarrow$ 使用 NPN 三极管拉低栅极，而不是 MCU 直驱。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>PMT信号</title>
+        <link>https://teaize.github.io/p/pmt%E4%BF%A1%E5%8F%B7/</link>
+        <pubDate>Sun, 14 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pmt%E4%BF%A1%E5%8F%B7/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;问题：质控仪输出固定 NO 浓度的气体，对于仪表 A，流速是一个值；对于仪表 B，流速是另一个值，那 PMT 产生的信号强度是一样的，还是根据流速不同是不一样的&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;PMT 产生的原始信号强度（光子数/电流值），本质上是和单位时间内进入反应室的 &lt;strong&gt;NO 分子总数&lt;/strong&gt;（Mass Flow Rate / 质量流量）有关。&lt;/p&gt;
+&lt;h2 id=&#34;原理剖析&#34;&gt;原理剖析
+&lt;/h2&gt;&lt;p&gt;我们要看化学发光反应的微观过程：
+$$NO + O_3 \rightarrow NO_2^* + O_2$$
+$$NO_2^* \rightarrow NO_2 + h\nu \text{ (光子)}$$&lt;/p&gt;
+&lt;p&gt;在这个反应室里，有一个关键的前提条件：&lt;strong&gt;臭氧 ($O_3$) 是过量的&lt;/strong&gt;。这意味着，每一个进入反应室的 $NO$ 分子，都会被“抓住”并发生反应，产生一个光子（理想情况下）。&lt;/p&gt;
+&lt;p&gt;PMT 是一个&lt;strong&gt;计数器&lt;/strong&gt;，它统计的是“每秒钟有多少个光子打在我的脸上”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浓度 (Concentration, C)： 比如 200 ppb，意思是每 10 亿个气体分子里有 200 个 NO。这只是一个“比例”。&lt;/li&gt;
+&lt;li&gt;流速 (Flow Rate, Q)： 比如 1 L/min，意思是每分钟有多少气体跑进来。&lt;/li&gt;
+&lt;li&gt;PMT 信号 (Signal, I)：
+$$I \propto \text{每秒反应掉的 NO 分子数}$$
+$$I \propto \text{浓度 (C)} \times \text{流速 (Q)}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;为什么流速对-cems-如此重要&#34;&gt;为什么流速对 CEMS 如此重要？
+&lt;/h2&gt;&lt;p&gt;这也解释了为什么化学发光法分析仪对&lt;strong&gt;流量控制&lt;/strong&gt;和&lt;strong&gt;压力控制&lt;/strong&gt;要求极高。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;限流孔 (Critical Orifice) 的作用：&lt;/strong&gt; 你会发现每一台 NO 分析仪的反应室入口前，都有一个极小的孔（宝石喷嘴或玻璃毛细管）。 它的作用就是&lt;strong&gt;锁死流速&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;如果这个孔脏了、堵了，流速变小了。&lt;/li&gt;
+&lt;li&gt;后果： 即使标气浓度没变，进入反应室的 NO 分子数少了，PMT 信号就会变弱，导致读数偏低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;反应室压力 (Chamber Pressure) 的影响：&lt;/strong&gt; 通常反应室是负压的。如果真空泵衰减，负压变小（压力升高）。
+&lt;ul&gt;
+&lt;li&gt;一方面：气体密度变大，单位体积分子数变多（信号变大）。&lt;/li&gt;
+&lt;li&gt;另一方面：猝灭效应 (Quenching) 增强（光子被撞没了，信号变小）。&lt;/li&gt;
+&lt;li&gt;这之间有个复杂的平衡，但总之，&lt;strong&gt;流速和压力的波动都会直接改变 PMT 的原始信号。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;引入泵的因素&#34;&gt;引入泵的因素
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;在现场中，经常会发现有的泵接了两台分析仪（用于给分析仪提供动力）。在这种情况下校准了仪器；然后过了一段时间，泵只接一台分析仪，只给一台分析仪提供动力，此时再通同样浓度的标气，分析仪显示的示数却不同了&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;核心原因泵的特性曲线&#34;&gt;核心原因：泵的“特性曲线”
+&lt;/h3&gt;&lt;p&gt;所有的泵（无论是隔膜泵、旋片泵还是活塞泵），其输出能力都不是恒定的。它们都遵循一条&lt;strong&gt;P-Q 曲线（压力 - 流量曲线）&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;双机模式（接两台）：
+&lt;ul&gt;
+&lt;li&gt;泵同时拖两个负载。&lt;strong&gt;此时管路总阻力较小（因为是并联）&lt;/strong&gt;，但需要的总流量大。&lt;/li&gt;
+&lt;li&gt;泵工作在 &lt;strong&gt;“低真空度（或低压力）、大流量”&lt;/strong&gt; 的状态。&lt;/li&gt;
+&lt;li&gt;假设此时供给每台仪器的有效压力差是 $\Delta P_1$，对应的流速是 $Q_1$。&lt;/li&gt;
+&lt;li&gt;你在这个状态下进行了校准，告诉分析仪：“当流速是 $Q_1$ 时，这个电流对应 200 ppm。”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;单机模式（接一台）：
+&lt;ul&gt;
+&lt;li&gt;你拔掉了一台，堵死了那个接口。&lt;/li&gt;
+&lt;li&gt;泵的负载突然变轻了（或者说气路阻力特性变了）。&lt;/li&gt;
+&lt;li&gt;根据泵的曲线，当流量需求减半时，泵能够提供的&lt;strong&gt;真空度（或压力）会显著升高&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;此时，剩余那台仪器面临的压力差变成了 $\Delta P_2$（且 $|\Delta P_2| &amp;gt; |\Delta P_1|$）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;后果： 压力差变大，导致流过这台仪器的实际气体流速 $Q_2$ 变大了&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;深度细节临界流-critical-flow-的失效&#34;&gt;深度细节：临界流 (Critical Flow) 的失效
+&lt;/h3&gt;&lt;p&gt;你可能会问：&lt;strong&gt;“分析仪内部不是有限流孔吗？它不是应该能锁住流速吗？”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;理论上，只要真空度达到一定阈值（比如 -40 kPa 以下），气体通过小孔的速度就会达到声速，此时流速应该恒定，不再随真空度的加深而增加。这就是“临界流”原理。但现实中为什么还会变？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;“伪”临界流：
+&lt;ul&gt;
+&lt;li&gt;在接两台仪器时，泵可能比较吃力，真空度可能只有 -35 kPa。此时并未完全达到临界流条件。流速依然受压力波动影响很大。&lt;/li&gt;
+&lt;li&gt;当变成一台时，真空度瞬间抽到 -60 kPa，进入了真临界流，或者流速进一步提升。从“非饱和”到“饱和”，流速肯定变了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;压力侧的影响（如果泵在前端）：
+&lt;ul&gt;
+&lt;li&gt;如果你的泵是用来推气（正压输送）的，那就更明显了。&lt;/li&gt;
+&lt;li&gt;少了一路泄压，所有的压力都灌进剩下那一路，流速必然暴涨，读数必然飙升。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;反应室压力的变化：
+&lt;ul&gt;
+&lt;li&gt;抽力变大，不仅影响流速，还会让反应室内部的绝对压力降低。
+&lt;ul&gt;
+&lt;li&gt;压力低 $\to$ 分子密度低 $\to$ 读数偏低。&lt;/li&gt;
+&lt;li&gt;流速快 $\to$ 分子总数多 $\to$ 读数偏高。&lt;/li&gt;
+&lt;li&gt;这两个效应会“打架”，但通常流速的影响占主导。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;解决方案与建议&#34;&gt;解决方案与建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;下策（凑合用）：
+&lt;ul&gt;
+&lt;li&gt;保持现在的“单机模式”。&lt;/li&gt;
+&lt;li&gt;立刻重新校准。&lt;/li&gt;
+&lt;li&gt;让仪器重新记住现在这个新流速下的电流对应关系。&lt;/li&gt;
+&lt;li&gt;隐患：如果哪天你又把另一台接回来了，读数又会不准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;中策（欺骗泵）：
+&lt;ul&gt;
+&lt;li&gt;如果不接第二台仪器，可以在那个空出来的接口上接一个一个针阀，调节它的开度，人为制造一个“假负载”漏气。【&lt;strong&gt;或者接一个同样大小的限流孔更省事&lt;/strong&gt;】&lt;/li&gt;
+&lt;li&gt;调整针阀，直到真空表读数恢复到接两台仪器时的水平。&lt;/li&gt;
+&lt;li&gt;这样可以维持原有的流速平衡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;上策（系统设计）：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;一机一泵。 这种并联共用动力源的设计，本身就是 CEMS 里的大忌&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;因为一旦一台仪器管路堵塞或断开，会直接通过压力耦合影响另一台仪器的读数。为了省一个泵的钱，牺牲了整个系统的可靠性，得不偿失。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -1660,7 +1867,8 @@
         <pubDate>Sat, 13 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8B%9F%E5%90%88/</guid>
-        <description>&lt;p&gt;继上篇 [[传感器信号处理]] 说到的多项式拟合，这里具体讲讲多项式拟合方法的应用&lt;/p&gt;
+        <description>&lt;p&gt;继上篇 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E4%BC%A0%E6%84%9F%E5%99%A8%E4%BF%A1%E5%8F%B7%E5%A4%84%E7%90%86/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Fetching Title#qeku&lt;/a&gt; 说到的多项式拟合，这里具体讲讲多项式拟合方法的应用&lt;/p&gt;
 &lt;h3 id=&#34;案例&#34;&gt;案例
 &lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;

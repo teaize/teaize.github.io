@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2025-12-14T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-16T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,13 +15,22 @@
                 href="https://teaize.github.io/"
                 />
   </url><url>
+    <loc>https://teaize.github.io/post/</loc>
+    <lastmod>2025-12-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/</loc>
+    <lastmod>2025-12-16T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/%E6%81%92%E6%B5%81%E6%BA%90%E4%B8%8E%E6%81%92%E5%8E%8B%E6%BA%90/</loc>
+    <lastmod>2025-12-15T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://teaize.github.io/p/pmos%E9%98%B2%E5%8F%8D%E6%8E%A5%E7%94%B5%E8%B7%AF%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2025-12-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/pmos%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90%E8%AE%BE%E8%AE%A1/</loc>
     <lastmod>2025-12-14T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://teaize.github.io/post/</loc>
+    <loc>https://teaize.github.io/p/pmt%E4%BF%A1%E5%8F%B7/</loc>
     <lastmod>2025-12-14T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/%E6%AF%94%E8%BE%83%E5%99%A8%E9%A2%A4%E6%8C%AF%E9%97%AE%E9%A2%98/</loc>
@@ -33,11 +42,27 @@
     <loc>https://teaize.github.io/p/%E8%BF%90%E6%94%BE%E8%99%9A%E7%9F%AD%E5%92%8C%E8%99%9A%E6%96%AD/</loc>
     <lastmod>2025-12-14T00:00:00+00:00</lastmod>
   </url><url>
+    <loc>https://teaize.github.io/tags/ahk/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/python%E8%84%9A%E6%9C%AC-%E6%9C%AC%E5%9C%B0csv%E5%BF%AB%E9%80%9F%E5%82%85%E9%87%8C%E5%8F%B6%E5%8F%98%E6%8D%A2/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/tags/</loc>
+    <lastmod>2025-12-13T00:00:00+00:00</lastmod>
+    <xhtml:link
+                rel="alternate"
+                hreflang="en"
+                href="https://teaize.github.io/en/tags/"
+                />
+    <xhtml:link
+                rel="alternate"
+                hreflang="zh-cn"
+                href="https://teaize.github.io/tags/"
+                />
   </url><url>
     <loc>https://teaize.github.io/p/%E8%A1%A5%E5%81%BF%E5%8E%9F%E5%88%99/</loc>
     <lastmod>2025-12-13T00:00:00+00:00</lastmod>
@@ -134,19 +159,6 @@
   </url><url>
     <loc>https://teaize.github.io/p/midisart-2000/</loc>
     <lastmod>2025-12-06T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://teaize.github.io/tags/</loc>
-    <lastmod>2025-12-06T00:00:00+00:00</lastmod>
-    <xhtml:link
-                rel="alternate"
-                hreflang="en"
-                href="https://teaize.github.io/en/tags/"
-                />
-    <xhtml:link
-                rel="alternate"
-                hreflang="zh-cn"
-                href="https://teaize.github.io/tags/"
-                />
   </url><url>
     <loc>https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/</loc>
     <lastmod>2025-12-06T00:00:00+00:00</lastmod>
