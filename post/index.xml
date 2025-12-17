@@ -7,13 +7,340 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Tue, 16 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 17 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>变量解耦</title>
+        <link>https://teaize.github.io/p/%E5%8F%98%E9%87%8F%E8%A7%A3%E8%80%A6/</link>
+        <pubDate>Wed, 17 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8F%98%E9%87%8F%E8%A7%A3%E8%80%A6/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;紫外荧光当中，为了检测荧光灯老化，通常也会设计一个参考检测器，通过这个检测器，消除荧光灯老化的影响。那么这个检测器放在&lt;strong&gt;气室末端&lt;/strong&gt;是否合适？&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h2 id=&#34;变量解耦&#34;&gt;变量解耦
+&lt;/h2&gt;&lt;p&gt;分析仪的读数关系如下所示
+$$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考检测器信号 (Reference)}}$$&lt;/p&gt;
+&lt;p&gt;将参考检测器放在气室末端看起来没什么问题。但仔细想想：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;参考检测器的作用？监测荧光灯老化，进行补偿，这点没问题&lt;/li&gt;
+&lt;li&gt;但是如果通入一定浓度气体，尽管荧光灯没老化，进入参考检测器的信号是不是也变弱了（被吸收了），也就是说参考检测器信号又和浓度扯上了关系&lt;/li&gt;
+&lt;li&gt;这就出现一个问题：我们最终的目的是求解浓度，但是求解方程式的另一端又引入了一个和浓度相关的变量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;更具体一点来说&lt;/strong&gt;，荧光检测的基本物理公式是：&lt;/p&gt;
+&lt;p&gt;$$S = I_0 \times C \times k$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$S$：探测器测到的信号（结果）&lt;/li&gt;
+&lt;li&gt;$I_0$：光的强度（干扰变量，不稳定的）&lt;/li&gt;
+&lt;li&gt;$C$：气体浓度（目标变量，我们要测的）&lt;/li&gt;
+&lt;li&gt;$k$：常数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;目标是求出 $C$$$C = \frac{S}{I_0 \times k}$$
+核心思想就在这里： 为了解出 $C$，必须获得一个纯净的 $I_0$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这个 $I_0$ 必须包含光源所有的不稳定因素（老化、温度漂移、瞬时抖动）。&lt;/li&gt;
+&lt;li&gt;但这个 $I_0$ &lt;strong&gt;绝对不能包含&lt;/strong&gt; $C$（气体浓度）的信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果将参考检测器放在气室后：$I_{ref} = I_0 - \text{被气体吸收的光}$。 这里的信号里混进了气体浓度 $C$。光强和浓度这两个变量纠缠在了一起。 如果在公式里除以这个 $I_{ref}$，你是除不干净的，甚至会引入非线性误差。&lt;/p&gt;
+&lt;p&gt;所以要&lt;strong&gt;变量解耦&lt;/strong&gt;，要剔除气体浓度对参考检测器的影响，也就是说，将检测器放在不包含样气通道的位置上，避开“气体”的干扰。&lt;/p&gt;
+&lt;h2 id=&#34;选择什么位置&#34;&gt;选择什么位置
+&lt;/h2&gt;&lt;p&gt;我们先来看一看光路中有哪些东西会“老化”。如果位置选错了，补偿就会失效。&lt;/p&gt;
+&lt;h3 id=&#34;包含滤光片的老化&#34;&gt;包含“滤光片”的老化
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;如果不放在滤光片之后： 假设你把参考检测器直接放在灯泡旁边。
+&lt;ul&gt;
+&lt;li&gt;灯泡亮度的衰减你监测到了。&lt;/li&gt;
+&lt;li&gt;但是，紫外线是非常猛烈的，长时间照射下，激发滤光片 也会老化（变浑浊、透过率下降，俗称“由于紫外线导致的途变/Solarization”）。&lt;/li&gt;
+&lt;li&gt;后果： 参考检测器觉得“光还挺亮”（因为灯没坏），但实际上透过滤光片后打到气体上的光已经很弱了。补偿算法会认为光强没变，导致测量结果偏低。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;只有放在滤光片之后，参考检测器看到的才是真正用于激发气体的有效光强。&lt;/p&gt;
+&lt;h3 id=&#34;避开气体的干扰&#34;&gt;避开“气体”的干扰
+&lt;/h3&gt;&lt;p&gt;如上所说，需要变量解耦。推荐位置：激发滤光片之后，气室之前。&lt;/p&gt;
+&lt;p&gt;通过安装一片 &lt;strong&gt;分束镜 (Beam Splitter)&lt;/strong&gt; 或者 &lt;strong&gt;石英导光片&lt;/strong&gt;，将经过滤光后的紫外光截取一小部分（例如 5% - 10%）反射给参考检测器，剩下的 90% 继续射入气室。&lt;/p&gt;
+&lt;p&gt;$$\text{紫外灯} \rightarrow \text{聚光透镜} \rightarrow \textbf{激发滤光片} \rightarrow \color{red}{\textbf{分束镜}} \rightarrow \text{气室入口窗}$$&lt;/p&gt;
+&lt;p&gt;在此处（红色位置）发生分流：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;主光路 (90%)： 直射入气室 $\rightarrow$ 激发 $SO_2$ $\rightarrow$ 产生荧光 $\rightarrow$ 主光电倍增管 (PMT)&lt;/li&gt;
+&lt;li&gt;参考光路 (10%)： 反射/折射 $\rightarrow$ 参考光电二极管（也就是参考检测器）&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>信噪比-激发光与荧光</title>
+        <link>https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/</link>
+        <pubDate>Wed, 17 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/</guid>
+        <description>&lt;p&gt;这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大&lt;/li&gt;
+&lt;li&gt;荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;光陷阱light-trapbeam-dump&#34;&gt;光陷阱（Light Trap/Beam Dump）
+&lt;/h3&gt;&lt;p&gt;光陷阱是给“激发光”准备的，它通常位于光源的正对面。&lt;/p&gt;
+&lt;p&gt;目的尽可能多的吸收掉激发光，减少激发光的反射。激发光穿过气体后，剩下的光依然非常强。如果直接打在平坦的壁上反射回来，会形成巨大的&lt;strong&gt;杂散光背景&lt;/strong&gt;。所以，必须在一个深深的黑洞（通常设计成牛角状，叫 Rayleigh Horn）里把它“吞噬”掉，不让它弹回来。&lt;/p&gt;
+&lt;p&gt;这个吃光的结构，在光学工程里有一个非常经典的名字，叫 &lt;strong&gt;伍德号角 (Wood&amp;rsquo;s Horn)&lt;/strong&gt;，有时也叫 &lt;strong&gt;瑞利号角 (Rayleigh Horn)&lt;/strong&gt;，它是一个是一个&lt;strong&gt;弯曲的、渐细的牛角状结构&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20251217101922.png]]&lt;/p&gt;
+&lt;h3 id=&#34;荧光信号&#34;&gt;荧光信号
+&lt;/h3&gt;&lt;p&gt;现在面临的问题是，如何处理荧光信号。&lt;/p&gt;
+&lt;p&gt;这里需要有一个基本概念：荧光现象是&lt;strong&gt;各向同性&lt;/strong&gt;的（Isotropic），当一个 $SO_2$ 分子被激发后，它发出的荧光（光子）是朝&lt;strong&gt;四面八方&lt;/strong&gt;随机发射的，但通常探测器（PMT）只安装在气室的一侧。&lt;/p&gt;
+&lt;p&gt;有两种策略：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;探测器只吸收直接的光，不吸收经过反射的荧光&lt;/li&gt;
+&lt;li&gt;探测器也吸收反射的荧光&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;探测器只吸收直接的光&#34;&gt;探测器只吸收直接的光
+&lt;/h4&gt;&lt;p&gt;也就是全黑设计&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设计： 气室内部全部做&lt;strong&gt;发黑处理&lt;/strong&gt;（阳极氧化黑或黑色特氟龙），且设计有复杂的光阑（Baffles）和光陷阱。&lt;/li&gt;
+&lt;li&gt;原理：
+&lt;ul&gt;
+&lt;li&gt;任何打到墙壁上的光（无论是激发光还是荧光），统统吸收掉。&lt;/li&gt;
+&lt;li&gt;探测器&lt;strong&gt;只接收&lt;/strong&gt;气体分子直接飞向探测器的那部分荧光。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;优点： 背景噪声（Noise）极低，零点非常稳。&lt;/li&gt;
+&lt;li&gt;缺点： 信号强度（Signal）很弱，灵敏度低。&lt;/li&gt;
+&lt;li&gt;应用： 适合量程较大（ppm 级），或者光源功率非常强（如激光/强氙灯）的场合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;探测器也吸收反射的荧光&#34;&gt;探测器也吸收反射的荧光
+&lt;/h4&gt;&lt;p&gt;这里也有两种处理方法：镜面反射 OR 漫反射&lt;/p&gt;
+&lt;p&gt;这里是用的漫反射，为什么？为了&lt;strong&gt;消除光斑不均匀&lt;/strong&gt;的影响&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;均匀化：&lt;/strong&gt; 镜面反射会形成特定的光路，如果在某个角度恰好有一束强光反射进探测器，可能会导致局部饱和或对震动敏感。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;积分效应：&lt;/strong&gt; 漫反射材料（PTFE）会让光线在内部经历多次无序散射，&lt;strong&gt;相当于把整个气室变成了一个均匀发光的“灯泡”&lt;/strong&gt;。这样，无论气体分子在气室的哪个角落发光，被探测器收集到的概率都比较接近。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;就像在漆黑的楼道里，用手机打开手电筒照着楼梯（局部强亮光），和用手机手电筒照着楼道天花板的白色墙壁（漫反射，整个楼道都变亮了）&lt;/p&gt;
+&lt;p&gt;那这里就用到高反设计&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设计： 气室侧壁用 &lt;strong&gt;烧结 PTFE&lt;/strong&gt;（白色），但在光源对面依然保留&lt;strong&gt;黑色光陷阱&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;原理：
+&lt;ul&gt;
+&lt;li&gt;对激发光： 用光陷阱吸收（必须要杀掉，不能乱反射）。&lt;/li&gt;
+&lt;li&gt;对荧光： 侧壁不仅不吸收，反而把背离探测器飞的荧光“弹”回来，赶进探测器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;优点： 信号强度暴增（通常能提高 5-10 倍），适合做痕量分析（ppb 级）。&lt;/li&gt;
+&lt;li&gt;缺点： 制造工艺难，如果光陷阱没设计好，反射壁会把杂散光也放大了。&lt;/li&gt;
+&lt;li&gt;应用： 现代高端环保监测（如 Thermo 43i, Teledyne T100）的主流方案，因为环保要求越来越严，需要测很低浓度的 $SO_2$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;信噪比最大化&#34;&gt;信噪比最大化
+&lt;/h3&gt;&lt;p&gt;激发光和荧光信号这种巨大的能量差异，决定了我们必须采用两套截然不同的策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;激发光 (Excitation) = &lt;strong&gt;“强干扰”&lt;/strong&gt; (是噪音源，考虑杂散光抑制)，“斩尽杀绝”&lt;/li&gt;
+&lt;li&gt;荧光信号 (Fluorescence) = &lt;strong&gt;“弱信号”&lt;/strong&gt; (是有效数据，考虑光收集效率)，“颗粒归仓”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;很多初学者设计仪器时，往往只关注“怎么让信号更强”（加大光源功率），却忽略了“怎么让背景更黑”。
+高水平设计的特征是： 与其把光源功率加大 10 倍（导致杂散光也大 10 倍，信噪比没变，还增加了热量），不如把光陷阱做得更深一点，或者把滤光片选得更好一点。&lt;/p&gt;
+&lt;p&gt;只要把背景噪声压下去，哪怕信号很弱，也能测得非常准。这就是为什么在痕量分析（ppb 级）中，光陷阱的设计比光源的选择更体现水平。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>带载启动</title>
         <link>https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/</link>
         <pubDate>Tue, 16 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/</guid>
         <description></description>
+        </item>
+        <item>
+        <title>关于金属镀层</title>
+        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/</link>
+        <pubDate>Tue, 16 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/</guid>
+        <description>&lt;p&gt;在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件&lt;/p&gt;
+&lt;p&gt;为了让新手对镀层建立概念，接下来从&lt;strong&gt;为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求&lt;/strong&gt;这四个维度来拆解&lt;/p&gt;
+&lt;h3 id=&#34;核心概念为什么气室要镀层&#34;&gt;核心概念：为什么气室要镀层
+&lt;/h3&gt;&lt;p&gt;普通的铝合金或不锈钢在特定环境下是不够用的。镀层的目的主要有三个：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;防腐蚀&lt;/strong&gt;： 样气中往往含有水分和酸性气体（$H_2SO_4$, $HNO_3$）。铝合金气室一旦腐蚀，产生的盐类粉末会污染镜片，导致漂移。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;惰性化/防吸附&lt;/strong&gt;： 金属表面在微观上是粗糙多孔的，容易“抓”住气体分子（吸附）。这会导致测量响应变慢（拖尾）。镀层可以填平微孔，使表面更光滑、更惰性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;光学反射率&lt;/strong&gt;： 对于红外（NDIR）或紫外（UV）分析仪，气室内壁往往充当光路的一部分。镀金或抛光镀镍可以提高光通量，提升信噪比。&lt;/li&gt;
+&lt;li&gt;除了反射光线，有的镀层的作用是用来吸收散射光（例如紫外荧光 $SO_2$）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键工艺电镀-vs-化学镀&#34;&gt;关键工艺：电镀 vs. 化学镀
+&lt;/h3&gt;&lt;p&gt;这是初学者最容易混淆的概念。对于分析仪气室，90% 的情况使用的是“化学镀镍”，而不是“电镀镍”。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;电镀镍 (Electro-plating)&lt;/th&gt;
+          &lt;th&gt;化学镀镍 (Electroless Nickel / ENP)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;原理&lt;/td&gt;
+          &lt;td&gt;依靠电流沉积金属。&lt;/td&gt;
+          &lt;td&gt;依靠化学还原反应沉积金属（自催化）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;形状适应性&lt;/td&gt;
+          &lt;td&gt;差。 电流有“尖端效应”，&lt;strong&gt;导致棱角处镀层厚，深孔/内腔（如气室内部）根本镀不上&lt;/strong&gt;（法拉第笼效应）。&lt;/td&gt;
+          &lt;td&gt;极好。 只要药水能流到的地方，镀层就一样厚。&lt;strong&gt;非常适合形状复杂的气室&lt;/strong&gt;。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;硬度与耐磨&lt;/td&gt;
+          &lt;td&gt;较软。&lt;/td&gt;
+          &lt;td&gt;硬度高，耐磨性好。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;分析仪应用&lt;/td&gt;
+          &lt;td&gt;仅用于外壳、接插件。&lt;/td&gt;
+          &lt;td&gt;气室、流路块、阀体的首选工艺。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;以后提到气室镀镍，请默认指代 化学镀镍，特别是 高磷化学镍（High-Phosphorus EN）。&lt;/p&gt;
+&lt;h3 id=&#34;参数概念镀多厚thickness&#34;&gt;参数概念：镀多厚？（Thickness）
+&lt;/h3&gt;&lt;p&gt;镀层厚度通常以 &lt;strong&gt;微米 ($\mu m$)&lt;/strong&gt; 为单位。厚度不是越厚越好，太厚会导致尺寸超差（螺纹拧不进）或镀层内应力过大导致开裂。&lt;/p&gt;
+&lt;p&gt;在仪器仪表行业，常见的标准如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$3 - 5 \mu m$ (装饰/防变色)：
+&lt;ul&gt;
+&lt;li&gt;用于：仅为了铝材不氧化，或者外观好看。&lt;/li&gt;
+&lt;li&gt;分析仪应用：很少用于内部流路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;$10 - 15 \mu m$ (中等防腐 - 行业标准)：
+&lt;ul&gt;
+&lt;li&gt;用于：大多数常规气体分析仪气室（如测量 $CO$, $CO_2$）。&lt;/li&gt;
+&lt;li&gt;特点：能保证镀层无针孔（Pore-free），起到良好的物理隔离作用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;$20 - 30 \mu m$ (高防腐/耐磨)：
+&lt;ul&gt;
+&lt;li&gt;用于：测量腐蚀性气体（如高浓度 $SO_2$, $HCl$）或有机械摩擦的部件。&lt;/li&gt;
+&lt;li&gt;注意：做到这个厚度需要控制公差，设计时要预留余量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;除了镍还有什么&#34;&gt;除了镍，还有什么？
+&lt;/h3&gt;&lt;p&gt;除了化学镀镍，您在高端分析仪中还会遇到以下两种“镀层”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;镀金（Gold Plating）：
+&lt;ul&gt;
+&lt;li&gt;应用： 红外气体分析仪（NDIR）的反射气室。&lt;/li&gt;
+&lt;li&gt;作用： &lt;strong&gt;金对红外线的反射率极高&lt;/strong&gt;，且化学性质极其稳定（不与任何酸反应）。&lt;/li&gt;
+&lt;li&gt;工艺： &lt;strong&gt;通常先镀一层镍做底，再镀一层极薄的金&lt;/strong&gt;（Flash Gold）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;钝化涂层（如 SilcoNert / Sulfinert）：
+&lt;ul&gt;
+&lt;li&gt;应用： 微量/痕量硫化物分析（如 ppb 级别的 $H_2S$）。&lt;/li&gt;
+&lt;li&gt;本质： 这不是传统的“镀”，而是化学气相沉积（CVD）的一层&lt;strong&gt;非晶硅&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;作用： 极度的化学惰性，防止硫化物被吸附。如果您的分析仪响应时间慢，往往就是因为没有做这个处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;如何向供应商提技术要求&#34;&gt;如何向供应商提技术要求
+&lt;/h3&gt;&lt;p&gt;如果您需要发图纸给加工厂，不能只写“表面镀镍”。为了显得专业并保证质量，可这样标注：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;表面处理&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;化学镀镍&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;材料&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;高磷镍&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;High&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Phosphorus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;P&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;content&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;%&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;——&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;注&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;高磷耐腐蚀最好&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;且无磁性&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;厚度&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;$&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;15&lt;/span&gt; \&lt;span class=&#34;n&#34;&gt;mu&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;m&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;$&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;附着力&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;满足&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ASTM&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;B571&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;热震实验要求&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;不脱皮&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;不起泡&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;后处理&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;需进行热处理&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;烘烤&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;以去氢脆&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;mi&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;外观&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;：&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;气室内部光亮&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;无肉眼可见的麻点&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;、&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;漏镀&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;扩展资料&#34;&gt;扩展资料
+&lt;/h3&gt;&lt;p&gt;如上所说，金对红外线的反射率极高（反射率&amp;gt;98%），但在紫外波段（尤其是 &amp;lt;400nm），金的反射率会断崖式下跌（像吸收体一样），不仅浪费光能，还会发热。&lt;/p&gt;
+&lt;p&gt;那在紫外波段，推荐如何做呢：&lt;/p&gt;
+&lt;h4 id=&#34;功能需求漫反射&#34;&gt;功能需求：漫反射
+&lt;/h4&gt;&lt;p&gt;例如紫外荧光法（UV Fluorescence）测 $SO_2$ 的气室。推荐工艺： &lt;strong&gt;烧结 PTFE 内衬 或 涂层 (如 Spectralon 类材料)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;注意：这里有两种处理思路：【1】高反设计：白色 PTFE 内衬，让 PMT 收集到尽可能多的荧光信号；【2】全黑设计：打到墙壁上的光都统统吸收掉。这里讲的是高反设计【1】&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原理：
+&lt;ul&gt;
+&lt;li&gt;在荧光分析中，我们不是要光“折射”，而是要光在气室里“均匀散射”，让探测器收集到尽可能多的荧光信号。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;性能：
+&lt;ul&gt;
+&lt;li&gt;高纯度的烧结 PTFE （白色）在紫外波段的漫反射率可以达到 95% - 99%，远高于任何金属镀层。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;化学优势：
+&lt;ul&gt;
+&lt;li&gt;PTFE（特氟龙）本身就是“塑料王”，对 $SO_2, H_2S$ 等腐蚀性气体完全免疫，且不吸附，是 $SO_2$ 痕量分析的终极解决方案。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;功能需求镜面反射&#34;&gt;功能需求：镜面反射
+&lt;/h4&gt;&lt;p&gt;适用场景： 需要光线像打在镜子上一样反射（如 NDUV 的反射镜、长光程池的端镜）。 推荐工艺： 真空蒸发镀铝 + 氟化镁 (MgF2) 保护膜&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么是铝？
+&lt;ul&gt;
+&lt;li&gt;铝是全波段的“万金油”，它是唯一在 紫外 ($200 - 400 nm$) 到红外都有极高反射率（&amp;gt;90%）的金属。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;为什么要加 MgF2？
+&lt;ul&gt;
+&lt;li&gt;铝极易氧化，&lt;strong&gt;氧化铝在紫外区的吸收很大&lt;/strong&gt;。必须在镀铝后立刻镀一层极薄的氟化镁 ($MgF_2$)。它不仅防氧化，还能在紫外区起到“增透/增反”的光学干涉作用，把紫外反射率拉高到 90% 以上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;缺点：
+&lt;ul&gt;
+&lt;li&gt;这种镀层通常是在光学玻璃上做的，耐腐蚀性不如实体金属强。如果是直接接触高腐蚀性样气，通常会把反射镜做在密封窗片（Window）的后面，不让它直接接触气体。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;总结建议表&#34;&gt;总结建议表
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;分析仪类型&lt;/th&gt;
+          &lt;th&gt;波段&lt;/th&gt;
+          &lt;th&gt;气室/部件功能&lt;/th&gt;
+          &lt;th&gt;绝对禁止&lt;/th&gt;
+          &lt;th&gt;推荐工艺&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;红外 (NDIR)&lt;/td&gt;
+          &lt;td&gt;IR&lt;/td&gt;
+          &lt;td&gt;反射光线&lt;/td&gt;
+          &lt;td&gt;阳极氧化铝 (吸红外)&lt;/td&gt;
+          &lt;td&gt;镀金 (Gold Plating)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;紫外 (NDUV)&lt;/td&gt;
+          &lt;td&gt;UV&lt;/td&gt;
+          &lt;td&gt;镜面反射光路&lt;/td&gt;
+          &lt;td&gt;镀金、镀银&lt;/td&gt;
+          &lt;td&gt;镀铝 + $MgF_2$&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;紫外荧光 ($SO_2$)&lt;/td&gt;
+          &lt;td&gt;UV&lt;/td&gt;
+          &lt;td&gt;收集散射光信号&lt;/td&gt;
+          &lt;td&gt;黑色阳极氧化&lt;/td&gt;
+          &lt;td&gt;PTFE (烧结/涂层)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;通用流路&lt;/td&gt;
+          &lt;td&gt;-&lt;/td&gt;
+          &lt;td&gt;仅传输气体，防腐&lt;/td&gt;
+          &lt;td&gt;普通电镀镍&lt;/td&gt;
+          &lt;td&gt;高磷化学镍 / 硅钝化&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
         </item>
         <item>
         <title>恒流源与恒压源</title>
