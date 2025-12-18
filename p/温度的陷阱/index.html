@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件\n为了让新手对镀层建立概念，接下来从为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求这四个维度来拆解\n">
-<title>关于金属镀层</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n">
+<title>温度的陷阱</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="关于金属镀层">
-<meta property='og:description' content="在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件\n为了让新手对镀层建立概念，接下来从为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求这四个维度来拆解\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="温度的陷阱">
+<meta property='og:description' content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-16T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="关于金属镀层">
-<meta name="twitter:description" content="在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件\n为了让新手对镀层建立概念，接下来从为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求这四个维度来拆解\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-18T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="温度的陷阱">
+<meta name="twitter:description" content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,16 +297,14 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#核心概念为什么气室要镀层">核心概念：为什么气室要镀层</a></li>
-        <li><a href="#关键工艺电镀-vs-化学镀">关键工艺：电镀 vs. 化学镀</a></li>
-        <li><a href="#参数概念镀多厚thickness">参数概念：镀多厚？（Thickness）</a></li>
-        <li><a href="#除了镍还有什么">除了镍，还有什么？</a></li>
-        <li><a href="#如何向供应商提技术要求">如何向供应商提技术要求</a></li>
-        <li><a href="#扩展资料">扩展资料</a>
+        <li><a href="#场景温度的陷阱">场景：温度的陷阱</a></li>
+        <li><a href="#缺陷一温度系数的非对称性">缺陷一：温度系数的“非对称性”</a></li>
+        <li><a href="#缺陷二温差梯度的动态变化">缺陷二：温差梯度的“动态变化”</a></li>
+        <li><a href="#解决方案">解决方案</a>
           <ol>
-            <li><a href="#功能需求漫反射">功能需求：漫反射</a></li>
-            <li><a href="#功能需求镜面反射">功能需求：镜面反射</a></li>
-            <li><a href="#总结建议表">总结建议表</a></li>
+            <li><a href="#1-恒温控制--最笨但最有效">1. 恒温控制 —— 最笨但最有效</a></li>
+            <li><a href="#2-半导体制冷-tec-cooling--针对-pmt">2. 半导体制冷 (TEC Cooling) —— 针对 PMT</a></li>
+            <li><a href="#3-软件温度补偿--省钱的做法">3. 软件温度补偿 —— 省钱的做法</a></li>
           </ol>
         </li>
       </ol>
@@ -330,7 +328,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/">关于金属镀层</a>
+            <a href="/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/">温度的陷阱</a>
         </h2>
     
         
@@ -352,7 +350,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-16</time>
+                <time class="article-time--published">2025-12-18</time>
             </div>
         
 
@@ -368,197 +366,68 @@
     <section class="article-content">
     
     
-    <p>在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件</p>
-<p>为了让新手对镀层建立概念，接下来从<strong>为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求</strong>这四个维度来拆解</p>
-<h3 id="核心概念为什么气室要镀层">核心概念：为什么气室要镀层
-</h3><p>普通的铝合金或不锈钢在特定环境下是不够用的。镀层的目的主要有三个：</p>
+    <h3 id="场景温度的陷阱">场景：温度的陷阱
+</h3><blockquote>
+<p>背景：为了追求紧凑，把分析仪设计得很小。</p>
 <ul>
-<li><strong>防腐蚀</strong>： 样气中往往含有水分和酸性气体（$H_2SO_4$, $HNO_3$）。铝合金气室一旦腐蚀，产生的盐类粉末会污染镜片，导致漂移。</li>
-<li><strong>惰性化/防吸附</strong>： 金属表面在微观上是粗糙多孔的，容易“抓”住气体分子（吸附）。这会导致测量响应变慢（拖尾）。镀层可以填平微孔，使表面更光滑、更惰性。</li>
-<li><strong>光学反射率</strong>： 对于红外（NDIR）或紫外（UV）分析仪，气室内壁往往充当光路的一部分。镀金或抛光镀镍可以提高光通量，提升信噪比。</li>
-<li>除了反射光线，有的镀层的作用是用来吸收散射光（例如紫外荧光 $SO_2$）</li>
+<li>主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。</li>
+<li>参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。</li>
 </ul>
-<h3 id="关键工艺电镀-vs-化学镀">关键工艺：电镀 vs. 化学镀
-</h3><p>这是初学者最容易混淆的概念。对于分析仪气室，90% 的情况使用的是“化学镀镍”，而不是“电镀镍”。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th>电镀镍 (Electro-plating)</th>
-          <th>化学镀镍 (Electroless Nickel / ENP)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>原理</td>
-          <td>依靠电流沉积金属。</td>
-          <td>依靠化学还原反应沉积金属（自催化）。</td>
-      </tr>
-      <tr>
-          <td>形状适应性</td>
-          <td>差。 电流有“尖端效应”，<strong>导致棱角处镀层厚，深孔/内腔（如气室内部）根本镀不上</strong>（法拉第笼效应）。</td>
-          <td>极好。 只要药水能流到的地方，镀层就一样厚。<strong>非常适合形状复杂的气室</strong>。</td>
-      </tr>
-      <tr>
-          <td>硬度与耐磨</td>
-          <td>较软。</td>
-          <td>硬度高，耐磨性好。</td>
-      </tr>
-      <tr>
-          <td>分析仪应用</td>
-          <td>仅用于外壳、接插件。</td>
-          <td>气室、流路块、阀体的首选工艺。</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>以后提到气室镀镍，请默认指代 化学镀镍，特别是 高磷化学镍（High-Phosphorus EN）。</p>
-<h3 id="参数概念镀多厚thickness">参数概念：镀多厚？（Thickness）
-</h3><p>镀层厚度通常以 <strong>微米 ($\mu m$)</strong> 为单位。厚度不是越厚越好，太厚会导致尺寸超差（螺纹拧不进）或镀层内应力过大导致开裂。</p>
-<p>在仪器仪表行业，常见的标准如下：</p>
+<p>故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。</p>
+<p>问题：我们在做 $\frac{Signal}{Reference}$ 补偿时，默认的前提是：两个探测器对光的响应系数（Sensitivity） 是常数。在这个场景中，温度这个变量是如何破坏“共模抑制”的？（即：当环境温度变化时，PMT 和 PD 是“同甘共苦”的吗？）</p>
+</blockquote>
+<p>在实际运维中，等待预热（Warm-up）是解决大多数温度漂移问题的标准操作流程（SOP）。几乎所有的精密分析仪说明书都会写：“开机后请预热 30-60 分钟，待读数稳定后再进行校准。</p>
+<p>但是，如果从设计的角度来看，这个设计是不及格的。因为“预热”只能解决“开机”那一瞬间的剧烈变化，却解决不了“环境变化”带来的长期漂移。在这个“温度陷阱”场景中，隐藏着两个<strong>连预热都救不了的致命物理缺陷</strong></p>
+<h3 id="缺陷一温度系数的非对称性">缺陷一：温度系数的“非对称性”
+</h3><p>我们在做 $\frac{\text{主信号}}{\text{参考信号}}$ 补偿时，有一个极其重要的默认假设：</p>
+<blockquote>
+<p>假设：当温度变化时，主探测器 (PMT) 和 参考检测器 (PD) 的性能变化是步调一致的。</p>
+</blockquote>
+<p>但在该场景中，这个假设彻底崩塌了：</p>
+<ol>
+<li>物理特性的差异：
 <ul>
-<li>$3 - 5 \mu m$ (装饰/防变色)：
-<ul>
-<li>用于：仅为了铝材不氧化，或者外观好看。</li>
-<li>分析仪应用：很少用于内部流路。</li>
+<li>主探测器 (PMT)： 它是真空电子管。温度每升高，它的暗电流 (Dark Current) 会指数级上升（底噪变大），同时其增益 (Gain) 也会发生漂移（通常是灵敏度下降）。</li>
+<li>参考检测器 (PD)： 它是硅半导体。它的温度特性完全不同，对温度不那么敏感，且漂移曲线与 PMT 完全不一样。</li>
 </ul>
 </li>
-<li>$10 - 15 \mu m$ (中等防腐 - 行业标准)：
+<li>后果：即使机器预热好了，如果机箱内的温度从 $35^\circ\text{C}$ 变成了 $36^\circ\text{C}$（比如空调坏了）：
 <ul>
-<li>用于：大多数常规气体分析仪气室（如测量 $CO$, $CO_2$）。</li>
-<li>特点：能保证镀层无针孔（Pore-free），起到良好的物理隔离作用。</li>
-</ul>
-</li>
-<li>$20 - 30 \mu m$ (高防腐/耐磨)：
-<ul>
-<li>用于：测量腐蚀性气体（如高浓度 $SO_2$, $HCl$）或有机械摩擦的部件。</li>
-<li>注意：做到这个厚度需要控制公差，设计时要预留余量。</li>
-</ul>
-</li>
-</ul>
-<h3 id="除了镍还有什么">除了镍，还有什么？
-</h3><p>除了化学镀镍，在高端分析仪中还会遇到以下两种“镀层”：</p>
-<ul>
-<li>镀金（Gold Plating）：
-<ul>
-<li>应用： 红外气体分析仪（NDIR）的反射气室。</li>
-<li>作用： <strong>金对红外线的反射率极高</strong>，且化学性质极其稳定（不与任何酸反应）。</li>
-<li>工艺： <strong>通常先镀一层镍做底，再镀一层极薄的金</strong>（Flash Gold）。</li>
-</ul>
-</li>
-</ul>
-<ol start="2">
-<li>钝化涂层（如 SilcoNert / Sulfinert）：
-<ul>
-<li>应用： 微量/痕量硫化物分析（如 ppb 级别的 $H_2S$）。</li>
-<li>本质： 这不是传统的“镀”，而是化学气相沉积（CVD）的一层<strong>非晶硅</strong>。</li>
-<li>作用： 极度的化学惰性，防止硫化物被吸附。如果您的分析仪响应时间慢，往往就是因为没有做这个处理。</li>
+<li>PMT 的信号可能漂移了 -1.0%。</li>
+<li>PD 的信号可能只漂移了 +0.1%。</li>
+<li>补偿结果： $\frac{99}{100.1} \neq 1$。</li>
+<li>结论： 补偿算法不仅没能消除误差，反而因为两者的“步调不一致”，让漂移变得不可预测。这就是<strong>共模抑制失败</strong>。</li>
 </ul>
 </li>
 </ol>
-<h3 id="如何向供应商提技术要求">如何向供应商提技术要求
-</h3><p>如果您需要发图纸给加工厂，不能只写“表面镀镍”。为了显得专业并保证质量，可这样标注：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">表面处理</span><span class="err">：</span><span class="n">化学镀镍</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="err">、</span><span class="n">材料</span><span class="err">：</span><span class="n">高磷镍</span> <span class="p">(</span><span class="n">High</span> <span class="n">Phosphorus</span><span class="p">,</span> <span class="n">P</span> <span class="n">content</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">%</span><span class="p">)</span> <span class="err">——</span> <span class="n">注</span><span class="err">：</span><span class="n">高磷耐腐蚀最好</span><span class="err">，</span><span class="n">且无磁性</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="err">、</span><span class="n">厚度</span><span class="err">：</span> <span class="err">$</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">15</span> \<span class="n">mu</span> <span class="n">m</span><span class="err">$</span>
-</span></span><span class="line"><span class="cl"><span class="mi">3</span><span class="err">、</span><span class="n">附着力</span><span class="err">：</span><span class="n">满足</span> <span class="n">ASTM</span> <span class="n">B571</span> <span class="n">热震实验要求</span><span class="err">（</span><span class="n">不脱皮</span><span class="err">、</span><span class="n">不起泡</span><span class="err">）。</span>
-</span></span><span class="line"><span class="cl"><span class="mi">4</span><span class="err">、</span><span class="n">后处理</span><span class="err">：</span><span class="n">需进行热处理</span><span class="err">（</span><span class="n">烘烤</span><span class="err">）</span><span class="n">以去氢脆</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="err">、</span><span class="n">外观</span><span class="err">：</span><span class="n">气室内部光亮</span><span class="err">，</span><span class="n">无肉眼可见的麻点</span><span class="err">、</span><span class="n">漏镀</span><span class="err">。</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="扩展资料">扩展资料
-</h3><p>如上所说，金对红外线的反射率极高（反射率&gt;98%），但在紫外波段（尤其是 &lt;400nm），金的反射率会断崖式下跌（像吸收体一样），不仅浪费光能，还会发热。</p>
-<p>那在紫外波段，推荐如何做呢：</p>
-<h4 id="功能需求漫反射">功能需求：漫反射
-</h4><p>例如紫外荧光法（UV Fluorescence）测 $SO_2$ 的气室。推荐工艺： <strong>烧结 PTFE 内衬 或 涂层 (如 Spectralon 类材料)</strong></p>
-<p>注意：这里有两种处理思路：【1】高反设计：白色 PTFE 内衬，让 PMT 收集到尽可能多的荧光信号；【2】全黑设计：打到墙壁上的光都统统吸收掉。这里讲的是高反设计【1】</p>
+<h3 id="缺陷二温差梯度的动态变化">缺陷二：温差梯度的“动态变化”
+</h3><p>你认为预热后温度就“定死”了吗？并没有。</p>
+<p>在场景三中，我特意设定了：PMT 在加热的气室旁 ($43^\circ\text{C}$)，PD 在灯泡旁 ($35^\circ\text{C}$)。这里存在一个 $8^\circ\text{C}$ 的温差 ($\Delta T$)。关键在于：这个 $\Delta T$ 是不稳定的！</p>
 <ul>
-<li>原理：
+<li>夏天中午： 环境温度 $30^\circ\text{C}$。风扇疯狂转。灯泡旁的 PD 可能被吹得比较凉，而气室旁的 PMT 因为有保温棉，温度没怎么降。$\Delta T$ 变大了。</li>
+<li>冬天深夜： 环境温度 $5^\circ\text{C}$。风扇转得慢。灯泡的热量散不出去，PD 变热了。$\Delta T$ 变小了。</li>
+</ul>
+<p>只要 $\Delta T$ 在变，哪怕预热了一万年，这两个探测器的工作点就永远对不上。参考信号就失去了“基准”的意义。</p>
+<h3 id="解决方案">解决方案
+</h3><p>工程师通常会采用以下三种手段来填这个坑：</p>
+<h4 id="1-恒温控制--最笨但最有效">1. 恒温控制 —— 最笨但最有效
+</h4><p>不要让 PMT 和 PD 处于不同的温度环境。设计： 把整个光学盒（包括 PMT、PD、气室、灯）全部包在一个保温盒子里，统一加热到 $50^\circ\text{C}$。</p>
 <ul>
-<li>在荧光分析中，我们不是要光“折射”，而是要光在气室里“均匀散射”，让探测器收集到尽可能多的荧光信号。</li>
+<li>不管外面是夏天还是冬天，盒子里永远是 $50^\circ\text{C}$。</li>
+<li>这样，所有的温度漂移都被物理锁死为 0。</li>
 </ul>
-</li>
-<li>性能：
+<h4 id="2-半导体制冷-tec-cooling--针对-pmt">2. 半导体制冷 (TEC Cooling) —— 针对 PMT
+</h4><p>既然 PMT 最怕热，那就给它装一个“私人空调”。
+设计：在 PMT 后面贴一个 Peltier (TEC) 制冷片，强制把它冷却并恒定在 $10^\circ\text{C}$。这样可以把 PMT 的噪声压到极低，且不再受环境影响。</p>
+<h4 id="3-软件温度补偿--省钱的做法">3. 软件温度补偿 —— 省钱的做法
+</h4><p>如果在硬件上没法恒温，那就通过大量实验数据来拟合。</p>
+<p>算法：</p>
 <ul>
-<li>高纯度的烧结 PTFE （白色）在紫外波段的漫反射率可以达到 95% - 99%，远高于任何金属镀层。</li>
+<li>在 PMT 旁边装一个温度传感器 $T_1$。</li>
+<li>在 PD 旁边装一个温度传感器 $T_2$。</li>
+<li>在软件里写死公式：$\text{最终结果} = \frac{S}{R} \times f(T_1) \times g(T_2)$。</li>
+<li>让 CPU 实时计算并抵消温度带来的增益变化。</li>
 </ul>
-</li>
-<li>化学优势：
-<ul>
-<li>PTFE（特氟龙）本身就是“塑料王”，对 $SO_2, H_2S$ 等腐蚀性气体完全免疫，且不吸附，是 $SO_2$ 痕量分析的终极解决方案。</li>
-</ul>
-</li>
-</ul>
-<h4 id="功能需求镜面反射">功能需求：镜面反射
-</h4><p>适用场景： 需要光线像打在镜子上一样反射（如 NDUV 的反射镜、长光程池的端镜）。 推荐工艺： 真空蒸发镀铝 + 氟化镁 (MgF2) 保护膜</p>
-<ul>
-<li>为什么是铝？
-<ul>
-<li>铝是全波段的“万金油”，它是唯一在 紫外 ($200 - 400 nm$) 到红外都有极高反射率（&gt;90%）的金属。</li>
-</ul>
-</li>
-<li>为什么要加 MgF2？
-<ul>
-<li>铝极易氧化，<strong>氧化铝在紫外区的吸收很大</strong>。必须在镀铝后立刻镀一层极薄的氟化镁 ($MgF_2$)。它不仅防氧化，还能在紫外区起到“增透/增反”的光学干涉作用，把紫外反射率拉高到 90% 以上。</li>
-</ul>
-</li>
-<li>缺点：
-<ul>
-<li>这种镀层通常是在光学玻璃上做的，耐腐蚀性不如实体金属强。如果是直接接触高腐蚀性样气，通常会把反射镜做在密封窗片（Window）的后面，不让它直接接触气体。</li>
-</ul>
-</li>
-</ul>
-<h4 id="总结建议表">总结建议表
-</h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>分析仪类型</th>
-          <th>波段</th>
-          <th>气室/部件功能</th>
-          <th>绝对禁止</th>
-          <th>推荐工艺</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>红外 (NDIR)</td>
-          <td>IR</td>
-          <td>反射光线</td>
-          <td>阳极氧化铝 (吸红外)</td>
-          <td>镀金 (Gold Plating)</td>
-      </tr>
-      <tr>
-          <td>紫外 (NDUV)</td>
-          <td>UV</td>
-          <td>镜面反射光路</td>
-          <td>镀金、镀银</td>
-          <td>镀铝 + $MgF_2$</td>
-      </tr>
-      <tr>
-          <td>紫外荧光 ($SO_2$)</td>
-          <td>UV</td>
-          <td>收集散射光信号</td>
-          <td>黑色阳极氧化</td>
-          <td>PTFE (烧结/涂层)</td>
-      </tr>
-      <tr>
-          <td>通用流路</td>
-          <td>-</td>
-          <td>仅传输气体，防腐</td>
-          <td>普通电镀镍</td>
-          <td>高磷化学镍 / 硅钝化</td>
-      </tr>
-  </tbody>
-</table></div>
 
 </section>
 

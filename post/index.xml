@@ -7,7 +7,77 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 17 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 18 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>温度的陷阱</title>
+        <link>https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/</link>
+        <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/</guid>
+        <description>&lt;h3 id=&#34;场景温度的陷阱&#34;&gt;场景：温度的陷阱
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;背景：为了追求紧凑，把分析仪设计得很小。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。&lt;/li&gt;
+&lt;li&gt;参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。&lt;/p&gt;
+&lt;p&gt;问题：我们在做 $\frac{Signal}{Reference}$ 补偿时，默认的前提是：两个探测器对光的响应系数（Sensitivity） 是常数。在这个场景中，温度这个变量是如何破坏“共模抑制”的？（即：当环境温度变化时，PMT 和 PD 是“同甘共苦”的吗？）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在实际运维中，等待预热（Warm-up）是解决大多数温度漂移问题的标准操作流程（SOP）。几乎所有的精密分析仪说明书都会写：“开机后请预热 30-60 分钟，待读数稳定后再进行校准。&lt;/p&gt;
+&lt;p&gt;但是，如果从设计的角度来看，这个设计是不及格的。因为“预热”只能解决“开机”那一瞬间的剧烈变化，却解决不了“环境变化”带来的长期漂移。在这个“温度陷阱”场景中，隐藏着两个&lt;strong&gt;连预热都救不了的致命物理缺陷&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;缺陷一温度系数的非对称性&#34;&gt;缺陷一：温度系数的“非对称性”
+&lt;/h3&gt;&lt;p&gt;我们在做 $\frac{\text{主信号}}{\text{参考信号}}$ 补偿时，有一个极其重要的默认假设：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;假设：当温度变化时，主探测器 (PMT) 和 参考检测器 (PD) 的性能变化是步调一致的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;但在该场景中，这个假设彻底崩塌了：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;物理特性的差异：
+&lt;ul&gt;
+&lt;li&gt;主探测器 (PMT)： 它是真空电子管。温度每升高，它的暗电流 (Dark Current) 会指数级上升（底噪变大），同时其增益 (Gain) 也会发生漂移（通常是灵敏度下降）。&lt;/li&gt;
+&lt;li&gt;参考检测器 (PD)： 它是硅半导体。它的温度特性完全不同，对温度不那么敏感，且漂移曲线与 PMT 完全不一样。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;后果：即使机器预热好了，如果机箱内的温度从 $35^\circ\text{C}$ 变成了 $36^\circ\text{C}$（比如空调坏了）：
+&lt;ul&gt;
+&lt;li&gt;PMT 的信号可能漂移了 -1.0%。&lt;/li&gt;
+&lt;li&gt;PD 的信号可能只漂移了 +0.1%。&lt;/li&gt;
+&lt;li&gt;补偿结果： $\frac{99}{100.1} \neq 1$。&lt;/li&gt;
+&lt;li&gt;结论： 补偿算法不仅没能消除误差，反而因为两者的“步调不一致”，让漂移变得不可预测。这就是&lt;strong&gt;共模抑制失败&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;缺陷二温差梯度的动态变化&#34;&gt;缺陷二：温差梯度的“动态变化”
+&lt;/h3&gt;&lt;p&gt;你认为预热后温度就“定死”了吗？并没有。&lt;/p&gt;
+&lt;p&gt;在场景三中，我特意设定了：PMT 在加热的气室旁 ($43^\circ\text{C}$)，PD 在灯泡旁 ($35^\circ\text{C}$)。这里存在一个 $8^\circ\text{C}$ 的温差 ($\Delta T$)。关键在于：这个 $\Delta T$ 是不稳定的！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;夏天中午： 环境温度 $30^\circ\text{C}$。风扇疯狂转。灯泡旁的 PD 可能被吹得比较凉，而气室旁的 PMT 因为有保温棉，温度没怎么降。$\Delta T$ 变大了。&lt;/li&gt;
+&lt;li&gt;冬天深夜： 环境温度 $5^\circ\text{C}$。风扇转得慢。灯泡的热量散不出去，PD 变热了。$\Delta T$ 变小了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;只要 $\Delta T$ 在变，哪怕预热了一万年，这两个探测器的工作点就永远对不上。参考信号就失去了“基准”的意义。&lt;/p&gt;
+&lt;h3 id=&#34;解决方案&#34;&gt;解决方案
+&lt;/h3&gt;&lt;p&gt;工程师通常会采用以下三种手段来填这个坑：&lt;/p&gt;
+&lt;h4 id=&#34;1-恒温控制--最笨但最有效&#34;&gt;1. 恒温控制 —— 最笨但最有效
+&lt;/h4&gt;&lt;p&gt;不要让 PMT 和 PD 处于不同的温度环境。设计： 把整个光学盒（包括 PMT、PD、气室、灯）全部包在一个保温盒子里，统一加热到 $50^\circ\text{C}$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不管外面是夏天还是冬天，盒子里永远是 $50^\circ\text{C}$。&lt;/li&gt;
+&lt;li&gt;这样，所有的温度漂移都被物理锁死为 0。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-半导体制冷-tec-cooling--针对-pmt&#34;&gt;2. 半导体制冷 (TEC Cooling) —— 针对 PMT
+&lt;/h4&gt;&lt;p&gt;既然 PMT 最怕热，那就给它装一个“私人空调”。
+设计：在 PMT 后面贴一个 Peltier (TEC) 制冷片，强制把它冷却并恒定在 $10^\circ\text{C}$。这样可以把 PMT 的噪声压到极低，且不再受环境影响。&lt;/p&gt;
+&lt;h4 id=&#34;3-软件温度补偿--省钱的做法&#34;&gt;3. 软件温度补偿 —— 省钱的做法
+&lt;/h4&gt;&lt;p&gt;如果在硬件上没法恒温，那就通过大量实验数据来拟合。&lt;/p&gt;
+&lt;p&gt;算法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 PMT 旁边装一个温度传感器 $T_1$。&lt;/li&gt;
+&lt;li&gt;在 PD 旁边装一个温度传感器 $T_2$。&lt;/li&gt;
+&lt;li&gt;在软件里写死公式：$\text{最终结果} = \frac{S}{R} \times f(T_1) \times g(T_2)$。&lt;/li&gt;
+&lt;li&gt;让 CPU 实时计算并抵消温度带来的增益变化。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>变量解耦</title>
         <link>https://teaize.github.io/p/%E5%8F%98%E9%87%8F%E8%A7%A3%E8%80%A6/</link>
         <pubDate>Wed, 17 Dec 2025 00:00:00 +0000</pubDate>
@@ -62,6 +132,148 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
 &lt;ol&gt;
 &lt;li&gt;主光路 (90%)： 直射入气室 $\rightarrow$ 激发 $SO_2$ $\rightarrow$ 产生荧光 $\rightarrow$ 主光电倍增管 (PMT)&lt;/li&gt;
 &lt;li&gt;参考光路 (10%)： 反射/折射 $\rightarrow$ 参考光电二极管（也就是参考检测器）&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;场景假设&#34;&gt;场景假设
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;假设参考检测器安装在了气室之后&lt;/strong&gt;，并且分析仪的线性很好。在通入 400ppb 标气的时候进行了校准。那通入 50ppb（也就是比之前校准的气体浓度更低）的标气，分析仪的示数会更低还是更高？&lt;/p&gt;
+&lt;p&gt;结论：分析仪示数会偏低&lt;/p&gt;
+&lt;h4 id=&#34;设定校准点-400ppb-的状态&#34;&gt;设定校准点 (400ppb) 的状态
+&lt;/h4&gt;&lt;p&gt;当通入 400ppb 进行校准时，气体浓度较高，对光的吸收 (Absorption) 较多。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理事实： 400ppb 的气体挡住了一部分光，导致到达末端的参考检测器的光变暗了。&lt;/li&gt;
+&lt;li&gt;仪器记忆： 仪器在这个时刻按下了“快照”。它记录下：
+&lt;ul&gt;
+&lt;li&gt;主信号 = $S_{400}$ (高)&lt;/li&gt;
+&lt;li&gt;参考信号 = $R_{400}$ (&lt;strong&gt;较弱&lt;/strong&gt;，因为被吸光了)&lt;/li&gt;
+&lt;li&gt;仪器计算出一个系数 $K$，让读数强行等于 400。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;切换到测量点-50ppb-的状态&#34;&gt;切换到测量点 (50ppb) 的状态
+&lt;/h4&gt;&lt;p&gt;现在通入 50ppb 的气体。浓度变低了，气体变“透明”了。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理事实： 气体对光的吸收大幅减少。&lt;/li&gt;
+&lt;li&gt;参考检测器的反应： 因为挡路的气体分子少了，透过去的光多了。所以&lt;strong&gt;参考信号 $R_{50}$ 会比校准时的 $R_{400}$ 更强（变大）&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;$$读数 = K \times \frac{\text{主信号 (正常变小)}}{\text{参考信号 (反而变大)}}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;分子（主信号）：因为浓度从 400 降到 50，正常按比例下降。&lt;/li&gt;
+&lt;li&gt;分母（参考信号）：因为透光率增加，数值&lt;strong&gt;变大&lt;/strong&gt;了。&lt;/li&gt;
+&lt;li&gt;K 不变，400ppb 校准过后，K 就不变了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也就是说，当浓度 $C$ 下降时 $\downarrow$：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;气体吸收减少 $\downarrow$。&lt;/li&gt;
+&lt;li&gt;导致 $I_{ref}$ 上升 $\uparrow$（这就是我们说的耦合，参考信号里混进了反向的浓度信息）。&lt;/li&gt;
+&lt;li&gt;因为 $I_{ref}$ 在分母上，分母上升，导致最终结果下降 $\downarrow$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最终的结果是：浓度越低，它越压低读数；浓度越高，它越抬高读数，给系统带来非线性误差&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>固态继电器</title>
+        <link>https://teaize.github.io/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/</link>
+        <pubDate>Wed, 17 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/</guid>
+        <description>&lt;p&gt;这里主要学习一下固态继电器使用的注意事项&lt;/p&gt;
+&lt;p&gt;固态继电器（Solid State Relay, &lt;strong&gt;SSR&lt;/strong&gt;）在 CEMS 机柜里绝对是“劳模”级别的存在，特别是在伴热管线控制、转换炉加热、冷凝器制冷片控制这些需要 &lt;strong&gt;PID 精确控温&lt;/strong&gt;（频繁开关）的场合。机械继电器如果像它那样每秒开关一次，两天触点就烧废了&lt;/p&gt;
+&lt;p&gt;但它不像机械继电器那样“皮实”，它更像是一个娇气的半导体&lt;/p&gt;
+&lt;h3 id=&#34;第一大坑发热&#34;&gt;第一大坑：发热
+&lt;/h3&gt;&lt;p&gt;这是 SSR 90% 的死因。很多人以为继电器就是个开关，不需要消耗能量。错！&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原理： SSR 的内部不是金属触点，而是可控硅（Triac）或 MOS 管。当电流流过它时，它会&lt;strong&gt;有大约 1.2V ~ 1.6V 的电压降&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;算笔账：
+&lt;ul&gt;
+&lt;li&gt;假设你控制一条 50 米的伴热管，电流是 10A。&lt;/li&gt;
+&lt;li&gt;SSR 产生的热量 $P = U \times I = 1.5V \times 10A = \mathbf{15W}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;后果：
+&lt;ul&gt;
+&lt;li&gt;别小看 15W。在一个密闭的 CEMS 机柜里，如果没有散热片，这 15W 的热量会让 SSR 自身温度在几分钟内飙升到 100°C 以上。&lt;/li&gt;
+&lt;li&gt;一旦超过结温（通常 125°C），SSR 瞬间击穿损坏（通常是永久导通，加热棒狂烧不止）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;避坑指南：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;必须加散热片： &lt;strong&gt;电流超过 5A，就必须把 SSR 锁在铝制散热片上&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;涂硅脂： SSR 底部和散热片之间，&lt;strong&gt;必须涂导热硅脂&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;通风： 散热片的齿要顺着风道，不能被线槽挡死。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第二大坑漏电流-leakage-current&#34;&gt;第二大坑：漏电流 (Leakage Current)
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;现象：
+&lt;ul&gt;
+&lt;li&gt;SSR 输入端明明已经断电（指示灯灭了）。你拿着万用表去量 SSR 的输出端（负载端），竟然测到了 &lt;strong&gt;220V 电压&lt;/strong&gt;！&lt;/li&gt;
+&lt;li&gt;或者，如果你接的是一个很小的指示灯，那个灯竟然在“关”的时候还发着微弱的“鬼火”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;原因：
+&lt;ul&gt;
+&lt;li&gt;半导体器件没有绝对的绝缘。SSR 内部通常并联了一个 &lt;strong&gt;RC 阻容吸收回路&lt;/strong&gt;（为了保护它不被浪涌打死）。&lt;/li&gt;
+&lt;li&gt;这个回路在关断时，依然会有 mA 级别 的漏电流流过。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;避坑指南：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;别被万用表骗了： 万用表内阻很高，测出的 220V 是“虚电”。只要接上负载（比如加热棒），电压立马归零。&lt;/li&gt;
+&lt;li&gt;触电警告： 千万不要以为 SSR 关了就安全了而去摸接线柱！ 那个漏电流虽然小，但电压是实打实的，会电人。维修时必须拉下空气开关。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第三大坑短路就是秒杀&#34;&gt;第三大坑：短路就是“秒杀”
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;机械继电器： 如果负载短路了，机械继电器可能只是触点粘连，或者还能扛个几秒钟等空开跳闸。&lt;/li&gt;
+&lt;li&gt;SSR： 它是半导体。&lt;strong&gt;它比保险丝烧得还快。&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;如果加热棒内部短路，巨大的电流涌过来，普通的空气开关（断路器）还没来得及跳闸（需要几十毫秒），SSR 内部的可控硅在 &lt;strong&gt;1 毫秒&lt;/strong&gt; 内就已经炸了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;避坑指南：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;普通空开保护不了 SSR。&lt;/li&gt;
+&lt;li&gt;如果你这路负载极其昂贵或易短路，必须串联“快速熔断器” (Fast Blow Fuse / 半导体保护熔断器)**。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;第四大坑选型选错了过零还是随机&#34;&gt;第四大坑：选型选错了“过零”还是“随机”
+&lt;/h3&gt;&lt;p&gt;在 CEMS 里，我们通常控制的是加热棒（电阻负载）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;过零触发型 (Zero-Crossing)：
+&lt;ul&gt;
+&lt;li&gt;原理： 你给信号让它开，它不会马上开，而是等到交流电的正弦波&lt;strong&gt;走到 0V 那个点&lt;/strong&gt;时才导通。
+&lt;ul&gt;
+&lt;li&gt;因为它是在 0V 时接通的，所以没有冲击，没有火花，没有噪音&lt;/li&gt;
+&lt;li&gt;代价是它会有延迟。最长需要等待半个周期（在 50Hz 电网下，最多延迟 10 毫秒）。但对于加热棒来说，10 毫秒完全可以忽略不计。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;优点： 干扰极小。不会对电网产生高频噪声，不会干扰你灵敏的弱电信号。&lt;/li&gt;
+&lt;li&gt;CEMS 必选： 控制伴热管、加热炉，&lt;strong&gt;必须选过零型&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;随机触发型 (Random Turn-on)：
+&lt;ul&gt;
+&lt;li&gt;原理： 给信号立马导通，不管电压在哪。&lt;/li&gt;
+&lt;li&gt;缺点： 会产生巨大的电磁干扰。&lt;/li&gt;
+&lt;li&gt;用途： 只有在控制感性负载（如电机、调节光亮度）时才偶尔用到。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;p&gt;当你设计或维护 CEMS 里的 SSR 回路时，脑子里过一遍这张检查清单：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;摸温度：&lt;/strong&gt; 设备运行半小时后，去摸一下 SSR 的散热片。如果烫手不敢摸（&amp;gt;60°C），说明散热不够，赶紧换大散热片或加风扇。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;留余量：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;电阻负载（加热棒）：按 &lt;strong&gt;2 倍&lt;/strong&gt; 选型。比如负载 10A，选 25A 的 SSR。&lt;/li&gt;
+&lt;li&gt;感性负载（电机/泵）：按 &lt;strong&gt;6-10 倍&lt;/strong&gt; 选型。电机启动电流大，SSR 极易被秒杀。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;看接线：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;输入端 ： 通常是 3-32V DC。注意&lt;strong&gt;正负极&lt;/strong&gt;别接反（虽然大多有保护，但接反了不工作）。&lt;/li&gt;
+&lt;li&gt;输出端： 控制交流电时，不分正负，但千万别把 220V 接到输入端去了，那是瞬间放烟花。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ol&gt;
 </description>
         </item>
@@ -217,7 +429,7 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;除了镍还有什么&#34;&gt;除了镍，还有什么？
-&lt;/h3&gt;&lt;p&gt;除了化学镀镍，您在高端分析仪中还会遇到以下两种“镀层”：&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;除了化学镀镍，在高端分析仪中还会遇到以下两种“镀层”：&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;镀金（Gold Plating）：
 &lt;ul&gt;

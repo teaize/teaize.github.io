@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件\n为了让新手对镀层建立概念，接下来从为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求这四个维度来拆解\n">
-<title>关于金属镀层</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这里主要学习一下固态继电器使用的注意事项\n固态继电器（Solid State Relay, SSR）在 CEMS 机柜里绝对是“劳模”级别的存在，特别是在伴热管线控制、转换炉加热、冷凝器制冷片控制这些需要 PID 精确控温（频繁开关）的场合。机械继电器如果像它那样每秒开关一次，两天触点就烧废了\n">
+<title>固态继电器</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="关于金属镀层">
-<meta property='og:description' content="在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件\n为了让新手对镀层建立概念，接下来从为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求这四个维度来拆解\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="固态继电器">
+<meta property='og:description' content="这里主要学习一下固态继电器使用的注意事项\n固态继电器（Solid State Relay, SSR）在 CEMS 机柜里绝对是“劳模”级别的存在，特别是在伴热管线控制、转换炉加热、冷凝器制冷片控制这些需要 PID 精确控温（频繁开关）的场合。机械继电器如果像它那样每秒开关一次，两天触点就烧废了\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-16T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="关于金属镀层">
-<meta name="twitter:description" content="在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件\n为了让新手对镀层建立概念，接下来从为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求这四个维度来拆解\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-17T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="固态继电器">
+<meta name="twitter:description" content="这里主要学习一下固态继电器使用的注意事项\n固态继电器（Solid State Relay, SSR）在 CEMS 机柜里绝对是“劳模”级别的存在，特别是在伴热管线控制、转换炉加热、冷凝器制冷片控制这些需要 PID 精确控温（频繁开关）的场合。机械继电器如果像它那样每秒开关一次，两天触点就烧废了\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,18 +297,11 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#核心概念为什么气室要镀层">核心概念：为什么气室要镀层</a></li>
-        <li><a href="#关键工艺电镀-vs-化学镀">关键工艺：电镀 vs. 化学镀</a></li>
-        <li><a href="#参数概念镀多厚thickness">参数概念：镀多厚？（Thickness）</a></li>
-        <li><a href="#除了镍还有什么">除了镍，还有什么？</a></li>
-        <li><a href="#如何向供应商提技术要求">如何向供应商提技术要求</a></li>
-        <li><a href="#扩展资料">扩展资料</a>
-          <ol>
-            <li><a href="#功能需求漫反射">功能需求：漫反射</a></li>
-            <li><a href="#功能需求镜面反射">功能需求：镜面反射</a></li>
-            <li><a href="#总结建议表">总结建议表</a></li>
-          </ol>
-        </li>
+        <li><a href="#第一大坑发热">第一大坑：发热</a></li>
+        <li><a href="#第二大坑漏电流-leakage-current">第二大坑：漏电流 (Leakage Current)</a></li>
+        <li><a href="#第三大坑短路就是秒杀">第三大坑：短路就是“秒杀”</a></li>
+        <li><a href="#第四大坑选型选错了过零还是随机">第四大坑：选型选错了“过零”还是“随机”</a></li>
+        <li><a href="#总结">总结</a></li>
       </ol>
     </li>
   </ol>
@@ -330,7 +323,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%85%B3%E4%BA%8E%E9%87%91%E5%B1%9E%E9%95%80%E5%B1%82/">关于金属镀层</a>
+            <a href="/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/">固态继电器</a>
         </h2>
     
         
@@ -352,7 +345,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-16</time>
+                <time class="article-time--published">2025-12-17</time>
             </div>
         
 
@@ -368,197 +361,106 @@
     <section class="article-content">
     
     
-    <p>在 CEMS 和气体分析仪领域，气室通常形状复杂，且直接接触腐蚀性气体（如 $SO_2$, $NO_x$, $HCl$），因此对镀层的要求远高于普通机械零件</p>
-<p>为了让新手对镀层建立概念，接下来从<strong>为什么要镀、镀什么（工艺）、镀多厚（参数）以及如何向供应商提需求 ER}如何向供应商提需求</strong>这四个维度来拆解</p>
-<h3 id="核心概念为什么气室要镀层">核心概念：为什么气室要镀层
-</h3><p>普通的铝合金或不锈钢在特定环境下是不够用的。镀层的目的主要有三个：</p>
+    <p>这里主要学习一下固态继电器使用的注意事项</p>
+<p>固态继电器（Solid State Relay, <strong>SSR</strong>）在 CEMS 机柜里绝对是“劳模”级别的存在，特别是在伴热管线控制、转换炉加热、冷凝器制冷片控制这些需要 <strong>PID 精确控温</strong>（频繁开关）的场合。机械继电器如果像它那样每秒开关一次，两天触点就烧废了</p>
+<p>但它不像机械继电器那样“皮实”，它更像是一个娇气的半导体</p>
+<h3 id="第一大坑发热">第一大坑：发热
+</h3><p>这是 SSR 90% 的死因。很多人以为继电器就是个开关，不需要消耗能量。错！</p>
 <ul>
-<li><strong>防腐蚀</strong>： 样气中往往含有水分和酸性气体（$H_2SO_4$, $HNO_3$）。铝合金气室一旦腐蚀，产生的盐类粉末会污染镜片，导致漂移。</li>
-<li><strong>惰性化/防吸附</strong>： 金属表面在微观上是粗糙多孔的，容易“抓”住气体分子（吸附）。这会导致测量响应变慢（拖尾）。镀层可以填平微孔，使表面更光滑、更惰性。</li>
-<li><strong>光学反射率</strong>： 对于红外（NDIR）或紫外（UV）分析仪，气室内壁往往充当光路的一部分。镀金或抛光镀镍可以提高光通量，提升信噪比。</li>
-<li>除了反射光线，有的镀层的作用是用来吸收散射光（例如紫外荧光 $SO_2$）</li>
-</ul>
-<h3 id="关键工艺电镀-vs-化学镀">关键工艺：电镀 vs. 化学镀
-</h3><p>这是初学者最容易混淆的概念。对于分析仪气室，90% 的情况使用的是“化学镀镍”，而不是“电镀镍”。</p>
-<div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th>电镀镍 (Electro-plating)</th>
-          <th>化学镀镍 (Electroless Nickel / ENP)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>原理</td>
-          <td>依靠电流沉积金属。</td>
-          <td>依靠化学还原反应沉积金属（自催化）。</td>
-      </tr>
-      <tr>
-          <td>形状适应性</td>
-          <td>差。 电流有“尖端效应”，<strong>导致棱角处镀层厚，深孔/内腔（如气室内部）根本镀不上</strong>（法拉第笼效应）。</td>
-          <td>极好。 只要药水能流到的地方，镀层就一样厚。<strong>非常适合形状复杂的气室</strong>。</td>
-      </tr>
-      <tr>
-          <td>硬度与耐磨</td>
-          <td>较软。</td>
-          <td>硬度高，耐磨性好。</td>
-      </tr>
-      <tr>
-          <td>分析仪应用</td>
-          <td>仅用于外壳、接插件。</td>
-          <td>气室、流路块、阀体的首选工艺。</td>
-      </tr>
-  </tbody>
-</table></div>
-<p>以后提到气室镀镍，请默认指代 化学镀镍，特别是 高磷化学镍（High-Phosphorus EN）。</p>
-<h3 id="参数概念镀多厚thickness">参数概念：镀多厚？（Thickness）
-</h3><p>镀层厚度通常以 <strong>微米 ($\mu m$)</strong> 为单位。厚度不是越厚越好，太厚会导致尺寸超差（螺纹拧不进）或镀层内应力过大导致开裂。</p>
-<p>在仪器仪表行业，常见的标准如下：</p>
+<li>原理： SSR 的内部不是金属触点，而是可控硅（Triac）或 MOS 管。当电流流过它时，它会<strong>有大约 1.2V ~ 1.6V 的电压降</strong>。</li>
+<li>算笔账：
 <ul>
-<li>$3 - 5 \mu m$ (装饰/防变色)：
-<ul>
-<li>用于：仅为了铝材不氧化，或者外观好看。</li>
-<li>分析仪应用：很少用于内部流路。</li>
+<li>假设你控制一条 50 米的伴热管，电流是 10A。</li>
+<li>SSR 产生的热量 $P = U \times I = 1.5V \times 10A = \mathbf{15W}$。</li>
 </ul>
 </li>
-<li>$10 - 15 \mu m$ (中等防腐 - 行业标准)：
+<li>后果：
 <ul>
-<li>用于：大多数常规气体分析仪气室（如测量 $CO$, $CO_2$）。</li>
-<li>特点：能保证镀层无针孔（Pore-free），起到良好的物理隔离作用。</li>
-</ul>
-</li>
-<li>$20 - 30 \mu m$ (高防腐/耐磨)：
-<ul>
-<li>用于：测量腐蚀性气体（如高浓度 $SO_2$, $HCl$）或有机械摩擦的部件。</li>
-<li>注意：做到这个厚度需要控制公差，设计时要预留余量。</li>
+<li>别小看 15W。在一个密闭的 CEMS 机柜里，如果没有散热片，这 15W 的热量会让 SSR 自身温度在几分钟内飙升到 100°C 以上。</li>
+<li>一旦超过结温（通常 125°C），SSR 瞬间击穿损坏（通常是永久导通，加热棒狂烧不止）。</li>
 </ul>
 </li>
 </ul>
-<h3 id="除了镍还有什么">除了镍，还有什么？
-</h3><p>除了化学镀镍，在高端分析仪中还会遇到以下两种“镀层”：</p>
+<p>避坑指南：</p>
+<ol>
+<li>必须加散热片： <strong>电流超过 5A，就必须把 SSR 锁在铝制散热片上</strong>。</li>
+<li>涂硅脂： SSR 底部和散热片之间，<strong>必须涂导热硅脂</strong>。</li>
+<li>通风： 散热片的齿要顺着风道，不能被线槽挡死。</li>
+</ol>
+<h3 id="第二大坑漏电流-leakage-current">第二大坑：漏电流 (Leakage Current)
+</h3><ul>
+<li>现象：
 <ul>
-<li>镀金（Gold Plating）：
+<li>SSR 输入端明明已经断电（指示灯灭了）。你拿着万用表去量 SSR 的输出端（负载端），竟然测到了 <strong>220V 电压</strong>！</li>
+<li>或者，如果你接的是一个很小的指示灯，那个灯竟然在“关”的时候还发着微弱的“鬼火”。</li>
+</ul>
+</li>
+<li>原因：
 <ul>
-<li>应用： 红外气体分析仪（NDIR）的反射气室。</li>
-<li>作用： <strong>金对红外线的反射率极高</strong>，且化学性质极其稳定（不与任何酸反应）。</li>
-<li>工艺： <strong>通常先镀一层镍做底，再镀一层极薄的金</strong>（Flash Gold）。</li>
+<li>半导体器件没有绝对的绝缘。SSR 内部通常并联了一个 <strong>RC 阻容吸收回路</strong>（为了保护它不被浪涌打死）。</li>
+<li>这个回路在关断时，依然会有 mA 级别 的漏电流流过。</li>
 </ul>
 </li>
 </ul>
-<ol start="2">
-<li>钝化涂层（如 SilcoNert / Sulfinert）：
+<p>避坑指南：</p>
+<ol>
+<li>别被万用表骗了： 万用表内阻很高，测出的 220V 是“虚电”。只要接上负载（比如加热棒），电压立马归零。</li>
+<li>触电警告： 千万不要以为 SSR 关了就安全了而去摸接线柱！ 那个漏电流虽然小，但电压是实打实的，会电人。维修时必须拉下空气开关。</li>
+</ol>
+<h3 id="第三大坑短路就是秒杀">第三大坑：短路就是“秒杀”
+</h3><ul>
+<li>机械继电器： 如果负载短路了，机械继电器可能只是触点粘连，或者还能扛个几秒钟等空开跳闸。</li>
+<li>SSR： 它是半导体。<strong>它比保险丝烧得还快。</strong>
 <ul>
-<li>应用： 微量/痕量硫化物分析（如 ppb 级别的 $H_2S$）。</li>
-<li>本质： 这不是传统的“镀”，而是化学气相沉积（CVD）的一层<strong>非晶硅</strong>。</li>
-<li>作用： 极度的化学惰性，防止硫化物被吸附。如果您的分析仪响应时间慢，往往就是因为没有做这个处理。</li>
+<li>如果加热棒内部短路，巨大的电流涌过来，普通的空气开关（断路器）还没来得及跳闸（需要几十毫秒），SSR 内部的可控硅在 <strong>1 毫秒</strong> 内就已经炸了。</li>
+</ul>
+</li>
+</ul>
+<p>避坑指南：</p>
+<ol>
+<li>普通空开保护不了 SSR。</li>
+<li>如果你这路负载极其昂贵或易短路，必须串联“快速熔断器” (Fast Blow Fuse / 半导体保护熔断器)**。</li>
+</ol>
+<h3 id="第四大坑选型选错了过零还是随机">第四大坑：选型选错了“过零”还是“随机”
+</h3><p>在 CEMS 里，我们通常控制的是加热棒（电阻负载）。</p>
+<ul>
+<li>过零触发型 (Zero-Crossing)：
+<ul>
+<li>原理： 你给信号让它开，它不会马上开，而是等到交流电的正弦波<strong>走到 0V 那个点</strong>时才导通。
+<ul>
+<li>因为它是在 0V 时接通的，所以没有冲击，没有火花，没有噪音</li>
+<li>代价是它会有延迟。最长需要等待半个周期（在 50Hz 电网下，最多延迟 10 毫秒）。但对于加热棒来说，10 毫秒完全可以忽略不计。</li>
+</ul>
+</li>
+<li>优点： 干扰极小。不会对电网产生高频噪声，不会干扰你灵敏的弱电信号。</li>
+<li>CEMS 必选： 控制伴热管、加热炉，<strong>必须选过零型</strong>。</li>
+</ul>
+</li>
+<li>随机触发型 (Random Turn-on)：
+<ul>
+<li>原理： 给信号立马导通，不管电压在哪。</li>
+<li>缺点： 会产生巨大的电磁干扰。</li>
+<li>用途： 只有在控制感性负载（如电机、调节光亮度）时才偶尔用到。</li>
+</ul>
+</li>
+</ul>
+<h3 id="总结">总结
+</h3><p>当你设计或维护 CEMS 里的 SSR 回路时，脑子里过一遍这张检查清单：</p>
+<ol>
+<li><strong>摸温度：</strong> 设备运行半小时后，去摸一下 SSR 的散热片。如果烫手不敢摸（&gt;60°C），说明散热不够，赶紧换大散热片或加风扇。</li>
+<li><strong>留余量：</strong>
+<ul>
+<li>电阻负载（加热棒）：按 <strong>2 倍</strong> 选型。比如负载 10A，选 25A 的 SSR。</li>
+<li>感性负载（电机/泵）：按 <strong>6-10 倍</strong> 选型。电机启动电流大，SSR 极易被秒杀。</li>
+</ul>
+</li>
+<li><strong>看接线：</strong>
+<ul>
+<li>输入端 ： 通常是 3-32V DC。注意<strong>正负极</strong>别接反（虽然大多有保护，但接反了不工作）。</li>
+<li>输出端： 控制交流电时，不分正负，但千万别把 220V 接到输入端去了，那是瞬间放烟花。</li>
 </ul>
 </li>
 </ol>
-<h3 id="如何向供应商提技术要求">如何向供应商提技术要求
-</h3><p>如果您需要发图纸给加工厂，不能只写“表面镀镍”。为了显得专业并保证质量，可这样标注：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span><span class="lnt">6
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">表面处理</span><span class="err">：</span><span class="n">化学镀镍</span>
-</span></span><span class="line"><span class="cl"><span class="mi">1</span><span class="err">、</span><span class="n">材料</span><span class="err">：</span><span class="n">高磷镍</span> <span class="p">(</span><span class="n">High</span> <span class="n">Phosphorus</span><span class="p">,</span> <span class="n">P</span> <span class="n">content</span> <span class="o">&gt;</span> <span class="mi">10</span><span class="o">%</span><span class="p">)</span> <span class="err">——</span> <span class="n">注</span><span class="err">：</span><span class="n">高磷耐腐蚀最好</span><span class="err">，</span><span class="n">且无磁性</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="mi">2</span><span class="err">、</span><span class="n">厚度</span><span class="err">：</span> <span class="err">$</span><span class="mi">10</span> <span class="o">-</span> <span class="mi">15</span> \<span class="n">mu</span> <span class="n">m</span><span class="err">$</span>
-</span></span><span class="line"><span class="cl"><span class="mi">3</span><span class="err">、</span><span class="n">附着力</span><span class="err">：</span><span class="n">满足</span> <span class="n">ASTM</span> <span class="n">B571</span> <span class="n">热震实验要求</span><span class="err">（</span><span class="n">不脱皮</span><span class="err">、</span><span class="n">不起泡</span><span class="err">）。</span>
-</span></span><span class="line"><span class="cl"><span class="mi">4</span><span class="err">、</span><span class="n">后处理</span><span class="err">：</span><span class="n">需进行热处理</span><span class="err">（</span><span class="n">烘烤</span><span class="err">）</span><span class="n">以去氢脆</span><span class="err">。</span>
-</span></span><span class="line"><span class="cl"><span class="mi">5</span><span class="err">、</span><span class="n">外观</span><span class="err">：</span><span class="n">气室内部光亮</span><span class="err">，</span><span class="n">无肉眼可见的麻点</span><span class="err">、</span><span class="n">漏镀</span><span class="err">。</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="扩展资料">扩展资料
-</h3><p>如上所说，金对红外线的反射率极高（反射率&gt;98%），但在紫外波段（尤其是 &lt;400nm），金的反射率会断崖式下跌（像吸收体一样），不仅浪费光能，还会发热。</p>
-<p>那在紫外波段，推荐如何做呢：</p>
-<h4 id="功能需求漫反射">功能需求：漫反射
-</h4><p>例如紫外荧光法（UV Fluorescence）测 $SO_2$ 的气室。推荐工艺： <strong>烧结 PTFE 内衬 或 涂层 (如 Spectralon 类材料)</strong></p>
-<p>注意：这里有两种处理思路：【1】高反设计：白色 PTFE 内衬，让 PMT 收集到尽可能多的荧光信号；【2】全黑设计：打到墙壁上的光都统统吸收掉。这里讲的是高反设计【1】</p>
-<ul>
-<li>原理：
-<ul>
-<li>在荧光分析中，我们不是要光“折射”，而是要光在气室里“均匀散射”，让探测器收集到尽可能多的荧光信号。</li>
-</ul>
-</li>
-<li>性能：
-<ul>
-<li>高纯度的烧结 PTFE （白色）在紫外波段的漫反射率可以达到 95% - 99%，远高于任何金属镀层。</li>
-</ul>
-</li>
-<li>化学优势：
-<ul>
-<li>PTFE（特氟龙）本身就是“塑料王”，对 $SO_2, H_2S$ 等腐蚀性气体完全免疫，且不吸附，是 $SO_2$ 痕量分析的终极解决方案。</li>
-</ul>
-</li>
-</ul>
-<h4 id="功能需求镜面反射">功能需求：镜面反射
-</h4><p>适用场景： 需要光线像打在镜子上一样反射（如 NDUV 的反射镜、长光程池的端镜）。 推荐工艺： 真空蒸发镀铝 + 氟化镁 (MgF2) 保护膜</p>
-<ul>
-<li>为什么是铝？
-<ul>
-<li>铝是全波段的“万金油”，它是唯一在 紫外 ($200 - 400 nm$) 到红外都有极高反射率（&gt;90%）的金属。</li>
-</ul>
-</li>
-<li>为什么要加 MgF2？
-<ul>
-<li>铝极易氧化，<strong>氧化铝在紫外区的吸收很大</strong>。必须在镀铝后立刻镀一层极薄的氟化镁 ($MgF_2$)。它不仅防氧化，还能在紫外区起到“增透/增反”的光学干涉作用，把紫外反射率拉高到 90% 以上。</li>
-</ul>
-</li>
-<li>缺点：
-<ul>
-<li>这种镀层通常是在光学玻璃上做的，耐腐蚀性不如实体金属强。如果是直接接触高腐蚀性样气，通常会把反射镜做在密封窗片（Window）的后面，不让它直接接触气体。</li>
-</ul>
-</li>
-</ul>
-<h4 id="总结建议表">总结建议表
-</h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>分析仪类型</th>
-          <th>波段</th>
-          <th>气室/部件功能</th>
-          <th>绝对禁止</th>
-          <th>推荐工艺</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>红外 (NDIR)</td>
-          <td>IR</td>
-          <td>反射光线</td>
-          <td>阳极氧化铝 (吸红外)</td>
-          <td>镀金 (Gold Plating)</td>
-      </tr>
-      <tr>
-          <td>紫外 (NDUV)</td>
-          <td>UV</td>
-          <td>镜面反射光路</td>
-          <td>镀金、镀银</td>
-          <td>镀铝 + $MgF_2$</td>
-      </tr>
-      <tr>
-          <td>紫外荧光 ($SO_2$)</td>
-          <td>UV</td>
-          <td>收集散射光信号</td>
-          <td>黑色阳极氧化</td>
-          <td>PTFE (烧结/涂层)</td>
-      </tr>
-      <tr>
-          <td>通用流路</td>
-          <td>-</td>
-          <td>仅传输气体，防腐</td>
-          <td>普通电镀镍</td>
-          <td>高磷化学镍 / 硅钝化</td>
-      </tr>
-  </tbody>
-</table></div>
 
 </section>
 
