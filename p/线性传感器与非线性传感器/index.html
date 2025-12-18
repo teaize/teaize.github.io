@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="">
-<title>带载启动</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 氧化锆氧传感器、流量计校准算法 和 一次多项式拟合 后，通过这三篇的学习，了解到在仪器仪表算法设计（例如校准算法）的核心逻辑上，物理现象与数学模型需要对应。\n">
+<title>线性传感器与非线性传感器</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E7%BA%BF%E6%80%A7%E4%BC%A0%E6%84%9F%E5%99%A8%E4%B8%8E%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%A0%E6%84%9F%E5%99%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="带载启动">
-<meta property='og:description' content="">
-<meta property='og:url' content='https://teaize.github.io/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="线性传感器与非线性传感器">
+<meta property='og:description' content="本篇继 氧化锆氧传感器、流量计校准算法 和 一次多项式拟合 后，通过这三篇的学习，了解到在仪器仪表算法设计（例如校准算法）的核心逻辑上，物理现象与数学模型需要对应。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E7%BA%BF%E6%80%A7%E4%BC%A0%E6%84%9F%E5%99%A8%E4%B8%8E%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%A0%E6%84%9F%E5%99%A8/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-16T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="带载启动">
-<meta name="twitter:description" content="">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-18T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="线性传感器与非线性传感器">
+<meta name="twitter:description" content="本篇继 氧化锆氧传感器、流量计校准算法 和 一次多项式拟合 后，通过这三篇的学习，了解到在仪器仪表算法设计（例如校准算法）的核心逻辑上，物理现象与数学模型需要对应。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,7 +273,45 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-线性传感器两个独立的物理旋钮-b-和-k">1. 线性传感器：两个独立的物理旋钮 ($b$ 和 $k$)</a></li>
+        <li><a href="#2-非线性传感器增加了第三个旋钮-a">2. 非线性传感器：增加了第三个旋钮 ($a$)</a></li>
+        <li><a href="#3-为什么非线性传感器需要最小二乘法多项式拟合">3. 为什么非线性传感器需要“最小二乘法多项式拟合”？</a></li>
+        <li><a href="#总结">总结</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -284,7 +322,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%B8%A6%E8%BD%BD%E5%90%AF%E5%8A%A8/">带载启动</a>
+            <a href="/p/%E7%BA%BF%E6%80%A7%E4%BC%A0%E6%84%9F%E5%99%A8%E4%B8%8E%E9%9D%9E%E7%BA%BF%E6%80%A7%E4%BC%A0%E6%84%9F%E5%99%A8/">线性传感器与非线性传感器</a>
         </h2>
     
         
@@ -306,7 +344,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-16</time>
+                <time class="article-time--published">2025-12-18</time>
             </div>
         
 
@@ -322,7 +360,99 @@
     <section class="article-content">
     
     
-    
+    <p>本篇继 <a class="link" href="https://teaize.github.io/p/%E6%B0%A7%E5%8C%96%E9%94%86%E6%B0%A7%E4%BC%A0%E6%84%9F%E5%99%A8/#%E4%BC%A0%E6%84%9F%E5%99%A8%E7%BA%BF%E6%80%A7%E5%85%B3%E7%B3%BB"  target="_blank" rel="noopener"
+    >氧化锆氧传感器</a>、<a class="link" href="https://teaize.github.io/p/%E6%B5%81%E9%87%8F%E8%AE%A1%E6%A0%A1%E5%87%86%E7%AE%97%E6%B3%95/"  target="_blank" rel="noopener"
+    >流量计校准算法</a> 和 <a class="link" href="https://teaize.github.io/p/%E4%B8%80%E6%AC%A1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8B%9F%E5%90%88/"  target="_blank" rel="noopener"
+    >一次多项式拟合</a> 后，通过这三篇的学习，了解到在仪器仪表算法设计（例如校准算法）的核心逻辑上，<strong>物理现象</strong>与<strong>数学模型</strong>需要对应。</p>
+<p>为了更深入地理解这个概念，我们可以把这三个参数（$c, b, a$）【最小二乘法多项式，$y = ax^2 + bx + c$】想象成控制一条曲线形状的三个“物理旋钮”：</p>
+<h3 id="1-线性传感器两个独立的物理旋钮-b-和-k">1. 线性传感器：两个独立的物理旋钮 ($b$ 和 $k$)
+</h3><p>对于大多数分析仪（如 $\text{SO}_2$, $\text{NO}_x$）或压力/温度变送器，理想情况下它们是线性的。</p>
+<ul>
+<li>旋钮 1：截距 $b$ (Zero / Offset)**
+<ul>
+<li>物理含义：<strong>零点漂移</strong>。</li>
+<li>物理来源：背景噪声、暗电流、零气不纯、温度引起的基线波动。</li>
+<li>数学作用：<strong>平移 (Translation)</strong>。</li>
+<li>操作：把整条线向上或向下移动，不改变倾斜角度。</li>
+<li>校准：通零气，修改 $b$。</li>
+</ul>
+</li>
+<li>旋钮 2：斜率 $k$ (Span / Gain)**
+<ul>
+<li>物理含义：<strong>灵敏度漂移</strong>。</li>
+<li>物理来源：光源老化（能量减弱）、检测器效率下降、光路受污染、气体室透镜变脏。</li>
+<li>数学作用：<strong>旋转 (Rotation)</strong>。</li>
+<li>操作：以零点为轴心，把线的尾巴抬高或按低。</li>
+<li>校准：通标气，修改 $k$。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>结论</strong>：因为这两个物理过程（比如“背景噪声大”和“灯泡变暗”）通常是不相关的，所以我们可以分别独立校准零点和量程。</p>
+</blockquote>
+<h3 id="2-非线性传感器增加了第三个旋钮-a">2. 非线性传感器：增加了第三个旋钮 ($a$)
+</h3><p>对于热式流量计（MFC）、NDIR（非分光红外）气体传感器、热电偶等，<strong>物理定律本身决定了它们不是直的</strong>。</p>
+<p>此时我们引入二次项：$y = ax^2 + bx + c$。</p>
+<ul>
+<li>旋钮 3：曲率系数 $a$ (Linearity / Curvature)
+<ul>
+<li>物理含义：<strong>非线性程度</strong>（弯曲的厉害程度）。</li>
+<li>物理来源：
+<ul>
+<li>热式流量计：King&rsquo;s Law 中的指数效应（散热速率随流量增加而变慢）。</li>
+<li>光学传感器：Beer-Lambert Law 在高浓度下的“吸光度饱和”效应（光被吸光了，浓度再高信号也变不了多少）。</li>
+</ul>
+</li>
+<li>数学作用：<strong>弯曲 (Bending)</strong>。</li>
+<li>操作：控制曲线是开口向上（像碗）还是开口向下（像拱桥），以及弯得有多急。</li>
+</ul>
+</li>
+</ul>
+<h3 id="3-为什么非线性传感器需要最小二乘法多项式拟合">3. 为什么非线性传感器需要“最小二乘法多项式拟合”？
+</h3><p>这就回到了你提到的点：<strong>因为这时候，$b$ 和 $k$ 已经不够用了</strong>。</p>
+<p>如果你强行用直尺（线性方程）去量一个弯曲的彩虹（非线性数据）：</p>
+<ol>
+<li>你调整 $b$（平移直尺），中间碰到了，两头翘起来。</li>
+<li>你调整 $k$（旋转直尺），头尾碰到了，中间空了一大块。</li>
+</ol>
+<p>只有引入 $ax^2$（多项式拟合），你手里的“直尺”变成了一根“软尺”，你才能把它弯曲，完美贴合传感器真实的物理曲线。</p>
+<h3 id="总结">总结
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>数学参数</strong></th>
+          <th><strong>几何动作</strong></th>
+          <th><strong>对应物理概念</strong></th>
+          <th><strong>典型故障原因</strong></th>
+          <th><strong>适用算法</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>$b$ (常数项)</strong></td>
+          <td>↕️ 上下平移</td>
+          <td><strong>零点 (Zero)</strong></td>
+          <td>电子噪声、温度漂移</td>
+          <td>简单的加减法 / 线性回归</td>
+      </tr>
+      <tr>
+          <td><strong>$k$ (一次项)</strong></td>
+          <td>🔄 旋转角度</td>
+          <td><strong>量程/灵敏度 (Span)</strong></td>
+          <td>光源老化、探头污染</td>
+          <td>比例运算 / 线性回归</td>
+      </tr>
+      <tr>
+          <td><strong>$a$ (二次项)</strong></td>
+          <td>⤵️ 弯曲程度</td>
+          <td><strong>线性度 (Linearity)</strong></td>
+          <td>物理原理饱和、散热非线性</td>
+          <td><strong>最小二乘法多项式拟合</strong></td>
+      </tr>
+  </tbody>
+</table></div>
+<p>所以说，算法的选择，本质上是对物理现象复杂度的妥协与匹配</p>
+
 </section>
 
 
