@@ -8,6 +8,73 @@
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
         <lastBuildDate>Thu, 18 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>流量计校准算法</title>
+        <link>https://teaize.github.io/p/%E6%B5%81%E9%87%8F%E8%AE%A1%E6%A0%A1%E5%87%86%E7%AE%97%E6%B3%95/</link>
+        <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B5%81%E9%87%8F%E8%AE%A1%E6%A0%A1%E5%87%86%E7%AE%97%E6%B3%95/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;例如我有一个未校准过的流量计和一个校准过的流量计，通过通讯，让未校准过的流量计输出 500ml 气体，当然真是输出可能并非 500ml。此时校准过的流量计显示 480ml，那么可以未这个未校准过的流量计提供一个参考值。依此类推，500ml、1000ml、2500ml 等等这些点校准过的流量计都给出一个参考值。然后通过这些点位的参考值，可以给未校准过的流量计计算出校准系数。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;这是工业仪表（特别是 &lt;strong&gt;MFC 质量流量控制器&lt;/strong&gt; 或 &lt;strong&gt;气体稀释仪/配气仪&lt;/strong&gt;）中非常标准的“多点标定” (Multi-point Calibration) 或 “线性化” (Linearization) 过程。这个过程通常分为三个步骤：&lt;strong&gt;数据采集&lt;/strong&gt;、&lt;strong&gt;模型拟合&lt;/strong&gt;、&lt;strong&gt;校准应用&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;第一步数据模型定义&#34;&gt;第一步：数据模型定义
+&lt;/h3&gt;&lt;p&gt;我们定义两组数据序列：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;$X$ (未校准/原始值)&lt;/strong&gt;：你下发的设定值（Setpoint）或者仪表原始读数。
+&lt;ul&gt;
+&lt;li&gt;例如：$500, 1000, 2500$ mL/min&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;$Y$ (参考值/标准值)&lt;/strong&gt;：标准流量计测得的真实值。
+&lt;ul&gt;
+&lt;li&gt;例如：$480, 990, 2480$ mL/min&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;我们的目标是找到一个函数 $f(x)$，使得 $Y \approx f(X)$。之后在实际使用时，如果读到了 $X$，我们就用 $f(X)$ 计算出真实的 $Y$；或者如果你想输出真实的 $Y$，你需要反算出应该设定的 $X$。&lt;/p&gt;
+&lt;h3 id=&#34;第二步常用的三种算法实现&#34;&gt;第二步：常用的三种算法实现
+&lt;/h3&gt;&lt;p&gt;根据精度的要求和微处理器的计算能力，通常有以下三种方案：&lt;/p&gt;
+&lt;h4 id=&#34;方案一分段线性插值法--最常用最稳健&#34;&gt;方案一：分段线性插值法 —— 最常用、最稳健
+&lt;/h4&gt;&lt;p&gt;这是在嵌入式底层（如 STM32, GD32）中最常见的做法。它不追求一条完美的曲线，而是把相邻的两个校准点连成直线。&lt;/p&gt;
+&lt;p&gt;原理：假设当前流量处于两个校准点之间：$(x_i, y_i)$ 和 $(x_{i+1}, y_{i+1})$。对于任意一个输入 $x$（在 $x_i$ 和 $x_{i+1}$ 之间），校准后的值 $y$ 计算公式为：$$y = y_i + (x - x_i) \cdot \frac{y_{i+1} - y_i}{x_{i+1} - x_i}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优点：计算简单，CPU 负担小，不会出现高阶多项式拟合在端点处的“龙格现象”（震荡）。
+&lt;ul&gt;
+&lt;li&gt;龙格现象 (Runge&amp;rsquo;s Phenomenon) ：当你试图用&lt;strong&gt;过高阶数&lt;/strong&gt;的多项式去完美穿过每一个校准点时，虽然曲线在这些点上是准的，但在&lt;strong&gt;头尾两端&lt;/strong&gt;（边缘区域），曲线会发生剧烈的、完全不符合逻辑的&lt;strong&gt;震荡&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;缺点：在点与点之间是直线的，如果传感器非线性极强，需要更密集的校准点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方案二最小二乘法多项式拟合--精度更高&#34;&gt;方案二：最小二乘法多项式拟合 —— 精度更高
+&lt;/h4&gt;&lt;p&gt;如果你希望曲线更平滑，且校准点较多（例如 5-10 个点），可以使用多项式拟合。通常 2 次（抛物线） 或 &lt;strong&gt;3 次（S 型）&lt;/strong&gt; 多项式就足够了。&lt;/p&gt;
+&lt;p&gt;原理：假设校准方程为：$$y = ax^2 + bx + c$$
+通过最小二乘法算法（Least Squares），输入所有的 $(X, Y)$ 点对，计算出系数 $a, b, c$。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优点：全局平滑，&lt;strong&gt;对热式流量计这种非线性传感器效果很好&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;缺点：算法较复杂（涉及到矩阵运算），&lt;strong&gt;且如果校准点有误（坏点），会影响全局精度&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251218193659.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251218193659.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;如果存在坏点，例如输入 950 的时候输入成 95 了，拟合出来的直线会影响全局精度&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251218194428.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251218194428.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;方案三查表法-look-up-table&#34;&gt;方案三：查表法 (Look-up Table)
+&lt;/h4&gt;&lt;p&gt;这是方案一的简化版。如果不计算插值，而是建立一个巨大的数组（例如把 0-5000ml 分成 5000 个点），直接查表。但这太占内存，通常配合方案一使用。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>温度的陷阱</title>
         <link>https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/</link>
         <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
@@ -74,6 +141,118 @@
 &lt;li&gt;在 PD 旁边装一个温度传感器 $T_2$。&lt;/li&gt;
 &lt;li&gt;在软件里写死公式：$\text{最终结果} = \frac{S}{R} \times f(T_1) \times g(T_2)$。&lt;/li&gt;
 &lt;li&gt;让 CPU 实时计算并抵消温度带来的增益变化。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>一次多项式拟合</title>
+        <link>https://teaize.github.io/p/%E4%B8%80%E6%AC%A1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8B%9F%E5%90%88/</link>
+        <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%B8%80%E6%AC%A1%E5%A4%9A%E9%A1%B9%E5%BC%8F%E6%8B%9F%E5%90%88/</guid>
+        <description>&lt;p&gt;本篇继 [[流量计校准实现过程]]，这里学习&lt;strong&gt;一次多项式拟合&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;工业分析仪中常见的“零点校准”和“量程（满度）校准”，本质上就是只有两个样本点的“一次多项式拟合”（线性回归）。&lt;/p&gt;
+&lt;p&gt;数学上，这就是在解一个二元一次方程组，求出直线方程 $y = kx + b$ 中的两个参数：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$b$ (截距/Offset)：对应 零点 (Zero)。&lt;/li&gt;
+&lt;li&gt;$k$ (斜率/Slope)：对应 量程/灵敏度 (Span/Sensitivity)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;不过，虽然数学本质一样，但在&lt;strong&gt;工程实现&lt;/strong&gt;和&lt;strong&gt;操作逻辑&lt;/strong&gt;上，普通的“零点/量程校准”和标准的“最小二乘法”有一点微妙的区别。我来为你拆解一下：&lt;/p&gt;
+&lt;h3 id=&#34;1-数学本质确定解-vs-统计解&#34;&gt;1. 数学本质：确定解 vs. 统计解
+&lt;/h3&gt;&lt;h4 id=&#34;场景-a两点校准zero--span-钉钉子&#34;&gt;场景 A：两点校准（Zero &amp;amp; Span）—— “钉钉子”
+&lt;/h4&gt;&lt;p&gt;这是大多数分析仪（如 CEMS 中的 $\text{SO}_2, \text{NO}_x$ 分析仪）的做法。因为只有两个点（零气点、标气点），两点确定一条直线。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;步骤 1（通零气）： 输入 $x=0$，测得 $y_{raw}$。
+&lt;ul&gt;
+&lt;li&gt;直接算出截距 $b = 0 - y_{raw}$（或者将当前的读数强行置为 0）。&lt;/li&gt;
+&lt;li&gt;这就像把直线的起点用钉子钉死在原点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;步骤 2（通标气）： 输入 $x=Span$，测得 $y_{raw}$。
+&lt;ul&gt;
+&lt;li&gt;基于确定的 $b$，算出斜率 $k$。&lt;/li&gt;
+&lt;li&gt;这就像以零点为轴心，旋转这根线，直到它穿过标气点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结论：这是一个代数计算过程，算出来的线必须完美经过这两个点。误差为 0（在校准那一刻）。&lt;/p&gt;
+&lt;h4 id=&#34;场景-b最小二乘法least-squares-找平衡&#34;&gt;场景 B：最小二乘法（Least Squares）—— “找平衡”
+&lt;/h4&gt;&lt;p&gt;这是你在配气仪或高精度流量计中用的方法（点数 $N &amp;gt; 2$）。如果你通了零气、20% 浓度、50% 浓度、80% 浓度、100% 浓度。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直线可能&lt;strong&gt;不会&lt;/strong&gt;完美穿过零点，也不会完美穿过 100% 点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;它是一条“妥协”的线，试图让所有点的综合误差最小&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么工业分析仪偏爱零点--量程而不是多点拟合&#34;&gt;为什么工业分析仪偏爱“零点 + 量程”而不是“多点拟合”
+&lt;/h3&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251218211422881.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251218211422881.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;既然多点拟合更准，为什么像西门子、赛默飞这些分析仪平时维护只做 Zero/Span？&lt;/p&gt;
+&lt;h4 id=&#34;原因一漂移的物理意义不同&#34;&gt;原因一：漂移的物理意义不同
+&lt;/h4&gt;&lt;p&gt;在传感器领域，误差通常&lt;strong&gt;来源于两个独立的物理现象&lt;/strong&gt;，正好对应 $b$ 和 $k$：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;零点漂移 (Zero Drift) $\rightarrow b$ 的变化
+&lt;ul&gt;
+&lt;li&gt;物理原因：电子元器件的热噪声、光电倍增管（PMT）的暗电流、背景光的干扰。&lt;/li&gt;
+&lt;li&gt;特点：它是一个叠加在所有读数上的固定值。&lt;/li&gt;
+&lt;li&gt;对策：只要每天通一次零气，把这个“底色”扣掉就行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;量程漂移 (Span Drift) $\rightarrow k$ 的变化
+&lt;ul&gt;
+&lt;li&gt;物理原因：紫外灯老化光强减弱、气体室镜片脏了、检测器灵敏度下降。&lt;/li&gt;
+&lt;li&gt;特点：它影响的是变化的比例。&lt;/li&gt;
+&lt;li&gt;对策：通入高浓度标气，重新计算放大倍数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;因为这两种漂移的机理不同，所以在仪表软件里，通常允许&lt;strong&gt;独立校准&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你可以只做零点校准（修正 $b$），而不动斜率 $k$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;这在最小二乘法里很难做到，因为一旦重新拟合，$k$ 和 $b$ 通常都会变&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;原因二法规与成本&#34;&gt;原因二：法规与成本
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;成本：做多点线性化（Linearization）需要购买不同浓度的标气，或者使用昂贵的配气仪。&lt;/li&gt;
+&lt;li&gt;法规：如果每天都要做 5 点校准，运维人员会疯掉，标气成本也受不了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;模型的选择&#34;&gt;模型的选择
+&lt;/h3&gt;&lt;p&gt;如上所说，在常见的线性传感器领域，误差通常来源于两个独立的物理现象，正好对应 $b$ 和 $k$。对于非线性传感器，可能就需要选择二次多项式拟合（如 [[流量计校准实现过程]] 中所说的&lt;strong&gt;最小二乘法多项式拟合&lt;/strong&gt;）&lt;/p&gt;
+&lt;h4 id=&#34;1物理原理金氏定律&#34;&gt;1、物理原理：金氏定律
+&lt;/h4&gt;&lt;p&gt;热式流量计的核心原理是测量气体带走热量的速度。描述这一物理过程的经典公式是 &lt;strong&gt;King&amp;rsquo;s Law（金氏定律）&lt;/strong&gt;：$$P = I^2 R = A + B \cdot (Q)^n$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$P$：加热功率（对应传感器的输出电压或电桥电压 $V$）。&lt;/li&gt;
+&lt;li&gt;$Q$：质量流量。&lt;/li&gt;
+&lt;li&gt;$n$：指数常数，通常在 0.4 ~ 0.5 之间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;这意味着什么？&lt;/strong&gt; 这意味着传感器输出的电压 $V$ 和流量 $Q$ 之间，&lt;strong&gt;根本不是直线关系&lt;/strong&gt;，而是一个类似于 “根号曲线” 或 “对数曲线” 的关系。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在小流量区：散热极快，电压变化非常剧烈（灵敏度极高，曲线很陡）。&lt;/li&gt;
+&lt;li&gt;在大流量区：散热趋于饱和，电压变化变慢（灵敏度下降，曲线变平缓）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你强行用一条直线（一次方程）去拟合这种“前陡后平”的物理曲线，误差会非常大——要么小流量测不准，要么大流量偏差巨大。&lt;/p&gt;
+&lt;h4 id=&#34;2数学特性泰勒级数展开&#34;&gt;2、数学特性：泰勒级数展开
+&lt;/h4&gt;&lt;p&gt;虽然 King&amp;rsquo;s Law 是指数关系，但在数学上，&lt;strong&gt;任何光滑的非线性函数，都可以在局部范围内展开成多项式（泰勒级数）&lt;/strong&gt;。$$f(x) \approx a_0 + a_1x + a_2x^2 + a_3x^3 + \dots$$
+对于热式流量计这种单调变化（不回头、不震荡）的曲线，&lt;strong&gt;二次（$x^2$）或三次（$x^3$）多项式&lt;/strong&gt; 恰好能完美地模拟由于指数 $n$ 带来的弯曲度。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二次项 ($ax^2$)：提供了曲线的“弯曲方向”，让拟合线能顺着金氏定律的趋势“弯”过去。&lt;/li&gt;
+&lt;li&gt;最小二乘法：能够在这个弯曲的过程中，让所有标定点的整体误差（均方差）最小，自动平衡高低流量段的偏差。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3工程需求宽量程比-high-turndown-ratio&#34;&gt;3、工程需求：宽量程比 (High Turndown Ratio)
+&lt;/h4&gt;&lt;p&gt;热式流量计的一个显著优点是&lt;strong&gt;量程比极宽&lt;/strong&gt;，通常能达到 &lt;strong&gt;100:1&lt;/strong&gt; 甚至更高（例如能测 5000 mL/min，也能测 50 mL/min）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;线性拟合的死穴：在 100:1 的宽量程下，直线完全无法兼顾首尾。&lt;/li&gt;
+&lt;li&gt;多项式拟合的优势：
+&lt;ul&gt;
+&lt;li&gt;它允许&lt;strong&gt;变斜率&lt;/strong&gt;（Variable Slope）。&lt;/li&gt;
+&lt;li&gt;在低端，多项式的切线斜率大，匹配高灵敏度。&lt;/li&gt;
+&lt;li&gt;在高端，多项式的切线斜率小，匹配饱和区。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
