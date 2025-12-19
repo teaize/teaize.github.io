@@ -7,7 +7,372 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 18 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 19 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>适用性检测</title>
+        <link>https://teaize.github.io/p/%E9%80%82%E7%94%A8%E6%80%A7%E6%A3%80%E6%B5%8B/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%80%82%E7%94%A8%E6%80%A7%E6%A3%80%E6%B5%8B/</guid>
+        <description>&lt;p&gt;在 HJ 76-2017 固定污染源烟气（SO2、NOX、颗粒物）排放连续监测系统技术要求及检测方法 标准中，要求进行，要求进行“供电电压变化的影响”等的测试，这实际上是属于&lt;strong&gt;型式核准&lt;/strong&gt;（Type Approval）或者&lt;strong&gt;适用性检测&lt;/strong&gt;的一部分&lt;/p&gt;
+&lt;p&gt;这里以“供电电压变化的影响”为例，为了验证仪器在恶劣的工业现场供电环境下，是否还能保持数据的准确性&lt;/p&gt;
+&lt;h3 id=&#34;一-为什么要这么做&#34;&gt;一、 为什么要这么做
+&lt;/h3&gt;&lt;p&gt;分析仪器（CEMS）通常安装在电厂、化工厂、水泥厂等工业现场。这些环境的供电系统与实验室完全不同，进行电压变化测试主要基于以下三个原因：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;模拟工业现场的“脏电”环境
+&lt;ul&gt;
+&lt;li&gt;电压波动是常态： 工业现场通常会有大型电机、变频器、压缩机等大功率设备的频繁启停。这会导致电网电压瞬间跌落（Sags）或浪涌（Swells）&lt;/li&gt;
+&lt;li&gt;测试目的： 确保当现场电压在 $220V \pm 10%$（即 198V~242V）范围内波动时，仪器依然能给出准确读数，而不是直接报警、死机或者读数漂移&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;考验仪器内部电源（PSU）的“线性调整率”
+&lt;ul&gt;
+&lt;li&gt;绝大多数现代分析仪内部都有开关电源（SMPS），将 220V AC 转变为 24V、12V、5V DC。理想情况下无论输入是 190V 还是 240V，输出都应该是稳定的 DC 电压。&lt;/li&gt;
+&lt;li&gt;测试目的： 验证仪器内部电源模块的线性调整率 (Line Regulation) 是否合格&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;保护核心敏感器件
+&lt;ul&gt;
+&lt;li&gt;分析仪中有几个部件对电压极其敏感，如果内部稳压做不好，直接影响测量值，例如光源、探测器、温控系统等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;以“供电电压变化的影响”为例，这其实是一个全球通用的仪器性能指标，不过在不同的认证体系下，称呼和具体要求略有不同&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;欧盟（EU）：EN 15267-3 (最严格)&lt;/li&gt;
+&lt;li&gt;美国（US EPA）：40 CFR Part 60/75&lt;/li&gt;
+&lt;li&gt;日本（JIS）：JIS B 7981 / 7982&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;鲁棒性设计&#34;&gt;鲁棒性设计
+&lt;/h3&gt;&lt;p&gt;除了“供电电压变化的影响”之外，还包括进样流量、环境温度、振动、电压波动等等对输出的影响。从工程设计层面上考虑，这其实是鲁棒性设计的一种体现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;含义： “鲁棒”是英文 Robust 的音译，原意是强壮、结实。在控制理论和系统工程中，它指的是&lt;strong&gt;一个系统在面临内部结构的不确定性或外部环境的干扰时，仍能保持其性能（如稳定性、准确性）维持在可接受范围内的能力。&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;你的例子：
+&lt;ul&gt;
+&lt;li&gt;理想的仪器：读数 = f(气体浓度)。&lt;/li&gt;
+&lt;li&gt;实际的仪器：读数 = f(气体浓度，&lt;strong&gt;电压&lt;/strong&gt;，&lt;strong&gt;温度&lt;/strong&gt;，&lt;strong&gt;流量&lt;/strong&gt;，&lt;strong&gt;振动&lt;/strong&gt;…)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;思维核心：&lt;/strong&gt; 我们无法消除环境中的电压波动或温度变化（无法消除干扰源），但我们可以通过设计，使得系统对这些变化**“不敏感”**（Insensitive）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;通俗比喻：&lt;/strong&gt; 一个身体素质好的人（鲁棒性强），不管是下雨（电压低）、刮风（流量变）、还是气温骤降（环境温度变），他都能照常跑步，速度不会变慢。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>系统思维</title>
+        <link>https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/</guid>
+        <description>&lt;p&gt;考虑三个维度：系统稳定性、测量纯度、架构设计&lt;/p&gt;
+&lt;h3 id=&#34;第一维度关于稳--系统的生存能力&#34;&gt;第一维度：关于“稳” —— 系统的生存能力
+&lt;/h3&gt;&lt;p&gt;这一层的概念和“鲁棒性”最接近，关注系统在极端或故障条件下的表现。&lt;/p&gt;
+&lt;h4 id=&#34;冗余-redundancy&#34;&gt;冗余 (Redundancy)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 为了提高可靠性，故意多配置一套组件。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;热备（Hot Standby）： 比如工控机双硬盘备份，或者采样泵“一用一备”。一旦主泵坏了，备用泵 0 秒自动切入，数据不中断。&lt;/li&gt;
+&lt;li&gt;架构思考： 用空间（多余的硬件）换时间（无故障运行时间）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;容错-fault-tolerance&#34;&gt;容错 (Fault Tolerance)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 当系统出现部分故障时，仍能继续运行（哪怕性能降级），而不会直接死机或崩溃。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;伴热管线某一段温度传感器坏了，系统不应该直接停机，而是应该报警并根据历史电流估算温度，维持基本的防冷凝功能，直到维修人员到达。&lt;/li&gt;
+&lt;li&gt;架构思考： 承认故障是不可避免的，重点在于故障隔离和降级运行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;失效安全-failsafe&#34;&gt;失效安全 (Failsafe)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 如果系统彻底坏了，它必须处于一个“安全”的状态，不能造成更大的破坏。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;如果探头反吹电磁阀突然断电（失效），阀门必须设计成自动关闭（常闭型），防止压缩空气无限制吹入烟道，或者防止烟气倒灌进仪表柜。&lt;/li&gt;
+&lt;li&gt;架构思考： 设计的底线思维，考虑“死法”是否安全。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第二维度关于准--数据的纯净度&#34;&gt;第二维度：关于“准” —— 数据的纯净度
+&lt;/h3&gt;&lt;p&gt;这一层的概念关注如何从干扰中提取真实信号，是对抗“影响量”的具体手段。&lt;/p&gt;
+&lt;h4 id=&#34;补偿-compensation&#34;&gt;补偿 (Compensation)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 既然无法消除干扰（温度、压力变化），那就通过算法把偏差“算回来”。这是对抗灵敏度的核心手段。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;P/T 补偿： 测量气体浓度时，必须同时测温度 (T) 和压力 (P)，通过公式 $C_{std} = C_{meas} \times \frac{P}{P_0} \times \frac{T_0}{T}$ 把工况浓度折算成标况浓度。&lt;/li&gt;
+&lt;li&gt;交叉干扰补偿： 比如测 CO 时，水蒸气 (H2O) 会有干扰。通过同时测 H2O 含量，在 CO 读数中减去水的贡献值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;迟滞-hysteresis&#34;&gt;迟滞 (Hysteresis)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 输入量从小变大，和从大变小，经过同一个点时，读数不一样。也就是系统的“记忆效应”。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;吸附效应： 测 NH3（氨逃逸）或 HCl 时最明显。通气校准时读数上去很快，停止通气后读数下来很慢（管路吸附了气体）。如果迟滞太大，说明采样系统管壁材料选型错误（如没用特氟龙或不锈钢钝化）。&lt;/li&gt;
+&lt;li&gt;架构思考： 系统对历史状态的依赖程度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;信噪比-snr---signal-to-noise-ratio&#34;&gt;信噪比 (SNR - Signal-to-Noise Ratio)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 有用的信号（S）与无用的背景噪声（N）的比值。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;在超低排放（如 SO2 &amp;lt; 35mg/m3）监测中，最大的敌人不是非线性，而是噪声。如果电压波动导致光源闪烁，就会产生噪声。&lt;/li&gt;
+&lt;li&gt;架构思考： 提高精度的两条路：要么增强信号（更强的激光、更长的光程），要么压制噪声（滤波算法、硬件屏蔽）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三维度关于结构--系统的组织方式&#34;&gt;第三维度：关于“结构” —— 系统的组织方式
+&lt;/h3&gt;&lt;p&gt;这一层的概念决定了仪器好不好用、好不好修。&lt;/p&gt;
+&lt;h4 id=&#34;模块化-modularity&#34;&gt;模块化 (Modularity)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 将系统拆分成独立的、功能单一的积木块，通过标准接口连接。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;好的 CEMS 分析仪，光源、气室、检测器、电路板都是独立的模块。&lt;/li&gt;
+&lt;li&gt;优点： 现场维修不需要懂原理，坏哪块换哪块（FRU - Field Replaceable Unit）。&lt;/li&gt;
+&lt;li&gt;架构思考： 高内聚，低耦合。让电压波动的影响只局限在电源模块，不要蔓延到信号处理模块。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;溯源性-traceability&#34;&gt;溯源性 (Traceability)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 你的测量结果，必须能通过一条不间断的链条，追溯到国家基准或国际基准。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;为什么要做标气校准？因为标气是标准物质（CRM）。&lt;/li&gt;
+&lt;li&gt;链条： 现场仪器 -&amp;gt; 标气 -&amp;gt; 国家一级标准物质 -&amp;gt; 国际单位制 (SI)。&lt;/li&gt;
+&lt;li&gt;架构思考： 数据的“血统证明”。没有溯源性的数据，在法律上是无效的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;可用性-availability--data-capture-rate&#34;&gt;可用性 (Availability / Data Capture Rate)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;含义： 系统处于可工作状态的时间比例。&lt;/li&gt;
+&lt;li&gt;CEMS 应用：
+&lt;ul&gt;
+&lt;li&gt;环保法规要求 CEMS 的数据捕获率必须 $\ge 95%$。&lt;/li&gt;
+&lt;li&gt;这意味着你每天 calibration（校准）、backflush（反吹）、maintenance（维护）的时间加起来不能超过 1.2 小时。&lt;/li&gt;
+&lt;li&gt;架构思考： 设计不仅要考虑“准”，还要考虑“效率”。能不能一边测一边校准？反吹能不能更快？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  mindmap
+  root((CEMS仪器&lt;br/&gt;核心工程指标))
+    系统生存能力&lt;br/&gt;(Reliability)
+      鲁棒性 (Robustness)
+        ::icon(fa fa-shield-alt)
+        电压适应性
+        环境适应性
+      冗余 (Redundancy)
+        ::icon(fa fa-clone)
+        双泵设计
+        热备机
+      失效安全 (Failsafe)
+        ::icon(fa fa-exclamation-triangle)
+        断电自动关阀
+        故障报警
+    数据测量质量&lt;br/&gt;(Metrology)
+      准确性 (Accuracy)
+        ::icon(fa fa-bullseye)
+        信噪比 (SNR)
+        线性度
+      干扰消除
+        ::icon(fa fa-filter)
+        交叉干扰补偿
+        温度/压力补偿
+      溯源性 (Traceability)
+        ::icon(fa fa-link)
+        标气校准
+    系统架构设计&lt;br/&gt;(Architecture)
+      模块化 (Modularity)
+        ::icon(fa fa-cubes)
+        独立气室
+        易更换部件(FRU)
+      可用性 (Availability)
+        ::icon(fa fa-clock)
+        高数据捕获率
+        低维护频次
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;面对环境干扰（如电压、温度）： 我们追求 鲁棒性 (Robustness)。&lt;/li&gt;
+&lt;li&gt;面对内部误差（如漂移、干扰）： 我们利用 补偿 (Compensation) 和 校准 (Calibration)。&lt;/li&gt;
+&lt;li&gt;面对硬件故障（如泵坏、断电）： 我们依赖 冗余 (Redundancy) 和 失效安全 (Failsafe)。&lt;/li&gt;
+&lt;li&gt;面对系统维护（如维修、升级）： 我们强调 模块化 (Modularity)。&lt;/li&gt;
+&lt;li&gt;面对法律合规（如环保数据）： 我们保证 溯源性 (Traceability) 和 可用性 (Availability)&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>现场可更换单元</title>
+        <link>https://teaize.github.io/p/%E7%8E%B0%E5%9C%BA%E5%8F%AF%E6%9B%B4%E6%8D%A2%E5%8D%95%E5%85%83/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%8E%B0%E5%9C%BA%E5%8F%AF%E6%9B%B4%E6%8D%A2%E5%8D%95%E5%85%83/</guid>
+        <description>&lt;p&gt;本篇继 [[系统思维]]，学习 FRU (Field Replaceable Unit) 现场可更换单元&lt;/p&gt;
+&lt;h3 id=&#34;什么是-fru&#34;&gt;什么是 FRU
+&lt;/h3&gt;&lt;p&gt;简单来说，FRU 是指在不把整机拉回工厂的情况下，维修人员可以在现场通过“拔下来、插上去”的方式，快速修复设备故障的最小部件。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要设计-fru&#34;&gt;为什么要设计 FRU
+&lt;/h3&gt;&lt;p&gt;在 CEMS 领域，FRU 的设计逻辑是为了解决“维修时效性”和“人员技能落差”之间的矛盾。&lt;/p&gt;
+&lt;p&gt;场景模拟：假设大雪天的凌晨 2 点，电厂的 CEMS 分析仪坏了，主板上的一颗电容爆了。运维人员爬到了烟囱下的监测小屋。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有 FRU 的设计： 运维人员需要带上电烙铁、焊锡、万用表。他需要懂电路原理，找到那个坏掉的电容，在光线昏暗、手冻得发抖的情况下，把坏电容焊下来，换个新的上去。
+&lt;ul&gt;
+&lt;li&gt;结果：维修失败率极高，耗时几小时，甚至损坏电路板其他部分。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;有 FRU 的设计： 运维人员只需要判断：“哦，是主控板坏了。” 他不需要知道板子上哪个元件坏了，他只需要拧下 4 颗螺丝，拔掉排线，把整块主控板（这就是一个 FRU） 换下来，换上一块新的，插好线，上电，故障排除。
+&lt;ul&gt;
+&lt;li&gt;结果： 维修耗时 10 分钟，不需要懂电路原理，只要会拧螺丝。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;cems-中常见的-fru-例子&#34;&gt;CEMS 中常见的 FRU 例子
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;FRU 类型&lt;/th&gt;
+          &lt;th&gt;具体部件例子&lt;/th&gt;
+          &lt;th&gt;维修动作&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;电子类&lt;/td&gt;
+          &lt;td&gt;PCB 主板、电源模块&lt;/td&gt;
+          &lt;td&gt;拔插接插件、拧螺丝。严禁现场焊接。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;机械类&lt;/td&gt;
+          &lt;td&gt;采样泵组件&lt;/td&gt;
+          &lt;td&gt;当泵膜破裂时，通常更换整个泵头或泵体，而不是去修泵里的连杆。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;光学类&lt;/td&gt;
+          &lt;td&gt;光源组件&lt;/td&gt;
+          &lt;td&gt;氙灯或紫外灯通常预装在一个带有定位销的底座上。更换时不需要重新调光路，插进去就是准的。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;传感器类&lt;/td&gt;
+          &lt;td&gt;氧电池、湿度传感器&lt;/td&gt;
+          &lt;td&gt;也是标准的 FRU，通常设计为旋转卡扣式或直插式。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;消耗品类&lt;/td&gt;
+          &lt;td&gt;滤芯、蠕动泵管&lt;/td&gt;
+          &lt;td&gt;这是最高频更换的 FRU。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;一个优秀的-fru-必须具备的特征&#34;&gt;一个优秀的 FRU 必须具备的特征
+&lt;/h3&gt;&lt;p&gt;如果你正在参与研发，或者你在选型仪器，你要看它的 FRU 设计好不好，主要看这三点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;免焊接、&lt;strong&gt;免特殊工具&lt;/strong&gt; (Tool-free / Min-tools)： 连接必须用端子排、航空插头、排线。如果要动用电烙铁，它就不叫 FRU。&lt;/li&gt;
+&lt;li&gt;防呆设计 (Fool-proof)：
+&lt;ul&gt;
+&lt;li&gt;比如： 电源接口和信号接口大小不一样，防止插反。&lt;/li&gt;
+&lt;li&gt;比如： 带有导向销，插反了根本推不进去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;最小化校准 (Minimal Calibration)：
+&lt;ul&gt;
+&lt;li&gt;最好的 FRU 换上去就能用。&lt;/li&gt;
+&lt;li&gt;次好的： 换上去后，做一个简单的零点/量程校准（Zero/Span）即可。&lt;/li&gt;
+&lt;li&gt;差的设计： 换了一个模块，需要用示波器重新调波形，这在现场是不可接受的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;拓展知识-sru-vs-fru&#34;&gt;拓展知识 SRU vs FRU
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;FRU (Field Replaceable Unit - 现场可更换): 在现场换下来的板子（坏板），运维人员带回公司。&lt;/li&gt;
+&lt;li&gt;SRU (Shop Replaceable Unit - 车间可更换): 带回公司的坏板，由工程师在维修车间里进行检测，发现是板子上的一个芯片坏了。这个芯片就是 SRU。工程师把芯片换好，这块板子就修好了，又变成了一个好用的 FRU，放入备件库。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>型式核准</title>
+        <link>https://teaize.github.io/p/%E5%9E%8B%E5%BC%8F%E6%A0%B8%E5%87%86/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%9E%8B%E5%BC%8F%E6%A0%B8%E5%87%86/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;型式核准&lt;/strong&gt;（Pattern Approval / Type Approval），全称为&lt;strong&gt;计量器具型式批准&lt;/strong&gt;，在行业内通常简称为 &lt;strong&gt;CPA&lt;/strong&gt; (China Pattern Approval)。&lt;/p&gt;
+&lt;h3 id=&#34;1-核心定义&#34;&gt;1. 核心定义
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;型式核准是中国政府对计量器具的一种行政许可（牌照）制度&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通俗理解： 就像汽车上市前必须通过“碰撞测试”并拿到工信部的准入许可一样，你的 CEMS 分析仪在市场上销售之前，必须先证明这款机器“设计是合理的”、“测得是准的”、“长期是稳定的”。&lt;/li&gt;
+&lt;li&gt;法律依据： 《中华人民共和国计量法》。凡是列入《实施强制管理的计量器具目录》的产品，只要在中国境内制造、销售、进口，都必须取得型式批准证书。&lt;/li&gt;
+&lt;li&gt;标志： 拿到证书后，&lt;strong&gt;仪器铭牌上会印有一个 CPA 标志（一个圆圈里面包着 CPA 三个字母）&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-它测什么&#34;&gt;2. 它测什么
+&lt;/h3&gt;&lt;p&gt;型式核准的核心环节叫&lt;strong&gt;型式评价（Pattern Evaluation）&lt;/strong&gt;。这不仅是测一下精度，而是对仪器进行“全身体检”和“极限压力测试”。&lt;/p&gt;
+&lt;p&gt;型式评价通常包含：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;计量性能： 准确度、重复性、线性误差、响应时间等。&lt;/li&gt;
+&lt;li&gt;环境适应性：
+&lt;ul&gt;
+&lt;li&gt;电压波动： 220V $\pm 10%$（正如你刚才关注的）。&lt;/li&gt;
+&lt;li&gt;温度影响： 在高温（如 40℃）和低温（如 5℃）下，仪器还能准吗？&lt;/li&gt;
+&lt;li&gt;绝缘强度： 打高压电会不会击穿？&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;抗干扰能力： 电磁兼容（EMC）测试，比如抗静电、抗雷击浪涌、抗射频干扰。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;cems-领域的双重门槛cpa-vs-ccep&#34;&gt;CEMS 领域的“双重门槛”：CPA vs CCEP
+&lt;/h3&gt;&lt;p&gt;做 CEMS 的人经常混淆这两个概念，因为它们都要做测试，而且很多测试项目（如电压影响）是重合的。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;比较维度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;CPA (型式核准)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;CCEP (环保产品认证)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;全称&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;计量器具型式批准证书&lt;/td&gt;
+          &lt;td&gt;中国环境保护产品认证证书&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;主管部门&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;市场监督管理局&lt;/strong&gt; (计量口)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;中环协&lt;/strong&gt; (环保口)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;依据标准&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;计量检定规程 (如 JJG 968)&lt;/td&gt;
+          &lt;td&gt;环保标准 (如 &lt;strong&gt;HJ 76&lt;/strong&gt;)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;性质&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;强制性行政许可&lt;/strong&gt; (法律底线)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;自愿性产品认证&lt;/strong&gt; (市场门槛)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;地位&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;准生证&lt;/strong&gt;：没它不能生产销售&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;通行证&lt;/strong&gt;：没它几乎投不了标&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;关注点&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;量值溯源&lt;/strong&gt;：机器本身准不准&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;适用性&lt;/strong&gt;：系统在现场好不好用&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;型式核准就是国家确认你这款仪器“基因优良、抗造耐用”的官方证明。在 HJ 76 里看到的那些看似苛刻的电压、温度测试，其实就是为了通过这个核准而设立的硬性指标&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>流量计校准算法</title>
         <link>https://teaize.github.io/p/%E6%B5%81%E9%87%8F%E8%AE%A1%E6%A0%A1%E5%87%86%E7%AE%97%E6%B3%95/</link>
         <pubDate>Thu, 18 Dec 2025 00:00:00 +0000</pubDate>
@@ -158,7 +523,7 @@
 &lt;h3 id=&#34;1-线性传感器两个独立的物理旋钮-b-和-k&#34;&gt;1. 线性传感器：两个独立的物理旋钮 ($b$ 和 $k$)
 &lt;/h3&gt;&lt;p&gt;对于大多数分析仪（如 $\text{SO}_2$, $\text{NO}_x$）或压力/温度变送器，理想情况下它们是线性的。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;旋钮 1：截距 $b$ (Zero / Offset)**
+&lt;li&gt;旋钮 1：截距 $b$ (Zero / Offset)
 &lt;ul&gt;
 &lt;li&gt;物理含义：&lt;strong&gt;零点漂移&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;物理来源：背景噪声、暗电流、零气不纯、温度引起的基线波动。&lt;/li&gt;
@@ -167,7 +532,7 @@
 &lt;li&gt;校准：通零气，修改 $b$。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;旋钮 2：斜率 $k$ (Span / Gain)**
+&lt;li&gt;旋钮 2：斜率 $k$ (Span / Gain)
 &lt;ul&gt;
 &lt;li&gt;物理含义：&lt;strong&gt;灵敏度漂移&lt;/strong&gt;。&lt;/li&gt;
 &lt;li&gt;物理来源：光源老化（能量减弱）、检测器效率下降、光路受污染、气体室透镜变脏。&lt;/li&gt;
@@ -571,7 +936,14 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
 &lt;/h3&gt;&lt;p&gt;光陷阱是给“激发光”准备的，它通常位于光源的正对面。&lt;/p&gt;
 &lt;p&gt;目的尽可能多的吸收掉激发光，减少激发光的反射。激发光穿过气体后，剩下的光依然非常强。如果直接打在平坦的壁上反射回来，会形成巨大的&lt;strong&gt;杂散光背景&lt;/strong&gt;。所以，必须在一个深深的黑洞（通常设计成牛角状，叫 Rayleigh Horn）里把它“吞噬”掉，不让它弹回来。&lt;/p&gt;
 &lt;p&gt;这个吃光的结构，在光学工程里有一个非常经典的名字，叫 &lt;strong&gt;伍德号角 (Wood&amp;rsquo;s Horn)&lt;/strong&gt;，有时也叫 &lt;strong&gt;瑞利号角 (Rayleigh Horn)&lt;/strong&gt;，它是一个是一个&lt;strong&gt;弯曲的、渐细的牛角状结构&lt;/strong&gt;&lt;/p&gt;
-&lt;p&gt;![[Pasted image 20251217101922.png]]&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h3 id=&#34;荧光信号&#34;&gt;荧光信号
 &lt;/h3&gt;&lt;p&gt;现在面临的问题是，如何处理荧光信号。&lt;/p&gt;
 &lt;p&gt;这里需要有一个基本概念：荧光现象是&lt;strong&gt;各向同性&lt;/strong&gt;的（Isotropic），当一个 $SO_2$ 分子被激发后，它发出的荧光（光子）是朝&lt;strong&gt;四面八方&lt;/strong&gt;随机发射的，但通常探测器（PMT）只安装在气室的一侧。&lt;/p&gt;
@@ -3678,7 +4050,14 @@ $$浓度 = 1.096 \times V^3 - 1.777 \times V^2 + 15.962 \times V - 0.210$$&lt;/p
 &lt;li&gt;Y 轴： 强度 (Magnitude)&lt;/li&gt;
 &lt;li&gt;看到的是： 信号的“配方表”**。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;![[Pasted image 20251213131958.png]]&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213131958.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251213131958.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h4 id=&#34;1-生活中的类比果汁与配方&#34;&gt;1. 生活中的类比：果汁与配方
 &lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;时域信号： 一杯混合果汁（你只能喝出它酸酸甜甜，看到它是红色的）。&lt;/li&gt;
@@ -6048,8 +6427,15 @@ $$
 &lt;li&gt;$I_{ref}$ (参比信号)： 仅包含（背景光）。注：因为 CO 波段已经黑了，剩下的全是背景。&lt;/li&gt;
 &lt;li&gt;$I_{meas} - I_{ref}$ (差值)： 这代表 “样气到底吃掉了多少光”&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;![[Pasted image 20251209232443.png]]&lt;/p&gt;
-&lt;p&gt;通过这个公式：&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251209232443.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251209232443.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+通过这个公式：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;strong&gt;抵消干扰：&lt;/strong&gt; 灰尘是非选择性吸收，无论光是“背景光成分”还是“CO 敏感光成分”，灰尘都一视同仁，统统挡掉一半。通过比值之后，抵消掉这个干扰&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;提取浓度：&lt;/strong&gt; 分子和分母的&lt;strong&gt;差值&lt;/strong&gt;，正好就是“样气 CO 吃掉的那部分光”。&lt;/li&gt;
@@ -6455,7 +6841,14 @@ $$
 
 &lt;/p&gt;
 &lt;p&gt;【下钳位二极管】下图当中，就可以确保点 2 处的电压不能低于 -0.7V
-![[Pasted image 20251207102905.png]]&lt;/p&gt;
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251207102905.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251207102905.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h3 id=&#34;继电器电机线圈的续流保护&#34;&gt;继电器/电机线圈的“续流保护”
 &lt;/h3&gt;&lt;p&gt;这也是一种“钳位”。我们在控制电感性负载（线圈、电机、继电器）时，断电瞬间线圈会产生几百伏的反向高压（电感尖峰），如果不处理，驱动三极管或 MOS 管必炸无疑。&lt;/p&gt;
 &lt;ul&gt;
@@ -7056,7 +7449,14 @@ $$f_c = \frac{1}{2\pi RC}$$
         <guid>https://teaize.github.io/p/o%E5%BD%A2%E5%9C%88%E5%8F%82%E6%95%B0/</guid>
         <description>&lt;h2 id=&#34;关于-o-形圈内径拉伸率&#34;&gt;关于 O 形圈内径拉伸率
 &lt;/h2&gt;&lt;p&gt;轴向密封时，建议内径拉伸率最大不超过 3%，为什么&lt;/p&gt;
-&lt;p&gt;![[Pasted image 20251205085313.png]]&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251205085313.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251205085313.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h3 id=&#34;焦耳---高夫效应--热力学陷阱&#34;&gt;焦耳 - 高夫效应 —— 热力学陷阱
 &lt;/h3&gt;&lt;p&gt;这是限制拉伸率最核心、最物理的原因。&lt;/p&gt;
 &lt;ul&gt;
@@ -13641,7 +14041,14 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;I don&amp;rsquo;t want to appear dumb or uninformed (even if I am in fact relatively uninformed, hence me wanting to ask the question!);&lt;/li&gt;
 &lt;li&gt;I feel like there&amp;rsquo;s an expectation that I would need to do a lot of due diligence before writing any sort of question, and I don&amp;rsquo;t have the time or energy at the moment to do that due diligence.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;![[Pasted image 20230504185441.png]]&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020230504185441.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020230504185441.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;我的性格非常避免冲突，我不想冒险让埃利泽尔或其他人对我大喊大叫；&lt;/li&gt;
 &lt;li&gt;我很容易被个性强的人吓到，而埃利泽尔…嗯，他可能会令人感到害怕；&lt;/li&gt;
@@ -14160,7 +14567,14 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;购物：指网上购物&lt;/li&gt;
 &lt;li&gt;医疗：指体检、诊所医院这类&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;![[Pasted image 20240709191924.png]]&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240709191924.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020240709191924.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 </description>
         </item>
         <item>

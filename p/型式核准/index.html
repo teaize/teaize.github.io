@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
-<title>信噪比-激发光与荧光</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="型式核准（Pattern Approval / Type Approval），全称为计量器具型式批准，在行业内通常简称为 CPA (China Pattern Approval)。\n1. 核心定义 型式核准是中国政府对计量器具的一种行政许可（牌照）制度。\n">
+<title>型式核准</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E5%9E%8B%E5%BC%8F%E6%A0%B8%E5%87%86/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="信噪比-激发光与荧光">
-<meta property='og:description' content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="型式核准">
+<meta property='og:description' content="型式核准（Pattern Approval / Type Approval），全称为计量器具型式批准，在行业内通常简称为 CPA (China Pattern Approval)。\n1. 核心定义 型式核准是中国政府对计量器具的一种行政许可（牌照）制度。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%9E%8B%E5%BC%8F%E6%A0%B8%E5%87%86/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-17T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="信噪比-激发光与荧光">
-<meta name="twitter:description" content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="型式核准">
+<meta name="twitter:description" content="型式核准（Pattern Approval / Type Approval），全称为计量器具型式批准，在行业内通常简称为 CPA (China Pattern Approval)。\n1. 核心定义 型式核准是中国政府对计量器具的一种行政许可（牌照）制度。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,14 +297,9 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#光陷阱light-trapbeam-dump">光陷阱（Light Trap/Beam Dump）</a></li>
-        <li><a href="#荧光信号">荧光信号</a>
-          <ol>
-            <li><a href="#探测器只吸收直接的光">探测器只吸收直接的光</a></li>
-            <li><a href="#探测器也吸收反射的荧光">探测器也吸收反射的荧光</a></li>
-          </ol>
-        </li>
-        <li><a href="#信噪比最大化">信噪比最大化</a></li>
+        <li><a href="#1-核心定义">1. 核心定义</a></li>
+        <li><a href="#2-它测什么">2. 它测什么</a></li>
+        <li><a href="#cems-领域的双重门槛cpa-vs-ccep">CEMS 领域的“双重门槛”：CPA vs CCEP</a></li>
       </ol>
     </li>
   </ol>
@@ -326,7 +321,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/">信噪比-激发光与荧光</a>
+            <a href="/p/%E5%9E%8B%E5%BC%8F%E6%A0%B8%E5%87%86/">型式核准</a>
         </h2>
     
         
@@ -348,7 +343,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-17</time>
+                <time class="article-time--published">2025-12-19</time>
             </div>
         
 
@@ -364,75 +359,72 @@
     <section class="article-content">
     
     
-    <p>这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：</p>
+    <p><strong>型式核准</strong>（Pattern Approval / Type Approval），全称为<strong>计量器具型式批准</strong>，在行业内通常简称为 <strong>CPA</strong> (China Pattern Approval)。</p>
+<h3 id="1-核心定义">1. 核心定义
+</h3><p><strong>型式核准是中国政府对计量器具的一种行政许可（牌照）制度</strong>。</p>
 <ul>
-<li>激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大</li>
-<li>荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的</li>
+<li>通俗理解： 就像汽车上市前必须通过“碰撞测试”并拿到工信部的准入许可一样，你的 CEMS 分析仪在市场上销售之前，必须先证明这款机器“设计是合理的”、“测得是准的”、“长期是稳定的”。</li>
+<li>法律依据： 《中华人民共和国计量法》。凡是列入《实施强制管理的计量器具目录》的产品，只要在中国境内制造、销售、进口，都必须取得型式批准证书。</li>
+<li>标志： 拿到证书后，<strong>仪器铭牌上会印有一个 CPA 标志（一个圆圈里面包着 CPA 三个字母）</strong>。</li>
 </ul>
-<h3 id="光陷阱light-trapbeam-dump">光陷阱（Light Trap/Beam Dump）
-</h3><p>光陷阱是给“激发光”准备的，它通常位于光源的正对面。</p>
-<p>目的尽可能多的吸收掉激发光，减少激发光的反射。激发光穿过气体后，剩下的光依然非常强。如果直接打在平坦的壁上反射回来，会形成巨大的<strong>杂散光背景</strong>。所以，必须在一个深深的黑洞（通常设计成牛角状，叫 Rayleigh Horn）里把它“吞噬”掉，不让它弹回来。</p>
-<p>这个吃光的结构，在光学工程里有一个非常经典的名字，叫 <strong>伍德号角 (Wood&rsquo;s Horn)</strong>，有时也叫 <strong>瑞利号角 (Rayleigh Horn)</strong>，它是一个是一个<strong>弯曲的、渐细的牛角状结构</strong></p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="荧光信号">荧光信号
-</h3><p>现在面临的问题是，如何处理荧光信号。</p>
-<p>这里需要有一个基本概念：荧光现象是<strong>各向同性</strong>的（Isotropic），当一个 $SO_2$ 分子被激发后，它发出的荧光（光子）是朝<strong>四面八方</strong>随机发射的，但通常探测器（PMT）只安装在气室的一侧。</p>
-<p>有两种策略：</p>
+<h3 id="2-它测什么">2. 它测什么
+</h3><p>型式核准的核心环节叫<strong>型式评价（Pattern Evaluation）</strong>。这不仅是测一下精度，而是对仪器进行“全身体检”和“极限压力测试”。</p>
+<p>型式评价通常包含：</p>
 <ol>
-<li>探测器只吸收直接的光，不吸收经过反射的荧光</li>
-<li>探测器也吸收反射的荧光</li>
+<li>计量性能： 准确度、重复性、线性误差、响应时间等。</li>
+<li>环境适应性：
+<ul>
+<li>电压波动： 220V $\pm 10%$（正如你刚才关注的）。</li>
+<li>温度影响： 在高温（如 40℃）和低温（如 5℃）下，仪器还能准吗？</li>
+<li>绝缘强度： 打高压电会不会击穿？</li>
+</ul>
+</li>
+<li>抗干扰能力： 电磁兼容（EMC）测试，比如抗静电、抗雷击浪涌、抗射频干扰。</li>
 </ol>
-<h4 id="探测器只吸收直接的光">探测器只吸收直接的光
-</h4><p>也就是全黑设计</p>
-<ul>
-<li>设计： 气室内部全部做<strong>发黑处理</strong>（阳极氧化黑或黑色特氟龙），且设计有复杂的光阑（Baffles）和光陷阱。</li>
-<li>原理：
-<ul>
-<li>任何打到墙壁上的光（无论是激发光还是荧光），统统吸收掉。</li>
-<li>探测器<strong>只接收</strong>气体分子直接飞向探测器的那部分荧光。</li>
-</ul>
-</li>
-<li>优点： 背景噪声（Noise）极低，零点非常稳。</li>
-<li>缺点： 信号强度（Signal）很弱，灵敏度低。</li>
-<li>应用： 适合量程较大（ppm 级），或者光源功率非常强（如激光/强氙灯）的场合。</li>
-</ul>
-<h4 id="探测器也吸收反射的荧光">探测器也吸收反射的荧光
-</h4><p>这里也有两种处理方法：镜面反射 OR 漫反射</p>
-<p>这里是用的漫反射，为什么？为了<strong>消除光斑不均匀</strong>的影响</p>
-<ul>
-<li><strong>均匀化：</strong> 镜面反射会形成特定的光路，如果在某个角度恰好有一束强光反射进探测器，可能会导致局部饱和或对震动敏感。</li>
-<li><strong>积分效应：</strong> 漫反射材料（PTFE）会让光线在内部经历多次无序散射，<strong>相当于把整个气室变成了一个均匀发光的“灯泡”</strong>。这样，无论气体分子在气室的哪个角落发光，被探测器收集到的概率都比较接近。</li>
-</ul>
-<p>就像在漆黑的楼道里，用手机打开手电筒照着楼梯（局部强亮光），和用手机手电筒照着楼道天花板的白色墙壁（漫反射，整个楼道都变亮了）</p>
-<p>那这里就用到高反设计</p>
-<ul>
-<li>设计： 气室侧壁用 <strong>烧结 PTFE</strong>（白色），但在光源对面依然保留<strong>黑色光陷阱</strong>。</li>
-<li>原理：
-<ul>
-<li>对激发光： 用光陷阱吸收（必须要杀掉，不能乱反射）。</li>
-<li>对荧光： 侧壁不仅不吸收，反而把背离探测器飞的荧光“弹”回来，赶进探测器。</li>
-</ul>
-</li>
-<li>优点： 信号强度暴增（通常能提高 5-10 倍），适合做痕量分析（ppb 级）。</li>
-<li>缺点： 制造工艺难，如果光陷阱没设计好，反射壁会把杂散光也放大了。</li>
-<li>应用： 现代高端环保监测（如 Thermo 43i, Teledyne T100）的主流方案，因为环保要求越来越严，需要测很低浓度的 $SO_2$。</li>
-</ul>
-<h3 id="信噪比最大化">信噪比最大化
-</h3><p>激发光和荧光信号这种巨大的能量差异，决定了我们必须采用两套截然不同的策略：</p>
-<ul>
-<li>激发光 (Excitation) = <strong>“强干扰”</strong> (是噪音源，考虑杂散光抑制)，“斩尽杀绝”</li>
-<li>荧光信号 (Fluorescence) = <strong>“弱信号”</strong> (是有效数据，考虑光收集效率)，“颗粒归仓”</li>
-</ul>
-<p>很多初学者设计仪器时，往往只关注“怎么让信号更强”（加大光源功率），却忽略了“怎么让背景更黑”。
-高水平设计的特征是： 与其把光源功率加大 10 倍（导致杂散光也大 10 倍，信噪比没变，还增加了热量），不如把光陷阱做得更深一点，或者把滤光片选得更好一点。</p>
-<p>只要把背景噪声压下去，哪怕信号很弱，也能测得非常准。这就是为什么在痕量分析（ppb 级）中，光陷阱的设计比光源的选择更体现水平。</p>
+<h3 id="cems-领域的双重门槛cpa-vs-ccep">CEMS 领域的“双重门槛”：CPA vs CCEP
+</h3><p>做 CEMS 的人经常混淆这两个概念，因为它们都要做测试，而且很多测试项目（如电压影响）是重合的。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>比较维度</strong></th>
+          <th><strong>CPA (型式核准)</strong></th>
+          <th><strong>CCEP (环保产品认证)</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>全称</strong></td>
+          <td>计量器具型式批准证书</td>
+          <td>中国环境保护产品认证证书</td>
+      </tr>
+      <tr>
+          <td><strong>主管部门</strong></td>
+          <td><strong>市场监督管理局</strong> (计量口)</td>
+          <td><strong>中环协</strong> (环保口)</td>
+      </tr>
+      <tr>
+          <td><strong>依据标准</strong></td>
+          <td>计量检定规程 (如 JJG 968)</td>
+          <td>环保标准 (如 <strong>HJ 76</strong>)</td>
+      </tr>
+      <tr>
+          <td><strong>性质</strong></td>
+          <td><strong>强制性行政许可</strong> (法律底线)</td>
+          <td><strong>自愿性产品认证</strong> (市场门槛)</td>
+      </tr>
+      <tr>
+          <td><strong>地位</strong></td>
+          <td><strong>准生证</strong>：没它不能生产销售</td>
+          <td><strong>通行证</strong>：没它几乎投不了标</td>
+      </tr>
+      <tr>
+          <td><strong>关注点</strong></td>
+          <td><strong>量值溯源</strong>：机器本身准不准</td>
+          <td><strong>适用性</strong>：系统在现场好不好用</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>型式核准就是国家确认你这款仪器“基因优良、抗造耐用”的官方证明。在 HJ 76 里看到的那些看似苛刻的电压、温度测试，其实就是为了通过这个核准而设立的硬性指标</p>
 
 </section>
 

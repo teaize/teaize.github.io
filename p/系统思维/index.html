@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
-<title>信噪比-激发光与荧光</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="考虑三个维度：系统稳定性、测量纯度、架构设计\n第一维度：关于“稳” —— 系统的生存能力 这一层的概念和“鲁棒性”最接近，关注系统在极端或故障条件下的表现。\n冗余 (Redundancy) 含义： 为了提高可靠性，故意多配置一套组件。 CEMS 应用： 热备（Hot Standby）： 比如工控机双硬盘备份，或者采样泵“一用一备”。一旦主泵坏了，备用泵 0 秒自动切入，数据不中断。 架构思考： 用空间（多余的硬件）换时间（无故障运行时间）。 容错 (Fault Tolerance) 含义： 当系统出现部分故障时，仍能继续运行（哪怕性能降级），而不会直接死机或崩溃。 CEMS 应用： 伴热管线某一段温度传感器坏了，系统不应该直接停机，而是应该报警并根据历史电流估算温度，维持基本的防冷凝功能，直到维修人员到达。 架构思考： 承认故障是不可避免的，重点在于故障隔离和降级运行。 失效安全 (Failsafe) 含义： 如果系统彻底坏了，它必须处于一个“安全”的状态，不能造成更大的破坏。 CEMS 应用： 如果探头反吹电磁阀突然断电（失效），阀门必须设计成自动关闭（常闭型），防止压缩空气无限制吹入烟道，或者防止烟气倒灌进仪表柜。 架构思考： 设计的底线思维，考虑“死法”是否安全。 第二维度：关于“准” —— 数据的纯净度 这一层的概念关注如何从干扰中提取真实信号，是对抗“影响量”的具体手段。\n">
+<title>系统思维</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="信噪比-激发光与荧光">
-<meta property='og:description' content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="系统思维">
+<meta property='og:description' content="考虑三个维度：系统稳定性、测量纯度、架构设计\n第一维度：关于“稳” —— 系统的生存能力 这一层的概念和“鲁棒性”最接近，关注系统在极端或故障条件下的表现。\n冗余 (Redundancy) 含义： 为了提高可靠性，故意多配置一套组件。 CEMS 应用： 热备（Hot Standby）： 比如工控机双硬盘备份，或者采样泵“一用一备”。一旦主泵坏了，备用泵 0 秒自动切入，数据不中断。 架构思考： 用空间（多余的硬件）换时间（无故障运行时间）。 容错 (Fault Tolerance) 含义： 当系统出现部分故障时，仍能继续运行（哪怕性能降级），而不会直接死机或崩溃。 CEMS 应用： 伴热管线某一段温度传感器坏了，系统不应该直接停机，而是应该报警并根据历史电流估算温度，维持基本的防冷凝功能，直到维修人员到达。 架构思考： 承认故障是不可避免的，重点在于故障隔离和降级运行。 失效安全 (Failsafe) 含义： 如果系统彻底坏了，它必须处于一个“安全”的状态，不能造成更大的破坏。 CEMS 应用： 如果探头反吹电磁阀突然断电（失效），阀门必须设计成自动关闭（常闭型），防止压缩空气无限制吹入烟道，或者防止烟气倒灌进仪表柜。 架构思考： 设计的底线思维，考虑“死法”是否安全。 第二维度：关于“准” —— 数据的纯净度 这一层的概念关注如何从干扰中提取真实信号，是对抗“影响量”的具体手段。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-17T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="信噪比-激发光与荧光">
-<meta name="twitter:description" content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="系统思维">
+<meta name="twitter:description" content="考虑三个维度：系统稳定性、测量纯度、架构设计\n第一维度：关于“稳” —— 系统的生存能力 这一层的概念和“鲁棒性”最接近，关注系统在极端或故障条件下的表现。\n冗余 (Redundancy) 含义： 为了提高可靠性，故意多配置一套组件。 CEMS 应用： 热备（Hot Standby）： 比如工控机双硬盘备份，或者采样泵“一用一备”。一旦主泵坏了，备用泵 0 秒自动切入，数据不中断。 架构思考： 用空间（多余的硬件）换时间（无故障运行时间）。 容错 (Fault Tolerance) 含义： 当系统出现部分故障时，仍能继续运行（哪怕性能降级），而不会直接死机或崩溃。 CEMS 应用： 伴热管线某一段温度传感器坏了，系统不应该直接停机，而是应该报警并根据历史电流估算温度，维持基本的防冷凝功能，直到维修人员到达。 架构思考： 承认故障是不可避免的，重点在于故障隔离和降级运行。 失效安全 (Failsafe) 含义： 如果系统彻底坏了，它必须处于一个“安全”的状态，不能造成更大的破坏。 CEMS 应用： 如果探头反吹电磁阀突然断电（失效），阀门必须设计成自动关闭（常闭型），防止压缩空气无限制吹入烟道，或者防止烟气倒灌进仪表柜。 架构思考： 设计的底线思维，考虑“死法”是否安全。 第二维度：关于“准” —— 数据的纯净度 这一层的概念关注如何从干扰中提取真实信号，是对抗“影响量”的具体手段。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,14 +297,28 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#光陷阱light-trapbeam-dump">光陷阱（Light Trap/Beam Dump）</a></li>
-        <li><a href="#荧光信号">荧光信号</a>
+        <li><a href="#第一维度关于稳--系统的生存能力">第一维度：关于“稳” —— 系统的生存能力</a>
           <ol>
-            <li><a href="#探测器只吸收直接的光">探测器只吸收直接的光</a></li>
-            <li><a href="#探测器也吸收反射的荧光">探测器也吸收反射的荧光</a></li>
+            <li><a href="#冗余-redundancy">冗余 (Redundancy)</a></li>
+            <li><a href="#容错-fault-tolerance">容错 (Fault Tolerance)</a></li>
+            <li><a href="#失效安全-failsafe">失效安全 (Failsafe)</a></li>
           </ol>
         </li>
-        <li><a href="#信噪比最大化">信噪比最大化</a></li>
+        <li><a href="#第二维度关于准--数据的纯净度">第二维度：关于“准” —— 数据的纯净度</a>
+          <ol>
+            <li><a href="#补偿-compensation">补偿 (Compensation)</a></li>
+            <li><a href="#迟滞-hysteresis">迟滞 (Hysteresis)</a></li>
+            <li><a href="#信噪比-snr---signal-to-noise-ratio">信噪比 (SNR - Signal-to-Noise Ratio)</a></li>
+          </ol>
+        </li>
+        <li><a href="#第三维度关于结构--系统的组织方式">第三维度：关于“结构” —— 系统的组织方式</a>
+          <ol>
+            <li><a href="#模块化-modularity">模块化 (Modularity)</a></li>
+            <li><a href="#溯源性-traceability">溯源性 (Traceability)</a></li>
+            <li><a href="#可用性-availability--data-capture-rate">可用性 (Availability / Data Capture Rate)</a></li>
+          </ol>
+        </li>
+        <li><a href="#小结">小结</a></li>
       </ol>
     </li>
   </ol>
@@ -326,7 +340,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/">信噪比-激发光与荧光</a>
+            <a href="/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/">系统思维</a>
         </h2>
     
         
@@ -348,7 +362,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-17</time>
+                <time class="article-time--published">2025-12-19</time>
             </div>
         
 
@@ -364,75 +378,152 @@
     <section class="article-content">
     
     
-    <p>这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：</p>
+    <p>考虑三个维度：系统稳定性、测量纯度、架构设计</p>
+<h3 id="第一维度关于稳--系统的生存能力">第一维度：关于“稳” —— 系统的生存能力
+</h3><p>这一层的概念和“鲁棒性”最接近，关注系统在极端或故障条件下的表现。</p>
+<h4 id="冗余-redundancy">冗余 (Redundancy)
+</h4><ul>
+<li>含义： 为了提高可靠性，故意多配置一套组件。</li>
+<li>CEMS 应用：
 <ul>
-<li>激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大</li>
-<li>荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的</li>
-</ul>
-<h3 id="光陷阱light-trapbeam-dump">光陷阱（Light Trap/Beam Dump）
-</h3><p>光陷阱是给“激发光”准备的，它通常位于光源的正对面。</p>
-<p>目的尽可能多的吸收掉激发光，减少激发光的反射。激发光穿过气体后，剩下的光依然非常强。如果直接打在平坦的壁上反射回来，会形成巨大的<strong>杂散光背景</strong>。所以，必须在一个深深的黑洞（通常设计成牛角状，叫 Rayleigh Horn）里把它“吞噬”掉，不让它弹回来。</p>
-<p>这个吃光的结构，在光学工程里有一个非常经典的名字，叫 <strong>伍德号角 (Wood&rsquo;s Horn)</strong>，有时也叫 <strong>瑞利号角 (Rayleigh Horn)</strong>，它是一个是一个<strong>弯曲的、渐细的牛角状结构</strong></p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="荧光信号">荧光信号
-</h3><p>现在面临的问题是，如何处理荧光信号。</p>
-<p>这里需要有一个基本概念：荧光现象是<strong>各向同性</strong>的（Isotropic），当一个 $SO_2$ 分子被激发后，它发出的荧光（光子）是朝<strong>四面八方</strong>随机发射的，但通常探测器（PMT）只安装在气室的一侧。</p>
-<p>有两种策略：</p>
-<ol>
-<li>探测器只吸收直接的光，不吸收经过反射的荧光</li>
-<li>探测器也吸收反射的荧光</li>
-</ol>
-<h4 id="探测器只吸收直接的光">探测器只吸收直接的光
-</h4><p>也就是全黑设计</p>
-<ul>
-<li>设计： 气室内部全部做<strong>发黑处理</strong>（阳极氧化黑或黑色特氟龙），且设计有复杂的光阑（Baffles）和光陷阱。</li>
-<li>原理：
-<ul>
-<li>任何打到墙壁上的光（无论是激发光还是荧光），统统吸收掉。</li>
-<li>探测器<strong>只接收</strong>气体分子直接飞向探测器的那部分荧光。</li>
+<li>热备（Hot Standby）： 比如工控机双硬盘备份，或者采样泵“一用一备”。一旦主泵坏了，备用泵 0 秒自动切入，数据不中断。</li>
+<li>架构思考： 用空间（多余的硬件）换时间（无故障运行时间）。</li>
 </ul>
 </li>
-<li>优点： 背景噪声（Noise）极低，零点非常稳。</li>
-<li>缺点： 信号强度（Signal）很弱，灵敏度低。</li>
-<li>应用： 适合量程较大（ppm 级），或者光源功率非常强（如激光/强氙灯）的场合。</li>
 </ul>
-<h4 id="探测器也吸收反射的荧光">探测器也吸收反射的荧光
-</h4><p>这里也有两种处理方法：镜面反射 OR 漫反射</p>
-<p>这里是用的漫反射，为什么？为了<strong>消除光斑不均匀</strong>的影响</p>
+<h4 id="容错-fault-tolerance">容错 (Fault Tolerance)
+</h4><ul>
+<li>含义： 当系统出现部分故障时，仍能继续运行（哪怕性能降级），而不会直接死机或崩溃。</li>
+<li>CEMS 应用：
 <ul>
-<li><strong>均匀化：</strong> 镜面反射会形成特定的光路，如果在某个角度恰好有一束强光反射进探测器，可能会导致局部饱和或对震动敏感。</li>
-<li><strong>积分效应：</strong> 漫反射材料（PTFE）会让光线在内部经历多次无序散射，<strong>相当于把整个气室变成了一个均匀发光的“灯泡”</strong>。这样，无论气体分子在气室的哪个角落发光，被探测器收集到的概率都比较接近。</li>
-</ul>
-<p>就像在漆黑的楼道里，用手机打开手电筒照着楼梯（局部强亮光），和用手机手电筒照着楼道天花板的白色墙壁（漫反射，整个楼道都变亮了）</p>
-<p>那这里就用到高反设计</p>
-<ul>
-<li>设计： 气室侧壁用 <strong>烧结 PTFE</strong>（白色），但在光源对面依然保留<strong>黑色光陷阱</strong>。</li>
-<li>原理：
-<ul>
-<li>对激发光： 用光陷阱吸收（必须要杀掉，不能乱反射）。</li>
-<li>对荧光： 侧壁不仅不吸收，反而把背离探测器飞的荧光“弹”回来，赶进探测器。</li>
+<li>伴热管线某一段温度传感器坏了，系统不应该直接停机，而是应该报警并根据历史电流估算温度，维持基本的防冷凝功能，直到维修人员到达。</li>
+<li>架构思考： 承认故障是不可避免的，重点在于故障隔离和降级运行。</li>
 </ul>
 </li>
-<li>优点： 信号强度暴增（通常能提高 5-10 倍），适合做痕量分析（ppb 级）。</li>
-<li>缺点： 制造工艺难，如果光陷阱没设计好，反射壁会把杂散光也放大了。</li>
-<li>应用： 现代高端环保监测（如 Thermo 43i, Teledyne T100）的主流方案，因为环保要求越来越严，需要测很低浓度的 $SO_2$。</li>
 </ul>
-<h3 id="信噪比最大化">信噪比最大化
-</h3><p>激发光和荧光信号这种巨大的能量差异，决定了我们必须采用两套截然不同的策略：</p>
+<h4 id="失效安全-failsafe">失效安全 (Failsafe)
+</h4><ul>
+<li>含义： 如果系统彻底坏了，它必须处于一个“安全”的状态，不能造成更大的破坏。</li>
+<li>CEMS 应用：
 <ul>
-<li>激发光 (Excitation) = <strong>“强干扰”</strong> (是噪音源，考虑杂散光抑制)，“斩尽杀绝”</li>
-<li>荧光信号 (Fluorescence) = <strong>“弱信号”</strong> (是有效数据，考虑光收集效率)，“颗粒归仓”</li>
+<li>如果探头反吹电磁阀突然断电（失效），阀门必须设计成自动关闭（常闭型），防止压缩空气无限制吹入烟道，或者防止烟气倒灌进仪表柜。</li>
+<li>架构思考： 设计的底线思维，考虑“死法”是否安全。</li>
 </ul>
-<p>很多初学者设计仪器时，往往只关注“怎么让信号更强”（加大光源功率），却忽略了“怎么让背景更黑”。
-高水平设计的特征是： 与其把光源功率加大 10 倍（导致杂散光也大 10 倍，信噪比没变，还增加了热量），不如把光陷阱做得更深一点，或者把滤光片选得更好一点。</p>
-<p>只要把背景噪声压下去，哪怕信号很弱，也能测得非常准。这就是为什么在痕量分析（ppb 级）中，光陷阱的设计比光源的选择更体现水平。</p>
+</li>
+</ul>
+<h3 id="第二维度关于准--数据的纯净度">第二维度：关于“准” —— 数据的纯净度
+</h3><p>这一层的概念关注如何从干扰中提取真实信号，是对抗“影响量”的具体手段。</p>
+<h4 id="补偿-compensation">补偿 (Compensation)
+</h4><ul>
+<li>含义： 既然无法消除干扰（温度、压力变化），那就通过算法把偏差“算回来”。这是对抗灵敏度的核心手段。</li>
+<li>CEMS 应用：
+<ul>
+<li>P/T 补偿： 测量气体浓度时，必须同时测温度 (T) 和压力 (P)，通过公式 $C_{std} = C_{meas} \times \frac{P}{P_0} \times \frac{T_0}{T}$ 把工况浓度折算成标况浓度。</li>
+<li>交叉干扰补偿： 比如测 CO 时，水蒸气 (H2O) 会有干扰。通过同时测 H2O 含量，在 CO 读数中减去水的贡献值。</li>
+</ul>
+</li>
+</ul>
+<h4 id="迟滞-hysteresis">迟滞 (Hysteresis)
+</h4><ul>
+<li>含义： 输入量从小变大，和从大变小，经过同一个点时，读数不一样。也就是系统的“记忆效应”。</li>
+<li>CEMS 应用：
+<ul>
+<li>吸附效应： 测 NH3（氨逃逸）或 HCl 时最明显。通气校准时读数上去很快，停止通气后读数下来很慢（管路吸附了气体）。如果迟滞太大，说明采样系统管壁材料选型错误（如没用特氟龙或不锈钢钝化）。</li>
+<li>架构思考： 系统对历史状态的依赖程度。</li>
+</ul>
+</li>
+</ul>
+<h4 id="信噪比-snr---signal-to-noise-ratio">信噪比 (SNR - Signal-to-Noise Ratio)
+</h4><ul>
+<li>含义： 有用的信号（S）与无用的背景噪声（N）的比值。</li>
+<li>CEMS 应用：
+<ul>
+<li>在超低排放（如 SO2 &lt; 35mg/m3）监测中，最大的敌人不是非线性，而是噪声。如果电压波动导致光源闪烁，就会产生噪声。</li>
+<li>架构思考： 提高精度的两条路：要么增强信号（更强的激光、更长的光程），要么压制噪声（滤波算法、硬件屏蔽）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="第三维度关于结构--系统的组织方式">第三维度：关于“结构” —— 系统的组织方式
+</h3><p>这一层的概念决定了仪器好不好用、好不好修。</p>
+<h4 id="模块化-modularity">模块化 (Modularity)
+</h4><ul>
+<li>含义： 将系统拆分成独立的、功能单一的积木块，通过标准接口连接。</li>
+<li>CEMS 应用：
+<ul>
+<li>好的 CEMS 分析仪，光源、气室、检测器、电路板都是独立的模块。</li>
+<li>优点： 现场维修不需要懂原理，坏哪块换哪块（FRU - Field Replaceable Unit）。</li>
+<li>架构思考： 高内聚，低耦合。让电压波动的影响只局限在电源模块，不要蔓延到信号处理模块。</li>
+</ul>
+</li>
+</ul>
+<h4 id="溯源性-traceability">溯源性 (Traceability)
+</h4><ul>
+<li>含义： 你的测量结果，必须能通过一条不间断的链条，追溯到国家基准或国际基准。</li>
+<li>CEMS 应用：
+<ul>
+<li>为什么要做标气校准？因为标气是标准物质（CRM）。</li>
+<li>链条： 现场仪器 -&gt; 标气 -&gt; 国家一级标准物质 -&gt; 国际单位制 (SI)。</li>
+<li>架构思考： 数据的“血统证明”。没有溯源性的数据，在法律上是无效的。</li>
+</ul>
+</li>
+</ul>
+<h4 id="可用性-availability--data-capture-rate">可用性 (Availability / Data Capture Rate)
+</h4><ul>
+<li>含义： 系统处于可工作状态的时间比例。</li>
+<li>CEMS 应用：
+<ul>
+<li>环保法规要求 CEMS 的数据捕获率必须 $\ge 95%$。</li>
+<li>这意味着你每天 calibration（校准）、backflush（反吹）、maintenance（维护）的时间加起来不能超过 1.2 小时。</li>
+<li>架构思考： 设计不仅要考虑“准”，还要考虑“效率”。能不能一边测一边校准？反吹能不能更快？</li>
+</ul>
+</li>
+</ul>
+<h3 id="小结">小结
+</h3><div class="mermaid">
+  mindmap
+  root((CEMS仪器<br/>核心工程指标))
+    系统生存能力<br/>(Reliability)
+      鲁棒性 (Robustness)
+        ::icon(fa fa-shield-alt)
+        电压适应性
+        环境适应性
+      冗余 (Redundancy)
+        ::icon(fa fa-clone)
+        双泵设计
+        热备机
+      失效安全 (Failsafe)
+        ::icon(fa fa-exclamation-triangle)
+        断电自动关阀
+        故障报警
+    数据测量质量<br/>(Metrology)
+      准确性 (Accuracy)
+        ::icon(fa fa-bullseye)
+        信噪比 (SNR)
+        线性度
+      干扰消除
+        ::icon(fa fa-filter)
+        交叉干扰补偿
+        温度/压力补偿
+      溯源性 (Traceability)
+        ::icon(fa fa-link)
+        标气校准
+    系统架构设计<br/>(Architecture)
+      模块化 (Modularity)
+        ::icon(fa fa-cubes)
+        独立气室
+        易更换部件(FRU)
+      可用性 (Availability)
+        ::icon(fa fa-clock)
+        高数据捕获率
+        低维护频次
+</div>
+<ul>
+<li>面对环境干扰（如电压、温度）： 我们追求 鲁棒性 (Robustness)。</li>
+<li>面对内部误差（如漂移、干扰）： 我们利用 补偿 (Compensation) 和 校准 (Calibration)。</li>
+<li>面对硬件故障（如泵坏、断电）： 我们依赖 冗余 (Redundancy) 和 失效安全 (Failsafe)。</li>
+<li>面对系统维护（如维修、升级）： 我们强调 模块化 (Modularity)。</li>
+<li>面对法律合规（如环保数据）： 我们保证 溯源性 (Traceability) 和 可用性 (Availability)</li>
+</ul>
 
 </section>
 
@@ -640,6 +731,15 @@
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
 </script>
 
     </body>

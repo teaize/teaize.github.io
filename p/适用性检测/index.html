@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
-<title>信噪比-激发光与荧光</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在 HJ 76-2017 固定污染源烟气（SO2、NOX、颗粒物）排放连续监测系统技术要求及检测方法 标准中，要求进行，要求进行“供电电压变化的影响”等的测试，这实际上是属于型式核准（Type Approval）或者适用性检测的一部分\n">
+<title>适用性检测</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E9%80%82%E7%94%A8%E6%80%A7%E6%A3%80%E6%B5%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="信噪比-激发光与荧光">
-<meta property='og:description' content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
-<meta property='og:url' content='https://teaize.github.io/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="适用性检测">
+<meta property='og:description' content="在 HJ 76-2017 固定污染源烟气（SO2、NOX、颗粒物）排放连续监测系统技术要求及检测方法 标准中，要求进行，要求进行“供电电压变化的影响”等的测试，这实际上是属于型式核准（Type Approval）或者适用性检测的一部分\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E9%80%82%E7%94%A8%E6%80%A7%E6%A3%80%E6%B5%8B/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-17T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="信噪比-激发光与荧光">
-<meta name="twitter:description" content="这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：\n激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大 荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的 光陷阱（Light Trap/Beam Dump） 光陷阱是给“激发光”准备的，它通常位于光源的正对面。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="适用性检测">
+<meta name="twitter:description" content="在 HJ 76-2017 固定污染源烟气（SO2、NOX、颗粒物）排放连续监测系统技术要求及检测方法 标准中，要求进行，要求进行“供电电压变化的影响”等的测试，这实际上是属于型式核准（Type Approval）或者适用性检测的一部分\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,14 +297,8 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#光陷阱light-trapbeam-dump">光陷阱（Light Trap/Beam Dump）</a></li>
-        <li><a href="#荧光信号">荧光信号</a>
-          <ol>
-            <li><a href="#探测器只吸收直接的光">探测器只吸收直接的光</a></li>
-            <li><a href="#探测器也吸收反射的荧光">探测器也吸收反射的荧光</a></li>
-          </ol>
-        </li>
-        <li><a href="#信噪比最大化">信噪比最大化</a></li>
+        <li><a href="#一-为什么要这么做">一、 为什么要这么做</a></li>
+        <li><a href="#鲁棒性设计">鲁棒性设计</a></li>
       </ol>
     </li>
   </ol>
@@ -326,7 +320,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E4%BF%A1%E5%99%AA%E6%AF%94-%E6%BF%80%E5%8F%91%E5%85%89%E4%B8%8E%E8%8D%A7%E5%85%89/">信噪比-激发光与荧光</a>
+            <a href="/p/%E9%80%82%E7%94%A8%E6%80%A7%E6%A3%80%E6%B5%8B/">适用性检测</a>
         </h2>
     
         
@@ -348,7 +342,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-17</time>
+                <time class="article-time--published">2025-12-19</time>
             </div>
         
 
@@ -364,75 +358,49 @@
     <section class="article-content">
     
     
-    <p>这里以二氧化硫紫外荧光分析仪为例。气室中存在两类光：</p>
+    <p>在 HJ 76-2017 固定污染源烟气（SO2、NOX、颗粒物）排放连续监测系统技术要求及检测方法 标准中，要求进行，要求进行“供电电压变化的影响”等的测试，这实际上是属于<strong>型式核准</strong>（Type Approval）或者<strong>适用性检测</strong>的一部分</p>
+<p>这里以“供电电压变化的影响”为例，为了验证仪器在恶劣的工业现场供电环境下，是否还能保持数据的准确性</p>
+<h3 id="一-为什么要这么做">一、 为什么要这么做
+</h3><p>分析仪器（CEMS）通常安装在电厂、化工厂、水泥厂等工业现场。这些环境的供电系统与实验室完全不同，进行电压变化测试主要基于以下三个原因：</p>
 <ul>
-<li>激发光 (Excitation Light) —— 从灯泡射出来的紫外光（如 214nm），强度极大</li>
-<li>荧光信号 (Fluorescence Signal) —— 气体分子发出的光（如 330nm），强度极弱，是我们真正想看的</li>
-</ul>
-<h3 id="光陷阱light-trapbeam-dump">光陷阱（Light Trap/Beam Dump）
-</h3><p>光陷阱是给“激发光”准备的，它通常位于光源的正对面。</p>
-<p>目的尽可能多的吸收掉激发光，减少激发光的反射。激发光穿过气体后，剩下的光依然非常强。如果直接打在平坦的壁上反射回来，会形成巨大的<strong>杂散光背景</strong>。所以，必须在一个深深的黑洞（通常设计成牛角状，叫 Rayleigh Horn）里把它“吞噬”掉，不让它弹回来。</p>
-<p>这个吃光的结构，在光学工程里有一个非常经典的名字，叫 <strong>伍德号角 (Wood&rsquo;s Horn)</strong>，有时也叫 <strong>瑞利号角 (Rayleigh Horn)</strong>，它是一个是一个<strong>弯曲的、渐细的牛角状结构</strong></p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251217101922.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="荧光信号">荧光信号
-</h3><p>现在面临的问题是，如何处理荧光信号。</p>
-<p>这里需要有一个基本概念：荧光现象是<strong>各向同性</strong>的（Isotropic），当一个 $SO_2$ 分子被激发后，它发出的荧光（光子）是朝<strong>四面八方</strong>随机发射的，但通常探测器（PMT）只安装在气室的一侧。</p>
-<p>有两种策略：</p>
-<ol>
-<li>探测器只吸收直接的光，不吸收经过反射的荧光</li>
-<li>探测器也吸收反射的荧光</li>
-</ol>
-<h4 id="探测器只吸收直接的光">探测器只吸收直接的光
-</h4><p>也就是全黑设计</p>
+<li>模拟工业现场的“脏电”环境
 <ul>
-<li>设计： 气室内部全部做<strong>发黑处理</strong>（阳极氧化黑或黑色特氟龙），且设计有复杂的光阑（Baffles）和光陷阱。</li>
-<li>原理：
-<ul>
-<li>任何打到墙壁上的光（无论是激发光还是荧光），统统吸收掉。</li>
-<li>探测器<strong>只接收</strong>气体分子直接飞向探测器的那部分荧光。</li>
+<li>电压波动是常态： 工业现场通常会有大型电机、变频器、压缩机等大功率设备的频繁启停。这会导致电网电压瞬间跌落（Sags）或浪涌（Swells）</li>
+<li>测试目的： 确保当现场电压在 $220V \pm 10%$（即 198V~242V）范围内波动时，仪器依然能给出准确读数，而不是直接报警、死机或者读数漂移</li>
 </ul>
 </li>
-<li>优点： 背景噪声（Noise）极低，零点非常稳。</li>
-<li>缺点： 信号强度（Signal）很弱，灵敏度低。</li>
-<li>应用： 适合量程较大（ppm 级），或者光源功率非常强（如激光/强氙灯）的场合。</li>
-</ul>
-<h4 id="探测器也吸收反射的荧光">探测器也吸收反射的荧光
-</h4><p>这里也有两种处理方法：镜面反射 OR 漫反射</p>
-<p>这里是用的漫反射，为什么？为了<strong>消除光斑不均匀</strong>的影响</p>
+<li>考验仪器内部电源（PSU）的“线性调整率”
 <ul>
-<li><strong>均匀化：</strong> 镜面反射会形成特定的光路，如果在某个角度恰好有一束强光反射进探测器，可能会导致局部饱和或对震动敏感。</li>
-<li><strong>积分效应：</strong> 漫反射材料（PTFE）会让光线在内部经历多次无序散射，<strong>相当于把整个气室变成了一个均匀发光的“灯泡”</strong>。这样，无论气体分子在气室的哪个角落发光，被探测器收集到的概率都比较接近。</li>
-</ul>
-<p>就像在漆黑的楼道里，用手机打开手电筒照着楼梯（局部强亮光），和用手机手电筒照着楼道天花板的白色墙壁（漫反射，整个楼道都变亮了）</p>
-<p>那这里就用到高反设计</p>
-<ul>
-<li>设计： 气室侧壁用 <strong>烧结 PTFE</strong>（白色），但在光源对面依然保留<strong>黑色光陷阱</strong>。</li>
-<li>原理：
-<ul>
-<li>对激发光： 用光陷阱吸收（必须要杀掉，不能乱反射）。</li>
-<li>对荧光： 侧壁不仅不吸收，反而把背离探测器飞的荧光“弹”回来，赶进探测器。</li>
+<li>绝大多数现代分析仪内部都有开关电源（SMPS），将 220V AC 转变为 24V、12V、5V DC。理想情况下无论输入是 190V 还是 240V，输出都应该是稳定的 DC 电压。</li>
+<li>测试目的： 验证仪器内部电源模块的线性调整率 (Line Regulation) 是否合格</li>
 </ul>
 </li>
-<li>优点： 信号强度暴增（通常能提高 5-10 倍），适合做痕量分析（ppb 级）。</li>
-<li>缺点： 制造工艺难，如果光陷阱没设计好，反射壁会把杂散光也放大了。</li>
-<li>应用： 现代高端环保监测（如 Thermo 43i, Teledyne T100）的主流方案，因为环保要求越来越严，需要测很低浓度的 $SO_2$。</li>
-</ul>
-<h3 id="信噪比最大化">信噪比最大化
-</h3><p>激发光和荧光信号这种巨大的能量差异，决定了我们必须采用两套截然不同的策略：</p>
+<li>保护核心敏感器件
 <ul>
-<li>激发光 (Excitation) = <strong>“强干扰”</strong> (是噪音源，考虑杂散光抑制)，“斩尽杀绝”</li>
-<li>荧光信号 (Fluorescence) = <strong>“弱信号”</strong> (是有效数据，考虑光收集效率)，“颗粒归仓”</li>
+<li>分析仪中有几个部件对电压极其敏感，如果内部稳压做不好，直接影响测量值，例如光源、探测器、温控系统等</li>
 </ul>
-<p>很多初学者设计仪器时，往往只关注“怎么让信号更强”（加大光源功率），却忽略了“怎么让背景更黑”。
-高水平设计的特征是： 与其把光源功率加大 10 倍（导致杂散光也大 10 倍，信噪比没变，还增加了热量），不如把光陷阱做得更深一点，或者把滤光片选得更好一点。</p>
-<p>只要把背景噪声压下去，哪怕信号很弱，也能测得非常准。这就是为什么在痕量分析（ppb 级）中，光陷阱的设计比光源的选择更体现水平。</p>
+</li>
+</ul>
+<p>以“供电电压变化的影响”为例，这其实是一个全球通用的仪器性能指标，不过在不同的认证体系下，称呼和具体要求略有不同</p>
+<ul>
+<li>欧盟（EU）：EN 15267-3 (最严格)</li>
+<li>美国（US EPA）：40 CFR Part 60/75</li>
+<li>日本（JIS）：JIS B 7981 / 7982</li>
+<li>…</li>
+</ul>
+<h3 id="鲁棒性设计">鲁棒性设计
+</h3><p>除了“供电电压变化的影响”之外，还包括进样流量、环境温度、振动、电压波动等等对输出的影响。从工程设计层面上考虑，这其实是鲁棒性设计的一种体现</p>
+<ul>
+<li>含义： “鲁棒”是英文 Robust 的音译，原意是强壮、结实。在控制理论和系统工程中，它指的是<strong>一个系统在面临内部结构的不确定性或外部环境的干扰时，仍能保持其性能（如稳定性、准确性）维持在可接受范围内的能力。</strong></li>
+<li>你的例子：
+<ul>
+<li>理想的仪器：读数 = f(气体浓度)。</li>
+<li>实际的仪器：读数 = f(气体浓度，<strong>电压</strong>，<strong>温度</strong>，<strong>流量</strong>，<strong>振动</strong>…)。</li>
+</ul>
+</li>
+<li><strong>思维核心：</strong> 我们无法消除环境中的电压波动或温度变化（无法消除干扰源），但我们可以通过设计，使得系统对这些变化**“不敏感”**（Insensitive）。</li>
+<li><strong>通俗比喻：</strong> 一个身体素质好的人（鲁棒性强），不管是下雨（电压低）、刮风（流量变）、还是气温骤降（环境温度变），他都能照常跑步，速度不会变慢。</li>
+</ul>
 
 </section>
 
