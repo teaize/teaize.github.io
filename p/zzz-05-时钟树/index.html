@@ -1,0 +1,705 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="时钟树的功能：车间里的“传动轴” 想象 STM32 是一个巨大的自动化工厂，里面有几百个加工车间（外设，比如 GPIO 是控制灯的车间，USART 是通信车间）。\n主时钟（HCLK/SYSCLK）：是工厂里的大发动机。 外设时钟：是从大发动机连接到各个车间的传动皮带。 STM32 的设计逻辑是： 为了极度省电，工厂默认所有的传动皮带都是拆掉的。也就是说，虽然大发动机（主频）在转，但动力传不到具体车间里。如果你想让 GPIO 车间工作，你必须先手动“合上电闸”或者“挂上皮带”。\n">
+<title>ZZZ-05-时钟树</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-05-%E6%97%B6%E9%92%9F%E6%A0%91/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-05-时钟树">
+<meta property='og:description' content="时钟树的功能：车间里的“传动轴” 想象 STM32 是一个巨大的自动化工厂，里面有几百个加工车间（外设，比如 GPIO 是控制灯的车间，USART 是通信车间）。\n主时钟（HCLK/SYSCLK）：是工厂里的大发动机。 外设时钟：是从大发动机连接到各个车间的传动皮带。 STM32 的设计逻辑是： 为了极度省电，工厂默认所有的传动皮带都是拆掉的。也就是说，虽然大发动机（主频）在转，但动力传不到具体车间里。如果你想让 GPIO 车间工作，你必须先手动“合上电闸”或者“挂上皮带”。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-05-%E6%97%B6%E9%92%9F%E6%A0%91/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-05-时钟树">
+<meta name="twitter:description" content="时钟树的功能：车间里的“传动轴” 想象 STM32 是一个巨大的自动化工厂，里面有几百个加工车间（外设，比如 GPIO 是控制灯的车间，USART 是通信车间）。\n主时钟（HCLK/SYSCLK）：是工厂里的大发动机。 外设时钟：是从大发动机连接到各个车间的传动皮带。 STM32 的设计逻辑是： 为了极度省电，工厂默认所有的传动皮带都是拆掉的。也就是说，虽然大发动机（主频）在转，但动力传不到具体车间里。如果你想让 GPIO 车间工作，你必须先手动“合上电闸”或者“挂上皮带”。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#时钟树的功能车间里的传动轴">时钟树的功能：车间里的“传动轴”</a></li>
+        <li><a href="#为什么要搞得这么麻烦核心逻辑低功耗">为什么要搞得这么麻烦？（核心逻辑：低功耗）</a></li>
+        <li><a href="#3-时钟树动力是怎么传导的">3. 时钟树：动力是怎么传导的？</a>
+          <ol>
+            <li><a href="#为什么要有这么多时钟源">为什么要有这么多时钟源</a></li>
+            <li><a href="#不同的总线apb1-与-apb2">不同的总线（APB1 与 APB2）</a></li>
+            <li><a href="#pll倍频器是核心魔术师">PLL（倍频器）是核心魔术师</a></li>
+          </ol>
+        </li>
+        <li><a href="#重点理解总线层级">重点理解：总线层级</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-05-%E6%97%B6%E9%92%9F%E6%A0%91/">ZZZ-05-时钟树</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="时钟树的功能车间里的传动轴">时钟树的功能：车间里的“传动轴”
+</h3><p>想象 STM32 是一个巨大的自动化工厂，里面有几百个加工车间（外设，比如 GPIO 是控制灯的车间，USART 是通信车间）。</p>
+<ul>
+<li>主时钟（HCLK/SYSCLK）：是工厂里的大发动机。</li>
+<li>外设时钟：是从大发动机连接到各个车间的传动皮带。</li>
+</ul>
+<p>STM32 的设计逻辑是： 为了极度省电，工厂默认所有的传动皮带都是拆掉的。也就是说，虽然大发动机（主频）在转，但动力传不到具体车间里。如果你想让 GPIO 车间工作，你必须先手动“合上电闸”或者“挂上皮带”。</p>
+<h3 id="为什么要搞得这么麻烦核心逻辑低功耗">为什么要搞得这么麻烦？（核心逻辑：低功耗）
+</h3><p>51 单片机默认时钟是全开的，简单但费电。 STM32 作为高性能芯片，集成了非常多的外设。如果这些外设的时钟全部默认开启：</p>
+<ol>
+<li>功耗爆炸：即使你没用这些外设，数字电路在时钟驱动下也会不断产生翻转电流，导致芯片发烫，电池瞬间没电。</li>
+<li>电磁干扰：无用的高频信号会产生不必要的干扰。</li>
+</ol>
+<p>所以，STM32 遵循“按需分配”原则：你不用的东西，我不给供能。</p>
+<h3 id="3-时钟树动力是怎么传导的">3. 时钟树：动力是怎么传导的？
+</h3><p>时钟的源头有很多，就像工厂可以由自备发电机供电，也可以由电网供电。</p>
+<ol>
+<li>HSE (高速外部时钟)：通常是电路板上那个金属外壳的晶振（比如 8MHz）。它最准。</li>
+<li>HSI (高速内部时钟)：芯片内部自带的，虽然没那么准，但能应急。</li>
+<li>PLL (锁相环/倍频器)：这是最神奇的地方。它能把 8MHz 的微弱动力，像加了涡轮增压一样，翻好几倍变成 72MHz 或 168MHz。</li>
+</ol>
+<div class="mermaid">
+  graph LR
+    %% 时钟源部分
+    subgraph Sources [1.时钟源-水源]
+        HSE[HSE 外部高速晶振<br/>通常 8MHz]
+        HSI[HSI 内部高速时钟<br/>约 8MHz, 不够准]
+        LSE[LSE 外部低速晶振<br/>32.768kHz, 给RTC用]
+        LSI[LSI 内部低速时钟<br/>40kHz, 给看门狗用]
+    end
+
+    %% 倍频部分
+    subgraph Processing [2.倍频与切换-水处理]
+        PLLMux{时钟源选择}
+        PLL[PLL 锁相环<br/>倍频器]
+        SYS_Mux{系统时钟选择}
+        
+        HSE --> PLLMux
+        HSI --> PLLMux
+        PLLMux --> PLL
+        PLL -->|x9| SYS_Mux
+        HSE --> SYS_Mux
+    end
+
+    %% 总线分发部分
+    subgraph Bus [3.总线预分频-水管]
+        SYSCLK((SYSCLK 系统时钟<br/>通常 72MHz))
+        AHB_Pre[AHB 预分频器]
+        APB1_Pre[APB1 低速预分频器<br/>最高 36MHz]
+        APB2_Pre[APB2 高速预分频器<br/>最高 72MHz]
+
+        SYS_Mux --> SYSCLK
+        SYSCLK --> AHB_Pre
+        AHB_Pre --> APB1_Pre
+        AHB_Pre --> APB2_Pre
+    end
+
+    %% 外设部分
+    subgraph Peripherals [4.外设-水龙头]
+        AHB_Pre --> DMA[DMA / 复位控制器]
+        
+        APB1_Pre --> TIM2[Timer 2,3,4]
+        APB1_Pre --> UART2[UART 2,3]
+        APB1_Pre --> I2C[I2C 1,2]
+
+        APB2_Pre --> GPIO[GPIO A, B, C...]
+        APB2_Pre --> UART1[UART 1]
+        APB2_Pre --> ADC[ADC 1,2]
+        APB2_Pre --> SPI1[SPI 1]
+    end
+
+    %% 样式美化
+    style SYSCLK fill:#f96,stroke:#333,stroke-width:2px
+    style PLL fill:#fcf,stroke:#333
+    style Sources fill:#e1f5fe,stroke:#01579b
+    style Peripherals fill:#fff9c4,stroke:#fbc02d
+</div>
+<h4 id="为什么要有这么多时钟源">为什么要有这么多时钟源
+</h4><ul>
+<li>HSE (High-Speed External)：你的开发板上那个金属的小疙瘩（晶振）。它是最准的，做串口通信、USB 等<strong>对时间敏感的任务</strong>必须用它。</li>
+<li>HSI (High-Speed Internal)：<strong>芯片内置的电阻电容震荡产生</strong>。优点是启动快、不用钱，缺点是受温度影响大，会“跑偏”。</li>
+<li>LSE/LSI：就像家里的闹钟电池，功率极低，专门给 RTC（实时时钟/万年历） 或 看门狗（防止程序死机） 这种需要 24 小时待命的模块用。</li>
+</ul>
+<h4 id="不同的总线apb1-与-apb2">不同的总线（APB1 与 APB2）
+</h4><p>这是初学者最容易搞混的地方：</p>
+<ul>
+<li>APB2 (高速总线)：通常运行在 72MHz。它连接的是最重要的外设，比如 GPIO（控制灯、按键快不快全靠它）、UART1、ADC。</li>
+<li>APB1 (低速总线)：<strong>为了节能</strong>，它的上限通常只有 36MHz。挂载的是一些没必要跑那么快的模块，比如一般的定时器、I2C 通信等。</li>
+</ul>
+<p>1、这里可能会产生疑问，为什么将 I2C 和 UART 挂在到 APB1 低速总线上，我们先来看看所谓的“低速”总线 APB1</p>
+<ul>
+<li>APB1 总线频率：通常是 <strong>$36\text{ MHz}$</strong>（即每秒钟翻转 36,000,000 次）。</li>
+<li>UART 常用速率：$115200\text{ bps}$（约 <strong>$0.1\text{ MHz}$</strong>）。</li>
+<li>I2C 常用速率：标准模式 $100\text{ kbps}$，快速模式 $400\text{ kbps}$（约 <strong>$0.4\text{ MHz}$</strong>）。</li>
+</ul>
+<p>结论：即使是所谓的“低速”总线 APB1（$36\text{ MHz}$），它的速度也是 I2C 和 UART 物理传输速率的 <strong>几十倍甚至几百倍</strong>。 对于这些外设来说，APB1 提供的带宽已经绰绰有余了。把它们挂在 $72\text{ MHz}$ 的 APB2 上，完全是浪费。</p>
+<p>2、你可能会问：既然 UART 都不需要高速，那 GPIO 为什么要高速？</p>
+<ul>
+<li>GPIO（通用输入输出）：有时候我们需要用 GPIO 模拟一些非常复杂的协议，或者输出极高频率的脉冲（比如驱动高速功率管）。如果 GPIO 总线慢，输出的波形就会“抖动”或者变圆，无法精准控制。</li>
+<li>ADC（模数转换）：ADC 需要在极短的时间内对模拟电压进行采样。<strong>采样频率越高，还原的信号越准，这必须依靠高速时钟支持</strong>。</li>
+<li>TIM1/TIM8：这些是高级定时器，用于控制电机的精准补差。如果时钟不够快，控制精度就会下降。</li>
+</ul>
+<p>3、一个有趣的例外：UART1</p>
+<p>如果你仔细看时钟树，你会发现 <strong>USART1 往往是挂在 APB2（高速）上的</strong>，而 USART2, 3 挂在 APB1 上。这是为什么呢？</p>
+<ol>
+<li>启动与刷机：<strong>STM32 的串口下载（Bootloader）通常默认使用 USART1</strong>。为了保证在各种复杂情况下都能快速、可靠地通信，官方把它放在了高速总线上。</li>
+<li>最高上限：如果你真的需要极限的串口波特率（比如几兆比特每秒），USART1 能够提供比其他串口更高的上限。</li>
+</ol>
+<h4 id="pll倍频器是核心魔术师">PLL（倍频器）是核心魔术师
+</h4><p>如果你外接了一个 8MHz 的晶振，但你希望芯片跑在 72MHz。怎么办？ PLL 就是干这个的。它能把输入的 8MHz “乘”上一个倍数（比如 9 倍），得到 72MHz。</p>
+<h3 id="重点理解总线层级">重点理解：总线层级
+</h3><p>在学习时钟树时，你会看到两个重要的“分发器”，它们叫 APB 总线：</p>
+<ul>
+<li>APB1：低速总线（最高通常 36MHz 或 42MHz）。连接的是比较慢的外设（如串口 UART2、普通定时器）。</li>
+<li>APB2：高速总线（最高通常 72MHz 或 84MHz）。连接的是重要的、需要快的模块（如 GPIO、串口 UART1、高级定时器）。</li>
+</ul>
+<p>记住这个知识点： 当你在查手册开启时钟时，一定要看清楚你的外设是挂在 APB1 还是 APB2 下。挂错了总线，时钟函数就调错了。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

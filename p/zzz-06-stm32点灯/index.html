@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="这里使用的是 ST-Link 和最小开发板。这种连接方式叫做 SWD (Serial Wire Debug) 接口。相比于串口下载，它不仅速度快，最重要的是支持在线调试（可以实时查看变量、打断点让程序停下）。\n">
+<title>ZZZ-06-STM32点灯</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-06-stm32%E7%82%B9%E7%81%AF/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-06-STM32点灯">
+<meta property='og:description' content="这里使用的是 ST-Link 和最小开发板。这种连接方式叫做 SWD (Serial Wire Debug) 接口。相比于串口下载，它不仅速度快，最重要的是支持在线调试（可以实时查看变量、打断点让程序停下）。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-06-stm32%E7%82%B9%E7%81%AF/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-06-STM32点灯">
+<meta name="twitter:description" content="这里使用的是 ST-Link 和最小开发板。这种连接方式叫做 SWD (Serial Wire Debug) 接口。相比于串口下载，它不仅速度快，最重要的是支持在线调试（可以实时查看变量、打断点让程序停下）。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#接线对照表">接线对照表</a></li>
+        <li><a href="#连接后的关键步骤">连接后的关键步骤</a></li>
+        <li><a href="#关于-boot-跳线帽的设置">关于 BOOT 跳线帽的设置</a></li>
+      </ol>
+    </li>
+    <li><a href="#工程配置">工程配置</a>
+      <ol>
+        <li><a href="#为什么需要工程配置">为什么需要“工程配置”</a></li>
+        <li><a href="#完整操作步骤">完整操作步骤</a>
+          <ol>
+            <li><a href="#第一步新建工程">第一步：新建工程</a></li>
+            <li><a href="#第二步图形化配置-ioc-文件">第二步：图形化配置 (ioc 文件)</a></li>
+            <li><a href="#第三步开启外部高速晶振可选">第三步：开启外部高速晶振（可选）</a></li>
+            <li><a href="#第四步编写完整代码">第四步：编写完整代码</a></li>
+            <li><a href="#第五步配置调试口">第五步：配置调试口</a></li>
+          </ol>
+        </li>
+        <li><a href="#编译下载与运行">编译、下载与运行</a></li>
+        <li><a href="#小结你的第一个工程长什么样">小结：你的第一个工程长什么样</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-06-stm32%E7%82%B9%E7%81%AF/">ZZZ-06-STM32点灯</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>这里使用的是 ST-Link 和最小开发板。这种连接方式叫做 <strong>SWD (Serial Wire Debug)</strong> 接口。相比于串口下载，它不仅速度快，最重要的是支持<strong>在线调试</strong>（可以实时查看变量、打断点让程序停下）。</p>
+<h3 id="接线对照表">接线对照表
+</h3><ul>
+<li>ST-Link 使用到的引脚：<del>7、9、19、20</del>(尝试这四个引脚，CubeIDE 下载程序时找不到单片机)
+<ul>
+<li>使用引脚 1、20、7、8；并且通过数据线单独给单片机供电</li>
+</ul>
+</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220151519265.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220151519265.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<div class="mermaid">
+  graph LR
+    subgraph ST_Link [ST-Link V2 下载器]
+        P1[3.3V]
+        P2[GND]
+        P3[SWCLK]
+        P4[SWDIO]
+    end
+
+    subgraph STM32_Board [STM32 最小系统板]
+        M1[3.3V]
+        M2[GND]
+        M3[SWCLK]
+        M4[SWIO]
+    end
+
+    P1 --- M1
+    P2 --- M2
+    P3 --- M3
+    P4 --- M4
+
+    style ST_Link fill:#f5f5f5,stroke:#333
+    style STM32_Board fill:#fff9c4,stroke:#fbc02d
+</div>
+<h3 id="连接后的关键步骤">连接后的关键步骤
+</h3><p>接好线后，你还需要在电脑端的软件（以 Keil MDK 为例）中进行设置，否则还是识别不到芯片：</p>
+<ol>
+<li>插上 ST-Link：电脑识别到 ST-Link 驱动。</li>
+<li>打开 Keil 工程：
+<ul>
+<li>点击魔术棒图标 (<strong>Options for Target</strong>)。</li>
+<li>切换到 <strong>Debug</strong> 选项卡。</li>
+<li>在右侧下拉框选择 <strong>ST-Link Debugger</strong>。</li>
+<li>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152131869.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152131869.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ul>
+</li>
+<li>进入 Settings 设置 (关键)：
+<ul>
+<li>点击旁边的 <strong>Settings</strong> 按钮。</li>
+<li>在 <strong>Port</strong> 下拉框中，务必将 <code>JTAG</code> 改为 <strong><code>SW</code></strong>（因为你只接了两根信号线）。</li>
+<li>如果连接成功，右侧的 <strong>SW Device</strong> 框里会出现一串十六进制代码（IDCODE），这说明已经成功识别到了你的 STM32 芯片。</li>
+<li>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251220152242.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251220152242.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="关于-boot-跳线帽的设置">关于 BOOT 跳线帽的设置
+</h3><p>在使用 ST-Link 下载时，开发板上的黄色跳线帽（BOOT0 和 BOOT1）通常应该这样设置：</p>
+<ul>
+<li>BOOT0 = 0（跳线帽靠近 GND 一端）</li>
+<li>BOOT1 = 0（跳线帽靠近 GND 一端） 这种模式下，程序下载后按一下复位键就能直接从 Flash 运行，最方便。</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152521016.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152521016.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h2 id="工程配置">工程配置
+</h2><p>STM32 的 C 代码需要一个“容器”（即工程环境）。如果你只把代码写在一个记事本里，编译器是不知道如何处理硬件底层的</p>
+<h3 id="为什么需要工程配置">为什么需要“工程配置”
+</h3><p>在 51 单片机里，你可能只需要一个 <code>.c</code> 文件就能跑。但在 STM32 里，一个完整的工程必须包含以下四个核心板块：</p>
+<ol>
+<li>启动文件 (<code>startup_stm32xxx.s</code>)：我们之前讲过的“工厂开工流程”，它是汇编代码。</li>
+<li>CMSIS 库文件：这是 ARM 公司提供的，用来让内核（Cortex-M）认识寄存器地址的。</li>
+<li>HAL/标准库驱动：这是 ST 官方提供的库，让你能用 <code>HAL_GPIO_WritePin</code> 这种函数。</li>
+<li>你的代码 (<code>main.c</code>)：你写的逻辑。</li>
+</ol>
+<p>好消息是：现在的开发者通常不需要手动配置这些，这里我们使用 <strong>STM32CubeIDE</strong>。只需要鼠标点几下，它就会自动为你生成一个配置好的工程容器。</p>
+<h3 id="完整操作步骤">完整操作步骤
+</h3><h4 id="第一步新建工程">第一步：新建工程
+</h4><ol>
+<li>打开 STM32CubeIDE，点击 <strong>File -&gt; New -&gt; STM32 Project</strong>。</li>
+<li>在 <strong>Commercial Part Number</strong> 框输入你的芯片型号（如 <code>STM32F103C8T6</code>），选中后点击 <strong>Next</strong>。</li>
+<li>给项目起个名字（如 <code>Blinky_LED</code>），点击 <strong>Finish</strong>。</li>
+</ol>
+<p>![[Pasted image 20251220153919.png]]</p>
+<h4 id="第二步图形化配置-ioc-文件">第二步：图形化配置 (ioc 文件)
+</h4><ol>
+<li>在弹出的芯片引脚图上，找到 <strong>PC13</strong> 引脚，左键点击它，选择 <strong>GPIO_Output</strong>。</li>
+<li>（可选）在左侧菜单 <strong>System Core -&gt; GPIO</strong> 里，点击 PC13，可以给它起个别名（User Label），比如 <code>MY_LED</code>。</li>
+<li><strong>配置时钟</strong>：点击上方的 <strong>Clock Configuration</strong> 选项卡。通常默认即可，或者在 <code>HCLK</code> 框输入 <code>72</code> 然后按回车，IDE 会自动帮你算好倍频。</li>
+<li><strong>生成代码</strong>：直接按键盘 <strong>Ctrl + S</strong> 保存，弹窗问是否生成代码，选 <strong>Yes</strong>。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154159371.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154159371.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="第三步开启外部高速晶振可选">第三步：开启外部高速晶振（可选）
+</h4><p>注意：在 STM32F1 系列中，如果使用内部时钟（HSI），倍频后最高只能达到 64MHz。要达到标准的 72MHz，你必须开启板子上的那个金属晶振。按照下面步骤可开启开发板上的金属晶振：</p>
+<p>1、开启 HSE 硬件开关</p>
+<ol>
+<li>回到 STM32CubeIDE 的 <strong>Pinout &amp; Configuration</strong>（引脚配置）界面。</li>
+<li>在左侧菜单栏找到 <strong>System Core</strong>（系统核心）。</li>
+<li>点击 <strong>RCC</strong>。</li>
+<li>在右侧的 <strong>High Speed Clock (HSE)</strong> 下拉菜单中，选择 <strong>Crystal/Ceramic Resonator</strong>（晶体/陶瓷谐振器）。
+<ul>
+<li>此时你会发现芯片引脚图上的 PD0 和 PD1 变绿了，这说明它们现在连接到了外部晶振。</li>
+<li>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154801274.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154801274.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ul>
+</li>
+</ol>
+<p>2、在时钟树中切换路径</p>
+<ol>
+<li>切换到上方的 <strong>Clock Configuration</strong>（时钟配置）选项卡。</li>
+<li>找到 <strong>PLL Source Mux</strong>（锁相环来源选择器）这个选择框，把点选挪到 <strong>HSE</strong> 上。</li>
+<li>确保 <strong>PLLMul</strong>（倍频系数）被设置为 <strong>X 9</strong>（因为 $8\text{MHz} \times 9 = 72\text{MHz}$）。</li>
+<li>在 <strong>System Clock Mux</strong>（系统时钟选择器）中，选择 <strong>PLLCLK</strong>。</li>
+<li><strong>关键点</strong>：观察 <strong>APB1 Prescaler</strong>，确保它的分频系数是 <strong>/2</strong>。
+<ul>
+<li>原因：我们在“总线”那一节讲过，APB1 最高只能跑 36MHz。如果系统时钟是 72MHz，这里必须 2 分频。
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155013204.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155013204.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ul>
+</li>
+</ol>
+<h4 id="第四步编写完整代码">第四步：编写完整代码
+</h4><p>代码生成后，打开左侧项目资源管理器里的 <strong>Core -&gt; Src -&gt; main.c</strong>。</p>
+<p><strong>⚠️ 注意：</strong> 在 CubeIDE 中，你必须把代码写在 <code>/* USER CODE BEGIN … */</code> 和 <code>/* USER CODE END … */</code> 之间。否则，下次你修改配置重新生成代码时，你的代码会被<strong>无情覆盖</strong>！</p>
+<p>找到 <code>main</code> 函数里的 <code>while(1)</code>，填入以下代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* Infinite loop */</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN WHILE */</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 翻转 PC13 的电平
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 如果你之前起了别名 MY_LED，这里也可以写 MY_LED_GPIO_Port, MY_LED_Pin
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 延时 500 毫秒
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE END WHILE */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE BEGIN 3 */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 3 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155522595.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155522595.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="第五步配置调试口">第五步：配置调试口
+</h4><ul>
+<li>打开你的工程里的 <strong><code>.ioc</code></strong> 文件。</li>
+<li>在左侧菜单栏找到 <strong>System Core</strong> -&gt; <strong>SYS</strong>。</li>
+<li>在右侧的 <strong>Debug</strong> 下拉菜单中，选择 <strong>Serial Wire</strong>。
+<ul>
+<li>选完后，你应该能看到引脚图上的 PA13 和 PA14 变绿了，并标注了 SWDIO 和 SWCLK。</li>
+</ul>
+</li>
+<li><strong>保存并重新生成代码</strong>。</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220180739819.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220180739819.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="编译下载与运行">编译、下载与运行
+</h3><ol>
+<li><strong>编译</strong>：点击工具栏上的 <strong>“小锤子”图标 (Build)</strong>。查看下方 Console 窗口，显示 <code>0 errors, 0 warnings</code> 即成功。</li>
+<li><strong>设置下载器</strong>：如果是第一次运行，点击 <strong>Run -&gt; Run Configurations…</strong>。
+<ul>
+<li>在 <strong>Debugger</strong> 选项卡里，确保使用的是 <strong>ST-LINK (ST-LINK GDB server)</strong>。</li>
+<li>确保 <strong>Interface</strong> 选的是 <strong>SWD</strong>。</li>
+</ul>
+</li>
+<li><strong>运行</strong>：点击工具栏上的 <strong>“绿色右箭头”图标 (Run)</strong>。IDE 会自动把程序烧录进开发板。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220160035387.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220160035387.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<blockquote>
+<p>升级 ST-LINK 固件</p>
+<ol>
+<li>点击 IDE 菜单 <strong>Help -&gt; ST-LINK Firmware Update</strong>。</li>
+<li>点击 <strong>Open in update mode</strong>。</li>
+<li>点击 <strong>Upgrade</strong> 升级固件。
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220161411019.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220161411019.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ol>
+</blockquote>
+<h3 id="小结你的第一个工程长什么样">小结：你的第一个工程长什么样
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>文件夹/文件</strong></th>
+          <th><strong>作用</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Drivers/CMSIS</strong></td>
+          <td>内核核心文件（不用动）</td>
+      </tr>
+      <tr>
+          <td><strong>Drivers/STM32F1xx_HAL_Driver</strong></td>
+          <td>HAL 库源码，即 <code>HAL_GPIO_xxx</code> 等函数的定义</td>
+      </tr>
+      <tr>
+          <td><strong>Core/Src/main.c</strong></td>
+          <td><strong>你的主战场</strong></td>
+      </tr>
+      <tr>
+          <td><strong>Core/Src/stm32f1xx_it.c</strong></td>
+          <td>处理中断函数的地方</td>
+      </tr>
+      <tr>
+          <td><strong>Project_Name.ioc</strong></td>
+          <td>可视化配置的源文件，双击它能重新改引脚</td>
+      </tr>
+  </tbody>
+</table></div>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

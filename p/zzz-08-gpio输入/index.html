@@ -1,0 +1,864 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="学习 GPIO 输入 是迈向“人机交互”的关键一步。现在我们将以 PA0 引脚连接按键，PC13 引脚控制 LED 为例。学习两种最常用的方法：轮询扫描（Polling） 和 外部中断（EXTI）\n">
+<title>ZZZ-08-GPIO输入</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-08-gpio%E8%BE%93%E5%85%A5/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-08-GPIO输入">
+<meta property='og:description' content="学习 GPIO 输入 是迈向“人机交互”的关键一步。现在我们将以 PA0 引脚连接按键，PC13 引脚控制 LED 为例。学习两种最常用的方法：轮询扫描（Polling） 和 外部中断（EXTI）\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-08-gpio%E8%BE%93%E5%85%A5/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-08-GPIO输入">
+<meta name="twitter:description" content="学习 GPIO 输入 是迈向“人机交互”的关键一步。现在我们将以 PA0 引脚连接按键，PC13 引脚控制 LED 为例。学习两种最常用的方法：轮询扫描（Polling） 和 外部中断（EXTI）\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#准备工作硬件连接">准备工作：硬件连接</a></li>
+        <li><a href="#实验一轮询扫描button-scanning">实验一：轮询扫描（Button Scanning）</a>
+          <ol>
+            <li><a href="#1-cubeide-配置-ioc-文件">1. CubeIDE 配置 (ioc 文件)</a></li>
+            <li><a href="#2-代码实现">2. 代码实现</a></li>
+          </ol>
+        </li>
+        <li><a href="#实验二外部中断exti">实验二：外部中断（EXTI）</a>
+          <ol>
+            <li><a href="#1-cubeide-配置-ioc-文件-1">1. CubeIDE 配置 (ioc 文件)</a></li>
+            <li><a href="#2-代码实现-1">2. 代码实现</a></li>
+          </ol>
+        </li>
+        <li><a href="#对比">对比</a></li>
+        <li><a href="#常见坑点避坑指南">常见坑点（避坑指南）</a></li>
+        <li><a href="#扩展资料常见中断类型">扩展资料：常见中断类型</a>
+          <ol>
+            <li><a href="#a-系统异常-system-exceptions">A. 系统异常 (System Exceptions)</a></li>
+            <li><a href="#b-外部中断-exti">B. 外部中断 (EXTI)</a></li>
+            <li><a href="#c-外设中断-peripheral-interrupts">C. 外设中断 (Peripheral Interrupts)</a></li>
+            <li><a href="#中断结构树图">中断结构树图</a></li>
+            <li><a href="#常见的-exti-线路拼车现象">常见的 EXTI 线路“拼车”现象</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-08-gpio%E8%BE%93%E5%85%A5/">ZZZ-08-GPIO输入</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>学习 GPIO 输入 是迈向“人机交互”的关键一步。现在我们将以 PA0 引脚连接按键，PC13 引脚控制 LED 为例。学习两种最常用的方法：轮询扫描（Polling） 和 外部中断（EXTI）</p>
+<h3 id="准备工作硬件连接">准备工作：硬件连接
+</h3><ol>
+<li>LED: 最小开发板自带，连接在 PC13（低电平点亮）。</li>
+<li>按键: 找一个轻触按键。
+<ul>
+<li>一端连接到 PA0。</li>
+<li>另一端连接到 GND。</li>
+<li>原理：平时 PA0 是高电平，按键按下时 PA0 变成低电平。</li>
+</ul>
+</li>
+</ol>
+<h3 id="实验一轮询扫描button-scanning">实验一：轮询扫描（Button Scanning）
+</h3><p>这种方法就像警察“查岗”，在 <code>while(1)</code> 循环里不断地看 PA0 的状态。</p>
+<h4 id="1-cubeide-配置-ioc-文件">1. CubeIDE 配置 (ioc 文件)
+</h4><ul>
+<li>PC13: 保持 <code>GPIO_Output</code>【最小开发板上的灯，低电平点亮】</li>
+<li>PA0: 设置为 <code>GPIO_Input</code>。</li>
+<li>关键配置 (GPIO 选项卡)：
+<ul>
+<li>点击 PA0，将 GPIO Pull-up/Pull-down 设置为 Pull-up（上拉）【PA0 默认为高电平，当按键按下时，将 PA0 拉低到 GND】</li>
+<li>原因：这样当按键没按下时，内部电阻会把 PA0 稳定在 3.3V（高电平），防止引脚“浮空”导致电平乱跳。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-代码实现">2. 代码实现
+</h4><p>在 <code>main.c</code> 的 <code>while(1)</code> 中编写：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN WHILE */</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 1. 读取 PA0 的电平状态
+</span></span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="c1">// 如果读到低电平（按键按下）
+</span></span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 软件消抖：按键是机械结构，按下时会产生几毫秒的杂波
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3. 再次确认是否按下
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// 4. 执行动作：翻转 LED
+</span></span></span><span class="line"><span class="cl">      <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// 5. 等待按键松开（死循环直到变回高电平），防止长按导致灯疯狂闪烁
+</span></span></span><span class="line"><span class="cl">      <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220203757285.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220203757285.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="实验二外部中断exti">实验二：外部中断（EXTI）
+</h3><p>轮询扫描很占 CPU 资源。中断 则像“报警器”：CPU 平时去干别的事，按键一按下，硬件自动触发一个信号通知 CPU 来处理。</p>
+<h4 id="1-cubeide-配置-ioc-文件-1">1. CubeIDE 配置 (ioc 文件)
+</h4><ul>
+<li>PA0: 修改为 <code>GPIO_EXTI0</code>。</li>
+<li>GPIO 设置:
+<ul>
+<li>GPIO mode: 选择 External Interrupt Mode with Falling edge trigger（下降沿触发，即电平从 1 变 0 的瞬间触发）。</li>
+<li>GPIO Pull-up/Pull-down: 保持 Pull-up。</li>
+<li>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220204223209.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220204223209.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ul>
+</li>
+<li>NVIC 设置 (最重要！):
+<ul>
+<li>点击左侧 System Core -&gt; NVIC。</li>
+<li>勾选 EXTI line0 interrupt 后面的 Enabled 框。如果不勾，中断永远不会发生！</li>
+<li>![[Pasted image 20251220204306.png]]</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>为什么勾选 <strong>EXTI line 0</strong>？
+“EXTI line 0” 其实是 STM32 中断分配机制中的一个“频道”。STM32 的 GPIO 引脚非常多（PA0<del>PA15, PB0</del>PB15…），但<strong>中断线（Line）资源是有限的</strong></p>
+<ul>
+<li>对应关系：引脚的编号决定了它属于哪条线。
+<ul>
+<li>PA0, PB0, PC0, PD0 … 全部连接到 EXTI Line 0。</li>
+<li>PA1, PB1, PC1, PD1 … 全部连接到 EXTI Line 1。</li>
+</ul>
+</li>
+<li>排他性（重要）：虽然 PA0 和 PB0 都能连到 Line 0，但<strong>同一时刻 Line 0 只能选择其中一个引脚</strong>。你不能同时把 PA0 和 PB0 都设为中断。</li>
+</ul>
+</blockquote>
+<h4 id="2-代码实现-1">2. 代码实现
+</h4><p>中断不需要写在 <code>while(1)</code> 里。HAL 库会自动调用一个名为“回调函数”的地方。你只需要在 <code>main.c</code> 的末尾（<code>USER CODE BEGIN 4</code> 之后）加上这个函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 4 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 当 PA0 触发中断时，系统会自动跳到这个函数执行
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_GPIO_EXTI_Callback</span><span class="p">(</span><span class="kt">uint16_t</span> <span class="n">GPIO_Pin</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="n">GPIO_Pin</span> <span class="o">==</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="c1">// 确保是 PA0 产生的中断
+</span></span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 翻转 LED
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 4 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="对比">对比
+</h3><p>两种方法的深度对比</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>特性</th>
+          <th>轮询扫描 (Polling)</th>
+          <th>外部中断 (EXTI)</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>CPU 占用</td>
+          <td>高（一直在跑判断语句）</td>
+          <td>极低（平时 CPU 可以休眠）</td>
+      </tr>
+      <tr>
+          <td>实时性</td>
+          <td>取决于 <code>while</code> 循环里其他代码的长短</td>
+          <td>极高（信号一到立刻响应）</td>
+      </tr>
+      <tr>
+          <td>消抖处理</td>
+          <td>简单（用 <code>HAL_Delay</code>）</td>
+          <td>复杂（中断里不建议用 Delay，通常用定时器）</td>
+      </tr>
+      <tr>
+          <td>适用场景</td>
+          <td>简单按键、对实时性要求不高</td>
+          <td>紧急停止、脉冲计数、低功耗唤醒</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="常见坑点避坑指南">常见坑点（避坑指南）
+</h3><ol>
+<li><strong>忘记开 NVIC 中断开关：这是 EXTI 实验失败的 90% 原因</strong>。</li>
+<li>中断里加了很长的延时：<strong>中断服务函数要求“快进快出”</strong>，如果在里面写 <code>HAL_Delay(1000)</code>，系统可能会卡死或错过其他重要任务。</li>
+<li>引脚悬空：如果不配置内部上拉（Pull-up），你的灯可能会因为你手指靠近板子而自己乱闪。</li>
+</ol>
+<h3 id="扩展资料常见中断类型">扩展资料：常见中断类型
+</h3><p>STM32 的中断分为三大类：<strong>系统异常</strong>、<strong>外部中断 (EXTI)</strong> 和 <strong>外设中断</strong></p>
+<h4 id="a-系统异常-system-exceptions">A. 系统异常 (System Exceptions)
+</h4><p>这些是内核自带的，优先级极高，通常用于处理“紧急事故”。</p>
+<ul>
+<li>Reset: 复位中断。</li>
+<li>HardFault: 硬故障（程序崩溃、访问非法内存）。</li>
+<li>SysTick: 系统滴答定时器（HAL_Delay 的基础）。</li>
+</ul>
+<h4 id="b-外部中断-exti">B. 外部中断 (EXTI)
+</h4><p>主要处理引脚的电平变化。<strong>Line 0 到 Line 15</strong>: 对应 GPIO 的 16 个引脚编号。</p>
+<h4 id="c-外设中断-peripheral-interrupts">C. 外设中断 (Peripheral Interrupts)
+</h4><p>每个功能模块都有自己的“报警器”。</p>
+<ul>
+<li>TIM (Timer): 定时器时间到、捕获到信号。</li>
+<li>UART/USART: 收到数据了、数据发完了。</li>
+<li>ADC: 模数转换完成了。</li>
+<li>DMA: 大批量数据搬运完了。</li>
+</ul>
+<h4 id="中断结构树图">中断结构树图
+</h4><div class="mermaid">
+  graph TD
+    subgraph "中断源 (Interrupt Sources)"
+        subgraph "外部中断 EXTI"
+            EXTI0[EXTI Line 0<br/>PA0/PB0/PC0...]
+            EXTI1[EXTI Line 1<br/>PA1/PB1/PC1...]
+            EXTIn[EXTI Line 10-15]
+        end
+        
+        subgraph "通信外设"
+            UART[UART1/2<br/>接收完成/发送空]
+            I2C[I2C/SPI<br/>传输错误/完成]
+        end
+        
+        subgraph "定时与控制"
+            TIM[TIM1/2/3/4<br/>更新/比较/捕获]
+            ADC[ADC<br/>转换结束]
+        end
+        
+        subgraph "系统异常 (内核)"
+            SysTick[SysTick<br/>1ms 节拍]
+            Fault[HardFault<br/>系统崩溃]
+        end
+    end
+
+    EXTI0 --> NVIC
+    EXTI1 --> NVIC
+    EXTIn --> NVIC
+    UART --> NVIC
+    I2C --> NVIC
+    TIM --> NVIC
+    ADC --> NVIC
+    SysTick --> NVIC
+    Fault --> NVIC
+
+    subgraph "NVIC (分诊台)"
+        NVIC{NVIC 控制器<br/>判断优先级/屏蔽}
+    end
+
+    NVIC -->|打断当前任务| CPU[Cortex-M3 内核]
+    
+    style CPU fill:#f96,stroke:#333,stroke-width:2px
+    style NVIC fill:#bbf,stroke:#333
+</div>
+<h4 id="常见的-exti-线路拼车现象">常见的 EXTI 线路“拼车”现象
+</h4><p>在 <code>STM32F103C8T6</code> 中，为了节省硬件资源，有些中断线路是<strong>合并</strong>在一起的。你在 CubeIDE 的 NVIC 列表里会发现：</p>
+<ol>
+<li>EXTI0, EXTI1, EXTI2, EXTI3, EXTI4：这 5 条线是<strong>独立</strong>的，每个都有自己的中断服务函数。</li>
+<li>EXTI9_5_IRQHandler：Line 5 到 Line 9 的中断<strong>共享</strong>这一个函数。</li>
+<li>EXTI15_10_IRQHandler：Line 10 到 Line 15 的中断<strong>共享</strong>这一个函数。</li>
+</ol>
+<p>这意味着：如果 PA10 和 PA11 都开启了中断，它们会跳进同一个函数。你需要在这个函数里通过 <code>if</code> 语句判断到底是哪条线触发的。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

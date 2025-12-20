@@ -1,0 +1,737 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[ZZZ-08-GPIO输入]]，重点学习“实验二：外部中断（EXTI）”中的内容\n核心概念：什么是 NVIC NVIC 是 Cortex-M 内核里的一个硬件模块，专门负责管理所有的中断。如果把 CPU 比作正在工作的医生，中断就是闯进诊室的病人，而 NVIC 就是分诊台的护士。在 CubeIDE 中，最让你困惑的可能就是 Priority（优先级）。\n">
+<title>ZZZ-09-NVIC中断</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-09-nvic%E4%B8%AD%E6%96%AD/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-09-NVIC中断">
+<meta property='og:description' content="本篇继 [[ZZZ-08-GPIO输入]]，重点学习“实验二：外部中断（EXTI）”中的内容\n核心概念：什么是 NVIC NVIC 是 Cortex-M 内核里的一个硬件模块，专门负责管理所有的中断。如果把 CPU 比作正在工作的医生，中断就是闯进诊室的病人，而 NVIC 就是分诊台的护士。在 CubeIDE 中，最让你困惑的可能就是 Priority（优先级）。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-09-nvic%E4%B8%AD%E6%96%AD/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-09-NVIC中断">
+<meta name="twitter:description" content="本篇继 [[ZZZ-08-GPIO输入]]，重点学习“实验二：外部中断（EXTI）”中的内容\n核心概念：什么是 NVIC NVIC 是 Cortex-M 内核里的一个硬件模块，专门负责管理所有的中断。如果把 CPU 比作正在工作的医生，中断就是闯进诊室的病人，而 NVIC 就是分诊台的护士。在 CubeIDE 中，最让你困惑的可能就是 Priority（优先级）。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#核心概念什么是-nvic">核心概念：什么是 NVIC</a></li>
+        <li><a href="#抢占优先级-vs-子优先级最核心的区别">抢占优先级 vs 子优先级（最核心的区别）</a>
+          <ol>
+            <li><a href="#抢占优先级-preemption-priority--插队权">抢占优先级 (Preemption Priority) —— “插队权”</a></li>
+            <li><a href="#子优先级-sub-priority--排队权">子优先级 (Sub Priority) —— “排队权”</a></li>
+          </ol>
+        </li>
+        <li><a href="#优先级分组-priority-grouping">优先级分组 (Priority Grouping)</a></li>
+        <li><a href="#cubeide-配置界面里的关键项">CubeIDE 配置界面里的关键项</a></li>
+        <li><a href="#中断背后的潜规则-best-practices">中断背后的“潜规则” (Best Practices)</a></li>
+        <li><a href="#回调函数-callback-的真相">回调函数 (Callback) 的真相</a></li>
+        <li><a href="#扩展资料如何找到中断入口">扩展资料：如何找到中断入口</a>
+          <ol>
+            <li><a href="#第一条路查看户口本启动文件">第一条路：查看“户口本”（启动文件）</a></li>
+            <li><a href="#第二条路查看值班表-stm32f1xx_itc">第二条路：查看“值班表” (<code>stm32f1xx_it.c</code>)</a></li>
+            <li><a href="#第三条路hal-库的回调函数callback-推荐用法">第三条路：HAL 库的“回调函数”（Callback）—— 推荐用法</a></li>
+            <li><a href="#怎么知道回调函数叫什么">怎么知道回调函数叫什么</a></li>
+            <li><a href="#实战技巧如何快速瞬移到函数名">实战技巧：如何快速“瞬移”到函数名？</a></li>
+            <li><a href="#小结">小结</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-09-nvic%E4%B8%AD%E6%96%AD/">ZZZ-09-NVIC中断</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>本篇继 [[ZZZ-08-GPIO输入]]，重点学习“实验二：外部中断（EXTI）”中的内容</p>
+<h3 id="核心概念什么是-nvic">核心概念：什么是 NVIC
+</h3><p>NVIC 是 Cortex-M 内核里的一个<strong>硬件模块</strong>，专门负责管理所有的中断。如果把 CPU 比作正在工作的医生，中断就是闯进诊室的病人，而 NVIC 就是分诊台的护士。在 CubeIDE 中，最让你困惑的可能就是 Priority（优先级）。</p>
+<h3 id="抢占优先级-vs-子优先级最核心的区别">抢占优先级 vs 子优先级（最核心的区别）
+</h3><p>STM32 的中断优先级分为两个维度：</p>
+<h4 id="抢占优先级-preemption-priority--插队权">抢占优先级 (Preemption Priority) —— “插队权”
+</h4><ul>
+<li>动作： 正在处理中断 A 时，中断 B 来了。如果 B 的抢占优先级比 A 高，CPU 会立刻放下手头的 A，去处理 B。等 B 处理完，再回来接着处理 A。</li>
+<li>本质： 这种现象叫 “中断嵌套”。</li>
+</ul>
+<h4 id="子优先级-sub-priority--排队权">子优先级 (Sub Priority) —— “排队权”
+</h4><ul>
+<li>动作： 如果中断 A 和中断 B 的抢占优先级一样，且它们同时发生了。</li>
+<li>本质： 这时 CPU 不会发生嵌套，而是看谁的子优先级高，谁就先被处理。如果其中一个已经在运行了，另一个只能乖乖在门口等着，不能进去“插队”。</li>
+</ul>
+<blockquote>
+<p>注意：</p>
+<ol>
+<li>数字越小，优先级越高（0 是最高优先级）。</li>
+<li>只有抢占优先级不同，才能发生“嵌套”（插队）。</li>
+</ol>
+</blockquote>
+<h3 id="优先级分组-priority-grouping">优先级分组 (Priority Grouping)
+</h3><p>在 CubeIDE 的 NVIC 设置里，你会看到一个 Priority Group 的选项。这是因为 STM32 分给优先级的“总位数”是有限的（通常是 4 位，即 $2^4=16$ 级）。</p>
+<p>你可以决定这 4 位如何分配给“抢占”和“子”：</p>
+<ul>
+<li>Group 4 (4 bits for preemption, 0 for sub)：有 16 级抢占优先级，没有子优先级（常用，最简单）。</li>
+<li>Group 2 (2 bits for preemption, 2 for sub)：有 4 级抢占（0-3），4 级子（0-3）。</li>
+</ul>
+<p>建议： 初学者直接选 Group 4 或者默认设置即可，没必要搞得太复杂。
+![[Pasted image 20251220205142.png]]</p>
+<h3 id="cubeide-配置界面里的关键项">CubeIDE 配置界面里的关键项
+</h3><p>当你点开 <code>System Core</code> -&gt; <code>NVIC</code> 时，你会看到这几列：</p>
+<ul>
+<li>Enabled：打勾，硬件才会把中断信号传给内核。</li>
+<li>Preemption Priority：设置抢占优先级。</li>
+<li>Sub Priority：设置子优先级。</li>
+<li>Uses FreeRTOS functions：如果以后学习操作系统（RTOS），这里会提醒哪些中断可以调用系统 API。</li>
+</ul>
+<h3 id="中断背后的潜规则-best-practices">中断背后的“潜规则” (Best Practices)
+</h3><p>在实际开发中，有三条铁律一定要遵守：</p>
+<ol>
+<li>快进快出：中断服务函数（ISR）就像急诊室，不能在里面“睡觉”（严禁使用 <code>HAL_Delay()</code>）。如果里面写了耗时很长的循环，整个系统会卡死。</li>
+<li>不要在中断里打印：<code>printf</code> 非常慢。如果你想看中断触发没，翻转个 LED 或者设置一个标志位（Flag）是最好的选择。</li>
+<li>变量要加 <code>volatile</code>：如果你在中断里修改了一个全局变量，而 <code>main</code> 函数里要用到它，定义变量时请写成： <code>volatile uint8_t flag = 0;</code> 这告诉编译器：这个变量随时可能被“天外来客”（中断）修改，不要自作聪明去优化它。</li>
+</ol>
+<h3 id="回调函数-callback-的真相">回调函数 (Callback) 的真相
+</h3><p>你在代码里写的 <code>HAL_GPIO_EXTI_Callback</code> 并不是真正的中断入口。</p>
+<ul>
+<li>硬件层面：触发 -&gt; 查找 向量表 (Vector Table) -&gt; 跳转到汇编定义的 <code>EXTI0_IRQHandler</code>。</li>
+<li>HAL 库层面：<code>EXTI0_IRQHandler</code> 调用 <code>HAL_GPIO_EXTI_IRQHandler</code>（处理清除中断标志位等脏活），最后才调用你写的那个 <code>Callback</code>。</li>
+<li>好处：你不需要管底层如何清除标志位，只需要关心你的业务逻辑。</li>
+</ul>
+<h3 id="扩展资料如何找到中断入口">扩展资料：如何找到中断入口
+</h3><h4 id="第一条路查看户口本启动文件">第一条路：查看“户口本”（启动文件）
+</h4><p>所有中断函数的“官方真名”都刻在芯片的<strong>启动文件</strong>里。</p>
+<ol>
+<li>在 STM32CubeIDE 的左侧目录找到：<code>Core -&gt; Startup -&gt; startup_stm32f103c8tx.s</code>（这是一个汇编文件）。</li>
+<li>打开它，向下拉，你会看到一张巨大的表，全是类似 <code>XXXX_IRQHandler</code> 的名字。</li>
+</ol>
+<blockquote>
+<p>这就是真名： 无论什么中断，它的底层函数名一定叫 <strong><code>[外设名]_IRQHandler</code></strong>。</p>
+<ul>
+<li>例如：<code>EXTI0_IRQHandler</code>、<code>TIM2_IRQHandler</code>、<code>USART1_IRQHandler</code>。</li>
+</ul>
+</blockquote>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220211117113.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220211117113.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="第二条路查看值班表-stm32f1xx_itc">第二条路：查看“值班表” (<code>stm32f1xx_it.c</code>)
+</h4><p>当你用 STM32CubeMX 配置并生成代码后，IDE 会自动为你准备一个专门存放中断函数的文件。</p>
+<ol>
+<li>打开：<code>Core -&gt; Src -&gt; stm32f1xx_it.c</code>（it 代表 Interrupt）。</li>
+<li>这里面已经写好了你开启的那些中断函数。比如你开了外部中断 0，你就能在这里找到：</li>
+</ol>
+<p>![[Pasted image 20251220211210.png]]</p>
+<h4 id="第三条路hal-库的回调函数callback-推荐用法">第三条路：HAL 库的“回调函数”（Callback）—— 推荐用法
+</h4><p>虽然 <code>EXTI0_IRQHandler</code> 是真正的入口，但 HAL 库为了方便我们编写业务逻辑，设计了一套“回调机制”。</p>
+<p>重点理解这个流程（以按键中断为例）：</p>
+<div class="mermaid">
+  graph TD
+    A[硬件触发中断] --> B[查找启动文件向量表]
+    B --> C["真实入口: EXTI0_IRQHandler<br/>(在 stm32f1xx_it.c 中)"]
+    C --> D["HAL库通用处理: HAL_GPIO_EXTI_IRQHandler<br/>(负责清除标志位等杂活)"]
+    D --> E["开发者重写的函数: HAL_GPIO_EXTI_Callback<br/>(你在 main.c 里写的业务代码)"]
+
+    style E fill:#f96,stroke:#333
+</div>
+<h4 id="怎么知道回调函数叫什么">怎么知道回调函数叫什么
+</h4><p>回调函数的名字是<strong>固定</strong>的。你可以在对应的 HAL 库驱动文件（<code>.h</code>）里找到它们。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>中断类型</strong></th>
+          <th><strong>回调函数名 (你直接在 main.c 里重写即可)</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>外部中断</strong></td>
+          <td><code>HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</code></td>
+      </tr>
+      <tr>
+          <td><strong>定时器中断</strong></td>
+          <td><code>HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)</code></td>
+      </tr>
+      <tr>
+          <td><strong>串口接收完成</strong></td>
+          <td><code>HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="实战技巧如何快速瞬移到函数名">实战技巧：如何快速“瞬移”到函数名？
+</h4><p>如果你在代码里看到了 <code>HAL_GPIO_EXTI_IRQHandler</code>，想知道它最后会调用哪个回调函数，你可以：</p>
+<ol>
+<li><strong>按住 Ctrl 键</strong>，鼠标左键点击这个函数名，跳转进源码。</li>
+<li>在源码里继续向下翻，你会看到一个被标注为 <strong><code>__weak</code></strong> 的函数定义。</li>
+<li><strong><code>__weak</code>（虚函数）</strong> 就是你要找的名字！你在自己的代码里写一个一模一样的函数，编译器就会优先用你写的，而忽略这个“弱”的。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220213548126.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220213548126.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="小结">小结
+</h4><ul>
+<li><strong>物理入口</strong>：名字必带 <code>_IRQHandler</code>，在 <code>stm32f1xx_it.c</code> 中。</li>
+<li><strong>逻辑入口</strong>：名字必带 <code>_Callback</code>，是你写具体逻辑的地方。</li>
+</ul>
+<p>作为初学者，你只需要在 <code>main.c</code> 的末尾，把官方那个带 <code>__weak</code> 的回调函数复制过来，去掉 <code>__weak</code> 关键字，然后往里面填你的逻辑（比如点灯）就行了。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

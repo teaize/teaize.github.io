@@ -96,6 +96,1545 @@
 </description>
         </item>
         <item>
+        <title>STM32入门学习大纲</title>
+        <link>https://teaize.github.io/p/stm32%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/stm32%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</guid>
+        <description>&lt;p&gt;学习 STM32 是进入嵌入式开发的里程碑。对于初学者来说，最大的挑战往往在于 “东西太多，不知道从哪儿下手”。&lt;/p&gt;
+&lt;h2 id=&#34;第一阶段必备基础知识&#34;&gt;第一阶段：必备基础知识
+&lt;/h2&gt;&lt;p&gt;在写第一行 STM32 代码前，这些基础决定了你能走多远。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;学习内容&lt;/th&gt;
+          &lt;th&gt;要求程度&lt;/th&gt;
+          &lt;th&gt;核心重点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;C 语言高级语法&lt;/td&gt;
+          &lt;td&gt;重点掌握&lt;/td&gt;
+          &lt;td&gt;指针（重点）、结构体、枚举、位运算（&amp;amp;, |, ~）、回调函数。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;硬件基础&lt;/td&gt;
+          &lt;td&gt;了解&lt;/td&gt;
+          &lt;td&gt;电平概念（TTL/CMOS）、上拉/下拉电阻、推挽/开漏输出、数字/模拟信号。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;开发环境搭建&lt;/td&gt;
+          &lt;td&gt;掌握&lt;/td&gt;
+          &lt;td&gt;安装 Keil MDK 或 STM32CubeIDE，掌握烧录工具（ST-Link/DAP）的使用。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;第二阶段内核与系统架构&#34;&gt;第二阶段：内核与系统架构
+&lt;/h2&gt;&lt;p&gt;不要深钻手册里的数千页寄存器，但要明白芯片是怎么跑起来的。&lt;/p&gt;
+&lt;h3 id=&#34;1-核心架构了解即可&#34;&gt;1. 核心架构（了解即可）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Cortex-M 内核：知道它和 51 单片机的区别（32 位 vs 8 位）。&lt;/li&gt;
+&lt;li&gt;存储器映射：知道代码存在 Flash，变量存在 SRAM。&lt;/li&gt;
+&lt;li&gt;启动过程：了解从 Reset 到 &lt;code&gt;main&lt;/code&gt; 函数经历了什么。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-时钟树重点理解&#34;&gt;2. 时钟树（重点理解）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;重点掌握：STM32 的外设必须开启时钟才能工作。&lt;/li&gt;
+&lt;li&gt;了解：HSE（外部高速时钟）、LSE、PLL（倍频器）的关系。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第三阶段核心外设必须死磕&#34;&gt;第三阶段：核心外设（必须死磕）
+&lt;/h2&gt;&lt;p&gt;这是 STM32 开发的“基本功”，90% 的项目都离不开这些。&lt;/p&gt;
+&lt;h3 id=&#34;1-gpio通用输入输出&#34;&gt;1. GPIO（通用输入输出）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;重点掌握：输入（按键扫描、外部中断）、输出（控制 LED、蜂鸣器）。&lt;/li&gt;
+&lt;li&gt;重点掌握：推挽输出与开漏输出的区别。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-中断系统nvic&#34;&gt;2. 中断系统（NVIC）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;重点掌握：中断优先级的概念（抢占优先级、响应优先级）。&lt;/li&gt;
+&lt;li&gt;重点掌握：编写中断服务函数（ISR）的注意事项（快进快出）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-定时器timer&#34;&gt;3. 定时器（Timer）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;重点掌握：定时中断（精准定时）。&lt;/li&gt;
+&lt;li&gt;重点掌握：PWM 输出（控制电机转速、LED 亮度）。&lt;/li&gt;
+&lt;li&gt;了解：输入捕获（测频率）、编码器模式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-串口通信uartusart&#34;&gt;4. 串口通信（UART/USART）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;重点掌握：波特率、校验位、停止位。&lt;/li&gt;
+&lt;li&gt;重点掌握：使用串口打印 &lt;code&gt;printf&lt;/code&gt; 调试信息。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第四阶段进阶与通信协议&#34;&gt;第四阶段：进阶与通信协议
+&lt;/h2&gt;&lt;p&gt;当你能控制灯和电机后，需要让芯片与外部世界交互。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;模块&lt;/th&gt;
+          &lt;th&gt;要求程度&lt;/th&gt;
+          &lt;th&gt;关键点&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;ADC（模数转换）&lt;/td&gt;
+          &lt;td&gt;重点掌握&lt;/td&gt;
+          &lt;td&gt;将传感器的模拟电压转为数字量。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;I2C 通信&lt;/td&gt;
+          &lt;td&gt;掌握&lt;/td&gt;
+          &lt;td&gt;读写常见的 OLED 屏幕或 EEPROM。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;SPI 通信&lt;/td&gt;
+          &lt;td&gt;掌握&lt;/td&gt;
+          &lt;td&gt;驱动读写 SD 卡或外部 Flash（如 W25Q128）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;DMA（直接存储器访问）&lt;/td&gt;
+          &lt;td&gt;理解/掌握&lt;/td&gt;
+          &lt;td&gt;非常重要。让数据搬运不占用 CPU 资源，提升系统效率。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;看门狗（IWDG/WWDG）&lt;/td&gt;
+          &lt;td&gt;掌握&lt;/td&gt;
+          &lt;td&gt;防止程序“跑飞”或死机。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;避坑指南与建议&#34;&gt;避坑指南与建议
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;关于库的选择：
+&lt;ul&gt;
+&lt;li&gt;HAL 库：新手首选。配合 STM32CubeMX 图形化配置工具，上手极快，是目前的行业主流。&lt;/li&gt;
+&lt;li&gt;标准库：较老，但有助于理解底层逻辑。如果你是学生或想考研/比赛，可能会接触到。&lt;/li&gt;
+&lt;li&gt;寄存器：初学者不要直接写寄存器，效率极低且易受挫。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不要只看书/视频：
+&lt;ul&gt;
+&lt;li&gt;嵌入式是“手感”科学。每学一个外设，必须在开发板上实现功能（比如：学了 PWM，就必须亲手做一个呼吸灯）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;学会看手册：
+&lt;ul&gt;
+&lt;li&gt;不要求背下来，但要学会通过搜索关键字查找《参考手册》（RM）和《数据手册》（DS）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-01-STM32和51单片机的区别</title>
+        <link>https://teaize.github.io/p/zzz-01-stm32%E5%92%8C51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-01-stm32%E5%92%8C51%E5%8D%95%E7%89%87%E6%9C%BA%E7%9A%84%E5%8C%BA%E5%88%AB/</guid>
+        <description>&lt;p&gt;我们可以把单片机想象成一个处理数字的工厂，内核就是这个工厂的核心加工车间&lt;/p&gt;
+&lt;h2 id=&#34;1-位的差别从窄马路到高速公路&#34;&gt;1. “位”的差别：从窄马路到高速公路
+&lt;/h2&gt;&lt;p&gt;这是最直观的区别。&lt;strong&gt;所谓的 8 位和 32 位，指的是 CPU 一次能处理的数据宽度&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;51 单片机（8 位）： 就像一条单行道。它一次只能处理 $2^8 = 256$ 以内的数字。如果你想算一个很大的数字（比如 100,000），CPU 必须把这个数字拆成好几段，分好几次才能算完，效率很低。&lt;/li&gt;
+&lt;li&gt;Cortex-M（32 位）： 就像一条 32 车道的高速公路。它一次能处理高达 $2^{32} \approx 42.9亿$ 以内的数字。绝大多数复杂的数学运算、坐标计算、甚至解析一段复杂的协议，它一次就能搞定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-寻址空间从小作坊到大城市&#34;&gt;2. 寻址空间：从“小作坊”到“大城市”
+&lt;/h2&gt;&lt;p&gt;CPU 需要通过地址来找内存（RAM）和程序（Flash）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;51 单片机： 它的“视力”有限，寻址范围通常只有 $2^{16} = 64KB$。这就好比一个只有几条街的小镇，你能盖的房子（存储的代码）非常有限。&lt;/li&gt;
+&lt;li&gt;Cortex-M： 它的寻址范围理论上高达 $2^{32} = 4GB$。这意味着它可以连接巨大的存储器，运行非常复杂的算法，甚至挂载一个小型的图形操作系统。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-处理效率主频与流水线&#34;&gt;3. 处理效率：主频与流水线
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;主频（速度）： 51 单片机通常运行在 12MHz 左右，且执行一条指令往往需要多个时钟周期。
+&lt;ul&gt;
+&lt;li&gt;STM32（Cortex-M）主频通常在 72MHz、168MHz 甚至更高，且采用了指令流水线技术，很多指令可以在一个时钟周期内完成。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;架构：
+&lt;ul&gt;
+&lt;li&gt;51 采用的是比较老的 CISC（复杂指令集）思想；&lt;/li&gt;
+&lt;li&gt;Cortex-M 采用的是 RISC（精简指令集） 架构，并使用了 Harvard（哈佛）结构（程序和数据有独立的路径），让取指令和算数据可以同时进行，互不干扰。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-外设与寄存器的复杂度&#34;&gt;4. 外设与寄存器的复杂度
+&lt;/h2&gt;&lt;p&gt;这是初学者最容易感到“压力”的地方：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;51 单片机&lt;/th&gt;
+          &lt;th&gt;STM32 (Cortex-M)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;IO 口控制&lt;/td&gt;
+          &lt;td&gt;简单：&lt;code&gt;P1 = 0x01;&lt;/code&gt; 即可点灯。&lt;/td&gt;
+          &lt;td&gt;复杂：需要先开时钟、配置模式、再写数据。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;寄存器数量&lt;/td&gt;
+          &lt;td&gt;几十个，看一遍手册就能背下来。&lt;/td&gt;
+          &lt;td&gt;几百上千个，没人能背下来，必须靠库函数。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;功能模块&lt;/td&gt;
+          &lt;td&gt;基本只有串口、定时器、ADC（有的还没有）。&lt;/td&gt;
+          &lt;td&gt;拥有 DMA、硬件 CRC、USB、CAN、硬件加密等。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;总结为什么要学-32-位&#34;&gt;总结：为什么要学 32 位
+&lt;/h2&gt;&lt;p&gt;如果你的项目只是点亮一个灯，或者做一个简单的温控器，51 绰绰有余。但如果你要：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;做复杂的计算（如无人机姿态解算、音频处理）。&lt;/li&gt;
+&lt;li&gt;驱动彩色屏幕（需要大量内存缓存图片）。&lt;/li&gt;
+&lt;li&gt;多任务并行（同时处理传感器、串口、显示屏、按键）。&lt;/li&gt;
+&lt;li&gt;低功耗要求（STM32 有极细致的功耗管理）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Cortex-M (STM32) 它更强大、更高效、也更符合现代工业的要求。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-02-Flash和SRAM</title>
+        <link>https://teaize.github.io/p/zzz-02-flash%E5%92%8Csram/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-02-flash%E5%92%8Csram/</guid>
+        <description>&lt;p&gt;理解了 Flash 和 SRAM，你就理解了单片机运行时的“数据流向”，我们继续用“工厂”来做比喻&lt;/p&gt;
+&lt;h3 id=&#34;1-形象比喻仓库-vs-办公桌&#34;&gt;1. 形象比喻：仓库 vs. 办公桌
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;Flash（&lt;strong&gt;闪存&lt;/strong&gt;）：像是一个巨大的“仓库”或“说明书珍藏馆”。
+&lt;ul&gt;
+&lt;li&gt;里面存放的是固定的、不常变动的东西。比如你写的代码逻辑、出厂预设的固定数据。&lt;/li&gt;
+&lt;li&gt;特点： 停电了，里面的东西不会丢。但是，往里放东西（烧录代码）比较慢。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;SRAM（&lt;strong&gt;静态随机存取存储器&lt;/strong&gt;）：像是一张“办公桌”或“黑板”。
+&lt;ul&gt;
+&lt;li&gt;它是 CPU 正在干活的地方。存放的是正在变动的、临时的数据。比如程序运行时的变量 &lt;code&gt;i&lt;/code&gt;、传感器读到的实时温度。&lt;/li&gt;
+&lt;li&gt;特点： 办公效率极高（读写飞快），但一停电（或复位），黑板上的字就全擦掉了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-它们分别存什么&#34;&gt;2. 它们分别存什么
+&lt;/h3&gt;&lt;p&gt;在 STM32 的开发中，你的程序会被拆成不同的部分分别存放：&lt;/p&gt;
+&lt;h4 id=&#34;flash-存的是只读内容&#34;&gt;Flash 存的是“只读”内容：
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;指令代码：你写的 &lt;code&gt;if…else&lt;/code&gt;、&lt;code&gt;while(1)&lt;/code&gt; 编译后变成的机器码。&lt;/li&gt;
+&lt;li&gt;常量 (const)：比如你在代码里定义的 &lt;code&gt;const int a = 100;&lt;/code&gt;。因为它是常量，不需要在运行时修改，所以直接存在 Flash 里省空间。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;sram-存的是读写内容&#34;&gt;SRAM 存的是“读写”内容：
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;全局变量：程序运行过程中需要一直记录的数据。&lt;/li&gt;
+&lt;li&gt;局部变量：函数内部临时定义的变量。&lt;/li&gt;
+&lt;li&gt;堆栈 (Stack/Heap)：函数嵌套调用时的现场保存、或者你动态申请的内存。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-什么是存储器映射&#34;&gt;3. 什么是“存储器映射”
+&lt;/h3&gt;&lt;p&gt;这是初学者最容易听懵的词，其实它非常简单。&lt;/p&gt;
+&lt;p&gt;STM32 的内核（Cortex-M）是一个 32 位的 CPU，它的“视力”范围是 $2^{32}$ 个地址（即 $0x0000 0000$ 到 $0xFFFF FFFF$）。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;存储器映射，就是给这些硬件设备分配“门牌号”&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Flash 的门牌号：通常从 &lt;code&gt;0x0800 0000&lt;/code&gt; 开始。当 CPU 想读代码时，它就去这个地址段找。&lt;/li&gt;
+&lt;li&gt;SRAM 的门牌号：通常从 &lt;code&gt;0x2000 0000&lt;/code&gt; 开始。当 CPU 想改变量时，它就去这个地址段找。&lt;/li&gt;
+&lt;li&gt;外设（寄存器）的门牌号：比如 GPIO、定时器，它们的控制开关也被映射到了特定的地址（通常从 &lt;code&gt;0x4000 0000&lt;/code&gt; 开始）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结论： &lt;strong&gt;对 CPU 来说，无论是读 Flash、写 SRAM，还是控制 LED 灯，本质上都只是在不同的地址（门牌号）上读写数据&lt;/strong&gt;。这就是“万物皆地址”。&lt;/p&gt;
+&lt;h3 id=&#34;4-核心区别对比表&#34;&gt;4. 核心区别对比表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;Flash (闪存)&lt;/th&gt;
+          &lt;th&gt;SRAM (内存)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;存放内容&lt;/td&gt;
+          &lt;td&gt;程序代码 (Code)、常量 (RO-data)&lt;/td&gt;
+          &lt;td&gt;变量 (RW-data)、堆栈&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;断电数据&lt;/td&gt;
+          &lt;td&gt;保存&lt;/td&gt;
+          &lt;td&gt;丢失&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;读写速度&lt;/td&gt;
+          &lt;td&gt;较慢（所以有时需要等待周期）&lt;/td&gt;
+          &lt;td&gt;极快&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;擦写寿命&lt;/td&gt;
+          &lt;td&gt;有次数限制（约 10 万次）&lt;/td&gt;
+          &lt;td&gt;无限制&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;起始地址&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0x0800 0000&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;0x2000 0000&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    CPU[Cortex-M 内核] -- 访问地址 --&gt; Bus[4GB 总线地址空间]
+
+    subgraph &#34;0x0000 0000 - 0xFFFF FFFF (总视野)&#34;
+        Bus --&gt; Flash_Space[&#34;【Flash 区】&lt;br/&gt;起始: 0x0800 0000&#34;]
+        Bus --&gt; SRAM_Space[&#34;【SRAM 区】&lt;br/&gt;起始: 0x2000 0000&#34;]
+        Bus --&gt; Peripheral_Space[&#34;【外设寄存器区】&lt;br/&gt;起始: 0x4000 0000&#34;]
+    end
+
+    subgraph &#34;Flash (仓库: 掉电不丢失)&#34;
+        Flash_Space --&gt; Code[指令代码 .text]
+        Flash_Space --&gt; RO_Data[只读常量 const]
+    end
+
+    subgraph &#34;SRAM (办公桌: 掉电丢失)&#34;
+        SRAM_Space --&gt; RW_Data[全局变量/静态变量]
+        SRAM_Space --&gt; Stack_Heap[堆栈: 函数局部变量]
+    end
+
+    subgraph &#34;Peripherals (功能按钮)&#34;
+        Peripheral_Space --&gt; GPIO[GPIO 控制器]
+        Peripheral_Space --&gt; UART[串口/定时器等]
+    end
+
+    style CPU fill:#f96,stroke:#333,stroke-width:2px
+    style Flash_Space fill:#bbf,stroke:#333
+    style SRAM_Space fill:#dfd,stroke:#333
+    style Peripheral_Space fill:#fff4dd,stroke:#333
+&lt;/div&gt;
+&lt;p&gt;在图的最上方，&lt;strong&gt;CPU 不直接管硬件的名字&lt;/strong&gt;。它只管发指令：“去 &lt;code&gt;0x0800 0000&lt;/code&gt; 取个东西”或者“往 &lt;code&gt;0x2000 0000&lt;/code&gt; 写个数字”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果地址落在 &lt;strong&gt;Flash&lt;/strong&gt; 范围，它就读到了代码。&lt;/li&gt;
+&lt;li&gt;如果地址落在 &lt;strong&gt;SRAM&lt;/strong&gt; 范围，它就访问了变量。&lt;/li&gt;
+&lt;li&gt;如果地址落在 &lt;strong&gt;外设（Peripherals）&lt;/strong&gt; 范围，它就控制了硬件（比如点亮 LED）。
+&lt;ul&gt;
+&lt;li&gt;你会发现，控制 GPIO 引脚的寄存器也有地址。这就是为什么在底层驱动里，我们可以通过指针操作来点灯： &lt;code&gt;*(uint32_t *)0x4001080C = 0x00000001; // 假设这是控制灯的地址&lt;/code&gt; 这就是 STM32 编程的底层逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-03-关于寄存器</title>
+        <link>https://teaize.github.io/p/zzz-03-%E5%85%B3%E4%BA%8E%E5%AF%84%E5%AD%98%E5%99%A8/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-03-%E5%85%B3%E4%BA%8E%E5%AF%84%E5%AD%98%E5%99%A8/</guid>
+        <description>&lt;p&gt;“控制硬件”的本质就是“读写寄存器”。我们可以把 STM32 想象成一个巨大的控制中心，而寄存器（Register）就是控制中心面板上密密麻麻的旋钮和开关。&lt;/p&gt;
+&lt;h3 id=&#34;1-什么是寄存器&#34;&gt;1. 什么是寄存器
+&lt;/h3&gt;&lt;p&gt;从物理上看，寄存器就是一小块极速存储单元，通常是 32 位（因为 STM32 是 32 位机），每一位（Bit）就是一个开关。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;它的位置： 它们就在外设（如 GPIO、定时器、串口）的内部。&lt;/li&gt;
+&lt;li&gt;它的门牌号： 就像 [[ZZZ-02-Flash和SRAM]] 中写的，每个寄存器都有一个唯一的内存地址。&lt;/li&gt;
+&lt;li&gt;它的作用：
+&lt;ul&gt;
+&lt;li&gt;配置寄存器： 像“设置菜单”。比如：设置这个引脚是做输入还是输出？&lt;/li&gt;
+&lt;li&gt;数据寄存器： 像“数据通道”。比如：我想让引脚输出高电平，就往这里写 1。&lt;/li&gt;
+&lt;li&gt;状态寄存器： 像“仪表盘”。比如：串口收到数据了吗？看看这个寄存器的某一位是不是变成了 1。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;案例说明&#34;&gt;案例说明
+&lt;/h3&gt;&lt;p&gt;当你执行 &lt;code&gt;*(uint32_t *)0x4001080C = 0x01;&lt;/code&gt; 时，发生了以下神奇的事情：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;软件层面： 你把内存地址 &lt;code&gt;0x4001080C&lt;/code&gt; 对应的那个 32 位“小盒子”里的第 0 位改成了 &lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;硬件逻辑层面： 这个寄存器物理上连接着一堆逻辑电路（锁存器、MOS 管等）。硬件电路检测到寄存器这一位变成了 &lt;code&gt;1&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;电气层面： 内部的 MOS 管导通，将芯片内部的 VDD（通常是 3.3V） 电源连接到那个物理引脚（Pin）上。&lt;/li&gt;
+&lt;li&gt;结果： 引脚上出现了 3.3V 的电压，也就是我们说的“高电平”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以，你控制的是寄存器里的“逻辑电平（0 和 1）”，硬件电路根据你的逻辑，输出真实的“物理电平（0V 和 3.3V）”。&lt;/p&gt;
+&lt;h3 id=&#34;寄存器编程-vs-库函数编程&#34;&gt;寄存器编程 vs. 库函数编程
+&lt;/h3&gt;&lt;p&gt;虽然底层全是寄存器，但现在的开发者很少直接写 &lt;code&gt;0x4001080C&lt;/code&gt; 这种魔术数字了。&lt;/p&gt;
+&lt;h4 id=&#34;方式-a寄存器操作硬核&#34;&gt;方式 A：寄存器操作（硬核）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;GPIOA-&amp;gt;ODR |= (1 &amp;lt;&amp;lt; 0); // 将 GPIOA 的数据寄存器第 0 位置 1
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;优点： 速度极快，代码体积最小。&lt;/li&gt;
+&lt;li&gt;缺点： 极难阅读，翻手册翻到头秃。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方式-bhal-库操作主流&#34;&gt;方式 B：HAL 库操作（主流）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;HAL_GPIO_WritePin(GPIOA, GPIO_PIN_0, GPIO_PIN_SET); // 设置 PA0 为高电平
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;优点： 像人类语言，好理解，换个芯片也好移植。&lt;/li&gt;
+&lt;li&gt;本质： &lt;code&gt;HAL_GPIO_WritePin&lt;/code&gt; 这个函数的内部，最终还是去操作了那几个寄存器地址。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;引脚（Pin）： 工厂的出货口。&lt;/li&gt;
+&lt;li&gt;寄存器（Register）： 控制出货口的开关闸门。&lt;/li&gt;
+&lt;li&gt;地址（Address）： 找到那个闸门的唯一路径。&lt;/li&gt;
+&lt;li&gt;库函数（Library）： 开关的操作手册和自动机械臂。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;进阶思考&#34;&gt;进阶思考
+&lt;/h3&gt;&lt;p&gt;既然一切都是寄存器，那么“串口发送数据”是怎么回事呢？ 其实就是：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查“状态寄存器”，看上一个字发完没。&lt;/li&gt;
+&lt;li&gt;如果发完了，把你要发的字符丢进“数据寄存器”。&lt;/li&gt;
+&lt;li&gt;芯片内部的硬件电路会自动把这个寄存器里的 8 位数据变成一串高低电平，从引脚“嗖”地射出去。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-04-STM32启动过程</title>
+        <link>https://teaize.github.io/p/zzz-04-stm32%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-04-stm32%E5%90%AF%E5%8A%A8%E8%BF%87%E7%A8%8B/</guid>
+        <description>&lt;p&gt;实际上，在 &lt;code&gt;main()&lt;/code&gt; 出现之前，单片机已经默默做了很多“脏活累活”。我们可以把这个过程想象成工厂开工前的准备流程&lt;/p&gt;
+&lt;h3 id=&#34;1-启动过程全景图&#34;&gt;1. 启动过程全景图
+&lt;/h3&gt;&lt;p&gt;当单片机掉电后再上电，或者你按下 Reset（复位） 键时，芯片内部会发生以下连锁反应：&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  sequenceDiagram
+    participant HW as 硬件 (CPU)
+    participant Flash as Flash (0x08000000)
+    participant Startup as 启动文件 (.s)
+    participant System as SystemInit 函数
+    participant Main as main() 函数
+
+    HW-&gt;&gt;Flash: 1. 读取栈顶指针 (MSP)
+    HW-&gt;&gt;Flash: 2. 读取复位向量 (Reset Vector)
+    Flash-&gt;&gt;Startup: 3. 跳转到复位程序入口
+    Startup-&gt;&gt;System: 4. 执行时钟初始化
+    System-&gt;&gt;Startup: 初始化完成
+    Startup-&gt;&gt;Main: 5. 跳转到用户代码
+&lt;/div&gt;
+&lt;h3 id=&#34;2-详细步骤拆解&#34;&gt;2. 详细步骤拆解
+&lt;/h3&gt;&lt;h4 id=&#34;第一步找地图和办公桌&#34;&gt;第一步：找“地图”和“办公桌”
+&lt;/h4&gt;&lt;p&gt;当复位信号产生，CPU 会雷打不动地去 Flash 的起始地址（0x0800 0000） 寻找两块最重要的数据：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;栈顶指针 (MSP)：告诉 CPU 办公桌（SRAM）的顶端在哪里，方便以后存放临时变量。&lt;/li&gt;
+&lt;li&gt;复位向量 (Reset Vector)：这其实是一个地址，指向“第一行程序”在 Flash 里的位置。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;第二步进入汇编世界启动文件&#34;&gt;第二步：进入汇编世界（启动文件）
+&lt;/h4&gt;&lt;p&gt;你可能在工程里见过一个叫 &lt;code&gt;startup_stm32xxxx.s&lt;/code&gt; 的文件，这就是启动文件。它是用汇编语言写的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么用汇编？ 因为此时 C 语言的环境（比如变量、堆栈）还没搭好，只能用最原始的汇编指令。&lt;/li&gt;
+&lt;li&gt;这个文件的任务是：定义中断向量表。它告诉 CPU：如果发生了复位去哪、发生了中断去哪。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第三步初始化心跳systeminit&#34;&gt;第三步：初始化“心跳”（SystemInit）
+&lt;/h4&gt;&lt;p&gt;在进入 &lt;code&gt;main&lt;/code&gt; 之前，启动文件会先调用一个 C 函数叫 &lt;code&gt;SystemInit()&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;任务：配置外部晶振，把芯片的频率从低速（刚启动时通常很慢）提升到正常工作频率（比如 72MHz）。&lt;/li&gt;
+&lt;li&gt;这就是为什么你的程序一跑起来就是全速的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第四步搬运数据数据初始化&#34;&gt;第四步：搬运数据（数据初始化）
+&lt;/h4&gt;&lt;p&gt;前面 [[ZZZ-02-Flash和SRAM]] 中说到：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;代码在 Flash。&lt;/li&gt;
+&lt;li&gt;变量在 SRAM。 如果你写了 &lt;code&gt;int a = 10;&lt;/code&gt;，这个“10”在断电时是存在 Flash 里的。 在这一步，启动代码会把 Flash 里的初始值“搬”到 SRAM 的变量地址里。这样等你进入 &lt;code&gt;main&lt;/code&gt; 的时候，变量 &lt;code&gt;a&lt;/code&gt; 已经变成 &lt;code&gt;10&lt;/code&gt; 了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;第五步跳转到-main&#34;&gt;第五步：跳转到 &lt;code&gt;main&lt;/code&gt;
+&lt;/h4&gt;&lt;p&gt;所有环境都搭好了，“办公桌”清理干净了，“时钟”也准了。启动文件最后执行一条跳转指令： &lt;code&gt;BL main&lt;/code&gt; 至此，你熟悉的 C 语言世界大幕开启！&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;阶段&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;发生位置&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;主要任务&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;硬件阶段&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;CPU 内核&lt;/td&gt;
+          &lt;td&gt;获取栈顶地址和首条指令地址&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;软件阶段 (汇编)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;startup_xxx.s&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;配置中断向量表，初始化堆栈&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;系统初始化&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;system_stm32xxx.c&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;设置系统时钟 (RCC)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;数据搬运&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;库代码&lt;/td&gt;
+          &lt;td&gt;将 Flash 中的变量初始值拷贝到 SRAM&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;应用阶段&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;main.c&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;执行你写的代码&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;为什么要了解这个&#34;&gt;为什么要了解这个
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;调试死机：如果你的程序还没进 &lt;code&gt;main&lt;/code&gt; 就挂了，你得知道要去启动文件或者 &lt;code&gt;SystemInit&lt;/code&gt; 里找原因。&lt;/li&gt;
+&lt;li&gt;理解中断：中断向量表就在启动文件里。如果你想深入底层，这是必经之路。&lt;/li&gt;
+&lt;li&gt;节省空间：理解了数据搬运，你就会明白为什么全局变量如果不初始化会占空间，以及如何优化内存。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-05-时钟树</title>
+        <link>https://teaize.github.io/p/zzz-05-%E6%97%B6%E9%92%9F%E6%A0%91/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-05-%E6%97%B6%E9%92%9F%E6%A0%91/</guid>
+        <description>&lt;h3 id=&#34;时钟树的功能车间里的传动轴&#34;&gt;时钟树的功能：车间里的“传动轴”
+&lt;/h3&gt;&lt;p&gt;想象 STM32 是一个巨大的自动化工厂，里面有几百个加工车间（外设，比如 GPIO 是控制灯的车间，USART 是通信车间）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;主时钟（HCLK/SYSCLK）：是工厂里的大发动机。&lt;/li&gt;
+&lt;li&gt;外设时钟：是从大发动机连接到各个车间的传动皮带。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;STM32 的设计逻辑是： 为了极度省电，工厂默认所有的传动皮带都是拆掉的。也就是说，虽然大发动机（主频）在转，但动力传不到具体车间里。如果你想让 GPIO 车间工作，你必须先手动“合上电闸”或者“挂上皮带”。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要搞得这么麻烦核心逻辑低功耗&#34;&gt;为什么要搞得这么麻烦？（核心逻辑：低功耗）
+&lt;/h3&gt;&lt;p&gt;51 单片机默认时钟是全开的，简单但费电。 STM32 作为高性能芯片，集成了非常多的外设。如果这些外设的时钟全部默认开启：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;功耗爆炸：即使你没用这些外设，数字电路在时钟驱动下也会不断产生翻转电流，导致芯片发烫，电池瞬间没电。&lt;/li&gt;
+&lt;li&gt;电磁干扰：无用的高频信号会产生不必要的干扰。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;所以，STM32 遵循“按需分配”原则：你不用的东西，我不给供能。&lt;/p&gt;
+&lt;h3 id=&#34;3-时钟树动力是怎么传导的&#34;&gt;3. 时钟树：动力是怎么传导的？
+&lt;/h3&gt;&lt;p&gt;时钟的源头有很多，就像工厂可以由自备发电机供电，也可以由电网供电。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;HSE (高速外部时钟)：通常是电路板上那个金属外壳的晶振（比如 8MHz）。它最准。&lt;/li&gt;
+&lt;li&gt;HSI (高速内部时钟)：芯片内部自带的，虽然没那么准，但能应急。&lt;/li&gt;
+&lt;li&gt;PLL (锁相环/倍频器)：这是最神奇的地方。它能把 8MHz 的微弱动力，像加了涡轮增压一样，翻好几倍变成 72MHz 或 168MHz。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    %% 时钟源部分
+    subgraph Sources [1.时钟源-水源]
+        HSE[HSE 外部高速晶振&lt;br/&gt;通常 8MHz]
+        HSI[HSI 内部高速时钟&lt;br/&gt;约 8MHz, 不够准]
+        LSE[LSE 外部低速晶振&lt;br/&gt;32.768kHz, 给RTC用]
+        LSI[LSI 内部低速时钟&lt;br/&gt;40kHz, 给看门狗用]
+    end
+
+    %% 倍频部分
+    subgraph Processing [2.倍频与切换-水处理]
+        PLLMux{时钟源选择}
+        PLL[PLL 锁相环&lt;br/&gt;倍频器]
+        SYS_Mux{系统时钟选择}
+        
+        HSE --&gt; PLLMux
+        HSI --&gt; PLLMux
+        PLLMux --&gt; PLL
+        PLL --&gt;|x9| SYS_Mux
+        HSE --&gt; SYS_Mux
+    end
+
+    %% 总线分发部分
+    subgraph Bus [3.总线预分频-水管]
+        SYSCLK((SYSCLK 系统时钟&lt;br/&gt;通常 72MHz))
+        AHB_Pre[AHB 预分频器]
+        APB1_Pre[APB1 低速预分频器&lt;br/&gt;最高 36MHz]
+        APB2_Pre[APB2 高速预分频器&lt;br/&gt;最高 72MHz]
+
+        SYS_Mux --&gt; SYSCLK
+        SYSCLK --&gt; AHB_Pre
+        AHB_Pre --&gt; APB1_Pre
+        AHB_Pre --&gt; APB2_Pre
+    end
+
+    %% 外设部分
+    subgraph Peripherals [4.外设-水龙头]
+        AHB_Pre --&gt; DMA[DMA / 复位控制器]
+        
+        APB1_Pre --&gt; TIM2[Timer 2,3,4]
+        APB1_Pre --&gt; UART2[UART 2,3]
+        APB1_Pre --&gt; I2C[I2C 1,2]
+
+        APB2_Pre --&gt; GPIO[GPIO A, B, C...]
+        APB2_Pre --&gt; UART1[UART 1]
+        APB2_Pre --&gt; ADC[ADC 1,2]
+        APB2_Pre --&gt; SPI1[SPI 1]
+    end
+
+    %% 样式美化
+    style SYSCLK fill:#f96,stroke:#333,stroke-width:2px
+    style PLL fill:#fcf,stroke:#333
+    style Sources fill:#e1f5fe,stroke:#01579b
+    style Peripherals fill:#fff9c4,stroke:#fbc02d
+&lt;/div&gt;
+&lt;h4 id=&#34;为什么要有这么多时钟源&#34;&gt;为什么要有这么多时钟源
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;HSE (High-Speed External)：你的开发板上那个金属的小疙瘩（晶振）。它是最准的，做串口通信、USB 等&lt;strong&gt;对时间敏感的任务&lt;/strong&gt;必须用它。&lt;/li&gt;
+&lt;li&gt;HSI (High-Speed Internal)：&lt;strong&gt;芯片内置的电阻电容震荡产生&lt;/strong&gt;。优点是启动快、不用钱，缺点是受温度影响大，会“跑偏”。&lt;/li&gt;
+&lt;li&gt;LSE/LSI：就像家里的闹钟电池，功率极低，专门给 RTC（实时时钟/万年历） 或 看门狗（防止程序死机） 这种需要 24 小时待命的模块用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;不同的总线apb1-与-apb2&#34;&gt;不同的总线（APB1 与 APB2）
+&lt;/h4&gt;&lt;p&gt;这是初学者最容易搞混的地方：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APB2 (高速总线)：通常运行在 72MHz。它连接的是最重要的外设，比如 GPIO（控制灯、按键快不快全靠它）、UART1、ADC。&lt;/li&gt;
+&lt;li&gt;APB1 (低速总线)：&lt;strong&gt;为了节能&lt;/strong&gt;，它的上限通常只有 36MHz。挂载的是一些没必要跑那么快的模块，比如一般的定时器、I2C 通信等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;1、这里可能会产生疑问，为什么将 I2C 和 UART 挂在到 APB1 低速总线上，我们先来看看所谓的“低速”总线 APB1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APB1 总线频率：通常是 &lt;strong&gt;$36\text{ MHz}$&lt;/strong&gt;（即每秒钟翻转 36,000,000 次）。&lt;/li&gt;
+&lt;li&gt;UART 常用速率：$115200\text{ bps}$（约 &lt;strong&gt;$0.1\text{ MHz}$&lt;/strong&gt;）。&lt;/li&gt;
+&lt;li&gt;I2C 常用速率：标准模式 $100\text{ kbps}$，快速模式 $400\text{ kbps}$（约 &lt;strong&gt;$0.4\text{ MHz}$&lt;/strong&gt;）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;结论：即使是所谓的“低速”总线 APB1（$36\text{ MHz}$），它的速度也是 I2C 和 UART 物理传输速率的 &lt;strong&gt;几十倍甚至几百倍&lt;/strong&gt;。 对于这些外设来说，APB1 提供的带宽已经绰绰有余了。把它们挂在 $72\text{ MHz}$ 的 APB2 上，完全是浪费。&lt;/p&gt;
+&lt;p&gt;2、你可能会问：既然 UART 都不需要高速，那 GPIO 为什么要高速？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GPIO（通用输入输出）：有时候我们需要用 GPIO 模拟一些非常复杂的协议，或者输出极高频率的脉冲（比如驱动高速功率管）。如果 GPIO 总线慢，输出的波形就会“抖动”或者变圆，无法精准控制。&lt;/li&gt;
+&lt;li&gt;ADC（模数转换）：ADC 需要在极短的时间内对模拟电压进行采样。&lt;strong&gt;采样频率越高，还原的信号越准，这必须依靠高速时钟支持&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;TIM1/TIM8：这些是高级定时器，用于控制电机的精准补差。如果时钟不够快，控制精度就会下降。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3、一个有趣的例外：UART1&lt;/p&gt;
+&lt;p&gt;如果你仔细看时钟树，你会发现 &lt;strong&gt;USART1 往往是挂在 APB2（高速）上的&lt;/strong&gt;，而 USART2, 3 挂在 APB1 上。这是为什么呢？&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;启动与刷机：&lt;strong&gt;STM32 的串口下载（Bootloader）通常默认使用 USART1&lt;/strong&gt;。为了保证在各种复杂情况下都能快速、可靠地通信，官方把它放在了高速总线上。&lt;/li&gt;
+&lt;li&gt;最高上限：如果你真的需要极限的串口波特率（比如几兆比特每秒），USART1 能够提供比其他串口更高的上限。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;pll倍频器是核心魔术师&#34;&gt;PLL（倍频器）是核心魔术师
+&lt;/h4&gt;&lt;p&gt;如果你外接了一个 8MHz 的晶振，但你希望芯片跑在 72MHz。怎么办？ PLL 就是干这个的。它能把输入的 8MHz “乘”上一个倍数（比如 9 倍），得到 72MHz。&lt;/p&gt;
+&lt;h3 id=&#34;重点理解总线层级&#34;&gt;重点理解：总线层级
+&lt;/h3&gt;&lt;p&gt;在学习时钟树时，你会看到两个重要的“分发器”，它们叫 APB 总线：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APB1：低速总线（最高通常 36MHz 或 42MHz）。连接的是比较慢的外设（如串口 UART2、普通定时器）。&lt;/li&gt;
+&lt;li&gt;APB2：高速总线（最高通常 72MHz 或 84MHz）。连接的是重要的、需要快的模块（如 GPIO、串口 UART1、高级定时器）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;记住这个知识点： 当你在查手册开启时钟时，一定要看清楚你的外设是挂在 APB1 还是 APB2 下。挂错了总线，时钟函数就调错了。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-06-STM32点灯</title>
+        <link>https://teaize.github.io/p/zzz-06-stm32%E7%82%B9%E7%81%AF/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-06-stm32%E7%82%B9%E7%81%AF/</guid>
+        <description>&lt;p&gt;这里使用的是 ST-Link 和最小开发板。这种连接方式叫做 &lt;strong&gt;SWD (Serial Wire Debug)&lt;/strong&gt; 接口。相比于串口下载，它不仅速度快，最重要的是支持&lt;strong&gt;在线调试&lt;/strong&gt;（可以实时查看变量、打断点让程序停下）。&lt;/p&gt;
+&lt;h3 id=&#34;接线对照表&#34;&gt;接线对照表
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;ST-Link 使用到的引脚：&lt;del&gt;7、9、19、20&lt;/del&gt;(尝试这四个引脚，CubeIDE 下载程序时找不到单片机)
+&lt;ul&gt;
+&lt;li&gt;使用引脚 1、20、7、8；并且通过数据线单独给单片机供电&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220151519265.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220151519265.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    subgraph ST_Link [ST-Link V2 下载器]
+        P1[3.3V]
+        P2[GND]
+        P3[SWCLK]
+        P4[SWDIO]
+    end
+
+    subgraph STM32_Board [STM32 最小系统板]
+        M1[3.3V]
+        M2[GND]
+        M3[SWCLK]
+        M4[SWIO]
+    end
+
+    P1 --- M1
+    P2 --- M2
+    P3 --- M3
+    P4 --- M4
+
+    style ST_Link fill:#f5f5f5,stroke:#333
+    style STM32_Board fill:#fff9c4,stroke:#fbc02d
+&lt;/div&gt;
+&lt;h3 id=&#34;连接后的关键步骤&#34;&gt;连接后的关键步骤
+&lt;/h3&gt;&lt;p&gt;接好线后，你还需要在电脑端的软件（以 Keil MDK 为例）中进行设置，否则还是识别不到芯片：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;插上 ST-Link：电脑识别到 ST-Link 驱动。&lt;/li&gt;
+&lt;li&gt;打开 Keil 工程：
+&lt;ul&gt;
+&lt;li&gt;点击魔术棒图标 (&lt;strong&gt;Options for Target&lt;/strong&gt;)。&lt;/li&gt;
+&lt;li&gt;切换到 &lt;strong&gt;Debug&lt;/strong&gt; 选项卡。&lt;/li&gt;
+&lt;li&gt;在右侧下拉框选择 &lt;strong&gt;ST-Link Debugger&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152131869.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152131869.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;进入 Settings 设置 (关键)：
+&lt;ul&gt;
+&lt;li&gt;点击旁边的 &lt;strong&gt;Settings&lt;/strong&gt; 按钮。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;Port&lt;/strong&gt; 下拉框中，务必将 &lt;code&gt;JTAG&lt;/code&gt; 改为 &lt;strong&gt;&lt;code&gt;SW&lt;/code&gt;&lt;/strong&gt;（因为你只接了两根信号线）。&lt;/li&gt;
+&lt;li&gt;如果连接成功，右侧的 &lt;strong&gt;SW Device&lt;/strong&gt; 框里会出现一串十六进制代码（IDCODE），这说明已经成功识别到了你的 STM32 芯片。&lt;/li&gt;
+&lt;li&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251220152242.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251220152242.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;关于-boot-跳线帽的设置&#34;&gt;关于 BOOT 跳线帽的设置
+&lt;/h3&gt;&lt;p&gt;在使用 ST-Link 下载时，开发板上的黄色跳线帽（BOOT0 和 BOOT1）通常应该这样设置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;BOOT0 = 0（跳线帽靠近 GND 一端）&lt;/li&gt;
+&lt;li&gt;BOOT1 = 0（跳线帽靠近 GND 一端） 这种模式下，程序下载后按一下复位键就能直接从 Flash 运行，最方便。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152521016.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220152521016.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;工程配置&#34;&gt;工程配置
+&lt;/h2&gt;&lt;p&gt;STM32 的 C 代码需要一个“容器”（即工程环境）。如果你只把代码写在一个记事本里，编译器是不知道如何处理硬件底层的&lt;/p&gt;
+&lt;h3 id=&#34;为什么需要工程配置&#34;&gt;为什么需要“工程配置”
+&lt;/h3&gt;&lt;p&gt;在 51 单片机里，你可能只需要一个 &lt;code&gt;.c&lt;/code&gt; 文件就能跑。但在 STM32 里，一个完整的工程必须包含以下四个核心板块：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;启动文件 (&lt;code&gt;startup_stm32xxx.s&lt;/code&gt;)：我们之前讲过的“工厂开工流程”，它是汇编代码。&lt;/li&gt;
+&lt;li&gt;CMSIS 库文件：这是 ARM 公司提供的，用来让内核（Cortex-M）认识寄存器地址的。&lt;/li&gt;
+&lt;li&gt;HAL/标准库驱动：这是 ST 官方提供的库，让你能用 &lt;code&gt;HAL_GPIO_WritePin&lt;/code&gt; 这种函数。&lt;/li&gt;
+&lt;li&gt;你的代码 (&lt;code&gt;main.c&lt;/code&gt;)：你写的逻辑。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;好消息是：现在的开发者通常不需要手动配置这些，这里我们使用 &lt;strong&gt;STM32CubeIDE&lt;/strong&gt;。只需要鼠标点几下，它就会自动为你生成一个配置好的工程容器。&lt;/p&gt;
+&lt;h3 id=&#34;完整操作步骤&#34;&gt;完整操作步骤
+&lt;/h3&gt;&lt;h4 id=&#34;第一步新建工程&#34;&gt;第一步：新建工程
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;打开 STM32CubeIDE，点击 &lt;strong&gt;File -&amp;gt; New -&amp;gt; STM32 Project&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;Commercial Part Number&lt;/strong&gt; 框输入你的芯片型号（如 &lt;code&gt;STM32F103C8T6&lt;/code&gt;），选中后点击 &lt;strong&gt;Next&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;给项目起个名字（如 &lt;code&gt;Blinky_LED&lt;/code&gt;），点击 &lt;strong&gt;Finish&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;![[Pasted image 20251220153919.png]]&lt;/p&gt;
+&lt;h4 id=&#34;第二步图形化配置-ioc-文件&#34;&gt;第二步：图形化配置 (ioc 文件)
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在弹出的芯片引脚图上，找到 &lt;strong&gt;PC13&lt;/strong&gt; 引脚，左键点击它，选择 &lt;strong&gt;GPIO_Output&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;（可选）在左侧菜单 &lt;strong&gt;System Core -&amp;gt; GPIO&lt;/strong&gt; 里，点击 PC13，可以给它起个别名（User Label），比如 &lt;code&gt;MY_LED&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;配置时钟&lt;/strong&gt;：点击上方的 &lt;strong&gt;Clock Configuration&lt;/strong&gt; 选项卡。通常默认即可，或者在 &lt;code&gt;HCLK&lt;/code&gt; 框输入 &lt;code&gt;72&lt;/code&gt; 然后按回车，IDE 会自动帮你算好倍频。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;生成代码&lt;/strong&gt;：直接按键盘 &lt;strong&gt;Ctrl + S&lt;/strong&gt; 保存，弹窗问是否生成代码，选 &lt;strong&gt;Yes&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154159371.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154159371.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;第三步开启外部高速晶振可选&#34;&gt;第三步：开启外部高速晶振（可选）
+&lt;/h4&gt;&lt;p&gt;注意：在 STM32F1 系列中，如果使用内部时钟（HSI），倍频后最高只能达到 64MHz。要达到标准的 72MHz，你必须开启板子上的那个金属晶振。按照下面步骤可开启开发板上的金属晶振：&lt;/p&gt;
+&lt;p&gt;1、开启 HSE 硬件开关&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;回到 STM32CubeIDE 的 &lt;strong&gt;Pinout &amp;amp; Configuration&lt;/strong&gt;（引脚配置）界面。&lt;/li&gt;
+&lt;li&gt;在左侧菜单栏找到 &lt;strong&gt;System Core&lt;/strong&gt;（系统核心）。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;RCC&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在右侧的 &lt;strong&gt;High Speed Clock (HSE)&lt;/strong&gt; 下拉菜单中，选择 &lt;strong&gt;Crystal/Ceramic Resonator&lt;/strong&gt;（晶体/陶瓷谐振器）。
+&lt;ul&gt;
+&lt;li&gt;此时你会发现芯片引脚图上的 PD0 和 PD1 变绿了，这说明它们现在连接到了外部晶振。&lt;/li&gt;
+&lt;li&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154801274.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220154801274.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;2、在时钟树中切换路径&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;切换到上方的 &lt;strong&gt;Clock Configuration&lt;/strong&gt;（时钟配置）选项卡。&lt;/li&gt;
+&lt;li&gt;找到 &lt;strong&gt;PLL Source Mux&lt;/strong&gt;（锁相环来源选择器）这个选择框，把点选挪到 &lt;strong&gt;HSE&lt;/strong&gt; 上。&lt;/li&gt;
+&lt;li&gt;确保 &lt;strong&gt;PLLMul&lt;/strong&gt;（倍频系数）被设置为 &lt;strong&gt;X 9&lt;/strong&gt;（因为 $8\text{MHz} \times 9 = 72\text{MHz}$）。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;System Clock Mux&lt;/strong&gt;（系统时钟选择器）中，选择 &lt;strong&gt;PLLCLK&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：观察 &lt;strong&gt;APB1 Prescaler&lt;/strong&gt;，确保它的分频系数是 &lt;strong&gt;/2&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;原因：我们在“总线”那一节讲过，APB1 最高只能跑 36MHz。如果系统时钟是 72MHz，这里必须 2 分频。
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155013204.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155013204.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;第四步编写完整代码&#34;&gt;第四步：编写完整代码
+&lt;/h4&gt;&lt;p&gt;代码生成后，打开左侧项目资源管理器里的 &lt;strong&gt;Core -&amp;gt; Src -&amp;gt; main.c&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;⚠️ 注意：&lt;/strong&gt; 在 CubeIDE 中，你必须把代码写在 &lt;code&gt;/* USER CODE BEGIN … */&lt;/code&gt; 和 &lt;code&gt;/* USER CODE END … */&lt;/code&gt; 之间。否则，下次你修改配置重新生成代码时，你的代码会被&lt;strong&gt;无情覆盖&lt;/strong&gt;！&lt;/p&gt;
+&lt;p&gt;找到 &lt;code&gt;main&lt;/code&gt; 函数里的 &lt;code&gt;while(1)&lt;/code&gt;，填入以下代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* Infinite loop */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 翻转 PC13 的电平
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 如果你之前起了别名 MY_LED，这里也可以写 MY_LED_GPIO_Port, MY_LED_Pin
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 延时 500 毫秒
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155522595.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220155522595.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;第五步配置调试口&#34;&gt;第五步：配置调试口
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;打开你的工程里的 &lt;strong&gt;&lt;code&gt;.ioc&lt;/code&gt;&lt;/strong&gt; 文件。&lt;/li&gt;
+&lt;li&gt;在左侧菜单栏找到 &lt;strong&gt;System Core&lt;/strong&gt; -&amp;gt; &lt;strong&gt;SYS&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在右侧的 &lt;strong&gt;Debug&lt;/strong&gt; 下拉菜单中，选择 &lt;strong&gt;Serial Wire&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;选完后，你应该能看到引脚图上的 PA13 和 PA14 变绿了，并标注了 SWDIO 和 SWCLK。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;保存并重新生成代码&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220180739819.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220180739819.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;编译下载与运行&#34;&gt;编译、下载与运行
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;编译&lt;/strong&gt;：点击工具栏上的 &lt;strong&gt;“小锤子”图标 (Build)&lt;/strong&gt;。查看下方 Console 窗口，显示 &lt;code&gt;0 errors, 0 warnings&lt;/code&gt; 即成功。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;设置下载器&lt;/strong&gt;：如果是第一次运行，点击 &lt;strong&gt;Run -&amp;gt; Run Configurations…&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;在 &lt;strong&gt;Debugger&lt;/strong&gt; 选项卡里，确保使用的是 &lt;strong&gt;ST-LINK (ST-LINK GDB server)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;确保 &lt;strong&gt;Interface&lt;/strong&gt; 选的是 &lt;strong&gt;SWD&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;运行&lt;/strong&gt;：点击工具栏上的 &lt;strong&gt;“绿色右箭头”图标 (Run)&lt;/strong&gt;。IDE 会自动把程序烧录进开发板。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220160035387.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220160035387.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;升级 ST-LINK 固件&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;点击 IDE 菜单 &lt;strong&gt;Help -&amp;gt; ST-LINK Firmware Update&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;Open in update mode&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;Upgrade&lt;/strong&gt; 升级固件。
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220161411019.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220161411019.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;小结你的第一个工程长什么样&#34;&gt;小结：你的第一个工程长什么样
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;文件夹/文件&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;作用&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Drivers/CMSIS&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;内核核心文件（不用动）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Drivers/STM32F1xx_HAL_Driver&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;HAL 库源码，即 &lt;code&gt;HAL_GPIO_xxx&lt;/code&gt; 等函数的定义&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Core/Src/main.c&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;你的主战场&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Core/Src/stm32f1xx_it.c&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;处理中断函数的地方&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Project_Name.ioc&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;可视化配置的源文件，双击它能重新改引脚&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-07-推挽输出与开漏输出</title>
+        <link>https://teaize.github.io/p/zzz-07-%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA%E4%B8%8E%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-07-%E6%8E%A8%E6%8C%BD%E8%BE%93%E5%87%BA%E4%B8%8E%E5%BC%80%E6%BC%8F%E8%BE%93%E5%87%BA/</guid>
+        <description>&lt;p&gt;在 STM32CubeIDE 配置 GPIO 时，你会看到 &lt;code&gt;Output Push-Pull&lt;/code&gt;（推挽）和 &lt;code&gt;Output Open-Drain&lt;/code&gt;（开漏）两个选项。理解它们的区别，决定了你能不能正确驱动外部设备。&lt;/p&gt;
+&lt;h3 id=&#34;1-推挽输出-push-pull--全能型驱动&#34;&gt;1. 推挽输出 (Push-Pull) —— “全能型驱动”
+&lt;/h3&gt;&lt;p&gt;这是最常用的模式，之前的 [[ZZZ-06-STM32点灯]] 用的就是它。&lt;/p&gt;
+&lt;h4 id=&#34;内部结构&#34;&gt;内部结构：
+&lt;/h4&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220182149374.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220182149374.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;想象引脚内部有两个“开关”(如上图“输出控制”后端的两个 MOS 管)：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个是连接到 VCC (3.3V) 的开关（P-MOS 管）。&lt;/li&gt;
+&lt;li&gt;一个是连接到 GND (0V) 的开关（N-MOS 管）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;工作原理&#34;&gt;工作原理：
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;输出高电平时：上面的开关接通，下面的断开。引脚被强力“推”向 3.3V。此时引脚有很强的电流输出能力。&lt;/li&gt;
+&lt;li&gt;输出低电平时：上面的开关断开，下面的接通。引脚被强力“拉”向 GND。此时引脚有很强的吸入电流能力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;特点&#34;&gt;特点：
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;双向都有力：无论是输出高还是低，电平都很稳定。&lt;/li&gt;
+&lt;li&gt;速度快：电平切换非常迅速，适合高速信号。&lt;/li&gt;
+&lt;li&gt;最常见：驱动 LED、驱动蜂鸣器、SPI 通信等，绝大多数情况都选它。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;2-开漏输出-open-drain--有底气没脾气&#34;&gt;2. 开漏输出 (Open-Drain) —— “有底气，没脾气”
+&lt;/h3&gt;&lt;p&gt;这个模式比较特殊，如果你选了它却没接“上拉电阻”，你会发现引脚输出高电平时没电压。&lt;/p&gt;
+&lt;h4 id=&#34;内部结构-1&#34;&gt;内部结构：
+&lt;/h4&gt;&lt;p&gt;引脚内部只有连接到 GND 的开关（N-MOS 管），没有连接到 VCC 的开关。&lt;/p&gt;
+&lt;h4 id=&#34;工作原理-1&#34;&gt;工作原理：
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;输出低电平时：开关接通，引脚被拉到 GND。这没问题。&lt;/li&gt;
+&lt;li&gt;输出高电平时：开关断开。由于上面没有连接 VCC 的开关，此时引脚处于浮空状态（高阻态）。就像一根断掉的电线，它自己无法产生电压。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;必须搭配上拉电阻&#34;&gt;必须搭配：上拉电阻
+&lt;/h4&gt;&lt;p&gt;为了让开漏模式能输出高电平，你必须在引脚外部接一个电阻连到电源（VCC）。这样，当内部开关断开时，外部电阻会把引脚“拉”上去。&lt;/p&gt;
+&lt;h4 id=&#34;特点与神奇用途&#34;&gt;特点与神奇用途：
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;线与逻辑（Wired-AND）：&lt;strong&gt;多个开漏引脚连在一起，只要有一个输出低，整条线就是低&lt;/strong&gt;。这是 I2C 总线 必须使用开漏的原因。&lt;/li&gt;
+&lt;li&gt;电平转换：STM32 是 3.3V 器件，但如果你想驱动一个 5V 的逻辑电路。你可以把开漏引脚通过电阻连到 5V 电源上。开关断开时，引脚就会被拉到 5V（前提是该引脚标有 &lt;code&gt;FT&lt;/code&gt;，即容忍 5V）。&lt;/li&gt;
+&lt;li&gt;防止短路：多个推挽输出连在一起如果电平不一会烧芯片，开漏则不会。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;直观对比表&#34;&gt;直观对比表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;推挽输出 (Push-Pull)&lt;/th&gt;
+          &lt;th&gt;开漏输出 (Open-Drain)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;输出高电平&lt;/td&gt;
+          &lt;td&gt;直接输出 VCC (3.3V)&lt;/td&gt;
+          &lt;td&gt;高阻态 (需外接上拉电阻才有电压)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;输出低电平&lt;/td&gt;
+          &lt;td&gt;直接输出 GND (0V)&lt;/td&gt;
+          &lt;td&gt;直接输出 GND (0V)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;驱动能力&lt;/td&gt;
+          &lt;td&gt;强 (双向)&lt;/td&gt;
+          &lt;td&gt;弱 (高电平靠电阻，低电平靠芯片)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;主要用途&lt;/td&gt;
+          &lt;td&gt;LED、普通 IO 控制、SPI、PWM&lt;/td&gt;
+          &lt;td&gt;I2C 通信、电平转换、多机通信&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;比喻&lt;/td&gt;
+          &lt;td&gt;既能推水，又能抽水的水泵&lt;/td&gt;
+          &lt;td&gt;只能抽水（排水）的水龙头&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;推挽输出就像是一个双向推拉门，你既可以用力把它推开（高电平），也可以用力把它拉关（低电平）。&lt;/li&gt;
+&lt;li&gt;开漏输出就像是一个单向弹簧门。你自己只能用力把它拉关（输出低），但你想开门（输出高）时，你自己没法推，只能靠门背后的弹簧（上拉电阻）把它拽回去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;什么时候该选什么&#34;&gt;什么时候该选什么？
+&lt;/h3&gt;&lt;p&gt;在 STM32CubeIDE 配置时：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你只是点灯、控制继电器、驱动电机驱动模块：闭眼选 Push-Pull。&lt;/li&gt;
+&lt;li&gt;如果你在学习 I2C 协议（比如驱动 OLED 屏幕或传感器）：必须选 Open-Drain。&lt;/li&gt;
+&lt;li&gt;如果你发现选了输出，灯却不亮或者电压很诡异：检查一下是不是误选成了 Open-Drain 且没接上拉电阻。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-08-GPIO输入</title>
+        <link>https://teaize.github.io/p/zzz-08-gpio%E8%BE%93%E5%85%A5/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-08-gpio%E8%BE%93%E5%85%A5/</guid>
+        <description>&lt;p&gt;学习 GPIO 输入 是迈向“人机交互”的关键一步。现在我们将以 PA0 引脚连接按键，PC13 引脚控制 LED 为例。学习两种最常用的方法：轮询扫描（Polling） 和 外部中断（EXTI）&lt;/p&gt;
+&lt;h3 id=&#34;准备工作硬件连接&#34;&gt;准备工作：硬件连接
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;LED: 最小开发板自带，连接在 PC13（低电平点亮）。&lt;/li&gt;
+&lt;li&gt;按键: 找一个轻触按键。
+&lt;ul&gt;
+&lt;li&gt;一端连接到 PA0。&lt;/li&gt;
+&lt;li&gt;另一端连接到 GND。&lt;/li&gt;
+&lt;li&gt;原理：平时 PA0 是高电平，按键按下时 PA0 变成低电平。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;实验一轮询扫描button-scanning&#34;&gt;实验一：轮询扫描（Button Scanning）
+&lt;/h3&gt;&lt;p&gt;这种方法就像警察“查岗”，在 &lt;code&gt;while(1)&lt;/code&gt; 循环里不断地看 PA0 的状态。&lt;/p&gt;
+&lt;h4 id=&#34;1-cubeide-配置-ioc-文件&#34;&gt;1. CubeIDE 配置 (ioc 文件)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;PC13: 保持 &lt;code&gt;GPIO_Output&lt;/code&gt;【最小开发板上的灯，低电平点亮】&lt;/li&gt;
+&lt;li&gt;PA0: 设置为 &lt;code&gt;GPIO_Input&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;关键配置 (GPIO 选项卡)：
+&lt;ul&gt;
+&lt;li&gt;点击 PA0，将 GPIO Pull-up/Pull-down 设置为 Pull-up（上拉）【PA0 默认为高电平，当按键按下时，将 PA0 拉低到 GND】&lt;/li&gt;
+&lt;li&gt;原因：这样当按键没按下时，内部电阻会把 PA0 稳定在 3.3V（高电平），防止引脚“浮空”导致电平乱跳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-代码实现&#34;&gt;2. 代码实现
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main.c&lt;/code&gt; 的 &lt;code&gt;while(1)&lt;/code&gt; 中编写：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 1. 读取 PA0 的电平状态
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_ReadPin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 如果读到低电平（按键按下）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 2. 软件消抖：按键是机械结构，按下时会产生几毫秒的杂波
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;20&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 3. 再次确认是否按下
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_ReadPin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;c1&#34;&gt;// 4. 执行动作：翻转 LED
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;c1&#34;&gt;// 5. 等待按键松开（死循环直到变回高电平），防止长按导致灯疯狂闪烁
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_ReadPin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220203757285.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220203757285.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;实验二外部中断exti&#34;&gt;实验二：外部中断（EXTI）
+&lt;/h3&gt;&lt;p&gt;轮询扫描很占 CPU 资源。中断 则像“报警器”：CPU 平时去干别的事，按键一按下，硬件自动触发一个信号通知 CPU 来处理。&lt;/p&gt;
+&lt;h4 id=&#34;1-cubeide-配置-ioc-文件-1&#34;&gt;1. CubeIDE 配置 (ioc 文件)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;PA0: 修改为 &lt;code&gt;GPIO_EXTI0&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;GPIO 设置:
+&lt;ul&gt;
+&lt;li&gt;GPIO mode: 选择 External Interrupt Mode with Falling edge trigger（下降沿触发，即电平从 1 变 0 的瞬间触发）。&lt;/li&gt;
+&lt;li&gt;GPIO Pull-up/Pull-down: 保持 Pull-up。&lt;/li&gt;
+&lt;li&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220204223209.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220204223209.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;NVIC 设置 (最重要！):
+&lt;ul&gt;
+&lt;li&gt;点击左侧 System Core -&amp;gt; NVIC。&lt;/li&gt;
+&lt;li&gt;勾选 EXTI line0 interrupt 后面的 Enabled 框。如果不勾，中断永远不会发生！&lt;/li&gt;
+&lt;li&gt;![[Pasted image 20251220204306.png]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么勾选 &lt;strong&gt;EXTI line 0&lt;/strong&gt;？
+“EXTI line 0” 其实是 STM32 中断分配机制中的一个“频道”。STM32 的 GPIO 引脚非常多（PA0&lt;del&gt;PA15, PB0&lt;/del&gt;PB15…），但&lt;strong&gt;中断线（Line）资源是有限的&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对应关系：引脚的编号决定了它属于哪条线。
+&lt;ul&gt;
+&lt;li&gt;PA0, PB0, PC0, PD0 … 全部连接到 EXTI Line 0。&lt;/li&gt;
+&lt;li&gt;PA1, PB1, PC1, PD1 … 全部连接到 EXTI Line 1。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;排他性（重要）：虽然 PA0 和 PB0 都能连到 Line 0，但&lt;strong&gt;同一时刻 Line 0 只能选择其中一个引脚&lt;/strong&gt;。你不能同时把 PA0 和 PB0 都设为中断。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;2-代码实现-1&#34;&gt;2. 代码实现
+&lt;/h4&gt;&lt;p&gt;中断不需要写在 &lt;code&gt;while(1)&lt;/code&gt; 里。HAL 库会自动调用一个名为“回调函数”的地方。你只需要在 &lt;code&gt;main.c&lt;/code&gt; 的末尾（&lt;code&gt;USER CODE BEGIN 4&lt;/code&gt; 之后）加上这个函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 当 PA0 触发中断时，系统会自动跳到这个函数执行
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_EXTI_Callback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIO_Pin&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 确保是 PA0 产生的中断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 翻转 LED
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;对比&#34;&gt;对比
+&lt;/h3&gt;&lt;p&gt;两种方法的深度对比&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;特性&lt;/th&gt;
+          &lt;th&gt;轮询扫描 (Polling)&lt;/th&gt;
+          &lt;th&gt;外部中断 (EXTI)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;CPU 占用&lt;/td&gt;
+          &lt;td&gt;高（一直在跑判断语句）&lt;/td&gt;
+          &lt;td&gt;极低（平时 CPU 可以休眠）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;实时性&lt;/td&gt;
+          &lt;td&gt;取决于 &lt;code&gt;while&lt;/code&gt; 循环里其他代码的长短&lt;/td&gt;
+          &lt;td&gt;极高（信号一到立刻响应）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;消抖处理&lt;/td&gt;
+          &lt;td&gt;简单（用 &lt;code&gt;HAL_Delay&lt;/code&gt;）&lt;/td&gt;
+          &lt;td&gt;复杂（中断里不建议用 Delay，通常用定时器）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;适用场景&lt;/td&gt;
+          &lt;td&gt;简单按键、对实时性要求不高&lt;/td&gt;
+          &lt;td&gt;紧急停止、脉冲计数、低功耗唤醒&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;常见坑点避坑指南&#34;&gt;常见坑点（避坑指南）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;忘记开 NVIC 中断开关：这是 EXTI 实验失败的 90% 原因&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;中断里加了很长的延时：&lt;strong&gt;中断服务函数要求“快进快出”&lt;/strong&gt;，如果在里面写 &lt;code&gt;HAL_Delay(1000)&lt;/code&gt;，系统可能会卡死或错过其他重要任务。&lt;/li&gt;
+&lt;li&gt;引脚悬空：如果不配置内部上拉（Pull-up），你的灯可能会因为你手指靠近板子而自己乱闪。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;扩展资料常见中断类型&#34;&gt;扩展资料：常见中断类型
+&lt;/h3&gt;&lt;p&gt;STM32 的中断分为三大类：&lt;strong&gt;系统异常&lt;/strong&gt;、&lt;strong&gt;外部中断 (EXTI)&lt;/strong&gt; 和 &lt;strong&gt;外设中断&lt;/strong&gt;&lt;/p&gt;
+&lt;h4 id=&#34;a-系统异常-system-exceptions&#34;&gt;A. 系统异常 (System Exceptions)
+&lt;/h4&gt;&lt;p&gt;这些是内核自带的，优先级极高，通常用于处理“紧急事故”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Reset: 复位中断。&lt;/li&gt;
+&lt;li&gt;HardFault: 硬故障（程序崩溃、访问非法内存）。&lt;/li&gt;
+&lt;li&gt;SysTick: 系统滴答定时器（HAL_Delay 的基础）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;b-外部中断-exti&#34;&gt;B. 外部中断 (EXTI)
+&lt;/h4&gt;&lt;p&gt;主要处理引脚的电平变化。&lt;strong&gt;Line 0 到 Line 15&lt;/strong&gt;: 对应 GPIO 的 16 个引脚编号。&lt;/p&gt;
+&lt;h4 id=&#34;c-外设中断-peripheral-interrupts&#34;&gt;C. 外设中断 (Peripheral Interrupts)
+&lt;/h4&gt;&lt;p&gt;每个功能模块都有自己的“报警器”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TIM (Timer): 定时器时间到、捕获到信号。&lt;/li&gt;
+&lt;li&gt;UART/USART: 收到数据了、数据发完了。&lt;/li&gt;
+&lt;li&gt;ADC: 模数转换完成了。&lt;/li&gt;
+&lt;li&gt;DMA: 大批量数据搬运完了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;中断结构树图&#34;&gt;中断结构树图
+&lt;/h4&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    subgraph &#34;中断源 (Interrupt Sources)&#34;
+        subgraph &#34;外部中断 EXTI&#34;
+            EXTI0[EXTI Line 0&lt;br/&gt;PA0/PB0/PC0...]
+            EXTI1[EXTI Line 1&lt;br/&gt;PA1/PB1/PC1...]
+            EXTIn[EXTI Line 10-15]
+        end
+        
+        subgraph &#34;通信外设&#34;
+            UART[UART1/2&lt;br/&gt;接收完成/发送空]
+            I2C[I2C/SPI&lt;br/&gt;传输错误/完成]
+        end
+        
+        subgraph &#34;定时与控制&#34;
+            TIM[TIM1/2/3/4&lt;br/&gt;更新/比较/捕获]
+            ADC[ADC&lt;br/&gt;转换结束]
+        end
+        
+        subgraph &#34;系统异常 (内核)&#34;
+            SysTick[SysTick&lt;br/&gt;1ms 节拍]
+            Fault[HardFault&lt;br/&gt;系统崩溃]
+        end
+    end
+
+    EXTI0 --&gt; NVIC
+    EXTI1 --&gt; NVIC
+    EXTIn --&gt; NVIC
+    UART --&gt; NVIC
+    I2C --&gt; NVIC
+    TIM --&gt; NVIC
+    ADC --&gt; NVIC
+    SysTick --&gt; NVIC
+    Fault --&gt; NVIC
+
+    subgraph &#34;NVIC (分诊台)&#34;
+        NVIC{NVIC 控制器&lt;br/&gt;判断优先级/屏蔽}
+    end
+
+    NVIC --&gt;|打断当前任务| CPU[Cortex-M3 内核]
+    
+    style CPU fill:#f96,stroke:#333,stroke-width:2px
+    style NVIC fill:#bbf,stroke:#333
+&lt;/div&gt;
+&lt;h4 id=&#34;常见的-exti-线路拼车现象&#34;&gt;常见的 EXTI 线路“拼车”现象
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;STM32F103C8T6&lt;/code&gt; 中，为了节省硬件资源，有些中断线路是&lt;strong&gt;合并&lt;/strong&gt;在一起的。你在 CubeIDE 的 NVIC 列表里会发现：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;EXTI0, EXTI1, EXTI2, EXTI3, EXTI4：这 5 条线是&lt;strong&gt;独立&lt;/strong&gt;的，每个都有自己的中断服务函数。&lt;/li&gt;
+&lt;li&gt;EXTI9_5_IRQHandler：Line 5 到 Line 9 的中断&lt;strong&gt;共享&lt;/strong&gt;这一个函数。&lt;/li&gt;
+&lt;li&gt;EXTI15_10_IRQHandler：Line 10 到 Line 15 的中断&lt;strong&gt;共享&lt;/strong&gt;这一个函数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这意味着：如果 PA10 和 PA11 都开启了中断，它们会跳进同一个函数。你需要在这个函数里通过 &lt;code&gt;if&lt;/code&gt; 语句判断到底是哪条线触发的。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-09-NVIC中断</title>
+        <link>https://teaize.github.io/p/zzz-09-nvic%E4%B8%AD%E6%96%AD/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-09-nvic%E4%B8%AD%E6%96%AD/</guid>
+        <description>&lt;p&gt;本篇继 [[ZZZ-08-GPIO输入]]，重点学习“实验二：外部中断（EXTI）”中的内容&lt;/p&gt;
+&lt;h3 id=&#34;核心概念什么是-nvic&#34;&gt;核心概念：什么是 NVIC
+&lt;/h3&gt;&lt;p&gt;NVIC 是 Cortex-M 内核里的一个&lt;strong&gt;硬件模块&lt;/strong&gt;，专门负责管理所有的中断。如果把 CPU 比作正在工作的医生，中断就是闯进诊室的病人，而 NVIC 就是分诊台的护士。在 CubeIDE 中，最让你困惑的可能就是 Priority（优先级）。&lt;/p&gt;
+&lt;h3 id=&#34;抢占优先级-vs-子优先级最核心的区别&#34;&gt;抢占优先级 vs 子优先级（最核心的区别）
+&lt;/h3&gt;&lt;p&gt;STM32 的中断优先级分为两个维度：&lt;/p&gt;
+&lt;h4 id=&#34;抢占优先级-preemption-priority--插队权&#34;&gt;抢占优先级 (Preemption Priority) —— “插队权”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;动作： 正在处理中断 A 时，中断 B 来了。如果 B 的抢占优先级比 A 高，CPU 会立刻放下手头的 A，去处理 B。等 B 处理完，再回来接着处理 A。&lt;/li&gt;
+&lt;li&gt;本质： 这种现象叫 “中断嵌套”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;子优先级-sub-priority--排队权&#34;&gt;子优先级 (Sub Priority) —— “排队权”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;动作： 如果中断 A 和中断 B 的抢占优先级一样，且它们同时发生了。&lt;/li&gt;
+&lt;li&gt;本质： 这时 CPU 不会发生嵌套，而是看谁的子优先级高，谁就先被处理。如果其中一个已经在运行了，另一个只能乖乖在门口等着，不能进去“插队”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;数字越小，优先级越高（0 是最高优先级）。&lt;/li&gt;
+&lt;li&gt;只有抢占优先级不同，才能发生“嵌套”（插队）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;优先级分组-priority-grouping&#34;&gt;优先级分组 (Priority Grouping)
+&lt;/h3&gt;&lt;p&gt;在 CubeIDE 的 NVIC 设置里，你会看到一个 Priority Group 的选项。这是因为 STM32 分给优先级的“总位数”是有限的（通常是 4 位，即 $2^4=16$ 级）。&lt;/p&gt;
+&lt;p&gt;你可以决定这 4 位如何分配给“抢占”和“子”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Group 4 (4 bits for preemption, 0 for sub)：有 16 级抢占优先级，没有子优先级（常用，最简单）。&lt;/li&gt;
+&lt;li&gt;Group 2 (2 bits for preemption, 2 for sub)：有 4 级抢占（0-3），4 级子（0-3）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;建议： 初学者直接选 Group 4 或者默认设置即可，没必要搞得太复杂。
+![[Pasted image 20251220205142.png]]&lt;/p&gt;
+&lt;h3 id=&#34;cubeide-配置界面里的关键项&#34;&gt;CubeIDE 配置界面里的关键项
+&lt;/h3&gt;&lt;p&gt;当你点开 &lt;code&gt;System Core&lt;/code&gt; -&amp;gt; &lt;code&gt;NVIC&lt;/code&gt; 时，你会看到这几列：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Enabled：打勾，硬件才会把中断信号传给内核。&lt;/li&gt;
+&lt;li&gt;Preemption Priority：设置抢占优先级。&lt;/li&gt;
+&lt;li&gt;Sub Priority：设置子优先级。&lt;/li&gt;
+&lt;li&gt;Uses FreeRTOS functions：如果以后学习操作系统（RTOS），这里会提醒哪些中断可以调用系统 API。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;中断背后的潜规则-best-practices&#34;&gt;中断背后的“潜规则” (Best Practices)
+&lt;/h3&gt;&lt;p&gt;在实际开发中，有三条铁律一定要遵守：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;快进快出：中断服务函数（ISR）就像急诊室，不能在里面“睡觉”（严禁使用 &lt;code&gt;HAL_Delay()&lt;/code&gt;）。如果里面写了耗时很长的循环，整个系统会卡死。&lt;/li&gt;
+&lt;li&gt;不要在中断里打印：&lt;code&gt;printf&lt;/code&gt; 非常慢。如果你想看中断触发没，翻转个 LED 或者设置一个标志位（Flag）是最好的选择。&lt;/li&gt;
+&lt;li&gt;变量要加 &lt;code&gt;volatile&lt;/code&gt;：如果你在中断里修改了一个全局变量，而 &lt;code&gt;main&lt;/code&gt; 函数里要用到它，定义变量时请写成： &lt;code&gt;volatile uint8_t flag = 0;&lt;/code&gt; 这告诉编译器：这个变量随时可能被“天外来客”（中断）修改，不要自作聪明去优化它。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;回调函数-callback-的真相&#34;&gt;回调函数 (Callback) 的真相
+&lt;/h3&gt;&lt;p&gt;你在代码里写的 &lt;code&gt;HAL_GPIO_EXTI_Callback&lt;/code&gt; 并不是真正的中断入口。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;硬件层面：触发 -&amp;gt; 查找 向量表 (Vector Table) -&amp;gt; 跳转到汇编定义的 &lt;code&gt;EXTI0_IRQHandler&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;HAL 库层面：&lt;code&gt;EXTI0_IRQHandler&lt;/code&gt; 调用 &lt;code&gt;HAL_GPIO_EXTI_IRQHandler&lt;/code&gt;（处理清除中断标志位等脏活），最后才调用你写的那个 &lt;code&gt;Callback&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;好处：你不需要管底层如何清除标志位，只需要关心你的业务逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;扩展资料如何找到中断入口&#34;&gt;扩展资料：如何找到中断入口
+&lt;/h3&gt;&lt;h4 id=&#34;第一条路查看户口本启动文件&#34;&gt;第一条路：查看“户口本”（启动文件）
+&lt;/h4&gt;&lt;p&gt;所有中断函数的“官方真名”都刻在芯片的&lt;strong&gt;启动文件&lt;/strong&gt;里。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在 STM32CubeIDE 的左侧目录找到：&lt;code&gt;Core -&amp;gt; Startup -&amp;gt; startup_stm32f103c8tx.s&lt;/code&gt;（这是一个汇编文件）。&lt;/li&gt;
+&lt;li&gt;打开它，向下拉，你会看到一张巨大的表，全是类似 &lt;code&gt;XXXX_IRQHandler&lt;/code&gt; 的名字。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这就是真名： 无论什么中断，它的底层函数名一定叫 &lt;strong&gt;&lt;code&gt;[外设名]_IRQHandler&lt;/code&gt;&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：&lt;code&gt;EXTI0_IRQHandler&lt;/code&gt;、&lt;code&gt;TIM2_IRQHandler&lt;/code&gt;、&lt;code&gt;USART1_IRQHandler&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220211117113.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220211117113.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;第二条路查看值班表-stm32f1xx_itc&#34;&gt;第二条路：查看“值班表” (&lt;code&gt;stm32f1xx_it.c&lt;/code&gt;)
+&lt;/h4&gt;&lt;p&gt;当你用 STM32CubeMX 配置并生成代码后，IDE 会自动为你准备一个专门存放中断函数的文件。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开：&lt;code&gt;Core -&amp;gt; Src -&amp;gt; stm32f1xx_it.c&lt;/code&gt;（it 代表 Interrupt）。&lt;/li&gt;
+&lt;li&gt;这里面已经写好了你开启的那些中断函数。比如你开了外部中断 0，你就能在这里找到：&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;![[Pasted image 20251220211210.png]]&lt;/p&gt;
+&lt;h4 id=&#34;第三条路hal-库的回调函数callback-推荐用法&#34;&gt;第三条路：HAL 库的“回调函数”（Callback）—— 推荐用法
+&lt;/h4&gt;&lt;p&gt;虽然 &lt;code&gt;EXTI0_IRQHandler&lt;/code&gt; 是真正的入口，但 HAL 库为了方便我们编写业务逻辑，设计了一套“回调机制”。&lt;/p&gt;
+&lt;p&gt;重点理解这个流程（以按键中断为例）：&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    A[硬件触发中断] --&gt; B[查找启动文件向量表]
+    B --&gt; C[&#34;真实入口: EXTI0_IRQHandler&lt;br/&gt;(在 stm32f1xx_it.c 中)&#34;]
+    C --&gt; D[&#34;HAL库通用处理: HAL_GPIO_EXTI_IRQHandler&lt;br/&gt;(负责清除标志位等杂活)&#34;]
+    D --&gt; E[&#34;开发者重写的函数: HAL_GPIO_EXTI_Callback&lt;br/&gt;(你在 main.c 里写的业务代码)&#34;]
+
+    style E fill:#f96,stroke:#333
+&lt;/div&gt;
+&lt;h4 id=&#34;怎么知道回调函数叫什么&#34;&gt;怎么知道回调函数叫什么
+&lt;/h4&gt;&lt;p&gt;回调函数的名字是&lt;strong&gt;固定&lt;/strong&gt;的。你可以在对应的 HAL 库驱动文件（&lt;code&gt;.h&lt;/code&gt;）里找到它们。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;中断类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;回调函数名 (你直接在 main.c 里重写即可)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;外部中断&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;定时器中断&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;串口接收完成&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;实战技巧如何快速瞬移到函数名&#34;&gt;实战技巧：如何快速“瞬移”到函数名？
+&lt;/h4&gt;&lt;p&gt;如果你在代码里看到了 &lt;code&gt;HAL_GPIO_EXTI_IRQHandler&lt;/code&gt;，想知道它最后会调用哪个回调函数，你可以：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;按住 Ctrl 键&lt;/strong&gt;，鼠标左键点击这个函数名，跳转进源码。&lt;/li&gt;
+&lt;li&gt;在源码里继续向下翻，你会看到一个被标注为 &lt;strong&gt;&lt;code&gt;__weak&lt;/code&gt;&lt;/strong&gt; 的函数定义。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;__weak&lt;/code&gt;（虚函数）&lt;/strong&gt; 就是你要找的名字！你在自己的代码里写一个一模一样的函数，编译器就会优先用你写的，而忽略这个“弱”的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220213548126.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220213548126.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;小结&#34;&gt;小结
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;物理入口&lt;/strong&gt;：名字必带 &lt;code&gt;_IRQHandler&lt;/code&gt;，在 &lt;code&gt;stm32f1xx_it.c&lt;/code&gt; 中。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逻辑入口&lt;/strong&gt;：名字必带 &lt;code&gt;_Callback&lt;/code&gt;，是你写具体逻辑的地方。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;作为初学者，你只需要在 &lt;code&gt;main.c&lt;/code&gt; 的末尾，把官方那个带 &lt;code&gt;__weak&lt;/code&gt; 的回调函数复制过来，去掉 &lt;code&gt;__weak&lt;/code&gt; 关键字，然后往里面填你的逻辑（比如点灯）就行了。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>为什么测CO</title>
+        <link>https://teaize.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B5%8Bco/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%B8%BA%E4%BB%80%E4%B9%88%E6%B5%8Bco/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;在一些 CEMS 中，为什么有些现场，除了测 NO 和 SO2，有的还需要测 CO&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;先说结论，是否需要测 CO，主要取决于：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;这个排口是不是被当成&lt;strong&gt;燃烧过程的监管对象&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;这个排口有没有&lt;strong&gt;燃烧效率或不完全燃烧的监管要求&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;当地环保规范或批复里，&lt;strong&gt;有没有把 CO 列为强制监测因子&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;从co-本身代表什么来理解&#34;&gt;从“CO 本身代表什么”来理解
+&lt;/h3&gt;&lt;p&gt;1、SO₂、NOx 在 CEMS 里的角色&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SO₂：代表硫污染物排放&lt;/li&gt;
+&lt;li&gt;NOx：代表氮氧化物排放
+这两个是&lt;strong&gt;典型的大气污染物总量控制因子&lt;/strong&gt;。换句话说：你排了多少，它本身就是监管目标&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、CO 的角色完全不一样&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CO 不是典型的“总量污染控制因子”&lt;/li&gt;
+&lt;li&gt;CO 更多是一个&lt;strong&gt;过程指标&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;它本质上在回答一个问题：“你这个燃烧，是不是烧干净了？”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;通俗地讲：SO₂、NOx 是“结果”，而 CO 是“过程质量”&lt;/p&gt;
+&lt;h3 id=&#34;为什么有些现场需要测-co&#34;&gt;为什么有些现场需要测 CO
+&lt;/h3&gt;&lt;p&gt;1、燃烧过程合规性要求高的场合&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;生活垃圾焚烧行业（GB 18485）： 这是最典型的例子。垃圾焚烧炉必须实时监测 $CO$，因为它不仅是污染物，更是衡量焚烧是否彻底、炉温是否达标的关键指标。&lt;/li&gt;
+&lt;li&gt;危险废物处置： 类似于垃圾焚烧，对燃烧稳定性要求极高。&lt;/li&gt;
+&lt;li&gt;医废焚烧&lt;/li&gt;
+&lt;li&gt;某些热处理炉、焚烧炉&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在这些场合：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CO 是判断&lt;strong&gt;是否充分燃烧&lt;/strong&gt;的核心指标&lt;/li&gt;
+&lt;li&gt;CO 高，说明：
+&lt;ul&gt;
+&lt;li&gt;温度不够&lt;/li&gt;
+&lt;li&gt;混合不好&lt;/li&gt;
+&lt;li&gt;停留时间不足&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;环保更担心的是：“你是不是在低温、半燃不燃的状态下偷排有害物”&lt;/li&gt;
+&lt;li&gt;所以监管逻辑是：CO 不合格 → 你燃烧过程不合规 → 即使 SO₂、NOx 还好，也可能不认&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2、CO 作为工艺运行的“仪表盘”（燃烧优化）&lt;/p&gt;
+&lt;p&gt;即使环保局不强制要求，很多厂长也希望测 $CO$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;判断燃烧效率：&lt;/strong&gt; $CO$ 是燃料&lt;strong&gt;不完全燃烧&lt;/strong&gt;的直接产物。
+&lt;ul&gt;
+&lt;li&gt;如果 $CO$ 突然升高，说明炉膛内氧气不足或燃料与空气混合不均匀。&lt;/li&gt;
+&lt;li&gt;通过监测 $CO$，锅炉司炉工可以调整&lt;strong&gt;过剩空气系数&lt;/strong&gt;。如果空气给多了，虽然 $CO$ 低了，但热量损失大且 $NO_x$ 会升高；如果空气给少了，$CO$ 就会飙升。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;节能降耗：&lt;/strong&gt; 维持在一个极低水平的 $CO$ 排放，意味着燃料利用率达到了最佳平衡点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3、用于解释 NOx、SO₂ 异常的“辅助证据”&lt;/p&gt;
+&lt;p&gt;在一些精细监管现场：NOx 忽高忽低、SO₂ 稀释后稳定性不好&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;CO 可以帮助判断：
+&lt;ul&gt;
+&lt;li&gt;是工况真的变了&lt;/li&gt;
+&lt;li&gt;还是稀释、采样、燃烧状态出了问题&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;从环保或运维角度：
+&lt;ul&gt;
+&lt;li&gt;CO = 工况“健康度指示灯”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么有些现场完全不需要-co&#34;&gt;为什么有些现场“完全不需要 CO”
+&lt;/h3&gt;&lt;p&gt;1、不是燃烧源，或燃烧不是监管重点&lt;/p&gt;
+&lt;p&gt;比如：化工尾气、工艺废气、脱硫脱硝后排放&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;这些场合：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;排放的 SO₂、NOx 主要来自工艺&lt;/li&gt;
+&lt;li&gt;CO 与工艺合规性关联弱&lt;/li&gt;
+&lt;li&gt;即使有 CO，也没有明确管理意义&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;2、监管目标是“排多少”，不是“怎么烧”&lt;/p&gt;
+&lt;p&gt;对很多锅炉、电站，监管核心是：SO₂、NOx、颗粒物是否达标。CO 对总量考核意义不大。毕竟多测一个 CO ≈ 多一套系统 + 多一堆维护风险 —&amp;gt; 没有明确要求，就不会上&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>质控仪</title>
         <link>https://teaize.github.io/p/%E8%B4%A8%E6%8E%A7%E4%BB%AA/</link>
         <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
