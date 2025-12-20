@@ -7,7 +7,895 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Fri, 19 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>HJ 212 协议</title>
+        <link>https://teaize.github.io/p/hj-212-%E5%8D%8F%E8%AE%AE/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/hj-212-%E5%8D%8F%E8%AE%AE/</guid>
+        <description>&lt;p&gt;在 CEMS 领域，HJ 212 协议《污染物在线监控（监测）系统数据传输标准》为环保界的“普通话”。它不仅是一个通讯标准，更是国家环保监管的“神经系统”。&lt;/p&gt;
+&lt;h2 id=&#34;为什么要颁布-hj-212&#34;&gt;为什么要颁布 HJ 212
+&lt;/h2&gt;&lt;p&gt;在 HJ 212 颁布之前，环保监测行业处于“战国时代”：A 厂家的分析仪说“德语”，B 厂家的数采仪说“法语”，而省环保厅的平台只能听懂“英语”。&lt;/p&gt;
+&lt;h3 id=&#34;统一接口消除信息孤岛&#34;&gt;统一接口，消除“信息孤岛”
+&lt;/h3&gt;&lt;p&gt;国家颁布 HJ 212 的核心目的就是&lt;strong&gt;标准化&lt;/strong&gt;。它规定了所有监测设备（水、气、声、土）在向环保局汇报数据时，必须&lt;strong&gt;使用统一的报文格式&lt;/strong&gt;。这样，无论企业用哪种品牌的分析仪，监管部门都能实时读取。&lt;/p&gt;
+&lt;h3 id=&#34;监管透明化防篡改&#34;&gt;监管透明化（防篡改）
+&lt;/h3&gt;&lt;p&gt;以前的数据传输是单向且简单的。HJ 212 引入了&lt;strong&gt;数据状态标志位&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;例如：如果企业正在维护设备，数据必须打上“D”（校验）标记。&lt;/li&gt;
+&lt;li&gt;如果没有这个标准，企业可能会把测试时的“零点数据”混成真实的排放数据上报，导致监管失灵。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;支撑非现场执法&#34;&gt;支撑“非现场执法”
+&lt;/h3&gt;&lt;p&gt;HJ 212 的演进（特别是从 2005 版到 2017 版）增加了大量的&lt;strong&gt;反向控制指令&lt;/strong&gt;。这让监管从“只能看”变成了“可以动”。环保局不需要进厂，就能远程启动一次核查。&lt;/p&gt;
+&lt;h2 id=&#34;反向控制反控&#34;&gt;反向控制（反控）
+&lt;/h2&gt;&lt;p&gt;环保局的监控平台通过网络向企业端的数据采集传输仪（数采仪）发送特定的指令，再由数采仪指挥质控仪动作，让现场的质控仪立即开始“盲样考核”，这背后的核心技术就是反向控制。&lt;/p&gt;
+&lt;h3 id=&#34;1-协议基础&#34;&gt;1. 协议基础
+&lt;/h3&gt;&lt;p&gt;这种操作必须遵循统一的“语言”，目前国内最通用的协议是 &lt;strong&gt;发送特定的指令，再由数采仪指挥&lt;/strong&gt;（也就是上面说的 HJ 212 协议）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平台发送一个“质控指令码”。&lt;/li&gt;
+&lt;li&gt;质控仪识别代码后，自动开启电磁阀、启动配气泵。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-工作流程&#34;&gt;2. 工作流程
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;发送特定的指令，再由数采仪指挥 平台下达“开始二氧化硫 50mg/m³ 盲样核查”指令。&lt;/li&gt;
+&lt;li&gt;HJ 212 协议 质控仪接收指令，内部配气模块将标气稀释至目标浓度。&lt;/li&gt;
+&lt;li&gt;指令下发： 质控仪控制切断烟气采样，将质控气送入分析仪。&lt;/li&gt;
+&lt;li&gt;自动配气： 分析仪测出的数据通过数采仪传回平台。&lt;/li&gt;
+&lt;li&gt;管路切换： 平台自动计算误差（例如：目标 50，实测 52，误差 4%），判断是否合格。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键环节&#34;&gt;关键环节
+&lt;/h3&gt;&lt;p&gt;远程操作质控仪并不仅仅是“通气”那么简单，它涉及以下四个关键要素：&lt;/p&gt;
+&lt;h4 id=&#34;1-指令的安全性与唯一性&#34;&gt;1. 指令的安全性与唯一性
+&lt;/h4&gt;&lt;p&gt;为了防止黑客攻击或误操作，反控指令通常带有&lt;strong&gt;时间戳&lt;/strong&gt;和&lt;strong&gt;唯一流水号&lt;/strong&gt;。只有经过授权的账号（如省/市环保局）才能发起。&lt;/p&gt;
+&lt;h4 id=&#34;2-状态标识打标&#34;&gt;2. 状态标识（打标）
+&lt;/h4&gt;&lt;p&gt;这是规范（如 HJ 75）中非常重要的一点。当质控仪开始工作时，CEMS 的数据状态必须从“正常”切换为“质控/校准”状态。&lt;/p&gt;
+&lt;p&gt;目的是防止这期间通入的高浓度标气被当做真实的排放数据，从而导致企业因“数据超标”被冤枉罚款。&lt;/p&gt;
+&lt;h4 id=&#34;3-盲样逻辑&#34;&gt;3. “盲样”逻辑
+&lt;/h4&gt;&lt;p&gt;质控仪最强大的地方在于，它对企业是“盲”的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;企业运维人员不知道监管部门什么时候会点下指令。&lt;/li&gt;
+&lt;li&gt;质控仪内部的标气底数（真实浓度）只有监管端掌握，现场人员无法提前修改结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-气路响应时间&#34;&gt;4. 气路响应时间
+&lt;/h4&gt;&lt;p&gt;技术规范要求远程指令下达后，系统必须在规定时间内完成响应。如果管路太长或配气太慢，导致数据迟迟不达标，会被判定为“设备故障”或“干预监测”。&lt;/p&gt;
+&lt;h3 id=&#34;为什么要做这种远程操作&#34;&gt;为什么要做这种“远程操作”
+&lt;/h3&gt;&lt;p&gt;过去，环保监管主要靠“现场突击检查”，但这存在几个弊端：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;成本高： 执法人员跑断腿也跑不完所有工厂。&lt;/li&gt;
+&lt;li&gt;易穿帮： 检查人员进厂门时，企业可能有时间做手脚。&lt;/li&gt;
+&lt;li&gt;频率低： 一年查一次，平时准不准全靠自觉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;有了远程反控质控仪后： 监管变成了**“全时段抽测”。环保局可以凌晨 3 点发起核查，如果此时质控仪数据异常，系统会自动锁定证据。&lt;/p&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;p&gt;远程反控质控仪标志着环保监管从“人防”转到了“技防”&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;涉及维度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;关键内容&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;通讯协议&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;HJ 212 及其扩展协议&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;硬件链路&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;云端平台 $\rightarrow$ 数采仪 $\rightarrow$ 质控仪 $\rightarrow$ 分析仪&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑保护&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;自动剔除校准期间的异常数据（打标标记）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;法律效力&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;远程核查结果可直接作为行政处罚的依据或线索&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>质控仪</title>
+        <link>https://teaize.github.io/p/%E8%B4%A8%E6%8E%A7%E4%BB%AA/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%B4%A8%E6%8E%A7%E4%BB%AA/</guid>
+        <description>&lt;p&gt;在 CEMS（烟气排放连续监测系统）中，&lt;strong&gt;质控仪&lt;/strong&gt;（也常被称为“远程质控装置”或“自动校验装置”）是一种用于&lt;strong&gt;监督和验证分析仪准确性&lt;/strong&gt;的辅助系统&lt;/p&gt;
+&lt;h3 id=&#34;质控仪是什么&#34;&gt;质控仪是什么
+&lt;/h3&gt;&lt;p&gt;质控仪通常由&lt;strong&gt;标准气体组、精密配气模块、控制回路&lt;/strong&gt;以及&lt;strong&gt;通信模块&lt;/strong&gt;组成。它并不是直接用来测量烟气的，而是通过向 CEMS 系统注入已知浓度的“标准气体”，来对比 CEMS 的读数是否与标气浓度一致。&lt;/p&gt;
+&lt;h3 id=&#34;主要用于什么&#34;&gt;主要用于什么
+&lt;/h3&gt;&lt;h4 id=&#34;1-自动校准与校验保证准确性&#34;&gt;1. 自动校准与校验（保证准确性）
+&lt;/h4&gt;&lt;p&gt;CEMS 传感器在长期运行中会产生“漂移”。质控仪可以按照预设程序（如每天一次或每周一次），自动切换阀门，将标气送入分析仪。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;零点校准：&lt;/strong&gt; 通入高纯氮气，检查仪表是否显示为“0”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;量程校准：&lt;/strong&gt; 通入已知高浓度的标气，检查仪表读数是否准确。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-远程抽检与防作弊合规监管&#34;&gt;2. 远程抽检与防作弊（合规监管）
+&lt;/h4&gt;&lt;p&gt;这是近年来环保监管最看重的功能。环保局可以通过远程平台发送指令，让现场的质控仪立即开始“盲样考核”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;远程触发： 监管人员在办公室点点鼠标，现场质控仪就自动放气。&lt;/li&gt;
+&lt;li&gt;数据比对： 质控仪记录放出的气是多少浓度，然后实时比对 CEMS 上传的数据。如果两者对不上，就说明数据可能存在偏差或人为干预。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-线性度测试&#34;&gt;3. 线性度测试
+&lt;/h4&gt;&lt;p&gt;通过内置的配气系统，质控仪可以将一种高浓度标气稀释成多个不同梯度（如 20%、50%、80% 量程），一次性测试分析仪在不同浓度下的反应是否呈线性，从而判断传感器是否老化失效。&lt;/p&gt;
+&lt;h3 id=&#34;质控仪与配气仪的区别&#34;&gt;质控仪与配气仪的区别
+&lt;/h3&gt;&lt;p&gt;简单来说：&lt;strong&gt;配气仪是“工具”，而质控仪是“成套系统”&lt;/strong&gt;。它们的关系就像“发动机”与“整车”的区别&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;配气仪 (Gas Dilutor)： 是一个纯粹的&lt;strong&gt;精密仪器&lt;/strong&gt;。它的任务只有一个：通过高精度的质量流量控制器（MFC），把高浓度的瓶装标气用氮气精确稀释成你想要的任何浓度（比如把 $1000ppm$ 稀释成 $20ppm$）。&lt;/li&gt;
+&lt;li&gt;质控仪 (QC Unit/System)： 是一个&lt;strong&gt;监管终端&lt;/strong&gt;。它集成了配气仪，但还多了“大脑”（控制器）和“嘴巴”（通信模块）。它负责接收环保局的指令，自动控制配气仪工作，并将结果上报。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在以前，运维人员提着一台&lt;strong&gt;便携式配气仪&lt;/strong&gt;去现场校准就行了。但现在国家推行&lt;strong&gt;远程非现场监管&lt;/strong&gt;，区别就显现出来了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;盲样考核：&lt;/strong&gt; 环保局想知道你的 CEMS 准不准，不需要派人去，直接给&lt;strong&gt;质控仪&lt;/strong&gt;发信号。质控仪自动稀释出一瓶“未知浓度”的气体送入 CEMS，CEMS 的读数传回平台。如果误差大，平台自动报警。这种&lt;strong&gt;远程闭环&lt;/strong&gt;是配气仪单独做不到的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;减少标气瓶数量：&lt;/strong&gt; 质控仪内置配气功能后，企业只需要买一两瓶高浓度标气，就能配出覆盖零点到满量程的各个点位。这符合 &lt;strong&gt;HJ 75/76&lt;/strong&gt; 规范中对多点线性检查的要求，既省钱又符合规范。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;核心技术规范hj-75--hj-76&#34;&gt;核心技术规范：HJ 75 &amp;amp; HJ 76
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;HJ 76-2017《固定污染源烟气排放连续监测系统技术要求及检测方法》
+&lt;ul&gt;
+&lt;li&gt;关注点： 质控仪硬件的“合格证”。&lt;/li&gt;
+&lt;li&gt;要求： 质控仪必须能够精准控制气体流量，且具有自动配气功能的装置需要经过严格的&lt;strong&gt;线性误差&lt;/strong&gt;检测。它规定了标准气体的精度（通常要求二级标物以上）以及设备在极端环境下的稳定性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;HJ 75-2017《固定污染源烟气排放连续监测技术规范》
+&lt;ul&gt;
+&lt;li&gt;关注点： 质控仪该怎么“干活”。&lt;/li&gt;
+&lt;li&gt;强制动作：
+&lt;ul&gt;
+&lt;li&gt;24 小时零点/量程漂移检查： 质控仪需每日定时自动通入零气和标气。&lt;/li&gt;
+&lt;li&gt;7 天漂移校准： 如果 7 天内漂移超过规定值（如 $2.5% F.S.$），质控仪必须介入校准。&lt;/li&gt;
+&lt;li&gt;全系统校准： 规范强调校准应尽可能覆盖全管路（从探头到分析仪）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键性能指标&#34;&gt;关键性能指标
+&lt;/h3&gt;&lt;p&gt;在技术验收（依据 HJ 75）时，质控仪配合 CEMS 必须达到以下硬指标：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;检测项目&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;规范要求 (HJ 75/76)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;质控仪的作用&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;示值误差&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;标气浓度的 $\pm 5%$ 以内&lt;/td&gt;
+          &lt;td&gt;验证配气精度&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;系统响应时间&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;通常 $\le 200$ 秒&lt;/td&gt;
+          &lt;td&gt;考核气路切换速度&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;24h 漂移&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\le \pm 2.5% F.S.$&lt;/td&gt;
+          &lt;td&gt;每日自动执行零点/量程检查&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;线性误差&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;相关系数 $r \ge 0.999$&lt;/td&gt;
+          &lt;td&gt;通过多点配气验证传感器线性&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;专家提醒2024-2025-监管新动向&#34;&gt;专家提醒：2024-2025 监管新动向
+&lt;/h3&gt;&lt;p&gt;目前国家正逐步推行“数智化运维”（如 HJ 1387 等新标准体系），对质控仪提出了更高要求：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动预警： 当质控仪发现连续 3 天漂移趋势一致时，需主动推送“维护提醒”。&lt;/li&gt;
+&lt;li&gt;低浓度挑战： 针对超低排放企业（如 SO₂ 常年在 $10mg/m^3$ 以下），质控仪的配气精度要求从传统的“百分比”升级到了更精细的“绝对误差”控制。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Mermaid流程图</title>
+        <link>https://teaize.github.io/p/mermaid%E6%B5%81%E7%A8%8B%E5%9B%BE/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/mermaid%E6%B5%81%E7%A8%8B%E5%9B%BE/</guid>
+        <description>&lt;h3 id=&#34;核心语法形状决定意义&#34;&gt;核心语法：形状决定意义
+&lt;/h3&gt;&lt;p&gt;在工程图纸里，形状是有严格规定的。Mermaid 通过括号来控制形状&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;矩形 &lt;code&gt;[]&lt;/code&gt;&lt;/strong&gt;：表示&lt;strong&gt;过程/步骤&lt;/strong&gt; (Process)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;菱形 &lt;code&gt;{}&lt;/code&gt;&lt;/strong&gt;：表示&lt;strong&gt;判断/决策&lt;/strong&gt; (Decision)。这是故障排查的核心。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;圆角 &lt;code&gt;()&lt;/code&gt;&lt;/strong&gt;：表示&lt;strong&gt;开始/结束&lt;/strong&gt; (Start/End)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;布局方向td-还是-lr&#34;&gt;布局方向：TD 还是 LR
+&lt;/h3&gt;&lt;p&gt;写在第一行。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;flowchart TD&lt;/code&gt; (Top-Down)：从上到下。适合画决策树、层级结构。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;flowchart LR&lt;/code&gt; (Left-Right)：从左到右。适合画工艺流向（比如 气路流程：进气 -&amp;gt; 过滤 -&amp;gt; 分析 -&amp;gt; 排空）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;连线技巧&#34;&gt;连线技巧
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;普通箭头：&lt;code&gt;--&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;带文字的箭头：&lt;code&gt;-- 文字 --&amp;gt;&lt;/code&gt; 或者 &lt;code&gt;--&amp;gt;|文字|&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;在做判断题时很有用： &lt;code&gt;A -- Yes --&amp;gt; B&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;graph TD
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Start[故障现象: 读数异常] --&amp;gt; Q1{光强是否正常?}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q1 -- No (过低/波动) --&amp;gt; A1[查光学部件]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A1 --&amp;gt; A1_1[换光源灯泡]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A1 --&amp;gt; A1_2[擦拭气室镜片]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A1 --&amp;gt; A1_3[检查光纤连接]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q1 -- Yes (光强很好) --&amp;gt; Q2{通零气回零吗?}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q2 -- No (零点高) --&amp;gt; A2[查气路污染]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A2 --&amp;gt; A2_1[清洗气室]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A2 --&amp;gt; A2_2[检查温控是否漂移]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q2 -- Yes (零点正常) --&amp;gt; Q3{通标气准吗?}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q3 -- No (偏低/慢) --&amp;gt; A3[查采样系统]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A3 --&amp;gt; A3_1[查泵流速/漏气]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    A3 --&amp;gt; A3_2[换滤芯/电磁阀]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Q3 -- Yes --&amp;gt; End[仪器没坏&amp;lt;br&amp;gt;是工况变了/DAS传输问题]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Start[故障现象: 读数异常] --&gt; Q1{光强是否正常?}
+    
+    Q1 -- No (过低/波动) --&gt; A1[查光学部件]
+    A1 --&gt; A1_1[换光源灯泡]
+    A1 --&gt; A1_2[擦拭气室镜片]
+    A1 --&gt; A1_3[检查光纤连接]
+    
+    Q1 -- Yes (光强很好) --&gt; Q2{通零气回零吗?}
+    
+    Q2 -- No (零点高) --&gt; A2[查气路污染]
+    A2 --&gt; A2_1[清洗气室]
+    A2 --&gt; A2_2[检查温控是否漂移]
+    
+    Q2 -- Yes (零点正常) --&gt; Q3{通标气准吗?}
+    
+    Q3 -- No (偏低/慢) --&gt; A3[查采样系统]
+    A3 --&gt; A3_1[查泵流速/漏气]
+    A3 --&gt; A3_2[换滤芯/电磁阀]
+    
+    Q3 -- Yes --&gt; End[仪器没坏&lt;br&gt;是工况变了/DAS传输问题]
+&lt;/div&gt;
+&lt;h3 id=&#34;避坑指南&#34;&gt;避坑指南
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;坑 1：菱形括号里不能有特殊字符
+&lt;ul&gt;
+&lt;li&gt;错误：&lt;code&gt;Q1{光强 &amp;gt; 50%?}&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;原因：&lt;code&gt;?&lt;/code&gt; 和 &lt;code&gt;%&lt;/code&gt; 等符号有时会破坏语法。&lt;/li&gt;
+&lt;li&gt;解决：像之前一样，用双引号包起来。 &lt;code&gt;Q1{&amp;quot;光强 &amp;gt; 50%?&amp;quot;}&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;坑 2：节点 ID 重复
+&lt;ul&gt;
+&lt;li&gt;如果你写 &lt;code&gt;A[检查] --&amp;gt; B[维修] --&amp;gt; A[检查]&lt;/code&gt;，这表示流程回到了最初的起点（形成了闭环）。&lt;/li&gt;
+&lt;li&gt;如果你只是想表达另一个“检查”步骤，不要用同一个 ID &lt;code&gt;A&lt;/code&gt;，要用 &lt;code&gt;A2&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;坑 3：混淆 &lt;code&gt;graph&lt;/code&gt; 和 &lt;code&gt;flowchart&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;你可能会看到有人写 &lt;code&gt;graph TD&lt;/code&gt;，有人写 &lt;code&gt;flowchart TD&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;建议：尽量使用 &lt;code&gt;flowchart&lt;/code&gt;。它是新版渲染器，支持更多花样（比如子图 subgraph），而且连线更圆滑，不像 &lt;code&gt;graph&lt;/code&gt; 那么生硬。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;flowchart LR
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 1. 定义样式：让图更好看
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef process fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef valve fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 2. 采样部分
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Sampling [采样端]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Probe(采样探头) --&amp;gt; Filter1[初级过滤]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Filter1 --&amp;gt; HeatLine[伴热管线 120℃]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 3. 预处理部分
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Conditioning [预处理柜]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        HeatLine --&amp;gt; Pump((采样泵))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Pump --&amp;gt; Cooler[冷凝除水]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Cooler --&amp;gt; Filter2[精细过滤]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 4. 分析部分
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Analyzer [分析仪]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Filter2 --&amp;gt; Valve{切换阀}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Valve -- 样气 --&amp;gt; Chamber[测量气室]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Valve -- 标气 --&amp;gt; Chamber
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Chamber --&amp;gt; Outlet(废气排放)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 5. 外部标气
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Cyl[标气瓶] -.-&amp;gt; Valve
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 应用样式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Filter1,Filter2,Cooler,Chamber process;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Valve valve;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  flowchart LR
+    %% 1. 定义样式：让图更好看
+    classDef process fill:#e1f5fe,stroke:#01579b,stroke-width:2px;
+    classDef valve fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+
+    %% 2. 采样部分
+    subgraph Sampling [采样端]
+        Probe(采样探头) --&gt; Filter1[初级过滤]
+        Filter1 --&gt; HeatLine[伴热管线 120℃]
+    end
+
+    %% 3. 预处理部分
+    subgraph Conditioning [预处理柜]
+        HeatLine --&gt; Pump((采样泵))
+        Pump --&gt; Cooler[冷凝除水]
+        Cooler --&gt; Filter2[精细过滤]
+    end
+
+    %% 4. 分析部分
+    subgraph Analyzer [分析仪]
+        Filter2 --&gt; Valve{切换阀}
+        Valve -- 样气 --&gt; Chamber[测量气室]
+        Valve -- 标气 --&gt; Chamber
+        Chamber --&gt; Outlet(废气排放)
+    end
+    
+    %% 5. 外部标气
+    Cyl[标气瓶] -.-&gt; Valve
+
+    %% 应用样式
+    class Filter1,Filter2,Cooler,Chamber process;
+    class Valve valve;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;subgraph&lt;/code&gt;&lt;/strong&gt;：把图分成了“采样端”、“预处理”、“分析仪”三块，逻辑非常清晰。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;-.-&amp;gt;&lt;/code&gt;&lt;/strong&gt;：虚线箭头，表示标气不是一直通的，是间歇的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;classDef&lt;/code&gt;&lt;/strong&gt;：这是进阶玩法，给不同的部件上色（比如过滤器是蓝色，阀门是黄色），看起来很专业。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Mermaid时序图</title>
+        <link>https://teaize.github.io/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/</guid>
+        <description>&lt;p&gt;本篇继 [[Mermaid思维导图]]、[[Mermaid状态图]]，学习 Mermaid 时序图&lt;/p&gt;
+&lt;h3 id=&#34;核心语法谁跟谁说话&#34;&gt;核心语法：谁跟谁说话
+&lt;/h3&gt;&lt;p&gt;时序图的代码就像写剧本。基本句式： &lt;code&gt;A-&amp;gt;&amp;gt;B: 你好啊&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;participant&lt;/code&gt;：定义演员。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&amp;gt;&amp;gt;&lt;/code&gt;：实线箭头（发指令）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--&amp;gt;&amp;gt;&lt;/code&gt;：虚线箭头（回消息）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sequenceDiagram
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant DAS as 🖥️工控机
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant CEMS as ⚙️分析仪
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    DAS-&amp;gt;&amp;gt;CEMS: 1. 现在的浓度是多少？(Modbus请求)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CEMS--&amp;gt;&amp;gt;DAS: 2. 是 35.5 mg/m3 (返回数据)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;进阶语法加个背景色-loop--alt&#34;&gt;进阶语法：加个背景色 (Loop / Alt)
+&lt;/h3&gt;&lt;p&gt;只有对话太单调，有时候需要表示“循环”或者“特殊情况”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;loop … end&lt;/code&gt;：表示一直做某事。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;alt … else … end&lt;/code&gt;：表示“如果…否则…” (Alternative)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sequenceDiagram
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant P as 采样泵
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant S as 传感器
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    loop 每秒一次
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        P-&amp;gt;&amp;gt;S: 抽气
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S--&amp;gt;&amp;gt;S: 读取光强
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    alt 光强太低
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S-&amp;gt;&amp;gt;P: 报警！停止抽气！
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    else 光强正常
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S-&amp;gt;&amp;gt;P: 继续工作
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  sequenceDiagram
+    participant P as 采样泵
+    participant S as 传感器
+
+    loop 每秒一次
+        P-&gt;&gt;S: 抽气
+        S--&gt;&gt;S: 读取光强
+    end
+    
+    alt 光强太低
+        S-&gt;&gt;P: 报警！停止抽气！
+    else 光强正常
+        S-&gt;&gt;P: 继续工作
+    end
+&lt;/div&gt;
+&lt;h3 id=&#34;避坑指南&#34;&gt;避坑指南
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;箭头方向：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-&amp;gt;&amp;gt;&lt;/code&gt; 是发出去（实线），&lt;code&gt;--&amp;gt;&amp;gt;&lt;/code&gt; 是回话（虚线）。&lt;/li&gt;
+&lt;li&gt;千万别写成 &lt;code&gt;--&amp;gt;&lt;/code&gt;（这是流程图的写法），虽然有时候能混过去，但在时序图里不规范。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;别名 (as) 很重要：
+&lt;ul&gt;
+&lt;li&gt;如果名字太长（比如“脱硝出口 CEMS 分析仪主控板”），一定要用 &lt;code&gt;participant A as …&lt;/code&gt; 这种写法，否则后面的代码会写得你想哭。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;顺序决定站位：
+&lt;ul&gt;
+&lt;li&gt;代码里谁先出现（&lt;code&gt;participant&lt;/code&gt; 定义的顺序），图上谁就站在左边。通常我们把“发起者”（比如电脑）放在最左边。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;遇到什么问题？&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;用什么图？&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;核心思考&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;代码关键词&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;我要拆解结构&lt;/strong&gt;&lt;br&gt;(如：这台机器由什么组成？)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Mindmap&lt;/strong&gt;&lt;br&gt;(思维导图)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;分类&lt;/strong&gt;&lt;br&gt;(包含关系)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;mindmap&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;我要理清状态&lt;/strong&gt;&lt;br&gt;(如：故障了怎么恢复？)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;StateDiagram&lt;/strong&gt;&lt;br&gt;(状态图)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;变化&lt;/strong&gt;&lt;br&gt;(从 A 变 B)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;stateDiagram-v2&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;我要搞懂通讯&lt;/strong&gt;&lt;br&gt;(如：软件怎么控制硬件？)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Sequence&lt;/strong&gt;&lt;br&gt;(时序图)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;时间&lt;/strong&gt;&lt;br&gt;(谁先谁后)&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;sequenceDiagram&lt;/code&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>Mermaid思维导图</title>
+        <link>https://teaize.github.io/p/mermaid%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/mermaid%E6%80%9D%E7%BB%B4%E5%AF%BC%E5%9B%BE/</guid>
+        <description>&lt;h3 id=&#34;示例代码&#34;&gt;示例代码
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mindmap
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  root((CEMS仪表&amp;lt;br/&amp;gt;学习笔记))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    核心部件
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      分析仪[气体分析仪]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      采样探头
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    常见问题
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      电压波动_±10%
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      管路堵塞_泄漏
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    关键概念
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      FRU))现场可更换((
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      鲁棒性
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  mindmap
+  root((CEMS仪表&lt;br/&gt;学习笔记))
+    核心部件
+      分析仪[气体分析仪]
+      采样探头
+    常见问题
+      电压波动_±10%
+      管路堵塞_泄漏
+    关键概念
+      FRU))现场可更换((
+      鲁棒性
+&lt;/div&gt;
+&lt;h3 id=&#34;核心语法要素&#34;&gt;核心语法要素
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;层级全靠缩进管， 空格必须引号包， 换行记得写 br， 括号决定形状好。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;骨架：全靠“缩进”。不需要写箭头 &lt;code&gt;--&amp;gt;&lt;/code&gt;，只需要用空格（通常是 2 个或 4 个空格）来表示层级关系
+&lt;ul&gt;
+&lt;li&gt;第一行写 &lt;code&gt;mindmap&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;第二行顶格写的是 根节点。&lt;/li&gt;
+&lt;li&gt;后面缩进的都是 子节点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;形状：括号决定长相
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;[]&lt;/code&gt; 方形&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;()&lt;/code&gt; 圆角（默认）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;(())&lt;/code&gt; 圆形&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;))&lt;/code&gt; 类似云朵/爆炸形（适合强调）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;{{}}&lt;/code&gt; 六边形&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;图标：画龙点睛
+&lt;ul&gt;
+&lt;li&gt;语法是：&lt;code&gt;::icon(图标代码)&lt;/code&gt;，例如 &lt;code&gt;::icon(fa fa-plug)&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;依赖软件环境，不一定能显示出来&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;避坑指南&#34;&gt;避坑指南
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;坑 1：文字里有“空格”或“标点”，如果你的节点文字里有空格、括号、标点，必须用&lt;strong&gt;英文双引号&lt;/strong&gt; &lt;code&gt;&amp;quot;&amp;quot;&lt;/code&gt; 把文字包起来
+&lt;ul&gt;
+&lt;li&gt;❌ 错误写法：&lt;code&gt;供电电压 (220V)&lt;/code&gt; （括号和空格会破坏代码结构）&lt;/li&gt;
+&lt;li&gt;✅ 正确写法：&lt;code&gt;&amp;quot;供电电压 (220V)&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;坑 2：缩进不一致
+&lt;ul&gt;
+&lt;li&gt;不要混用 &lt;code&gt;Tab&lt;/code&gt; 键和 &lt;code&gt;空格&lt;/code&gt; 键。&lt;/li&gt;
+&lt;li&gt;建议全用空格（比如每次按 2 下空格）。如果上一行缩进了 2 格，下一行同级节点必须也是 2 格，不能是 3 格。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;坑 3：换行要用 &lt;code&gt;&amp;lt;br/&amp;gt;&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;✅ 正确：&lt;code&gt;&amp;quot;分析仪&amp;lt;br/&amp;gt;供电测试&amp;quot;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Mermaid状态图</title>
+        <link>https://teaize.github.io/p/mermaid%E7%8A%B6%E6%80%81%E5%9B%BE/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/mermaid%E7%8A%B6%E6%80%81%E5%9B%BE/</guid>
+        <description>&lt;h3 id=&#34;示例代码&#34;&gt;示例代码
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;stateDiagram-v2
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    [*] --&amp;gt; 正常运行(Measure)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;正常运行 (Measure)&amp;#34; as Measure {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        [*] --&amp;gt; 采样中
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        采样中 --&amp;gt; 数据处理
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        数据处理 --&amp;gt; 采样中
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;故障状态 (Fault)&amp;#34; as Fault {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        [*] --&amp;gt; 诊断中
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        诊断中 --&amp;gt; 锁定输出: 保护下游
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        锁定输出 --&amp;gt; 等待维修
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    state &amp;#34;维修模式 (Maintenance)&amp;#34; as Maint {
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        [*] --&amp;gt; 识别FRU
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        识别FRU --&amp;gt; 更换模块: 拔插操作
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        更换模块 --&amp;gt; 自动自检: 握手通信
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        自动自检 --&amp;gt; [*]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    }
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 状态流转逻辑
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Measure --&amp;gt; Fault: 监测到光强过低 (光源老化)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Fault --&amp;gt; Maint: 运维人员到达，切换至维修模式
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    note right of Maint
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        这里体现 FRU 的优势：
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        不需要焊接，不需要示波器
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        换完自动握手
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end note
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Maint --&amp;gt; Measure: 自检通过，系统复位
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  stateDiagram-v2
+    [*] --&gt; 正常运行(Measure)
+
+    state &#34;正常运行 (Measure)&#34; as Measure {
+        [*] --&gt; 采样中
+        采样中 --&gt; 数据处理
+        数据处理 --&gt; 采样中
+    }
+
+    state &#34;故障状态 (Fault)&#34; as Fault {
+        [*] --&gt; 诊断中
+        诊断中 --&gt; 锁定输出: 保护下游
+        锁定输出 --&gt; 等待维修
+    }
+
+    state &#34;维修模式 (Maintenance)&#34; as Maint {
+        [*] --&gt; 识别FRU
+        识别FRU --&gt; 更换模块: 拔插操作
+        更换模块 --&gt; 自动自检: 握手通信
+        自动自检 --&gt; [*]
+    }
+
+    %% 状态流转逻辑
+    Measure --&gt; Fault: 监测到光强过低 (光源老化)
+    
+    Fault --&gt; Maint: 运维人员到达，切换至维修模式
+    note right of Maint
+        这里体现 FRU 的优势：
+        不需要焊接，不需要示波器
+        换完自动握手
+    end note
+
+    Maint --&gt; Measure: 自检通过，系统复位
+&lt;/div&gt;
+&lt;h3 id=&#34;核心语法要素&#34;&gt;核心语法要素
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;开头结尾画只眼 &lt;code&gt;[*]&lt;/code&gt;，&lt;/strong&gt; &lt;strong&gt;箭头必须两横线 &lt;code&gt;--&amp;gt;&lt;/code&gt;，&lt;/strong&gt; &lt;strong&gt;名字太长用别名 &lt;code&gt;as&lt;/code&gt;，&lt;/strong&gt; &lt;strong&gt;条件说明加冒号 &lt;code&gt;:&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;起点与终点：&lt;code&gt;[*]&lt;/code&gt;，这是状态图的标志性符号
+&lt;ul&gt;
+&lt;li&gt;放在开头：表示“系统启动”。&lt;/li&gt;
+&lt;li&gt;放在结尾：表示“系统关机”或“流程结束”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;流转箭头：&lt;code&gt;--&amp;gt;&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;注意！Mermaid 的状态图箭头必须是 &lt;strong&gt;两个横杠&lt;/strong&gt; &lt;code&gt;--&amp;gt;&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;状态描述：冒号 &lt;code&gt;:&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你想解释“为什么”会从 A 变成 B，就在箭头后面加冒号&lt;/li&gt;
+&lt;li&gt;格式：&lt;code&gt;状态A --&amp;gt; 状态B : 触发条件&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;别名法
+&lt;ul&gt;
+&lt;li&gt;给状态起个简单的英文代号（ID），然后在引号里写复杂的中文名字&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;语法：&lt;/strong&gt; &lt;code&gt;state &amp;quot;复杂的中文名字&amp;quot; as ID&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;避坑指南&#34;&gt;避坑指南
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;坑 1：方向没控制好，状态图默认是从上到下（Top-Bottom），如果流程很长，图会变得巨长无比
+&lt;ul&gt;
+&lt;li&gt;解决： 在第一行加上 &lt;code&gt;direction LR&lt;/code&gt; (Left to Right)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;坑 2：忘记闭环
+&lt;ul&gt;
+&lt;li&gt;状态图最怕“死胡同”。比如：状态到了“故障”，然后就没下文了。&lt;/li&gt;
+&lt;li&gt;逻辑检查： 故障修好了去哪？要画一条线指回“正常”或指像“结束 &lt;code&gt;[*]&lt;/code&gt;”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;坑 1：箭头少画一横
+&lt;ul&gt;
+&lt;li&gt;❌ 错误：&lt;code&gt;A -&amp;gt; B&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;✅ 正确：&lt;code&gt;A --&amp;gt; B&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>关于加热棒</title>
+        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E5%8A%A0%E7%83%AD%E6%A3%92/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E5%8A%A0%E7%83%AD%E6%A3%92/</guid>
+        <description>&lt;p&gt;分析仪当中的控温部件，大都都使用加热棒来加热控温，为什么：&lt;/p&gt;
+&lt;h3 id=&#34;为什么首选加热棒cartridge-heater&#34;&gt;为什么首选“加热棒”（Cartridge Heater）？
+&lt;/h3&gt;&lt;p&gt;相比于加热丝（云母绕线）、加热片（硅胶加热板）或者陶瓷加热器，加热棒在精密仪器中有三大核心优势：&lt;/p&gt;
+&lt;h4 id=&#34;1-极高的功率密度与传热效率&#34;&gt;1. 极高的“功率密度”与“传热效率”
+&lt;/h4&gt;&lt;p&gt;CEMS 的核心部件（如采样探头腔体、NOx 转换炉、分析仪气室）通常是不锈钢或铝合金材质的&lt;strong&gt;金属块&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传热方式： 加热棒是专门为模具加热设计的。它插入一个紧配合的金属孔中，通过&lt;strong&gt;接触导热&lt;/strong&gt;直接把热量传递给金属块。&lt;/li&gt;
+&lt;li&gt;优势： 这种方式&lt;strong&gt;热损耗极小，升温速度极快&lt;/strong&gt;。一根手指大小的加热棒可以轻松做到 200W~500W 的功率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-完美的-fru现场可更换设计&#34;&gt;2. 完美的 FRU（现场可更换）设计
+&lt;/h4&gt;&lt;p&gt;还记得之前我们讨论的 [[现场可更换单元]] 吗？加热棒是完美的 FRU 代表。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;维修场景： 如果加热元件烧了。
+&lt;ul&gt;
+&lt;li&gt;如果是加热丝： 你得把保温层拆掉，重新绕线，还要涂抹耐高温胶，现场根本做不了。&lt;/li&gt;
+&lt;li&gt;如果是加热棒：拔出来 -&amp;gt; 插进去 -&amp;gt; 拧紧定位螺丝。全过程 5 分钟。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结构标准化： 它的直径通常是标准的（如 6.5mm, 8mm, 10mm, 1/4 inch），非常容易找到备件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-铠装结构安全耐用&#34;&gt;3. 铠装结构，安全耐用
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;密封性： CEMS 现场环境恶劣（有腐蚀性气体、有水汽）。加热棒外部是&lt;strong&gt;304/316L 不锈钢管&lt;/strong&gt;，内部填充压实的&lt;strong&gt;氧化镁 (MgO)&lt;/strong&gt; 粉末绝缘。这使得它不怕氧化、不怕轻微腐蚀，而且&lt;strong&gt;绝缘性能&lt;/strong&gt;比裸露的加热丝好太多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么大家都用德国-hotset&#34;&gt;为什么大家都用德国 Hotset
+&lt;/h3&gt;&lt;p&gt;Hotset 在工业加热领域的地位，有点像汽车界的“博世”或“BBA”，尽管国产加热棒价格只有 Hotset 的 1/5 甚至 1/10，但主流 CEMS 厂家在核心部位依然不敢省这个钱。原因在于 CEMS 的特殊工况：&lt;/p&gt;
+&lt;h4 id=&#34;1-吸潮导致的绝缘崩溃&#34;&gt;1. “吸潮”导致的绝缘崩溃
+&lt;/h4&gt;&lt;p&gt;这是国产低端加热棒的死穴。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;现象： CEMS 有时候会停机检修几天，或者发货运输途中遇到高湿环境。劣质加热棒内部的氧化镁粉不纯，会&lt;strong&gt;吸潮&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;后果： 再次上电瞬间，因为内部受潮，绝缘电阻下降，直接导致漏电跳闸。&lt;/li&gt;
+&lt;li&gt;Hotset 优势： 他们的密封工艺（Swaged-in）和氧化镁纯度极高，防潮性能极好。这对于需要常年稳定运行的 CEMS 至关重要。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-公差控制-h7-tolerance&#34;&gt;2. 公差控制 (H7 Tolerance)
+&lt;/h4&gt;&lt;p&gt;加热棒的寿命，一半取决于它自己，&lt;strong&gt;另一半取决于它和孔的配合&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原理： &lt;strong&gt;加热棒产生的热量必须瞬间导出去&lt;/strong&gt;。如果加热棒直径做小了（比如标准 10mm，它做成了 9.8mm），中间有了 0.2mm 的空气隙。&lt;/li&gt;
+&lt;li&gt;后果： 空气是热的不良导体。热量导不出去，热量就会积聚在加热棒内部，导致内部温度瞬间飙升到 1000℃ 以上，电阻丝直接熔断。&lt;/li&gt;
+&lt;li&gt;Hotset 优势： 他们的直径公差控制得极其精准（通常是负公差，配合 H7 的孔），保证插进去刚刚好，没有空气隙，寿命自然长。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251219223339949.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251219223339949.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20251219223406.png]]&lt;/p&gt;
+&lt;h4 id=&#34;3-内部热分布均匀&#34;&gt;3. 内部热分布均匀
+&lt;/h4&gt;&lt;p&gt;在 NOx 转换炉中，我们需要温度极其均匀（例如维持在 350℃±2℃）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;劣质加热棒可能“头热尾冷”或者“中间局部过热”。&lt;/li&gt;
+&lt;li&gt;Hotset 可以定制&lt;strong&gt;功率分布&lt;/strong&gt;，保证整根棒表面温度一致，这对化学反应效率（转化率）至关重要。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;千万别干烧： 加热棒必须完全插入金属孔里才能通电。如果你把它拿在空气中通电测试，它会&lt;strong&gt;因为散热不掉而烧红&lt;/strong&gt;、炸裂。&lt;/li&gt;
+&lt;li&gt;防卡死： 加热棒在高温下工作久了，容易和金属孔锈死在一起，拔不出来。有经验的工程师在安装新棒时，会在表面涂一层&lt;strong&gt;二硫化钼&lt;/strong&gt;或&lt;strong&gt;高温防卡剂&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>适用性检测</title>
         <link>https://teaize.github.io/p/%E9%80%82%E7%94%A8%E6%80%A7%E6%A3%80%E6%B5%8B/</link>
         <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
@@ -2083,7 +2971,7 @@ $$I \propto \text{浓度 (C)} \times \text{流速 (Q)}$$&lt;/li&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;mermaid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;initialize&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;({&lt;/span&gt; 
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;startOnLoad&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kc&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;theme&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;base&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 或者 &amp;#39;default&amp;#39;, &amp;#39;forest&amp;#39;, &amp;#39;neutral&amp;#39;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nx&#34;&gt;securityLevel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;loose&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;securityLevel&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;loose&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;});&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;script&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;{{ end }}
@@ -2968,42 +3856,42 @@ $$I \propto \text{浓度 (C)} \times \text{流速 (Q)}$$&lt;/li&gt;
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 定义一个全局 PID 对象
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID_Controller&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;PID_Controller&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 主函数初始化
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 初始化硬件：SPI(读温度), TIM(产PWM), TIM(调度中断)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;MX_SPI1_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MX_SPI1_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MX_TIM2_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 用于 PWM 输出
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;MX_TIM3_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 用于 100ms 中断
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MX_TIM3_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 用于 100ms 中断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 初始化 PID 参数 (需要调试出来)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;PID_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;50.0f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;10.0f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;PID_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;50.0f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;10.0f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Target_Temp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;315.0f&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 设定目标
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 开启 PWM
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PWM_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PWM_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 开启调度中断
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Start_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Start_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 主循环处理低优先级任务：屏幕显示、按键、Modbus通讯
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// 不要在这里算 PID！
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 不要在这里算 PID！
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 定时器中断回调函数 (每 100ms 触发一次)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PeriodElapsedCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PeriodElapsedCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Instance&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 1. 读取传感器 (通过 SPI 读取 MAX31865)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;now_temp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;MAX31865_Read_Temp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;now_temp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;MAX31865_Read_Temp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 2. 运算 PID
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwm_duty&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;now_temp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwm_duty&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;now_temp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 3. 执行输出 (修改 PWM 寄存器 CCR)
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;        &lt;span class=&#34;nf&#34;&gt;__HAL_TIM_SET_COMPARE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pwm_duty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;__HAL_TIM_SET_COMPARE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pwm_duty&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;

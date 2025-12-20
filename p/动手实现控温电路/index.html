@@ -603,42 +603,42 @@
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// 定义一个全局 PID 对象
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">PID_Controller</span> <span class="n">HeaterPID</span><span class="p">;</span>
+</span></span></span><span class="line"><span class="cl"><span class="n">PID_Controller</span> <span class="n">HeaterPID</span><span class="p">;</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 主函数初始化
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">HAL_Init</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 初始化硬件：SPI(读温度), TIM(产PWM), TIM(调度中断)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">MX_SPI1_Init</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">MX_SPI1_Init</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">    <span class="nf">MX_TIM2_Init</span><span class="p">();</span> <span class="c1">// 用于 PWM 输出
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">MX_TIM3_Init</span><span class="p">();</span> <span class="c1">// 用于 100ms 中断
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    <span class="nf">MX_TIM3_Init</span><span class="p">();</span> <span class="c1">// 用于 100ms 中断
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 初始化 PID 参数 (需要调试出来)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">PID_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">HeaterPID</span><span class="p">,</span> <span class="mf">50.0f</span><span class="p">,</span> <span class="mf">0.5f</span><span class="p">,</span> <span class="mf">10.0f</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">PID_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">HeaterPID</span><span class="p">,</span> <span class="mf">50.0f</span><span class="p">,</span> <span class="mf">0.5f</span><span class="p">,</span> <span class="mf">10.0f</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="n">HeaterPID</span><span class="p">.</span><span class="n">Target_Temp</span> <span class="o">=</span> <span class="mf">315.0f</span><span class="p">;</span> <span class="c1">// 设定目标
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    
+</span></span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="c1">// 开启 PWM
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">HAL_TIM_PWM_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim2</span><span class="p">,</span> <span class="n">TIM_CHANNEL_1</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_TIM_PWM_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim2</span><span class="p">,</span> <span class="n">TIM_CHANNEL_1</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="c1">// 开启调度中断
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nf">HAL_TIM_Base_Start_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim3</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_TIM_Base_Start_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim3</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    
 </span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 主循环处理低优先级任务：屏幕显示、按键、Modbus通讯
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="c1">// 不要在这里算 PID！
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">}</span>
+</span></span></span><span class="line"><span class="cl">        <span class="c1">// 不要在这里算 PID！
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="c1">// 定时器中断回调函数 (每 100ms 触发一次)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">HAL_TIM_PeriodElapsedCallback</span><span class="p">(</span><span class="n">TIM_HandleTypeDef</span> <span class="o">*</span><span class="n">htim</span><span class="p">)</span> <span class="p">{</span>
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_TIM_PeriodElapsedCallback</span><span class="p">(</span><span class="n">TIM_HandleTypeDef</span> <span class="o">*</span><span class="n">htim</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">htim</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">TIM3</span><span class="p">)</span> <span class="p">{</span>
 </span></span><span class="line"><span class="cl">        <span class="c1">// 1. 读取传感器 (通过 SPI 读取 MAX31865)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">float</span> <span class="n">now_temp</span> <span class="o">=</span> <span class="nf">MAX31865_Read_Temp</span><span class="p">();</span>
+</span></span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">now_temp</span> <span class="o">=</span> <span class="nf">MAX31865_Read_Temp</span><span class="p">();</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// 2. 运算 PID
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="kt">float</span> <span class="n">pwm_duty</span> <span class="o">=</span> <span class="nf">PID_Compute</span><span class="p">(</span><span class="o">&amp;</span><span class="n">HeaterPID</span><span class="p">,</span> <span class="n">now_temp</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">pwm_duty</span> <span class="o">=</span> <span class="nf">PID_Compute</span><span class="p">(</span><span class="o">&amp;</span><span class="n">HeaterPID</span><span class="p">,</span> <span class="n">now_temp</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">        
 </span></span><span class="line"><span class="cl">        <span class="c1">// 3. 执行输出 (修改 PWM 寄存器 CCR)
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="nf">__HAL_TIM_SET_COMPARE</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim2</span><span class="p">,</span> <span class="n">TIM_CHANNEL_1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">pwm_duty</span><span class="p">);</span>
+</span></span></span><span class="line"><span class="cl">        <span class="nf">__HAL_TIM_SET_COMPARE</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim2</span><span class="p">,</span> <span class="n">TIM_CHANNEL_1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="p">)</span><span class="n">pwm_duty</span><span class="p">);</span>
 </span></span><span class="line"><span class="cl">    <span class="p">}</span>
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>

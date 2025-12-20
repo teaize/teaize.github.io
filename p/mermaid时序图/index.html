@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<title>Hugo渲染Mermaid</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[Mermaid思维导图]]、[[Mermaid状态图]]，学习 Mermaid 时序图\n核心语法：谁跟谁说话 时序图的代码就像写剧本。基本句式： A-&gt;&gt;B: 你好啊\nparticipant：定义演员。 -&gt;&gt;：实线箭头（发指令）。 --&gt;&gt;：虚线箭头（回消息）。 1 2 3 4 5 6 sequenceDiagram participant DAS as 🖥️工控机 participant CEMS as ⚙️分析仪 DAS-&gt;&gt;CEMS: 1. 现在的浓度是多少？(Modbus请求) CEMS--&gt;&gt;DAS: 2. 是 35.5 mg/m3 (返回数据) 进阶语法：加个背景色 (Loop / Alt) 只有对话太单调，有时候需要表示“循环”或者“特殊情况”。\n">
+<title>Mermaid时序图</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel='canonical' href='https://teaize.github.io/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Hugo渲染Mermaid">
-<meta property='og:description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<meta property='og:url' content='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Mermaid时序图">
+<meta property='og:description' content="本篇继 [[Mermaid思维导图]]、[[Mermaid状态图]]，学习 Mermaid 时序图\n核心语法：谁跟谁说话 时序图的代码就像写剧本。基本句式： A-&gt;&gt;B: 你好啊\nparticipant：定义演员。 -&gt;&gt;：实线箭头（发指令）。 --&gt;&gt;：虚线箭头（回消息）。 1 2 3 4 5 6 sequenceDiagram participant DAS as 🖥️工控机 participant CEMS as ⚙️分析仪 DAS-&gt;&gt;CEMS: 1. 现在的浓度是多少？(Modbus请求) CEMS--&gt;&gt;DAS: 2. 是 35.5 mg/m3 (返回数据) 进阶语法：加个背景色 (Loop / Alt) 只有对话太单调，有时候需要表示“循环”或者“特殊情况”。\n">
+<meta property='og:url' content='https://teaize.github.io/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Hugo渲染Mermaid">
-<meta name="twitter:description" content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Mermaid时序图">
+<meta name="twitter:description" content="本篇继 [[Mermaid思维导图]]、[[Mermaid状态图]]，学习 Mermaid 时序图\n核心语法：谁跟谁说话 时序图的代码就像写剧本。基本句式： A-&gt;&gt;B: 你好啊\nparticipant：定义演员。 -&gt;&gt;：实线箭头（发指令）。 --&gt;&gt;：虚线箭头（回消息）。 1 2 3 4 5 6 sequenceDiagram participant DAS as 🖥️工控机 participant CEMS as ⚙️分析仪 DAS-&gt;&gt;CEMS: 1. 现在的浓度是多少？(Modbus请求) CEMS--&gt;&gt;DAS: 2. 是 35.5 mg/m3 (返回数据) 进阶语法：加个背景色 (Loop / Alt) 只有对话太单调，有时候需要表示“循环”或者“特殊情况”。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,8 +297,10 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子</a></li>
-        <li><a href="#第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库</a></li>
+        <li><a href="#核心语法谁跟谁说话">核心语法：谁跟谁说话</a></li>
+        <li><a href="#进阶语法加个背景色-loop--alt">进阶语法：加个背景色 (Loop / Alt)</a></li>
+        <li><a href="#避坑指南">避坑指南</a></li>
+        <li><a href="#小结">小结</a></li>
       </ol>
     </li>
   </ol>
@@ -320,7 +322,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/hugo%E6%B8%B2%E6%9F%93mermaid/">Hugo渲染Mermaid</a>
+            <a href="/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/">Mermaid时序图</a>
         </h2>
     
         
@@ -342,7 +344,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-13</time>
+                <time class="article-time--published">2025-12-19</time>
             </div>
         
 
@@ -358,21 +360,13 @@
     <section class="article-content">
     
     
-    <p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<p>曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定</p>
-<h3 id="第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子
-</h3><p>这个步骤是为了告诉 Hugo：当遇到语言标记为 <code>mermaid</code> 的代码块时，不要高亮代码，而是将其包装在一个 <code>div</code> 中，以便 JavaScript 库进行渲染。</p>
+    <p>本篇继 [[Mermaid思维导图]]、[[Mermaid状态图]]，学习 Mermaid 时序图</p>
+<h3 id="核心语法谁跟谁说话">核心语法：谁跟谁说话
+</h3><p>时序图的代码就像写剧本。基本句式： <code>A-&gt;&gt;B: 你好啊</code></p>
 <ul>
-<li>在你的 Hugo 站点根目录下（注意<strong>不是</strong>在 <code>themes</code> 目录里），找到或创建 <code>layouts</code> 文件夹。</li>
-<li>建立如下目录结构和文件： <code>layouts/_default/_markup/render-codeblock-mermaid.html</code></li>
-<li>在该文件中粘贴以下代码：</li>
+<li><code>participant</code>：定义演员。</li>
+<li><code>-&gt;&gt;</code>：实线箭头（发指令）。</li>
+<li><code>--&gt;&gt;</code>：虚线箭头（回消息）。</li>
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -380,20 +374,24 @@
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mermaid&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  {{ .Inner | safeHTML }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ .Page.Store.Set &#34;hasMermaid&#34; true }}
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sequenceDiagram
+</span></span><span class="line"><span class="cl">    participant DAS as 🖥️工控机
+</span></span><span class="line"><span class="cl">    participant CEMS as ⚙️分析仪
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    DAS-&gt;&gt;CEMS: 1. 现在的浓度是多少？(Modbus请求)
+</span></span><span class="line"><span class="cl">    CEMS--&gt;&gt;DAS: 2. 是 35.5 mg/m3 (返回数据)
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库
-</h3><p>我们需要将 Mermaid 的核心 JS 脚本注入到页面底部。<code>hugo-theme-stack</code> 主题预留了自定义页脚文件的位置。</p>
-<ol>
-<li>在站点根目录下，创建文件： <code>layouts/partials/footer/custom.html</code> (如果该文件已存在，直接在里面追加代码即可)</li>
-<li>在该文件中粘贴以下代码：</li>
-</ol>
+</div><h3 id="进阶语法加个背景色-loop--alt">进阶语法：加个背景色 (Loop / Alt)
+</h3><p>只有对话太单调，有时候需要表示“循环”或者“特殊情况”。</p>
+<ul>
+<li><code>loop … end</code>：表示一直做某事。</li>
+<li><code>alt … else … end</code>：表示“如果…否则…” (Alternative)。</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -406,21 +404,94 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl">{{ if .Page.Store.Get &#34;hasMermaid&#34; }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;module&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">import</span> <span class="nx">mermaid</span> <span class="nx">from</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">    <span class="nx">startOnLoad</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">theme</span><span class="o">:</span> <span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="c1">// 或者 &#39;default&#39;, &#39;forest&#39;, &#39;neutral&#39;
-</span></span></span><span class="line"><span class="cl">    <span class="nx">securityLevel</span><span class="o">:</span> <span class="s1">&#39;loose&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">sequenceDiagram
+</span></span><span class="line"><span class="cl">    participant P as 采样泵
+</span></span><span class="line"><span class="cl">    participant S as 传感器
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    loop 每秒一次
+</span></span><span class="line"><span class="cl">        P-&gt;&gt;S: 抽气
+</span></span><span class="line"><span class="cl">        S--&gt;&gt;S: 读取光强
+</span></span><span class="line"><span class="cl">    end
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    alt 光强太低
+</span></span><span class="line"><span class="cl">        S-&gt;&gt;P: 报警！停止抽气！
+</span></span><span class="line"><span class="cl">    else 光强正常
+</span></span><span class="line"><span class="cl">        S-&gt;&gt;P: 继续工作
+</span></span><span class="line"><span class="cl">    end
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>大功告成！</p>
+</div><div class="mermaid">
+  sequenceDiagram
+    participant P as 采样泵
+    participant S as 传感器
+
+    loop 每秒一次
+        P->>S: 抽气
+        S-->>S: 读取光强
+    end
+    
+    alt 光强太低
+        S->>P: 报警！停止抽气！
+    else 光强正常
+        S->>P: 继续工作
+    end
+</div>
+<h3 id="避坑指南">避坑指南
+</h3><ul>
+<li>箭头方向：
+<ul>
+<li><code>-&gt;&gt;</code> 是发出去（实线），<code>--&gt;&gt;</code> 是回话（虚线）。</li>
+<li>千万别写成 <code>--&gt;</code>（这是流程图的写法），虽然有时候能混过去，但在时序图里不规范。</li>
+</ul>
+</li>
+<li>别名 (as) 很重要：
+<ul>
+<li>如果名字太长（比如“脱硝出口 CEMS 分析仪主控板”），一定要用 <code>participant A as …</code> 这种写法，否则后面的代码会写得你想哭。</li>
+</ul>
+</li>
+<li>顺序决定站位：
+<ul>
+<li>代码里谁先出现（<code>participant</code> 定义的顺序），图上谁就站在左边。通常我们把“发起者”（比如电脑）放在最左边。</li>
+</ul>
+</li>
+</ul>
+<h3 id="小结">小结
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>遇到什么问题？</strong></th>
+          <th><strong>用什么图？</strong></th>
+          <th><strong>核心思考</strong></th>
+          <th><strong>代码关键词</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>我要拆解结构</strong><br>(如：这台机器由什么组成？)</td>
+          <td><strong>Mindmap</strong><br>(思维导图)</td>
+          <td><strong>分类</strong><br>(包含关系)</td>
+          <td><code>mindmap</code></td>
+      </tr>
+      <tr>
+          <td><strong>我要理清状态</strong><br>(如：故障了怎么恢复？)</td>
+          <td><strong>StateDiagram</strong><br>(状态图)</td>
+          <td><strong>变化</strong><br>(从 A 变 B)</td>
+          <td><code>stateDiagram-v2</code></td>
+      </tr>
+      <tr>
+          <td><strong>我要搞懂通讯</strong><br>(如：软件怎么控制硬件？)</td>
+          <td><strong>Sequence</strong><br>(时序图)</td>
+          <td><strong>时间</strong><br>(谁先谁后)</td>
+          <td><code>sequenceDiagram</code></td>
+      </tr>
+  </tbody>
+</table></div>
 
 </section>
 
@@ -628,6 +699,15 @@
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
 </script>
 
     </body>

@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<title>Hugo渲染Mermaid</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="示例代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 stateDiagram-v2 [*] --&gt; 正常运行(Measure) state &#34;正常运行 (Measure)&#34; as Measure { [*] --&gt; 采样中 采样中 --&gt; 数据处理 数据处理 --&gt; 采样中 } state &#34;故障状态 (Fault)&#34; as Fault { [*] --&gt; 诊断中 诊断中 --&gt; 锁定输出: 保护下游 锁定输出 --&gt; 等待维修 } state &#34;维修模式 (Maintenance)&#34; as Maint { [*] --&gt; 识别FRU 识别FRU --&gt; 更换模块: 拔插操作 更换模块 --&gt; 自动自检: 握手通信 自动自检 --&gt; [*] } %% 状态流转逻辑 Measure --&gt; Fault: 监测到光强过低 (光源老化) Fault --&gt; Maint: 运维人员到达，切换至维修模式 note right of Maint 这里体现 FRU 的优势： 不需要焊接，不需要示波器 换完自动握手 end note Maint --&gt; Measure: 自检通过，系统复位 stateDiagram-v2 [*] --> 正常运行(Measure) state \"正常运行 (Measure)\" as Measure { [*] --> 采样中 采样中 --> 数据处理 数据处理 --> 采样中 } state \"故障状态 (Fault)\" as Fault { [*] --> 诊断中 诊断中 --> 锁定输出: 保护下游 锁定输出 --> 等待维修 } state \"维修模式 (Maintenance)\" as Maint { [*] --> 识别FRU 识别FRU --> 更换模块: 拔插操作 更换模块 --> 自动自检: 握手通信 自动自检 --> [*] } %% 状态流转逻辑 Measure --> Fault: 监测到光强过低 (光源老化) Fault --> Maint: 运维人员到达，切换至维修模式 note right of Maint 这里体现 FRU 的优势： 不需要焊接，不需要示波器 换完自动握手 end note Maint --> Measure: 自检通过，系统复位 核心语法要素 开头结尾画只眼 [*]， 箭头必须两横线 --&gt;， 名字太长用别名 as， 条件说明加冒号 :\n">
+<title>Mermaid状态图</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel='canonical' href='https://teaize.github.io/p/mermaid%E7%8A%B6%E6%80%81%E5%9B%BE/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Hugo渲染Mermaid">
-<meta property='og:description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<meta property='og:url' content='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Mermaid状态图">
+<meta property='og:description' content="示例代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 stateDiagram-v2 [*] --&gt; 正常运行(Measure) state &#34;正常运行 (Measure)&#34; as Measure { [*] --&gt; 采样中 采样中 --&gt; 数据处理 数据处理 --&gt; 采样中 } state &#34;故障状态 (Fault)&#34; as Fault { [*] --&gt; 诊断中 诊断中 --&gt; 锁定输出: 保护下游 锁定输出 --&gt; 等待维修 } state &#34;维修模式 (Maintenance)&#34; as Maint { [*] --&gt; 识别FRU 识别FRU --&gt; 更换模块: 拔插操作 更换模块 --&gt; 自动自检: 握手通信 自动自检 --&gt; [*] } %% 状态流转逻辑 Measure --&gt; Fault: 监测到光强过低 (光源老化) Fault --&gt; Maint: 运维人员到达，切换至维修模式 note right of Maint 这里体现 FRU 的优势： 不需要焊接，不需要示波器 换完自动握手 end note Maint --&gt; Measure: 自检通过，系统复位 stateDiagram-v2 [*] --> 正常运行(Measure) state \"正常运行 (Measure)\" as Measure { [*] --> 采样中 采样中 --> 数据处理 数据处理 --> 采样中 } state \"故障状态 (Fault)\" as Fault { [*] --> 诊断中 诊断中 --> 锁定输出: 保护下游 锁定输出 --> 等待维修 } state \"维修模式 (Maintenance)\" as Maint { [*] --> 识别FRU 识别FRU --> 更换模块: 拔插操作 更换模块 --> 自动自检: 握手通信 自动自检 --> [*] } %% 状态流转逻辑 Measure --> Fault: 监测到光强过低 (光源老化) Fault --> Maint: 运维人员到达，切换至维修模式 note right of Maint 这里体现 FRU 的优势： 不需要焊接，不需要示波器 换完自动握手 end note Maint --> Measure: 自检通过，系统复位 核心语法要素 开头结尾画只眼 [*]， 箭头必须两横线 --&gt;， 名字太长用别名 as， 条件说明加冒号 :\n">
+<meta property='og:url' content='https://teaize.github.io/p/mermaid%E7%8A%B6%E6%80%81%E5%9B%BE/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Hugo渲染Mermaid">
-<meta name="twitter:description" content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Mermaid状态图">
+<meta name="twitter:description" content="示例代码 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 stateDiagram-v2 [*] --&gt; 正常运行(Measure) state &#34;正常运行 (Measure)&#34; as Measure { [*] --&gt; 采样中 采样中 --&gt; 数据处理 数据处理 --&gt; 采样中 } state &#34;故障状态 (Fault)&#34; as Fault { [*] --&gt; 诊断中 诊断中 --&gt; 锁定输出: 保护下游 锁定输出 --&gt; 等待维修 } state &#34;维修模式 (Maintenance)&#34; as Maint { [*] --&gt; 识别FRU 识别FRU --&gt; 更换模块: 拔插操作 更换模块 --&gt; 自动自检: 握手通信 自动自检 --&gt; [*] } %% 状态流转逻辑 Measure --&gt; Fault: 监测到光强过低 (光源老化) Fault --&gt; Maint: 运维人员到达，切换至维修模式 note right of Maint 这里体现 FRU 的优势： 不需要焊接，不需要示波器 换完自动握手 end note Maint --&gt; Measure: 自检通过，系统复位 stateDiagram-v2 [*] --> 正常运行(Measure) state \"正常运行 (Measure)\" as Measure { [*] --> 采样中 采样中 --> 数据处理 数据处理 --> 采样中 } state \"故障状态 (Fault)\" as Fault { [*] --> 诊断中 诊断中 --> 锁定输出: 保护下游 锁定输出 --> 等待维修 } state \"维修模式 (Maintenance)\" as Maint { [*] --> 识别FRU 识别FRU --> 更换模块: 拔插操作 更换模块 --> 自动自检: 握手通信 自动自检 --> [*] } %% 状态流转逻辑 Measure --> Fault: 监测到光强过低 (光源老化) Fault --> Maint: 运维人员到达，切换至维修模式 note right of Maint 这里体现 FRU 的优势： 不需要焊接，不需要示波器 换完自动握手 end note Maint --> Measure: 自检通过，系统复位 核心语法要素 开头结尾画只眼 [*]， 箭头必须两横线 --&gt;， 名字太长用别名 as， 条件说明加冒号 :\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,8 +297,9 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子</a></li>
-        <li><a href="#第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库</a></li>
+        <li><a href="#示例代码">示例代码</a></li>
+        <li><a href="#核心语法要素">核心语法要素</a></li>
+        <li><a href="#避坑指南">避坑指南</a></li>
       </ol>
     </li>
   </ol>
@@ -320,7 +321,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/hugo%E6%B8%B2%E6%9F%93mermaid/">Hugo渲染Mermaid</a>
+            <a href="/p/mermaid%E7%8A%B6%E6%80%81%E5%9B%BE/">Mermaid状态图</a>
         </h2>
     
         
@@ -342,7 +343,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-13</time>
+                <time class="article-time--published">2025-12-19</time>
             </div>
         
 
@@ -358,43 +359,8 @@
     <section class="article-content">
     
     
-    <p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<p>曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定</p>
-<h3 id="第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子
-</h3><p>这个步骤是为了告诉 Hugo：当遇到语言标记为 <code>mermaid</code> 的代码块时，不要高亮代码，而是将其包装在一个 <code>div</code> 中，以便 JavaScript 库进行渲染。</p>
-<ul>
-<li>在你的 Hugo 站点根目录下（注意<strong>不是</strong>在 <code>themes</code> 目录里），找到或创建 <code>layouts</code> 文件夹。</li>
-<li>建立如下目录结构和文件： <code>layouts/_default/_markup/render-codeblock-mermaid.html</code></li>
-<li>在该文件中粘贴以下代码：</li>
-</ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mermaid&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  {{ .Inner | safeHTML }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ .Page.Store.Set &#34;hasMermaid&#34; true }}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库
-</h3><p>我们需要将 Mermaid 的核心 JS 脚本注入到页面底部。<code>hugo-theme-stack</code> 主题预留了自定义页脚文件的位置。</p>
-<ol>
-<li>在站点根目录下，创建文件： <code>layouts/partials/footer/custom.html</code> (如果该文件已存在，直接在里面追加代码即可)</li>
-<li>在该文件中粘贴以下代码：</li>
-</ol>
-<div class="highlight"><div class="chroma">
+    <h3 id="示例代码">示例代码
+</h3><div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -406,21 +372,150 @@
 </span><span class="lnt"> 8
 </span><span class="lnt"> 9
 </span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl">{{ if .Page.Store.Get &#34;hasMermaid&#34; }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;module&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">import</span> <span class="nx">mermaid</span> <span class="nx">from</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">    <span class="nx">startOnLoad</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">theme</span><span class="o">:</span> <span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="c1">// 或者 &#39;default&#39;, &#39;forest&#39;, &#39;neutral&#39;
-</span></span></span><span class="line"><span class="cl">    <span class="nx">securityLevel</span><span class="o">:</span> <span class="s1">&#39;loose&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">stateDiagram-v2
+</span></span><span class="line"><span class="cl">    [*] --&gt; 正常运行(Measure)
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    state &#34;正常运行 (Measure)&#34; as Measure {
+</span></span><span class="line"><span class="cl">        [*] --&gt; 采样中
+</span></span><span class="line"><span class="cl">        采样中 --&gt; 数据处理
+</span></span><span class="line"><span class="cl">        数据处理 --&gt; 采样中
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    state &#34;故障状态 (Fault)&#34; as Fault {
+</span></span><span class="line"><span class="cl">        [*] --&gt; 诊断中
+</span></span><span class="line"><span class="cl">        诊断中 --&gt; 锁定输出: 保护下游
+</span></span><span class="line"><span class="cl">        锁定输出 --&gt; 等待维修
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    state &#34;维修模式 (Maintenance)&#34; as Maint {
+</span></span><span class="line"><span class="cl">        [*] --&gt; 识别FRU
+</span></span><span class="line"><span class="cl">        识别FRU --&gt; 更换模块: 拔插操作
+</span></span><span class="line"><span class="cl">        更换模块 --&gt; 自动自检: 握手通信
+</span></span><span class="line"><span class="cl">        自动自检 --&gt; [*]
+</span></span><span class="line"><span class="cl">    }
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    %% 状态流转逻辑
+</span></span><span class="line"><span class="cl">    Measure --&gt; Fault: 监测到光强过低 (光源老化)
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    Fault --&gt; Maint: 运维人员到达，切换至维修模式
+</span></span><span class="line"><span class="cl">    note right of Maint
+</span></span><span class="line"><span class="cl">        这里体现 FRU 的优势：
+</span></span><span class="line"><span class="cl">        不需要焊接，不需要示波器
+</span></span><span class="line"><span class="cl">        换完自动握手
+</span></span><span class="line"><span class="cl">    end note
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    Maint --&gt; Measure: 自检通过，系统复位
 </span></span></code></pre></td></tr></table>
 </div>
-</div><p>大功告成！</p>
+</div><div class="mermaid">
+  stateDiagram-v2
+    [*] --> 正常运行(Measure)
+
+    state "正常运行 (Measure)" as Measure {
+        [*] --> 采样中
+        采样中 --> 数据处理
+        数据处理 --> 采样中
+    }
+
+    state "故障状态 (Fault)" as Fault {
+        [*] --> 诊断中
+        诊断中 --> 锁定输出: 保护下游
+        锁定输出 --> 等待维修
+    }
+
+    state "维修模式 (Maintenance)" as Maint {
+        [*] --> 识别FRU
+        识别FRU --> 更换模块: 拔插操作
+        更换模块 --> 自动自检: 握手通信
+        自动自检 --> [*]
+    }
+
+    %% 状态流转逻辑
+    Measure --> Fault: 监测到光强过低 (光源老化)
+    
+    Fault --> Maint: 运维人员到达，切换至维修模式
+    note right of Maint
+        这里体现 FRU 的优势：
+        不需要焊接，不需要示波器
+        换完自动握手
+    end note
+
+    Maint --> Measure: 自检通过，系统复位
+</div>
+<h3 id="核心语法要素">核心语法要素
+</h3><blockquote>
+<p><strong>开头结尾画只眼 <code>[*]</code>，</strong> <strong>箭头必须两横线 <code>--&gt;</code>，</strong> <strong>名字太长用别名 <code>as</code>，</strong> <strong>条件说明加冒号 <code>:</code></strong></p>
+</blockquote>
+<ul>
+<li>起点与终点：<code>[*]</code>，这是状态图的标志性符号
+<ul>
+<li>放在开头：表示“系统启动”。</li>
+<li>放在结尾：表示“系统关机”或“流程结束”。</li>
+</ul>
+</li>
+<li>流转箭头：<code>--&gt;</code>
+<ul>
+<li>注意！Mermaid 的状态图箭头必须是 <strong>两个横杠</strong> <code>--&gt;</code></li>
+</ul>
+</li>
+<li>状态描述：冒号 <code>:</code>
+<ul>
+<li>如果你想解释“为什么”会从 A 变成 B，就在箭头后面加冒号</li>
+<li>格式：<code>状态A --&gt; 状态B : 触发条件</code></li>
+</ul>
+</li>
+<li>别名法
+<ul>
+<li>给状态起个简单的英文代号（ID），然后在引号里写复杂的中文名字</li>
+<li><strong>语法：</strong> <code>state &quot;复杂的中文名字&quot; as ID</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="避坑指南">避坑指南
+</h3><ul>
+<li>坑 1：方向没控制好，状态图默认是从上到下（Top-Bottom），如果流程很长，图会变得巨长无比
+<ul>
+<li>解决： 在第一行加上 <code>direction LR</code> (Left to Right)。</li>
+</ul>
+</li>
+<li>坑 2：忘记闭环
+<ul>
+<li>状态图最怕“死胡同”。比如：状态到了“故障”，然后就没下文了。</li>
+<li>逻辑检查： 故障修好了去哪？要画一条线指回“正常”或指像“结束 <code>[*]</code>”。</li>
+</ul>
+</li>
+<li>坑 1：箭头少画一横
+<ul>
+<li>❌ 错误：<code>A -&gt; B</code></li>
+<li>✅ 正确：<code>A --&gt; B</code></li>
+</ul>
+</li>
+</ul>
 
 </section>
 
@@ -628,6 +723,15 @@
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
 </script>
 
     </body>

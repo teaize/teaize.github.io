@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<title>Hugo渲染Mermaid</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="分析仪当中的控温部件，大都都使用加热棒来加热控温，为什么：\n为什么首选“加热棒”（Cartridge Heater）？ 相比于加热丝（云母绕线）、加热片（硅胶加热板）或者陶瓷加热器，加热棒在精密仪器中有三大核心优势：\n">
+<title>关于加热棒</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E5%8A%A0%E7%83%AD%E6%A3%92/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Hugo渲染Mermaid">
-<meta property='og:description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<meta property='og:url' content='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="关于加热棒">
+<meta property='og:description' content="分析仪当中的控温部件，大都都使用加热棒来加热控温，为什么：\n为什么首选“加热棒”（Cartridge Heater）？ 相比于加热丝（云母绕线）、加热片（硅胶加热板）或者陶瓷加热器，加热棒在精密仪器中有三大核心优势：\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E5%8A%A0%E7%83%AD%E6%A3%92/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Hugo渲染Mermaid">
-<meta name="twitter:description" content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-19T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-19T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="关于加热棒">
+<meta name="twitter:description" content="分析仪当中的控温部件，大都都使用加热棒来加热控温，为什么：\n为什么首选“加热棒”（Cartridge Heater）？ 相比于加热丝（云母绕线）、加热片（硅胶加热板）或者陶瓷加热器，加热棒在精密仪器中有三大核心优势：\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,8 +297,21 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子</a></li>
-        <li><a href="#第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库</a></li>
+        <li><a href="#为什么首选加热棒cartridge-heater">为什么首选“加热棒”（Cartridge Heater）？</a>
+          <ol>
+            <li><a href="#1-极高的功率密度与传热效率">1. 极高的“功率密度”与“传热效率”</a></li>
+            <li><a href="#2-完美的-fru现场可更换设计">2. 完美的 FRU（现场可更换）设计</a></li>
+            <li><a href="#3-铠装结构安全耐用">3. 铠装结构，安全耐用</a></li>
+          </ol>
+        </li>
+        <li><a href="#为什么大家都用德国-hotset">为什么大家都用德国 Hotset</a>
+          <ol>
+            <li><a href="#1-吸潮导致的绝缘崩溃">1. “吸潮”导致的绝缘崩溃</a></li>
+            <li><a href="#2-公差控制-h7-tolerance">2. 公差控制 (H7 Tolerance)</a></li>
+            <li><a href="#3-内部热分布均匀">3. 内部热分布均匀</a></li>
+          </ol>
+        </li>
+        <li><a href="#注意事项">注意事项</a></li>
       </ol>
     </li>
   </ol>
@@ -320,7 +333,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/hugo%E6%B8%B2%E6%9F%93mermaid/">Hugo渲染Mermaid</a>
+            <a href="/p/%E5%85%B3%E4%BA%8E%E5%8A%A0%E7%83%AD%E6%A3%92/">关于加热棒</a>
         </h2>
     
         
@@ -342,7 +355,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-13</time>
+                <time class="article-time--published">2025-12-19</time>
             </div>
         
 
@@ -358,69 +371,66 @@
     <section class="article-content">
     
     
-    <p>
+    <p>分析仪当中的控温部件，大都都使用加热棒来加热控温，为什么：</p>
+<h3 id="为什么首选加热棒cartridge-heater">为什么首选“加热棒”（Cartridge Heater）？
+</h3><p>相比于加热丝（云母绕线）、加热片（硅胶加热板）或者陶瓷加热器，加热棒在精密仪器中有三大核心优势：</p>
+<h4 id="1-极高的功率密度与传热效率">1. 极高的“功率密度”与“传热效率”
+</h4><p>CEMS 的核心部件（如采样探头腔体、NOx 转换炉、分析仪气室）通常是不锈钢或铝合金材质的<strong>金属块</strong>。</p>
+<ul>
+<li>传热方式： 加热棒是专门为模具加热设计的。它插入一个紧配合的金属孔中，通过<strong>接触导热</strong>直接把热量传递给金属块。</li>
+<li>优势： 这种方式<strong>热损耗极小，升温速度极快</strong>。一根手指大小的加热棒可以轻松做到 200W~500W 的功率。</li>
+</ul>
+<h4 id="2-完美的-fru现场可更换设计">2. 完美的 FRU（现场可更换）设计
+</h4><p>还记得之前我们讨论的 [[现场可更换单元]] 吗？加热棒是完美的 FRU 代表。</p>
+<ul>
+<li>维修场景： 如果加热元件烧了。
+<ul>
+<li>如果是加热丝： 你得把保温层拆掉，重新绕线，还要涂抹耐高温胶，现场根本做不了。</li>
+<li>如果是加热棒：拔出来 -&gt; 插进去 -&gt; 拧紧定位螺丝。全过程 5 分钟。</li>
+</ul>
+</li>
+<li>结构标准化： 它的直径通常是标准的（如 6.5mm, 8mm, 10mm, 1/4 inch），非常容易找到备件。</li>
+</ul>
+<h4 id="3-铠装结构安全耐用">3. 铠装结构，安全耐用
+</h4><ul>
+<li>密封性： CEMS 现场环境恶劣（有腐蚀性气体、有水汽）。加热棒外部是<strong>304/316L 不锈钢管</strong>，内部填充压实的<strong>氧化镁 (MgO)</strong> 粉末绝缘。这使得它不怕氧化、不怕轻微腐蚀，而且<strong>绝缘性能</strong>比裸露的加热丝好太多。</li>
+</ul>
+<h3 id="为什么大家都用德国-hotset">为什么大家都用德国 Hotset
+</h3><p>Hotset 在工业加热领域的地位，有点像汽车界的“博世”或“BBA”，尽管国产加热棒价格只有 Hotset 的 1/5 甚至 1/10，但主流 CEMS 厂家在核心部位依然不敢省这个钱。原因在于 CEMS 的特殊工况：</p>
+<h4 id="1-吸潮导致的绝缘崩溃">1. “吸潮”导致的绝缘崩溃
+</h4><p>这是国产低端加热棒的死穴。</p>
+<ul>
+<li>现象： CEMS 有时候会停机检修几天，或者发货运输途中遇到高湿环境。劣质加热棒内部的氧化镁粉不纯，会<strong>吸潮</strong>。</li>
+<li>后果： 再次上电瞬间，因为内部受潮，绝缘电阻下降，直接导致漏电跳闸。</li>
+<li>Hotset 优势： 他们的密封工艺（Swaged-in）和氧化镁纯度极高，防潮性能极好。这对于需要常年稳定运行的 CEMS 至关重要。</li>
+</ul>
+<h4 id="2-公差控制-h7-tolerance">2. 公差控制 (H7 Tolerance)
+</h4><p>加热棒的寿命，一半取决于它自己，<strong>另一半取决于它和孔的配合</strong>。</p>
+<ul>
+<li>原理： <strong>加热棒产生的热量必须瞬间导出去</strong>。如果加热棒直径做小了（比如标准 10mm，它做成了 9.8mm），中间有了 0.2mm 的空气隙。</li>
+<li>后果： 空气是热的不良导体。热量导不出去，热量就会积聚在加热棒内部，导致内部温度瞬间飙升到 1000℃ 以上，电阻丝直接熔断。</li>
+<li>Hotset 优势： 他们的直径公差控制得极其精准（通常是负公差，配合 H7 的孔），保证插进去刚刚好，没有空气隙，寿命自然长。</li>
+</ul>
+<p>
 	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png" alt=""  />
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251219223339949.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251219223339949.png" alt=""  />
 		</a>
 	</div>
 
 </p>
-<p>曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定</p>
-<h3 id="第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子
-</h3><p>这个步骤是为了告诉 Hugo：当遇到语言标记为 <code>mermaid</code> 的代码块时，不要高亮代码，而是将其包装在一个 <code>div</code> 中，以便 JavaScript 库进行渲染。</p>
+<p>![[Pasted image 20251219223406.png]]</p>
+<h4 id="3-内部热分布均匀">3. 内部热分布均匀
+</h4><p>在 NOx 转换炉中，我们需要温度极其均匀（例如维持在 350℃±2℃）。</p>
 <ul>
-<li>在你的 Hugo 站点根目录下（注意<strong>不是</strong>在 <code>themes</code> 目录里），找到或创建 <code>layouts</code> 文件夹。</li>
-<li>建立如下目录结构和文件： <code>layouts/_default/_markup/render-codeblock-mermaid.html</code></li>
-<li>在该文件中粘贴以下代码：</li>
+<li>劣质加热棒可能“头热尾冷”或者“中间局部过热”。</li>
+<li>Hotset 可以定制<strong>功率分布</strong>，保证整根棒表面温度一致，这对化学反应效率（转化率）至关重要。</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mermaid&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  {{ .Inner | safeHTML }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ .Page.Store.Set &#34;hasMermaid&#34; true }}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库
-</h3><p>我们需要将 Mermaid 的核心 JS 脚本注入到页面底部。<code>hugo-theme-stack</code> 主题预留了自定义页脚文件的位置。</p>
-<ol>
-<li>在站点根目录下，创建文件： <code>layouts/partials/footer/custom.html</code> (如果该文件已存在，直接在里面追加代码即可)</li>
-<li>在该文件中粘贴以下代码：</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl">{{ if .Page.Store.Get &#34;hasMermaid&#34; }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;module&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">import</span> <span class="nx">mermaid</span> <span class="nx">from</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">    <span class="nx">startOnLoad</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">theme</span><span class="o">:</span> <span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="c1">// 或者 &#39;default&#39;, &#39;forest&#39;, &#39;neutral&#39;
-</span></span></span><span class="line"><span class="cl">    <span class="nx">securityLevel</span><span class="o">:</span> <span class="s1">&#39;loose&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>大功告成！</p>
+<h3 id="注意事项">注意事项
+</h3><ul>
+<li>千万别干烧： 加热棒必须完全插入金属孔里才能通电。如果你把它拿在空气中通电测试，它会<strong>因为散热不掉而烧红</strong>、炸裂。</li>
+<li>防卡死： 加热棒在高温下工作久了，容易和金属孔锈死在一起，拔不出来。有经验的工程师在安装新棒时，会在表面涂一层<strong>二硫化钼</strong>或<strong>高温防卡剂</strong>。</li>
+</ul>
 
 </section>
 

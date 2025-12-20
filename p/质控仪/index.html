@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<title>Hugo渲染Mermaid</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在 CEMS（烟气排放连续监测系统）中，质控仪（也常被称为“远程质控装置”或“自动校验装置”）是一种用于监督和验证分析仪准确性的辅助系统\n质控仪是什么 质控仪通常由标准气体组、精密配气模块、控制回路以及通信模块组成。它并不是直接用来测量烟气的，而是通过向 CEMS 系统注入已知浓度的“标准气体”，来对比 CEMS 的读数是否与标气浓度一致。\n">
+<title>质控仪</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E8%B4%A8%E6%8E%A7%E4%BB%AA/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Hugo渲染Mermaid">
-<meta property='og:description' content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
-<meta property='og:url' content='https://teaize.github.io/p/hugo%E6%B8%B2%E6%9F%93mermaid/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="质控仪">
+<meta property='og:description' content="在 CEMS（烟气排放连续监测系统）中，质控仪（也常被称为“远程质控装置”或“自动校验装置”）是一种用于监督和验证分析仪准确性的辅助系统\n质控仪是什么 质控仪通常由标准气体组、精密配气模块、控制回路以及通信模块组成。它并不是直接用来测量烟气的，而是通过向 CEMS 系统注入已知浓度的“标准气体”，来对比 CEMS 的读数是否与标气浓度一致。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E8%B4%A8%E6%8E%A7%E4%BB%AA/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-13T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-13T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Hugo渲染Mermaid">
-<meta name="twitter:description" content=" 曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定\n第一步：创建 Mermaid 的渲染钩子 这个步骤是为了告诉 Hugo：当遇到语言标记为 mermaid 的代码块时，不要高亮代码，而是将其包装在一个 div 中，以便 JavaScript 库进行渲染。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="质控仪">
+<meta name="twitter:description" content="在 CEMS（烟气排放连续监测系统）中，质控仪（也常被称为“远程质控装置”或“自动校验装置”）是一种用于监督和验证分析仪准确性的辅助系统\n质控仪是什么 质控仪通常由标准气体组、精密配气模块、控制回路以及通信模块组成。它并不是直接用来测量烟气的，而是通过向 CEMS 系统注入已知浓度的“标准气体”，来对比 CEMS 的读数是否与标气浓度一致。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,8 +297,18 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子</a></li>
-        <li><a href="#第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库</a></li>
+        <li><a href="#质控仪是什么">质控仪是什么</a></li>
+        <li><a href="#主要用于什么">主要用于什么</a>
+          <ol>
+            <li><a href="#1-自动校准与校验保证准确性">1. 自动校准与校验（保证准确性）</a></li>
+            <li><a href="#2-远程抽检与防作弊合规监管">2. 远程抽检与防作弊（合规监管）</a></li>
+            <li><a href="#3-线性度测试">3. 线性度测试</a></li>
+          </ol>
+        </li>
+        <li><a href="#质控仪与配气仪的区别">质控仪与配气仪的区别</a></li>
+        <li><a href="#核心技术规范hj-75--hj-76">核心技术规范：HJ 75 &amp; HJ 76</a></li>
+        <li><a href="#关键性能指标">关键性能指标</a></li>
+        <li><a href="#专家提醒2024-2025-监管新动向">专家提醒：2024-2025 监管新动向</a></li>
       </ol>
     </li>
   </ol>
@@ -320,7 +330,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/hugo%E6%B8%B2%E6%9F%93mermaid/">Hugo渲染Mermaid</a>
+            <a href="/p/%E8%B4%A8%E6%8E%A7%E4%BB%AA/">质控仪</a>
         </h2>
     
         
@@ -342,7 +352,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-13</time>
+                <time class="article-time--published">2025-12-20</time>
             </div>
         
 
@@ -358,69 +368,95 @@
     <section class="article-content">
     
     
-    <p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251213143207280.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<p>曾经翻网站翻博客找半天的答案，在 Gemini 的加持下，五分钟搞定</p>
-<h3 id="第一步创建-mermaid-的渲染钩子">第一步：创建 Mermaid 的渲染钩子
-</h3><p>这个步骤是为了告诉 Hugo：当遇到语言标记为 <code>mermaid</code> 的代码块时，不要高亮代码，而是将其包装在一个 <code>div</code> 中，以便 JavaScript 库进行渲染。</p>
+    <p>在 CEMS（烟气排放连续监测系统）中，<strong>质控仪</strong>（也常被称为“远程质控装置”或“自动校验装置”）是一种用于<strong>监督和验证分析仪准确性</strong>的辅助系统</p>
+<h3 id="质控仪是什么">质控仪是什么
+</h3><p>质控仪通常由<strong>标准气体组、精密配气模块、控制回路</strong>以及<strong>通信模块</strong>组成。它并不是直接用来测量烟气的，而是通过向 CEMS 系统注入已知浓度的“标准气体”，来对比 CEMS 的读数是否与标气浓度一致。</p>
+<h3 id="主要用于什么">主要用于什么
+</h3><h4 id="1-自动校准与校验保证准确性">1. 自动校准与校验（保证准确性）
+</h4><p>CEMS 传感器在长期运行中会产生“漂移”。质控仪可以按照预设程序（如每天一次或每周一次），自动切换阀门，将标气送入分析仪。</p>
 <ul>
-<li>在你的 Hugo 站点根目录下（注意<strong>不是</strong>在 <code>themes</code> 目录里），找到或创建 <code>layouts</code> 文件夹。</li>
-<li>建立如下目录结构和文件： <code>layouts/_default/_markup/render-codeblock-mermaid.html</code></li>
-<li>在该文件中粘贴以下代码：</li>
+<li><strong>零点校准：</strong> 通入高纯氮气，检查仪表是否显示为“0”。</li>
+<li><strong>量程校准：</strong> 通入已知高浓度的标气，检查仪表读数是否准确。</li>
 </ul>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">div</span> <span class="na">class</span><span class="o">=</span><span class="s">&#34;mermaid&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  {{ .Inner | safeHTML }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">div</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ .Page.Store.Set &#34;hasMermaid&#34; true }}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="第二步引入-mermaid-javascript-库">第二步：引入 Mermaid JavaScript 库
-</h3><p>我们需要将 Mermaid 的核心 JS 脚本注入到页面底部。<code>hugo-theme-stack</code> 主题预留了自定义页脚文件的位置。</p>
-<ol>
-<li>在站点根目录下，创建文件： <code>layouts/partials/footer/custom.html</code> (如果该文件已存在，直接在里面追加代码即可)</li>
-<li>在该文件中粘贴以下代码：</li>
-</ol>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-HTML" data-lang="HTML"><span class="line"><span class="cl">{{ if .Page.Store.Get &#34;hasMermaid&#34; }}
-</span></span><span class="line"><span class="cl"><span class="p">&lt;</span><span class="nt">script</span> <span class="na">type</span><span class="o">=</span><span class="s">&#34;module&#34;</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">  <span class="kr">import</span> <span class="nx">mermaid</span> <span class="nx">from</span> <span class="s1">&#39;https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs&#39;</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">  <span class="nx">mermaid</span><span class="p">.</span><span class="nx">initialize</span><span class="p">({</span> 
-</span></span><span class="line"><span class="cl">    <span class="nx">startOnLoad</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">    <span class="nx">theme</span><span class="o">:</span> <span class="s1">&#39;base&#39;</span><span class="p">,</span> <span class="c1">// 或者 &#39;default&#39;, &#39;forest&#39;, &#39;neutral&#39;
-</span></span></span><span class="line"><span class="cl">    <span class="nx">securityLevel</span><span class="o">:</span> <span class="s1">&#39;loose&#39;</span><span class="p">,</span>
-</span></span><span class="line"><span class="cl">  <span class="p">});</span>
-</span></span><span class="line"><span class="cl"><span class="p">&lt;/</span><span class="nt">script</span><span class="p">&gt;</span>
-</span></span><span class="line"><span class="cl">{{ end }}
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>大功告成！</p>
+<h4 id="2-远程抽检与防作弊合规监管">2. 远程抽检与防作弊（合规监管）
+</h4><p>这是近年来环保监管最看重的功能。环保局可以通过远程平台发送指令，让现场的质控仪立即开始“盲样考核”：</p>
+<ul>
+<li>远程触发： 监管人员在办公室点点鼠标，现场质控仪就自动放气。</li>
+<li>数据比对： 质控仪记录放出的气是多少浓度，然后实时比对 CEMS 上传的数据。如果两者对不上，就说明数据可能存在偏差或人为干预。</li>
+</ul>
+<h4 id="3-线性度测试">3. 线性度测试
+</h4><p>通过内置的配气系统，质控仪可以将一种高浓度标气稀释成多个不同梯度（如 20%、50%、80% 量程），一次性测试分析仪在不同浓度下的反应是否呈线性，从而判断传感器是否老化失效。</p>
+<h3 id="质控仪与配气仪的区别">质控仪与配气仪的区别
+</h3><p>简单来说：<strong>配气仪是“工具”，而质控仪是“成套系统”</strong>。它们的关系就像“发动机”与“整车”的区别</p>
+<ul>
+<li>配气仪 (Gas Dilutor)： 是一个纯粹的<strong>精密仪器</strong>。它的任务只有一个：通过高精度的质量流量控制器（MFC），把高浓度的瓶装标气用氮气精确稀释成你想要的任何浓度（比如把 $1000ppm$ 稀释成 $20ppm$）。</li>
+<li>质控仪 (QC Unit/System)： 是一个<strong>监管终端</strong>。它集成了配气仪，但还多了“大脑”（控制器）和“嘴巴”（通信模块）。它负责接收环保局的指令，自动控制配气仪工作，并将结果上报。</li>
+</ul>
+<p>在以前，运维人员提着一台<strong>便携式配气仪</strong>去现场校准就行了。但现在国家推行<strong>远程非现场监管</strong>，区别就显现出来了：</p>
+<ul>
+<li><strong>盲样考核：</strong> 环保局想知道你的 CEMS 准不准，不需要派人去，直接给<strong>质控仪</strong>发信号。质控仪自动稀释出一瓶“未知浓度”的气体送入 CEMS，CEMS 的读数传回平台。如果误差大，平台自动报警。这种<strong>远程闭环</strong>是配气仪单独做不到的。</li>
+<li><strong>减少标气瓶数量：</strong> 质控仪内置配气功能后，企业只需要买一两瓶高浓度标气，就能配出覆盖零点到满量程的各个点位。这符合 <strong>HJ 75/76</strong> 规范中对多点线性检查的要求，既省钱又符合规范。</li>
+</ul>
+<h3 id="核心技术规范hj-75--hj-76">核心技术规范：HJ 75 &amp; HJ 76
+</h3><ul>
+<li>HJ 76-2017《固定污染源烟气排放连续监测系统技术要求及检测方法》
+<ul>
+<li>关注点： 质控仪硬件的“合格证”。</li>
+<li>要求： 质控仪必须能够精准控制气体流量，且具有自动配气功能的装置需要经过严格的<strong>线性误差</strong>检测。它规定了标准气体的精度（通常要求二级标物以上）以及设备在极端环境下的稳定性。</li>
+</ul>
+</li>
+<li>HJ 75-2017《固定污染源烟气排放连续监测技术规范》
+<ul>
+<li>关注点： 质控仪该怎么“干活”。</li>
+<li>强制动作：
+<ul>
+<li>24 小时零点/量程漂移检查： 质控仪需每日定时自动通入零气和标气。</li>
+<li>7 天漂移校准： 如果 7 天内漂移超过规定值（如 $2.5% F.S.$），质控仪必须介入校准。</li>
+<li>全系统校准： 规范强调校准应尽可能覆盖全管路（从探头到分析仪）。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="关键性能指标">关键性能指标
+</h3><p>在技术验收（依据 HJ 75）时，质控仪配合 CEMS 必须达到以下硬指标：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>检测项目</strong></th>
+          <th><strong>规范要求 (HJ 75/76)</strong></th>
+          <th><strong>质控仪的作用</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>示值误差</strong></td>
+          <td>标气浓度的 $\pm 5%$ 以内</td>
+          <td>验证配气精度</td>
+      </tr>
+      <tr>
+          <td><strong>系统响应时间</strong></td>
+          <td>通常 $\le 200$ 秒</td>
+          <td>考核气路切换速度</td>
+      </tr>
+      <tr>
+          <td><strong>24h 漂移</strong></td>
+          <td>$\le \pm 2.5% F.S.$</td>
+          <td>每日自动执行零点/量程检查</td>
+      </tr>
+      <tr>
+          <td><strong>线性误差</strong></td>
+          <td>相关系数 $r \ge 0.999$</td>
+          <td>通过多点配气验证传感器线性</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="专家提醒2024-2025-监管新动向">专家提醒：2024-2025 监管新动向
+</h3><p>目前国家正逐步推行“数智化运维”（如 HJ 1387 等新标准体系），对质控仪提出了更高要求：</p>
+<ul>
+<li>自动预警： 当质控仪发现连续 3 天漂移趋势一致时，需主动推送“维护提醒”。</li>
+<li>低浓度挑战： 针对超低排放企业（如 SO₂ 常年在 $10mg/m^3$ 以下），质控仪的配气精度要求从传统的“百分比”升级到了更精细的“绝对误差”控制。</li>
+</ul>
 
 </section>
 
