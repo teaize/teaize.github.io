@@ -7,7 +7,1321 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sat, 20 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 21 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>ZZZ-14-串口通讯UART</title>
+        <link>https://teaize.github.io/p/zzz-14-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AFuart/</link>
+        <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-14-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AFuart/</guid>
+        <description>&lt;p&gt;如果说 GPIO 和 PWM 是单片机的“手脚”，定时器是“脉搏”，那么 &lt;strong&gt;串口通信（UART）&lt;/strong&gt; 就是单片机的“嘴巴”和“耳朵”。有了它，单片机就能把内部的运行数据（比如传感器的数值、调试信息）发送给电脑显示出来，也能接收电脑发来的指令。&lt;/p&gt;
+&lt;h3 id=&#34;1-什么是-uart通俗理解&#34;&gt;1. 什么是 UART？（通俗理解）
+&lt;/h3&gt;&lt;p&gt;UART (Universal Asynchronous Receiver/Transmitter)，即通用异步收发传输器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;异步 (Asynchronous)：意思是通信双方没有共同的时钟线（不像 SPI 或 I2C 有根时钟线牵着）。&lt;/li&gt;
+&lt;li&gt;收发 (Receiver/Transmitter)：它有两根核心信号线：
+&lt;ul&gt;
+&lt;li&gt;TX (Transmit)：发送数据（嘴巴）。&lt;/li&gt;
+&lt;li&gt;RX (Receive)：接收数据（耳朵）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;全双工：因为有两根线，单片机可以一边说一边听，互不干扰。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-uart-的接头暗号通信参数&#34;&gt;2. UART 的“接头暗号”（通信参数）
+&lt;/h3&gt;&lt;p&gt;既然没有时钟线同步，通信双方必须提前约定好“说话的速度”和“说话的格式”，否则就是鸡同鸭讲，显示乱码。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;参数名称&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;常用设置&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;形象比喻&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;波特率 (Baud Rate)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;115200&lt;/strong&gt; / 9600&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;说话的速度&lt;/strong&gt;（每秒钟发送多少个比特位）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;停止位 (Stop Bits)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;1&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;句号&lt;/strong&gt;（一段话结束的标志）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;数据位 (Data Bits)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;8 bits&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;单词长度&lt;/strong&gt;（每次发 8 位，刚好一个字节）。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;奇偶校验 (Parity)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;None&lt;/strong&gt; (无)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;逻辑纠错&lt;/strong&gt;（检查话有没有传错）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;3-硬件连接必须交叉&#34;&gt;3. 硬件连接：必须“交叉”
+&lt;/h3&gt;&lt;p&gt;这是初学者最容易犯错的地方。单片机和电脑（通过 USB-TTL 模块）连接时：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;单片机的 TX（PA9）&lt;/strong&gt; $\rightarrow$ &lt;strong&gt;USB-TTL 的 RX&lt;/strong&gt;（我的嘴对着你的耳朵）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;单片机的 RX（PA10）&lt;/strong&gt; $\leftarrow$ &lt;strong&gt;USB-TTL 的 TX&lt;/strong&gt;（你的嘴对着我的耳朵）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;GND&lt;/strong&gt; $\leftrightarrow$ &lt;strong&gt;GND&lt;/strong&gt;（必须共地，参考电压一致）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    subgraph STM32_MCU [STM32 开发板]
+        TX1[PA9 / TX]
+        RX1[PA10 / RX]
+        GND1[GND]
+    end
+
+    subgraph USB_TTL [USB-TTL 模块]
+        RX2[RXD]
+        TX2[TXD]
+        GND2[GND]
+    end
+
+    TX1 --- RX2
+    RX1 --- TX2
+    GND1 --- GND2
+&lt;/div&gt;
+&lt;h3 id=&#34;4-stm32cubeide-配置步骤&#34;&gt;4. STM32CubeIDE 配置步骤
+&lt;/h3&gt;&lt;p&gt;我们通常使用 &lt;strong&gt;USART1&lt;/strong&gt;（它是单片机里最高速、最常用的串口）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开启串口：在 &lt;code&gt;.ioc&lt;/code&gt; 文件左侧找到 &lt;strong&gt;Connectivity -&amp;gt; USART1&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;设置模式：将 &lt;strong&gt;Mode&lt;/strong&gt; 设为 &lt;strong&gt;Asynchronous&lt;/strong&gt;（异步）。
+&lt;ul&gt;
+&lt;li&gt;你会发现引脚图上 &lt;strong&gt;PA9 (TX)&lt;/strong&gt; 和 &lt;strong&gt;PA10 (RX)&lt;/strong&gt; 变绿了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;配置参数：
+&lt;ul&gt;
+&lt;li&gt;Baud Rate: &lt;strong&gt;115200&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;Word Length: &lt;strong&gt;8 bits&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;Stop Bits: &lt;strong&gt;1&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;生成代码：按 &lt;code&gt;Ctrl + S&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221091559217.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221091559217.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;5-核心代码实现&#34;&gt;5. 核心代码实现
+&lt;/h3&gt;&lt;h4 id=&#34;a-发送数据让单片机说话&#34;&gt;A. 发送数据（让单片机说话）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Running...&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;strlen&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;),&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 每秒发一次
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 3 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;![[Pasted image 20251221092640.png]]&lt;/p&gt;
+&lt;h4 id=&#34;b-接收数据让单片机听话&#34;&gt;B. 接收数据（让单片机听话）
+&lt;/h4&gt;&lt;p&gt;在串口通信中，让单片机接收数据（听话）通常有两种方法：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;轮询接收（Polling）：单片机死等电脑发消息，不来就不干别的。&lt;/li&gt;
+&lt;li&gt;中断接收（Interrupt）：单片机边干活边等，电脑一发消息就立刻停下活去处理。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;在实际开发中，&lt;strong&gt;中断接收&lt;/strong&gt;才是最专业、最常用的，这里单独开一篇学习—&amp;gt;[[ZZZ-15-串口通讯中断接收]]&lt;/p&gt;
+&lt;h3 id=&#34;6-一个进阶的小技巧重定向-printf&#34;&gt;6. 一个进阶的小技巧：重定向 &lt;code&gt;printf&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;如果你想像在电脑上写 C 语言一样使用 &lt;code&gt;printf(&amp;quot;数值是: %d&amp;quot;, value);&lt;/code&gt;，你需要做一个“重定向”。&lt;/p&gt;
+&lt;p&gt;第一步：包含头文件 在 &lt;code&gt;main.c&lt;/code&gt; 最顶部的 &lt;code&gt;USER CODE BEGIN Includes&lt;/code&gt; 区域：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN Includes */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;stdio.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;lt;string.h&amp;gt;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END Includes */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;第二步：重定向（告诉编译器 printf 往串口跑）&lt;/strong&gt; 在 &lt;code&gt;main.c&lt;/code&gt; 里的 &lt;code&gt;MX_USART1_UART_Init()&lt;/code&gt; 函数之后，或者专门的 &lt;code&gt;USER CODE BEGIN 0&lt;/code&gt; 区域：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 0 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;__io_putchar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 核心代码：通过串口1发送一个字符
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_MAX_DELAY&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ch&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 0 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这样，你之后所有的 &lt;code&gt;printf&lt;/code&gt; 都会自动通过串口 1 发送到电脑上。&lt;/p&gt;
+&lt;h3 id=&#34;常见避坑指南&#34;&gt;常见避坑指南
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;波特率不匹配：如果电脑串口助手设置的是 9600，单片机是 115200，你会看到满屏乱码。&lt;/li&gt;
+&lt;li&gt;未接 GND：如果不接地线，信号没有参考平面，也会产生乱码或无法接收。&lt;/li&gt;
+&lt;li&gt;阻塞问题：&lt;code&gt;HAL_UART_Receive&lt;/code&gt; 在没收到数据前会一直卡在那（死等）。在正式项目中，我们通常会配合&lt;strong&gt;中断&lt;/strong&gt;或 &lt;strong&gt;DMA&lt;/strong&gt; 来接收数据。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-15-串口通讯中断接收</title>
+        <link>https://teaize.github.io/p/zzz-15-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF%E4%B8%AD%E6%96%AD%E6%8E%A5%E6%94%B6/</link>
+        <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-15-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF%E4%B8%AD%E6%96%AD%E6%8E%A5%E6%94%B6/</guid>
+        <description>&lt;h3 id=&#34;第一步stm32cubeide-配置-ioc&#34;&gt;第一步：STM32CubeIDE 配置 (.ioc)
+&lt;/h3&gt;&lt;p&gt;我们要开启串口的&lt;strong&gt;中断“开关”&lt;/strong&gt;：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开 &lt;strong&gt;Connectivity -&amp;gt; USART1&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;NVIC Settings&lt;/strong&gt; 选项卡。&lt;/li&gt;
+&lt;li&gt;勾选 &lt;strong&gt;USART1 global interrupt&lt;/strong&gt; 后的 &lt;strong&gt;Enabled&lt;/strong&gt; 框。&lt;/li&gt;
+&lt;li&gt;保存（Ctrl + S）生成代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221093455837.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221093455837.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;第二步编写接收逻辑-mainc&#34;&gt;第二步：编写接收逻辑 (main.c)
+&lt;/h3&gt;&lt;p&gt;中断接收的逻辑是：你先告诉单片机“你听着，收到一个字节就叫我”，然后单片机去跑 &lt;code&gt;while(1)&lt;/code&gt;。当电脑发来数据，单片机自动跳进“回调函数”执行任务。&lt;/p&gt;
+&lt;h4 id=&#34;1-定义接收缓存&#34;&gt;1. 定义接收缓存
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main.c&lt;/code&gt; 的 &lt;code&gt;USER CODE BEGIN PV&lt;/code&gt; (Private Variables) 区域定义一个变量来存放收到的字符：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rx_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 接收缓冲区，存放电脑发来的一个字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;2-开启听力模式&#34;&gt;2. 开启“听力”模式
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main&lt;/code&gt; 函数的 &lt;code&gt;while(1)&lt;/code&gt; 之前，调用一次中断接收函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 告诉单片机：开启中断接收，收满 1 个字节就存到 rx_data 变量里
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rx_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;3-编写收到命令后做什么-回调函数&#34;&gt;3. 编写“收到命令后做什么” (回调函数)
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main.c&lt;/code&gt; 最下方的 &lt;code&gt;USER CODE BEGIN 4&lt;/code&gt; 区域，重写回调函数。我们要实现：电脑发 &lt;strong&gt;&amp;lsquo;1&amp;rsquo;&lt;/strong&gt; 亮灯，发 &lt;strong&gt;&amp;lsquo;0&amp;rsquo;&lt;/strong&gt; 灭灯。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_UART_RxCpltCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Instance&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;USART1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 确认是串口 1 触发的中断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rx_data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;1&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 电脑发来字符 &amp;#39;1&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 亮灯
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;LED ON!&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 回复电脑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rx_data&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;sc&#34;&gt;&amp;#39;0&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 电脑发来字符 &amp;#39;0&amp;#39;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_SET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;// 灭灯
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;LED OFF!&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 回复电脑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 重要：中断是一次性的，处理完后必须再次开启，否则下次就收不到了
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;HAL_UART_Receive_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rx_data&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;注意这里使用了 printf，需要查看 [[ZZZ-14-串口通讯UART]] 中关于 printf 的设置&lt;/p&gt;
+&lt;h3 id=&#34;第三步原理图解-中断流程&#34;&gt;第三步：原理图解 (中断流程)
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    A[1.程序启动:开启中断接收] --&gt; B[2.CPU运行while循环]
+    B --&gt; C[3.电脑发送字符]
+    C --&gt; D[4.硬件触发UART中断]
+    D --&gt; E[5.进入Callback回调函数]
+    E --&gt; F[6.执行逻辑:如开关灯]
+    F --&gt; G[7.重新调用Receive_IT续约]
+    G --&gt; B
+&lt;/div&gt;
+&lt;h3 id=&#34;第四步串口调试助手测试&#34;&gt;第四步：串口调试助手测试
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;烧录程序。&lt;/li&gt;
+&lt;li&gt;打开串口调试助手，波特率 115200。&lt;/li&gt;
+&lt;li&gt;在发送框输入字符 &lt;strong&gt;&lt;code&gt;1&lt;/code&gt;&lt;/strong&gt;（注意是&lt;strong&gt;字符模式&lt;/strong&gt;，不是十六进制），点击发送。
+&lt;ul&gt;
+&lt;li&gt;现象：板子上的 PC13 灯亮了，助手屏幕显示 &lt;code&gt;LED ON!&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在发送框输入字符 &lt;strong&gt;&lt;code&gt;0&lt;/code&gt;&lt;/strong&gt;，点击发送。
+&lt;ul&gt;
+&lt;li&gt;现象：板子上的 PC13 灯灭了，助手屏幕显示 &lt;code&gt;LED OFF!&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;避坑指南为什么我的单片机只听一次话&#34;&gt;避坑指南：为什么我的单片机只听一次话？
+&lt;/h3&gt;&lt;p&gt;在代码里会看到反复强调最后一行 &lt;code&gt;HAL_UART_Receive_IT&lt;/code&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原因&lt;/strong&gt;：HAL 库的中断接收是“单次任务制”。当你收完指定的 1 个字节后，中断就会自动关闭。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;解决&lt;/strong&gt;：必须在回调函数结束前，再次调用该函数，相当于给单片机续一份“听力合规”，它才能持续监听。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;进阶挑战如何接收一个单词&#34;&gt;进阶挑战：如何接收一个“单词”
+&lt;/h3&gt;&lt;p&gt;刚才实现的例子是“一个字节”触发一次中断。但现实中，我们经常需要接收一串字符，比如发送 &lt;code&gt;&amp;quot;ON&amp;quot;&lt;/code&gt; 开启，发送 &lt;code&gt;&amp;quot;OFF&amp;quot;&lt;/code&gt; 关闭。作为初学者，处理字符串接收有&lt;strong&gt;两种最常用&lt;/strong&gt;的思路：&lt;/p&gt;
+&lt;h4 id=&#34;方案-a字节拼接法最基础锻炼逻辑&#34;&gt;方案 A：字节拼接法（最基础，锻炼逻辑）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;原理：依然是 1 个字节触发一次中断。&lt;/li&gt;
+&lt;li&gt;逻辑：在单片机里准备一个“小篮子”（数组）。每收到一个字节，就把它丢进篮子，直到收到了回车符 &lt;code&gt;\n&lt;/code&gt;，说明一句话说完了。然后用 &lt;code&gt;strcmp&lt;/code&gt; 函数比较这个篮子里装的是不是 &lt;code&gt;&amp;quot;ON&amp;quot;&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;方案-b空闲中断法最优雅专业用法&#34;&gt;方案 B：空闲中断法（最优雅，专业用法）
+&lt;/h4&gt;&lt;p&gt;这是处理&lt;strong&gt;不定长数据&lt;/strong&gt;（比如一条指令有时长，有时短）最优雅、最工业级的方案。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;原理：利用 STM32 串口的一个高级特性——&lt;strong&gt;IDLE（空闲中断）&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;逻辑：单片机会盯着串口线，如果发现超过 1 个字节的时间没有新数据进来了，它就认为“这串话发完了”，然后一次性把整个数组交给你处理。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;下面开始方案 B 空闲中断法的学习&lt;/p&gt;
+&lt;h3 id=&#34;1-为什么它最优雅&#34;&gt;1. 为什么它最“优雅”？
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;传统中断&lt;/strong&gt;：像“强迫症”，必须数够 10 个字节才告诉你。如果对方只发了 5 个，你就永远在死等。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;空闲中断&lt;/strong&gt;：像“观察员”。它不管对方发了多少，它只盯着信号线。只要线上一段时间没有波动了（空闲了），它就认为“这串话发完了”，立刻叫醒 CPU。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;最强组合：UART IDLE + DMA&lt;/strong&gt; 通常我们会配合 &lt;strong&gt;DMA&lt;/strong&gt;（直接存储器访问）使用。DMA 就像一个搬运工，数据一到就自动搬到内存里，不占用 CPU 资源。只有当一串话全说完了（触发 IDLE），CPU 才出来看一眼。&lt;/p&gt;
+&lt;h3 id=&#34;2核心原理图&#34;&gt;2、核心原理图
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    Sender[电脑/传感器] -- 发送数据流 --&gt; RX_Pin[STM32 RX 引脚]
+    RX_Pin -- 自动搬运 --&gt; DMA[DMA 搬运工]
+    DMA -- 存入 --&gt; Buffer[内存缓冲区/数组]
+    
+    subgraph &#34;检测机制&#34;
+        Line[信号线状态] -- 消失一段时间 --&gt; IDLE_Flag[触发 IDLE 空闲中断]
+    end
+
+    IDLE_Flag -- 通知 --&gt; CPU[CPU 处理整条数据]
+&lt;/div&gt;
+&lt;h3 id=&#34;3-stm32cubeide-配置步骤&#34;&gt;3. STM32CubeIDE 配置步骤
+&lt;/h3&gt;&lt;p&gt;我们要用到 HAL 库中一个非常强大的“新”函数：&lt;code&gt;HAL_UARTEx_ReceiveToIdle_DMA&lt;/code&gt;（这里的 &lt;strong&gt;Ex&lt;/strong&gt; 代表 Extended 扩展功能）。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;开启 DMA&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;在 &lt;code&gt;.ioc&lt;/code&gt; 文件中，点击 &lt;strong&gt;Connectivity -&amp;gt; USART1&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;DMA Settings&lt;/strong&gt; 选项卡 -&amp;gt; 点击 &lt;strong&gt;Add&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;USART1_RX&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Priority&lt;/strong&gt; 选 Medium（中等）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Mode&lt;/strong&gt; 选 &lt;strong&gt;Normal&lt;/strong&gt;（普通模式，接收完处理后再重开）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;确认 NVIC&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;在 &lt;strong&gt;NVIC Settings&lt;/strong&gt; 选项卡中，确保 &lt;strong&gt;USART1 global interrupt&lt;/strong&gt; 已勾选（DMA 配合空闲中断也需要开启串口总中断）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;生成代码&lt;/strong&gt;：&lt;code&gt;Ctrl + S&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221095739564.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221095739564.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;4-编写代码-mainc&#34;&gt;4. 编写代码 (main.c)
+&lt;/h3&gt;&lt;h4 id=&#34;第一步定义缓冲区&#34;&gt;第一步：定义缓冲区
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rx_buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 准备一个足够大的“篮子”
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第二步启动接收在-main-函数循环前&#34;&gt;第二步：启动接收（在 main 函数循环前）
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 告诉单片机：用 DMA 方式接收数据，如果触发了空闲中断或存满了 100 字节，就叫我
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_UARTEx_ReceiveToIdle_DMA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rx_buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 禁掉 DMA 的过半中断（可选，防止大数据量时频繁进中断）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;__HAL_DMA_DISABLE_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hdma_usart1_rx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DMA_IT_HT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第三步编写回调函数&#34;&gt;第三步：编写回调函数
+&lt;/h4&gt;&lt;p&gt;注意！空闲中断的回调函数和之前的 &lt;code&gt;RxCpltCallback&lt;/code&gt; 不同，它叫 &lt;strong&gt;&lt;code&gt;RxEventCallback&lt;/code&gt;&lt;/strong&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// Size 参数非常有用：它告诉你这次实际上收到了多少个字节
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_UARTEx_RxEventCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;UART_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Instance&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;USART1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 1. 处理数据：比如把收到的单词原封不动发回给电脑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;HAL_UART_Transmit&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rx_buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Size&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 2. 可以在这里做字符串比较
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;strncmp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rx_buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;ON&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_RESET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;strncmp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;char&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;rx_buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;OFF&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        	&lt;span class=&#34;nf&#34;&gt;HAL_GPIO_WritePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_SET&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 3. 重要：处理完后，必须再次开启接收
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;HAL_UARTEx_ReceiveToIdle_DMA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;huart1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;rx_buf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;__HAL_DMA_DISABLE_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hdma_usart1_rx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DMA_IT_HT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;5-这种方案的职业美感体现在哪&#34;&gt;5. 这种方案的“职业美感”体现在哪？
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;Size 变量&lt;/strong&gt;：这是神来之笔。如果你发 &lt;code&gt;&amp;quot;Hello&amp;quot;&lt;/code&gt;，&lt;code&gt;Size&lt;/code&gt; 就是 5；如果你发 &lt;code&gt;&amp;quot;How are you&amp;quot;&lt;/code&gt;，&lt;code&gt;Size&lt;/code&gt; 就是 11。你再也不用自己去写循环判断 &lt;code&gt;\n&lt;/code&gt; 了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;极低 CPU 占用&lt;/strong&gt;：在数据传输过程中，CPU 甚至可以去“睡觉”（进入低功耗模式）。只有整句话说完了，CPU 才醒过来处理一下。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;高可靠性&lt;/strong&gt;：不再会因为数据发得太快而导致丢字节（DMA 硬件级搬运）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;常见避坑&#34;&gt;常见避坑
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;重载函数名&lt;/strong&gt;：一定要写对 &lt;code&gt;HAL_UARTEx_RxEventCallback&lt;/code&gt;，拼错一个字母它都不会运行。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;缓冲区溢出&lt;/strong&gt;：如果你定义的 &lt;code&gt;rx_buf&lt;/code&gt; 是 100，但对方一次性发了 150 个字节，DMA 会在满 100 的时候强制触发一次中断。所以缓冲区要设得比最长的指令稍微大一点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;现在你可以试试发送 &lt;code&gt;&amp;quot;Hello STM32&amp;quot;&lt;/code&gt;。你会发现，无论你发多长或多短，单片机都能精准地识别出长度并回复你。并且发送 &lt;code&gt;ON&lt;/code&gt;，灯会亮、发送 &lt;code&gt;OFF&lt;/code&gt;，灯会灭&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-16-DMA</title>
+        <link>https://teaize.github.io/p/zzz-16-dma/</link>
+        <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-16-dma/</guid>
+        <description>&lt;p&gt;本篇继 [[ZZZ-14-串口通讯UART]]、 [[ZZZ-15-串口通讯中断接收]]，[[ZZZ-15-串口通讯中断接收]] 中应用到了 DMA，这节就来学习 DMA&lt;/p&gt;
+&lt;h3 id=&#34;1-为什么要用-dma从搬砖中解放-boss&#34;&gt;1. 为什么要用 DMA？（从“搬砖”中解放 Boss）
+&lt;/h3&gt;&lt;p&gt;在没有 DMA 之前，所有的数据搬运都必须经过 CPU。&lt;/p&gt;
+&lt;h4 id=&#34;场景串口收到-100-字节数据&#34;&gt;场景：串口收到 100 字节数据
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;非 DMA 模式（CPU 模式）&lt;/strong&gt;： 每收到一个字节，串口就拍拍 CPU 的肩膀说：“老板，来货了，快把它搬到内存里！” CPU 必须放下手头正在算的数学题，跑过去搬一个字节，然后再回来算题。100 个字节，CPU 就得被打断 100 次。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DMA 模式&lt;/strong&gt;： CPU 告诉 DMA：“快递员，一会儿串口那边有 100 件货，你直接帮我搬到 0x2000… 这个地址的仓库（内存）里，搬完了再通知我。” 于是，CPU 继续心无旁骛地算题，DMA 在后台默默搬运。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-dma-在硬件体系中的位置&#34;&gt;2. DMA 在硬件体系中的位置
+&lt;/h3&gt;&lt;p&gt;在 STM32 的内部，DMA 就像是一条“高速旁路”。它拥有访问内存（SRAM）和外设（如 UART, ADC, SPI）的权利。&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    subgraph &#34;STM32 内部总线架构&#34;
+        CPU[Cortex-M3 内核&lt;br/&gt;&#39;大Boss&#39;]
+        DMA[DMA 控制器&lt;br/&gt;&#39;搬运工&#39;]
+        BusMatrix{总线矩阵&lt;br/&gt;&#39;交通枢纽&#39;}
+        
+        SRAM[SRAM 内存&lt;br/&gt;&#39;仓库&#39;]
+        Flash[Flash 闪存&lt;br/&gt;&#39;代码库&#39;]
+        Peripherals[外设: UART/ADC/SPI&lt;br/&gt;&#39;码头&#39;]
+    end
+
+    CPU --&gt; BusMatrix
+    DMA --&gt; BusMatrix
+    BusMatrix --- SRAM
+    BusMatrix --- Flash
+    BusMatrix --- Peripherals
+
+    style CPU fill:#f96,stroke:#333
+    style DMA fill:#bbf,stroke:#333
+    style BusMatrix fill:#eee,stroke:#333
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;关键点&lt;/strong&gt;：DMA 和 CPU 是并列的，它们共享总线。当 DMA 在搬运数据时，只要不发生“抢车道（总线竞争）”，CPU 完全可以在处理别的事情。&lt;/p&gt;
+&lt;h3 id=&#34;3-dma-的三要素快递单怎么填&#34;&gt;3. DMA 的“三要素”（快递单怎么填）
+&lt;/h3&gt;&lt;p&gt;要让 DMA 工作，你（CPU）只需要在初始化时填好这张“快递单”：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;从哪搬？(Source)：比如外设的寄存器地址（串口的数据寄存器）。&lt;/li&gt;
+&lt;li&gt;搬到哪？(Destination)：比如你定义的数组地址（内存）。&lt;/li&gt;
+&lt;li&gt;搬多少？(Direction &amp;amp; Size)：搬运的方向、搬多少个字节、每次搬 8 位还是 16 位。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;4-结合上节的串口空闲中断案例&#34;&gt;4. 结合上节的“串口空闲中断”案例
+&lt;/h3&gt;&lt;p&gt;我们来看看 DMA 在那个案例里具体干了什么：&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  sequenceDiagram
+    participant PC as 电脑 (发送端)
+    participant UART as 串口外设 (码头)
+    participant DMA as DMA 搬运工
+    participant RAM as 接收数组 (仓库)
+    participant CPU as CPU (老板)
+
+    Note over CPU, RAM: 1. CPU 设置 DMA: &#39;搬到数组里，搬完叫我&#39;
+    PC-&gt;&gt;UART: 发送数据 &#39;H&#39;
+    UART-&gt;&gt;DMA: 货到了，快搬走
+    DMA-&gt;&gt;RAM: 自动存入数组[0]
+    PC-&gt;&gt;UART: 发送数据 &#39;e&#39;
+    UART-&gt;&gt;DMA: 货又到了
+    DMA-&gt;&gt;RAM: 自动存入数组[1]
+    
+    Note right of PC: ...一段时间不发数据了...
+    
+    UART-&gt;&gt;CPU: 触发 IDLE (空闲中断)
+    CPU-&gt;&gt;RAM: 老板起床处理整串数据 &#34;He...&#34;
+&lt;/div&gt;
+&lt;h3 id=&#34;5-dma-的重要特性通道-channel&#34;&gt;5. DMA 的重要特性：通道 (Channel)
+&lt;/h3&gt;&lt;p&gt;你在 CubeIDE 里看到 &lt;code&gt;DMA1 Channel 1&lt;/code&gt;, &lt;code&gt;Channel 2&lt;/code&gt;…&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;通道&lt;/strong&gt;就像是&lt;strong&gt;独立的传送带&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;串口接收需要一条通道，ADC 采集需要一条通道。&lt;/li&gt;
+&lt;li&gt;STM32F103C8T6 内部通常有两个 DMA 控制器（DMA1 和 DMA2），每个控制器有 5-7 个通道。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;6-为什么要配合空闲中断&#34;&gt;6. 为什么要配合“空闲中断”？
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DMA 的弱点&lt;/strong&gt;：它很“死板”，它只管搬运，直到搬满你设定的数量（比如 100 字节）。如果对方只发了 10 个字节就停了，DMA 就会一直等下去，不告诉 CPU。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;空闲中断的强项&lt;/strong&gt;：它很“机灵”，只要线上一没动静，它就叫醒 CPU。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;强强联手&lt;/strong&gt;：DMA 负责默默搬运不累着 CPU，空闲中断负责在关键时刻提醒 CPU 结账。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;总结dma-的好处&#34;&gt;总结：DMA 的好处
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;极大地减轻 CPU 负担&lt;/strong&gt;：CPU 不再需要为每一个字节的传输而中断。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;提高实时性&lt;/strong&gt;：在高速通信（如 SPI 驱动屏幕）中，DMA 能跑满带宽，而 CPU 搬运可能跟不上速度。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;降低功耗&lt;/strong&gt;：CPU 可以在 DMA 搬运时进入低功耗模式。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-17-ADC</title>
+        <link>https://teaize.github.io/p/zzz-17-adc/</link>
+        <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-17-adc/</guid>
+        <description>&lt;p&gt;如果说串口是单片机的“嘴巴”，那么 ADC 就是单片机的“眼睛”。它让单片机能够感知真实世界中连续变化的模拟信号（如光照、温度、声音、电压）。&lt;/p&gt;
+&lt;h3 id=&#34;1-什么是-adc通俗理解&#34;&gt;1. 什么是 ADC？（通俗理解）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;模拟信号（Analog）&lt;/strong&gt;：大自然中的信号，比如 0.5V, 1.25V, 3.3V，是连续不断的。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数字信号（Digital）&lt;/strong&gt;：单片机的大脑，只能理解 0 和 1（二进制数字）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;ADC 的角色&lt;/strong&gt;：就像一个&lt;strong&gt;带有刻度的量杯&lt;/strong&gt;。它把杯子里液面的高度（电压）转化成一个具体的数字，告诉单片机：“现在的电压是 2048”。&lt;/p&gt;
+&lt;h3 id=&#34;2-stm32-adc-的核心参数&#34;&gt;2. STM32 ADC 的核心参数
+&lt;/h3&gt;&lt;p&gt;在 STM32F103C8T6 中，自带有一个 ADC，ADC 的性能非常强劲：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;参数&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;数值&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;含义&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;分辨率 (Resolution)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;12 位 (12-bit)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;把 0~3.3V 分成 $2^{12} = 4096$ 份。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;转换范围 (Range)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;0V ~ 3.3V&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;超过 3.3V 可能烧毁引脚，低于 0V 读不到。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;对应关系&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;0 $\to$ 0V, 4095 $\to$ 3.3V&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;数值每增加 1，代表电压增加了约 0.8mV。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;通道数量&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;10 个外部通道&lt;/td&gt;
+          &lt;td&gt;PA0&lt;del&gt;PA7, PB0&lt;/del&gt;PB1 都可以作为“眼睛”。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;3-adc-的内部构造-mermaid&#34;&gt;3. ADC 的内部构造 (Mermaid)
+&lt;/h3&gt;&lt;p&gt;你会发现 ADC 也有很多 &lt;strong&gt;Channel（通道）&lt;/strong&gt;，它的原理和定时器通道类似：一个“测量核心”配合一个“多路开关”。&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    subgraph &#34;外部世界 (模拟信号)&#34;
+        In0[PA0: 光敏电阻]
+        In1[PA1: 电位器]
+        In2[PA2: 电池电压]
+    end
+
+    subgraph &#34;ADC 内部&#34;
+        MUX{多路开关&lt;br/&gt;Multiplexer}
+        Core[ADC 核心&lt;br/&gt;12位量化]
+        DataReg[数据寄存器&lt;br/&gt;DR]
+    end
+
+    In0 --&gt; MUX
+    In1 --&gt; MUX
+    In2 --&gt; MUX
+    
+    MUX --&gt; Core
+    Core --&gt; DataReg
+    DataReg --&gt; CPU[CPU 或 DMA]
+&lt;/div&gt;
+&lt;h3 id=&#34;4-三种常见的看世界方式&#34;&gt;4. 三种常见的“看世界”方式
+&lt;/h3&gt;&lt;p&gt;根据你对实时性的要求，ADC 有三种工作模式：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;单次转换 (Single Conversion)：点一下，看一眼。看完了就闭上眼。&lt;/li&gt;
+&lt;li&gt;连续转换 (Continuous Conversion)：睁着眼不眨，一直看，一直更新数据。&lt;/li&gt;
+&lt;li&gt;扫描模式 (Scan Mode)：&lt;strong&gt;如果有多个通道（比如同时看光敏和电位器），它会挨个看一圈&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;5-快速上手实验读取电位器电压轮询模式&#34;&gt;5. 快速上手实验：读取电位器电压（轮询模式）
+&lt;/h3&gt;&lt;p&gt;我们先用最简单的&lt;strong&gt;轮询方式&lt;/strong&gt;（类似于按键扫描）来感受 ADC。&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    subgraph STM32 [STM32F103C8T6]
+        3V3[3.3V Pin]
+        GND[GND Pin]
+        PA1[PA1 / ADC_IN1]
+    end
+
+    subgraph POT [电位器 / 传感器]
+        VCC_IN[1号脚: VCC]
+        OUT[2号脚: 信号输出]
+        GND_IN[3号脚: GND]
+    end
+
+    3V3 --- VCC_IN
+    PA1 --- OUT
+    GND --- GND_IN
+&lt;/div&gt;
+&lt;h4 id=&#34;第一步cubeide-配置-ioc&#34;&gt;第一步：CubeIDE 配置 (.ioc)
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在左侧点击 &lt;strong&gt;Analog -&amp;gt; ADC1&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;勾选 &lt;strong&gt;IN1&lt;/strong&gt;（对应引脚 &lt;strong&gt;PA1&lt;/strong&gt;）。&lt;/li&gt;
+&lt;li&gt;在下方的 &lt;strong&gt;Parameter Settings&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Continuous Conversion Mode&lt;/strong&gt;：设为 &lt;strong&gt;Enabled&lt;/strong&gt;（让它不停地转换）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;保存生成代码。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103430273.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103430273.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;开启了 ADC 之后，需要注意一下这里的 ADC 分频
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103632155.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103632155.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h4 id=&#34;第二步编写代码-mainc&#34;&gt;第二步：编写代码 (main.c)
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main&lt;/code&gt; 函数的 &lt;code&gt;while(1)&lt;/code&gt; 之前启动 ADC，在 &lt;code&gt;while(1)&lt;/code&gt; 里读取。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注意这里也用到了 printf 和串口通讯&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_ADC_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 1. 开启 ADC
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 2. 等待转换完成（超时时间 10ms）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;HAL_ADC_PollForConversion&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;HAL_OK&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 3. 读取 12 位的数字量 (0-4095)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_val&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_ADC_GetValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 4. 将数字换算成电压 (单位: V)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;voltage&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;adc_val&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;3.3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// 5. 通过串口打印出来看看
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;ADC Value: %lu, Voltage: %.2fV&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_val&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;voltage&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 每半秒看一眼
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221104502276.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221104502276.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;6-进阶预告为什么-adc-最离不开-dma&#34;&gt;6. 进阶预告：为什么 ADC 最离不开 DMA？
+&lt;/h3&gt;&lt;p&gt;你可能已经发现了：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果 ADC 开启了&lt;strong&gt;连续转换&lt;/strong&gt;，它每秒钟能产生几十万个数据。&lt;/li&gt;
+&lt;li&gt;如果 CPU 每次都去 &lt;code&gt;GetValue&lt;/code&gt;，那 CPU 真的就什么都不用干了，光在那“看眼睛”了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;专业做法&lt;/strong&gt;：开启 &lt;strong&gt;ADC + DMA&lt;/strong&gt;。 让 DMA 这个“快递员”自动把 ADC 转换好的数据搬运到数组里，CPU 只需要在想看的时候去数组里翻一下就行了。&lt;/p&gt;
+&lt;h3 id=&#34;常见避坑指南&#34;&gt;常见避坑指南
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;引脚悬空&lt;/strong&gt;：如果你不接任何东西到 PA1，读到的数值会乱跳。这是正常的，因为引脚在感知空气中的静电电场（这叫“天线效应”）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;采样时间&lt;/strong&gt;：如果信号变化很快，需要调整 &lt;strong&gt;Sampling Time&lt;/strong&gt;（采样时间），让量杯有足够的时间装满水（充好电）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;扩展资料&#34;&gt;扩展资料
+&lt;/h3&gt;&lt;p&gt;在 CubeIDE 中选择 ADC1 时，能看到 IN0、IN1…，这些是&lt;strong&gt;频道选择&lt;/strong&gt;。就像电视机有很多个频道，但只有一个屏幕，ADC 内部通常只有一个“测量器”，通过一个开关来决定现在看哪个引脚的电压&lt;/p&gt;
+&lt;h4 id=&#34;1-什么是-in0-in1&#34;&gt;1. 什么是 IN0, IN1…？
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;STM32F103C8T6&lt;/code&gt; 中，ADC1 拥有 10 个外部引脚通道。它们的对应关系是固定的：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;IN0&lt;/strong&gt; $\to$ PA0&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IN1&lt;/strong&gt; $\to$ PA1&lt;/li&gt;
+&lt;li&gt;…&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;IN9&lt;/strong&gt; $\to$ PB1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;你在 CubeIDE 里勾选了哪个 &lt;code&gt;IN&lt;/code&gt;，就代表你告诉单片机：“我要把这个引脚当成模拟输入来用”。&lt;/p&gt;
+&lt;h3 id=&#34;2-adc-内部框架图-mermaid&#34;&gt;2. ADC 内部框架图 (Mermaid)
+&lt;/h3&gt;&lt;p&gt;为了理解那些复杂的配置项，我们来看看电压信号进入单片机后经历了什么：&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    subgraph &#34;外部引脚 (Input Channels)&#34;
+        P0[PA0/IN0]
+        P1[PA1/IN1]
+        Pn[...其他引脚]
+    end
+
+    subgraph &#34;ADC 内部核心&#34;
+        MUX{多路开关&lt;br/&gt;Multiplexer}
+        
+        subgraph &#34;采样保持与转化&#34;
+            SH[采样保持器&lt;br/&gt;Sampling Time]
+            SAR[12位逐次逼近器&lt;br/&gt;Successive Approx]
+        end
+        
+        Logic[控制逻辑&lt;br/&gt;Continuous/Scan Mode]
+    end
+
+    P0 --&gt; MUX
+    P1 --&gt; MUX
+    Pn --&gt; MUX
+
+    MUX --&gt; SH
+    SH --&gt; SAR
+    SAR --&gt; DR[数据寄存器&lt;br/&gt;Data Register]
+    
+    Logic -.-&gt; MUX
+    Logic -.-&gt; SAR
+
+    DR --&gt; CPU[CPU读取/中断]
+    DR --&gt; DMA[DMA搬运]
+
+    style SAR fill:#f96,stroke:#333
+    style Logic fill:#bbf,stroke:#333
+&lt;/div&gt;
+&lt;h4 id=&#34;3-配置参数详细拆解&#34;&gt;3. 配置参数详细拆解
+&lt;/h4&gt;&lt;p&gt;当你点击 &lt;code&gt;ADC1&lt;/code&gt; 的 &lt;code&gt;Parameter Settings&lt;/code&gt; 时，最核心的配置分为三部分：&lt;/p&gt;
+&lt;p&gt;A. 基础设置 (Basic Settings)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Data Alignment (数据对齐)：通常选 Right Alignment（右对齐）。
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;解释&lt;/em&gt;：ADC 结果是 12 位的，但寄存器是 16 位的。右对齐就像我们在本子上写数字，个位对齐，方便直接读取数值。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Scan Conversion Mode (扫描模式)：
+&lt;ul&gt;
+&lt;li&gt;如果你勾选了&lt;strong&gt;多个&lt;/strong&gt; IN 通道（比如同时看 PA0 和 PA1），就必须 &lt;strong&gt;Enable&lt;/strong&gt;。它会自动按顺序测量选中的所有通道。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Continuous Conversion Mode (连续转换模式)：
+&lt;ul&gt;
+&lt;li&gt;Enable：它会像监控摄像头一样，拍完一张（转完一次）立刻拍下一张，数据永不停歇地更新。&lt;/li&gt;
+&lt;li&gt;Disable：拍一张就闭眼，直到你再次命令它。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;B. 规则组设置 (ADC_Regular_ConversionMode)&lt;/p&gt;
+&lt;p&gt;这里决定了“谁先测，测多久”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Number of Conversion：你要测几个通道？如果你选了 IN0 和 IN1，这里就填 2。&lt;/li&gt;
+&lt;li&gt;Rank (排名)：这是具体的顺序。
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;Rank 1&lt;/code&gt; 选 &lt;code&gt;Channel 0&lt;/code&gt;，代表第一个测 PA0。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;Rank 2&lt;/code&gt; 选 &lt;code&gt;Channel 1&lt;/code&gt;，代表第二个测 PA1。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Sampling Time (采样时间)：
+&lt;ul&gt;
+&lt;li&gt;这是最容易被忽视的参数！ 电压进入单片机需要给内部电容充电。&lt;/li&gt;
+&lt;li&gt;如果电压信号“很虚”（阻抗高），你需要把这个时间调大（比如选 55.5 Cycles 或更高），测出来的电压才准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;C. 外部触发 (External Trigger)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;External Trigger Conversion Source：通常选 Regular Conversion launched by software。
+&lt;ul&gt;
+&lt;li&gt;意思是：由你在代码里写 &lt;code&gt;HAL_ADC_Start&lt;/code&gt; 来手动开启转换。你也可以设置为由定时器触发（比如每秒精准采集 1000 次）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-为什么配置这么多&#34;&gt;4. 为什么配置这么多？
+&lt;/h4&gt;&lt;p&gt;STM32 的 ADC 设计理念是：&lt;strong&gt;尽可能不需要 CPU 介入&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最简单的配置：单通道、单次转换（你之前的实验）。&lt;/li&gt;
+&lt;li&gt;最专业的配置：
+&lt;ol&gt;
+&lt;li&gt;开启 &lt;strong&gt;Scan Mode&lt;/strong&gt;（看多个引脚）。&lt;/li&gt;
+&lt;li&gt;开启 &lt;strong&gt;Continuous Mode&lt;/strong&gt;（不停地看）。&lt;/li&gt;
+&lt;li&gt;开启 &lt;strong&gt;DMA&lt;/strong&gt;（让搬运工把看的结果自动写进数组）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;结果：CPU 只需要在启动时下个令，然后随时去查数组就行了，完全不浪费 CPU 时间。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-18-ADC多通道采集</title>
+        <link>https://teaize.github.io/p/zzz-18-adc%E5%A4%9A%E9%80%9A%E9%81%93%E9%87%87%E9%9B%86/</link>
+        <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-18-adc%E5%A4%9A%E9%80%9A%E9%81%93%E9%87%87%E9%9B%86/</guid>
+        <description>&lt;p&gt;在“多通道 + DMA”模式下，单片机会像一台&lt;strong&gt;自动流水线&lt;/strong&gt;：ADC 负责把电压“打包”成数字，DMA 负责把包“搬运”到内存。CPU 甚至可以去喝咖啡，只需要在想看数据的时候，去数组里看一眼就行了。&lt;/p&gt;
+&lt;h3 id=&#34;1-硬件连接-准备两只眼睛&#34;&gt;1. 硬件连接 (准备两只“眼睛”)
+&lt;/h3&gt;&lt;p&gt;假设你准备了两个模拟传感器（比如：一个电位器、一个光敏电阻）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传感器 A 的输出 $\rightarrow$ 连接到 PA0 (ADC1IN0)&lt;/li&gt;
+&lt;li&gt;传感器 B 的输出 $\rightarrow$ 连接到 PA1 (ADC1IN1)&lt;/li&gt;
+&lt;li&gt;所有 GND $\rightarrow$ 必须全部连在一起（共地）&lt;/li&gt;
+&lt;li&gt;电源 $\rightarrow$ 传感器接板子上的 3.3V&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-stm32cubeide-配置-ioc--这是实验的灵魂&#34;&gt;2. STM32CubeIDE 配置 (.ioc) —— 这是实验的灵魂
+&lt;/h3&gt;&lt;p&gt;这里的配置比单通道稍微复杂一点，请屏住呼吸：&lt;/p&gt;
+&lt;h4 id=&#34;a-adc1-配置&#34;&gt;A. ADC1 配置
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;勾选通道&lt;/strong&gt;：勾选 &lt;strong&gt;IN0&lt;/strong&gt; 和 &lt;strong&gt;IN1&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;基本参数 (Parameter Settings)&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Scan Conversion Mode&lt;/strong&gt;：&lt;strong&gt;Enabled&lt;/strong&gt;（扫描模式，必须开，否则它只看一个引脚）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Continuous Conversion Mode&lt;/strong&gt;：&lt;strong&gt;Enabled&lt;/strong&gt;（连续转换，自动循环看）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DMA Continuous Requests&lt;/strong&gt;：&lt;strong&gt;Enabled&lt;/strong&gt;（&lt;strong&gt;极其重要！&lt;/strong&gt; 只有开了这个，DMA 才会源源不断地搬运，否则搬一次就停了）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;规则组参数 (ADC_Regular_ConversionMode)&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Number of Conversion&lt;/strong&gt;：改为 &lt;strong&gt;2&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rank 1&lt;/strong&gt;：选择 Channel 0 (对应 PA0)。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Rank 2&lt;/strong&gt;：选择 Channel 1 (对应 PA1)。&lt;/li&gt;
+&lt;li&gt;建议将 Sampling Time 调大一点（比如 55.5 或 71.5 Cycles），这样数据更稳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221110653091.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221110653091.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+(注意上图中采样时间才 1.5 个周期，需要调大一点，太快采不到)&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221111434785.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221111434785.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;配置项&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;位置&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;设置值&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;作用&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;DMA Mode&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;DMA Settings&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Circular&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;搬运指针自动折返。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Continuous Conversion&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ADC Parameter Settings&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Enabled&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ADC 拍完一张不停，接着拍。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;DMA Continuous Requests&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ADC Parameter Settings&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;Enabled&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;每次拍完都呼叫快递员搬运。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h4 id=&#34;b-dma-配置-关键点&#34;&gt;B. DMA 配置 (关键点)
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;点击下方的 &lt;strong&gt;DMA Settings&lt;/strong&gt; 选项卡 -&amp;gt; 点击 &lt;strong&gt;Add&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;选择 &lt;strong&gt;ADC1&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DMA 模式设置&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Mode&lt;/strong&gt;：选择 &lt;strong&gt;Circular (循环模式)&lt;/strong&gt;。（这样 DMA 搬完两个数后，会自动回到数组开头覆盖旧数据，形成闭环）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Memory Address Increment&lt;/strong&gt;：勾选 &lt;strong&gt;Increment Address&lt;/strong&gt;。（这样第一个数存数组 [0]，第二个数存数组 [1]）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Data Width&lt;/strong&gt;：Peripheral 和 Memory 都选 &lt;strong&gt;Half Word&lt;/strong&gt; (16 位)。（因为 ADC 结果是 12 位，8 位装不下，用 16 位刚好）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-编写代码-mainc&#34;&gt;3. 编写代码 (main.c)
+&lt;/h3&gt;&lt;p&gt;你会惊讶地发现，有了 DMA 后，代码反而变得异常简洁。&lt;/p&gt;
+&lt;h4 id=&#34;第一步准备缓冲区&#34;&gt;第一步：准备缓冲区
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main.c&lt;/code&gt; 的 &lt;code&gt;USER CODE BEGIN PV&lt;/code&gt; 区域：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 准备一个容纳 2 个通道数据的“小篮子”
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第二步启动-adc-搬运流水线&#34;&gt;第二步：启动 ADC 搬运流水线
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main&lt;/code&gt; 函数的 &lt;code&gt;while(1)&lt;/code&gt; 之前，启动 DMA 传输：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 为了精准，建议先进行 ADC 校准（F1系列特有）
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_ADCEx_Calibration_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 核心命令：启动 ADC + DMA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 参数：ADC句柄，存储的目标地址，要搬运的数据个数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_ADC_Start_DMA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第三步读取并显示数据&#34;&gt;第三步：读取并显示数据
+&lt;/h4&gt;&lt;p&gt;此时，数据已经在后台自动刷写到 &lt;code&gt;adc_buffer&lt;/code&gt; 数组里了。在 &lt;code&gt;while(1)&lt;/code&gt; 中：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 直接从内存数组里拿数据，不需要调用任何 HAL_ADC 函数！
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sensor_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sensor_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 转换成电压显示
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;volt_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sensor_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;3.3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;volt_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;sensor_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;3.3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;PA0(A): %.2fV | PA1(B): %.2fV&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;volt_A&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;volt_B&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;500&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;运行后为什么看不到数字：
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221112645285.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221112645285.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;因为在代码中使用 &lt;code&gt;%f&lt;/code&gt; 格式化字符串，但编译器没有开启浮点数支持时，&lt;code&gt;printf&lt;/code&gt; 就会直接忽略这部分内容，导致你看到的输出跳过了数字，直接显示了后面的 &lt;code&gt;V&lt;/code&gt;。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;解决方法 A：开启 IDE 设置（最简单）&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在左侧 &lt;strong&gt;Project Explorer&lt;/strong&gt; 中，右键点击你的项目名称，选择 &lt;strong&gt;Properties&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;进入 &lt;strong&gt;C/C++ Build&lt;/strong&gt; -&amp;gt; &lt;strong&gt;Settings&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在右边的选项卡中选择 &lt;strong&gt;Tool Settings&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;找到 &lt;strong&gt;MCU Settings&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;勾选底部的 &lt;code&gt;Runtime Library: Use float with printf from newlib-nano (-u _printf_float)&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;Apply and Close&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;重新编译&lt;/strong&gt;（小锤子）并下载。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221112628596.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221112628596.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;4-实验原理图解-mermaid&#34;&gt;4. 实验原理图解 (Mermaid)
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    subgraph &#34;硬件自动流转 (无需 CPU 参与)&#34;
+        SensorA[&#34;传感器 A (PA0)&#34;] -- 采样 --&gt; CH0[&#34;ADC 通道 0&#34;]
+        SensorB[&#34;传感器 B (PA1)&#34;] -- 采样 --&gt; CH1[&#34;ADC 通道 1&#34;]
+        
+        CH0 -- DMA 搬运 --&gt; Buf0[&#34;adc_buffer[0]&#34;]
+        CH1 -- DMA 搬运 --&gt; Buf1[&#34;adc_buffer[1]&#34;]
+        
+        Buf1 -- 循环模式重置 --&gt; Buf0
+    end
+    
+    Buf0 -.-&gt; Read[&#34;CPU 直接读取数组内容&#34;]
+    Buf1 -.-&gt; Read
+    
+    style SensorA fill:#f9f,stroke:#333
+    style SensorB fill:#f9f,stroke:#333
+    style Read fill:#bbf,stroke:#333
+&lt;/div&gt;
+&lt;h4 id=&#34;1-为什么这个结构很强大&#34;&gt;1. 为什么这个结构很强大？
+&lt;/h4&gt;&lt;p&gt;在传统的做法中，如果你想测两个通道，你需要：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;切到通道 0 $\to$ 启动 $\to$ 等待 $\to$ 读数。&lt;/li&gt;
+&lt;li&gt;切到通道 1 $\to$ 启动 $\to$ 等待 $\to$ 读数。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;而在你现在配置的 &lt;strong&gt;扫描模式 (Scan) + 循环模式 (Circular) + DMA&lt;/strong&gt; 下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;ADC&lt;/strong&gt; 会自动在 PA0 和 PA1 之间来回切换采样。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;DMA&lt;/strong&gt; 会自动把 PA0 的结果放进 &lt;code&gt;adc_buffer[0]&lt;/code&gt;，把 PA1 的结果放进 &lt;code&gt;adc_buffer[1]&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;完全同步&lt;/strong&gt;：这个过程是硬件级锁定的，你永远不用担心 PA1 的数据被误存到了 &lt;code&gt;adc_buffer[0]&lt;/code&gt; 里。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-dma-循环模式&#34;&gt;2. DMA 循环模式
+&lt;/h4&gt;&lt;p&gt;结构图当中，循环模式重置是什么意思：&lt;/p&gt;
+&lt;p&gt;你可以把 &lt;code&gt;adc_buffer[2]&lt;/code&gt; 想象成一个只有两个格子的&lt;strong&gt;环形跑道&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第 1 步：ADC 转换完第一个通道（PA0），DMA 把结果送进 &lt;code&gt;Buf0&lt;/code&gt;（第一个格子）。&lt;/li&gt;
+&lt;li&gt;第 2 步：ADC 转换完第二个通道（PA1），DMA 把结果送进 &lt;code&gt;Buf1&lt;/code&gt;（第二个格子）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;此时，DMA 的搬运任务“名义上”完成了（因为你告诉它只搬 2 个数）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是普通模式 (Normal Mode)：搬运工 DMA 就地解散，去睡觉了。如果你想再看数据，必须由 CPU 再次下令 &lt;code&gt;HAL_ADC_Start_DMA&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;如果是循环模式 (Circular Mode)：DMA 发现自己到了终点，会&lt;strong&gt;瞬间自动回到起点&lt;/strong&gt;，把指针重新指向 &lt;code&gt;Buf0&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-这个实验的专业感在哪里&#34;&gt;5. 这个实验的“专业感”在哪里？
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;零等待&lt;/strong&gt;：CPU 不需要调用 &lt;code&gt;PollForConversion&lt;/code&gt; 去死等转换完成。无论何时 CPU 去读 &lt;code&gt;adc_buffer&lt;/code&gt;，拿到的都是&lt;strong&gt;最新的电压值&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;严格同步&lt;/strong&gt;：PA0 和 PA1 的数据几乎是同时采集并按顺序排列的，绝对不会出现通道对错位。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自由扩展&lt;/strong&gt;：如果你有 10 个传感器，只需要在配置里把 Number 改成 10，代码里定义长度为 10 的数组即可，代码量完全不增加。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-19-ADC采样数据滤波</title>
+        <link>https://teaize.github.io/p/zzz-19-adc%E9%87%87%E6%A0%B7%E6%95%B0%E6%8D%AE%E6%BB%A4%E6%B3%A2/</link>
+        <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-19-adc%E9%87%87%E6%A0%B7%E6%95%B0%E6%8D%AE%E6%BB%A4%E6%B3%A2/</guid>
+        <description>&lt;p&gt;本篇继 [[ZZZ-18-ADC多通道采集]]。你可能会发现传感器传回来的数据：即便你不动传感器，串口打印出的电压值最后两位可能还在不停跳动&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221115244975.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221115244975.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;这是由于环境噪声、电源波动等引起的 &lt;strong&gt;ADC 采样噪声&lt;/strong&gt;。在工业级仪器中，我们通常不会直接使用单次采样的结果，而是需要一个“数字滤镜”。&lt;/p&gt;
+&lt;p&gt;这里我们学习滑动平均值滤波 (Moving Average Filter)，让 DMA 一次搬运更多的数据（比如每个通道搬 10 个数），然后求平均值。&lt;/p&gt;
+&lt;h3 id=&#34;1-滤波原理以多胜少&#34;&gt;1. 滤波原理：以多胜少
+&lt;/h3&gt;&lt;p&gt;原理非常简单：单次采样可能会由于瞬时干扰产生误差，但如果我们连续采 10 次甚至 100 次，取它们的&lt;strong&gt;平均值&lt;/strong&gt;，那些随机的噪声就会互相抵消。&lt;/p&gt;
+&lt;p&gt;数学公式表示为：$$V_{avg} = \frac{1}{N} \sum_{i=1}^{N} V_i$$&lt;/p&gt;
+&lt;h3 id=&#34;2-硬件与配置调整&#34;&gt;2. 硬件与配置调整
+&lt;/h3&gt;&lt;p&gt;为了实现这个功能，我们需要让 DMA 这个“快递员”一次多搬一些货【这里在 [[ZZZ-18-ADC多通道采集]] 的基础上修改代码】。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;修改数组大小：
+&lt;ul&gt;
+&lt;li&gt;假设我们要对每个通道取 10 次采样的平均值。因为你有 2 个通道，所以数组大小应改为 $2 \times 10 = 20$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DMA 配置（无需修改）：
+&lt;ul&gt;
+&lt;li&gt;保持之前的 Circular（循环模式） 和 Memory Increment。DMA 会自动按照 CH0, CH1, CH0, CH1 … 的顺序把 20 个数据填满。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;3-代码实现&#34;&gt;3. 代码实现
+&lt;/h3&gt;&lt;p&gt;我们需要在 &lt;code&gt;main.c&lt;/code&gt; 中修改数组定义和读取逻辑。&lt;/p&gt;
+&lt;h4 id=&#34;第一步定义更大的缓冲区&#34;&gt;第一步：定义更大的缓冲区
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define SAMPLES 10  &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 每个通道采样 10 次
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define CHANNELS 2 &lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;// 共 2 个通道
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SAMPLES&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CHANNELS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 长度为 20 的数组
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END PV */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第二步启动采集&#34;&gt;第二步：启动采集
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 为了精准，建议先进行 ADC 校准（F1系列特有＿
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_ADCEx_Calibration_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 核心命令：启势 ADC + DMA
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 参数：ADC句柄，存储的目标地址，要搬运的数据个数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_ADC_Start_DMA&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;hadc1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMPLES&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CHANNELS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第三步计算平均值算法核心&#34;&gt;第三步：计算平均值（算法核心）
+&lt;/h4&gt;&lt;p&gt;由于 DMA 存放的顺序是交替的，我们需要跳着加和：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint32_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 累加各个通道的数据
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMPLES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// adc_buffer[0, 2, 4...] 是通道 A
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;sum_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CHANNELS&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;c1&#34;&gt;// adc_buffer[1, 3, 5...] 是通道 B
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;sum_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;adc_buffer&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CHANNELS&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;];&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 计算平均值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;avg_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMPLES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;avg_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sum_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SAMPLES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 打印转换后的电压
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;printf&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;Stable PA0: %.3fV | Stable PA1: %.3fV&lt;/span&gt;&lt;span class=&#34;se&#34;&gt;\r\n&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;           &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;avg_A&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;3.3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;avg_B&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;3.3&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;4096&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;200&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;滤波后数据：
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221115903361.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221115903361.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;4-滤波前后的对比图&#34;&gt;4. 滤波前后的对比图
+&lt;/h3&gt;&lt;p&gt;通过这种方式，数据流转的逻辑发生了微妙的变化：&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    A[ADC 硬件] -- &#34;快速采样(1kHz)&#34; --&gt; B[DMA 搬运工]
+    B -- &#34;填充&#34; --&gt; C[&#34;adc_buffer[20] (原始数据)&#34;]
+    C -- &#34;循环覆盖&#34; --&gt; C
+    
+    subgraph &#34;CPU 软件处理&#34;
+        D[for 循环累加] --&gt; E[除以次数]
+        E --&gt; F[得到稳定的平均值]
+    end
+    
+    C -.-&gt; D
+    F --&gt; G[串口/OLED显示]
+
+    style C fill:#fff2cc,stroke:#d6b656
+    style F fill:#d5e8d4,stroke:#82b366,stroke-width:2px
+&lt;/div&gt;
+&lt;h3 id=&#34;5-进阶小贴士为什么选-10-次&#34;&gt;5. 进阶小贴士：为什么选 10 次？
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;次数越多越稳：如果你取 100 次平均，数值会像粘在屏幕上一样稳。&lt;/li&gt;
+&lt;li&gt;副作用：次数越多，数值对真实电压变化的&lt;strong&gt;响应就会变慢&lt;/strong&gt;（滞后感）。&lt;/li&gt;
+&lt;li&gt;黄金法则：在工业仪表中，通常选择 8、16 或 32 次采样。&lt;strong&gt;为什么选 2 的次方？&lt;/strong&gt; 因为在单片机中，除以 8 可以直接通过“位移操作”（&lt;code&gt;&amp;gt;&amp;gt; 3&lt;/code&gt;）完成，计算速度极快！&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>HJ 212 协议</title>
         <link>https://teaize.github.io/p/hj-212-%E5%8D%8F%E8%AE%AE/</link>
         <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
@@ -1539,6 +2853,531 @@
 &lt;li&gt;&lt;strong&gt;逻辑入口&lt;/strong&gt;：名字必带 &lt;code&gt;_Callback&lt;/code&gt;，是你写具体逻辑的地方。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;作为初学者，你只需要在 &lt;code&gt;main.c&lt;/code&gt; 的末尾，把官方那个带 &lt;code&gt;__weak&lt;/code&gt; 的回调函数复制过来，去掉 &lt;code&gt;__weak&lt;/code&gt; 关键字，然后往里面填你的逻辑（比如点灯）就行了。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-10-定时器中断</title>
+        <link>https://teaize.github.io/p/zzz-10-%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-10-%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/</guid>
+        <description>&lt;p&gt;如果说 GPIO 是单片机的“手脚”，中断是“神经反射”，那么定时器（Timer）就是单片机的“脉搏”。在 51 单片机里，配置定时器需要去算初值、写寄存器。而在 STM32 中，虽然寄存器更多，但有了 &lt;strong&gt;CubeIDE&lt;/strong&gt;，我们只需要掌握一个&lt;strong&gt;核心公式&lt;/strong&gt;就能实现极其精准的定时。&lt;/p&gt;
+&lt;h3 id=&#34;1-形象比喻定时器到底是怎么工作的&#34;&gt;1. 形象比喻：定时器到底是怎么工作的
+&lt;/h3&gt;&lt;p&gt;你可以把定时器想象成一个“自动数数的小学生”**：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;时钟源（Clock Source）&lt;/strong&gt;：老师敲黑板的速度（比如每秒敲 72,000,000 下）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;预分频器（PSC, Prescaler）&lt;/strong&gt;：小学生觉得老师敲得太快了，数不过来，于是规定“老师敲 7200 下，我才记 1 个数”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;计数器（Counter）&lt;/strong&gt;：小学生手里的小本子，每记满一个数就加 1。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;自动重装载寄存器（ARR, Auto-Reload Register）&lt;/strong&gt;：老师规定的“目标数”。比如数到 10000，就举手报告（触发中断），然后擦掉本子从 0 重新数。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;核心公式必须死记硬背它是定时器的灵魂&#34;&gt;核心公式（必须死记硬背，它是定时器的灵魂）
+&lt;/h3&gt;&lt;p&gt;你想定多长时间，全靠这个公式：&lt;/p&gt;
+&lt;p&gt;$$定时时间 (秒) = \frac{(PSC + 1) \times (ARR + 1)}{定时器输入频率 (Hz)}$$&lt;/p&gt;
+&lt;p&gt;对于 STM32F103C8T6，如果你的时钟树配置为 &lt;strong&gt;72MHz&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你想要 &lt;strong&gt;1 秒&lt;/strong&gt;（1Hz）触发一次中断：
+&lt;ul&gt;
+&lt;li&gt;我们将 &lt;strong&gt;预分频器 PSC&lt;/strong&gt; 设为 &lt;strong&gt;7199&lt;/strong&gt;（即 $7200 - 1$）。&lt;/li&gt;
+&lt;li&gt;我们将 &lt;strong&gt;自动重装载寄存器 ARR&lt;/strong&gt; 设为 &lt;strong&gt;9999&lt;/strong&gt;（即 $10000 - 1$）。&lt;/li&gt;
+&lt;li&gt;计算：$\frac{7200 \times 10000}{72,000,000} = 1\text{ 秒}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么都要 -1？ 因为计数器是从 0 开始数的。数 10 个数，实际上是 0 到 9。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;3-stm32cubeide-配置步骤&#34;&gt;3. STM32CubeIDE 配置步骤
+&lt;/h3&gt;&lt;p&gt;我们以 &lt;strong&gt;TIM2&lt;/strong&gt;（通用定时器）为例：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;开启定时器：
+&lt;ul&gt;
+&lt;li&gt;在 &lt;code&gt;.ioc&lt;/code&gt; 文件左侧找到 Timers -&amp;gt; TIM2。&lt;/li&gt;
+&lt;li&gt;Combined Channels 不用管，将 Clock Source 设为 Internal Clock（内部时钟）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;设置参数：
+&lt;ul&gt;
+&lt;li&gt;Prescaler (PSC): 输入 &lt;code&gt;7199&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;Counter Period (ARR): 输入 &lt;code&gt;9999&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;其他默认即可（向上计数模式）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;开启中断 (NVIC)：
+&lt;ul&gt;
+&lt;li&gt;点击上方的 NVIC Settings 选项卡。&lt;/li&gt;
+&lt;li&gt;勾选 TIM2 global interrupt 后面的 Enabled。（不勾这个，定时器只会数数，不会通知 CPU）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;生成代码：按 &lt;code&gt;Ctrl + S&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220221250104.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220221250104.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;4-编写代码开启与回调&#34;&gt;4. 编写代码（开启与回调）
+&lt;/h3&gt;&lt;p&gt;定时器配置完后，默认是关闭的，你需要手动在代码里给它“上发条”。&lt;/p&gt;
+&lt;h4 id=&#34;第一步启动定时器中断&#34;&gt;第一步：启动定时器中断
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main.c&lt;/code&gt; 的 &lt;code&gt;MX_GPIO_Init()&lt;/code&gt; 之后，&lt;code&gt;while(1)&lt;/code&gt; 之前，加入这行代码：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_Base_Start_IT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 以中断模式启动 TIM2
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;第二步编写回调函数&#34;&gt;第二步：编写回调函数
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main.c&lt;/code&gt; 下方的 &lt;code&gt;USER CODE BEGIN 4&lt;/code&gt; 区域，写下我们要执行的动作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 定时器溢出（时间到）时，会自动调用这个函数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;HAL_TIM_PeriodElapsedCallback&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;TIM_HandleTypeDef&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Instance&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;==&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 确认是 TIM2 触发的
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;HAL_GPIO_TogglePin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;GPIOC&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;GPIO_PIN_13&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 翻转 LED 灯
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 4 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;5-定时中断-vs-hal_delay&#34;&gt;5. 定时中断 vs HAL_Delay()
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;特性&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;HAL_Delay()&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;定时器中断&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;原理&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;阻塞式（CPU 在死等，啥也干不了）&lt;/td&gt;
+          &lt;td&gt;非阻塞式（CPU 平时干别的，时间到才去处理）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;精度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;较低（会被其他任务干扰）&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;极高&lt;/strong&gt;（硬件自动计数，不受软件干扰）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;用途&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;简单的、不重要的等待&lt;/td&gt;
+          &lt;td&gt;精准采样、控制电机速度、多任务并行&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;6-进阶如果你想要-1-毫秒定一次时&#34;&gt;6. 进阶：如果你想要 1 毫秒定一次时
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;输入频率 = 72,000,000 Hz&lt;/li&gt;
+&lt;li&gt;目标时间 = 0.001 s&lt;/li&gt;
+&lt;li&gt;设置：PSC = &lt;strong&gt;71&lt;/strong&gt; ($72-1$)，ARR = &lt;strong&gt;999&lt;/strong&gt; ($1000-1$)。&lt;/li&gt;
+&lt;li&gt;计算：$\frac{72 \times 1000}{72,000,000} = 0.001\text{ 秒}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常见避坑指南&#34;&gt;常见避坑指南
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;忘记加 &lt;code&gt;_IT&lt;/code&gt;：如果是调用 &lt;code&gt;HAL_TIM_Base_Start()&lt;/code&gt;，定时器会跑，但不会进中断函数。必须用 &lt;code&gt;HAL_TIM_Base_Start_IT()&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;公式没减 1：虽然不减 1 也能跑，但时间会差那么一点点。在追求极致精准的工业控制中，这 1 个周期的误差很重要。&lt;/li&gt;
+&lt;li&gt;中断里代码太长：如果你的定时器是 1ms 触发一次，但你在中断函数里执行了需要 2ms 才能跑完的代码，系统就会彻底乱套。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-11-CubeIDE篇</title>
+        <link>https://teaize.github.io/p/zzz-11-cubeide%E7%AF%87/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-11-cubeide%E7%AF%87/</guid>
+        <description>&lt;h2 id=&#34;中文乱码&#34;&gt;中文乱码
+&lt;/h2&gt;&lt;h3 id=&#34;第一步设置-ide-全局编码为-utf-8&#34;&gt;第一步：设置 IDE 全局编码为 UTF-8
+&lt;/h3&gt;&lt;p&gt;为了与国际接轨并减少跨平台问题，建议统一使用 &lt;strong&gt;UTF-8&lt;/strong&gt;。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在菜单栏点击 &lt;strong&gt;Window -&amp;gt; Preferences&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;展开 &lt;strong&gt;General -&amp;gt; Workspace&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在右侧最下方的 &lt;strong&gt;Text file encoding&lt;/strong&gt; 中，选择 &lt;strong&gt;Other: UTF-8&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;Apply and Close&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220225819001.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220225819001.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;第二步修改编译器选项核心步骤&#34;&gt;第二步：修改编译器选项（核心步骤）
+&lt;/h3&gt;&lt;p&gt;即使编辑器设置好了，编译器（GCC）在处理代码中的中文常量时，仍可能出现识别问题。我们需要手动告诉编译器如何处理中文。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在你的工程项目上 &lt;strong&gt;右键 -&amp;gt; Properties&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;进入 &lt;strong&gt;C/C++ Build -&amp;gt; Settings&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在右侧找到 &lt;strong&gt;Tool Settings&lt;/strong&gt; 选项卡，点击 &lt;strong&gt;MCU GCC Compiler -&amp;gt; Miscellaneous&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;Other flags&lt;/strong&gt; 输入框的最末尾，添加以下指令（注意前面有个空格）： &lt;code&gt;-finput-charset=UTF-8 -fexec-charset=GBK&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;指令含义&lt;/strong&gt;：告诉编译器，我的输入文件（源码）是 &lt;strong&gt;UTF-8&lt;/strong&gt;，但生成的执行程序（发给串口的）请使用 &lt;strong&gt;GBK&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;注：这样设置后，大多数 Windows 串口助手（默认 GBK）就能直接显示正常中文了。
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220230036429.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220230036429.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;进阶如果还是乱码文件级别转换&#34;&gt;进阶：如果还是乱码？（文件级别转换）
+&lt;/h3&gt;&lt;p&gt;有时候你之前的代码已经是用某种编码保存的，修改全局设置后，旧代码里的中文会变乱码。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;在具体的 &lt;code&gt;.c&lt;/code&gt; 或 &lt;code&gt;.h&lt;/code&gt; 文件上 &lt;strong&gt;右键 -&amp;gt; Properties&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;Resource&lt;/strong&gt; 标签页修改 &lt;strong&gt;Text file encoding&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;如果已经乱码了，你可以先用记事本打开，另存为 UTF-8 编码，再粘回到 IDE 中。&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-12-定时器</title>
+        <link>https://teaize.github.io/p/zzz-12-%E5%AE%9A%E6%97%B6%E5%99%A8/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-12-%E5%AE%9A%E6%97%B6%E5%99%A8/</guid>
+        <description>&lt;p&gt;本篇继 [[ZZZ-10-定时器中断]]，学习定时器。我们可以把 STM32 的定时器资源想象成一个**“大型工厂的动力系统”，里面有不同等级的“发动机”和多条“传动轴”&lt;/p&gt;
+&lt;h3 id=&#34;1-定时器的等级制度-classification&#34;&gt;1. 定时器的等级制度 (Classification)
+&lt;/h3&gt;&lt;p&gt;在 STM32F103C8T6 中，并不是所有的定时器都一样。它们被分为三个等级：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;等级&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;编号&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;特色功能&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;形象比喻&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;高级定时器&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;TIM1&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;带死区控制、互补输出（专为电机驱动设计）。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;全能大 BOSS&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;通用定时器&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;TIM2, 3, 4&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;具备定时、PWM、输入捕获、编码器接口。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;工厂主力中层&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;基本定时器&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;(C8T6 没有)&lt;/td&gt;
+          &lt;td&gt;仅有最基本的定时功能，通常给 DAC 触发用。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;纯体力临时工&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;2-定时器的内部结构图-mermaid&#34;&gt;2. 定时器的内部结构图 (Mermaid)
+&lt;/h3&gt;&lt;p&gt;为了让你看懂什么是 &lt;strong&gt;Channel（通道）&lt;/strong&gt;，我们先看一个定时器的内部逻辑。你可以把通道看作是定时器伸向外部引脚的“手臂”。&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Clock[内部时钟 CK_INT&lt;br/&gt;72MHz] --&gt; PSC[预分频器 Prescaler&lt;br/&gt;降速]
+    PSC --&gt; CNT[计数器 Counter&lt;br/&gt;数数]
+    CNT --- ARR[自动重装载寄存器&lt;br/&gt;目标数值]
+    
+    subgraph &#34;定时器核心 (产生时间基准)&#34;
+        PSC
+        CNT
+        ARR
+    end
+
+    CNT --&gt; Comparator[比较器/捕获逻辑]
+    
+    subgraph &#34;Channels (外部交互的手臂)&#34;
+        Comparator --&gt; CH1[Channel 1&lt;br/&gt;PA0]
+        Comparator --&gt; CH2[Channel 2&lt;br/&gt;PA1]
+        Comparator --&gt; CH3[Channel 3&lt;br/&gt;PA2]
+        Comparator --&gt; CH4[Channel 4&lt;br/&gt;PA3]
+    end
+
+    ARR --&gt; Interrupt[定时更新中断]
+&lt;/div&gt;
+&lt;h3 id=&#34;3-什么是-channel通道&#34;&gt;3. 什么是 Channel（通道）
+&lt;/h3&gt;&lt;p&gt;一个定时器（如 TIM2）只有一个计数器（CNT）在不断数数。但是，它有 4 个独立的&lt;strong&gt;通道&lt;/strong&gt;。 这些通道共享同一个“数数进度”，但可以执行不同的任务：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;输出比较 (Output Compare)：
+&lt;ul&gt;
+&lt;li&gt;原理：我设定一个值（CCR），当计数器数到这个值时，让引脚电平翻转。&lt;/li&gt;
+&lt;li&gt;用途：&lt;strong&gt;PWM 输出&lt;/strong&gt;（控制灯亮度、舵机角度）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;输入捕获 (Input Capture)：
+&lt;ul&gt;
+&lt;li&gt;原理：外部引脚电平一变，我立刻记下当前计数器数到哪了。&lt;/li&gt;
+&lt;li&gt;用途：&lt;strong&gt;测量脉冲宽度&lt;/strong&gt;、频率测量（比如测转速）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;单脉冲模式：
+&lt;ul&gt;
+&lt;li&gt;用途：像延迟开关一样，触发后出一颗脉冲。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;通道背后的秘密武器ccr-寄存器&#34;&gt;通道背后的“秘密武器”：CCR 寄存器
+&lt;/h4&gt;&lt;p&gt;为什么同一个计数器（CNT）能让不同的通道输出不同的信号？因为每个通道都配了一个属于自己的“挡位设置”，叫做 CCR（Capture/Compare Register，捕获/比较寄存器）。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;组件&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;角色&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;谁拥有它？&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;决定了什么？&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CNT (计数器)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;跑步的秒表&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;整个定时器&lt;/strong&gt;共有&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;频率&lt;/strong&gt;（跑一圈要多久）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;ARR (重装载值)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;跑道的终点&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;整个定时器&lt;/strong&gt;共有&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;周期&lt;/strong&gt;（什么时候回头重新跑）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CCR (比较值)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;跑道上的记号&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;每个通道&lt;/strong&gt;独立拥有&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;占空比&lt;/strong&gt;（跑到哪个位置触发动作）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;4-为什么会有多个-channel&#34;&gt;4. 为什么会有多个 Channel
+&lt;/h3&gt;&lt;p&gt;比喻 1：教室里的那口大钟（一个节奏，多个事件）
+想象一间教室，墙上只有一个大钟（这就是 &lt;strong&gt;Counter 计数器&lt;/strong&gt;）。全班同学都看着这口钟。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;大钟：从 0 分数到 60 分，然后循环。&lt;/li&gt;
+&lt;li&gt;通道 1：老师规定，数到 45 分时，铃声响起，大家去休息。&lt;/li&gt;
+&lt;li&gt;通道 2：校长规定，数到 60 分时，广播响起，大家去吃饭。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;为什么要这么设计？&lt;/strong&gt; 因为大家需要&lt;strong&gt;同步&lt;/strong&gt;。如果每个事件都专门配一口钟，万一有的钟快一点，有的钟慢一点，学校的作息就乱套了。在单片机里，这能保证多个引脚的动作在时间线上是&lt;strong&gt;完全对齐&lt;/strong&gt;的。&lt;/p&gt;
+&lt;p&gt;作为一个初学者，先理解这两点：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;省资源&lt;/strong&gt;：STM32 的定时器数量是有限的（只有几个）。如果控制 4 个灯都要开 4 个定时器，那芯片很快就不够用了。有了通道，1 个定时器就能管 4 个灯。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;同节奏&lt;/strong&gt;：当你需要多个引脚协同工作（比如驱动三相电机、多路舵机、全彩 RGB 灯）时，多个通道能保证它们永远不会“各跑各的”。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;5-在-cubeide-中配置时的重点&#34;&gt;5. 在 CubeIDE 中配置时的重点
+&lt;/h3&gt;&lt;p&gt;当你点开 &lt;code&gt;TIM2&lt;/code&gt; 的配置：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Clock Source: 选 &lt;code&gt;Internal Clock&lt;/code&gt;，就是让它开始走字。&lt;/li&gt;
+&lt;li&gt;Channel 1~4:
+&lt;ul&gt;
+&lt;li&gt;如果你想做呼吸灯或控制舵机，选择 &lt;strong&gt;&lt;code&gt;PWM Generation CHx&lt;/code&gt;&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;选完后，你会发现芯片引脚图上某个引脚（比如 PA0）变绿了，这说明该引脚被分配给了这个通道。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-13-呼吸灯</title>
+        <link>https://teaize.github.io/p/zzz-13-%E5%91%BC%E5%90%B8%E7%81%AF/</link>
+        <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-13-%E5%91%BC%E5%90%B8%E7%81%AF/</guid>
+        <description>&lt;p&gt;本篇继 [[ZZZ-12-定时器]] 和 [[ZZZ-10-定时器中断]]。&lt;/p&gt;
+&lt;p&gt;由于 STM32F103C8T6 最小系统板上的 &lt;strong&gt;PC13（板载 LED）&lt;/strong&gt; 并不直接支持定时器的硬件 PWM 输出通道，我们在 &lt;strong&gt;PA0&lt;/strong&gt; 引脚上通过一个电阻接一个 LED（或者直接用杜邦线接一个 LED 到 PA0 和 GND 之间）&lt;/p&gt;
+&lt;h3 id=&#34;第一步stm32cubeide-图形化配置-ioc&#34;&gt;第一步：STM32CubeIDE 图形化配置 (.ioc)
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;选择定时器：在左侧树状菜单点击 &lt;strong&gt;Timers -&amp;gt; TIM2&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;设置时钟源：将 &lt;strong&gt;Clock Source&lt;/strong&gt; 设置为 &lt;strong&gt;Internal Clock&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;启用 PWM 通道：将 &lt;strong&gt;Channel 1&lt;/strong&gt; 设置为 &lt;strong&gt;PWM Generation CH1&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;此时你会发现引脚图上的 &lt;strong&gt;PA0&lt;/strong&gt; 变绿了，标注为 &lt;code&gt;TIM2_CH1&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;配置参数（关键公式计算）：
+&lt;ul&gt;
+&lt;li&gt;假设你的系统时钟（HCLK）是 &lt;strong&gt;72MHz&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;我们要产生一个 &lt;strong&gt;1kHz&lt;/strong&gt; 的 PWM 波（这个频率肉眼看不出闪烁，且调节丝滑）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Prescaler (PSC)&lt;/strong&gt;：输入 &lt;code&gt;71&lt;/code&gt;（即 $72-1$）。此时频率变为 $72MHz / 72 = 1MHz$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Counter Period (ARR)&lt;/strong&gt;：输入 &lt;code&gt;999&lt;/code&gt;（即 $1000-1$）。此时频率变为 $1MHz / 1000 = 1kHz$。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Pulse (初始占空比)&lt;/strong&gt;：先设为 &lt;code&gt;0&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;生成代码：按 &lt;code&gt;Ctrl + S&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220233339573.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220233339573.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;第二步编写呼吸灯逻辑-mainc&#34;&gt;第二步：编写呼吸灯逻辑 (main.c)
+&lt;/h3&gt;&lt;p&gt;我们需要在 &lt;code&gt;while(1)&lt;/code&gt; 中不断修改 &lt;strong&gt;CCR&lt;/strong&gt;（捕获/比较寄存器）的值，这个值决定了占空比，也就是灯的亮度。&lt;/p&gt;
+&lt;h4 id=&#34;1-启动-pwm&#34;&gt;1. 启动 PWM
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;main&lt;/code&gt; 函数的 &lt;code&gt;MX_TIM2_Init()&lt;/code&gt; 之后，&lt;code&gt;while(1)&lt;/code&gt; 之前，加入启动命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 启动 TIM2 的通道 1 输出 PWM
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nf&#34;&gt;HAL_TIM_PWM_Start&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;2-实现呼吸逻辑&#34;&gt;2. 实现呼吸逻辑
+&lt;/h4&gt;&lt;p&gt;在 &lt;code&gt;while(1)&lt;/code&gt; 循环中，写一个循环让亮度增加，再写一个循环让亮度减小：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint16_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwm_value&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;   &lt;span class=&#34;c1&#34;&gt;// 亮度值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;uint8_t&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// 1: 变亮, 0: 变暗
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 改变亮度值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;pwm_value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;++&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pwm_value&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1000&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 达到最大 ARR 值，开始变暗
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;pwm_value&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pwm_value&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;direction&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;    &lt;span class=&#34;c1&#34;&gt;// 达到最小，开始变亮
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 关键函数：修改 TIM2 通道 1 的比较值 (CCR)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;__HAL_TIM_SET_COMPARE&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;htim2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;TIM_CHANNEL_1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pwm_value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 稍微延时，否则变色太快肉眼看不清
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Delay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这段代码本质上是一个&lt;strong&gt;状态机&lt;/strong&gt;，它在做“折返运动”：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;if (direction)&lt;/code&gt;&lt;/strong&gt;：这代表“正在变亮”阶段。
+&lt;ul&gt;
+&lt;li&gt;当 &lt;code&gt;pwm_value&lt;/code&gt; 一路增加到 &lt;code&gt;1000&lt;/code&gt;（撞到了天花板），说明已经最亮了，没法再亮了。&lt;/li&gt;
+&lt;li&gt;于是执行 &lt;code&gt;direction = 0;&lt;/code&gt;。这相当于下令：“好了，掉头，开始往回走（变暗）”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;else&lt;/code&gt;&lt;/strong&gt;：这代表“正在变暗”阶段。
+&lt;ul&gt;
+&lt;li&gt;当 &lt;code&gt;pwm_value&lt;/code&gt; 一路减小到 &lt;code&gt;0&lt;/code&gt;（撞到了地板），说明已经全灭了，没法更暗了。&lt;/li&gt;
+&lt;li&gt;于是执行 &lt;code&gt;direction = 1;&lt;/code&gt;。这相当于下令：“好了，掉头，开始往回走（变亮）”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为什么频率（Frequency）要设为 1000Hz：人眼在观察快速闪烁的物体时，如果闪烁频率超过 &lt;strong&gt;50Hz ~ 60Hz&lt;/strong&gt;，大脑就会认为这个光是连续的。就像手机屏幕刷新率，动画看起来越丝滑。频率设置为 1000，对于人眼来说就“绝对平滑了”；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;第三步代码深度解析&#34;&gt;第三步：代码深度解析
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;__HAL_TIM_SET_COMPARE(&amp;amp;htim2, TIM_CHANNEL_1, pwm_value)&lt;/code&gt;&lt;/strong&gt;： 这个宏直接操作的是 &lt;code&gt;TIM2-&amp;gt;CCR1&lt;/code&gt; 寄存器。
+&lt;ul&gt;
+&lt;li&gt;当 &lt;code&gt;pwm_value&lt;/code&gt; 为 &lt;strong&gt;0&lt;/strong&gt; 时：占空比为 0%，灯全灭。&lt;/li&gt;
+&lt;li&gt;当 &lt;code&gt;pwm_value&lt;/code&gt; 为 &lt;strong&gt;500&lt;/strong&gt; 时：占空比为 50%，灯半亮。&lt;/li&gt;
+&lt;li&gt;当 &lt;code&gt;pwm_value&lt;/code&gt; 为 &lt;strong&gt;999&lt;/strong&gt; 时：占空比为 100%，灯全亮。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;为什么是 1ms 延时？&lt;/strong&gt; 如果去掉 &lt;code&gt;HAL_Delay(1)&lt;/code&gt;，CPU 运行速度极快，灯会在微秒级的时间内完成呼吸，你的肉眼看起来灯只是一直微亮。1ms 的延时能让整个呼吸周期大约在 2 秒左右（0 到 1000 再到 0，共 2000 次操作）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;假如调整了-arr&#34;&gt;假如调整了 ARR
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;假设在 CubeIDE 的 &lt;code&gt;.ioc&lt;/code&gt; 文件里，把 &lt;strong&gt;Counter Period (ARR)&lt;/strong&gt; 从 &lt;code&gt;999&lt;/code&gt; 改成 &lt;strong&gt;&lt;code&gt;499&lt;/code&gt;&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;生成代码。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;如果不改代码&lt;/strong&gt;：你会发现灯的亮度变化不对了。因为 &lt;code&gt;pwm_value&lt;/code&gt; 会加到 1000，而定时器数到 499 就回头了。这意味着 &lt;code&gt;pwm_value&lt;/code&gt; 在 500 到 1000 这段时间里，灯始终是 100% 亮度，呼吸感会变得“很肉”（亮很久才开始变暗）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;修正方法&lt;/strong&gt;：你必须把代码里的 &lt;code&gt;1000&lt;/code&gt; 也改成 &lt;code&gt;500&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;结构图解&#34;&gt;结构图解
+&lt;/h4&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;电平
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; ^
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; |      ______          ______          ______
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; |     |      |        |      |        |      |
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt; |_____|      |________|      |________|      |________&amp;gt; 时间
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &amp;lt;---- 一个周期 (ARR 决定) ----&amp;gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;       &amp;lt;-亮-&amp;gt; (CCR/pwm_value 决定)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;ARR 就像是“分母”，固定了总长度。&lt;/li&gt;
+&lt;li&gt;CCR (pwm_value) 就像是“分子”，决定了高电平占多大比例。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;__HAL_TIM_SET_COMPARE&lt;/code&gt;&lt;/strong&gt; 的作用是：修改 &lt;strong&gt;CCR&lt;/strong&gt; 寄存器的值。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;硬件动作&lt;/strong&gt;：每秒钟进行几千万次 &lt;code&gt;CNT vs CCR&lt;/code&gt; 的比较，根据结果决定引脚是 0 还是 1。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;你的任务&lt;/strong&gt;：确保 &lt;code&gt;pwm_value&lt;/code&gt; 在 &lt;code&gt;0&lt;/code&gt; 到 &lt;code&gt;ARR&lt;/code&gt; 之间变化，从而实现从 0% 到 100% 的亮度调节。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>

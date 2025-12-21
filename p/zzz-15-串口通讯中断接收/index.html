@@ -1,0 +1,895 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="第一步：STM32CubeIDE 配置 (.ioc) 我们要开启串口的中断“开关”：\n打开 Connectivity -&gt; USART1。 点击 NVIC Settings 选项卡。 勾选 USART1 global interrupt 后的 Enabled 框。 保存（Ctrl + S）生成代码。 第二步：编写接收逻辑 (main.c) 中断接收的逻辑是：你先告诉单片机“你听着，收到一个字节就叫我”，然后单片机去跑 while(1)。当电脑发来数据，单片机自动跳进“回调函数”执行任务。\n">
+<title>ZZZ-15-串口通讯中断接收</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-15-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF%E4%B8%AD%E6%96%AD%E6%8E%A5%E6%94%B6/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-15-串口通讯中断接收">
+<meta property='og:description' content="第一步：STM32CubeIDE 配置 (.ioc) 我们要开启串口的中断“开关”：\n打开 Connectivity -&gt; USART1。 点击 NVIC Settings 选项卡。 勾选 USART1 global interrupt 后的 Enabled 框。 保存（Ctrl + S）生成代码。 第二步：编写接收逻辑 (main.c) 中断接收的逻辑是：你先告诉单片机“你听着，收到一个字节就叫我”，然后单片机去跑 while(1)。当电脑发来数据，单片机自动跳进“回调函数”执行任务。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-15-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF%E4%B8%AD%E6%96%AD%E6%8E%A5%E6%94%B6/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-15-串口通讯中断接收">
+<meta name="twitter:description" content="第一步：STM32CubeIDE 配置 (.ioc) 我们要开启串口的中断“开关”：\n打开 Connectivity -&gt; USART1。 点击 NVIC Settings 选项卡。 勾选 USART1 global interrupt 后的 Enabled 框。 保存（Ctrl + S）生成代码。 第二步：编写接收逻辑 (main.c) 中断接收的逻辑是：你先告诉单片机“你听着，收到一个字节就叫我”，然后单片机去跑 while(1)。当电脑发来数据，单片机自动跳进“回调函数”执行任务。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#第一步stm32cubeide-配置-ioc">第一步：STM32CubeIDE 配置 (.ioc)</a></li>
+        <li><a href="#第二步编写接收逻辑-mainc">第二步：编写接收逻辑 (main.c)</a>
+          <ol>
+            <li><a href="#1-定义接收缓存">1. 定义接收缓存</a></li>
+            <li><a href="#2-开启听力模式">2. 开启“听力”模式</a></li>
+            <li><a href="#3-编写收到命令后做什么-回调函数">3. 编写“收到命令后做什么” (回调函数)</a></li>
+          </ol>
+        </li>
+        <li><a href="#第三步原理图解-中断流程">第三步：原理图解 (中断流程)</a></li>
+        <li><a href="#第四步串口调试助手测试">第四步：串口调试助手测试</a></li>
+        <li><a href="#避坑指南为什么我的单片机只听一次话">避坑指南：为什么我的单片机只听一次话？</a></li>
+        <li><a href="#进阶挑战如何接收一个单词">进阶挑战：如何接收一个“单词”</a>
+          <ol>
+            <li><a href="#方案-a字节拼接法最基础锻炼逻辑">方案 A：字节拼接法（最基础，锻炼逻辑）</a></li>
+            <li><a href="#方案-b空闲中断法最优雅专业用法">方案 B：空闲中断法（最优雅，专业用法）</a></li>
+          </ol>
+        </li>
+        <li><a href="#1-为什么它最优雅">1. 为什么它最“优雅”？</a></li>
+        <li><a href="#2核心原理图">2、核心原理图</a></li>
+        <li><a href="#3-stm32cubeide-配置步骤">3. STM32CubeIDE 配置步骤</a></li>
+        <li><a href="#4-编写代码-mainc">4. 编写代码 (main.c)</a>
+          <ol>
+            <li><a href="#第一步定义缓冲区">第一步：定义缓冲区</a></li>
+            <li><a href="#第二步启动接收在-main-函数循环前">第二步：启动接收（在 main 函数循环前）</a></li>
+            <li><a href="#第三步编写回调函数">第三步：编写回调函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-这种方案的职业美感体现在哪">5. 这种方案的“职业美感”体现在哪？</a></li>
+        <li><a href="#常见避坑">常见避坑</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-15-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF%E4%B8%AD%E6%96%AD%E6%8E%A5%E6%94%B6/">ZZZ-15-串口通讯中断接收</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-21</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="第一步stm32cubeide-配置-ioc">第一步：STM32CubeIDE 配置 (.ioc)
+</h3><p>我们要开启串口的<strong>中断“开关”</strong>：</p>
+<ol>
+<li>打开 <strong>Connectivity -&gt; USART1</strong>。</li>
+<li>点击 <strong>NVIC Settings</strong> 选项卡。</li>
+<li>勾选 <strong>USART1 global interrupt</strong> 后的 <strong>Enabled</strong> 框。</li>
+<li>保存（Ctrl + S）生成代码。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221093455837.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221093455837.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="第二步编写接收逻辑-mainc">第二步：编写接收逻辑 (main.c)
+</h3><p>中断接收的逻辑是：你先告诉单片机“你听着，收到一个字节就叫我”，然后单片机去跑 <code>while(1)</code>。当电脑发来数据，单片机自动跳进“回调函数”执行任务。</p>
+<h4 id="1-定义接收缓存">1. 定义接收缓存
+</h4><p>在 <code>main.c</code> 的 <code>USER CODE BEGIN PV</code> (Private Variables) 区域定义一个变量来存放收到的字符：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN PV */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">rx_data</span><span class="p">;</span> <span class="c1">// 接收缓冲区，存放电脑发来的一个字节
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END PV */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-开启听力模式">2. 开启“听力”模式
+</h4><p>在 <code>main</code> 函数的 <code>while(1)</code> 之前，调用一次中断接收函数：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 告诉单片机：开启中断接收，收满 1 个字节就存到 rx_data 变量里
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_UART_Receive_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rx_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="3-编写收到命令后做什么-回调函数">3. 编写“收到命令后做什么” (回调函数)
+</h4><p>在 <code>main.c</code> 最下方的 <code>USER CODE BEGIN 4</code> 区域，重写回调函数。我们要实现：电脑发 <strong>&lsquo;1&rsquo;</strong> 亮灯，发 <strong>&lsquo;0&rsquo;</strong> 灭灯。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 4 */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UART_RxCpltCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span><span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">USART1</span><span class="p">)</span> <span class="c1">// 确认是串口 1 触发的中断
+</span></span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span><span class="p">(</span><span class="n">rx_data</span> <span class="o">==</span> <span class="sc">&#39;1&#39;</span><span class="p">)</span> <span class="c1">// 电脑发来字符 &#39;1&#39;
+</span></span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 亮灯
+</span></span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;LED ON!</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="c1">// 回复电脑
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="n">rx_data</span> <span class="o">==</span> <span class="sc">&#39;0&#39;</span><span class="p">)</span> <span class="c1">// 电脑发来字符 &#39;0&#39;
+</span></span></span><span class="line"><span class="cl">        <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>   <span class="c1">// 灭灯
+</span></span></span><span class="line"><span class="cl">            <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;LED OFF!</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span> <span class="c1">// 回复电脑
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 重要：中断是一次性的，处理完后必须再次开启，否则下次就收不到了
+</span></span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Receive_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">rx_data</span><span class="p">,</span> <span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 4 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>注意这里使用了 printf，需要查看 [[ZZZ-14-串口通讯UART]] 中关于 printf 的设置</p>
+<h3 id="第三步原理图解-中断流程">第三步：原理图解 (中断流程)
+</h3><div class="mermaid">
+  graph TD
+    A[1.程序启动:开启中断接收] --> B[2.CPU运行while循环]
+    B --> C[3.电脑发送字符]
+    C --> D[4.硬件触发UART中断]
+    D --> E[5.进入Callback回调函数]
+    E --> F[6.执行逻辑:如开关灯]
+    F --> G[7.重新调用Receive_IT续约]
+    G --> B
+</div>
+<h3 id="第四步串口调试助手测试">第四步：串口调试助手测试
+</h3><ol>
+<li>烧录程序。</li>
+<li>打开串口调试助手，波特率 115200。</li>
+<li>在发送框输入字符 <strong><code>1</code></strong>（注意是<strong>字符模式</strong>，不是十六进制），点击发送。
+<ul>
+<li>现象：板子上的 PC13 灯亮了，助手屏幕显示 <code>LED ON!</code>。</li>
+</ul>
+</li>
+<li>在发送框输入字符 <strong><code>0</code></strong>，点击发送。
+<ul>
+<li>现象：板子上的 PC13 灯灭了，助手屏幕显示 <code>LED OFF!</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="避坑指南为什么我的单片机只听一次话">避坑指南：为什么我的单片机只听一次话？
+</h3><p>在代码里会看到反复强调最后一行 <code>HAL_UART_Receive_IT</code>。</p>
+<ul>
+<li><strong>原因</strong>：HAL 库的中断接收是“单次任务制”。当你收完指定的 1 个字节后，中断就会自动关闭。</li>
+<li><strong>解决</strong>：必须在回调函数结束前，再次调用该函数，相当于给单片机续一份“听力合规”，它才能持续监听。</li>
+</ul>
+<h3 id="进阶挑战如何接收一个单词">进阶挑战：如何接收一个“单词”
+</h3><p>刚才实现的例子是“一个字节”触发一次中断。但现实中，我们经常需要接收一串字符，比如发送 <code>&quot;ON&quot;</code> 开启，发送 <code>&quot;OFF&quot;</code> 关闭。作为初学者，处理字符串接收有<strong>两种最常用</strong>的思路：</p>
+<h4 id="方案-a字节拼接法最基础锻炼逻辑">方案 A：字节拼接法（最基础，锻炼逻辑）
+</h4><ul>
+<li>原理：依然是 1 个字节触发一次中断。</li>
+<li>逻辑：在单片机里准备一个“小篮子”（数组）。每收到一个字节，就把它丢进篮子，直到收到了回车符 <code>\n</code>，说明一句话说完了。然后用 <code>strcmp</code> 函数比较这个篮子里装的是不是 <code>&quot;ON&quot;</code>。</li>
+</ul>
+<h4 id="方案-b空闲中断法最优雅专业用法">方案 B：空闲中断法（最优雅，专业用法）
+</h4><p>这是处理<strong>不定长数据</strong>（比如一条指令有时长，有时短）最优雅、最工业级的方案。</p>
+<ul>
+<li>原理：利用 STM32 串口的一个高级特性——<strong>IDLE（空闲中断）</strong>。</li>
+<li>逻辑：单片机会盯着串口线，如果发现超过 1 个字节的时间没有新数据进来了，它就认为“这串话发完了”，然后一次性把整个数组交给你处理。</li>
+</ul>
+<p>下面开始方案 B 空闲中断法的学习</p>
+<h3 id="1-为什么它最优雅">1. 为什么它最“优雅”？
+</h3><ul>
+<li><strong>传统中断</strong>：像“强迫症”，必须数够 10 个字节才告诉你。如果对方只发了 5 个，你就永远在死等。</li>
+<li><strong>空闲中断</strong>：像“观察员”。它不管对方发了多少，它只盯着信号线。只要线上一段时间没有波动了（空闲了），它就认为“这串话发完了”，立刻叫醒 CPU。</li>
+</ul>
+<p><strong>最强组合：UART IDLE + DMA</strong> 通常我们会配合 <strong>DMA</strong>（直接存储器访问）使用。DMA 就像一个搬运工，数据一到就自动搬到内存里，不占用 CPU 资源。只有当一串话全说完了（触发 IDLE），CPU 才出来看一眼。</p>
+<h3 id="2核心原理图">2、核心原理图
+</h3><div class="mermaid">
+  graph LR
+    Sender[电脑/传感器] -- 发送数据流 --> RX_Pin[STM32 RX 引脚]
+    RX_Pin -- 自动搬运 --> DMA[DMA 搬运工]
+    DMA -- 存入 --> Buffer[内存缓冲区/数组]
+    
+    subgraph "检测机制"
+        Line[信号线状态] -- 消失一段时间 --> IDLE_Flag[触发 IDLE 空闲中断]
+    end
+
+    IDLE_Flag -- 通知 --> CPU[CPU 处理整条数据]
+</div>
+<h3 id="3-stm32cubeide-配置步骤">3. STM32CubeIDE 配置步骤
+</h3><p>我们要用到 HAL 库中一个非常强大的“新”函数：<code>HAL_UARTEx_ReceiveToIdle_DMA</code>（这里的 <strong>Ex</strong> 代表 Extended 扩展功能）。</p>
+<ol>
+<li><strong>开启 DMA</strong>：
+<ul>
+<li>在 <code>.ioc</code> 文件中，点击 <strong>Connectivity -&gt; USART1</strong>。</li>
+<li>点击 <strong>DMA Settings</strong> 选项卡 -&gt; 点击 <strong>Add</strong>。</li>
+<li>选择 <strong>USART1_RX</strong>。</li>
+<li><strong>Priority</strong> 选 Medium（中等）。</li>
+<li><strong>Mode</strong> 选 <strong>Normal</strong>（普通模式，接收完处理后再重开）。</li>
+</ul>
+</li>
+<li><strong>确认 NVIC</strong>：
+<ul>
+<li>在 <strong>NVIC Settings</strong> 选项卡中，确保 <strong>USART1 global interrupt</strong> 已勾选（DMA 配合空闲中断也需要开启串口总中断）。</li>
+</ul>
+</li>
+<li><strong>生成代码</strong>：<code>Ctrl + S</code>。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221095739564.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221095739564.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="4-编写代码-mainc">4. 编写代码 (main.c)
+</h3><h4 id="第一步定义缓冲区">第一步：定义缓冲区
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN PV */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">rx_buf</span><span class="p">[</span><span class="mi">100</span><span class="p">];</span> <span class="c1">// 准备一个足够大的“篮子”
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END PV */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第二步启动接收在-main-函数循环前">第二步：启动接收（在 main 函数循环前）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 告诉单片机：用 DMA 方式接收数据，如果触发了空闲中断或存满了 100 字节，就叫我
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rx_buf</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 禁掉 DMA 的过半中断（可选，防止大数据量时频繁进中断）
+</span></span></span><span class="line"><span class="cl"><span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第三步编写回调函数">第三步：编写回调函数
+</h4><p>注意！空闲中断的回调函数和之前的 <code>RxCpltCallback</code> 不同，它叫 <strong><code>RxEventCallback</code></strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 4 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// Size 参数非常有用：它告诉你这次实际上收到了多少个字节
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">USART1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 1. 处理数据：比如把收到的单词原封不动发回给电脑
+</span></span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rx_buf</span><span class="p">,</span> <span class="n">Size</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        
+</span></span><span class="line"><span class="cl">        <span class="c1">// 2. 可以在这里做字符串比较
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nf">strncmp</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">rx_buf</span><span class="p">,</span> <span class="s">&#34;ON&#34;</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span><span class="p">(</span><span class="nf">strncmp</span><span class="p">((</span><span class="kt">char</span><span class="o">*</span><span class="p">)</span><span class="n">rx_buf</span><span class="p">,</span> <span class="s">&#34;OFF&#34;</span><span class="p">,</span> <span class="mi">3</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        	<span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 重要：处理完后，必须再次开启接收
+</span></span></span><span class="line"><span class="cl">        <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="n">rx_buf</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">__HAL_DMA_DISABLE_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hdma_usart1_rx</span><span class="p">,</span> <span class="n">DMA_IT_HT</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 4 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5-这种方案的职业美感体现在哪">5. 这种方案的“职业美感”体现在哪？
+</h3><ol>
+<li><strong>Size 变量</strong>：这是神来之笔。如果你发 <code>&quot;Hello&quot;</code>，<code>Size</code> 就是 5；如果你发 <code>&quot;How are you&quot;</code>，<code>Size</code> 就是 11。你再也不用自己去写循环判断 <code>\n</code> 了。</li>
+<li><strong>极低 CPU 占用</strong>：在数据传输过程中，CPU 甚至可以去“睡觉”（进入低功耗模式）。只有整句话说完了，CPU 才醒过来处理一下。</li>
+<li><strong>高可靠性</strong>：不再会因为数据发得太快而导致丢字节（DMA 硬件级搬运）。</li>
+</ol>
+<h3 id="常见避坑">常见避坑
+</h3><ul>
+<li><strong>重载函数名</strong>：一定要写对 <code>HAL_UARTEx_RxEventCallback</code>，拼错一个字母它都不会运行。</li>
+<li><strong>缓冲区溢出</strong>：如果你定义的 <code>rx_buf</code> 是 100，但对方一次性发了 150 个字节，DMA 会在满 100 的时候强制触发一次中断。所以缓冲区要设得比最长的指令稍微大一点。</li>
+</ul>
+<p>现在你可以试试发送 <code>&quot;Hello STM32&quot;</code>。你会发现，无论你发多长或多短，单片机都能精准地识别出长度并回复你。并且发送 <code>ON</code>，灯会亮、发送 <code>OFF</code>，灯会灭</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

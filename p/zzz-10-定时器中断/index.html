@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="如果说 GPIO 是单片机的“手脚”，中断是“神经反射”，那么定时器（Timer）就是单片机的“脉搏”。在 51 单片机里，配置定时器需要去算初值、写寄存器。而在 STM32 中，虽然寄存器更多，但有了 CubeIDE，我们只需要掌握一个核心公式就能实现极其精准的定时。\n">
+<title>ZZZ-10-定时器中断</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-10-%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-10-定时器中断">
+<meta property='og:description' content="如果说 GPIO 是单片机的“手脚”，中断是“神经反射”，那么定时器（Timer）就是单片机的“脉搏”。在 51 单片机里，配置定时器需要去算初值、写寄存器。而在 STM32 中，虽然寄存器更多，但有了 CubeIDE，我们只需要掌握一个核心公式就能实现极其精准的定时。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-10-%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-20T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-20T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-10-定时器中断">
+<meta name="twitter:description" content="如果说 GPIO 是单片机的“手脚”，中断是“神经反射”，那么定时器（Timer）就是单片机的“脉搏”。在 51 单片机里，配置定时器需要去算初值、写寄存器。而在 STM32 中，虽然寄存器更多，但有了 CubeIDE，我们只需要掌握一个核心公式就能实现极其精准的定时。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-形象比喻定时器到底是怎么工作的">1. 形象比喻：定时器到底是怎么工作的</a></li>
+        <li><a href="#核心公式必须死记硬背它是定时器的灵魂">核心公式（必须死记硬背，它是定时器的灵魂）</a></li>
+        <li><a href="#3-stm32cubeide-配置步骤">3. STM32CubeIDE 配置步骤</a></li>
+        <li><a href="#4-编写代码开启与回调">4. 编写代码（开启与回调）</a>
+          <ol>
+            <li><a href="#第一步启动定时器中断">第一步：启动定时器中断</a></li>
+            <li><a href="#第二步编写回调函数">第二步：编写回调函数</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-定时中断-vs-hal_delay">5. 定时中断 vs HAL_Delay()</a></li>
+        <li><a href="#6-进阶如果你想要-1-毫秒定一次时">6. 进阶：如果你想要 1 毫秒定一次时</a></li>
+        <li><a href="#常见避坑指南">常见避坑指南</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-10-%E5%AE%9A%E6%97%B6%E5%99%A8%E4%B8%AD%E6%96%AD/">ZZZ-10-定时器中断</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-20</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>如果说 GPIO 是单片机的“手脚”，中断是“神经反射”，那么定时器（Timer）就是单片机的“脉搏”。在 51 单片机里，配置定时器需要去算初值、写寄存器。而在 STM32 中，虽然寄存器更多，但有了 <strong>CubeIDE</strong>，我们只需要掌握一个<strong>核心公式</strong>就能实现极其精准的定时。</p>
+<h3 id="1-形象比喻定时器到底是怎么工作的">1. 形象比喻：定时器到底是怎么工作的
+</h3><p>你可以把定时器想象成一个“自动数数的小学生”**：</p>
+<ul>
+<li><strong>时钟源（Clock Source）</strong>：老师敲黑板的速度（比如每秒敲 72,000,000 下）。</li>
+<li><strong>预分频器（PSC, Prescaler）</strong>：小学生觉得老师敲得太快了，数不过来，于是规定“老师敲 7200 下，我才记 1 个数”。</li>
+<li><strong>计数器（Counter）</strong>：小学生手里的小本子，每记满一个数就加 1。</li>
+<li><strong>自动重装载寄存器（ARR, Auto-Reload Register）</strong>：老师规定的“目标数”。比如数到 10000，就举手报告（触发中断），然后擦掉本子从 0 重新数。</li>
+</ul>
+<h3 id="核心公式必须死记硬背它是定时器的灵魂">核心公式（必须死记硬背，它是定时器的灵魂）
+</h3><p>你想定多长时间，全靠这个公式：</p>
+<p>$$定时时间 (秒) = \frac{(PSC + 1) \times (ARR + 1)}{定时器输入频率 (Hz)}$$</p>
+<p>对于 STM32F103C8T6，如果你的时钟树配置为 <strong>72MHz</strong>：</p>
+<ul>
+<li>如果你想要 <strong>1 秒</strong>（1Hz）触发一次中断：
+<ul>
+<li>我们将 <strong>预分频器 PSC</strong> 设为 <strong>7199</strong>（即 $7200 - 1$）。</li>
+<li>我们将 <strong>自动重装载寄存器 ARR</strong> 设为 <strong>9999</strong>（即 $10000 - 1$）。</li>
+<li>计算：$\frac{7200 \times 10000}{72,000,000} = 1\text{ 秒}$。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>为什么都要 -1？ 因为计数器是从 0 开始数的。数 10 个数，实际上是 0 到 9。</p>
+</blockquote>
+<h3 id="3-stm32cubeide-配置步骤">3. STM32CubeIDE 配置步骤
+</h3><p>我们以 <strong>TIM2</strong>（通用定时器）为例：</p>
+<ol>
+<li>开启定时器：
+<ul>
+<li>在 <code>.ioc</code> 文件左侧找到 Timers -&gt; TIM2。</li>
+<li>Combined Channels 不用管，将 Clock Source 设为 Internal Clock（内部时钟）。</li>
+</ul>
+</li>
+<li>设置参数：
+<ul>
+<li>Prescaler (PSC): 输入 <code>7199</code>。</li>
+<li>Counter Period (ARR): 输入 <code>9999</code>。</li>
+<li>其他默认即可（向上计数模式）。</li>
+</ul>
+</li>
+<li>开启中断 (NVIC)：
+<ul>
+<li>点击上方的 NVIC Settings 选项卡。</li>
+<li>勾选 TIM2 global interrupt 后面的 Enabled。（不勾这个，定时器只会数数，不会通知 CPU）</li>
+</ul>
+</li>
+<li>生成代码：按 <code>Ctrl + S</code>。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220221250104.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251220221250104.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="4-编写代码开启与回调">4. 编写代码（开启与回调）
+</h3><p>定时器配置完后，默认是关闭的，你需要手动在代码里给它“上发条”。</p>
+<h4 id="第一步启动定时器中断">第一步：启动定时器中断
+</h4><p>在 <code>main.c</code> 的 <code>MX_GPIO_Init()</code> 之后，<code>while(1)</code> 之前，加入这行代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_TIM_Base_Start_IT</span><span class="p">(</span><span class="o">&amp;</span><span class="n">htim2</span><span class="p">);</span> <span class="c1">// 以中断模式启动 TIM2
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第二步编写回调函数">第二步：编写回调函数
+</h4><p>在 <code>main.c</code> 下方的 <code>USER CODE BEGIN 4</code> 区域，写下我们要执行的动作：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 4 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 定时器溢出（时间到）时，会自动调用这个函数
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_TIM_PeriodElapsedCallback</span><span class="p">(</span><span class="n">TIM_HandleTypeDef</span> <span class="o">*</span><span class="n">htim</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">htim</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">TIM2</span><span class="p">)</span> <span class="c1">// 确认是 TIM2 触发的
+</span></span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span> <span class="c1">// 翻转 LED 灯
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 4 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="5-定时中断-vs-hal_delay">5. 定时中断 vs HAL_Delay()
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>特性</strong></th>
+          <th><strong>HAL_Delay()</strong></th>
+          <th><strong>定时器中断</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>原理</strong></td>
+          <td>阻塞式（CPU 在死等，啥也干不了）</td>
+          <td>非阻塞式（CPU 平时干别的，时间到才去处理）</td>
+      </tr>
+      <tr>
+          <td><strong>精度</strong></td>
+          <td>较低（会被其他任务干扰）</td>
+          <td><strong>极高</strong>（硬件自动计数，不受软件干扰）</td>
+      </tr>
+      <tr>
+          <td><strong>用途</strong></td>
+          <td>简单的、不重要的等待</td>
+          <td>精准采样、控制电机速度、多任务并行</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="6-进阶如果你想要-1-毫秒定一次时">6. 进阶：如果你想要 1 毫秒定一次时
+</h3><ul>
+<li>输入频率 = 72,000,000 Hz</li>
+<li>目标时间 = 0.001 s</li>
+<li>设置：PSC = <strong>71</strong> ($72-1$)，ARR = <strong>999</strong> ($1000-1$)。</li>
+<li>计算：$\frac{72 \times 1000}{72,000,000} = 0.001\text{ 秒}$。</li>
+</ul>
+<h3 id="常见避坑指南">常见避坑指南
+</h3><ol>
+<li>忘记加 <code>_IT</code>：如果是调用 <code>HAL_TIM_Base_Start()</code>，定时器会跑，但不会进中断函数。必须用 <code>HAL_TIM_Base_Start_IT()</code>。</li>
+<li>公式没减 1：虽然不减 1 也能跑，但时间会差那么一点点。在追求极致精准的工业控制中，这 1 个周期的误差很重要。</li>
+<li>中断里代码太长：如果你的定时器是 1ms 触发一次，但你在中断函数里执行了需要 2ms 才能跑完的代码，系统就会彻底乱套。</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

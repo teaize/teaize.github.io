@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="如果说串口是单片机的“嘴巴”，那么 ADC 就是单片机的“眼睛”。它让单片机能够感知真实世界中连续变化的模拟信号（如光照、温度、声音、电压）。\n1. 什么是 ADC？（通俗理解） 模拟信号（Analog）：大自然中的信号，比如 0.5V, 1.25V, 3.3V，是连续不断的。 数字信号（Digital）：单片机的大脑，只能理解 0 和 1（二进制数字）。 ADC 的角色：就像一个带有刻度的量杯。它把杯子里液面的高度（电压）转化成一个具体的数字，告诉单片机：“现在的电压是 2048”。\n">
+<title>ZZZ-17-ADC</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-17-adc/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-17-ADC">
+<meta property='og:description' content="如果说串口是单片机的“嘴巴”，那么 ADC 就是单片机的“眼睛”。它让单片机能够感知真实世界中连续变化的模拟信号（如光照、温度、声音、电压）。\n1. 什么是 ADC？（通俗理解） 模拟信号（Analog）：大自然中的信号，比如 0.5V, 1.25V, 3.3V，是连续不断的。 数字信号（Digital）：单片机的大脑，只能理解 0 和 1（二进制数字）。 ADC 的角色：就像一个带有刻度的量杯。它把杯子里液面的高度（电压）转化成一个具体的数字，告诉单片机：“现在的电压是 2048”。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-17-adc/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-17-ADC">
+<meta name="twitter:description" content="如果说串口是单片机的“嘴巴”，那么 ADC 就是单片机的“眼睛”。它让单片机能够感知真实世界中连续变化的模拟信号（如光照、温度、声音、电压）。\n1. 什么是 ADC？（通俗理解） 模拟信号（Analog）：大自然中的信号，比如 0.5V, 1.25V, 3.3V，是连续不断的。 数字信号（Digital）：单片机的大脑，只能理解 0 和 1（二进制数字）。 ADC 的角色：就像一个带有刻度的量杯。它把杯子里液面的高度（电压）转化成一个具体的数字，告诉单片机：“现在的电压是 2048”。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-什么是-adc通俗理解">1. 什么是 ADC？（通俗理解）</a></li>
+        <li><a href="#2-stm32-adc-的核心参数">2. STM32 ADC 的核心参数</a></li>
+        <li><a href="#3-adc-的内部构造-mermaid">3. ADC 的内部构造 (Mermaid)</a></li>
+        <li><a href="#4-三种常见的看世界方式">4. 三种常见的“看世界”方式</a></li>
+        <li><a href="#5-快速上手实验读取电位器电压轮询模式">5. 快速上手实验：读取电位器电压（轮询模式）</a>
+          <ol>
+            <li><a href="#第一步cubeide-配置-ioc">第一步：CubeIDE 配置 (.ioc)</a></li>
+            <li><a href="#第二步编写代码-mainc">第二步：编写代码 (main.c)</a></li>
+          </ol>
+        </li>
+        <li><a href="#6-进阶预告为什么-adc-最离不开-dma">6. 进阶预告：为什么 ADC 最离不开 DMA？</a></li>
+        <li><a href="#常见避坑指南">常见避坑指南</a></li>
+        <li><a href="#扩展资料">扩展资料</a>
+          <ol>
+            <li><a href="#1-什么是-in0-in1">1. 什么是 IN0, IN1…？</a></li>
+          </ol>
+        </li>
+        <li><a href="#2-adc-内部框架图-mermaid">2. ADC 内部框架图 (Mermaid)</a>
+          <ol>
+            <li><a href="#3-配置参数详细拆解">3. 配置参数详细拆解</a></li>
+            <li><a href="#4-为什么配置这么多">4. 为什么配置这么多？</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-17-adc/">ZZZ-17-ADC</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-21</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>如果说串口是单片机的“嘴巴”，那么 ADC 就是单片机的“眼睛”。它让单片机能够感知真实世界中连续变化的模拟信号（如光照、温度、声音、电压）。</p>
+<h3 id="1-什么是-adc通俗理解">1. 什么是 ADC？（通俗理解）
+</h3><ul>
+<li><strong>模拟信号（Analog）</strong>：大自然中的信号，比如 0.5V, 1.25V, 3.3V，是连续不断的。</li>
+<li><strong>数字信号（Digital）</strong>：单片机的大脑，只能理解 0 和 1（二进制数字）。</li>
+</ul>
+<p><strong>ADC 的角色</strong>：就像一个<strong>带有刻度的量杯</strong>。它把杯子里液面的高度（电压）转化成一个具体的数字，告诉单片机：“现在的电压是 2048”。</p>
+<h3 id="2-stm32-adc-的核心参数">2. STM32 ADC 的核心参数
+</h3><p>在 STM32F103C8T6 中，自带有一个 ADC，ADC 的性能非常强劲：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>参数</strong></th>
+          <th><strong>数值</strong></th>
+          <th><strong>含义</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>分辨率 (Resolution)</strong></td>
+          <td><strong>12 位 (12-bit)</strong></td>
+          <td>把 0~3.3V 分成 $2^{12} = 4096$ 份。</td>
+      </tr>
+      <tr>
+          <td><strong>转换范围 (Range)</strong></td>
+          <td><strong>0V ~ 3.3V</strong></td>
+          <td>超过 3.3V 可能烧毁引脚，低于 0V 读不到。</td>
+      </tr>
+      <tr>
+          <td><strong>对应关系</strong></td>
+          <td><strong>0 $\to$ 0V, 4095 $\to$ 3.3V</strong></td>
+          <td>数值每增加 1，代表电压增加了约 0.8mV。</td>
+      </tr>
+      <tr>
+          <td><strong>通道数量</strong></td>
+          <td>10 个外部通道</td>
+          <td>PA0<del>PA7, PB0</del>PB1 都可以作为“眼睛”。</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="3-adc-的内部构造-mermaid">3. ADC 的内部构造 (Mermaid)
+</h3><p>你会发现 ADC 也有很多 <strong>Channel（通道）</strong>，它的原理和定时器通道类似：一个“测量核心”配合一个“多路开关”。</p>
+<div class="mermaid">
+  graph LR
+    subgraph "外部世界 (模拟信号)"
+        In0[PA0: 光敏电阻]
+        In1[PA1: 电位器]
+        In2[PA2: 电池电压]
+    end
+
+    subgraph "ADC 内部"
+        MUX{多路开关<br/>Multiplexer}
+        Core[ADC 核心<br/>12位量化]
+        DataReg[数据寄存器<br/>DR]
+    end
+
+    In0 --> MUX
+    In1 --> MUX
+    In2 --> MUX
+    
+    MUX --> Core
+    Core --> DataReg
+    DataReg --> CPU[CPU 或 DMA]
+</div>
+<h3 id="4-三种常见的看世界方式">4. 三种常见的“看世界”方式
+</h3><p>根据你对实时性的要求，ADC 有三种工作模式：</p>
+<ol>
+<li>单次转换 (Single Conversion)：点一下，看一眼。看完了就闭上眼。</li>
+<li>连续转换 (Continuous Conversion)：睁着眼不眨，一直看，一直更新数据。</li>
+<li>扫描模式 (Scan Mode)：<strong>如果有多个通道（比如同时看光敏和电位器），它会挨个看一圈</strong>。</li>
+</ol>
+<h3 id="5-快速上手实验读取电位器电压轮询模式">5. 快速上手实验：读取电位器电压（轮询模式）
+</h3><p>我们先用最简单的<strong>轮询方式</strong>（类似于按键扫描）来感受 ADC。</p>
+<div class="mermaid">
+  graph LR
+    subgraph STM32 [STM32F103C8T6]
+        3V3[3.3V Pin]
+        GND[GND Pin]
+        PA1[PA1 / ADC_IN1]
+    end
+
+    subgraph POT [电位器 / 传感器]
+        VCC_IN[1号脚: VCC]
+        OUT[2号脚: 信号输出]
+        GND_IN[3号脚: GND]
+    end
+
+    3V3 --- VCC_IN
+    PA1 --- OUT
+    GND --- GND_IN
+</div>
+<h4 id="第一步cubeide-配置-ioc">第一步：CubeIDE 配置 (.ioc)
+</h4><ol>
+<li>在左侧点击 <strong>Analog -&gt; ADC1</strong>。</li>
+<li>勾选 <strong>IN1</strong>（对应引脚 <strong>PA1</strong>）。</li>
+<li>在下方的 <strong>Parameter Settings</strong>：
+<ul>
+<li><strong>Continuous Conversion Mode</strong>：设为 <strong>Enabled</strong>（让它不停地转换）。</li>
+</ul>
+</li>
+<li>保存生成代码。</li>
+</ol>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103430273.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103430273.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<p>开启了 ADC 之后，需要注意一下这里的 ADC 分频
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103632155.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221103632155.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="第二步编写代码-mainc">第二步：编写代码 (main.c)
+</h4><p>在 <code>main</code> 函数的 <code>while(1)</code> 之前启动 ADC，在 <code>while(1)</code> 里读取。</p>
+<blockquote>
+<p>注意这里也用到了 printf 和串口通讯</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_ADC_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span> <span class="c1">// 1. 开启 ADC
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 2 */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN WHILE */</span>
+</span></span><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 等待转换完成（超时时间 10ms）
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_ADC_PollForConversion</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="mi">10</span><span class="p">)</span> <span class="o">==</span> <span class="n">HAL_OK</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 3. 读取 12 位的数字量 (0-4095)
+</span></span></span><span class="line"><span class="cl">        <span class="kt">uint32_t</span> <span class="n">adc_val</span> <span class="o">=</span> <span class="nf">HAL_ADC_GetValue</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 4. 将数字换算成电压 (单位: V)
+</span></span></span><span class="line"><span class="cl">        <span class="kt">float</span> <span class="n">voltage</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">adc_val</span> <span class="o">*</span> <span class="mf">3.3</span> <span class="o">/</span> <span class="mi">4096</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 5. 通过串口打印出来看看
+</span></span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;ADC Value: %lu, Voltage: %.2fV</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">adc_val</span><span class="p">,</span> <span class="n">voltage</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span> <span class="c1">// 每半秒看一眼
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE END WHILE */</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221104502276.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221104502276.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="6-进阶预告为什么-adc-最离不开-dma">6. 进阶预告：为什么 ADC 最离不开 DMA？
+</h3><p>你可能已经发现了：</p>
+<ul>
+<li>如果 ADC 开启了<strong>连续转换</strong>，它每秒钟能产生几十万个数据。</li>
+<li>如果 CPU 每次都去 <code>GetValue</code>，那 CPU 真的就什么都不用干了，光在那“看眼睛”了。</li>
+</ul>
+<p><strong>专业做法</strong>：开启 <strong>ADC + DMA</strong>。 让 DMA 这个“快递员”自动把 ADC 转换好的数据搬运到数组里，CPU 只需要在想看的时候去数组里翻一下就行了。</p>
+<h3 id="常见避坑指南">常见避坑指南
+</h3><ol>
+<li><strong>引脚悬空</strong>：如果你不接任何东西到 PA1，读到的数值会乱跳。这是正常的，因为引脚在感知空气中的静电电场（这叫“天线效应”）。</li>
+<li><strong>采样时间</strong>：如果信号变化很快，需要调整 <strong>Sampling Time</strong>（采样时间），让量杯有足够的时间装满水（充好电）。</li>
+</ol>
+<h3 id="扩展资料">扩展资料
+</h3><p>在 CubeIDE 中选择 ADC1 时，能看到 IN0、IN1…，这些是<strong>频道选择</strong>。就像电视机有很多个频道，但只有一个屏幕，ADC 内部通常只有一个“测量器”，通过一个开关来决定现在看哪个引脚的电压</p>
+<h4 id="1-什么是-in0-in1">1. 什么是 IN0, IN1…？
+</h4><p>在 <code>STM32F103C8T6</code> 中，ADC1 拥有 10 个外部引脚通道。它们的对应关系是固定的：</p>
+<ul>
+<li><strong>IN0</strong> $\to$ PA0</li>
+<li><strong>IN1</strong> $\to$ PA1</li>
+<li>…</li>
+<li><strong>IN9</strong> $\to$ PB1</li>
+</ul>
+<p>你在 CubeIDE 里勾选了哪个 <code>IN</code>，就代表你告诉单片机：“我要把这个引脚当成模拟输入来用”。</p>
+<h3 id="2-adc-内部框架图-mermaid">2. ADC 内部框架图 (Mermaid)
+</h3><p>为了理解那些复杂的配置项，我们来看看电压信号进入单片机后经历了什么：</p>
+<div class="mermaid">
+  graph TD
+    subgraph "外部引脚 (Input Channels)"
+        P0[PA0/IN0]
+        P1[PA1/IN1]
+        Pn[...其他引脚]
+    end
+
+    subgraph "ADC 内部核心"
+        MUX{多路开关<br/>Multiplexer}
+        
+        subgraph "采样保持与转化"
+            SH[采样保持器<br/>Sampling Time]
+            SAR[12位逐次逼近器<br/>Successive Approx]
+        end
+        
+        Logic[控制逻辑<br/>Continuous/Scan Mode]
+    end
+
+    P0 --> MUX
+    P1 --> MUX
+    Pn --> MUX
+
+    MUX --> SH
+    SH --> SAR
+    SAR --> DR[数据寄存器<br/>Data Register]
+    
+    Logic -.-> MUX
+    Logic -.-> SAR
+
+    DR --> CPU[CPU读取/中断]
+    DR --> DMA[DMA搬运]
+
+    style SAR fill:#f96,stroke:#333
+    style Logic fill:#bbf,stroke:#333
+</div>
+<h4 id="3-配置参数详细拆解">3. 配置参数详细拆解
+</h4><p>当你点击 <code>ADC1</code> 的 <code>Parameter Settings</code> 时，最核心的配置分为三部分：</p>
+<p>A. 基础设置 (Basic Settings)</p>
+<ul>
+<li>Data Alignment (数据对齐)：通常选 Right Alignment（右对齐）。
+<ul>
+<li><em>解释</em>：ADC 结果是 12 位的，但寄存器是 16 位的。右对齐就像我们在本子上写数字，个位对齐，方便直接读取数值。</li>
+</ul>
+</li>
+<li>Scan Conversion Mode (扫描模式)：
+<ul>
+<li>如果你勾选了<strong>多个</strong> IN 通道（比如同时看 PA0 和 PA1），就必须 <strong>Enable</strong>。它会自动按顺序测量选中的所有通道。</li>
+</ul>
+</li>
+<li>Continuous Conversion Mode (连续转换模式)：
+<ul>
+<li>Enable：它会像监控摄像头一样，拍完一张（转完一次）立刻拍下一张，数据永不停歇地更新。</li>
+<li>Disable：拍一张就闭眼，直到你再次命令它。</li>
+</ul>
+</li>
+</ul>
+<p>B. 规则组设置 (ADC_Regular_ConversionMode)</p>
+<p>这里决定了“谁先测，测多久”。</p>
+<ul>
+<li>Number of Conversion：你要测几个通道？如果你选了 IN0 和 IN1，这里就填 2。</li>
+<li>Rank (排名)：这是具体的顺序。
+<ul>
+<li><code>Rank 1</code> 选 <code>Channel 0</code>，代表第一个测 PA0。</li>
+<li><code>Rank 2</code> 选 <code>Channel 1</code>，代表第二个测 PA1。</li>
+</ul>
+</li>
+<li>Sampling Time (采样时间)：
+<ul>
+<li>这是最容易被忽视的参数！ 电压进入单片机需要给内部电容充电。</li>
+<li>如果电压信号“很虚”（阻抗高），你需要把这个时间调大（比如选 55.5 Cycles 或更高），测出来的电压才准。</li>
+</ul>
+</li>
+</ul>
+<p>C. 外部触发 (External Trigger)</p>
+<ul>
+<li>External Trigger Conversion Source：通常选 Regular Conversion launched by software。
+<ul>
+<li>意思是：由你在代码里写 <code>HAL_ADC_Start</code> 来手动开启转换。你也可以设置为由定时器触发（比如每秒精准采集 1000 次）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="4-为什么配置这么多">4. 为什么配置这么多？
+</h4><p>STM32 的 ADC 设计理念是：<strong>尽可能不需要 CPU 介入</strong>。</p>
+<ul>
+<li>最简单的配置：单通道、单次转换（你之前的实验）。</li>
+<li>最专业的配置：
+<ol>
+<li>开启 <strong>Scan Mode</strong>（看多个引脚）。</li>
+<li>开启 <strong>Continuous Mode</strong>（不停地看）。</li>
+<li>开启 <strong>DMA</strong>（让搬运工把看的结果自动写进数组）。</li>
+</ol>
+<ul>
+<li>结果：CPU 只需要在启动时下个令，然后随时去查数组就行了，完全不浪费 CPU 时间。</li>
+</ul>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>
