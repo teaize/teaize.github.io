@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？难道再重新校准吗。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？这就需要单片机能够保存（并且断电不丢失）数据\n">
 <title>ZZZ-25-保存数据到FLASH</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/zzz-25-%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE%E5%88%B0flash/'>
 
 <link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-25-保存数据到FLASH">
-<meta property='og:description' content="本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？难道再重新校准吗。\n">
+<meta property='og:description' content="本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？这就需要单片机能够保存（并且断电不丢失）数据\n">
 <meta property='og:url' content='https://teaize.github.io/p/zzz-25-%E4%BF%9D%E5%AD%98%E6%95%B0%E6%8D%AE%E5%88%B0flash/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-21T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="ZZZ-25-保存数据到FLASH">
-<meta name="twitter:description" content="本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？难道再重新校准吗。\n">
+<meta name="twitter:description" content="本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？这就需要单片机能够保存（并且断电不丢失）数据\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,7 +273,57 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-flash-存储的核心规则必读">1. FLASH 存储的核心规则（必读）</a></li>
+        <li><a href="#2-确定存储位置">2. 确定存储位置</a></li>
+        <li><a href="#3-实战代码读写函数库">3. 实战代码：读写函数库</a>
+          <ol>
+            <li><a href="#a-写入函数保存参数">A. 写入函数（保存参数）</a></li>
+            <li><a href="#b-读取函数开机加载">B. 读取函数（开机加载）</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-如何整合到你的系统中">4. 如何整合到你的系统中？</a>
+          <ol>
+            <li><a href="#第一步开机自动读取">第一步：开机自动读取</a></li>
+            <li><a href="#第二步校准成功后自动保存">第二步：校准成功后自动保存</a></li>
+          </ol>
+        </li>
+        <li><a href="#5-为什么这样做很专业">5. 为什么这样做很“专业”？</a></li>
+        <li><a href="#完整代码">完整代码</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -322,9 +372,523 @@
     <section class="article-content">
     
     
-    <p>本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？难道再重新校准吗。</p>
-<p>这就需要单片机能够保存（并且断电不丢失）数据</p>
+    <p>本篇继 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]。想一想，好不容易通过标准物质（例如标准压力）将传感器的零点和满量程校准好，如果断电这些珍贵的校准系数丢了怎么办？这就需要单片机能够保存（并且断电不丢失）数据</p>
+<p>STM32 的内部 FLASH 就像是电脑的硬盘，断电后数据不会丢失。我们将把校准得到的 <code>zero_offset_volt</code> 和 <code>slope_k</code> 存入 FLASH 的最后一段空间。</p>
+<h3 id="1-flash-存储的核心规则必读">1. FLASH 存储的核心规则（必读）
+</h3><p>在操作之前，你需要记住 STM32 FLASH 的三个“脾气”：</p>
+<ol>
+<li>先擦除再写入：FLASH 的位只能从 <code>1</code> 变成 <code>0</code>。擦除操作会将整个“页”（Page）恢复为全 <code>1</code>（即 <code>0xFF</code>）。</li>
+<li>以“页”为单位：STM32F103 通常每页是 <strong>1KB</strong> 或 <strong>2KB</strong>。即使你只改一个字，也得擦除整一页。</li>
+<li>读写保护：写入前要“解锁”（Unlock），写完要“上锁”（Lock）。</li>
+</ol>
+<h3 id="2-确定存储位置">2. 确定存储位置
+</h3><p>我们要把数据存在 FLASH 的<strong>末尾</strong>，避免覆盖掉你写的程序代码。</p>
+<ul>
+<li>假设：你用的是 STM32F103C8T6（64KB FLASH）。</li>
+<li>最后一页地址：<code>0x0800FC00</code>（第 63 页）。</li>
+</ul>
+<h3 id="3-实战代码读写函数库">3. 实战代码：读写函数库
+</h3><p>你可以将以下代码直接加入到 <code>main.c</code> 的 <code>USER CODE BEGIN 0</code> 区域。</p>
+<h4 id="a-写入函数保存参数">A. 写入函数（保存参数）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define FLASH_USER_START_ADDR   0x0800FC00   </span><span class="c1">// 最后一页地址
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="n">slope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用指针强转，把 float 变成 uint32_t 存入数组
+</span></span></span><span class="line"><span class="cl">    <span class="n">data_to_save</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_to_save</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">slope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Unlock</span><span class="p">();</span> <span class="c1">// 解锁
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 擦除最后一页
+</span></span></span><span class="line"><span class="cl">    <span class="n">FLASH_EraseInitTypeDef</span> <span class="n">EraseInitStruct</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">PageError</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">TypeErase</span> <span class="o">=</span> <span class="n">FLASH_TYPEERASE_PAGES</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">PageAddress</span> <span class="o">=</span> <span class="n">FLASH_USER_START_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">NbPages</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASHEx_Erase</span><span class="p">(</span><span class="o">&amp;</span><span class="n">EraseInitStruct</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">PageError</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 写入数据
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Program</span><span class="p">(</span><span class="n">FLASH_TYPEPROGRAM_WORD</span><span class="p">,</span> <span class="n">FLASH_USER_START_ADDR</span><span class="p">,</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Program</span><span class="p">(</span><span class="n">FLASH_TYPEPROGRAM_WORD</span><span class="p">,</span> <span class="n">FLASH_USER_START_ADDR</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Lock</span><span class="p">();</span> <span class="c1">// 上锁
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="b-读取函数开机加载">B. 读取函数（开机加载）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">slope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">raw_zero</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">__IO</span> <span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_USER_START_ADDR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">raw_slope</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">__IO</span> <span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_USER_START_ADDR</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果 FLASH 是空的（0xFFFFFFFF），则不加载，维持默认值
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">raw_zero</span> <span class="o">!=</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">zero</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">raw_zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">slope</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">raw_slope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4-如何整合到你的系统中">4. 如何整合到你的系统中？
+</h3><h4 id="第一步开机自动读取">第一步：开机自动读取
+</h4><p>在 <code>main</code> 函数的 <code>while(1)</code> 之前调用，确保一上电就拿到了上次校准的值。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl"><span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">adc_buffer</span><span class="p">,</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第二步校准成功后自动保存">第二步：校准成功后自动保存
+</h4><p>在你之前的按键校准逻辑里，确认校准成功后，顺手存一下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// 在零点校准成功后的位置
+</span></span></span><span class="line"><span class="cl"><span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span> <span class="c1">// 同步保存到 FLASH
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 在满量程校准成功后的位置
+</span></span></span><span class="line"><span class="cl"><span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span> <span class="c1">// 同步保存到 FLASH
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>关机前
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221213735885.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221213735885.png" alt=""  />
+		</a>
+	</div>
 
+
+关机重启后：
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221213906876.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221213906876.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="5-为什么这样做很专业">5. 为什么这样做很“专业”？
+</h3><ol>
+<li><strong>用户体验</strong>：在 CEMS 站房里，设备可能会因为停电或检修重启。如果没有 FLASH 存储，运维人员每次开机都得重新通标准气体校准，那是极其痛苦的。</li>
+<li><strong>数据安全</strong>：通过 <code>0xFFFFFFFF</code> 的判断，你保证了新芯片第一次运行时不会加载乱码，而是使用代码里的默认值。</li>
+</ol>
+<h3 id="完整代码">完整代码
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN Includes */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END Includes */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN PV */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SAMPLES 10  					</span><span class="c1">// 每个通道采样 10 次
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define CHANNELS 2 						</span><span class="c1">// 共 2 个通道
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span> <span class="c1">// 长度为 20 的数组
+</span></span></span><span class="line"><span class="cl"><span class="c1">// --- 核心标定参数 ---
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">float</span> <span class="n">P_NOMINAL</span> <span class="o">=</span> <span class="mf">1.6f</span><span class="p">;</span>             <span class="c1">// 满量程标定时的标准压力值 (MPa)
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">float</span> <span class="n">R_SAMPLE</span> <span class="o">=</span> <span class="mf">150.0f</span><span class="p">;</span>            <span class="c1">// 采样电阻 150 欧
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.15f</span><span class="p">;</span>                <span class="c1">// 一阶滞后滤波系数
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// --- 标定状态变量 ---
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="mf">0.60f</span><span class="p">;</span>           <span class="c1">// 默认零点电压 (4mA 对应 0.6V)
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">slope_k</span> <span class="o">=</span> <span class="mf">1.6f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.0f</span> <span class="o">-</span> <span class="mf">0.60f</span><span class="p">);</span>    <span class="c1">// 默认斜率
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="mf">0.60f</span><span class="p">;</span>              <span class="c1">// 滤波后的电压变量
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">calibration_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>             <span class="c1">// 标定标志位
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END PV */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 0 */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">__io_putchar</span><span class="p">(</span><span class="kt">int</span> <span class="n">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">HAL_MAX_DELAY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 写入函数（保存参数）
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define FLASH_USER_START_ADDR   0x0800FC00   </span><span class="c1">// 最后一页地址
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="n">slope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 使用指针强转，把 float 变成 uint32_t 存入数组
+</span></span></span><span class="line"><span class="cl">    <span class="n">data_to_save</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_to_save</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">slope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Unlock</span><span class="p">();</span> <span class="c1">// 解锁
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 擦除最后一页
+</span></span></span><span class="line"><span class="cl">    <span class="n">FLASH_EraseInitTypeDef</span> <span class="n">EraseInitStruct</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">PageError</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">TypeErase</span> <span class="o">=</span> <span class="n">FLASH_TYPEERASE_PAGES</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">PageAddress</span> <span class="o">=</span> <span class="n">FLASH_USER_START_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">NbPages</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASHEx_Erase</span><span class="p">(</span><span class="o">&amp;</span><span class="n">EraseInitStruct</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">PageError</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 写入数据
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Program</span><span class="p">(</span><span class="n">FLASH_TYPEPROGRAM_WORD</span><span class="p">,</span> <span class="n">FLASH_USER_START_ADDR</span><span class="p">,</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Program</span><span class="p">(</span><span class="n">FLASH_TYPEPROGRAM_WORD</span><span class="p">,</span> <span class="n">FLASH_USER_START_ADDR</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Lock</span><span class="p">();</span> <span class="c1">// 上锁
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 读取函数（开机加载）
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">slope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">raw_zero</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">__IO</span> <span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_USER_START_ADDR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">raw_slope</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">__IO</span> <span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_USER_START_ADDR</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果 FLASH 是空的（0xFFFFFFFF），则不加载，维持默认值
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">raw_zero</span> <span class="o">!=</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">zero</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">raw_zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">slope</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">raw_slope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 0 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 为了精准，建议先进行 ADC 校准（F1系列特有�?
+</span></span></span><span class="line"><span class="cl">  <span class="nf">HAL_ADCEx_Calibration_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 核心命令：启�? ADC + DMA
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 参数：ADC句柄，存储的目标地址，要搬运的数据个�?
+</span></span></span><span class="line"><span class="cl">  <span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">adc_buffer</span><span class="p">,</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 开机加载校准数据
+</span></span></span><span class="line"><span class="cl">  <span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">adc_buffer</span><span class="p">,</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 1. 信号采集与双重滤波 ---
+</span></span></span><span class="line"><span class="cl">      <span class="kt">uint32_t</span> <span class="n">sum_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SAMPLES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">sum_A</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 原始电压计算 (基于 3.3V 理论值，若需更准可换回 VREFINT 公式)
+</span></span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">raw_volt_A</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_A</span> <span class="o">/</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 一阶滞后滤波
+</span></span></span><span class="line"><span class="cl">      <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">raw_volt_A</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">volt</span> <span class="o">=</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 2. 零点校准逻辑 (PB0) ---
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// 初步去抖
+</span></span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">volt</span><span class="p">;</span> <span class="c1">// 记录当前电压为新零点
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">              <span class="c1">// 亮灯反馈
+</span></span></span><span class="line"><span class="cl">              <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">              <span class="c1">// 在零点校准成功后的位置
+</span></span></span><span class="line"><span class="cl">              <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span> <span class="c1">// 同步保存到 FLASH
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">              <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 等待松开
+</span></span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 3. 满量程校准逻辑 (PB1) ---
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="c1">// 核心逻辑：斜率 k = 标准压力 / (当前满量程电压 - 零点电压)
+</span></span></span><span class="line"><span class="cl">              <span class="kt">float</span> <span class="n">v_diff</span> <span class="o">=</span> <span class="n">volt</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">              <span class="k">if</span> <span class="p">(</span><span class="n">v_diff</span> <span class="o">&gt;</span> <span class="mf">0.1f</span><span class="p">)</span> <span class="c1">// 安全检查：确保满位电压确实大于零点电压
+</span></span></span><span class="line"><span class="cl">              <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                  <span class="c1">// 在满量程校准成功后的位置
+</span></span></span><span class="line"><span class="cl">                  <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                  <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span> <span class="c1">// 同步保存到 FLASH
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                  <span class="c1">// 成功后快闪两次灯
+</span></span></span><span class="line"><span class="cl">                  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                      <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                      <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">              <span class="p">}</span>
+</span></span><span class="line"><span class="cl">              <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 4. 最终工业参数换算 ---
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// 计算电流 (mA)
+</span></span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">current_mA</span> <span class="o">=</span> <span class="p">(</span><span class="n">volt</span> <span class="o">/</span> <span class="n">R_SAMPLE</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 计算校准后的压力
+</span></span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="p">(</span><span class="n">volt</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope_k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 负数截断保护
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">calibrated_pressure</span> <span class="o">&lt;</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 5. VOFA+ 数据输出 ---
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// 通道说明：1.电流(mA), 2.校准后压力(MPa), 3.零点偏置电压(V), 4.当前斜率k
+</span></span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%.2f,%.3f,%.3f,%.4f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="n">current_mA</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="n">calibrated_pressure</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="n">zero_offset_volt</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// 10Hz 刷新率，适合观察
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
 </section>
 
 

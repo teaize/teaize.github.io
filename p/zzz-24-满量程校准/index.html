@@ -321,6 +321,12 @@
             <li><a href="#你的代码可以增加的高级感">你的代码可以增加的“高级感”</a></li>
           </ol>
         </li>
+        <li><a href="#校零函数和满量程校准函数">校零函数和满量程校准函数</a>
+          <ol>
+            <li><a href="#1-校零函数-zero-calibration">1. 校零函数 (Zero Calibration)</a></li>
+            <li><a href="#2-满量程校准函数-span-calibration">2. 满量程校准函数 (Span Calibration)</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -825,7 +831,43 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><h3 id="校零函数和满量程校准函数">校零函数和满量程校准函数
+</h3><h4 id="1-校零函数-zero-calibration">1. 校零函数 (Zero Calibration)
+</h4><p><strong>核心逻辑：截距修正 (Offset Correction)</strong></p>
+<p>在传感器没有任何压力（或通入零点标准气）时，记录当前的输出。</p>
+<ul>
+<li>核心公式：$$V_{zero} = V_{current_filtered}$$</li>
+<li>代码动作：
+<ol>
+<li>确保系统处于“零状态”（如通入纯氮气）。</li>
+<li>读取经过滤波后的稳定电压值。</li>
+<li>将该值覆盖保存到 <code>zero_offset_volt</code> 变量中。</li>
+</ol>
+</li>
+<li><strong>物理意义</strong>：告诉单片机：“不管电路漂移到了多少伏，从这一刻起，这个电压就代表 0 MPa。”</li>
+</ul>
+<h4 id="2-满量程校准函数-span-calibration">2. 满量程校准函数 (Span Calibration)
+</h4><p><strong>核心逻辑：增益/斜率修正 (Gain/Slope Correction)</strong></p>
+<p>在传感器承受标准满量程压力（如 1.6MPa）时，调整输出的放大倍数。</p>
+<ul>
+<li>
+<p>核心公式：$$Slope_K = \frac{P_{nominal}}{V_{full} - V_{zero}}$$
+(其中 $P_{nominal}$ 是你预设的标准值，如 1.6)</p>
+</li>
+<li>
+<p>代码动作：</p>
+<ol>
+<li>确保系统处于“满量程状态”（如通入 1.6MPa 压力）。</li>
+<li>计算当前的有效压差：<code>v_diff = V_current - V_zero</code>。</li>
+<li>安全检查：判断 <code>v_diff</code> 是否足够大（防止除以 0 或误操作）。</li>
+<li>计算并更新斜率 <code>slope_k</code>。</li>
+</ol>
+</li>
+<li>
+<p><strong>物理意义</strong>：告诉单片机：“<strong>现在压力是 1.6，电压差是这么大，请计算出每一伏电压代表多少 MPa</strong>。”</p>
+</li>
+</ul>
+
 </section>
 
 
