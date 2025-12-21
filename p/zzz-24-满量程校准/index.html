@@ -1,0 +1,1038 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[ZZZ-23-零点校准]]，演示的案例中【硬件】和【单片机配置】大体相同\n如果说“零点校准”是修正坐标轴的起点，那么“满量程校准”就是修正坐标轴的斜率。\n">
+<title>ZZZ-24-满量程校准</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-24-%E6%BB%A1%E9%87%8F%E7%A8%8B%E6%A0%A1%E5%87%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-24-满量程校准">
+<meta property='og:description' content="本篇继 [[ZZZ-23-零点校准]]，演示的案例中【硬件】和【单片机配置】大体相同\n如果说“零点校准”是修正坐标轴的起点，那么“满量程校准”就是修正坐标轴的斜率。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-24-%E6%BB%A1%E9%87%8F%E7%A8%8B%E6%A0%A1%E5%87%86/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-24-满量程校准">
+<meta name="twitter:description" content="本篇继 [[ZZZ-23-零点校准]]，演示的案例中【硬件】和【单片机配置】大体相同\n如果说“零点校准”是修正坐标轴的起点，那么“满量程校准”就是修正坐标轴的斜率。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1-为什么要进行满量程校准">1. 为什么要进行满量程校准？</a></li>
+        <li><a href="#2-数学模型从-yx-b-到-ykx-b">2. 数学模型：从 $y=x-b$ 到 $y=k(x-b)$</a></li>
+        <li><a href="#3-代码实现方案">3. 代码实现方案</a></li>
+        <li><a href="#4校准实验">4、校准实验</a>
+          <ol>
+            <li><a href="#1-零点漂移被零点偏置电压吸收">1. 零点漂移被“零点偏置电压”吸收</a></li>
+            <li><a href="#2-量程漂移被斜率吸收">2. 量程漂移被“斜率”吸收</a></li>
+          </ol>
+        </li>
+        <li><a href="#满量程校准中的安全检查">满量程校准中的安全检查</a>
+          <ol>
+            <li><a href="#预防数学炸弹防止除以零">预防“数学炸弹”：防止除以零</a></li>
+            <li><a href="#操作防错防止误触发标定">操作防错：防止“误触发”标定</a></li>
+            <li><a href="#为什么是-01f-这个值">为什么是 0.1f 这个值？</a></li>
+          </ol>
+        </li>
+        <li><a href="#关于零点偏置电压和斜率">关于零点偏置电压和斜率</a>
+          <ol>
+            <li><a href="#1-如果零点偏置电压偏离过大">1. 如果“零点偏置电压”偏离过大</a></li>
+            <li><a href="#2-如果斜率-k偏离过大">2. 如果“斜率 $k$”偏离过大</a></li>
+            <li><a href="#cems-工业实战中的判定逻辑">CEMS 工业实战中的判定逻辑</a></li>
+            <li><a href="#你的代码可以增加的高级感">你的代码可以增加的“高级感”</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-24-%E6%BB%A1%E9%87%8F%E7%A8%8B%E6%A0%A1%E5%87%86/">ZZZ-24-满量程校准</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-21</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>本篇继 [[ZZZ-23-零点校准]]，演示的案例中【硬件】和【单片机配置】大体相同</p>
+<blockquote>
+<p>如果说“零点校准”是修正坐标轴的<strong>起点</strong>，那么“满量程校准”就是修正坐标轴的<strong>斜率</strong>。</p>
+</blockquote>
+<h3 id="1-为什么要进行满量程校准">1. 为什么要进行满量程校准？
+</h3><p>即使你把零点对齐了（4mA 对应 0），传感器在测量高浓度或高压力时，依然可能产生偏差。</p>
+<ul>
+<li>原因：传感器内部的放大电路增益可能随温度变化，或者传感器探头灵敏度衰减。</li>
+<li>结果：原本 $20mA$ 应该代表 $1.6,MPa$，结果传感器只输出了 $19.5mA$。</li>
+<li>校准逻辑：我们需要给传感器一个“标准参考值”（如标准气体或已知压力），告诉单片机：“这就是满量程，请记住现在的斜率。”。</li>
+</ul>
+<h3 id="2-数学模型从-yx-b-到-ykx-b">2. 数学模型：从 $y=x-b$ 到 $y=k(x-b)$
+</h3><p>我们之前的压力计算公式可以抽象为：$$Pressure = k \cdot (V_{measured} - V_{zero})$$</p>
+<ul>
+<li><strong>$V_{zero}$</strong>：零点电压（通过零点校准获得）。</li>
+<li><strong>$k$ (斜率)</strong>：这是满量程校准要修正的对象。</li>
+</ul>
+<p>满量程校准的推导：当你施加一个标准满量程压力（如 $1.6,MPa$）时，记下当前的电压 $V_{full_measured}$。
+那么新的斜率 $k$ 应该是：$$k = \frac{P_{nominal}}{V_{full_measured} - V_{zero}}$$
+其中 $P_{nominal}$ 是标准值的额定压力（如 1.6Mpa）</p>
+<h3 id="3-代码实现方案">3. 代码实现方案
+</h3><p>我们需要再增加一个按键逻辑（例如按键接到 PB1）来触发“满量程校准”。</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221203135621.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221203135621.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN Includes */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END Includes */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN PV */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SAMPLES 10  					</span><span class="c1">// 每个通道采样 10 次
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define CHANNELS 2 						</span><span class="c1">// 共 2 个通道
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span> <span class="c1">// 长度为 20 的数组
+</span></span></span><span class="line"><span class="cl"><span class="c1">// --- 核心标定参数 ---
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">float</span> <span class="n">P_NOMINAL</span> <span class="o">=</span> <span class="mf">1.6f</span><span class="p">;</span>             <span class="c1">// 满量程标定时的标准压力值 (MPa)
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">float</span> <span class="n">R_SAMPLE</span> <span class="o">=</span> <span class="mf">150.0f</span><span class="p">;</span>            <span class="c1">// 采样电阻 150 欧
+</span></span></span><span class="line"><span class="cl"><span class="k">const</span> <span class="kt">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.15f</span><span class="p">;</span>                <span class="c1">// 一阶滞后滤波系数
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// --- 标定状态变量 ---
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="mf">0.60f</span><span class="p">;</span>           <span class="c1">// 默认零点电压 (4mA 对应 0.6V)
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">slope_k</span> <span class="o">=</span> <span class="mf">1.6f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.0f</span> <span class="o">-</span> <span class="mf">0.60f</span><span class="p">);</span>    <span class="c1">// 默认斜率
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="mf">0.60f</span><span class="p">;</span>              <span class="c1">// 滤波后的电压变量
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">calibration_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>             <span class="c1">// 标定标志位
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END PV */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 为了精准，建议先进行 ADC 校准（F1系列特有）
+</span></span></span><span class="line"><span class="cl">  <span class="nf">HAL_ADCEx_Calibration_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 核心命令：启动 ADC + DMA
+</span></span></span><span class="line"><span class="cl">  <span class="c1">// 参数：ADC句柄，存储的目标地址，要搬运的数据个数
+</span></span></span><span class="line"><span class="cl">  <span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">adc_buffer</span><span class="p">,</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 1. 信号采集与双重滤波 ---
+</span></span></span><span class="line"><span class="cl">      <span class="kt">uint32_t</span> <span class="n">sum_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SAMPLES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">sum_A</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// 原始电压计算 (基于 3.3V 理论值，若需更准可换回 VREFINT 公式)
+</span></span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">raw_volt_A</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_A</span> <span class="o">/</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// 一阶滞后滤波
+</span></span></span><span class="line"><span class="cl">      <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">raw_volt_A</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">volt</span> <span class="o">=</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 2. 零点校准逻辑 (PB0) ---
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// 初步去抖
+</span></span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">volt</span><span class="p">;</span> <span class="c1">// 记录当前电压为新零点
+</span></span></span><span class="line"><span class="cl">              
+</span></span><span class="line"><span class="cl">              <span class="c1">// 亮灯反馈
+</span></span></span><span class="line"><span class="cl">              <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">              <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">              
+</span></span><span class="line"><span class="cl">              <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 等待松开
+</span></span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 3. 满量程校准逻辑 (PB1) ---
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">          <span class="p">{</span>
+</span></span><span class="line"><span class="cl">              <span class="c1">// 核心逻辑：斜率 k = 标准压力 / (当前满量程电压 - 零点电压)
+</span></span></span><span class="line"><span class="cl">              <span class="kt">float</span> <span class="n">v_diff</span> <span class="o">=</span> <span class="n">volt</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">              
+</span></span><span class="line"><span class="cl">              <span class="k">if</span> <span class="p">(</span><span class="n">v_diff</span> <span class="o">&gt;</span> <span class="mf">0.1f</span><span class="p">)</span> <span class="c1">// 安全检查：确保满位电压确实大于零点电压
+</span></span></span><span class="line"><span class="cl">              <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                  
+</span></span><span class="line"><span class="cl">                  <span class="c1">// 成功后快闪两次灯
+</span></span></span><span class="line"><span class="cl">                  <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                      <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                      <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">              <span class="p">}</span>
+</span></span><span class="line"><span class="cl">              <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 4. 最终工业参数换算 ---
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// 计算电流 (mA)
+</span></span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">current_mA</span> <span class="o">=</span> <span class="p">(</span><span class="n">volt</span> <span class="o">/</span> <span class="n">R_SAMPLE</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// 计算校准后的压力
+</span></span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="p">(</span><span class="n">volt</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope_k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="c1">// 负数截断保护
+</span></span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="n">calibrated_pressure</span> <span class="o">&lt;</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// --- 5. VOFA+ 数据输出 ---
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// 通道说明：1.电流(mA), 2.校准后压力(MPa), 3.零点偏置电压(V), 4.当前斜率k
+</span></span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%.2f,%.3f,%.3f,%.4f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">current_mA</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">calibrated_pressure</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">zero_offset_volt</span><span class="p">,</span> 
+</span></span><span class="line"><span class="cl">              <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span> <span class="c1">// 10Hz 刷新率，适合观察
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="4校准实验">4、校准实验
+</h3><p>校准零点前
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221204654926.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221204654926.png" alt=""  />
+		</a>
+	</div>
+
+
+校准零点后
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221204750064.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221204750064.png" alt=""  />
+		</a>
+	</div>
+
+
+校准满量程后
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221204520043.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221204520043.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h4 id="1-零点漂移被零点偏置电压吸收">1. 零点漂移被“零点偏置电压”吸收
+</h4><ul>
+<li>物理现象：传感器在没有压力时，输出原本应该是 $0.6V$，但因为环境温度或老化变成了 $0.65V$。这多出来的 $0.05V$ 就是“零点漂移”。</li>
+<li>数学处理：你通过校准，把变量 <code>zero_offset_volt</code> 从 $0.6$ 改成了 $0.65$。</li>
+<li>理解：在公式 $(volt - zero_offset_volt)$ 中，那个多出来的 $0.05V$ 确实被 <code>zero_offset_volt</code> 抵消（吸收）掉了。坐标轴的起点被你平移到了现在真实的位置上。</li>
+</ul>
+<h4 id="2-量程漂移被斜率吸收">2. 量程漂移被“斜率”吸收
+</h4><ul>
+<li>物理现象：传感器现在的“力气”变小了。以前增加 $2.4V$ 代表增加 $1.6,MPa$，现在增加 $2.4V$ 只能代表增加 $1.5,MPa$ 了。</li>
+<li>数学处理：你通过满量程校准，重新计算了 <code>slope_k</code>。</li>
+<li>理解：新的 <code>slope_k</code> 变大了，它通过补偿增益的方式，“吸收”了传感器灵敏度的下降。它把斜斜的曲线重新拉回到了正确的高度。</li>
+</ul>
+<p>换句话说，在工业仪表中，我们把传感器的所有“不完美”都归结为两个参数：</p>
+<ul>
+<li>截距 (Intercept)：由 <code>zero_offset_volt</code> 承载，解决“<strong>从哪开始</strong>”的问题。</li>
+<li>增益 (Gain/Slope)：由 <code>slope_k</code> 承载，解决“<strong>走多快</strong>”的问题。</li>
+</ul>
+<h3 id="满量程校准中的安全检查">满量程校准中的安全检查
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// --- 3. 满量程校准逻辑 (PB1) ---
+</span></span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="c1">// 核心逻辑：斜率 k = 标准压力 / (当前满量程电压 - 零点电压)
+</span></span></span><span class="line"><span class="cl">	<span class="kt">float</span> <span class="n">v_diff</span> <span class="o">=</span> <span class="n">volt</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	
+</span></span><span class="line"><span class="cl">	<span class="k">if</span> <span class="p">(</span><span class="n">v_diff</span> <span class="o">&gt;</span> <span class="mf">0.1f</span><span class="p">)</span> <span class="c1">// 安全检查：确保满位电压确实大于零点电压
+</span></span></span><span class="line"><span class="cl">	<span class="p">{</span>
+</span></span><span class="line"><span class="cl">	    <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	    
+</span></span><span class="line"><span class="cl">	    <span class="c1">// 成功后快闪两次灯
+</span></span></span><span class="line"><span class="cl">	    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span> <span class="n">i</span><span class="o">&lt;</span><span class="mi">4</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		 <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">		 <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">	<span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里重点关注：<code>if (v_diff &gt; 0.1f)</code> ，为什么要这么写：</p>
+<h4 id="预防数学炸弹防止除以零">预防“数学炸弹”：防止除以零
+</h4><p>在满量程标定中，斜率的计算公式是：$$k = \frac{P_{NOMINAL}}{V_{full} - V_{zero}}$$</p>
+<ul>
+<li>风险：如果 $V_{full}$ 等于 $V_{zero}$（即 <code>v_diff</code> 为 0），程序在执行除法时会触发<strong>硬件异常</strong>或者得到一个<strong>无穷大（Inf）</strong>。</li>
+<li>后果：这会导致你的 <code>calibrated_pressure</code> 变成乱码，甚至导致单片机程序卡死或复位。</li>
+<li>保护：<code>0.1f</code> 作为一个门槛，确保了分母永远是一个有意义的正数。</li>
+</ul>
+<h4 id="操作防错防止误触发标定">操作防错：防止“误触发”标定
+</h4><p>在 CEMS（烟气在线监测系统）的现场维护中，操作员可能会忙中出错：</p>
+<ul>
+<li>误触：操作员本想按零点标定，却按成了满量程标定。此时传感器还没有通入标准压力或标气。</li>
+<li>逻辑：此时 $V_{full}$ 几乎等于 $V_{zero}$。如果没有这个检查，单片机就会把微小的噪声（比如 $0.001V$ 的波动）当成整个量程的跨度。</li>
+<li>结果：你会得到一个超级巨大的斜率 $k$。标定完后，哪怕空气稍微波动一下，显示屏上的压力数值都会疯狂飙升。</li>
+<li>保护：通过检查，如果差值不到 $0.1V$，程序就会认为“这次标定不合法”，从而拒绝更新 <code>slope_k</code>。</li>
+</ul>
+<h4 id="为什么是-01f-这个值">为什么是 0.1f 这个值？
+</h4><p>这个值不是绝对的，它是根据你的硬件环境估算的：</p>
+<ul>
+<li><strong>0.1V</strong> 对应 12 位 ADC 约 <strong>124 个数值</strong>（$4095 \times \frac{0.1}{3.3}$）。</li>
+<li>对于你的传感器（$0.6V \sim 3.0V$），总跨度是 $2.4V$。$0.1V$ 约占满量程跨度的 <strong>4%</strong>。</li>
+<li><strong>建议</strong>：如果你在更复杂的工业现场发现干扰很大，可以将这个值调高到 <code>0.2f</code> 或 <code>0.3f</code>。</li>
+</ul>
+<h3 id="关于零点偏置电压和斜率">关于零点偏置电压和斜率
+</h3><blockquote>
+<p>如果零点偏置电压和斜率，被校准得偏离初始值非常大，会出现什么现象</p>
+</blockquote>
+<p>在 CEMS（烟气在线监测系统）的运维中，如果校准参数（零点和斜率）偏离初始值过大，通常意味着<strong>系统正在失去“测量能力”</strong>。这种现象在工业上被称为“<strong>量程压缩</strong>”或“<strong>分辨率退化</strong>”。我们可以把这种情况形象地比喻成“老花镜”失效了。</p>
+<h4 id="1-如果零点偏置电压偏离过大">1. 如果“零点偏置电压”偏离过大
+</h4><p>假设原本零点是 $0.6V$，现在被校准到了 $2.0V$。</p>
+<ul>
+<li>现象 A：有效量程变窄（Range Compression）
+<ul>
+<li>STM32 的 ADC 最高只能测到 $3.3V$。如果零点占用了 $2.0V$，那么留给实际信号的范围就只剩下 $3.3V - 2.0V = 1.3V$。<strong>原本你可以用 $2.4V$ 的跨度来表现 $1.6,MPa$，现在只能用一半的电压范围来表现，测量精度直接减半</strong>。</li>
+</ul>
+</li>
+<li>现象 B：提前出现“削顶”
+<ul>
+<li>当压力还没达到满量程时，ADC 已经读到了 $4095$（满位）。在 VOFA+ 上你会看到压力曲线在还没到顶时就变成了一条平平的直线，数据丢了。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-如果斜率-k偏离过大">2. 如果“斜率 $k$”偏离过大
+</h4><p>斜率 $k$ 本质上是一个“放大倍数”。</p>
+<ul>
+<li>情况一：$k$ 变得特别大（高增益）
+<ul>
+<li>现象：系统变得<strong>极其敏感且神经质</strong>。哪怕 ADC 只有 1 个数值的微小跳动，乘以巨大的 $k$ 之后，显示的压力值都会在 VOFA+ 上剧烈抖动。</li>
+<li>本质：<strong>你正在放大噪声</strong>。<strong>这种情况通常说明传感器已经“衰减”得很厉害了，给出的信号极其微弱，你不得不拼命放大它</strong>。</li>
+</ul>
+</li>
+<li>情况二：$k$ 变得特别小（低增益）
+<ul>
+<li>现象：系统变得<strong>迟钝</strong>。无论你如何调节电位器，压力数值几乎不动，或者变化非常缓慢。</li>
+<li>本质：这通常发生在误操作标定时，或者传感器发生了“短路”性质的故障。</li>
+</ul>
+</li>
+</ul>
+<h4 id="cems-工业实战中的判定逻辑">CEMS 工业实战中的判定逻辑
+</h4><p>在专业的 CEMS 仪表中，我们不会任由参数无限偏离。我们会设置“标定限值（Calibration Limits）”**：</p>
+<blockquote>
+<p><strong>工业逻辑示例：</strong></p>
+<ul>
+<li>如果 <code>zero_offset_volt</code> 偏离初始值超过 $\pm 20%$。</li>
+<li>或者 <code>slope_k</code> 偏离初始值超过 $\pm 30%$。</li>
+<li><strong>结果</strong>：单片机直接报错 <strong>“Calibration Error”</strong>，并拒绝更新参数。</li>
+</ul>
+</blockquote>
+<p>为什么要这样做？因为参数偏离这么大，说明不是简单的漂移，而是硬件出问题了：</p>
+<ol>
+<li>传感器探头脏了（需要清洗）。</li>
+<li>气路漏气了（标气没通进去）。</li>
+<li>传感器彻底老化（需要更换）。</li>
+</ol>
+<h4 id="你的代码可以增加的高级感">你的代码可以增加的“高级感”
+</h4><p>你可以给你的代码加一个小小的“安全锁”，防止校准出荒唐的数据：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="n">v_diff</span> <span class="o">&gt;</span> <span class="mf">0.5f</span> <span class="o">&amp;&amp;</span> <span class="n">v_diff</span> <span class="o">&lt;</span> <span class="mf">2.8f</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 检查有效跨度是否在合理范围内
+</span></span></span><span class="line"><span class="cl">    <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 报错：量程偏差过大，维持旧斜率不变
+</span></span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;Calibration Failed: Sensor Out of Range!</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
