@@ -1,0 +1,946 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="在工业开发（如 CEMS）中，VOFA+ 配合串口（UART）简直是“神兵利器”。它能把枯燥的数字变成实时的波形图，让你一眼看出传感器的数据稳不稳定、有没有噪声。\n">
+<title>ZZZ-21-串口通讯&#43;VOFA</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-21-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF-vofa/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-21-串口通讯+VOFA">
+<meta property='og:description' content="在工业开发（如 CEMS）中，VOFA+ 配合串口（UART）简直是“神兵利器”。它能把枯燥的数字变成实时的波形图，让你一眼看出传感器的数据稳不稳定、有没有噪声。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-21-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF-vofa/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-21T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-21T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-21-串口通讯+VOFA">
+<meta name="twitter:description" content="在工业开发（如 CEMS）中，VOFA+ 配合串口（UART）简直是“神兵利器”。它能把枯燥的数字变成实时的波形图，让你一眼看出传感器的数据稳不稳定、有没有噪声。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#编写代码-mainc">编写代码 (main.c)</a>
+          <ol>
+            <li><a href="#第一步定义更大的缓冲区">第一步：定义更大的缓冲区</a></li>
+            <li><a href="#第二步启动采集">第二步：启动采集</a></li>
+            <li><a href="#第三步数据平均处理并发送">第三步：数据平均处理并发送</a></li>
+          </ol>
+        </li>
+        <li><a href="#配置-vofa-工具">配置 VOFA+ 工具</a></li>
+      </ol>
+    </li>
+    <li><a href="#进阶挑战工频干扰">进阶挑战：工频干扰</a>
+      <ol>
+        <li><a href="#为什么会出现圈-3-的波动">为什么会出现圈 (3) 的波动</a></li>
+        <li><a href="#利用算法把这些毛刺磨平">利用“算法”把这些毛刺“磨平”</a>
+          <ol>
+            <li><a href="#1-滤波原理公式">1. 滤波原理公式</a></li>
+            <li><a href="#2-代码实现">2. 代码实现</a></li>
+          </ol>
+        </li>
+        <li><a href="#数据的逻辑映射">数据的逻辑映射</a>
+          <ol>
+            <li><a href="#尝试编写一个映射函数">尝试编写一个“映射函数”</a></li>
+            <li><a href="#在-vofa-中观察">在 VOFA+ 中观察</a></li>
+          </ol>
+        </li>
+        <li><a href="#思考为什么用-30v-对应-100mgm3">思考：为什么用 $3.0V$ 对应 $100,mg/m^3$</a>
+          <ol>
+            <li><a href="#1留出安全冗余度headroom">1、留出“安全冗余度”（Headroom）</a></li>
+            <li><a href="#2电压波动风险">2、电压波动风险</a></li>
+            <li><a href="#3线性区的保护">3、线性区的保护</a></li>
+            <li><a href="#总结这就是工程思维">总结：这就是“工程思维”</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-21-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AF-vofa/">ZZZ-21-串口通讯&#43;VOFA</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-21</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>在工业开发（如 CEMS）中，<strong>VOFA+</strong> 配合串口（UART）简直是“神兵利器”。它能把枯燥的数字变成实时的波形图，让你一眼看出传感器的数据稳不稳定、有没有噪声。</p>
+<p>这里我们使用 [[ZZZ-18-ADC多通道采集]]、[[ZZZ-19-ADC采样数据滤波]] 中对单片机的配置【两个传感器、串口通讯、扫描模式 (Scan) + 循环模式 (Circular) + DMA】
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221144914068.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221144914068.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="编写代码-mainc">编写代码 (main.c)
+</h3><h4 id="第一步定义更大的缓冲区">第一步：定义更大的缓冲区
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN PV */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SAMPLES 10  </span><span class="c1">// 每个通道采样 10 次
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define CHANNELS 2 </span><span class="c1">// 共 2 个通道
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span> <span class="c1">// 长度为 20 的数组
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END PV */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第二步启动采集">第二步：启动采集
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// 为了精准，建议先进行 ADC 校准（F1系列特有＿
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_ADCEx_Calibration_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 核心命令：启势 ADC + DMA
+</span></span></span><span class="line"><span class="cl"><span class="c1">// 参数：ADC句柄，存储的目标地址，要搬运的数据个数
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">adc_buffer</span><span class="p">,</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="第三步数据平均处理并发送">第三步：数据平均处理并发送
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN WHILE */</span>
+</span></span><span class="line"><span class="cl">  <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">uint32_t</span> <span class="n">sum_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">uint32_t</span> <span class="n">sum_B</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 1. 从 DMA 缓冲区计算平均值（让你看到的波形更平滑）
+</span></span></span><span class="line"><span class="cl">      <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SAMPLES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="n">sum_A</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span>     <span class="c1">// 通道 A
+</span></span></span><span class="line"><span class="cl">          <span class="n">sum_B</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">CHANNELS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span> <span class="c1">// 通道 B
+</span></span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      
+</span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">volt_A</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_A</span> <span class="o">/</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="kt">float</span> <span class="n">volt_B</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_B</span> <span class="o">/</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 2. 核心步骤：按照 VOFA+ 的 FireWater 协议打印
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// 注意：末尾必须有 \n，VOFA+ 靠它来识别一帧数据的结束
+</span></span></span><span class="line"><span class="cl">      <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%.3f,%.3f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">volt_A</span><span class="p">,</span> <span class="n">volt_B</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="c1">// 3. 适当延时
+</span></span></span><span class="line"><span class="cl">      <span class="c1">// VOFA+ 绘图能力很强，10ms~100ms 都可以。这里设为 20ms，波形会很丝滑
+</span></span></span><span class="line"><span class="cl">      <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE END WHILE */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>在 VOFA+ 的 FireWater 协议中，如何同时发送多个数据通道?
+使用 <code>printf</code> 以逗号分隔数值，并以 <code>\n</code> 结尾。例如：<code>printf(&quot;%f,%f\n&quot;, val1, val2);</code>。</p>
+</blockquote>
+<h3 id="配置-vofa-工具">配置 VOFA+ 工具
+</h3><ul>
+<li>打开 VOFA+，点击左侧的“小齿轮”图标（设置）。</li>
+<li>数据引擎 (Data Engine)：选择 <strong>FireWater</strong>。</li>
+<li>连接配置：
+<ul>
+<li>选择你的 <strong>COM 口</strong>（和烧录器/串口线对应）。</li>
+<li><strong>波特率</strong>：检查你在 CubeMX 里的设置，通常是 <strong>115200</strong>。</li>
+</ul>
+</li>
+<li>开始运行：点击右上角的红色圆圈（连接）。</li>
+<li>添加波形图：
+<ul>
+<li>右键点击空白处 -&gt; <strong>控件</strong> -&gt; <strong>Waveform</strong>（波形图）。</li>
+<li>此时你应该能看到两条线在跳动了！</li>
+</ul>
+</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221145732234.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221145732234.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221145841345.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221145841345.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h2 id="进阶挑战工频干扰">进阶挑战：工频干扰
+</h2><p>用手摸一下 ADC 的输入引脚，如（3）所示，波形因为人体感应电产生了剧烈的波动，这就是噪声，之后我们会用算法滤掉它</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221150236586.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221150236586.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="为什么会出现圈-3-的波动">为什么会出现圈 (3) 的波动
+</h3><p>你观察到的这个波动非常典型。当你的输入引脚（ADC 通道）处于<strong>高阻抗</strong>状态（比如拔掉了电位器，引脚悬空或者只由人体接触时），它就像一根“天线”，会吸收空间中的电磁干扰，最主要的就是环境中的 <strong>50Hz 市电工频干扰</strong>。</p>
+<h3 id="利用算法把这些毛刺磨平">利用“算法”把这些毛刺“磨平”
+</h3><p>为了应对你观察到的圈 (3) 这种干扰，工业界最常用的方案是 <strong>一阶滞后滤波 (First-order Lag Filter)</strong>。它比简单的算术平均值更节省内存，且波形更加平滑。</p>
+<h4 id="1-滤波原理公式">1. 滤波原理公式
+</h4><p>$$Y(n) = \alpha \cdot X(n) + (1 - \alpha) \cdot Y(n-1)$$</p>
+<ul>
+<li>$X(n)$：本次采样的原始值。</li>
+<li>$Y(n-1)$：上一次滤波后的输出值。</li>
+<li>$\alpha$：滤波系数（$0 &lt; \alpha &lt; 1$）。
+<ul>
+<li>$\alpha$ 越小，波形越平滑，但响应越慢；$\alpha$ 越大，波形越灵敏，但滤除噪声能力弱。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-代码实现">2. 代码实现
+</h4><p>可以直接在 <code>while(1)</code> 循环上方定义一个静态变量来存储“上一次的值”，并应用这个公式。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">  <span class="o">/*</span> <span class="n">USER</span> <span class="n">CODE</span> <span class="n">BEGIN</span> <span class="mi">1</span> <span class="o">*/</span>
+</span></span><span class="line"><span class="cl">  <span class="n">static</span> <span class="nb">float</span> <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="mf">0.0</span><span class="n">f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">const</span> <span class="nb">float</span> <span class="n">alpha</span> <span class="o">=</span> <span class="mf">0.15</span><span class="n">f</span><span class="p">;</span> <span class="o">//</span> <span class="n">滤波系数</span><span class="err">，</span><span class="n">你可以尝试修改这个值观察</span> <span class="n">VOFA</span><span class="o">+</span> <span class="n">上的变化</span>
+</span></span><span class="line"><span class="cl">  <span class="o">/*</span> <span class="n">USER</span> <span class="n">CODE</span> <span class="n">END</span> <span class="mi">1</span> <span class="o">*/</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint32_t</span> <span class="n">sum_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">uint32_t</span> <span class="n">sum_B</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 1. 计算平均值（作为原始输入值值）
+</span></span></span><span class="line"><span class="cl">	<span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">SAMPLES</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sum_A</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">		<span class="n">sum_B</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="n">CHANNELS</span> <span class="o">+</span> <span class="mi">1</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">	<span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 计算当前这一刻的原始电压
+</span></span></span><span class="line"><span class="cl">	<span class="kt">float</span> <span class="n">raw_volt_A</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_A</span> <span class="o">/</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">	<span class="kt">float</span> <span class="n">raw_volt_B</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_B</span> <span class="o">/</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 2. 核心算法：一阶滞后滤波（只对 A 进行处理作为演示）
+</span></span></span><span class="line"><span class="cl">	<span class="c1">// 公式：本次输出 = alpha * 本次采样 + (1 - alpha) * 上次输出
+</span></span></span><span class="line"><span class="cl">	<span class="n">filter_volt_A</span> <span class="o">=</span> <span class="n">alpha</span> <span class="o">*</span> <span class="n">raw_volt_A</span> <span class="o">+</span> <span class="p">(</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 3. 核心步骤：只用一个 printf，一次性发出三个数据
+</span></span></span><span class="line"><span class="cl">	<span class="c1">// VOFA+ 会识别到 3 个通道：通道0(原始A), 通道1(滤波A), 通道2(原始B)
+</span></span></span><span class="line"><span class="cl">	<span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%.3f,%.3f,%.3f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">raw_volt_A</span><span class="p">,</span> <span class="n">filter_volt_A</span><span class="p">,</span> <span class="n">raw_volt_B</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">	<span class="c1">// 4. 适当延时，20ms 对应 50Hz 的采样率，对观察干扰波形非常合适
+</span></span></span><span class="line"><span class="cl">	<span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/* USER CODE END WHILE */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>红色为原始曲线【注意，这里没有用上面所说的一阶滞后滤波，但依然用了 [[ZZZ-19-ADC采样数据滤波]] 的平均滤波】</li>
+<li>绿色为滤波之后的曲线【相对于红色曲线多了一层一阶滞后滤波】
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221152006005.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221152006005.png" alt=""  />
+		</a>
+	</div>
+
+</li>
+</ul>
+<p>如果去掉 [[ZZZ-19-ADC采样数据滤波]] 中的平均滤波，直接使用一阶滞后滤波，效果如下
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221152454949.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221152454949.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<p>另外，还有一个值得学习的点是，如何根据频域图来找干扰（再 VOFA+ 中可以添加频域图）
+
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221153800773.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221153800773.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="数据的逻辑映射">数据的逻辑映射
+</h3><p>掌握了 VOFA+，就相当于拥有了一双“电子显微镜”。我们可以利用这双眼睛，把你的 STM32 变成一个真正的工业测量仪表初级原型。</p>
+<p>在 CEMS（烟气监测）领域，传感器很少直接告诉你“电压是多少”，它们通常输出的是 <strong>4-20mA 电流</strong>或 <strong>0-5V 电压</strong>，对应的是<strong>烟气浓度</strong>（比如 $0 \sim 100,mg/m^3$ 的 $SO_2$）。我们可以在代码中添加一些数学转换，让 VOFA 不再显示枯燥的电压，而是浓度</p>
+<h4 id="尝试编写一个映射函数">尝试编写一个“映射函数”
+</h4><p>假设你正在模拟一个二氧化硫（$SO_2$）传感器：</p>
+<ul>
+<li>$0.0V$ 对应 $0,mg/m^3$</li>
+<li>$3.0V$ 对应 $100,mg/m^3$</li>
+</ul>
+<p>你可以定义一个公式：$$Concentration = Voltage \times \frac{100}{3.0}$$</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="o">//</span> <span class="n">在</span> <span class="k">while</span><span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="n">里</span>
+</span></span><span class="line"><span class="cl"><span class="nb">float</span> <span class="n">so2_conc</span> <span class="o">=</span> <span class="n">filter_volt_A</span> <span class="o">*</span> <span class="p">(</span><span class="mf">100.0</span><span class="n">f</span> <span class="o">/</span> <span class="mf">3.0</span><span class="n">f</span><span class="p">);</span> <span class="o">//</span> <span class="n">计算浓度</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="o">//</span> <span class="n">发送给</span> <span class="n">VOFA</span><span class="o">+</span><span class="err">：</span><span class="n">原始电压</span><span class="err">，</span><span class="n">滤波电压</span><span class="err">，</span><span class="n">SO2浓度</span>
+</span></span><span class="line"><span class="cl"><span class="n">printf</span><span class="p">(</span><span class="s2">&#34;</span><span class="si">%.3f</span><span class="s2">,</span><span class="si">%.3f</span><span class="s2">,</span><span class="si">%.3f</span><span class="se">\n</span><span class="s2">&#34;</span><span class="p">,</span> <span class="n">raw_volt_A</span><span class="p">,</span> <span class="n">filter_volt_A</span><span class="p">,</span> <span class="n">so2_conc</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="在-vofa-中观察">在 VOFA+ 中观察
+</h4><p>可以在 VOFA+ 里同时打开两个窗口：</p>
+<ul>
+<li>左边放波形图：看电压的平滑度。</li>
+<li>右边放“数字仪表盘” (Number 控件)：直接看当前的 $SO_2$ 浓度数值。当拨动电位器时，你会发现自己正在“调节”烟气浓度。</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221155716472.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251221155716472.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="思考为什么用-30v-对应-100mgm3">思考：为什么用 $3.0V$ 对应 $100,mg/m^3$
+</h3><h4 id="1留出安全冗余度headroom">1、留出“安全冗余度”（Headroom）
+</h4><p>在现实世界中，如果你的传感器满量程刚好是 $3.3V$，而你的单片机供电也是 $3.3V$，这会带来一个很尴尬的问题：<strong>削顶（Clipping）</strong>。</p>
+<ul>
+<li>如果传感器因为某种原因（比如瞬时超标）输出了 $3.35V$，你的 ADC 读出来依然是 $4095$（对应 $3.3V$）。这意味着你丢失了超标的那部分数据，且无法判断它是刚好满量程还是已经<strong>溢出了</strong></li>
+<li>工程做法：通常会设计电路，<strong>让传感器的最大量程对应 ADC 满量程的 80%~90%</strong>（例如 $3.0V$）。这样即使信号稍微超出一点，单片机依然能捕捉到变化曲线。</li>
+</ul>
+<h4 id="2电压波动风险">2、电压波动风险
+</h4><p>单片机的 $3.3V$ 电源往往不是完美的 $3.3000V$。</p>
+<ul>
+<li>如果此时电脑 USB 供电不足，电压降到了 $3.25V$。</li>
+<li>如果你以 $3.3V$ 为标准计算，所有的测量结果都会产生<strong>比例偏差</strong>。</li>
+<li>将满量程定在 $3.0V$，可以一定程度上降低对电源绝对精准度的依赖（当然，最专业的做法是使用内部或外部的参考电压基准）。</li>
+</ul>
+<h4 id="3线性区的保护">3、线性区的保护
+</h4><p>大多数运算放大器（模拟信号处理电路）在接近电源轨（比如 $0V$ 或 $3.3V$）时，输出的<strong>线性度</strong>会变差。</p>
+<ul>
+<li>信号在 $0.5V \sim 2.8V$ 之间可能非常准，是一条直线。</li>
+<li>一旦到了 $3.2V$ 以上，曲线可能会变弯。</li>
+<li><strong>思考</strong>：为了保证 数据的精准，我们宁愿只用中间那段最准的“黄金区间”。</li>
+</ul>
+<h4 id="总结这就是工程思维">总结：这就是“工程思维”
+</h4><ul>
+<li>数学思维：$3.3V / 4096$，追求理论的极致利用。</li>
+<li>工程思维：$3.0V / 4096$，追求系统的鲁棒性（稳定性）和容错率。</li>
+</ul>
+<p>所以你会发现很多专业仪器在标定时，都会预留出 10% 的“超量程监测能力”，就是为了防止信号“顶到天花板”导致数据丢失</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
