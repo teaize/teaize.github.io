@@ -7,7 +7,25 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 21 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 22 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>HugoBlog添加时间</title>
+        <link>https://teaize.github.io/p/hugoblog%E6%B7%BB%E5%8A%A0%E6%97%B6%E9%97%B4/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/hugoblog%E6%B7%BB%E5%8A%A0%E6%97%B6%E9%97%B4/</guid>
+        <description>&lt;p&gt;测试时间&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-26-实现Modbus RTU 协议</title>
+        <link>https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu-%E5%8D%8F%E8%AE%AE/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu-%E5%8D%8F%E8%AE%AE/</guid>
+        <description>&lt;p&gt;前几篇[[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]]已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”，让它能和工业控制系统（PLC/DCS）交流&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>ZZZ-14-串口通讯UART</title>
         <link>https://teaize.github.io/p/zzz-14-%E4%B8%B2%E5%8F%A3%E9%80%9A%E8%AE%AFuart/</link>
         <pubDate>Sun, 21 Dec 2025 00:00:00 +0000</pubDate>
