@@ -17,6 +17,365 @@
 </description>
         </item>
         <item>
+        <title>XXX-00-AutoCAD入门学习大纲</title>
+        <link>https://teaize.github.io/p/xxx-00-autocad%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-00-autocad%E5%85%A5%E9%97%A8%E5%AD%A6%E4%B9%A0%E5%A4%A7%E7%BA%B2/</guid>
+        <description>&lt;p&gt;以下是制定的 AutoCAD 学习框架，分为四个阶段，帮助你从零基础快速过渡到实战水平：&lt;/p&gt;
+&lt;h2 id=&#34;第一阶段建立坐标思维入门期&#34;&gt;第一阶段：建立“坐标”思维（入门期）
+&lt;/h2&gt;&lt;p&gt;不要急着画复杂的图，先熟悉软件的操作逻辑。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;界面与基本操作： 熟悉绘图区、命令行（非常重要）、状态栏。学会缩放（滚轮）和平移（按住滚轮）。&lt;/li&gt;
+&lt;li&gt;坐标系理解： 理解绝对坐标和相对坐标（例如输入 &lt;code&gt;@100,50&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;基础绘图命令： 掌握 &lt;strong&gt;L&lt;/strong&gt; (直线)、&lt;strong&gt;C&lt;/strong&gt; (圆)、&lt;strong&gt;REC&lt;/strong&gt; (矩形)、&lt;strong&gt;PL&lt;/strong&gt; (多段线)。
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：习惯看屏幕下方的&lt;strong&gt;命令行提示&lt;/strong&gt;，它会告诉你下一步该做什么。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第二阶段高效修改与精准定位成长期&#34;&gt;第二阶段：高效修改与精准定位（成长期）
+&lt;/h2&gt;&lt;p&gt;“画”图只占 30%，“改”图占 70%。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修改命令： 熟练使用 &lt;strong&gt;CO&lt;/strong&gt; (复制)、&lt;strong&gt;M&lt;/strong&gt; (移动)、&lt;strong&gt;RO&lt;/strong&gt; (旋转)、&lt;strong&gt;TR&lt;/strong&gt; (修剪)、&lt;strong&gt;EX&lt;/strong&gt; (延伸)、&lt;strong&gt;O&lt;/strong&gt; (偏移)。&lt;/li&gt;
+&lt;li&gt;捕捉与追踪： 掌握 &lt;strong&gt;F3&lt;/strong&gt; (对象捕捉) 和 &lt;strong&gt;F11&lt;/strong&gt; (对象捕捉追踪)。这是保证图纸精准（不漏缝、不重叠）的核心。&lt;/li&gt;
+&lt;li&gt;选择技巧： 蓝色框选择与绿色框选择的区别（窗选 vs 交叉选）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第三阶段标准化与组织管理进阶期&#34;&gt;第三阶段：标准化与组织管理（进阶期）
+&lt;/h2&gt;&lt;p&gt;这是区分“业余”和“专业”的分水岭。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;图层管理 (Layer)： 学习如何分层（如：中心线层、轮廓线层、标注层）。学会控制颜色、线型和图层开关。&lt;/li&gt;
+&lt;li&gt;块 (Block) 的应用：
+&lt;ul&gt;
+&lt;li&gt;学习创建块 (B) 和插入块 (I)。&lt;/li&gt;
+&lt;li&gt;实战建议： 如果你以后涉及 CEMS 或分析仪设计，可以将常用的传感器、阀门、法兰做成“块”，随取随用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;填充 (Hatch)： 掌握 H 命令，为剖视图添加材质阴影。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;第四阶段标注输出与工程规范实战期&#34;&gt;第四阶段：标注、输出与工程规范（实战期）
+&lt;/h2&gt;&lt;p&gt;图纸是画给人看的，必须符合标准。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;标注系统： 掌握 DLI (线性标注)、DAN (角度标注)。学习设置标注样式 (D)，调整文字大小和箭头样式。&lt;/li&gt;
+&lt;li&gt;布局与打印： 理解“模型空间”与“布局空间”的区别。学习如何按比例导出为 PDF。&lt;/li&gt;
+&lt;li&gt;图框与模板： 建立自己的标准 A3/A4 图框模板，包含标题栏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;框架图&#34;&gt;框架图
+&lt;/h2&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Start((AutoCAD 学习框架)) --&gt; Phase1[第一阶段: 基础入门]
+    Start --&gt; Phase2[第二阶段: 编辑与精准]
+    Start --&gt; Phase3[第三阶段: 组织与效率]
+    Start --&gt; Phase4[第四阶段: 标准与输出]
+
+    subgraph &#34;Phase 1: 建立绘图逻辑&#34;
+    Phase1 --&gt; P1_1(软件界面与坐标系)
+    Phase1 --&gt; P1_2(基础命令: L直线/C圆/REC矩形)
+    Phase1 --&gt; P1_3(命令行交互习惯)
+    end
+
+    subgraph &#34;Phase 2: 修改与定位&#34;
+    Phase2 --&gt; P2_1(对象捕捉与追踪 F3/F11)
+    Phase2 --&gt; P2_2(修改命令: CO复制/M移动/TR修剪)
+    Phase2 --&gt; P2_3(偏移 O 与 镜像 MI)
+    end
+
+    subgraph &#34;Phase 3: 数据管理&#34;
+    Phase3 --&gt; P3_1(图层管理 Layer: 颜色/线型)
+    Phase3 --&gt; P3_2(块 Block: 零件复用与属性)
+    Phase3 --&gt; P3_3(填充 Hatch: 剖切面表达)
+    end
+
+    subgraph &#34;Phase 4: 交付与规范&#34;
+    Phase4 --&gt; P4_1(标注系统: 尺寸/文字/引线)
+    Phase4 --&gt; P4_2(布局空间 Layout 与 打印 PDF)
+    Phase4 --&gt; P4_3(国家标准: 图框与标题栏)
+    end
+
+    Phase4 --&gt; Success((达到实战水平))
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-01-AutoCAD快捷键清单</title>
+        <link>https://teaize.github.io/p/xxx-01-autocad%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B8%85%E5%8D%95/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-01-autocad%E5%BF%AB%E6%8D%B7%E9%94%AE%E6%B8%85%E5%8D%95/</guid>
+        <description>&lt;p&gt;在 CAD 圈子里，高手通常是“左手键盘，右手鼠标”：右手只管定位和点击，左手在大键盘左侧区域完成所有指令输入。&lt;/p&gt;
+&lt;h3 id=&#34;1-绘图核心最常用的笔&#34;&gt;1. 绘图核心（最常用的“笔”）
+&lt;/h3&gt;&lt;p&gt;这几个命令几乎构成了所有 2D 图形的骨架。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;L (Line)： 直线。&lt;/li&gt;
+&lt;li&gt;PL (Polyline)： 多段线。老手更爱这个，因为它是一个整体，方便后期计算周长、面积，也方便导入 SolidWorks 转换成 3D 拉伸路径。&lt;/li&gt;
+&lt;li&gt;REC (Rectangle)： 矩形。&lt;/li&gt;
+&lt;li&gt;C (Circle)： 圆形。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-修改与编辑拉开差距的关键&#34;&gt;2. 修改与编辑（拉开差距的关键）
+&lt;/h3&gt;&lt;p&gt;CAD 的精髓不在于画，而在于“改”。 熟练掌握这几个，你的效率会直接翻倍。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;O (Offset)： 偏移。这是使用频率最高的命令之一。画平行线、墙体、管路厚度全靠它。&lt;/li&gt;
+&lt;li&gt;TR (Trim)： 修剪。剪掉多余的线。&lt;/li&gt;
+&lt;li&gt;EX (Extend)： 延伸。把线延长到特定边界。&lt;/li&gt;
+&lt;li&gt;CO (Copy)： 复制。&lt;/li&gt;
+&lt;li&gt;M (Move)： 移动。&lt;/li&gt;
+&lt;li&gt;MI (Mirror)： 镜像。画对称零件（如分析仪机箱、法兰）时的神技。&lt;/li&gt;
+&lt;li&gt;S (Stretch)： 拉伸（老手秘籍）。不要一个点一个点移动，用框选直接拉伸图形的一部分，保持比例不变地缩放。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-精准控制像狙击手一样准确&#34;&gt;3. 精准控制（像狙击手一样准确）
+&lt;/h3&gt;&lt;p&gt;这些是功能键，控制绘图的“手感”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;F3 (Osnap)： 对象捕捉开关。保证你的线精准连接到端点或圆心。&lt;/li&gt;
+&lt;li&gt;F8 (Ortho)： 正交模式。强制只画水平或垂直线。&lt;/li&gt;
+&lt;li&gt;Space / Enter： 重复上一个命令。画完一条线，按一下空格立刻又是画线命令。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-组织与管理图纸乱不乱全靠它&#34;&gt;4. 组织与管理（图纸乱不乱全靠它）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;LA (Layer)： 图层管理器。&lt;/li&gt;
+&lt;li&gt;B (Block)： 定义块。比如你画好了一个“采样泵”的符号，把它变成块，以后一键调用。&lt;/li&gt;
+&lt;li&gt;MA (Matchprop)： 特性匹配。俗称“格式刷”，让选中的图形立刻变得跟参考图形一模一样（颜色、图层、线型）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;给你的老手心得&#34;&gt;给你的“老手”心得：
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;空格键代替回车键： 在 AutoCAD 中，空格和回车的作用是一样的。左手大拇指永远悬停在空格键上，这能让你输入命令的速度比别人快一倍。&lt;/li&gt;
+&lt;li&gt;ESC 键是救命草： 只要操作卡住了，或者想退出当前命令，疯狂按几下 ESC 永远没错。&lt;/li&gt;
+&lt;li&gt;鼠标中键（滚轮）：
+&lt;ul&gt;
+&lt;li&gt;滚动： 缩放。&lt;/li&gt;
+&lt;li&gt;按住拖动： 平移画面。&lt;/li&gt;
+&lt;li&gt;双击中键： 全屏显示所有图形（图纸找不到了？双击中键就回来了）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-02-CAD初始化设置与常见命令概念</title>
+        <link>https://teaize.github.io/p/xxx-02-cad%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E6%A6%82%E5%BF%B5/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-02-cad%E5%88%9D%E5%A7%8B%E5%8C%96%E8%AE%BE%E7%BD%AE%E4%B8%8E%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E6%A6%82%E5%BF%B5/</guid>
+        <description>&lt;h3 id=&#34;1动态输入&#34;&gt;1、动态输入
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;动态输入（Dynamic Input，快捷键 F12） 是一项&lt;strong&gt;交互功能&lt;/strong&gt;。简单来说，它就像是把屏幕底部的“命令行”搬到了你的&lt;strong&gt;十字光标（鼠标）旁边&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在动态输入模式下，&lt;code&gt;Tab&lt;/code&gt; 键是切换输入框（比如长宽切换、长角切换）的神器。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222183243958.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222183243958.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;2autotrack自动追踪&#34;&gt;2、AutoTrack（自动追踪）
+&lt;/h3&gt;&lt;p&gt;简单来说，AutoTrack 的作用是在你绘图时提供&lt;strong&gt;临时的虚线（辅助线）&lt;/strong&gt;，帮你精准对齐，而不需要你真的去画辅助线（XL 或 L）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;极轴追踪 (Polar Tracking, F10)：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;当你的鼠标移动到特定角度（如 0°、45°、90°）时，会弹出一根无限延伸的虚线，帮你锁定角度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;对象捕捉追踪 (Object Snap Tracking, F11)：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;这是高阶绘图的神技。&lt;/strong&gt; 你只需将鼠标悬停在某个点上（不点击），等出现一个小加号 &lt;code&gt;+&lt;/code&gt;（代表“获取”了该点），然后移动鼠标，CAD 就会根据这个点引出水平或垂直的对齐虚线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3选择集视觉效果&#34;&gt;3、选择集（视觉效果）
+&lt;/h3&gt;&lt;p&gt;选择集—&amp;gt;视觉效果设置，这里主要分为两个核心板块：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;A. &lt;strong&gt;选择预览&lt;/strong&gt; (Selection Preview)：这是指：当你的鼠标只是悬停在某个图形上，还没点击时，图形会发生什么变化。
+&lt;ul&gt;
+&lt;li&gt;虚线/加粗/变色： 默认情况下，对象会变亮或变成虚线。&lt;/li&gt;
+&lt;li&gt;避坑指南： 建议勾选“锁定图层上的对象”。这样当你鼠标划过那些不需要改动的锁定图层时，它们不会亮起来，能极大地减少视觉干扰并提升系统流畅度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;B. &lt;strong&gt;区域选择效果&lt;/strong&gt; (Area Selection Effects)：“拉框选”时的视觉设置
+&lt;ul&gt;
+&lt;li&gt;窗口选择（Window Selection）： 从左往右拉，默认是蓝色框。只有完全被包围的对象才会被选中。&lt;/li&gt;
+&lt;li&gt;交叉选择（Crossing Selection）： 从右往左拉，默认是绿色框。只要碰到的对象都会被选中。&lt;/li&gt;
+&lt;li&gt;老手建议： &lt;strong&gt;默认的蓝色和绿色是工业标准，不建议改&lt;/strong&gt;。但如果你觉得颜色太刺眼，可以适当调高透明度（让框变得更“虚”一点），这样你能更清楚地看到框下面的线条。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;指示选择区域：它决定了当你拉动鼠标进行框选时，选框内部是否要“填充颜色”&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-02-样式管理</title>
+        <link>https://teaize.github.io/p/xxx-02-%E6%A0%B7%E5%BC%8F%E7%AE%A1%E7%90%86/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-02-%E6%A0%B7%E5%BC%8F%E7%AE%A1%E7%90%86/</guid>
+        <description>&lt;p&gt;因为有经验，这里直接开始上强度了。&lt;/p&gt;
+&lt;p&gt;为什么要搞样式？为了“&lt;strong&gt;一处修改，全局更新&lt;/strong&gt;”，以及“&lt;strong&gt;多人协作，标准统一&lt;/strong&gt;”。以下是高阶绘图必须精通的四大样式体系：&lt;/p&gt;
+&lt;h3 id=&#34;1-文字样式-text-style--命令st-style&#34;&gt;1. 文字样式 (Text Style) —— 命令：&lt;code&gt;ST&lt;/code&gt; (Style)
+&lt;/h3&gt;&lt;p&gt;新手习惯随便选个宋体或黑体，老手则会建立严格的体系。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;SHX 字体 vs. TrueType 字体：
+&lt;ul&gt;
+&lt;li&gt;老手建议： 尽量用 &lt;strong&gt;SHX（大字体）&lt;/strong&gt;。原因：渲染快、不卡顿，且符合国家机械制图标准（如 &lt;code&gt;gbenor.shx&lt;/code&gt; + &lt;code&gt;gbcbig.shx&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;TrueType（如微软雅黑）： 只用于封面或需要美观的说明，因为它非常占内存，图纸大了会卡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;字高设为 0： 在样式里将字高设为 &lt;code&gt;0&lt;/code&gt;。
+&lt;ul&gt;
+&lt;li&gt;秘籍： 如果样式里写死了高度（如 3.5），你在画图时就无法手动调整。设为 0 可以让你在标注或输入文字时灵活定义高度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-标注样式-dimension-style--命令d-dimstyle&#34;&gt;2. 标注样式 (Dimension Style) —— 命令：&lt;code&gt;D&lt;/code&gt; (Dimstyle)
+&lt;/h3&gt;&lt;p&gt;这是最复杂的部分，决定了图纸的“专业感”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;五大核心选项卡：
+&lt;ul&gt;
+&lt;li&gt;线 (Lines)： 这里的重点是“超出尺寸线”和“起点偏移量”。这决定了标注线和物体之间那个标准的“留白”。&lt;/li&gt;
+&lt;li&gt;符号和箭头 (Symbols and Arrows)： 机械图用实心闭合箭头，建筑图用倾斜斜杠。&lt;/li&gt;
+&lt;li&gt;文字 (Text)： 建议关联你刚才建好的“文字样式”。&lt;/li&gt;
+&lt;li&gt;调整 (Fit)： &lt;strong&gt;最关键！&lt;/strong&gt; 这里有个“使用全局比例”。如果你在画一个很大的厂房，标注看不见，不要去改文字大小，去改这个全局比例。&lt;/li&gt;
+&lt;li&gt;主单位 (Primary Units)： 设置精度（如 0.00）。老手还会在这里设置“消零”（隐藏 10.00 后面的 00）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-多重引线样式-multileader-style--命令mls&#34;&gt;3. 多重引线样式 (Multileader Style) —— 命令：&lt;code&gt;MLS&lt;/code&gt;
+&lt;/h3&gt;&lt;p&gt;当你需要给零件写编号（如 ①、②）或写技术说明时，这个比普通文字好用百倍。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;优势： 它可以让你轻松对齐一排引线（命令：&lt;code&gt;MLEADERALIGN&lt;/code&gt;），让图纸看起来像强迫症一样整齐。
+内容类型： 引线不仅能写字，还能直接关联“块”（比如做一个圆圈里面带数字的块作为零件球标）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;4-注释性-annotative--高阶必杀技&#34;&gt;4. 注释性 (Annotative) —— 高阶必杀技
+&lt;/h3&gt;&lt;p&gt;这是新手和老手的&lt;strong&gt;分水岭&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;痛点： 以前我们画 1:10 和 1:100 的图，文字大小要手动算。&lt;/li&gt;
+&lt;li&gt;原理： 开启“注释性”后，无论你把图纸缩放到什么比例，打印出来的文字永远是 3.5mm 高。&lt;/li&gt;
+&lt;li&gt;建议： 刚开始可能觉得难用，但一旦掌握了“注释性比例”，你就不再需要为缩放比例头疼了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;5-高阶玩家的大招图纸模板-dwt&#34;&gt;5. 高阶玩家的“大招”：图纸模板 (.DWT)
+&lt;/h3&gt;&lt;p&gt;如果你每次打开 CAD 都要重新设置一遍这些样式，那不叫高手。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;找个空文件，把你的文字样式（中文、英文）、标注样式（1:1, 1:2, 1:10）、图层（中心线、轮廓、标注）、图框全部设置好。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;另存为 &lt;code&gt;.DWT&lt;/code&gt; 格式&lt;/strong&gt;（AutoCAD 图形模板）。&lt;/li&gt;
+&lt;li&gt;在设置里把这个模板设为默认启动文件。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;这样，你每次“Ctrl+N”新建时，自带一套标准的“军火库”。&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Root((CAD 高阶标准化系统)) --&gt; Styles[样式管理 System Styles]
+    Root --&gt; Intelligence[智能特性 Intelligence]
+    Root --&gt; Assets[资产管理 Assets]
+    Root --&gt; Output[最终交付 Output]
+
+    subgraph &#34;Styles: 视觉统一&#34;
+    Styles --&gt; ST[文字样式 ST: SHX字体/字高归零]
+    Styles --&gt; D[标注样式 D: 全局比例/消零/留白]
+    Styles --&gt; MLS[多重引线 MLS: 对齐规则/块关联]
+    end
+
+    subgraph &#34;Intelligence: 动态缩放&#34;
+    Intelligence --&gt; AN[注释性 Annotative: 异比例自动缩放]
+    Intelligence --&gt; DB[动态块 Dynamic Blocks: 参数化零件符号]
+    end
+
+    subgraph &#34;Assets: 组织架构&#34;
+    Assets --&gt; LA[图层体系 Layer: 命名规范/线宽映射]
+    Assets --&gt; Template[DWT 模板: 预设所有样式/标题栏]
+    end
+
+    subgraph &#34;Output: 跨软件联动&#34;
+    Output --&gt; PDF[标准打印: 颜色样式表 CTB]
+    Output --&gt; SW[SolidWorks 映射: 3D转2D图层自动归类]
+    end
+
+    %% 行业应用关联
+    CEMS[针对 CEMS/分析仪行业] -.-&gt; DB
+    CEMS -.-&gt; LA
+    CEMS -.-&gt; SW
+&lt;/div&gt;
+&lt;h3 id=&#34;如何解读这个框架&#34;&gt;如何解读这个框架？
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;左侧（Styles）是你的“基本功”： 只有把文字、标注、引线的样式定死了，你的图纸看起来才像是一个人的作品，而不是东拼西凑的。&lt;/li&gt;
+&lt;li&gt;中间（Intelligence）是“效率助推器”：
+&lt;ul&gt;
+&lt;li&gt;注释性让你在画大布局图（1:100）和局部细节图（1:10）时，标注文字的大小看起来是一模一样的。&lt;/li&gt;
+&lt;li&gt;动态块非常适合你：比如你定义一个“阀门”块，可以通过点击下拉菜单切换它是“开”还是“关”，而不需要画两个块。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;右侧（Assets &amp;amp; Output）是“专业交付”：
+&lt;ul&gt;
+&lt;li&gt;DWT 模板是你所有心血的结晶，建议你一旦定好一套满意的样式，立刻封存为模板。&lt;/li&gt;
+&lt;li&gt;SolidWorks 映射：当你从 SW 导出工程图到 CAD 时，如果映射做好了，CAD 会自动识别哪些是粗实线（轮廓），哪些是细实线（标注），并自动分层。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-03-CAD块</title>
+        <link>https://teaize.github.io/p/xxx-03-cad%E5%9D%97/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-03-cad%E5%9D%97/</guid>
+        <description>&lt;p&gt;简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。&lt;/p&gt;
+&lt;h3 id=&#34;一-为什么要用块核心价值&#34;&gt;一、 为什么要用“块”？（核心价值）
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。
+&lt;ul&gt;
+&lt;li&gt;不用块： 你得手动改 100 次。&lt;/li&gt;
+&lt;li&gt;用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;减小文件体积： &lt;strong&gt;CAD 只记录一个块的定义，其余的只是“引用”&lt;/strong&gt;。这能让复杂的系统图运行得更流畅。&lt;/li&gt;
+&lt;li&gt;标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;二-块的常用操作指令&#34;&gt;二、 块的常用操作指令
+&lt;/h3&gt;&lt;h4 id=&#34;1-创建块b-block&#34;&gt;1. 创建块：&lt;code&gt;B&lt;/code&gt; (Block)
+&lt;/h4&gt;&lt;p&gt;这是“打包”的过程。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关键点：基点 (Base Point)。这是你以后插入块时的“手抓点”。&lt;/li&gt;
+&lt;li&gt;老手建议：永远不要选默认的 (0,0,0)，务必在图形上点击一个有意义的点（如圆心或左下角）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-插入块i-insert&#34;&gt;2. 插入块：&lt;code&gt;I&lt;/code&gt; (Insert)
+&lt;/h4&gt;&lt;p&gt;把做好的印章盖到图纸上。&lt;/p&gt;
+&lt;h4 id=&#34;3-编辑块be-bedit&#34;&gt;3. 编辑块：&lt;code&gt;BE&lt;/code&gt; (Bedit)
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;进入一个专用的灰白色背景空间，修改块的形状。&lt;/li&gt;
+&lt;li&gt;修改完点击“保存并退出”，全图的同名块都会变。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-写块w-wblock&#34;&gt;4. 写块：&lt;code&gt;W&lt;/code&gt; (WBlock)
+&lt;/h4&gt;&lt;p&gt;这是建立“个人军火库”的神技。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;普通的块（B）只存在于当前文件里。&lt;code&gt;W&lt;/code&gt; 命令能把块单独存成一个硬盘上的 &lt;code&gt;.dwg&lt;/code&gt; 文件，以后你打开任何新工程，都能直接调用这个文件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;框架图&#34;&gt;框架图
+&lt;/h4&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Objects[散乱的线/圆/弧] -- &#34;B (创建)&#34; --&gt; BlockDef[块定义: 存在于当前文件]
+    BlockDef -- &#34;W (写块)&#34; --&gt; DWGFile[独立的 DWG 文件: 存入个人库]
+    
+    DWGFile -- &#34;I (插入)&#34; --&gt; Drawing[当前图纸中的实例]
+    BlockDef -- &#34;I (插入)&#34; --&gt; Drawing
+    
+    Drawing -- &#34;BE (编辑)&#34; --&gt; Change[修改形状]
+    Change -- &#34;保存&#34; --&gt; Update[全图所有实例自动同步]
+    
+    Drawing -- &#34;X (炸开)&#34; --&gt; Objects[变回散乱的线]
+&lt;/div&gt;
+&lt;h3 id=&#34;三-老手的块进阶准则&#34;&gt;三、 老手的“块”进阶准则
+&lt;/h3&gt;&lt;h4 id=&#34;1-永远在0-图层画块&#34;&gt;1. 永远在“0 图层”画块
+&lt;/h4&gt;&lt;p&gt;这是 CAD 里最容易踩的坑。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;规则： 在画块的原始对象时，务必把它们放在 &lt;code&gt;0&lt;/code&gt; 图层，颜色设为 &lt;code&gt;Bylayer&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;结果： 这样当你把块插入到“设备图层”时，它会变绿；插入到“标注图层”时，它会变红。&lt;strong&gt;如果你在画块时就用了特定图层，它就“死”在那儿了，无法随层变色&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-属性块att-attribute&#34;&gt;2. 属性块：&lt;code&gt;ATT&lt;/code&gt; (Attribute)
+&lt;/h4&gt;&lt;p&gt;如果你想让块带上信息（比如这个泵的型号、功率、厂家），你需要使用 &lt;strong&gt;“属性”&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你可以做一个带文字的块，每次插入时，它会弹窗问你：“这个零件的编号是多少？”。这样你的图纸不仅是画，还是一张&lt;strong&gt;数据库&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>ZZZ-26-实现Modbus RTU 协议</title>
         <link>https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu-%E5%8D%8F%E8%AE%AE/</link>
         <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
