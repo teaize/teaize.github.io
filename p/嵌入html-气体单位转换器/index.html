@@ -424,9 +424,13 @@
 <li>只保留 <code>&lt;body&gt;</code> 内部的核心内容。</li>
 <li>如果 HTML 里有专属的 <code>&lt;style&gt;</code> 或 <code>&lt;script&gt;</code>，可以直接写在里面。</li>
 </ul>
-<p>参见：<a class="link" href="https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/"  target="_blank" rel="noopener"
-    >气体单位转换器</a></p>
-<p>缺点：会破坏原始 HTML 格式，破坏了想要恢复回来比较麻烦</p>
+<blockquote>
+<ul>
+<li>缺点：会破坏原始 HTML 格式，破坏了想要恢复回来比较麻烦</li>
+<li>如果 HTML 中本来就引用了一些样式，和博客自身的样式容易引起冲突（例如网页宽度）</li>
+<li>这里放弃方式 2 了，直接用方式 1 吧</li>
+</ul>
+</blockquote>
 <h3 id="下面演示方式-1">下面演示：方式 1
 </h3><iframe src="/html-files/气体单位转换器.html" width="100%" height="1000px" frameborder="0"></iframe>
 
