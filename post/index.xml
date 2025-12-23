@@ -367,7 +367,10 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;继续博文内容...
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;方式-2博客嵌入-html&#34;&gt;方式 2：博客嵌入 html
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;缺点：Markdown 编辑器中无法预览，因为 html 文件在博客目录下，不再笔记软件目录下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;方式-2博客嵌入-html&#34;&gt;方式 2：博客嵌入 html
 &lt;/h3&gt;&lt;p&gt;如果你希望这个 HTML 文件看起来像一篇普通的博文，带有 &lt;code&gt;hugo-theme-stack&lt;/code&gt; 的侧边栏、头像和评论区，你可以直接将 HTML 放在 &lt;code&gt;content&lt;/code&gt; 文件夹下。操作步骤如下：&lt;/p&gt;
 &lt;ol&gt;
 &lt;li&gt;将 &lt;code&gt;.html&lt;/code&gt; 文件放入 &lt;code&gt;content/post/&lt;/code&gt;（或其他你存放文章的目录）。&lt;/li&gt;
@@ -408,9 +411,10 @@
 &lt;li&gt;如果 HTML 里有专属的 &lt;code&gt;&amp;lt;style&amp;gt;&lt;/code&gt; 或 &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt;，可以直接写在里面。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;参见：&lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;气体单位转换器&lt;/a&gt;&lt;/p&gt;
+    &gt;气体单位转换器&lt;/a&gt;
+缺点：会破坏原始 HTML 格式，破坏了想要恢复回来比较麻烦&lt;/p&gt;
 &lt;h3 id=&#34;下面演示方式-1&#34;&gt;下面演示：方式 1
-&lt;/h3&gt;&lt;iframe src=&#34;https://teaize.github.io/html-files/气体单位转换器.html&#34; width=&#34;100%&#34; height=&#34;500px&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+&lt;/h3&gt;&lt;iframe src=&#34;https://teaize.github.io/html-files/气体单位转换器.html&#34; width=&#34;100%&#34; height=&#34;1000px&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 </description>
         </item>
         <item>
