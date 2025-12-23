@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8">
+  <title>气体单位转换器</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    .input-with-unit {
+      position: relative;
+    }
+    .input-with-unit input {
+      padding-right: 3rem;
+    }
+    .input-with-unit span {
+      position: absolute;
+      right: 0.5rem;
+      top: 50%;
+      transform: translateY(-50%);
+      color: #666;
+      font-size: 0.9rem;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body class="bg-gray-100 flex items-start justify-center min-h-screen py-12">
+  <div class="bg-white shadow-xl rounded-2xl p-8 max-w-4xl w-full mx-4">
+    <h1 class="text-3xl font-bold mb-4 text-center">气体单位转换器</h1>
+
+    <p class="text-sm text-gray-600 mb-4 bg-blue-50 p-4 rounded">
+      说明：本计算基于 <strong>25℃、1 个大气压</strong> 的标准状态，采用公式：
+      <br>mg/m³ = ppb × 分子量 ÷ 24.45 ÷ 1000
+      <br>ppb = mg/m³ × 1000 × 24.45 ÷ 分子量
+      <br><strong>稀释比说明</strong>：稀释比 > 1 表示样品在测量时被稀释过（例如 10 倍稀释），要恢复未稀释的原始浓度，计算结果应当 <strong>乘以</strong> 稀释比进行修正。
+    </p>
+
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div>
+        <label class="block mb-1">选择气体</label>
+        <select id="gas" class="w-full p-2 border rounded">
+          <option value="so2">二氧化硫 (SO₂)</option>
+          <option value="no">一氧化氮 (NO)</option>
+          <option value="no2">二氧化氮 (NO₂)</option>
+          <option value="co">一氧化碳 (CO)</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="block mb-1">稀释比</label>
+        <div class="input-with-unit">
+          <input type="number" id="dilution" value="1" min="1" class="w-full p-2 border rounded" title="稀释比，>1 表示样品被稀释（例如 10 表示 10 倍稀释）">
+          <span>倍</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="block mb-1">输入数值</label>
+        <div class="input-with-unit">
+          <input type="number" id="value" class="w-full p-2 border rounded" placeholder="输入数值，按下确认后计算">
+          <span id="input-unit-label">ppb</span>
+        </div>
+      </div>
+
+      <div>
+        <label class="block mb-1">选择输入单位</label>
+        <select id="unit" class="w-full p-2 border rounded" onchange="updateUnitLabel()">
+          <option value="ppb">ppb</option>
+          <option value="mgm3">mg/m³</option>
+        </select>
+      </div>
+    </div>
+
+    <div class="mt-6 flex gap-4">
+      <button id="confirmBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded">确认转换</button>
+      <button id="clearBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-4 rounded">清除</button>
+    </div>
+
+    <div id="result" class="mt-6 p-4 bg-gray-50 border rounded text-lg text-center font-semibold"></div>
+
+    <p class="text-xs text-gray-500 mt-4">
+      * 本工具仅供参考，实际监测应考虑温度、压力及湿度等因素进行修正。
+    </p>
+  </div>
+
+  <script>
+    const molWeights = {
+      so2: 64.066,
+      no: 30.006,
+      no2: 46.0055,
+      co: 28.01
+    };
+
+    function updateUnitLabel() {
+      const unit = document.getElementById('unit').value;
+      document.getElementById('input-unit-label').textContent = unit === 'ppb' ? 'ppb' : 'mg/m³';
+    }
+
+    function convert() {
+      const gas = document.getElementById('gas').value;
+      const value = parseFloat(document.getElementById('value').value);
+      const unit = document.getElementById('unit').value;
+      const dilution = parseFloat(document.getElementById('dilution').value) || 1;
+      const resultDiv = document.getElementById('result');
+
+      if (isNaN(value) || isNaN(dilution) || dilution <= 0) {
+        resultDiv.textContent = '请输入有效数值和稀释比（稀释比应大于 0）';
+        return;
+      }
+
+      const MW = molWeights[gas];
+      let converted;
+
+      if (unit === 'ppb') {
+        // ppb -> mg/m3
+        converted = value * MW / 24.45 / 1000; // 等价于 value * MW / 24450
+      } else {
+        // mg/m3 -> ppb
+        converted = value * 1000 * 24.45 / MW;
+      }
+
+      // 稀释比修正：若样品被稀释（稀释比 > 1），恢复原始浓度需乘以稀释比
+      converted = converted * dilution;
+
+      resultDiv.textContent = unit === 'ppb'
+        ? `${value} ppb (稀释比 ${dilution}) → ${converted.toFixed(6)} mg/m³`
+        : `${value} mg/m³ (稀释比 ${dilution}) → ${converted.toFixed(3)} ppb`;
+    }
+
+    document.getElementById('confirmBtn').addEventListener('click', convert);
+    document.getElementById('clearBtn').addEventListener('click', ()=>{
+      document.getElementById('value').value = '';
+      document.getElementById('dilution').value = '1';
+      document.getElementById('result').textContent = '';
+    });
+
+    // 初始化
+    updateUnitLabel();
+  </script>
+</body>
+</html>

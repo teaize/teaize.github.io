@@ -7,13 +7,205 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Mon, 22 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>HugoBlog添加时间</title>
-        <link>https://teaize.github.io/p/hugoblog%E6%B7%BB%E5%8A%A0%E6%97%B6%E9%97%B4/</link>
-        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        <lastBuildDate>Tue, 23 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>关于检出限</title>
+        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%A3%80%E5%87%BA%E9%99%90/</link>
+        <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://teaize.github.io/p/hugoblog%E6%B7%BB%E5%8A%A0%E6%97%B6%E9%97%B4/</guid>
-        <description>&lt;p&gt;测试时间&lt;/p&gt;
+        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%A3%80%E5%87%BA%E9%99%90/</guid>
+        <description>&lt;p&gt;检出限（Detection Limit / Limit of Detection, LOD），简单来说，是仪器能够可靠地从噪声中分辨出被测组分的最低浓度。&lt;/p&gt;
+&lt;h3 id=&#34;核心定义&#34;&gt;核心定义
+&lt;/h3&gt;&lt;p&gt;检出限是指在给定的置信水平（通常为 95% 或 99%）内，分析方法能够检出待测组分的最小浓度。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;不仅是“看到”：&lt;/strong&gt; 仪器显示的数值必须比背景噪声（底噪）足够大，大到我们可以确定这不是仪器的偶然波动，而是真的有污染物。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;定性不定量：&lt;/strong&gt; 检出限通常被认为是“定性”的界限。即：低于这个浓度，我们不能确定污染物是否存在；达到这个浓度，我们确定它存在，但此时测得的数值准确度（定量）往往不够。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;在-cems-行业中的分类&#34;&gt;在 CEMS 行业中的分类
+&lt;/h3&gt;&lt;p&gt;在实际应用中，检出限通常分为两类，区分它们对选型和运维至关重要：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;仪器检出限&lt;/strong&gt; (IDL, Instrument Detection Limit)： 指分析仪主机（如红外分析仪、紫外分析仪）在实验室环境下，直接通入零气测试得到的极限。它只反映仪器本身的电子噪声和稳定性。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;方法检出限&lt;/strong&gt; (MDL, Method Detection Limit)： 这是 CEMS 系统 真正关注的。它包括了取样探头、伴热管线、冷凝除水系统等整个采样链路对样品的损耗和干扰。由于样品的吸附和稀释，&lt;strong&gt;方法检出限通常高于仪器检出限&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;检出限如何计算&#34;&gt;检出限如何计算
+&lt;/h3&gt;&lt;p&gt;在 CEMS 的标准（如中国的 &lt;strong&gt;HJ 76-2017&lt;/strong&gt;）和相关计量规程中，通常采用“空白标准偏差法”：$$LOD = 3 \times \sigma$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;$\sigma$（标准偏差）：&lt;/strong&gt; 对零点气体（如高纯氮气）进行多次重复测量（通常为 7 次或 20 次），计算其测量值的标准偏差。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;3 倍原则：&lt;/strong&gt; 统计学上认为，当信号达到噪声标准偏差的 3 倍时，该信号源于真实的污染物的把握度约为 99%。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如标准 &lt;code&gt;HJ 76-2017&lt;/code&gt; 中关于检出限的描述
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251223185209445.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251223185209445.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;检出限-vs-分辨率&#34;&gt;检出限 vs 分辨率
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;分辨率： 是仪器显示出的“刻度”（仪表显示的最小末位数字）。比如能显示到 0.01mg/m³。&lt;/li&gt;
+&lt;li&gt;关系： 很多低端仪器分辨率很高，但检出限很差。这就像一把尺子刻度到了 0.1 毫米，但由于手抖（噪声大），你永远测不准 1 毫米以下的东西。&lt;strong&gt;好的分析仪，检出限通常大于分辨率。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;如何理解好的分析仪检出限通常大于分辨率&#34;&gt;如何理解：好的分析仪，检出限通常大于分辨率
+&lt;/h3&gt;&lt;h4 id=&#34;概念本质的对比&#34;&gt;概念本质的对比
+&lt;/h4&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;指标&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;形象比喻&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;决定因素&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;分辨率 (Resolution)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;尺子的刻度：&lt;/strong&gt; 你最细能画到哪一格？&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;数字化能力：&lt;/strong&gt; 由电路（AD 转换器位长）和软件显示决定。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;检出限 (LOD)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;手稳不稳：&lt;/strong&gt; 即使刻度很细，如果手抖，你最小能看准多少？&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;物理极限：&lt;/strong&gt; 由传感器噪声、电路底噪、光学散射等决定。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;一个优秀的分析仪设计遵循“&lt;strong&gt;宁可让你看到波动的真实，也不让你看到静止的虚假&lt;/strong&gt;”的原则。&lt;/p&gt;
+&lt;h4 id=&#34;a-只有分辨率足够小才能观察到噪声&#34;&gt;A. 只有分辨率足够小，才能观察到噪声
+&lt;/h4&gt;&lt;p&gt;如果一台仪器的检出限是 $0.5mg/m^3$（意味着在这个浓度以下数据都在乱跳），而它的分辨率被设定为 $1.0mg/m^3$（即显示器只能显示 0, 1, 2…）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;后果： 所有的噪声波动都被强行“归零”或“四舍五入”了。你看到的是一个极其平稳的“0”，但这其实是&lt;strong&gt;数据造假&lt;/strong&gt;，因为它掩盖了仪器的真实波动和温漂。&lt;/li&gt;
+&lt;li&gt;好的设计： 分辨率设为 $0.01mg/m^3$。当你通入零气时，你会看到数值在 -0.05 到 +0.05 之间跳动。这种跳动虽然不好看，但它提供了计算标准偏差（$\sigma$）的原始数据，让你能真实地算出检出限。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;b-统计学的必然要求&#34;&gt;B. 统计学的必然要求
+&lt;/h4&gt;&lt;p&gt;根据公式 $LOD = 3 \times \sigma$，我们需要计算标准偏差。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果分辨率比 $\sigma$ 还要大，测量值就会变成一串死板的数字（例如全是 0），此时计算出的 $\sigma$ 也是 0。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逻辑悖论：&lt;/strong&gt; 这样算出来的检出限也会是 0，这在物理上是不可能的（意味着仪器没有噪声）。因此，为了准确捕捉噪声的统计特征，&lt;strong&gt;分辨率必须远小于噪声的量级&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常见误区把分辨率当成精度&#34;&gt;常见误区：把分辨率当成精度
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;厂家的猫腻： 某些厂商为了参数好看，会在显示屏上强行保留 4 位小数（极高的分辨率），让你觉得仪器很准。但如果你看它的技术手册，检出限可能只有 1.0。这意味着小数点后面那三位数字全都是&lt;strong&gt;无效的随机噪声&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;高端仪器的做法： 高端分析仪&lt;strong&gt;其分辨率通常比检出限小一个数量级&lt;/strong&gt;（例如检出限 0.1，分辨率 0.01）。这样做的目的是让运维人员在做零点校准时，能够清晰地观察到零位的微小漂移趋势。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;总结来说：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;分辨率&lt;/strong&gt;（我能显示的最小数） &amp;lt; &lt;strong&gt;噪声强度&lt;/strong&gt;（我能观察到的波动） &amp;lt; &lt;strong&gt;检出限&lt;/strong&gt;（我敢保证是真实存在的浓度值）。&lt;/li&gt;
+&lt;li&gt;这就是为什么我们说“检出限大于分辨率”的原因：&lt;strong&gt;它证明了这台机器的显示精度足以支撑它对物理极限的捕捉，而不是在用软件修饰数据。&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;检出限与漂移的区别&#34;&gt;检出限与漂移的区别
+&lt;/h2&gt;&lt;p&gt;检出限（LOD）和漂移（Drift）是两个描述仪器“不确定性”的最重要指标。它们既有本质的区别，又在实际应用中相互牵制。&lt;/p&gt;
+&lt;p&gt;简单来说：&lt;strong&gt;检出限决定了仪器“能不能看见”，而漂移决定了仪器“看的是不是一直准”。&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;检出限-vs-漂移核心区别&#34;&gt;检出限 vs 漂移：核心区别
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;检出限 (LOD)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;漂移 (Drift)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;本质含义&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;短期噪声&lt;/strong&gt;的统计表现。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;长期趋势&lt;/strong&gt;的偏差累积。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;时间尺度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;极短时间&lt;/strong&gt;（几分钟内）：读数在零点附近的快速上下跳动。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;较长时间&lt;/strong&gt;（24 小时或 7 天）：读数缓慢地朝着一个方向偏离。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;表现形式&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;“毛刺”或“锯齿波”。&lt;/td&gt;
+          &lt;td&gt;“坡度”或“台阶”。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;主要成因&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;电子元件热噪声、光电探测器散粒噪声、信号放大器的底噪。&lt;/td&gt;
+          &lt;td&gt;环境温度变化、光源老化、光学镜片污染、气压波动、采样管路吸附。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;计算逻辑&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$3 \times \sigma$（标准偏差）。&lt;/td&gt;
+          &lt;td&gt;$终点值 - 初始值$（绝对差值）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;检出限与漂移的内在联系&#34;&gt;检出限与漂移的内在联系
+&lt;/h3&gt;&lt;h4 id=&#34;-漂移会淹没检出限&#34;&gt;① 漂移会“淹没”检出限
+&lt;/h4&gt;&lt;p&gt;这是最核心的联系。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;理论状态： 假设一台仪器的检出限是 $1mg/m^3$，如果零点绝对不动，你测到 $2mg/m^3$ 时可以很有信心。&lt;/li&gt;
+&lt;li&gt;现实状态： 如果仪器的零点漂移是 $5mg/m^3$（24 小时内），那么即使你看到了 $2mg/m^3$ 的读数，你根本无法判断这是因为“真的有污染物”，还是因为“仪器自己飘了”。&lt;/li&gt;
+&lt;li&gt;结论： &lt;strong&gt;在高精度的监测中，漂移是检出限的“实际约束”。 一个检出限极低但漂移很大的仪器，是没有实际意义的&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;-它们共同定义了测量下限&#34;&gt;② 它们共同定义了“测量下限”
+&lt;/h4&gt;&lt;p&gt;在 CEMS 行业标准（如 HJ 76）中，评估一台仪器是否能用于“超低排放”监测，不是只看检出限，而是看“零点漂移”是否小于排放限值的一定比例。如下图为 HJ 76 标准中的部分性能指标截图
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251223192035439.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251223192035439.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;用打靶来理解&#34;&gt;用“打靶”来理解
+&lt;/h3&gt;&lt;p&gt;想象你正在用一把步枪（分析仪）射击靶心（真实浓度）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;检出限（噪声）： 相当于你的**“手抖”程度。手抖得越厉害（噪声大），子弹散布圆就越大，你越难打中细小的目标。&lt;/li&gt;
+&lt;li&gt;漂移： 相当于“瞄准镜松动”。随着时间的推移，虽然你的手还是很稳，但瞄准镜慢慢偏了。即便你打得很准，子弹也会整团地偏向靶心的一侧。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么-cems-行业更怕漂移&#34;&gt;为什么 CEMS 行业更怕“漂移”
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;检出限是天生的： 仪器选型定下来，检出限基本就定了，它影响的是数据的“毛刺感”。&lt;/li&gt;
+&lt;li&gt;漂移是后天的： 随着现场粉尘污染、水分进入、环境温度变化，漂移会持续发生。如果漂移失控，会导致环保数据虚高（被罚款）或者虚低（数据失真）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;扩展资料&#34;&gt;扩展资料
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  mindmap
+  root((CEMS/分析仪
+  性能指标框架))
+    测量品质
+      检出限 LOD
+        能够识别的最低浓度
+      准确度 Accuracy
+        测量值与真实值的接近程度
+      线性误差 Linearity
+        全量程范围内的一致性
+      重复性 Repeatability
+        多次测量同一气体的一致性
+    稳定性
+      零点漂移 Zero Drift
+        长时间无信号时的数值偏移
+      量程漂移 Span Drift
+        长时间高浓度下的数值偏移
+      平均无故障时间 MTBF
+        系统的整体可靠性
+    响应特性
+      响应时间 T90
+        达到稳定值90%所需的时间
+      滞后时间
+        气体进入管线到仪器反应的延迟
+    环境与抗干扰
+      交叉干扰 Cross-Sensitivity
+        非目标气体如水分对测量影响
+      压力/温度补偿
+        环境波动对测量值的修正能力
+      防护等级 IP
+        设备对防尘防水的耐受度
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>气体单位转换器</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/</link>
+        <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/</guid>
+        <description>&lt;iframe src=&#34;https://teaize.github.io/html-files/气体单位转换器.html&#34; width=&#34;100%&#34; height=&#34;500px&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
 </description>
         </item>
         <item>
@@ -200,14 +392,249 @@
 &lt;/li&gt;
 &lt;li&gt;指示选择区域：它决定了当你拉动鼠标进行框选时，选框内部是否要“填充颜色”&lt;/li&gt;
 &lt;/ul&gt;
+&lt;h2 id=&#34;新装软件设置&#34;&gt;新装软件设置
+&lt;/h2&gt;&lt;p&gt;可以直接输入命令 &lt;code&gt;OP&lt;/code&gt; (Options) 打开选项面板，按以下清单进行设置：&lt;/p&gt;
+&lt;h3 id=&#34;1-文件安全与兼容性防止丢档与打不开&#34;&gt;1. 文件安全与兼容性（防止丢档与打不开）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;另存为版本： 建议设置为 &lt;strong&gt;AutoCAD 2007 或 2010 DWG&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;自动保存间隔： 默认 10 分钟，建议改为 &lt;strong&gt;5 分钟&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;理由： 崩溃是常有的事，5 分钟的损失通常可以接受。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;文件扩展名： 确保勾选“保存预览图像”，这样你在文件夹里查看时能看到缩略图。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222195030344.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222195030344.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;2-视觉反馈与操作手感老手的定制化&#34;&gt;2. 视觉反馈与操作手感（老手的“定制化”）
+&lt;/h3&gt;&lt;p&gt;让软件用起来更顺手，视线更舒服。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;十字光标大小： 默认是 5，建议改为 100。
+&lt;ul&gt;
+&lt;li&gt;理由： 光标横跨整个屏幕，能帮你快速进行视觉对齐，判断不同物体是否在同一水平线或垂直线上，甚至不需要辅助线。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;背景颜色： “显示”选项卡 -&amp;gt; “颜色”。
+&lt;ul&gt;
+&lt;li&gt;建议：将“统一背景”设为&lt;strong&gt;纯黑色&lt;/strong&gt;或&lt;strong&gt;深灰色&lt;/strong&gt;。长时间盯着亮色非常伤眼。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;圆弧和圆的平滑度： “显示”选项卡 -&amp;gt; “显示精度”。
+&lt;ul&gt;
+&lt;li&gt;建议： 将“圆弧和圆的平滑度”从 100 改为 &lt;strong&gt;2000-5000&lt;/strong&gt;。这样圆看起来就是圆，而不是多边形（这只是显示问题，不影响打印，但影响心情）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222195417914.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222195417914.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;3-操作逻辑优化提速核心&#34;&gt;3. 操作逻辑优化（提速核心）
+&lt;/h3&gt;&lt;p&gt;这是老手和新手拉开差距的地方。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;右键功能自定义： “用户系统配置”选项卡 -&amp;gt; “右键单击自定义”。
+&lt;ul&gt;
+&lt;li&gt;核心动作： 开启“间歇单击”。&lt;/li&gt;
+&lt;li&gt;老手秘籍：
+&lt;ul&gt;
+&lt;li&gt;快点右键 = &lt;code&gt;Enter&lt;/code&gt;（确定/重复上一个命令）。&lt;/li&gt;
+&lt;li&gt;长按右键 = 弹出快捷菜单。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;效果： 你的右手不再需要离开鼠标去按键盘的回车键，绘图效率飞升。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;选择集预览： 就像我们之前讨论的，在“选择集”里设置好预览过滤器，避开锁定图层。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222195808575.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222195808575.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222200020851.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222200020851.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;4-单位与精度工程图的基础&#34;&gt;4. 单位与精度（工程图的基础）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;单位设置 (命令：&lt;code&gt;UN&lt;/code&gt;)：
+&lt;ul&gt;
+&lt;li&gt;进入后，将长度精度设为 &lt;strong&gt;0.00&lt;/strong&gt;（机械行业通常到两位小数足够）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;插入比例：&lt;/strong&gt; 务必确认为 毫米 (Millimeters)。如果你在画 CEMS 系统图时单位是英寸，导入 SolidWorks 时比例会全部乱掉。
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222200130042.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222200130042.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;导出-profile-配置&#34;&gt;导出 Profile (配置)
+&lt;/h3&gt;&lt;p&gt;当你把这一切都设置好后：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 &lt;code&gt;OP&lt;/code&gt; 选项面板里点击 &lt;strong&gt;“配置”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;点击 &lt;strong&gt;“导出”&lt;/strong&gt;，存为一个 &lt;code&gt;.arg&lt;/code&gt; 文件。&lt;/li&gt;
+&lt;li&gt;以后你重装系统、换电脑，或者去公司上班，只需“导入”这个文件，所有的习惯瞬间回归，不需要重新设置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;隐藏技巧&#34;&gt;隐藏技巧
+&lt;/h2&gt;&lt;h3 id=&#34;oops-命令--比-undo-更聪明的撤销&#34;&gt;OOPS 命令 —— 比 Undo 更聪明的“撤销”
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;场景： 你删掉了一个设备块，接着又画了半小时的管路，突然发现那个设备块不该删。如果按 &lt;code&gt;Ctrl+Z&lt;/code&gt;，这半小时画的管路也就没了。&lt;/li&gt;
+&lt;li&gt;操作： 直接输入 &lt;strong&gt;&lt;code&gt;OOPS&lt;/code&gt;&lt;/strong&gt; 并回车。&lt;/li&gt;
+&lt;li&gt;价值： 它会&lt;strong&gt;只恢复最后一次被删除的对象&lt;/strong&gt;，而不影响你删除之后进行的任何其他操作。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;夹点模式的高级循环&#34;&gt;夹点模式的高级循环
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    Start[&#34;选中对象并点击基准夹点&#34;] --&gt; Move[&#34;1.移动(Move)&#34;]
+    Move -- &#34;按一次空格&#34; --&gt; Rotate[&#34;2.旋转(Rotate)&#34;]
+    Rotate -- &#34;按一次空格&#34; --&gt; Scale[&#34;3.缩放(Scale)&#34;]
+    Scale -- &#34;按一次空格&#34; --&gt; Mirror[&#34;4.镜像(Mirror)&#34;]
+    Mirror -- &#34;按一次空格&#34; --&gt; Start
+&lt;/div&gt;
+&lt;h3 id=&#34;快速微调-nudge--强迫症福音&#34;&gt;快速微调 (Nudge) —— 强迫症福音
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;场景： 在画 流程图时，某个标签离管路太近了，想移动一点点，但开着捕捉（Snap）它总是跳来跳去。&lt;/li&gt;
+&lt;li&gt;操作： 选中对象，按住 &lt;strong&gt;Ctrl + 键盘方向键&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;价值： 对象会按照极小的像素级单位进行微移。这在调整 P&amp;amp;ID 图纸的视觉美感时超级好用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;前一次选择-p--选错后的救命稻草&#34;&gt;“前一次选择” (P) —— 选错后的救命稻草
+&lt;/h3&gt;&lt;p&gt;&lt;code&gt;P&lt;/code&gt; 不是一个独立的命令，而是一个“选择模式”。它只能在命令行提示 “选择对象:” (Select objects:) 的时候输入。&lt;/p&gt;
+&lt;p&gt;例如下面的情况：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你执行了一个命令（比如 &lt;code&gt;M&lt;/code&gt; 移动），选中了一堆零件并完成了移动。&lt;/li&gt;
+&lt;li&gt;你突然发现这堆零件还需要旋转（&lt;code&gt;RO&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;输入 &lt;code&gt;RO&lt;/code&gt; 回车。&lt;/li&gt;
+&lt;li&gt;当屏幕提示“选择对象:”时，不要去手动点，直接键盘输入 &lt;strong&gt;&lt;code&gt;P&lt;/code&gt;&lt;/strong&gt; 然后按&lt;strong&gt;空格&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;奇迹发生：&lt;/strong&gt; 上一次参与移动的那堆零件瞬间被再次选中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;注意：如果你选了一堆东西，然后按了 &lt;code&gt;ESC&lt;/code&gt; 没做任何动作，那么 &lt;code&gt;P&lt;/code&gt; 记录的还是上一个&lt;strong&gt;成功执行&lt;/strong&gt;的命令所选的对象。&lt;/p&gt;
+&lt;h3 id=&#34;两点之间的中点-m2p--告别辅助线&#34;&gt;两点之间的中点 (M2P) —— 告别辅助线
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;场景： 你想在两个法兰或者两根管子的正中间放一个传感器，但那里没有任何特征点。&lt;/li&gt;
+&lt;li&gt;操作： 在执行命令（比如 &lt;code&gt;Move&lt;/code&gt; 或 &lt;code&gt;Circle&lt;/code&gt;）&lt;strong&gt;要求指定点时&lt;/strong&gt;，输入 &lt;strong&gt;&lt;code&gt;M2P&lt;/code&gt;&lt;/strong&gt; 然后回车。&lt;/li&gt;
+&lt;li&gt;动作： &lt;strong&gt;依次点击两个端点，CAD 会自动捕捉到这两点连线的中点&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;价值： 彻底不需要为了找中心而先画一根辅助线再删掉了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;捕捉自-from--偏移定位&#34;&gt;捕捉自 (FROM) —— 偏移定位
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;场景： 你想在距离柜子左边墙壁正好 水平 100，垂直 150 的地方画一个泵。&lt;/li&gt;
+&lt;li&gt;操作： 在画线指令下，按 &lt;strong&gt;Shift + 右键&lt;/strong&gt; 选择 &lt;strong&gt;“捕捉自/自”&lt;/strong&gt;。点击机柜的左下角顶点，然后输入 &lt;code&gt;@150,100&lt;/code&gt;。采样泵（或圆）就精准地出现在了距离角落水平 100、垂直 150 的位置&lt;/li&gt;
+&lt;li&gt;价值： 直接定位，不需要先画线再偏移。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;在位编辑&#34;&gt;在位编辑
+&lt;/h3&gt;&lt;p&gt;CAD 的新版本中，&lt;code&gt;MT&lt;/code&gt; 命令后可能只会出现圈 2 的在位编辑文本框。如果想要切换旧版编辑器（如下图，除了文本框，还有文字格式弹框，方便修改文字格式），可按如下操作：&lt;/p&gt;
+&lt;p&gt;命令行输入 &lt;code&gt;OP&lt;/code&gt; —&amp;gt; 输入 &lt;code&gt;MTEXTED&lt;/code&gt; 回车 —&amp;gt; 输入 &lt;code&gt;OldEditor&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251223181132.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251223181132.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;沉孔锥孔符号&#34;&gt;沉孔、锥孔符号
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在文字编辑状态下，点击顶部功能区（Ribbon）或右键菜单中的 &lt;strong&gt;“符号” (Symbol)&lt;/strong&gt; 按钮（图标通常是一个 &lt;code&gt;@&lt;/code&gt; 符号）。&lt;/li&gt;
+&lt;li&gt;在下拉列表中选择 &lt;strong&gt;“其他…” (Other…)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在弹出的“字符映射表”中：
+&lt;ul&gt;
+&lt;li&gt;将字体切换为 &lt;strong&gt;GDT&lt;/strong&gt;（这是机械制图专用字体）。&lt;/li&gt;
+&lt;li&gt;找到沉孔（类似 &lt;code&gt;v&lt;/code&gt; 的符号）和锥孔（类似 &lt;code&gt;w&lt;/code&gt; 的符号）。&lt;/li&gt;
+&lt;li&gt;点击“选择” -&amp;gt; “复制”，回到 CAD 里粘贴即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251223182006.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251223182006.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;更简单一点的方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在文字编辑状态下，先切换为 gdt 字体&lt;/li&gt;
+&lt;li&gt;英文输入法，小写状态下，输入 v、w、x 就可以自动如下符号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;![[Pasted image 20251223182514.png]]&lt;/p&gt;
+&lt;h3 id=&#34;巧用多重引线样式-multileader-style&#34;&gt;巧用“多重引线样式” (Multileader Style)
+&lt;/h3&gt;&lt;p&gt;标注孔位时，我们通常不只输入一个符号，而是“符号 + 文字”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;输入 &lt;strong&gt;&lt;code&gt;MLS&lt;/code&gt;&lt;/strong&gt; (Multileader Style) 建立一个新样式，命名为“孔标注”。&lt;/li&gt;
+&lt;li&gt;在“内容”选项卡中，预设好文字内容（例如先打个 &lt;code&gt;v&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;以后标注：&lt;/strong&gt; 直接点一下孔，引线拉出来，沉孔符号就在那等着你了，你只需要填数字。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251223183457531.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251223183457531.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;备忘录习惯在-dwt-模板里留一行样板&#34;&gt;“备忘录”习惯：在 DWT 模板里留一行“样板”
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;在你的标准模板文件（&lt;code&gt;.dwt&lt;/code&gt;）的图框外（非打印区域），写下一行所有你常用的特种符号、特殊字体。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;以后画图：&lt;/strong&gt; 缺符号了？直接往左边扫一眼，用 &lt;strong&gt;&lt;code&gt;MA&lt;/code&gt;&lt;/strong&gt; (格式刷) 或者 &lt;strong&gt;&lt;code&gt;CO&lt;/code&gt;&lt;/strong&gt; (复制) 过来改个数字就行。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;核心的控制码-control-codes&#34;&gt;核心的“控制码” (Control Codes)
+&lt;/h3&gt;&lt;p&gt;除了 GDT 字体，有些通用符号是可以用 &lt;code&gt;%%&lt;/code&gt; 开头的控制码输入的，这在任何编辑器下都有效：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;输入代码&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;对应符号&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;记忆口诀&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;%%c&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\phi$ (直径)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;C&lt;/strong&gt;ircle&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;%%d&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$^\circ$ (度数)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;D&lt;/strong&gt;egree&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;%%p&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;$\pm$ (正负号)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;P&lt;/strong&gt;lus/Minus&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         </item>
         <item>
-        <title>XXX-02-样式管理</title>
-        <link>https://teaize.github.io/p/xxx-02-%E6%A0%B7%E5%BC%8F%E7%AE%A1%E7%90%86/</link>
+        <title>XXX-02-CAD样式管理</title>
+        <link>https://teaize.github.io/p/xxx-02-cad%E6%A0%B7%E5%BC%8F%E7%AE%A1%E7%90%86/</link>
         <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://teaize.github.io/p/xxx-02-%E6%A0%B7%E5%BC%8F%E7%AE%A1%E7%90%86/</guid>
+        <guid>https://teaize.github.io/p/xxx-02-cad%E6%A0%B7%E5%BC%8F%E7%AE%A1%E7%90%86/</guid>
         <description>&lt;p&gt;因为有经验，这里直接开始上强度了。&lt;/p&gt;
 &lt;p&gt;为什么要搞样式？为了“&lt;strong&gt;一处修改，全局更新&lt;/strong&gt;”，以及“&lt;strong&gt;多人协作，标准统一&lt;/strong&gt;”。以下是高阶绘图必须精通的四大样式体系：&lt;/p&gt;
 &lt;h3 id=&#34;1-文字样式-text-style--命令st-style&#34;&gt;1. 文字样式 (Text Style) —— 命令：&lt;code&gt;ST&lt;/code&gt; (Style)
@@ -317,12 +744,26 @@
         
         <guid>https://teaize.github.io/p/xxx-03-cad%E5%9D%97/</guid>
         <description>&lt;p&gt;简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。&lt;/p&gt;
+&lt;h3 id=&#34;框架图&#34;&gt;框架图
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Objects[散乱的线/圆/弧] -- &#34;B (创建)&#34; --&gt; BlockDef[块定义: 存在于当前文件]
+    BlockDef -- &#34;W (写块)&#34; --&gt; DWGFile[独立的 DWG 文件: 存入个人库]
+    
+    DWGFile -- &#34;I (插入)&#34; --&gt; Drawing[当前图纸中的实例]
+    BlockDef -- &#34;I (插入)&#34; --&gt; Drawing
+    
+    Drawing -- &#34;BE (编辑)&#34; --&gt; Change[修改形状]
+    Change -- &#34;保存&#34; --&gt; Update[全图所有实例自动同步]
+    
+    Drawing -- &#34;X (炸开)&#34; --&gt; Objects[变回散乱的线]
+&lt;/div&gt;
 &lt;h3 id=&#34;一-为什么要用块核心价值&#34;&gt;一、 为什么要用“块”？（核心价值）
 &lt;/h3&gt;&lt;ol&gt;
 &lt;li&gt;全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。
 &lt;ul&gt;
 &lt;li&gt;不用块： 你得手动改 100 次。&lt;/li&gt;
-&lt;li&gt;用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。&lt;/li&gt;
+&lt;li&gt;用了块： &lt;strong&gt;你只需修改“块定义”，全图 100 个泵会自动同步更新&lt;/strong&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;减小文件体积： &lt;strong&gt;CAD 只记录一个块的定义，其余的只是“引用”&lt;/strong&gt;。这能让复杂的系统图运行得更流畅。&lt;/li&gt;
@@ -339,7 +780,7 @@
 &lt;/h4&gt;&lt;p&gt;把做好的印章盖到图纸上。&lt;/p&gt;
 &lt;h4 id=&#34;3-编辑块be-bedit&#34;&gt;3. 编辑块：&lt;code&gt;BE&lt;/code&gt; (Bedit)
 &lt;/h4&gt;&lt;ul&gt;
-&lt;li&gt;进入一个专用的灰白色背景空间，修改块的形状。&lt;/li&gt;
+&lt;li&gt;可直接双击块，进入块编辑器，进入一个专用的灰白色背景空间，修改块的形状。&lt;/li&gt;
 &lt;li&gt;修改完点击“保存并退出”，全图的同名块都会变。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h4 id=&#34;4-写块w-wblock&#34;&gt;4. 写块：&lt;code&gt;W&lt;/code&gt; (WBlock)
@@ -347,20 +788,18 @@
 &lt;ul&gt;
 &lt;li&gt;普通的块（B）只存在于当前文件里。&lt;code&gt;W&lt;/code&gt; 命令能把块单独存成一个硬盘上的 &lt;code&gt;.dwg&lt;/code&gt; 文件，以后你打开任何新工程，都能直接调用这个文件。&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h4 id=&#34;框架图&#34;&gt;框架图
-&lt;/h4&gt;&lt;div class=&#34;mermaid&#34;&gt;
-  graph TD
-    Objects[散乱的线/圆/弧] -- &#34;B (创建)&#34; --&gt; BlockDef[块定义: 存在于当前文件]
-    BlockDef -- &#34;W (写块)&#34; --&gt; DWGFile[独立的 DWG 文件: 存入个人库]
-    
-    DWGFile -- &#34;I (插入)&#34; --&gt; Drawing[当前图纸中的实例]
-    BlockDef -- &#34;I (插入)&#34; --&gt; Drawing
-    
-    Drawing -- &#34;BE (编辑)&#34; --&gt; Change[修改形状]
-    Change -- &#34;保存&#34; --&gt; Update[全图所有实例自动同步]
-    
-    Drawing -- &#34;X (炸开)&#34; --&gt; Objects[变回散乱的线]
-&lt;/div&gt;
+&lt;h4 id=&#34;5-清理块pu&#34;&gt;5. 清理块：&lt;code&gt;PU&lt;/code&gt;
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;删除块： 只是把图面上的“实例”删掉了，但这个块的“定义”依然像幽灵一样躲在文件的后台。&lt;/li&gt;
+&lt;li&gt;清理 (Purge)： 它是去后台“查户口”，把那些在图面上已经没有被使用的块定义、图层、样式彻底删掉。&lt;/li&gt;
+&lt;li&gt;什么时候用 &lt;code&gt;PU&lt;/code&gt;
+&lt;ul&gt;
+&lt;li&gt;减小文件体积、解决卡顿&lt;/li&gt;
+&lt;li&gt;清理冗余图层：当你删除了所有标注，但“标注图层”死活删不掉时，用 &lt;code&gt;PU&lt;/code&gt; 就能把它彻底拔除。&lt;/li&gt;
+&lt;li&gt;交付标准： 给客户发图纸前，老手都会 &lt;code&gt;PU&lt;/code&gt; 一遍，显得图纸非常干净、专业。可参考 [[XXX-05-CAD清理组合拳]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h3 id=&#34;三-老手的块进阶准则&#34;&gt;三、 老手的“块”进阶准则
 &lt;/h3&gt;&lt;h4 id=&#34;1-永远在0-图层画块&#34;&gt;1. 永远在“0 图层”画块
 &lt;/h4&gt;&lt;p&gt;这是 CAD 里最容易踩的坑。&lt;/p&gt;
@@ -373,6 +812,254 @@
 &lt;ul&gt;
 &lt;li&gt;你可以做一个带文字的块，每次插入时，它会弹窗问你：“这个零件的编号是多少？”。这样你的图纸不仅是画，还是一张&lt;strong&gt;数据库&lt;/strong&gt;。&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-04-CAD文字样式</title>
+        <link>https://teaize.github.io/p/xxx-04-cad%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-04-cad%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F/</guid>
+        <description>&lt;p&gt;处理别人图纸时常见的两个噩梦是：&lt;strong&gt;打开全是问号（乱码）和文字样式多得数不清（冗余）&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;一-文字样式的核心st-命令&#34;&gt;一、 文字样式的核心：&lt;code&gt;ST&lt;/code&gt; 命令
+&lt;/h3&gt;&lt;p&gt;当你输入 &lt;code&gt;ST&lt;/code&gt; 弹出对话框时，有三个参数决定了文字的命运：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;SHX 字体 vs. TrueType 字体：
+&lt;ul&gt;
+&lt;li&gt;SHX（单线体）： 图标是个“A”，CAD 自家格式。优点是渲染极快，占内存极小。&lt;/li&gt;
+&lt;li&gt;TTF（填充体）： 图标是个“双 T”，如微软雅黑。优点是美观，缺点是文件大了以后缩放图纸会卡。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;大字体（Big Font）：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;这是处理中文字体的关键&lt;/strong&gt;。在 SHX 模式下，左边选 &lt;code&gt;txt.shx&lt;/code&gt; 或 &lt;code&gt;gbenor.shx&lt;/code&gt;（常规字母），&lt;strong&gt;必须勾选“使用大字体”&lt;/strong&gt;，右边选 &lt;code&gt;gbcbig.shx&lt;/code&gt;（中文字符），这样才能正常显示中文。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;高度设为 0：
+&lt;ul&gt;
+&lt;li&gt;老手准则： 在样式设置里，高度永远设为 &lt;code&gt;0&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;原因： 如果设为固定高度（如 3.5），那么在标注样式里你就改不动它了。设为 0，它就是“活”的，可以随标注样式的比例缩放。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;二-解决满屏问号的三个招式&#34;&gt;二、 解决“满屏问号”的三个招式
+&lt;/h3&gt;&lt;p&gt;当你打开厂家的图纸，发现文字全是 &lt;code&gt;?&lt;/code&gt;，是因为你电脑里缺他用的那个字体文件（&lt;code&gt;.shx&lt;/code&gt;）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一招：硬核补全
+&lt;ul&gt;
+&lt;li&gt;看报错提示缺什么（比如 &lt;code&gt;hztxt.shx&lt;/code&gt;），去网上下载一个，扔进 CAD 安装目录下的 &lt;code&gt;Fonts&lt;/code&gt; 文件夹里。重启 CAD 即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第二招：强制替换（临时应急）
+&lt;ul&gt;
+&lt;li&gt;打开图纸时，如果弹出“缺少 SHX 文件”，不要点取消，选择“为每个 SHX 文件指定替换文件”，然后统一选择 &lt;code&gt;gbcbig.shx&lt;/code&gt; 或 &lt;code&gt;hztxt.shx&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;第三招：修改系统变量（一劳永逸）
+&lt;ul&gt;
+&lt;li&gt;输入 &lt;code&gt;FONTALT&lt;/code&gt;（默认替换字体），将其值改为 &lt;code&gt;gbcbig.shx&lt;/code&gt;。这样以后再遇到缺字体的图纸，CAD 会自动用这个字体顶替，不再弹窗问你。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-如何清理样式爆炸的图纸&#34;&gt;三、 如何清理“样式爆炸”的图纸？
+&lt;/h3&gt;&lt;p&gt;如果你发现图纸里有 50 个文字样式（比如 &amp;ldquo;Style1&amp;rdquo;, &amp;quot; 新建 1&amp;quot;, &amp;ldquo;Standard_1&amp;rdquo; 等），你需要进行“归一化”处理：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;快速选择归类（QSELECT）：
+&lt;ul&gt;
+&lt;li&gt;右键 -&amp;gt; 快速选择。&lt;/li&gt;
+&lt;li&gt;对象类型选“文字”，特性选“文字样式”。&lt;/li&gt;
+&lt;li&gt;把所有乱七八糟样式的文字，在特性面板里一键改为你自定义的“标准样式”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;组合拳清理（PU）：
+&lt;ul&gt;
+&lt;li&gt;改完之后，运行我们之前说的 &lt;code&gt;PU&lt;/code&gt; 命令。&lt;strong&gt;那些没有被任何文字引用的“废弃样式”就会被彻底删掉&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;标准命名法：
+&lt;ul&gt;
+&lt;li&gt;不要按字体命名（如“微软雅黑”），要&lt;strong&gt;按用途命名&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;建议命名：&lt;code&gt;0_Standard&lt;/code&gt;（通用文字）、&lt;code&gt;0_Title&lt;/code&gt;（图框标题）、&lt;code&gt;0_Note&lt;/code&gt;（技术要求）。加个 &lt;code&gt;0&lt;/code&gt; 是为了让它们永远排在样式列表的最顶端。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;字体管理逻辑流程图&#34;&gt;字体管理逻辑流程图
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Open[打开外部图纸] --&gt; Check{是否有问号?}
+    Check -- 是 --&gt; Substitution[1.FONTALT自动替换]
+    Substitution --&gt; ST_Dialog[2.ST界面重新指定大字体]
+    Check -- 否 --&gt; Bloat{样式是否冗余?}
+    
+    Bloat -- 是 --&gt; QSELECT[3.QSELECT全选异类样式]
+    QSELECT --&gt; Change[4.特性面板统一修改为标准样式]
+    Change --&gt; PURGE[5.PU清理无效样式定义]
+    
+    PURGE --&gt; Final[干净、标准的图纸]
+    ST_Dialog --&gt; Final
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-05-CAD清理组合拳</title>
+        <link>https://teaize.github.io/p/xxx-05-cad%E6%B8%85%E7%90%86%E7%BB%84%E5%90%88%E6%8B%B3/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-05-cad%E6%B8%85%E7%90%86%E7%BB%84%E5%90%88%E6%8B%B3/</guid>
+        <description>&lt;p&gt;如果你的图纸经常崩溃、显示异常，或者从厂家拷贝来的图块带了大量“脏数据”，这套流程就是你的救命稻草。这套组合拳的专业顺序通常是：&lt;strong&gt;Audit (体检) -&amp;gt; Overkill (瘦身) -&amp;gt; Purge (清扫)&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;第一式audit体检修复&#34;&gt;第一式：Audit（体检修复）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;功能： 扫描整个图纸的数据库，寻找并修复逻辑错误。&lt;/li&gt;
+&lt;li&gt;应用场景： 图纸无故卡顿、复制粘贴失效、或者有些图形“看得见点不着”时。&lt;/li&gt;
+&lt;li&gt;老手操作：
+&lt;ul&gt;
+&lt;li&gt;输入 &lt;code&gt;AUDIT&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;命令行询问“是否修复发现的任何错误？”，输入 &lt;code&gt;Y&lt;/code&gt;（是）。&lt;/li&gt;
+&lt;li&gt;注： 它会像杀毒软件一样扫描一遍，最后告诉你修复了多少个错误对象。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第二式overkill重叠清理&#34;&gt;第二式：Overkill（重叠清理）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;功能： 自动删除重叠的线条、合并部分重叠的线。&lt;/li&gt;
+&lt;li&gt;应用场景： 非常关键！尤其是当你准备把 AutoCAD 的 2D 草图导入 &lt;strong&gt;SolidWorks&lt;/strong&gt; 建模时。SolidWorks 的草图最怕重叠线（会报错、无法拉伸），&lt;code&gt;Overkill&lt;/code&gt; 能一键解决。&lt;/li&gt;
+&lt;li&gt;老手设置：
+&lt;ul&gt;
+&lt;li&gt;输入 &lt;code&gt;OV&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;全选图纸。&lt;/li&gt;
+&lt;li&gt;在弹出的对话框中，勾选**“忽略特性”**（比如颜色、线型）。这样即使一根红线和一根蓝线重叠，它也会把多余的那根删掉，只留下一根。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三式-purge深度强力清扫&#34;&gt;第三式：-Purge（深度强力清扫）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;功能： 除了普通 &lt;code&gt;PU&lt;/code&gt; 能删掉的块和图层，这一招能删掉隐藏得更深的“注册应用程序”数据（Regapps）。&lt;/li&gt;
+&lt;li&gt;现象： 有时候图纸里明明没东西，文件却有几十 MB 大，普通 &lt;code&gt;PU&lt;/code&gt; 根本没用，这就是 &lt;code&gt;Regapps&lt;/code&gt; 在作怪。&lt;/li&gt;
+&lt;li&gt;老手操作：
+&lt;ol&gt;
+&lt;li&gt;输入 &lt;code&gt;-PURGE&lt;/code&gt;（&lt;strong&gt;注意前面有个减号&lt;/strong&gt;，这会启动命令行版本）。&lt;/li&gt;
+&lt;li&gt;输入 &lt;code&gt;R&lt;/code&gt;（代表 Regapps）。&lt;/li&gt;
+&lt;li&gt;询问“要清理的名称”，直接按 &lt;strong&gt;Enter&lt;/strong&gt;（默认全选）。&lt;/li&gt;
+&lt;li&gt;询问“是否确认每个要清理的名称”，输入 &lt;code&gt;N&lt;/code&gt;（否）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;奇迹时刻：你会看到命令行刷刷刷删掉成千上万个没用的注册项。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第四式组合拳后的收招regen&#34;&gt;第四式：组合拳后的“收招”——REGEN
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;功能： 重新生成图形（Regenerate）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;作用：&lt;/strong&gt; 所有的清理做完后，输入 &lt;code&gt;RE&lt;/code&gt;，让 CAD 重新计算一次当前的显示数据。你会发现圆变圆了，线条缩放也顺滑了。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;命令&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;昵称&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;解决的问题&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;对 SolidWorks 的意义&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Audit&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;医生&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;修复数据库底层的“断裂”和错误。&lt;/td&gt;
+          &lt;td&gt;保证文件导出时数据不损坏。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;Overkill&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;裁缝&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;删除重叠线、多余的点、合并共线。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;最高。&lt;/strong&gt; 避免 3D 建模时草图闭合失败。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;-Purge&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;清洁工&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;删除顽固的 Regapps 和无用块。&lt;/td&gt;
+          &lt;td&gt;减小体积，防止 3D 软件读取文件时假死。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;工作流&#34;&gt;工作流
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    Start[获取外部厂家图纸] --&gt; Step1[AUDIT: 逻辑体检修复]
+    Step1 --&gt; Step2[OV: 清理重叠几何体]
+    Step2 --&gt; Step3[PU: 清除无用块/图层]
+    Step3 --&gt; Step4[-PU &gt; R: 强力清除 Regapps]
+    Step4 --&gt; Step5[RE: 重新生成显示]
+    Step5 --&gt; End[干净专业的工程模板]
+&lt;/div&gt;
+</description>
+        </item>
+        <item>
+        <title>XXX-06-CAD标注样式</title>
+        <link>https://teaize.github.io/p/xxx-06-cad%E6%A0%87%E6%B3%A8%E6%A0%B7%E5%BC%8F/</link>
+        <pubDate>Mon, 22 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/xxx-06-cad%E6%A0%87%E6%B3%A8%E6%A0%B7%E5%BC%8F/</guid>
+        <description>&lt;p&gt;标注样式管理器（Dimension Style Manager，快捷键 &lt;code&gt;D&lt;/code&gt;） 是 AutoCAD 里参数最密集、最让人头大的一块&lt;/p&gt;
+&lt;h3 id=&#34;一-标注样式的四大支柱&#34;&gt;一、 标注样式的“四大支柱”
+&lt;/h3&gt;&lt;h4 id=&#34;1-线与箭头-lines--symbols--长什么样&#34;&gt;1. 线与箭头 (Lines &amp;amp; Symbols) —— “长什么样”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;超出尺寸线 (Extend beyond dim lines)： 决定了标注的那根斜横线往外伸出多少。&lt;/li&gt;
+&lt;li&gt;起点偏移量 (Offset from origin)： &lt;strong&gt;老手非常在意这个。&lt;/strong&gt; 决定了标注线和物体之间留出的空隙。如果没有空隙，图纸看起来会糊成一团，分不清哪是零件，哪是标注。&lt;/li&gt;
+&lt;li&gt;箭头大小： 机械制图通常用 2.5 或 3.5。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-文字-text--怎么读&#34;&gt;2. 文字 (Text) —— “怎么读”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;文字样式： 直接关联 [[XXX-04-CAD文字样式]] 讲过的 &lt;code&gt;ST&lt;/code&gt; 设置好的样式。&lt;/li&gt;
+&lt;li&gt;从尺寸线偏移 (Offset from dim line)： 文字和线之间的距离，太近了打印出来看不清，太远了容易混淆。&lt;/li&gt;
+&lt;li&gt;文字对齐： 建议选“与尺寸线对齐”，这样斜着的线，文字也是斜着的，符合制图规范。&lt;/li&gt;
+&lt;li&gt;角度的数字一律写成&lt;strong&gt;水平方向&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这里查看国标 &lt;code&gt;GB/T 4458.4-2003 机械制图 尺寸注法&lt;/code&gt;：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;线性尺寸数字的方向，有以下两种注写方法，&lt;strong&gt;一般应采用方法 1 注写&lt;/strong&gt;；在不致引起误解时，也允许采用方法 2。但在一张图样中，应尽可能采用同一种方法。
+方法 1：数字应按图 18 所示的方向注写，并尽可能避免在图示 30° 范围内标注尺寸，当无法避免时可按图 19 的形式标注。
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222202238086.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222202238086.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+方法 2：对于非水平方向的尺寸，其数字可水平地注写在尺寸线的中断处（图 20、图 21）。
+![[Pasted image 20251222202259.png]]&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;3-调整-fit--核心大脑&#34;&gt;3. 调整 (Fit) —— “核心大脑”
+&lt;/h4&gt;&lt;p&gt;这是整个管理器里最重要的一页。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;全局比例 (Use overall scale of)：&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你画的是 1:1 的零件，这里填 1。&lt;/li&gt;
+&lt;li&gt;如果你画的是 1:100 的厂房布局，这里填 100。&lt;/li&gt;
+&lt;li&gt;秘籍： 它会一键把箭头、文字、间距全部放大 100 倍，而不需要你一个个去改。&lt;/li&gt;
+&lt;li&gt;优化： 勾选“在尺寸界线之间绘制尺寸线”，防止文字乱跳。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4-主单位-primary-units--精度控制&#34;&gt;4. 主单位 (Primary Units) —— “精度控制”
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;精度： 机械加工通常设为 &lt;code&gt;0.00&lt;/code&gt;，绘制系统流程图（例如 P&amp;amp;ID）时可设为 &lt;code&gt;0&lt;/code&gt; 即可。&lt;/li&gt;
+&lt;li&gt;消零 (Zero Suppression)：
+&lt;ul&gt;
+&lt;li&gt;勾选“后缀 (Trailing)”。&lt;/li&gt;
+&lt;li&gt;效果： 10.000 会显示为 10，10.500 显示为 10.5。这能让图纸瞬间清爽很多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222204149666.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251222204149666.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 </description>
         </item>
         <item>

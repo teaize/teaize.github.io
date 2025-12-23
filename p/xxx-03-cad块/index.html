@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n框架图 graph TD Objects[散乱的线/圆/弧] -- \"B (创建)\" --> BlockDef[块定义: 存在于当前文件] BlockDef -- \"W (写块)\" --> DWGFile[独立的 DWG 文件: 存入个人库] DWGFile -- \"I (插入)\" --> Drawing[当前图纸中的实例] BlockDef -- \"I (插入)\" --> Drawing Drawing -- \"BE (编辑)\" --> Change[修改形状] Change -- \"保存\" --> Update[全图所有实例自动同步] Drawing -- \"X (炸开)\" --> Objects[变回散乱的线] 一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
 <title>XXX-03-CAD块</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/xxx-03-cad%E5%9D%97/'>
 
 <link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="XXX-03-CAD块">
-<meta property='og:description' content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
+<meta property='og:description' content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n框架图 graph TD Objects[散乱的线/圆/弧] -- \"B (创建)\" --> BlockDef[块定义: 存在于当前文件] BlockDef -- \"W (写块)\" --> DWGFile[独立的 DWG 文件: 存入个人库] DWGFile -- \"I (插入)\" --> Drawing[当前图纸中的实例] BlockDef -- \"I (插入)\" --> Drawing Drawing -- \"BE (编辑)\" --> Change[修改形状] Change -- \"保存\" --> Update[全图所有实例自动同步] Drawing -- \"X (炸开)\" --> Objects[变回散乱的线] 一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
 <meta property='og:url' content='https://teaize.github.io/p/xxx-03-cad%E5%9D%97/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-22T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="XXX-03-CAD块">
-<meta name="twitter:description" content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
+<meta name="twitter:description" content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n框架图 graph TD Objects[散乱的线/圆/弧] -- \"B (创建)\" --> BlockDef[块定义: 存在于当前文件] BlockDef -- \"W (写块)\" --> DWGFile[独立的 DWG 文件: 存入个人库] DWGFile -- \"I (插入)\" --> Drawing[当前图纸中的实例] BlockDef -- \"I (插入)\" --> Drawing Drawing -- \"BE (编辑)\" --> Change[修改形状] Change -- \"保存\" --> Update[全图所有实例自动同步] Drawing -- \"X (炸开)\" --> Objects[变回散乱的线] 一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -64,7 +64,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_f1908d46b5afaca1.png" width="300"
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -297,6 +297,7 @@
   <ol>
     <li>
       <ol>
+        <li><a href="#框架图">框架图</a></li>
         <li><a href="#一-为什么要用块核心价值">一、 为什么要用“块”？（核心价值）</a></li>
         <li><a href="#二-块的常用操作指令">二、 块的常用操作指令</a>
           <ol>
@@ -304,7 +305,7 @@
             <li><a href="#2-插入块i-insert">2. 插入块：<code>I</code> (Insert)</a></li>
             <li><a href="#3-编辑块be-bedit">3. 编辑块：<code>BE</code> (Bedit)</a></li>
             <li><a href="#4-写块w-wblock">4. 写块：<code>W</code> (WBlock)</a></li>
-            <li><a href="#框架图">框架图</a></li>
+            <li><a href="#5-清理块pu">5. 清理块：<code>PU</code></a></li>
           </ol>
         </li>
         <li><a href="#三-老手的块进阶准则">三、 老手的“块”进阶准则</a>
@@ -373,12 +374,26 @@
     
     
     <p>简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。</p>
+<h3 id="框架图">框架图
+</h3><div class="mermaid">
+  graph TD
+    Objects[散乱的线/圆/弧] -- "B (创建)" --> BlockDef[块定义: 存在于当前文件]
+    BlockDef -- "W (写块)" --> DWGFile[独立的 DWG 文件: 存入个人库]
+    
+    DWGFile -- "I (插入)" --> Drawing[当前图纸中的实例]
+    BlockDef -- "I (插入)" --> Drawing
+    
+    Drawing -- "BE (编辑)" --> Change[修改形状]
+    Change -- "保存" --> Update[全图所有实例自动同步]
+    
+    Drawing -- "X (炸开)" --> Objects[变回散乱的线]
+</div>
 <h3 id="一-为什么要用块核心价值">一、 为什么要用“块”？（核心价值）
 </h3><ol>
 <li>全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。
 <ul>
 <li>不用块： 你得手动改 100 次。</li>
-<li>用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。</li>
+<li>用了块： <strong>你只需修改“块定义”，全图 100 个泵会自动同步更新</strong>。</li>
 </ul>
 </li>
 <li>减小文件体积： <strong>CAD 只记录一个块的定义，其余的只是“引用”</strong>。这能让复杂的系统图运行得更流畅。</li>
@@ -395,7 +410,7 @@
 </h4><p>把做好的印章盖到图纸上。</p>
 <h4 id="3-编辑块be-bedit">3. 编辑块：<code>BE</code> (Bedit)
 </h4><ul>
-<li>进入一个专用的灰白色背景空间，修改块的形状。</li>
+<li>可直接双击块，进入块编辑器，进入一个专用的灰白色背景空间，修改块的形状。</li>
 <li>修改完点击“保存并退出”，全图的同名块都会变。</li>
 </ul>
 <h4 id="4-写块w-wblock">4. 写块：<code>W</code> (WBlock)
@@ -403,20 +418,18 @@
 <ul>
 <li>普通的块（B）只存在于当前文件里。<code>W</code> 命令能把块单独存成一个硬盘上的 <code>.dwg</code> 文件，以后你打开任何新工程，都能直接调用这个文件。</li>
 </ul>
-<h4 id="框架图">框架图
-</h4><div class="mermaid">
-  graph TD
-    Objects[散乱的线/圆/弧] -- "B (创建)" --> BlockDef[块定义: 存在于当前文件]
-    BlockDef -- "W (写块)" --> DWGFile[独立的 DWG 文件: 存入个人库]
-    
-    DWGFile -- "I (插入)" --> Drawing[当前图纸中的实例]
-    BlockDef -- "I (插入)" --> Drawing
-    
-    Drawing -- "BE (编辑)" --> Change[修改形状]
-    Change -- "保存" --> Update[全图所有实例自动同步]
-    
-    Drawing -- "X (炸开)" --> Objects[变回散乱的线]
-</div>
+<h4 id="5-清理块pu">5. 清理块：<code>PU</code>
+</h4><ul>
+<li>删除块： 只是把图面上的“实例”删掉了，但这个块的“定义”依然像幽灵一样躲在文件的后台。</li>
+<li>清理 (Purge)： 它是去后台“查户口”，把那些在图面上已经没有被使用的块定义、图层、样式彻底删掉。</li>
+<li>什么时候用 <code>PU</code>
+<ul>
+<li>减小文件体积、解决卡顿</li>
+<li>清理冗余图层：当你删除了所有标注，但“标注图层”死活删不掉时，用 <code>PU</code> 就能把它彻底拔除。</li>
+<li>交付标准： 给客户发图纸前，老手都会 <code>PU</code> 一遍，显得图纸非常干净、专业。可参考 [[XXX-05-CAD清理组合拳]]</li>
+</ul>
+</li>
+</ul>
 <h3 id="三-老手的块进阶准则">三、 老手的“块”进阶准则
 </h3><h4 id="1-永远在0-图层画块">1. 永远在“0 图层”画块
 </h4><p>这是 CAD 里最容易踩的坑。</p>
