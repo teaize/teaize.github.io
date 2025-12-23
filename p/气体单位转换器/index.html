@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 气体单位转换器 说明：本计算基于 25℃、1 个大气压 的标准状态，采用公式： mg/m³ = ppb × 分子量 ÷ 24.45 ÷ 1000 ppb = mg/m³ × 1000 × 24.45 ÷ 分子量 稀释比说明：稀释比 > 1 表示样品在测量时被稀释过（例如 10 倍稀释），要恢复未稀释的原始浓度，计算结果应当 乘以 稀释比进行修正。 ">
-<title>博客嵌入HTML-气体单位转换器</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 气体单位转换器 计算标准：25℃、1 个大气压\n">
+<title>气体单位转换器</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/%E5%8D%9A%E5%AE%A2%E5%B5%8C%E5%85%A5html-%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="博客嵌入HTML-气体单位转换器">
-<meta property='og:description' content=" 气体单位转换器 说明：本计算基于 25℃、1 个大气压 的标准状态，采用公式： mg/m³ = ppb × 分子量 ÷ 24.45 ÷ 1000 ppb = mg/m³ × 1000 × 24.45 ÷ 分子量 稀释比说明：稀释比 > 1 表示样品在测量时被稀释过（例如 10 倍稀释），要恢复未稀释的原始浓度，计算结果应当 乘以 稀释比进行修正。 ">
-<meta property='og:url' content='https://teaize.github.io/p/%E5%8D%9A%E5%AE%A2%E5%B5%8C%E5%85%A5html-%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="气体单位转换器">
+<meta property='og:description' content=" 气体单位转换器 计算标准：25℃、1 个大气压\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-23T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-23T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="博客嵌入HTML-气体单位转换器">
-<meta name="twitter:description" content=" 气体单位转换器 说明：本计算基于 25℃、1 个大气压 的标准状态，采用公式： mg/m³ = ppb × 分子量 ÷ 24.45 ÷ 1000 ppb = mg/m³ × 1000 × 24.45 ÷ 分子量 稀释比说明：稀释比 > 1 表示样品在测量时被稀释过（例如 10 倍稀释），要恢复未稀释的原始浓度，计算结果应当 乘以 稀释比进行修正。 ">
+<meta name="twitter:title" content="气体单位转换器">
+<meta name="twitter:description" content=" 气体单位转换器 计算标准：25℃、1 个大气压\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -284,7 +284,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/%E5%8D%9A%E5%AE%A2%E5%B5%8C%E5%85%A5html-%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/">博客嵌入HTML-气体单位转换器</a>
+            <a href="/p/%E6%B0%94%E4%BD%93%E5%8D%95%E4%BD%8D%E8%BD%AC%E6%8D%A2%E5%99%A8/">气体单位转换器</a>
         </h2>
     
         
@@ -323,151 +323,147 @@
     
     
     
-<script src="https://cdn.tailwindcss.com"></script>
 <style>
-.input-with-unit {
-  position: relative;
-}
-.input-with-unit input {
-  padding-right: 3rem;
-}
-.input-with-unit span {
-  position: absolute;
-  right: 0.5rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #666;
-  font-size: 0.9rem;
-  pointer-events: none;
-}
-</style>
-
-<style>
-    /* 1. 强制覆盖主题的文章容器宽度限制 */
+    /* 让 Stack 主题的正文容器在当前页面变宽 */
     .main-article .article-content {
-        max-width: 100% !important; /* 让内容占满整行 */
-        padding: 0 !important;      /* 去掉内边距 */
+        max-width: 100% !important; 
+    }
+    
+    /* 修复 Tailwind 引入后可能导致的字体缩小问题 */
+    #gas-converter-root {
+        font-size: 16px;
+        line-height: 1.5;
+        color: #333;
     }
 
-    /* 2. 确保你的离线 HTML 内部元素也是 100% 宽度 */
-    .my-custom-container { 
-        width: 100% !important; 
+    /* 原有的自定义样式 */
+    .input-with-unit {
+        position: relative;
+    }
+    .input-with-unit input {
+        padding-right: 3rem;
+    }
+    .input-with-unit span {
+        position: absolute;
+        right: 0.5rem;
+        top: 50%;
+        transform: translateY(-50%);
+        color: #666;
+        font-size: 0.9rem;
+        pointer-events: none;
     }
 </style>
 
-<div class="bg-white shadow-xl rounded-2xl p-8 max-w-4xl w-full mx-4">
-<h1 class="text-3xl font-bold mb-4 text-center">气体单位转换器</h1>
+<script src="https://cdn.tailwindcss.com"></script>
 
-<p class="text-sm text-gray-600 mb-4 bg-blue-50 p-4 rounded">
-  说明：本计算基于 <strong>25℃、1 个大气压</strong> 的标准状态，采用公式：
-  <br>mg/m³ = ppb × 分子量 ÷ 24.45 ÷ 1000
-  <br>ppb = mg/m³ × 1000 × 24.45 ÷ 分子量
-  <br><strong>稀释比说明</strong>：稀释比 > 1 表示样品在测量时被稀释过（例如 10 倍稀释），要恢复未稀释的原始浓度，计算结果应当 <strong>乘以</strong> 稀释比进行修正。
-</p>
+<div id="gas-converter-root" class="bg-white shadow-lg rounded-xl p-6 md:p-8 w-full border border-gray-100 mt-4">
+    <h1 class="text-2xl md:text-3xl font-bold mb-6 text-center text-blue-800">气体单位转换器</h1>
 
-<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-  <div>
-	<label class="block mb-1">选择气体</label>
-	<select id="gas" class="w-full p-2 border rounded">
-	  <option value="so2">二氧化硫 (SO₂)</option>
-	  <option value="no">一氧化氮 (NO)</option>
-	  <option value="no2">二氧化氮 (NO₂)</option>
-	  <option value="co">一氧化碳 (CO)</option>
-	</select>
-  </div>
+    <div class="text-sm text-gray-600 mb-6 bg-blue-50 p-4 rounded-lg border-l-4 border-blue-400">
+        <p class="font-bold mb-1">计算标准：25℃、1 个大气压</p>
+        <p>公式：mg/m³ = ppb × 分子量 ÷ 24.45 ÷ 1000</p>
+        <p class="mt-2 text-xs opacity-80"><strong>稀释比说明</strong>：若样品被稀释（如 10 倍），结果将自动乘以该倍数以恢复原始浓度。</p>
+    </div>
 
-  <div>
-	<label class="block mb-1">稀释比</label>
-	<div class="input-with-unit">
-	  <input type="number" id="dilution" value="1" min="1" class="w-full p-2 border rounded" title="稀释比，>1 表示样品被稀释（例如 10 表示 10 倍稀释）">
-	  <span>倍</span>
-	</div>
-  </div>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        <div>
+            <label class="block text-sm font-medium mb-1">选择气体</label>
+            <select id="gas" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                <option value="so2">二氧化硫 (SO₂)</option>
+                <option value="no">一氧化氮 (NO)</option>
+                <option value="no2">二氧化氮 (NO₂)</option>
+                <option value="co">一氧化碳 (CO)</option>
+            </select>
+        </div>
 
-  <div>
-	<label class="block mb-1">输入数值</label>
-	<div class="input-with-unit">
-	  <input type="number" id="value" class="w-full p-2 border rounded" placeholder="输入数值，按下确认后计算">
-	  <span id="input-unit-label">ppb</span>
-	</div>
-  </div>
+        <div>
+            <label class="block text-sm font-medium mb-1">稀释比</label>
+            <div class="input-with-unit">
+                <input type="number" id="dilution" value="1" min="1" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none">
+                <span>倍</span>
+            </div>
+        </div>
 
-  <div>
-	<label class="block mb-1">选择输入单位</label>
-	<select id="unit" class="w-full p-2 border rounded" onchange="updateUnitLabel()">
-	  <option value="ppb">ppb</option>
-	  <option value="mgm3">mg/m³</option>
-	</select>
-  </div>
-</div>
+        <div>
+            <label class="block text-sm font-medium mb-1">输入数值</label>
+            <div class="input-with-unit">
+                <input type="number" id="value" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" placeholder="输入待转换数值">
+                <span id="input-unit-label">ppb</span>
+            </div>
+        </div>
 
-<div class="mt-6 flex gap-4">
-  <button id="confirmBtn" class="flex-1 bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-4 rounded">确认转换</button>
-  <button id="clearBtn" class="bg-gray-200 hover:bg-gray-300 text-gray-800 font-semibold py-3 px-4 rounded">清除</button>
-</div>
+        <div>
+            <label class="block text-sm font-medium mb-1">选择输入单位</label>
+            <select id="unit" class="w-full p-2.5 border rounded-lg focus:ring-2 focus:ring-blue-500 outline-none" onchange="updateUnitLabel()">
+                <option value="ppb">ppb</option>
+                <option value="mgm3">mg/m³</option>
+            </select>
+        </div>
+    </div>
 
-<div id="result" class="mt-6 p-4 bg-gray-50 border rounded text-lg text-center font-semibold"></div>
+    <div class="mt-8 flex flex-col sm:flex-row gap-3">
+        <button id="confirmBtn" class="flex-[2] bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-6 rounded-lg transition duration-200">
+            开始转换
+        </button>
+        <button id="clearBtn" class="flex-1 bg-gray-100 hover:bg-gray-200 text-gray-600 font-bold py-3 px-6 rounded-lg transition duration-200">
+            重置
+        </button>
+    </div>
 
-<p class="text-xs text-gray-500 mt-4">
-  * 本工具仅供参考，实际监测应考虑温度、压力及湿度等因素进行修正。
-</p>
+    <div id="result" class="mt-8 p-6 bg-blue-50 border-2 border-dashed border-blue-200 rounded-xl text-lg text-center font-bold text-blue-900 min-h-[80px] flex items-center justify-center">
+        等待输入数据...
+    </div>
+
+    <p class="text-[10px] text-gray-400 mt-6 text-center italic">
+        * 工具仅供参考，实际监测需根据实时温压补偿。
+    </p>
 </div>
 
 <script>
-const molWeights = {
-  so2: 64.066,
-  no: 30.006,
-  no2: 46.0055,
-  co: 28.01
-};
+    // JS 部分逻辑保持不变，只需确保 ID 对应
+    const molWeights = { so2: 64.066, no: 30.006, no2: 46.0055, co: 28.01 };
 
-function updateUnitLabel() {
-  const unit = document.getElementById('unit').value;
-  document.getElementById('input-unit-label').textContent = unit === 'ppb' ? 'ppb' : 'mg/m³';
-}
+    function updateUnitLabel() {
+        const unit = document.getElementById('unit').value;
+        document.getElementById('input-unit-label').textContent = unit === 'ppb' ? 'ppb' : 'mg/m³';
+    }
 
-function convert() {
-  const gas = document.getElementById('gas').value;
-  const value = parseFloat(document.getElementById('value').value);
-  const unit = document.getElementById('unit').value;
-  const dilution = parseFloat(document.getElementById('dilution').value) || 1;
-  const resultDiv = document.getElementById('result');
+    function convert() {
+        const gas = document.getElementById('gas').value;
+        const value = parseFloat(document.getElementById('value').value);
+        const unit = document.getElementById('unit').value;
+        const dilution = parseFloat(document.getElementById('dilution').value) || 1;
+        const resultDiv = document.getElementById('result');
 
-  if (isNaN(value) || isNaN(dilution) || dilution <= 0) {
-	resultDiv.textContent = '请输入有效数值和稀释比（稀释比应大于 0）';
-	return;
-  }
+        if (isNaN(value) || isNaN(dilution) || dilution <= 0) {
+            resultDiv.innerHTML = '<span class="text-red-500">请输入有效的数值和稀释比</span>';
+            return;
+        }
 
-  const MW = molWeights[gas];
-  let converted;
+        const MW = molWeights[gas];
+        let converted;
+        if (unit === 'ppb') {
+            converted = value * MW / 24.45 / 1000;
+        } else {
+            converted = value * 1000 * 24.45 / MW;
+        }
 
-  if (unit === 'ppb') {
-	// ppb -> mg/m3
-	converted = value * MW / 24.45 / 1000; // 等价于 value * MW / 24450
-  } else {
-	// mg/m3 -> ppb
-	converted = value * 1000 * 24.45 / MW;
-  }
+        converted = converted * dilution;
 
-  // 稀释比修正：若样品被稀释（稀释比 > 1），恢复原始浓度需乘以稀释比
-  converted = converted * dilution;
+        const targetUnit = unit === 'ppb' ? 'mg/m³' : 'ppb';
+        const displayValue = targetUnit === 'ppb' ? converted.toFixed(3) : converted.toFixed(6);
 
-  resultDiv.textContent = unit === 'ppb'
-	? `${value} ppb (稀释比 ${dilution}) → ${converted.toFixed(6)} mg/m³`
-	: `${value} mg/m³ (稀释比 ${dilution}) → ${converted.toFixed(3)} ppb`;
-}
+        resultDiv.innerHTML = `<div><div class="text-sm text-blue-600 font-normal mb-1">转换结果 (含 ${dilution} 倍稀释)</div>${displayValue} <span class="text-sm ml-1">${targetUnit}</span></div>`;
+    }
 
-document.getElementById('confirmBtn').addEventListener('click', convert);
-document.getElementById('clearBtn').addEventListener('click', ()=>{
-  document.getElementById('value').value = '';
-  document.getElementById('dilution').value = '1';
-  document.getElementById('result').textContent = '';
-});
-
-// 初始化
-updateUnitLabel();
+    document.getElementById('confirmBtn').addEventListener('click', convert);
+    document.getElementById('clearBtn').addEventListener('click', () => {
+        document.getElementById('value').value = '';
+        document.getElementById('dilution').value = '1';
+        document.getElementById('result').textContent = '等待输入数据...';
+    });
+    updateUnitLabel();
 </script>
-
 </section>
 
 
