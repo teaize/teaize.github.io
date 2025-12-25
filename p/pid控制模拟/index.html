@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="参考资料 PID Controller Simulator PID control simulator ![[Pasted image 20251225155427.png]]\n几个控制参数 我们要分清“PID 控制器本身”和“整个闭环系统”\n对于 PID 控制器（你的代码逻辑），它其实只有一个核心输入：误差 $e(t)$ $e(t) = \\text{Set Point} (目标值) - \\text{Process Variable} (实际测量值)$。 输出：控制量 $u(t)$（比如 PWM 的占空比）。 对于整个仿真系统（闭环回路）：为了模拟真实世界，仿真器通常有 3 个输入 和 1 个输出： 输入 1：设定值 (Set Point, SP) —— 你希望温度达到的度数（如 $120^\\circ\\text{C}$）。 输入 2：测量噪声 (Measurement Noise) —— 模拟传感器的抖动。 输入 3：过程扰动 (Process Disturbance) —— 模拟外部环境的变化。 输出：实际温度 (Process Variable, PV) —— 传感器最终读到的数值 为什么仿真器里会有“噪声”这个选项 噪声是 PID 算法（尤其是 D 项）的“天敌”。\n">
+<title>PID控制模拟</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/pid%E6%8E%A7%E5%88%B6%E6%A8%A1%E6%8B%9F/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="PID控制模拟">
+<meta property='og:description' content="参考资料 PID Controller Simulator PID control simulator ![[Pasted image 20251225155427.png]]\n几个控制参数 我们要分清“PID 控制器本身”和“整个闭环系统”\n对于 PID 控制器（你的代码逻辑），它其实只有一个核心输入：误差 $e(t)$ $e(t) = \\text{Set Point} (目标值) - \\text{Process Variable} (实际测量值)$。 输出：控制量 $u(t)$（比如 PWM 的占空比）。 对于整个仿真系统（闭环回路）：为了模拟真实世界，仿真器通常有 3 个输入 和 1 个输出： 输入 1：设定值 (Set Point, SP) —— 你希望温度达到的度数（如 $120^\\circ\\text{C}$）。 输入 2：测量噪声 (Measurement Noise) —— 模拟传感器的抖动。 输入 3：过程扰动 (Process Disturbance) —— 模拟外部环境的变化。 输出：实际温度 (Process Variable, PV) —— 传感器最终读到的数值 为什么仿真器里会有“噪声”这个选项 噪声是 PID 算法（尤其是 D 项）的“天敌”。\n">
+<meta property='og:url' content='https://teaize.github.io/p/pid%E6%8E%A7%E5%88%B6%E6%A8%A1%E6%8B%9F/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-25T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-25T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="PID控制模拟">
+<meta name="twitter:description" content="参考资料 PID Controller Simulator PID control simulator ![[Pasted image 20251225155427.png]]\n几个控制参数 我们要分清“PID 控制器本身”和“整个闭环系统”\n对于 PID 控制器（你的代码逻辑），它其实只有一个核心输入：误差 $e(t)$ $e(t) = \\text{Set Point} (目标值) - \\text{Process Variable} (实际测量值)$。 输出：控制量 $u(t)$（比如 PWM 的占空比）。 对于整个仿真系统（闭环回路）：为了模拟真实世界，仿真器通常有 3 个输入 和 1 个输出： 输入 1：设定值 (Set Point, SP) —— 你希望温度达到的度数（如 $120^\\circ\\text{C}$）。 输入 2：测量噪声 (Measurement Noise) —— 模拟传感器的抖动。 输入 3：过程扰动 (Process Disturbance) —— 模拟外部环境的变化。 输出：实际温度 (Process Variable, PV) —— 传感器最终读到的数值 为什么仿真器里会有“噪声”这个选项 噪声是 PID 算法（尤其是 D 项）的“天敌”。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#几个控制参数">几个控制参数</a></li>
+        <li><a href="#为什么仿真器里会有噪声这个选项">为什么仿真器里会有“噪声”这个选项</a></li>
+        <li><a href="#扰动-disturbance又是什么">“扰动 (Disturbance)”又是什么</a></li>
+      </ol>
+    </li>
+    <li><a href="#pid-网页仿真器">PID 网页仿真器</a>
+      <ol>
+        <li><a href="#如何使用这个仿真器学习">如何使用这个仿真器学习？</a>
+          <ol>
+            <li><a href="#实验-1感受静差">实验 1：感受“静差”</a></li>
+            <li><a href="#实验-2感受积分的力量">实验 2：感受“积分的力量”</a></li>
+            <li><a href="#实验-3感受噪声的恐惧">实验 3：感受“噪声的恐惧”</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#从网页仿真到-c-语言的跨越">从“网页仿真”到 C 语言的跨越</a>
+      <ol>
+        <li><a href="#为什么这段-c-代码比网页版更高级">为什么这段 C 代码比网页版更“高级”？</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/pid%E6%8E%A7%E5%88%B6%E6%A8%A1%E6%8B%9F/">PID控制模拟</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-25</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="参考资料">参考资料
+</h3><ul>
+<li><a class="link" href="https://www.luisllamas.es/en/pid-controller-simulator/"  target="_blank" rel="noopener"
+    >PID Controller Simulator</a></li>
+<li><a class="link" href="https://grauonline.de/alexwww/ardumower/pid/pid.html"  target="_blank" rel="noopener"
+    >PID control simulator</a></li>
+</ul>
+<p>![[Pasted image 20251225155427.png]]</p>
+<h3 id="几个控制参数">几个控制参数
+</h3><p>我们要分清“PID 控制器本身”和“整个闭环系统”</p>
+<ul>
+<li>对于 PID 控制器（你的代码逻辑），<strong>它其实只有一个核心输入：误差 $e(t)$</strong>
+<ul>
+<li>$e(t) = \text{Set Point} (目标值) - \text{Process Variable} (实际测量值)$。</li>
+<li>输出：控制量 $u(t)$（比如 PWM 的占空比）。</li>
+</ul>
+</li>
+<li>对于整个仿真系统（闭环回路）：为了模拟真实世界，仿真器通常有 <strong>3 个输入</strong> 和 <strong>1 个输出</strong>：
+<ul>
+<li>输入 1：设定值 (Set Point, SP) —— 你希望温度达到的度数（如 $120^\circ\text{C}$）。</li>
+<li>输入 2：测量噪声 (Measurement Noise) —— 模拟传感器的抖动。</li>
+<li>输入 3：过程扰动 (Process Disturbance) —— 模拟外部环境的变化。</li>
+<li>输出：实际温度 (Process Variable, PV) —— 传感器最终读到的数值</li>
+</ul>
+</li>
+</ul>
+<h3 id="为什么仿真器里会有噪声这个选项">为什么仿真器里会有“噪声”这个选项
+</h3><p>噪声是 PID 算法（尤其是 <strong>D 项</strong>）的“天敌”。</p>
+<ul>
+<li>传感器的真实情况：你的 PT100 即使在恒温下，ADC 读数也会有 $\pm0.1^\circ\text{C}$ 的跳动。</li>
+<li>D 项的放大效应：
+<ul>
+<li>$D$ 项是求导（变化率）。</li>
+<li>如果噪声让温度在 1 毫秒内跳动了 $0.1$ 度，导数就是 $0.1 / 0.001 = 100$！</li>
+<li>这会导致你的控制输出（PWM）像抽风一样剧烈抖动，即便温度其实很稳定。</li>
+</ul>
+</li>
+</ul>
+<p>所以在真实 CEMS 开发中，我们在把数据传给 PID 之前，必须先经过你思维导图里的“双重滤波算法”（算术平均或一阶滞后），这就是为了干掉噪声。</p>
+<blockquote>
+<p>你在仿真器里尝试<strong>开启一点 Noise</strong>，然后观察：</p>
+<ul>
+<li>当你 $D$ 值很小时，曲线还算平滑。</li>
+<li>当你把 $D$ 调大，你会发现输出信号（通常是底下的那个条）变得非常杂乱。</li>
+<li>这就是为什么在工业现场，很多工程师宁愿只用 PI 控制，也不轻易开 D 的原因</li>
+</ul>
+</blockquote>
+<h3 id="扰动-disturbance又是什么">“扰动 (Disturbance)”又是什么
+</h3><p>噪声是“眼睛（传感器）”看花了，而扰动是“身体”被踢了一脚。</p>
+<ul>
+<li>场景：你的发热片正在稳稳地保持 $120^\circ\text{C}$。</li>
+<li>扰动：这时候采样泵突然开启，冷烟气快速流过，带走了热量；或者你打开了机箱风扇。</li>
+<li>PID 的任务：它必须立刻感知到这个由于外部干扰导致的温度下降，并迅速加大功率补偿回来。</li>
+</ul>
+<h2 id="pid-网页仿真器">PID 网页仿真器
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">pid_sim</span><span class="o">.</span><span class="n">html</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个仿真器模拟了发热片控温过程：它<strong>有热惯性（升温慢）、有散热（自然冷却）、有噪声</strong>。</p>
+<h3 id="如何使用这个仿真器学习">如何使用这个仿真器学习？
+</h3><p>![[Pasted image 20251225161607.png]]</p>
+<p>当你打开这个网页后，请尝试以下“实验步骤”：</p>
+<iframe src="/html-files/pid_sim.html" width="100%" height="1000px" frameborder="0"></iframe>
+<h4 id="实验-1感受静差">实验 1：感受“静差”
+</h4><ol>
+<li>将 $K_i$ 和 $K_d$ 设为 0。</li>
+<li>慢慢调大 $K_p$。你会发现蓝线（实际温度）永远追不上红虚线（目标温度）。</li>
+<li>原理：因为散热的存在，当误差变小时，$K_p$ 产生的热量正好抵消了散热，温度就不再上升了。</li>
+</ol>
+<h4 id="实验-2感受积分的力量">实验 2：感受“积分的力量”
+</h4><ol>
+<li>在实验 1 的基础上，慢慢调大 $K_i$。</li>
+<li>你会看到蓝线开始“缓慢但坚定”地向红线靠拢，最终完美重合。</li>
+<li><strong>副作用</strong>：调大 $K_i$ 后，你会发现蓝线冲过了头（超调）。</li>
+</ol>
+<h4 id="实验-3感受噪声的恐惧">实验 3：感受“噪声的恐惧”
+</h4><ol>
+<li>保持一个稳定的 PID 参数。</li>
+<li>调大 <strong>“环境噪声”</strong> 滑块。</li>
+<li>此时再调大 $K_d$。你会发现蓝线变得非常抖动。</li>
+<li><strong>结论</strong>：在有噪声的环境下，$K_d$ 不能开太大，或者需要先对温度进行滤波。</li>
+</ol>
+<h2 id="从网页仿真到-c-语言的跨越">从“网页仿真”到 C 语言的跨越
+</h2><p>在 STM32 中，为了让代码整洁、可复用（比如你以后可能同时控制 3 路加热，每路都要一个 PID），我们通常会定义一个 <strong>结构体 (Struct)</strong>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* PID 控制器结构体定义 */</span>
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Target</span><span class="p">;</span>           <span class="c1">// 目标值 (Set Point)
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Measured</span><span class="p">;</span>         <span class="c1">// 实际测量值 (Process Variable)
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Kp</span><span class="p">;</span>               <span class="c1">// 比例系数
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Ki</span><span class="p">;</span>               <span class="c1">// 积分系数
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Kd</span><span class="p">;</span>               <span class="c1">// 微分系数
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Error</span><span class="p">;</span>            <span class="c1">// 当前误差
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">LastError</span><span class="p">;</span>        <span class="c1">// 上一次误差
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Integral</span><span class="p">;</span>         <span class="c1">// 误差累积值 (积分项)
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">OutputMax</span><span class="p">;</span>        <span class="c1">// 输出限幅最大值 (如 100% PWM)
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">OutputMin</span><span class="p">;</span>        <span class="c1">// 输出限幅最小值 (如 0%)
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">IntegralMax</span><span class="p">;</span>      <span class="c1">// 积分限幅 (防止积分饱和)
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Output</span><span class="p">;</span>           <span class="c1">// 最终计算出的控制输出
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">PID_Controller</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/* PID 计算函数原型 */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PID_Compute</span><span class="p">(</span><span class="n">PID_Controller</span> <span class="o">*</span><span class="n">pid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 计算当前误差
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Error</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Target</span> <span class="o">-</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Measured</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 计算积分 (累加误差)
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">+=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3. 积分限幅 (抗饱和逻辑，这就是我们在网页里讨论过的)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">&gt;</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntegralMax</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntegralMax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntegralMax</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">=</span> <span class="o">-</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntegralMax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4. 计算输出 = P + I + D
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">=</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Kp</span> <span class="o">*</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Error</span><span class="p">)</span> <span class="o">+</span> \
+</span></span><span class="line"><span class="cl">                  <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Ki</span> <span class="o">*</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span><span class="p">)</span> <span class="o">+</span> \
+</span></span><span class="line"><span class="cl">                  <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Kd</span> <span class="o">*</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Error</span> <span class="o">-</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">LastError</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 5. 输出限幅 (防止 PWM 溢出)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">&gt;</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">OutputMax</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">OutputMax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">&lt;</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">OutputMin</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">OutputMin</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 6. 保存本次误差，供下次微分计算使用
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">LastError</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="为什么这段-c-代码比网页版更高级">为什么这段 C 代码比网页版更“高级”？
+</h3><ul>
+<li>面向对象思想：通过 <code>PID_Controller</code> 结构体，你可以轻松创建 <code>Heater_PID</code>、<code>Pump_PID</code> 等多个实例。</li>
+<li>抗饱和机制：专门加入了 <code>IntegralMax</code>，防止系统在长时间达不到目标时产生的“失控”现象。</li>
+<li>指针传递：使用 <code>*pid</code> 指针传递，运行效率极高，符合 STM32 这种嵌入式环境的要求。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

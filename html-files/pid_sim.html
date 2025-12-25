@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>CEMS PID 控温仿真器</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body { font-family: sans-serif; margin: 20px; background: #f4f4f9; }
+        .container { display: flex; flex-direction: column; align-items: center; }
+        .controls { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; background: white; padding: 20px; border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }
+        .control-group { display: flex; flex-direction: column; }
+        canvas { max-width: 800px; background: white; border-radius: 8px; margin-top: 20px; }
+        label { font-weight: bold; font-size: 0.9em; }
+        span { color: #666; font-size: 0.8em; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2>CEMS 发热片 PID 控温仿真</h2>
+        <div class="controls">
+            <div class="control-group">
+                <label>目标温度 (SP): <span id="sp_val">100</span>°C</label>
+                <input type="range" id="sp" min="20" max="200" value="100">
+            </div>
+            <div class="control-group">
+                <label>比例 Kp: <span id="kp_val">2.0</span></label>
+                <input type="range" id="kp" min="0" max="10" step="0.1" value="2.0">
+            </div>
+            <div class="control-group">
+                <label>积分 Ki: <span id="ki_val">0.1</span></label>
+                <input type="range" id="ki" min="0" max="2" step="0.01" value="0.1">
+            </div>
+            <div class="control-group">
+                <label>微分 Kd: <span id="kd_val">1.0</span></label>
+                <input type="range" id="kd" min="0" max="5" step="0.1" value="1.0">
+            </div>
+            <div class="control-group">
+                <label>环境噪声: <span id="noise_val">0.5</span></label>
+                <input type="range" id="noise" min="0" max="5" step="0.1" value="0.5">
+            </div>
+            <button onclick="resetSim()" style="grid-column: span 1;">重置仿真</button>
+        </div>
+        <canvas id="pidChart"></canvas>
+    </div>
+
+    <script>
+        // --- PID 逻辑变量 ---
+        let integral = 0;
+        let lastError = 0;
+        let currentTemp = 25; // 初始室温
+        const dt = 0.1; // 采样时间 100ms
+
+        // --- 物理模型变量 (模拟 MCH 发热片) ---
+        const mass = 1.0; 
+        const coolingFactor = 0.05; // 散热系数
+        const heatingPower = 2.0;   // 加热能力
+
+        // --- 图表初始化 ---
+        const ctx = document.getElementById('pidChart').getContext('2d');
+        const chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                labels: [],
+                datasets: [
+                    { label: '目标温度 (SP)', data: [], borderColor: 'red', borderDash: [5, 5], fill: false },
+                    { label: '实际温度 (PV)', data: [], borderColor: 'blue', fill: false, pointRadius: 0 }
+                ]
+            },
+            options: { animation: false, scales: { y: { min: 0, max: 220 } } }
+        });
+
+        function resetSim() {
+            chart.data.labels = [];
+            chart.data.datasets[0].data = [];
+            chart.data.datasets[1].data = [];
+            currentTemp = 25;
+            integral = 0;
+            lastError = 0;
+        }
+
+        function update() {
+            const sp = parseFloat(document.getElementById('sp').value);
+            const kp = parseFloat(document.getElementById('kp').value);
+            const ki = parseFloat(document.getElementById('ki').value);
+            const kd = parseFloat(document.getElementById('kd').value);
+            const noiseLevel = parseFloat(document.getElementById('noise').value);
+
+            // 更新标签
+            document.getElementById('sp_val').innerText = sp;
+            document.getElementById('kp_val').innerText = kp;
+            document.getElementById('ki_val').innerText = ki;
+            document.getElementById('kd_val').innerText = kd;
+            document.getElementById('noise_val').innerText = noiseLevel;
+
+            // 1. 计算误差
+            let error = sp - currentTemp;
+
+            // 2. PID 计算
+            integral += error * dt;
+            // 抗饱和：限制积分项，防止失控
+            integral = Math.max(Math.min(integral, 100), -100);
+            
+            let derivative = (error - lastError) / dt;
+            let output = (kp * error) + (ki * integral) + (kd * derivative);
+            
+            // 限制输出在 0-100% (PWM 范围)
+            output = Math.max(Math.min(output, 100), 0);
+            lastError = error;
+
+            // 3. 物理模型更新 (简化热力学：温度增量 = 加热 - 散热)
+            let noise = (Math.random() - 0.5) * noiseLevel;
+            let tempChange = (output * heatingPower * 0.1) - ((currentTemp - 25) * coolingFactor);
+            currentTemp += tempChange + noise;
+
+            // 4. 更新图表
+            const now = new Date().toLocaleTimeString();
+            chart.data.labels.push("");
+            chart.data.datasets[0].data.push(sp);
+            chart.data.datasets[1].data.push(currentTemp.toFixed(2));
+
+            if (chart.data.labels.length > 100) {
+                chart.data.labels.shift();
+                chart.data.datasets[0].data.shift();
+                chart.data.datasets[1].data.shift();
+            }
+            chart.update();
+        }
+
+        setInterval(update, 100); // 100ms 运行一次
+    </script>
+</body>
+</html>

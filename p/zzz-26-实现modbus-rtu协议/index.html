@@ -322,6 +322,11 @@
             <li><a href="#为什么校验时强制取前-8-字节">为什么校验时，强制取前 8 字节</a></li>
           </ol>
         </li>
+        <li><a href="#本案例流程总结">本案例流程总结</a>
+          <ol>
+            <li><a href="#五步实战流程详解">五步实战流程详解</a></li>
+          </ol>
+        </li>
       </ol>
     </li>
   </ol>
@@ -1666,6 +1671,55 @@
 <li>结果： 本该是 <code>rx_buffer[6]</code> 和 <code>rx_buffer[7]</code> 的 CRC，变成了 <code>rx_buffer[7]</code> 和 <code>rx_buffer[8]</code>。位置一偏，校验必败。</li>
 </ul>
 <p>注意，如果 Modbus 报文长度超过了 8 字节（如 16 功能码），就不能强制取 8 字节了，此时需根据报文中的“字节计数值”字段动态计算 CRC 位置。</p>
+<h3 id="本案例流程总结">本案例流程总结
+</h3><div class="mermaid">
+  graph TD
+    Start((开始项目)) --> Phase1[<b>第一阶段：硬件解耦</b><br/>双串口方案规划]
+    Phase1 --> Phase2[<b>第二阶段：CubeMX 配置</b><br/>DMA + IDLE 中断]
+    Phase2 --> Phase3[<b>第三阶段：核心算法</b><br/>CRC16 与 寄存器映射]
+    Phase3 --> Phase4[<b>第四阶段：逻辑解析</b><br/>三道门卫 校验逻辑]
+    Phase4 --> Phase5[<b>第五阶段：工业加固</b><br/>响应优先 与 缓冲区自洁]
+    Phase5 --> End((稳定运行))
+
+    subgraph "关键细节"
+    Phase1 -.-> P1_1[USART1: 调试/VOFA+<br/>USART2: 485/Modbus]
+    Phase2 -.-> P2_1[DMA: Circular 模式<br/>NVIC: 开启全局中断]
+    Phase4 -.-> P4_1[1.长度校验<br/>2.站号校验<br/>3.CRC 强校验]
+    Phase5 -.-> P5_1[先发回传, 后写 Flash<br/>memset 彻底清理缓存]
+    end
+
+    style Start fill:#f9f,stroke:#333
+    style End fill:#bbf,stroke:#333
+    style Phase4 fill:#f96,stroke:#333
+</div>
+<h4 id="五步实战流程详解">五步实战流程详解
+</h4><p>1、硬件架构（物理层隔离）</p>
+<ul>
+<li>USART1 (调试口)：接 USB-TTL，用于 <code>printf</code> 文本和 VOFA+ 绘图。它相当于仪表的“黑匣子”，让你看到内部逻辑。</li>
+<li>USART2 (通讯口)：接 TTL-485 模块。它是仪表的“耳朵和嘴巴”，只跑二进制协议，确保不受调试信息的干扰。</li>
+</ul>
+<p>2、第二步：底层配置（DMA+ 空闲中断）</p>
+<ul>
+<li>DMA (Direct Memory Access)：数据不需要经过 CPU，直接搬运到数组，效率极高。</li>
+<li>IDLE (空闲中断)：这是 Modbus 的灵魂。它能自动判定一帧数据的结束（当总线超过 1.5 个字符时间没信号时触发），完美解决变长报文接收问题。</li>
+</ul>
+<p>3、第三步：数据建模（寄存器映射）</p>
+<ul>
+<li>建立仓库：用一个数组 <code>Modbus_Regs[10]</code> 模拟寄存器。</li>
+<li>同步数据：在 <code>while(1)</code> 中将传感器实时值（如压力、电流）放大 100/1000 倍后存入数组，等待主机读取。</li>
+</ul>
+<p>4、第四步：解析逻辑（三道门卫）</p>
+<ul>
+<li>长度检查：对于 03/06，小于 8 字节的一律视为垃圾。</li>
+<li>站号过滤：不是发给我的（SLAVE_ID）一律不回。</li>
+<li>CRC 强校验：<strong>这是最重要的安全锁</strong>。通过 <code>Modbus_CRC16</code> 函数计算后与末尾两字节比对，确保数据在传输过程中没有因为电磁干扰而变质。</li>
+</ul>
+<p>5、第五步：工业级加固（稳定性策略）</p>
+<ul>
+<li>防御性编程：强制截取前 8 字节校验，无视末尾多余的 <code>\n</code> 或空格。</li>
+<li>响应优先原则：先回传响应报文，再执行 Flash 写入或电机控制等耗时动作，防止上位机通讯超时。</li>
+<li>自洁功能：处理完每一帧后，必须 <code>memset</code> 缓冲区并重启 DMA，确保下一帧从第 0 位开始。</li>
+</ul>
 
 </section>
 

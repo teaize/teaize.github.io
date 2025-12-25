@@ -7,7 +7,413 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Tue, 23 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 25 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>PID控制模拟</title>
+        <link>https://teaize.github.io/p/pid%E6%8E%A7%E5%88%B6%E6%A8%A1%E6%8B%9F/</link>
+        <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/pid%E6%8E%A7%E5%88%B6%E6%A8%A1%E6%8B%9F/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.luisllamas.es/en/pid-controller-simulator/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PID Controller Simulator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://grauonline.de/alexwww/ardumower/pid/pid.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;PID control simulator&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;![[Pasted image 20251225155427.png]]&lt;/p&gt;
+&lt;h3 id=&#34;几个控制参数&#34;&gt;几个控制参数
+&lt;/h3&gt;&lt;p&gt;我们要分清“PID 控制器本身”和“整个闭环系统”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于 PID 控制器（你的代码逻辑），&lt;strong&gt;它其实只有一个核心输入：误差 $e(t)$&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;$e(t) = \text{Set Point} (目标值) - \text{Process Variable} (实际测量值)$。&lt;/li&gt;
+&lt;li&gt;输出：控制量 $u(t)$（比如 PWM 的占空比）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;对于整个仿真系统（闭环回路）：为了模拟真实世界，仿真器通常有 &lt;strong&gt;3 个输入&lt;/strong&gt; 和 &lt;strong&gt;1 个输出&lt;/strong&gt;：
+&lt;ul&gt;
+&lt;li&gt;输入 1：设定值 (Set Point, SP) —— 你希望温度达到的度数（如 $120^\circ\text{C}$）。&lt;/li&gt;
+&lt;li&gt;输入 2：测量噪声 (Measurement Noise) —— 模拟传感器的抖动。&lt;/li&gt;
+&lt;li&gt;输入 3：过程扰动 (Process Disturbance) —— 模拟外部环境的变化。&lt;/li&gt;
+&lt;li&gt;输出：实际温度 (Process Variable, PV) —— 传感器最终读到的数值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么仿真器里会有噪声这个选项&#34;&gt;为什么仿真器里会有“噪声”这个选项
+&lt;/h3&gt;&lt;p&gt;噪声是 PID 算法（尤其是 &lt;strong&gt;D 项&lt;/strong&gt;）的“天敌”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传感器的真实情况：你的 PT100 即使在恒温下，ADC 读数也会有 $\pm0.1^\circ\text{C}$ 的跳动。&lt;/li&gt;
+&lt;li&gt;D 项的放大效应：
+&lt;ul&gt;
+&lt;li&gt;$D$ 项是求导（变化率）。&lt;/li&gt;
+&lt;li&gt;如果噪声让温度在 1 毫秒内跳动了 $0.1$ 度，导数就是 $0.1 / 0.001 = 100$！&lt;/li&gt;
+&lt;li&gt;这会导致你的控制输出（PWM）像抽风一样剧烈抖动，即便温度其实很稳定。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;所以在真实 CEMS 开发中，我们在把数据传给 PID 之前，必须先经过你思维导图里的“双重滤波算法”（算术平均或一阶滞后），这就是为了干掉噪声。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你在仿真器里尝试&lt;strong&gt;开启一点 Noise&lt;/strong&gt;，然后观察：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当你 $D$ 值很小时，曲线还算平滑。&lt;/li&gt;
+&lt;li&gt;当你把 $D$ 调大，你会发现输出信号（通常是底下的那个条）变得非常杂乱。&lt;/li&gt;
+&lt;li&gt;这就是为什么在工业现场，很多工程师宁愿只用 PI 控制，也不轻易开 D 的原因&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;扰动-disturbance又是什么&#34;&gt;“扰动 (Disturbance)”又是什么
+&lt;/h3&gt;&lt;p&gt;噪声是“眼睛（传感器）”看花了，而扰动是“身体”被踢了一脚。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景：你的发热片正在稳稳地保持 $120^\circ\text{C}$。&lt;/li&gt;
+&lt;li&gt;扰动：这时候采样泵突然开启，冷烟气快速流过，带走了热量；或者你打开了机箱风扇。&lt;/li&gt;
+&lt;li&gt;PID 的任务：它必须立刻感知到这个由于外部干扰导致的温度下降，并迅速加大功率补偿回来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;pid-网页仿真器&#34;&gt;PID 网页仿真器
+&lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pid_sim&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;html&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;这个仿真器模拟了发热片控温过程：它&lt;strong&gt;有热惯性（升温慢）、有散热（自然冷却）、有噪声&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;如何使用这个仿真器学习&#34;&gt;如何使用这个仿真器学习？
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20251225161607.png]]&lt;/p&gt;
+&lt;p&gt;当你打开这个网页后，请尝试以下“实验步骤”：&lt;/p&gt;
+&lt;iframe src=&#34;https://teaize.github.io/html-files/pid_sim.html&#34; width=&#34;100%&#34; height=&#34;1000px&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+&lt;h4 id=&#34;实验-1感受静差&#34;&gt;实验 1：感受“静差”
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;将 $K_i$ 和 $K_d$ 设为 0。&lt;/li&gt;
+&lt;li&gt;慢慢调大 $K_p$。你会发现蓝线（实际温度）永远追不上红虚线（目标温度）。&lt;/li&gt;
+&lt;li&gt;原理：因为散热的存在，当误差变小时，$K_p$ 产生的热量正好抵消了散热，温度就不再上升了。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;实验-2感受积分的力量&#34;&gt;实验 2：感受“积分的力量”
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;在实验 1 的基础上，慢慢调大 $K_i$。&lt;/li&gt;
+&lt;li&gt;你会看到蓝线开始“缓慢但坚定”地向红线靠拢，最终完美重合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;副作用&lt;/strong&gt;：调大 $K_i$ 后，你会发现蓝线冲过了头（超调）。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;实验-3感受噪声的恐惧&#34;&gt;实验 3：感受“噪声的恐惧”
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;保持一个稳定的 PID 参数。&lt;/li&gt;
+&lt;li&gt;调大 &lt;strong&gt;“环境噪声”&lt;/strong&gt; 滑块。&lt;/li&gt;
+&lt;li&gt;此时再调大 $K_d$。你会发现蓝线变得非常抖动。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;结论&lt;/strong&gt;：在有噪声的环境下，$K_d$ 不能开太大，或者需要先对温度进行滤波。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;从网页仿真到-c-语言的跨越&#34;&gt;从“网页仿真”到 C 语言的跨越
+&lt;/h2&gt;&lt;p&gt;在 STM32 中，为了让代码整洁、可复用（比如你以后可能同时控制 3 路加热，每路都要一个 PID），我们通常会定义一个 &lt;strong&gt;结构体 (Struct)&lt;/strong&gt;。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* PID 控制器结构体定义 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Target&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;           &lt;span class=&#34;c1&#34;&gt;// 目标值 (Set Point)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Measured&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;// 实际测量值 (Process Variable)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Kp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;// 比例系数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ki&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;// 积分系数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Kd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;               &lt;span class=&#34;c1&#34;&gt;// 微分系数
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;            &lt;span class=&#34;c1&#34;&gt;// 当前误差
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LastError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// 上一次误差
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;         &lt;span class=&#34;c1&#34;&gt;// 误差累积值 (积分项)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OutputMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// 输出限幅最大值 (如 100% PWM)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OutputMin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;        &lt;span class=&#34;c1&#34;&gt;// 输出限幅最小值 (如 0%)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IntegralMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;      &lt;span class=&#34;c1&#34;&gt;// 积分限幅 (防止积分饱和)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Output&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;           &lt;span class=&#34;c1&#34;&gt;// 最终计算出的控制输出
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PID_Controller&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* PID 计算函数原型 */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID_Controller&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 1. 计算当前误差
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Target&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Measured&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 2. 计算积分 (累加误差)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 3. 积分限幅 (抗饱和逻辑，这就是我们在网页里讨论过的)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IntegralMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IntegralMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IntegralMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IntegralMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 4. 计算输出 = P + I + D
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Output&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Ki&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Integral&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; \
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                  &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LastError&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;));&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 5. 输出限幅 (防止 PWM 溢出)
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Output&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;OutputMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Output&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;OutputMax&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Output&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;OutputMin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Output&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;OutputMin&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 6. 保存本次误差，供下次微分计算使用
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;LastError&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Error&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;为什么这段-c-代码比网页版更高级&#34;&gt;为什么这段 C 代码比网页版更“高级”？
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;面向对象思想：通过 &lt;code&gt;PID_Controller&lt;/code&gt; 结构体，你可以轻松创建 &lt;code&gt;Heater_PID&lt;/code&gt;、&lt;code&gt;Pump_PID&lt;/code&gt; 等多个实例。&lt;/li&gt;
+&lt;li&gt;抗饱和机制：专门加入了 &lt;code&gt;IntegralMax&lt;/code&gt;，防止系统在长时间达不到目标时产生的“失控”现象。&lt;/li&gt;
+&lt;li&gt;指针传递：使用 &lt;code&gt;*pid&lt;/code&gt; 指针传递，运行效率极高，符合 STM32 这种嵌入式环境的要求。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>ZZZ-27-STM32逻辑控制与保护</title>
+        <link>https://teaize.github.io/p/zzz-27-stm32%E9%80%BB%E8%BE%91%E6%8E%A7%E5%88%B6%E4%B8%8E%E4%BF%9D%E6%8A%A4/</link>
+        <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-27-stm32%E9%80%BB%E8%BE%91%E6%8E%A7%E5%88%B6%E4%B8%8E%E4%BF%9D%E6%8A%A4/</guid>
+        <description>&lt;p&gt;根据我们的开发框架：STM32—&amp;gt;CEMS，前面的学习成功打通了“数据采集与补偿”（零点/量程标定）和“通信与联网”（Modbus RTU），现在开始进入逻辑控制分支的学习&lt;/p&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  mindmap
+  root((CEMS 分析仪成品))
+    数据采集与补偿
+      双重滤波算法
+        算术平均
+        一阶滞后
+      物理量转化
+        零点标定
+        量程缩放
+      状态补偿
+        温度补偿: PT100
+        压力补偿: 绝压传感器
+        标态换算: 0度, 101.325kPa
+    通信与联网
+      Modbus RTU
+        RS485 差分传输
+        寄存器点表设计
+        CRC 校验
+      报警输出
+        4-20mA 模拟输出
+        继电器开关量输出
+    人机交互
+      显示界面
+        实时浓度波形
+        系统状态/报警信息
+      菜单系统
+        多级菜单逻辑
+        校准参数设置
+      输入控制
+        旋转编码器/按键
+        权限管理: 用户/专家密码
+    逻辑控制与保护
+      时序管理
+        定时反吹控制
+        自动零点校准时序
+      故障诊断
+        传感器断线检测
+        光源老化/泵故障预警
+      看门狗保护
+        IWDG 防止死机
+    数据持久化
+      参数存储
+        FLASH 存储校准值
+        FLASH 存储配置参数
+      历史记录
+        RTC 实时时钟
+        历史报警/日志记录
+&lt;/div&gt;
+&lt;p&gt;可以从这三个点进行切入：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动反吹逻辑 (Back-flushing Control)
+&lt;ul&gt;
+&lt;li&gt;硬件：电磁阀 + 继电器。&lt;/li&gt;
+&lt;li&gt;软件逻辑：STM32 维护一个计时器。例如每 8 小时触发一次，动作顺序：&lt;strong&gt;停止采样泵 -&amp;gt; 开启反吹电磁阀 30 秒 -&amp;gt; 关闭阀门 -&amp;gt; 延时 2 分钟等待气路稳定 -&amp;gt; 重新开启采样泵&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;PID 伴热控温 (Temperature Control)
+&lt;ul&gt;
+&lt;li&gt;硬件：PT100 温度传感器 + PWM 控制固态继电器。&lt;/li&gt;
+&lt;li&gt;软件逻辑：你需要编写一个 &lt;strong&gt;PID 算法&lt;/strong&gt;，根据实测温度动态调整加热功率。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;气路切换与校准逻辑
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;动作&lt;/strong&gt;：通过控制多个三通电磁阀，实现“样气”、“零气（氮气）”、“标气（标准浓度 $SO_2$）”的自动切换。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;意义&lt;/strong&gt;：这配合你刚才写的 &lt;strong&gt;Modbus 06 功能码&lt;/strong&gt;，可以实现远程自动化校准。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;学习路径：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;继电器驱动与逻辑隔离：如何用 STM32 的 GPIO 安全地驱动 220V 的电磁阀和泵。&lt;/li&gt;
+&lt;li&gt;温度采集与计算：学习 PT100 的分度表查找算法或专用采集芯片（如 MAX31865）。&lt;/li&gt;
+&lt;li&gt;PID 算法基础：如何在 STM32 中实现一个简单的增量式 PID，控制加热管。&lt;/li&gt;
+&lt;li&gt;状态机编程：用 &lt;code&gt;switch-case&lt;/code&gt; 编写一个复杂的“校准/反吹/采样”状态切换逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;如何驱动继电器控制电磁阀&#34;&gt;如何驱动继电器控制电磁阀
+&lt;/h2&gt;&lt;p&gt;STM32 的 GPIO 引脚输出电压只有 3.3V，驱动电流微乎其微（约 20mA），无法直接驱动电磁阀。因此，我们需要一个“中间人”——&lt;strong&gt;继电器 (Relay)&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;硬件清单&#34;&gt;硬件清单
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;电力控制与执行模块
+&lt;ul&gt;
+&lt;li&gt;继电器模块：建议买 4 路 5V 继电器模块 (带光耦隔离)。
+&lt;ul&gt;
+&lt;li&gt;用途：控制采样泵、反吹电磁阀、标气切换阀。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;电磁阀：买 DC 12V 或 24V 二位三通电磁阀 (2 个)。
+&lt;ul&gt;
+&lt;li&gt;注意：实验阶段尽量不要用 220V AC，12V/24V DC 安全得多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;直流电源适配器：12V 2A 或 24V 2A 1 个。
+&lt;ul&gt;
+&lt;li&gt;用途：给电磁阀和继电器线圈供电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;温度与状态补偿模块（解决标态换算）
+&lt;ul&gt;
+&lt;li&gt;PT100 温度探头：买 工业级 PT100 三线制探头 1 个。&lt;/li&gt;
+&lt;li&gt;MAX31865 采集模块：1 个。
+&lt;ul&gt;
+&lt;li&gt;用途：PT100 不是线性电阻，直接接 ADC 很不准。MAX31865 是专用的电阻转数字芯片，是工业测温的标准方案。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;绝压传感器模块：如 BMP280 或工业级 4-20mA 压力变送器。
+&lt;ul&gt;
+&lt;li&gt;用途：用于计算大气压补偿。****&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;气路模拟与外设
+&lt;ul&gt;
+&lt;li&gt;微型真空泵 (采样泵)：DC 12V 微型气泵 1 个。
+&lt;ul&gt;
+&lt;li&gt;用途：模拟从烟囱抽气。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;HMI 串口屏：推荐 大陶屏 (TJC) 或 迪文屏 (DWIN)，2.8 寸或 3.5 寸。
+&lt;ul&gt;
+&lt;li&gt;用途：这是我们最后一章的重头戏，这类屏幕只需 Modbus 通讯。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;STM32 PA4 (GPIO) ----&amp;gt; [继电器模块 IN 引脚]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;STM32 5V         ----&amp;gt; [继电器模块 VCC]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;STM32 GND        ----&amp;gt; [继电器模块 GND]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[继电器常开端 NO] ----&amp;gt; [电磁阀正极]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[12V 电源正极]    ----&amp;gt; [继电器公共端 COM]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;[12V 电源负极]    ----&amp;gt; [电磁阀负极]
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>ZZZ-28-串口指令解析器</title>
+        <link>https://teaize.github.io/p/zzz-28-%E4%B8%B2%E5%8F%A3%E6%8C%87%E4%BB%A4%E8%A7%A3%E6%9E%90%E5%99%A8/</link>
+        <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/zzz-28-%E4%B8%B2%E5%8F%A3%E6%8C%87%E4%BB%A4%E8%A7%A3%E6%9E%90%E5%99%A8/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>工程师进阶的三境</title>
+        <link>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%BF%9B%E9%98%B6%E7%9A%84%E4%B8%89%E5%A2%83/</link>
+        <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%B8%88%E8%BF%9B%E9%98%B6%E7%9A%84%E4%B8%89%E5%A2%83/</guid>
+        <description>&lt;h2 id=&#34;工程师成长的三重境界&#34;&gt;工程师成长的三重境界
+&lt;/h2&gt;&lt;p&gt;作为技术开发者，我们常在“重复造轮子”的挫败感与“追求底层逻辑”的执着间徘徊。这种成长过程可以抽象为以下三个阶段：&lt;/p&gt;
+&lt;h3 id=&#34;第一境界见山是山--好奇驱动的探索者&#34;&gt;第一境界：见山是山 —— 【好奇驱动的探索者】
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;状态： 刚接触 STM32、传感器或 PID 算法。看到一个功能实现（如控温、通信）会感到兴奋，渴望亲手实现它。&lt;/li&gt;
+&lt;li&gt;认知： &lt;strong&gt;关注的是“如何实现”&lt;/strong&gt;。认为写出代码、焊好电路就是掌握了技术的全部。&lt;/li&gt;
+&lt;li&gt;价值： 建立基础的工程感，通过底层的“摸爬滚打”积累最原始的直觉。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第二境界见山不是山--实用主义的怀疑者&#34;&gt;第二境界：见山不是山 —— 【实用主义的怀疑者】
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;状态： 发现工业界早已有极其成熟、稳定且廉价的温控器、PLC 或集成模块。&lt;/li&gt;
+&lt;li&gt;困惑： 产生“既然已经有完美的轮子，我为什么还要学造轮子”的怀疑。感到个人努力在庞大的工业标准面前显得微不足道。&lt;/li&gt;
+&lt;li&gt;认知： &lt;strong&gt;关注的是“效率与成本”&lt;/strong&gt;。开始意识到商业逻辑中，稳定性和交付速度往往高于个人技术实现的快感。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;第三境界见山又是山--掌控全局的架构师&#34;&gt;第三境界：见山又是山 —— 【掌控全局的架构师】
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;状态： 能够自由地在“直接调用模块”与“自研底层”之间精准切换。&lt;/li&gt;
+&lt;li&gt;认知： &lt;strong&gt;关注的是“边界与定义”&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;调用模块是因为：在通用场景下，我尊重工业标准带来的高效率，将精力释放到更高层级的系统设计上。&lt;/li&gt;
+&lt;li&gt;自研底层是因为：当面临&lt;strong&gt;极端成本控制、极致性能优化或非标需求&lt;/strong&gt;时，我具备“打破黑盒”的能力，不被现有工具所限制。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;价值： 你不再只是工具的使用者，而是成为了&lt;strong&gt;能够根据场景定义工具的人&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    A[第一境界: 见山是山] --&gt;|发现成熟方案| B[第二境界: 见山不是山]
+    B --&gt;|产生怀疑与动摇| C{思考底层逻辑的意义}
+    C --&gt;|重构知识体系| D[第三境界: 见山又是山]
+    D --&gt; E[成为架构师: 自由切换底层与集成]
+&lt;/div&gt;
+&lt;p&gt;“造轮子”不是为了替代市场上的轮子，而是为了在轮子坏掉时、或需要跑在特殊路面时，你拥有随时能修补或重新设计一个轮子的&lt;strong&gt;底气&lt;/strong&gt;。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>关于检出限</title>
         <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%A3%80%E5%87%BA%E9%99%90/</link>
         <pubDate>Tue, 23 Dec 2025 00:00:00 +0000</pubDate>
@@ -2438,6 +2844,55 @@
 &lt;li&gt;结果： 本该是 &lt;code&gt;rx_buffer[6]&lt;/code&gt; 和 &lt;code&gt;rx_buffer[7]&lt;/code&gt; 的 CRC，变成了 &lt;code&gt;rx_buffer[7]&lt;/code&gt; 和 &lt;code&gt;rx_buffer[8]&lt;/code&gt;。位置一偏，校验必败。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;注意，如果 Modbus 报文长度超过了 8 字节（如 16 功能码），就不能强制取 8 字节了，此时需根据报文中的“字节计数值”字段动态计算 CRC 位置。&lt;/p&gt;
+&lt;h3 id=&#34;本案例流程总结&#34;&gt;本案例流程总结
+&lt;/h3&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph TD
+    Start((开始项目)) --&gt; Phase1[&lt;b&gt;第一阶段：硬件解耦&lt;/b&gt;&lt;br/&gt;双串口方案规划]
+    Phase1 --&gt; Phase2[&lt;b&gt;第二阶段：CubeMX 配置&lt;/b&gt;&lt;br/&gt;DMA + IDLE 中断]
+    Phase2 --&gt; Phase3[&lt;b&gt;第三阶段：核心算法&lt;/b&gt;&lt;br/&gt;CRC16 与 寄存器映射]
+    Phase3 --&gt; Phase4[&lt;b&gt;第四阶段：逻辑解析&lt;/b&gt;&lt;br/&gt;三道门卫 校验逻辑]
+    Phase4 --&gt; Phase5[&lt;b&gt;第五阶段：工业加固&lt;/b&gt;&lt;br/&gt;响应优先 与 缓冲区自洁]
+    Phase5 --&gt; End((稳定运行))
+
+    subgraph &#34;关键细节&#34;
+    Phase1 -.-&gt; P1_1[USART1: 调试/VOFA+&lt;br/&gt;USART2: 485/Modbus]
+    Phase2 -.-&gt; P2_1[DMA: Circular 模式&lt;br/&gt;NVIC: 开启全局中断]
+    Phase4 -.-&gt; P4_1[1.长度校验&lt;br/&gt;2.站号校验&lt;br/&gt;3.CRC 强校验]
+    Phase5 -.-&gt; P5_1[先发回传, 后写 Flash&lt;br/&gt;memset 彻底清理缓存]
+    end
+
+    style Start fill:#f9f,stroke:#333
+    style End fill:#bbf,stroke:#333
+    style Phase4 fill:#f96,stroke:#333
+&lt;/div&gt;
+&lt;h4 id=&#34;五步实战流程详解&#34;&gt;五步实战流程详解
+&lt;/h4&gt;&lt;p&gt;1、硬件架构（物理层隔离）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;USART1 (调试口)：接 USB-TTL，用于 &lt;code&gt;printf&lt;/code&gt; 文本和 VOFA+ 绘图。它相当于仪表的“黑匣子”，让你看到内部逻辑。&lt;/li&gt;
+&lt;li&gt;USART2 (通讯口)：接 TTL-485 模块。它是仪表的“耳朵和嘴巴”，只跑二进制协议，确保不受调试信息的干扰。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、第二步：底层配置（DMA+ 空闲中断）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;DMA (Direct Memory Access)：数据不需要经过 CPU，直接搬运到数组，效率极高。&lt;/li&gt;
+&lt;li&gt;IDLE (空闲中断)：这是 Modbus 的灵魂。它能自动判定一帧数据的结束（当总线超过 1.5 个字符时间没信号时触发），完美解决变长报文接收问题。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3、第三步：数据建模（寄存器映射）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建立仓库：用一个数组 &lt;code&gt;Modbus_Regs[10]&lt;/code&gt; 模拟寄存器。&lt;/li&gt;
+&lt;li&gt;同步数据：在 &lt;code&gt;while(1)&lt;/code&gt; 中将传感器实时值（如压力、电流）放大 100/1000 倍后存入数组，等待主机读取。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;4、第四步：解析逻辑（三道门卫）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;长度检查：对于 03/06，小于 8 字节的一律视为垃圾。&lt;/li&gt;
+&lt;li&gt;站号过滤：不是发给我的（SLAVE_ID）一律不回。&lt;/li&gt;
+&lt;li&gt;CRC 强校验：&lt;strong&gt;这是最重要的安全锁&lt;/strong&gt;。通过 &lt;code&gt;Modbus_CRC16&lt;/code&gt; 函数计算后与末尾两字节比对，确保数据在传输过程中没有因为电磁干扰而变质。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;5、第五步：工业级加固（稳定性策略）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;防御性编程：强制截取前 8 字节校验，无视末尾多余的 &lt;code&gt;\n&lt;/code&gt; 或空格。&lt;/li&gt;
+&lt;li&gt;响应优先原则：先回传响应报文，再执行 Flash 写入或电机控制等耗时动作，防止上位机通讯超时。&lt;/li&gt;
+&lt;li&gt;自洁功能：处理完每一帧后，必须 &lt;code&gt;memset&lt;/code&gt; 缓冲区并重启 DMA，确保下一帧从第 0 位开始。&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
