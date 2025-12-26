@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="拆卸芯片 从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）\n1、核心秘诀：“以锡引锡” 这是最重要的一点。不要直接用干烙铁去烫旧焊点。\n">
+<title>PCB焊接</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/pcb%E7%84%8A%E6%8E%A5/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="PCB焊接">
+<meta property='og:description' content="拆卸芯片 从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）\n1、核心秘诀：“以锡引锡” 这是最重要的一点。不要直接用干烙铁去烫旧焊点。\n">
+<meta property='og:url' content='https://teaize.github.io/p/pcb%E7%84%8A%E6%8E%A5/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-26T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="PCB焊接">
+<meta name="twitter:description" content="拆卸芯片 从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）\n1、核心秘诀：“以锡引锡” 这是最重要的一点。不要直接用干烙铁去烫旧焊点。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#拆卸芯片">拆卸芯片</a>
+          <ol>
+            <li><a href="#1核心秘诀以锡引锡">1、核心秘诀：“以锡引锡”</a></li>
+            <li><a href="#2必须使用助焊剂-flux">2、必须使用助焊剂 (Flux)</a></li>
+            <li><a href="#3工具的选择">3、工具的选择</a></li>
+            <li><a href="#4芯片取下来后pcb-上锡怎么清理">4、芯片取下来后，PCB 上锡怎么清理</a></li>
+            <li><a href="#5避免焊盘脱落的绝招">5、避免“焊盘脱落”的绝招</a></li>
+          </ol>
+        </li>
+        <li><a href="#连锡">连锡</a>
+          <ol>
+            <li><a href="#为什么会连在一起">为什么会连在一起</a></li>
+            <li><a href="#化解连锡的三大法宝">化解“连锡”的三大法宝</a></li>
+          </ol>
+        </li>
+        <li><a href="#进阶技巧把连锡变成拖焊">进阶技巧：把连锡变成拖焊</a></li>
+        <li><a href="#关于温度">关于温度</a></li>
+        <li><a href="#定心丸">定心丸</a></li>
+      </ol>
+    </li>
+    <li><a href="#烙铁头">烙铁头</a>
+      <ol>
+        <li><a href="#刀头的日常保养">刀头的日常保养</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/pcb%E7%84%8A%E6%8E%A5/">PCB焊接</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-26</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="拆卸芯片">拆卸芯片
+</h3><p>从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）</p>
+<h4 id="1核心秘诀以锡引锡">1、核心秘诀：“以锡引锡”
+</h4><p>这是最重要的一点。<strong>不要直接用干烙铁去烫旧焊点。</strong></p>
+<ul>
+<li>做法：在拆卸前，先给芯片的引脚加上一些<strong>新鲜的含铅焊锡</strong>。</li>
+<li>原理：新鲜焊锡中的助焊剂能去除氧化层，同时增加接触面积，让热量迅速渗透到旧焊锡中。</li>
+</ul>
+<h4 id="2必须使用助焊剂-flux">2、必须使用助焊剂 (Flux)
+</h4><p>在芯片引脚周围涂抹适量的<strong>助焊剂膏</strong>。助焊剂能显著提高热传导效率，防止焊锡拉丝和氧化。</p>
+<h4 id="3工具的选择">3、工具的选择
+</h4><ul>
+<li>多引脚芯片： 建议使用热风枪而不是烙铁。
+<ul>
+<li>设置：风温 $350-380^\circ\text{C}$ 左右，风速中等。</li>
+<li>操作：均匀地在芯片四周及上方环绕加热，直到焊锡全部闪亮融化，用镊子轻轻拨动即可。</li>
+</ul>
+</li>
+<li>双排引脚（如 SOP）： 如果只有烙铁，可以使用“堆锡法”，将两排引脚全部用大锡球连起来，两边交替加热，趁热滑下</li>
+</ul>
+<h4 id="4芯片取下来后pcb-上锡怎么清理">4、芯片取下来后，PCB 上锡怎么清理
+</h4><p>芯片取掉后，焊盘上肯定会留下一大摊焊锡。这时候你需要你的“焊接橡皮擦”——吸锡带（Solder Wick）。</p>
+<ol>
+<li>涂抹助焊剂（关键）： 在那一坨焊锡上涂上大量的助焊剂（不要心疼，这是清理成功的灵魂）。</li>
+<li>使用吸锡带： * 将吸锡带压在焊锡堆上。
+<ul>
+<li>用烙铁头压住吸锡带。你会看到焊锡像被海绵吸水一样，顺着铜丝网吸了上去。</li>
+<li>注意： 当吸锡带变色（吸满锡）后，剪掉那一段再继续吸。</li>
+</ul>
+</li>
+<li>平推清理： 像拖地一样，带着吸锡带在焊盘上轻轻平移，直到焊盘露出原本平整、闪亮的铜面。</li>
+</ol>
+<h4 id="5避免焊盘脱落的绝招">5、避免“焊盘脱落”的绝招
+</h4><p>新手最容易犯的错误是：<strong>锡还没完全化，就用镊子暴力去撬。</strong></p>
+<p>记住： 永远不要用力。如果锡化了，芯片应该能像漂在水面上一样，用镊子轻轻拨一下就能位移。如果拨不动，说明热量还没透，绝对不能硬拔！</p>
+<h3 id="连锡">连锡
+</h3><p>焊新芯片时，经常将芯片一排的引脚连接在了一起，如何处理：</p>
+<h4 id="为什么会连在一起">为什么会连在一起
+</h4><p>通常只有两个原因：</p>
+<ol>
+<li>焊锡给多了： 你的焊锡丝太粗，或者接触时间太长。</li>
+<li>助焊剂干了： 助焊剂是焊锡的“润滑剂”。一旦它挥发完了，焊锡就会变得像黏稠的胶水，互相拉扯，形成连锡。</li>
+</ol>
+<h4 id="化解连锡的三大法宝">化解“连锡”的三大法宝
+</h4><p>1、助焊剂大法（首选，最无损）</p>
+<ul>
+<li>操作： 在连锡的那一排引脚上，大量涂抹助焊剂。</li>
+<li>做法： 把烙铁头擦干净（在湿海绵或金属清洁球擦到发亮），然后直接去烫那块连锡的地方。
+<ul>
+<li>不能用干海绵,直接把几百度的烙铁头往干海绵上擦，海绵会立刻被烧焦，冒出一股黑烟，产生的焦炭会粘在烙铁头上，让烙铁头彻底“毁容”且再也不沾锡</li>
+</ul>
+</li>
+<li>原理： 在助焊剂的作用下，<strong>焊锡会产生很强的表面张力，它们会由于“趋温性”自动往烙铁头上吸</strong>，或者缩回引脚和焊盘上。</li>
+</ul>
+<p>2、物理拉开法（“带走”多余的锡）</p>
+<p>如果锡实在太多，助焊剂也缩不回去：</p>
+<ul>
+<li>动作： 将板子倾斜，烙铁头顺着引脚的方向（<strong>从内向外</strong>）轻轻一扫。</li>
+<li>技巧： 每次扫完，都要在海绵上把烙铁头上的余锡擦掉。重复两三次，多余的锡就被烙铁头“带走”了。</li>
+</ul>
+<h3 id="进阶技巧把连锡变成拖焊">进阶技巧：把连锡变成拖焊
+</h3><p>其实很多高手焊芯片，是故意把一排引脚全部连起来的，这叫“拖焊 (Drag Soldering)”。</p>
+<p>如何正确地“拖”：</p>
+<ol>
+<li>对齐： 先焊住对角的两个引脚，固定好芯片。</li>
+<li>抹油： 在一整排引脚上抹一层厚厚的助焊剂膏。</li>
+<li>喂锡： 在烙铁头上融化一坨适量的锡（形成一个小锡球）。</li>
+<li>拖动： 让烙铁头带着这个锡球，从引脚的一头平滑地刷到另一头。</li>
+<li>奇迹时刻： 只要助焊剂足够，你会发现锡球走过的地方，每个引脚都自动吸附了完美的锡量，而多余的锡一直跟着烙铁头走。</li>
+</ol>
+<h3 id="关于温度">关于温度
+</h3><p>为什么不推荐 $460^\circ\text{C}$</p>
+<ul>
+<li>助焊剂瞬间失效： <strong>焊锡膏（助焊剂）在超过 $350^\circ\text{C}$ 时会迅速碳化、发黑</strong>。失去了助焊剂的润滑和传热，焊锡会变得像干枯的渣子，流动性极差，反而更难融化。</li>
+<li>损坏电路板（PCB）： PCB 的材质通常是树脂和玻璃纤维，超过 $400^\circ\text{C}$ 极易导致<strong>焊盘脱落</strong>或板材炭化起泡。</li>
+<li>烙铁头氧化： 高温会使烙铁头表面的镀层迅速氧化发黑，一旦发黑，它就再也无法传导热量了。</li>
+</ul>
+<p>推荐的温度范围</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>操作类型</strong></th>
+          <th><strong>焊锡类型</strong></th>
+          <th><strong>建议温度</strong></th>
+          <th><strong>备注</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>正常焊接</strong></td>
+          <td>含铅焊锡 (63/37)</td>
+          <td>$320^\circ\text{C} - 340^\circ\text{C}$</td>
+          <td>最好上手，流动性极佳。</td>
+      </tr>
+      <tr>
+          <td><strong>正常焊接</strong></td>
+          <td>无铅焊锡</td>
+          <td>$350^\circ\text{C} - 370^\circ\text{C}$</td>
+          <td>熔点较高，现代工业主板常用。</td>
+      </tr>
+      <tr>
+          <td><strong>拆卸芯片</strong></td>
+          <td>堆锡法/热风枪</td>
+          <td>$350^\circ\text{C} - 380^\circ\text{C}$</td>
+          <td>温度上限，配合助焊剂使用。</td>
+      </tr>
+      <tr>
+          <td><strong>超大焊盘</strong></td>
+          <td>如电源插座/GND</td>
+          <td>$380^\circ\text{C} - 400^\circ\text{C}$</td>
+          <td>仅限大散热面积场景，且停留时间要短。</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>新手操作时，为什么调高了温度还是拆不下来</p>
+<ul>
+<li>散热面积太大
+<ul>
+<li>如果你拆的芯片引脚连接着大面积的接地（GND）铜箔，这块铜箔就像一个“黑洞”，会迅速吸走你烙铁头上的热量。</li>
+<li>对策： 不要盲目加温，而是<strong>换用更粗、热容量更大的烙铁头</strong>（如刀头或 D 型头），增加接触面积。</li>
+</ul>
+</li>
+<li>烙铁头“挂不住锡”
+<ul>
+<li>如果你的烙铁头看起来黑乎乎的，不沾锡，那么它和焊点之间只有一点点接触，热量传不过去。</li>
+<li>对策： 用湿海绵擦净，涂上新鲜焊锡。只有亮亮的、带锡的烙铁头传热最快。</li>
+</ul>
+</li>
+<li>焊锡“干涸”
+<ul>
+<li>旧焊锡表面有一层氧化膜。</li>
+<li>对策： 往旧焊点上<strong>加一点新鲜的含铅焊锡丝</strong>。新鲜焊锡里的助焊剂能瞬间打破氧化膜，把热量“导”进旧焊点。</li>
+</ul>
+</li>
+</ul>
+<h3 id="定心丸">定心丸
+</h3><ul>
+<li>助焊剂是神： 90% 的焊接问题，加助焊剂都能解决；剩下 10% 的问题，加更多助焊剂。</li>
+<li>洗板水（酒精）： 焊完之后，板子上会留下一堆黄色的焦糊状物质，那是助焊剂残余。用棉签蘸酒精擦干净，你会发现焊点其实非常漂亮。</li>
+</ul>
+<h2 id="烙铁头">烙铁头
+</h2><p>在维修界，<strong>刀头</strong>被称为“全能型选手”，它比<strong>尖头</strong>（I 头）拥有更大的热容量和接触面积，是拆卸和拖焊芯片的神器</p>
+<h3 id="刀头的日常保养">刀头的日常保养
+</h3><p>刀头虽然好用，但如果你之前用过 $460^\circ\text{C}$，它现在可能已经“中毒”（氧化严重）了。</p>
+<ul>
+<li>检查： 你的刀头表面还是闪亮的银色吗？如果变成了黑灰色，且加锡上去会缩成一个球掉下来，说明它不沾锡了。</li>
+<li>复活：
+<ul>
+<li>趁热在助焊剂里蘸一下，然后在湿海绵上用力擦。</li>
+<li>如果不行，使用“烙铁头复活膏”（Tip Refresher）。</li>
+<li>千万不要用砂纸去磨，磨掉镀层这把刀就废了。</li>
+</ul>
+</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

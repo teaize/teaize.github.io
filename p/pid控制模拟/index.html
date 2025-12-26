@@ -316,7 +316,30 @@
     </li>
     <li><a href="#从网页仿真到-c-语言的跨越">从“网页仿真”到 C 语言的跨越</a>
       <ol>
-        <li><a href="#为什么这段-c-代码比网页版更高级">为什么这段 C 代码比网页版更“高级”？</a></li>
+        <li><a href="#为什么这段-c-代码比网页版更高级">为什么这段 C 代码比网页版更“高级”</a></li>
+      </ol>
+    </li>
+    <li><a href="#pid-控制注意事项">PID 控制注意事项</a>
+      <ol>
+        <li><a href="#积分饱和-最隐蔽的定时炸弹">积分饱和—— 最隐蔽的“定时炸弹”</a></li>
+        <li><a href="#微分突变-瞬间心梗">微分突变—— “瞬间心梗”</a></li>
+        <li><a href="#采样周期不固定--算法的基石动摇">采样周期不固定 —— “算法的基石动摇”</a></li>
+        <li><a href="#传感器断线或短路--逻辑致盲">传感器断线或短路 —— “逻辑致盲”</a></li>
+        <li><a href="#进阶版-pid-代码框架带坑位修复">进阶版 PID 代码框架（带坑位修复）</a></li>
+        <li><a href="#安全监控逻辑">安全监控逻辑</a>
+          <ol>
+            <li><a href="#工业级安全监控逻辑">工业级安全监控逻辑</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#首次调试">首次调试</a>
+      <ol>
+        <li><a href="#第一步安全第一调试前的硬限制">第一步：安全第一（调试前的硬限制）</a></li>
+        <li><a href="#第二步确定比例系数-k_p找劲头">第二步：确定比例系数 $K_p$（找“劲头”）</a></li>
+        <li><a href="#第三步确定积分系数-k_i消静差">第三步：确定积分系数 $K_i$（消“静差”）</a></li>
+        <li><a href="#第四步确定微分系数-k_d加刹车">第四步：确定微分系数 $K_d$（加“刹车”）</a></li>
+        <li><a href="#核心辅助工具串口示波器">核心辅助工具：串口示波器</a></li>
       </ol>
     </li>
   </ol>
@@ -441,7 +464,14 @@
 </div>
 </div><p>这个仿真器模拟了发热片控温过程：它<strong>有热惯性（升温慢）、有散热（自然冷却）、有噪声</strong>。</p>
 <h3 id="如何使用这个仿真器学习">如何使用这个仿真器学习？
-</h3><p>![[Pasted image 20251225161607.png]]</p>
+</h3><p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251225161607.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251225161607.png" alt=""  />
+		</a>
+	</div>
+
+</p>
 <p>当你打开这个网页后，请尝试以下“实验步骤”：</p>
 <iframe src="/html-files/pid_sim.html" width="100%" height="1000px" frameborder="0"></iframe>
 <h4 id="实验-1感受静差">实验 1：感受“静差”
@@ -559,11 +589,294 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div><h3 id="为什么这段-c-代码比网页版更高级">为什么这段 C 代码比网页版更“高级”？
+</div><h3 id="为什么这段-c-代码比网页版更高级">为什么这段 C 代码比网页版更“高级”
 </h3><ul>
 <li>面向对象思想：通过 <code>PID_Controller</code> 结构体，你可以轻松创建 <code>Heater_PID</code>、<code>Pump_PID</code> 等多个实例。</li>
 <li>抗饱和机制：专门加入了 <code>IntegralMax</code>，防止系统在长时间达不到目标时产生的“失控”现象。</li>
 <li>指针传递：使用 <code>*pid</code> 指针传递，运行效率极高，符合 STM32 这种嵌入式环境的要求。</li>
+</ul>
+<h2 id="pid-控制注意事项">PID 控制注意事项
+</h2><h3 id="积分饱和-最隐蔽的定时炸弹">积分饱和—— 最隐蔽的“定时炸弹”
+</h3><ul>
+<li>现象：你的目标是 $120^\circ\text{C}$，但此时发热片断电了。PID 发现温度没升，积分项（$I$）就会疯狂累积。当电源恢复时，累积的巨大积分值会让加热器保持 $100%$ 功率输出，直到温度冲到 $200^\circ\text{C}$ 都降不下来。</li>
+<li>解决方案：<strong>积分限幅</strong>。给 <code>Integral</code> 设一个上限和下限（比如最大只允许占输出的 $20%$）。</li>
+</ul>
+<h3 id="微分突变-瞬间心梗">微分突变—— “瞬间心梗”
+</h3><ul>
+<li>现象：当你突然把目标温度从 $100^\circ\text{C}$ 改为 $150^\circ\text{C}$ 时，误差 $e(t)$ 瞬间产生了一个巨大的台阶。因为微分项 $D$ 计算的是误差的变化率，这会导致输出 $u(t)$ 瞬间产生一个巨大的尖峰脉冲。</li>
+<li>后果：这个瞬间电流脉冲可能击穿你的 MOSFET 或导致电源保护性重启。</li>
+<li>解决方案：微分先行 。在计算 $D$ 项时，<strong>不计算误差的变化，而是计算测量值（PV）的变化</strong>。因为温度本身不会瞬间跳变，这样输出就会平滑得多。</li>
+</ul>
+<h3 id="采样周期不固定--算法的基石动摇">采样周期不固定 —— “算法的基石动摇”
+</h3><ul>
+<li>现象：PID 的公式是基于时间的 $dt$。如果你在 <code>while(1)</code> 循环里随意调用 PID 函数，循环里其他代码执行时间的变化（比如 Modbus 响应久了点）会导致 $dt$ 不稳定。</li>
+<li>后果：$I$ 和 $D$ 的计算逻辑会完全乱套，系统产生不可预测的震荡。</li>
+<li>解决方案：<strong>定时中断</strong>。必须把 PID 计算放在 STM32 的硬件定时器中断里（比如固定每 $100\text{ ms}$ 执行一次）。</li>
+</ul>
+<h3 id="传感器断线或短路--逻辑致盲">传感器断线或短路 —— “逻辑致盲”
+</h3><ul>
+<li>现象：CEMS 现场震动大，PT100 探头可能脱落。</li>
+<li>后果：如果探头断了，ADC 读数可能变为 0 或最大值。PID 以为温度极低，会疯狂加热，导致发热片烧毁甚至起火。</li>
+<li>解决方案：<strong>安全保护逻辑</strong>。在 PID 运行前加一行：<code>if (temp &lt; -10 || temp &gt; 300) { Stop_All_Heaters(); }</code>。</li>
+</ul>
+<h3 id="进阶版-pid-代码框架带坑位修复">进阶版 PID 代码框架（带坑位修复）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PID_Compute_Advanced</span><span class="p">(</span><span class="n">PID_Controller</span> <span class="o">*</span><span class="n">pid</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">error</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Target</span> <span class="o">-</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Measured</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 比例项
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">P_out</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Kp</span> <span class="o">*</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 积分项 + 抗饱和限幅 (Anti-Windup)
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">+=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Ki</span> <span class="o">*</span> <span class="n">error</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">&gt;</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntMax</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntMax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">&lt;</span> <span class="o">-</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntMax</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">=</span> <span class="o">-</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">IntMax</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3. 微分项 (采用微分先行：计算测量值的变化，避免目标值改变时的冲击)
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">D_out</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Kd</span> <span class="o">*</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">LastMeasured</span> <span class="o">-</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Measured</span><span class="p">);</span> <span class="c1">// 注意这里是 PV-PV
+</span></span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4. 总输出
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">=</span> <span class="n">P_out</span> <span class="o">+</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Integral</span> <span class="o">+</span> <span class="n">D_out</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 5. 输出限幅
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">&gt;</span> <span class="mi">100</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">=</span> <span class="mi">100</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">&lt;</span> <span class="mi">0</span><span class="p">)</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Output</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 保存状态
+</span></span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">LastMeasured</span> <span class="o">=</span> <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Measured</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安全监控逻辑">安全监控逻辑
+</h3><p>例如，如果功率输出 $100%$ 持续了 5 分钟，温度还没上升 $5^\circ\text{C}$，这说明什么？（可能是发热片坏了或探头掉了）。在这种情况下，程序应该怎么做？（报警并切断电源）。</p>
+<p>在工业现场，一套成熟的控制系统，安全监控逻辑的代码量往往比 PID 核心算法还要多。对于 CEMS 这种需要 24 小时无人值守的设备，必须假设“硬件总会坏”，并用软件筑起最后一道防线。</p>
+<h4 id="工业级安全监控逻辑">工业级安全监控逻辑
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">SAFE_OK</span> <span class="o">=</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">ERR_SENSOR_FAULT</span><span class="p">,</span>    <span class="c1">// 传感器断线或短路
+</span></span></span><span class="line"><span class="cl">    <span class="n">ERR_HEATER_BROKEN</span><span class="p">,</span>   <span class="c1">// 发热片坏了（有输出但不升温）
+</span></span></span><span class="line"><span class="cl">    <span class="n">ERR_THERMAL_RUNAWAY</span><span class="p">,</span> <span class="c1">// 热失控（没输出但温度狂飙，可能是固态继电器击穿短路）
+</span></span></span><span class="line"><span class="cl">    <span class="n">ERR_OVER_TEMP</span>        <span class="c1">// 极高温度保护
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">SafetyStatus</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">LastTemp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">PowerOnTime</span><span class="p">;</span>      <span class="c1">// 满功率持续计数器
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">RunawayTime</span><span class="p">;</span>      <span class="c1">// 热失控计数器
+</span></span></span><span class="line"><span class="cl">    <span class="n">SafetyStatus</span> <span class="n">Status</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span>  <span class="n">SafetyCutoff</span><span class="p">;</span>     <span class="c1">// 1: 切断输出, 0: 正常
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">Safety_Monitor</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @brief 工业级安全逻辑检查
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param monitor 安全结构体
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param currentTemp 实际温度
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param currentOutput 当前PID输出占空比 (0-100)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Safety_Check</span><span class="p">(</span><span class="n">Safety_Monitor</span> <span class="o">*</span><span class="n">monitor</span><span class="p">,</span> <span class="kt">float</span> <span class="n">currentTemp</span><span class="p">,</span> <span class="kt">float</span> <span class="n">currentOutput</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 传感器有效性硬检查 (Hard Limit)
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// PT100 断线通常读出极大值或极小值
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">currentTemp</span> <span class="o">&lt;</span> <span class="o">-</span><span class="mf">20.0f</span> <span class="o">||</span> <span class="n">currentTemp</span> <span class="o">&gt;</span> <span class="mf">250.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">Status</span> <span class="o">=</span> <span class="n">ERR_SENSOR_FAULT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">SafetyCutoff</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 极高温度立即切断 (防止起火)
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">currentTemp</span> <span class="o">&gt;</span> <span class="mf">180.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">Status</span> <span class="o">=</span> <span class="n">ERR_OVER_TEMP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">SafetyCutoff</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3. 堵转/发热片损坏检测 (Stall Detection)
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 如果连续 60 秒满功率输出，温度上升却不足 2°C，判定为发热片损坏或环境极寒
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">currentOutput</span> <span class="o">&gt;</span> <span class="mf">95.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">PowerOnTime</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">monitor</span><span class="o">-&gt;</span><span class="n">PowerOnTime</span> <span class="o">&gt;</span> <span class="mi">600</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 假设 100ms 调用一次，600即60秒
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">currentTemp</span> <span class="o">-</span> <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">LastTemp</span> <span class="o">&lt;</span> <span class="mf">2.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">Status</span> <span class="o">=</span> <span class="n">ERR_HEATER_BROKEN</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">SafetyCutoff</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">PowerOnTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 重置检查周期
+</span></span></span><span class="line"><span class="cl">            <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">LastTemp</span> <span class="o">=</span> <span class="n">currentTemp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">PowerOnTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4. 热失控检测 (Runaway Detection) - 非常重要！
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 如果 PID 输出为 0，但温度仍在以异常速度持续上升，判定为驱动管(MOSFET)击穿短路
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">currentOutput</span> <span class="o">&lt;</span> <span class="mf">1.0f</span> <span class="o">&amp;&amp;</span> <span class="n">currentTemp</span> <span class="o">&gt;</span> <span class="mf">50.0f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">currentTemp</span> <span class="o">-</span> <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">LastTemp</span> <span class="o">&gt;</span> <span class="mf">5.0f</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 没加热还 60s 涨 5度
+</span></span></span><span class="line"><span class="cl">             <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">RunawayTime</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="k">if</span> <span class="p">(</span><span class="n">monitor</span><span class="o">-&gt;</span><span class="n">RunawayTime</span> <span class="o">&gt;</span> <span class="mi">600</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">Status</span> <span class="o">=</span> <span class="n">ERR_THERMAL_RUNAWAY</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">SafetyCutoff</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">monitor</span><span class="o">-&gt;</span><span class="n">RunawayTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为什么这才是工业级？</p>
+<ul>
+<li>容错时间窗口：它不是一发现异常就报错，而是观察一段时间（如 60 秒），避开了传感器抖动或冷风吹过导致的干扰。</li>
+<li>全链路覆盖：它不仅管传感器，还通过“能量守恒”逻辑监控 MOSFET 和发热片的健康。</li>
+<li>状态机思维：它将错误分类，方便你在串口屏（HMI）上精准弹出错误代码（如：<code>E01: 传感器断线</code>，<code>E03: 固态继电器击穿</code>）。</li>
+</ul>
+<h2 id="首次调试">首次调试
+</h2><p>真实硬件有热惯性（升温后停不下来）和非线性（电压波动），不像仿真器那么听话。建议采用“渐进式经验法”（也叫试凑法）。不要去算复杂的数学公式，按照下面的步骤操作，既安全又能快速见效：</p>
+<h3 id="第一步安全第一调试前的硬限制">第一步：安全第一（调试前的硬限制）
+</h3><p>在写下第一行 <code>PID_Compute</code> 之前，先在代码里做两个限制，防止把发热片烧红：</p>
+<ol>
+<li>输出限幅：将 <code>OutputMax</code> 先设为 <strong>50%</strong>（比如 PWM 是 1000，先限制在 500）。等调稳了再放开。</li>
+<li>采样时间固定：确保你的 PID 函数是在<strong>定时器中断</strong>（如 100ms 一次）里跑的，这比什么都重要。</li>
+</ol>
+<h3 id="第二步确定比例系数-k_p找劲头">第二步：确定比例系数 $K_p$（找“劲头”）
+</h3><p><strong>目标：让温度动起来，允许有差距，但不能震荡。</strong></p>
+<ol>
+<li>将 $K_i$ 和 $K_d$ 设为 <strong>0</strong>。</li>
+<li>从一个很小的 $K_p$ 开始（比如 <strong>0.1</strong> 或 <strong>1.0</strong>，取决于你的量程）。</li>
+<li>观察温度曲线：
+<ul>
+<li>现象 A：温度升得很慢，离目标值还差十万八千里就不动了。—— <strong>调大 $K_p$</strong>。</li>
+<li>现象 B：温度猛冲，过了目标值还在狂跳（震荡）。—— <strong>调小 $K_p$</strong>。</li>
+</ul>
+</li>
+<li>最终状态：<strong>让温度能快速上升到目标值的 80%~90% 左右，曲线平滑，不产生剧烈来回摆动</strong>。</li>
+</ol>
+<h3 id="第三步确定积分系数-k_i消静差">第三步：确定积分系数 $K_i$（消“静差”）
+</h3><p><strong>目标：把最后那点“够不着”的温差磨平。</strong></p>
+<ol>
+<li>保持刚才调好的 $K_p$，开始加入微小的 $K_i$（比如从 <strong>0.01</strong> 开始）。</li>
+<li>观察曲线：
+<ul>
+<li><strong>现象 A</strong>：温度在 $K_p$ 停下的位置慢悠悠地往目标值蹭，蹭得很久才到。—— <strong>稍微调大 $K_i$</strong>。</li>
+<li><strong>现象 B</strong>：温度很快到了目标值，但直接“冲过了头”（超调），然后反复好几次才稳住。—— <strong>调小 $K_i$</strong>。</li>
+</ul>
+</li>
+<li>最终状态：温度能稳稳地停在目标线上，误差为 0。</li>
+</ol>
+<h3 id="第四步确定微分系数-k_d加刹车">第四步：确定微分系数 $K_d$（加“刹车”）
+</h3><p>注意：对于发热片这种大惯性系统，$K_d$ 往往可以设为 0。</p>
+<ol>
+<li>如果你的系统在加入 $K_i$ 后，超调（冲过头）还是无法接受。</li>
+<li>试着加入一点点 $K_d$（比 $K_i$ 还要小）。</li>
+<li>作用：它会预测温度上升的趋势，在快到目标时提前减小电流。</li>
+</ol>
+<h3 id="核心辅助工具串口示波器">核心辅助工具：串口示波器
+</h3><p>一定要用图形化软件看曲线！ 光看串口打印的数字，你根本分不清是“震荡”还是“正常的漂移”。</p>
+<ul>
+<li>推荐工具：<strong>VOFA+</strong>。</li>
+<li>做法：在程序里 <code>printf(&quot;%f,%f\n&quot;, Target, CurrentTemp);</code>。</li>
+<li>看图说话：
+<ul>
+<li>锯齿太多？—— 滤波没做好或 D 太大。</li>
+<li>波浪太大？—— P 太大或 I 太大。</li>
+</ul>
+</li>
 </ul>
 
 </section>
