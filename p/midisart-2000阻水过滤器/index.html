@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="嵌入式状态机 (FSM) 架构\nCEMS 的逻辑非常复杂：开机预热 -&gt; 自动吹扫 -&gt; 样气测量 -&gt; 零点校准 -&gt; 故障处理。如果用简单的 if-else 或 delay 来写（顺序执行思维），代码很快就会变成“屎山”，且无法同时处理串口通讯。\n">
-<title>ZZZ-29-程序架构</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款一次性气体过滤器的商业名称。在 CEMS 领域，它通常被称为阻水过滤器或者疏水过滤器。\n外壳：聚丙烯（PP），耐腐蚀 滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜 精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm ">
+<title>Midisart 2000阻水过滤器</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/zzz-29-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/'>
+<link rel='canonical' href='https://teaize.github.io/p/midisart-2000%E9%98%BB%E6%B0%B4%E8%BF%87%E6%BB%A4%E5%99%A8/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-29-程序架构">
-<meta property='og:description' content="嵌入式状态机 (FSM) 架构\nCEMS 的逻辑非常复杂：开机预热 -&gt; 自动吹扫 -&gt; 样气测量 -&gt; 零点校准 -&gt; 故障处理。如果用简单的 if-else 或 delay 来写（顺序执行思维），代码很快就会变成“屎山”，且无法同时处理串口通讯。\n">
-<meta property='og:url' content='https://teaize.github.io/p/zzz-29-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Midisart 2000阻水过滤器">
+<meta property='og:description' content="Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款一次性气体过滤器的商业名称。在 CEMS 领域，它通常被称为阻水过滤器或者疏水过滤器。\n外壳：聚丙烯（PP），耐腐蚀 滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜 精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm ">
+<meta property='og:url' content='https://teaize.github.io/p/midisart-2000%E9%98%BB%E6%B0%B4%E8%BF%87%E6%BB%A4%E5%99%A8/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-26T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="ZZZ-29-程序架构">
-<meta name="twitter:description" content="嵌入式状态机 (FSM) 架构\nCEMS 的逻辑非常复杂：开机预热 -&gt; 自动吹扫 -&gt; 样气测量 -&gt; 零点校准 -&gt; 故障处理。如果用简单的 if-else 或 delay 来写（顺序执行思维），代码很快就会变成“屎山”，且无法同时处理串口通讯。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-06T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Midisart 2000阻水过滤器">
+<meta name="twitter:description" content="Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款一次性气体过滤器的商业名称。在 CEMS 领域，它通常被称为阻水过滤器或者疏水过滤器。\n外壳：聚丙烯（PP），耐腐蚀 滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜 精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm ">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,18 +297,13 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#为什么-delay-是嵌入式的毒药">为什么 <code>delay</code> 是嵌入式的“毒药”</a>
+        <li><a href="#主要作用">主要作用</a>
           <ol>
-            <li><a href="#屎山写法阻塞式">“屎山”写法（阻塞式）：</a></li>
+            <li><a href="#核心功能疏水保护">核心功能：疏水保护</a></li>
+            <li><a href="#辅助功能精细过滤">辅助功能：精细过滤</a></li>
           </ol>
         </li>
-        <li><a href="#为什么-if-else-会变成屎山">为什么 <code>if-else</code> 会变成“屎山”</a></li>
-        <li><a href="#救星状态机fsm架构">救星：状态机（FSM）架构</a>
-          <ol>
-            <li><a href="#fsm-代码架构非阻塞式">FSM 代码架构（非阻塞式）：</a></li>
-          </ol>
-        </li>
-        <li><a href="#状态机为什么神">状态机为什么“神”</a></li>
+        <li><a href="#注意事项">注意事项</a></li>
       </ol>
     </li>
   </ol>
@@ -330,7 +325,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/zzz-29-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/">ZZZ-29-程序架构</a>
+            <a href="/p/midisart-2000%E9%98%BB%E6%B0%B4%E8%BF%87%E6%BB%A4%E5%99%A8/">Midisart 2000阻水过滤器</a>
         </h2>
     
         
@@ -352,7 +347,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-26</time>
+                <time class="article-time--published">2025-12-06</time>
             </div>
         
 
@@ -368,187 +363,55 @@
     <section class="article-content">
     
     
-    <p>嵌入式状态机 (FSM) 架构</p>
-<p>CEMS 的逻辑非常复杂：开机预热 -&gt; 自动吹扫 -&gt; 样气测量 -&gt; 零点校准 -&gt; 故障处理。如果用简单的 <code>if-else</code> 或 <code>delay</code> 来写（顺序执行思维），代码很快就会变成“屎山”，且无法同时处理串口通讯。</p>
+    <p>Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款<strong>一次性气体过滤器</strong>的商业名称。在 CEMS 领域，它通常被称为<strong>阻水过滤器</strong>或者<strong>疏水过滤器</strong>。</p>
 <ul>
-<li>理论核心：学习如何用 <code>switch-case</code> 配合 <code>enum</code>（枚举）编写<strong>非阻塞式状态机</strong>。</li>
-<li>优势：你的 PID 控温可以在后台毫秒级运行，而“自动校准”这种分钟级的逻辑在主循环里慢速切换，互不干扰。</li>
+<li>外壳：聚丙烯（PP），耐腐蚀</li>
+<li>滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜</li>
+<li>精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm</li>
 </ul>
-<h3 id="为什么-delay-是嵌入式的毒药">为什么 <code>delay</code> 是嵌入式的“毒药”
-</h3><p>假设你的 CEMS 有一个功能：“反吹扫”（用高压气体清理采样探头），需要持续 30 秒。</p>
-<h4 id="屎山写法阻塞式">“屎山”写法（阻塞式）：
-</h4><div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
-</span><span class="lnt">2
-</span><span class="lnt">3
-</span><span class="lnt">4
-</span><span class="lnt">5
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Backflush_Sequence</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">Relay_On</span><span class="p">();</span>           <span class="c1">// 打开电磁阀
-</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">30000</span><span class="p">);</span>     <span class="c1">// 停在这里等 30 秒
-</span></span></span><span class="line"><span class="cl">    <span class="nf">Relay_Off</span><span class="p">();</span>          <span class="c1">// 关闭电磁阀
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>致命问题：</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206131946.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206131946.png" alt=""  />
+		</a>
+	</div>
+
+</p>
+<h3 id="主要作用">主要作用
+</h3><h4 id="核心功能疏水保护">核心功能：疏水保护
+</h4><p>CEMS 的样气经过冷凝器除水后，虽然大部分水被除去了，但在故障或极端工况下（如冷凝器失效、蠕动泵坏了），液态水可能会直接冲向后端的分析仪</p>
 <ul>
-<li>串口变聋子：在这 30 秒内，如果串口屏发来一个“停止”指令，或者 Modbus 上位机要读数据，单片机完全听不见，因为它正死死地卡在 <code>delay</code> 里。</li>
-<li>控温失效：你的 PID 控温函数无法执行。这 30 秒内，发热片可能会因为没有 PID 调节而过热烧毁。</li>
-</ul>
-<h3 id="为什么-if-else-会变成屎山">为什么 <code>if-else</code> 会变成“屎山”
-</h3><p>随着功能增加，你会发现逻辑变得极其扭曲。</p>
-<p>“逻辑地狱”示例：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">is_power_on</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">is_warmed_up</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// 预热逻辑...
-</span></span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">button_pressed</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// 执行采样...
-</span></span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">                    <span class="c1">// 执行校准...
-</span></span></span><span class="line"><span class="cl">                <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 如果再加一个“急停”或者“传感器故障”，这个嵌套深度会让你崩溃
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><p>致命问题：</p>
+<li>Midisart 2000 的特性： 它的 PTFE 膜是<strong>天然疏水</strong>的。
 <ul>
-<li>难以维护：改动一个地方，可能会导致原本正常的逻辑在某种特定组合下失效。</li>
-<li>无法处理“突发”事件：比如在采样过程中突然发生“漏液报警”，你需要从深深的嵌套 <code>if</code> 中跳出来，非常困难。</li>
+<li>气体（$SO_2, NO, O_2$）可以轻松穿过。</li>
+<li>液态水 无法穿过。</li>
 </ul>
-<h3 id="救星状态机fsm架构">救星：状态机（FSM）架构
-</h3><p>状态机就像是一个“自动售货机”：<strong>它永远处于某个特定的状态，并且只在接收到事件时才切换状态</strong>。</p>
-<h4 id="fsm-代码架构非阻塞式">FSM 代码架构（非阻塞式）：
-</h4><p>首先，定义状态（用枚举）：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">STATE_IDLE</span><span class="p">,</span>        <span class="c1">// 空闲
-</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_WARMUP</span><span class="p">,</span>      <span class="c1">// 预热
-</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_MEASURE</span><span class="p">,</span>     <span class="c1">// 测量
-</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_BACKFLUSH</span><span class="p">,</span>   <span class="c1">// 反吹
-</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_FAULT</span>        <span class="c1">// 故障
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">SystemState_t</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="n">SystemState_t</span> <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_IDLE</span><span class="p">;</span> <span class="c1">// 初始状态
-</span></span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">stateStartTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>             <span class="c1">// 用于非阻塞计时
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>然后，在 <code>while(1)</code> 循环里使用 <code>switch-case</code>：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span><span class="lnt">26
-</span><span class="lnt">27
-</span><span class="lnt">28
-</span><span class="lnt">29
-</span><span class="lnt">30
-</span><span class="lnt">31
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main_loop</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">currentState</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_IDLE</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">Start_Button_Pressed</span><span class="p">())</span> <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_WARMUP</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_WARMUP</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">Heat_Control</span><span class="p">(</span><span class="mf">120.0</span><span class="p">);</span> <span class="c1">// 调用 PID，不会阻塞
-</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">Get_Temp</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">120.0</span><span class="p">)</span> <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_MEASURE</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_BACKFLUSH</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">Relay_On</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="c1">// --- 非阻塞计时核心 ---
-</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">stateStartTime</span> <span class="o">&gt;=</span> <span class="mi">30000</span><span class="p">)</span> <span class="p">{</span> 
-</span></span><span class="line"><span class="cl">                <span class="nf">Relay_Off</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">                <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_IDLE</span><span class="p">;</span> 
-</span></span><span class="line"><span class="cl">            <span class="p">}</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_FAULT</span><span class="p">:</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">All_Stop</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="nf">Show_Error_On_Screen</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    
-</span></span><span class="line"><span class="cl">    <span class="c1">// 【关键】无论在什么状态，这些函数每秒都在跑
-</span></span></span><span class="line"><span class="cl">    <span class="nf">PID_Compute</span><span class="p">();</span>      <span class="c1">// 控温不停
-</span></span></span><span class="line"><span class="cl">    <span class="nf">UART_Parse</span><span class="p">();</span>       <span class="c1">// 串口指令随叫随到
-</span></span></span><span class="line"><span class="cl">    <span class="nf">Safety_Monitor</span><span class="p">();</span>   <span class="c1">// 安全检查一刻不松
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="状态机为什么神">状态机为什么“神”
-</h3><ul>
-<li>并发处理：因为它没有 <code>delay</code>，主循环跑得飞快（每秒几千次）。看起来单片机在“同时”控温、接串口、管流程。</li>
-<li>逻辑清晰：你只需要关注“当前状态”以及“跳转条件”。比如在任何状态下发现传感器坏了，直接 <code>currentState = STATE_FAULT</code>，系统立刻进入安全模式。</li>
-<li>易于扩展：如果你想增加一个“手动校准”模式，只需要在 <code>enum</code> 里加一个状态，然后在 <code>switch</code> 里多写一个 <code>case</code>，完全不影响老代码。</li>
+</li>
+<li>保护逻辑： 一旦有液态水过来，这个过滤器会瞬间利用表面张力把水挡住（同时也堵死了气路）。
+<ul>
+<li>结果： 流量计归零，分析仪报警“流量低”。</li>
+<li>价值： 虽然系统停运了，但它牺牲了自己，救了后面的分析仪气室（如果水进气室，光学部件可能报废）。</li>
 </ul>
+</li>
+</ul>
+<h4 id="辅助功能精细过滤">辅助功能：精细过滤
+</h4><p>冷凝器前端通常有初级过滤器（如 2μm 或 5μm），但微小的粉尘可能会穿透。Midisart 2000 的精度通常是 0.2μm（微米级）。也就是说，它可以滤除极其细微的颗粒物，确保进入红外/紫外分析仪气室的气体是绝对纯净的，防止镜片脏污。</p>
+<h3 id="注意事项">注意事项
+</h3><p>Midisart 2000 是一个疏水性的精密微孔过滤器，它是<strong>一次性的</strong>。它的存在是为了<strong>防止液态水和微尘进入分析仪</strong>。如果它堵了，说明它为后端的分析仪挡了一次灾。</p>
+<ul>
+<li>基本参数：注意连接方向、使用截止日期及过过滤尺寸。</li>
+<li>变色：如果白色滤膜变黑、变黄，说明粉尘多了，<strong>需要更换</strong>。</li>
+<li>进水： 如果发现前端管路有水珠，且流量突然降低，说明它已经“堵水”了。此时千万不要试图把它甩干再用，<strong>水中的杂质可能已经堵死了微孔，直接换新的</strong>。</li>
+<li>安装位置： 它通常安装在冷凝器之后、分析仪入口之前，或者取样泵的入口处（保护泵）</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206130625.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206130625.png" alt=""  />
+		</a>
+	</div>
+
+</p>
 
 </section>
 

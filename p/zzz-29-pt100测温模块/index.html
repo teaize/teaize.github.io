@@ -1,0 +1,968 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="数字转换模块（如 MAX31865）相比之前的模拟量变送器，它采用 SPI 数字通讯，避开了模拟信号的噪声和温漂，精度极高。\n我们要把这个新成员加入到你的“User_Library”架构中。按照“从引脚到逻辑”的顺序，我们分三步走。\n">
+<title>zzz-29-PT100测温模块</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-29-pt100%E6%B5%8B%E6%B8%A9%E6%A8%A1%E5%9D%97/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="zzz-29-PT100测温模块">
+<meta property='og:description' content="数字转换模块（如 MAX31865）相比之前的模拟量变送器，它采用 SPI 数字通讯，避开了模拟信号的噪声和温漂，精度极高。\n我们要把这个新成员加入到你的“User_Library”架构中。按照“从引脚到逻辑”的顺序，我们分三步走。\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-29-pt100%E6%B5%8B%E6%B8%A9%E6%A8%A1%E5%9D%97/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-28T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="zzz-29-PT100测温模块">
+<meta name="twitter:description" content="数字转换模块（如 MAX31865）相比之前的模拟量变送器，它采用 SPI 数字通讯，避开了模拟信号的噪声和温漂，精度极高。\n我们要把这个新成员加入到你的“User_Library”架构中。按照“从引脚到逻辑”的顺序，我们分三步走。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#第一阶段stm32cubemx-引脚配置-硬件层">第一阶段：STM32CubeMX 引脚配置 (硬件层)</a></li>
+        <li><a href="#关于硬件接线">关于硬件接线</a></li>
+        <li><a href="#pt100-端的接线非常重要">PT100 端的接线（非常重要！）</a>
+          <ol>
+            <li><a href="#第一步用万用表确认最稳妥">第一步：用万用表确认（最稳妥）</a></li>
+            <li><a href="#物理接线方案两红一白">物理接线方案（两红一白）</a></li>
+            <li><a href="#必须处理的三个焊盘">必须处理的“三个焊盘”</a></li>
+          </ol>
+        </li>
+        <li><a href="#为什么这么接">为什么这么接？</a></li>
+        <li><a href="#快速握手测试验证焊接和连线">快速“握手”测试（验证焊接和连线）</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-29-pt100%E6%B5%8B%E6%B8%A9%E6%A8%A1%E5%9D%97/">zzz-29-PT100测温模块</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-28</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>数字转换模块（如 MAX31865）相比之前的模拟量变送器，它采用 <strong>SPI 数字通讯</strong>，避开了模拟信号的噪声和温漂，精度极高。</p>
+<p>我们要把这个新成员加入到你的“User_Library”架构中。按照“从引脚到逻辑”的顺序，我们分三步走。</p>
+<h3 id="第一阶段stm32cubemx-引脚配置-硬件层">第一阶段：STM32CubeMX 引脚配置 (硬件层)
+</h3><p>MAX31865 使用 SPI 协议。请在 CubeMX 中进行以下设置：</p>
+<ol>
+<li><strong>SPI 配置</strong>：
+<ul>
+<li>选择一个闲置的 SPI（例如 <strong>SPI1</strong>）。</li>
+<li><strong>Mode</strong>: Full-Duplex Master（全双工主机）。</li>
+<li><strong>Hardware NSS</strong>: Disable（我们要用软件控制片选，更灵活）。</li>
+<li><strong>参数设置</strong>：
+<ul>
+<li><strong>Baud Rate</strong>: 建议 1MBits/s 到 5MBits/s 之间。</li>
+<li><strong>CPOL</strong>: High (1) —— 空闲时时钟为高。</li>
+<li><strong>CPHA</strong>: 2nd Edge (1) —— 在第二个跳变沿采样（MAX31865 常用模式）。</li>
+<li><strong>First Bit</strong>: MSB First。</li>
+</ul>
+</li>
+<li>![[Pasted image 20251228115855.png]]</li>
+</ul>
+</li>
+<li><strong>GPIO 配置 (CS 引脚)</strong>：
+<ul>
+<li>找一个普通引脚（例如 <strong>PA4</strong>）作为片选。</li>
+<li><strong>GPIO Output Level</strong>: High（默认不选通）。</li>
+<li><strong>User Label</strong>: <code>MAX_CS</code>。</li>
+<li>![[Pasted image 20251228120028.png]]</li>
+</ul>
+</li>
+<li><strong>DRDY 引脚 (可选)</strong>：
+<ul>
+<li>找一个输入引脚（例如 <strong>PA3</strong>），用于检测转换是否完成。不接也可以，我们可以用延时或查寄存器代替。</li>
+</ul>
+</li>
+</ol>
+<h3 id="关于硬件接线">关于硬件接线
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>模块引脚</strong></th>
+          <th><strong>功能说明</strong></th>
+          <th><strong>建议连接 STM32 引脚</strong></th>
+          <th><strong>备注</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>VIN</strong></td>
+          <td>电源输入 (3-5V)</td>
+          <td><strong>5V 或 3.3V</strong></td>
+          <td>建议接 3.3V，与 STM32 电平一致</td>
+      </tr>
+      <tr>
+          <td><strong>GND</strong></td>
+          <td>电源地</td>
+          <td><strong>GND</strong></td>
+          <td>必须与单片机共地</td>
+      </tr>
+      <tr>
+          <td><strong>CLK</strong></td>
+          <td>SPI 时钟 (Clock)</td>
+          <td><strong>PA5 (SPI1_SCK)</strong></td>
+          <td>通讯节拍</td>
+      </tr>
+      <tr>
+          <td><strong>SDO</strong></td>
+          <td>串口输出 (MISO)</td>
+          <td><strong>PA6 (SPI1_MISO)</strong></td>
+          <td>模块发数据给单片机</td>
+      </tr>
+      <tr>
+          <td><strong>SDI</strong></td>
+          <td>串口输入 (MOSI)</td>
+          <td><strong>PA7 (SPI1_MOSI)</strong></td>
+          <td>单片机发数据给模块</td>
+      </tr>
+      <tr>
+          <td><strong>CS</strong></td>
+          <td>片选 (Chip Select)</td>
+          <td><strong>PA4 (GPIO)</strong></td>
+          <td><strong>手动控制</strong>，拉低才开始通讯</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>特殊引脚说明（可以暂时不接）</p>
+<ul>
+<li>3V3 引脚：
+<ul>
+<li>如果你的模块 VIN 接了 5V，这个 3V3 通常是模块内置稳压芯片输出的 3.3V，可以不用管。</li>
+<li><strong>注意</strong>：不要同时把 VIN 接 5V，又把 3V3 引脚接到单片机的 3.3V，这样可能会产生电流倒灌。</li>
+</ul>
+</li>
+<li>RDY (或 DRDY) 引脚：
+<ul>
+<li>这是“数据就绪”信号。当芯片完成一次温度转换，它会把这个引脚拉低通知单片机。</li>
+<li><strong>新手建议</strong>：先不接。我们在代码里使用简单的“延时等待”或者直接“读取寄存器”就能拿到数据，不需要占用额外的引脚。</li>
+</ul>
+</li>
+</ul>
+<h3 id="pt100-端的接线非常重要">PT100 端的接线（非常重要！）
+</h3><p>模块的另一侧通常有几个焊盘或螺丝端子（通常标记为 Force+, Force-, RTDIn+, RTDIn-），这决定了你 PT100 的精度：</p>
+<ul>
+<li><strong>2 线制</strong>：把引脚旁边的焊盘（通常标有 2/3/4 wire 的地方）按照说明书短接，PT100 两根线随便接。</li>
+<li><strong>3 线制</strong>（工业最常用）：这是你最可能买到的 PT100。模块上通常需要焊上一处短接点。
+<ul>
+<li><em>接法</em>：PT100 里面通常有两根颜色一样的线（比如红、蓝、蓝），两根颜色一样的接在一起。</li>
+</ul>
+</li>
+</ul>
+<h4 id="第一步用万用表确认最稳妥">第一步：用万用表确认（最稳妥）
+</h4><p>在接线前，建议你拿万用表测一下这三根线，确保没有断线或阻值异常：</p>
+<ul>
+<li><strong>红线 A 与 红线 B</strong>：阻值应该接近 <strong>$0\Omega$</strong>（通常只有 $0.2 \sim 0.5\Omega$ 的线阻）。</li>
+<li><strong>白线 与 任意红线</strong>：在室温（$25^\circ C$）左右，阻值应该在 <strong>$108 \sim 110\Omega$</strong> 之间。</li>
+</ul>
+<h4 id="物理接线方案两红一白">物理接线方案（两红一白）
+</h4><p>三线制的本质是：一端用单线，另一端用双线来补偿线阻。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>端子位置</strong></th>
+          <th><strong>标记</strong></th>
+          <th><strong>传感器线色</strong></th>
+          <th><strong>逻辑说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>第 1 个 (最左)</strong></td>
+          <td><strong>F-</strong></td>
+          <td><strong>红线 1</strong></td>
+          <td>电流回路负极</td>
+      </tr>
+      <tr>
+          <td><strong>第 2 个</strong></td>
+          <td><strong>RTD-</strong></td>
+          <td><strong>红线 2</strong></td>
+          <td>电压感知负极</td>
+      </tr>
+      <tr>
+          <td><strong>第 3 个</strong></td>
+          <td><strong>RTD+</strong></td>
+          <td><strong>(空着)</strong></td>
+          <td>正极感知（依靠背后的“3”焊盘连通到 F+）</td>
+      </tr>
+      <tr>
+          <td><strong>第 4 个 (最右)</strong></td>
+          <td><strong>F+</strong></td>
+          <td><strong>白线</strong></td>
+          <td>电流/电压正极</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="必须处理的三个焊盘">必须处理的“三个焊盘”
+</h4><p>这是新手最容易失败的地方。请翻到模块背面（或者正面寻找标有 <code>2/3/4</code> 的区域）：</p>
+<ol>
+<li><strong>&ldquo;2/3 Wire&rdquo; 焊盘</strong>：<strong>必须短接</strong>。
+<ul>
+<li>作用：告诉芯片启用三线制补偿算法。</li>
+</ul>
+</li>
+<li><strong>&ldquo;3&rdquo; 字样焊盘（通常在端子附近）</strong>：<strong>必须短接</strong>。
+<ul>
+<li>作用：这会在内部把 <code>Force+</code> 和 <code>RTDIn+</code> 连接在一起。因为你只有一根白线，短接这里后，白线既负责供电，也负责检测电压。</li>
+</ul>
+</li>
+<li><strong>&ldquo;2 Wire&rdquo; 焊盘（通常是并排的两个）</strong>：<strong>绝对不要动（保持开路）</strong>。
+<ul>
+<li>作用：这是给两线制准备的，短接它会毁掉你的红线补偿逻辑。</li>
+</ul>
+</li>
+</ol>
+<p>![[Pasted image 20251228122403.png]]</p>
+<ul>
+<li>位置 ① (2/3 Wire)：<strong>必须焊上（短接）</strong>。
+<ul>
+<li><strong>作用</strong>：告诉芯片启用补偿逻辑，准备处理 2 线或 3 线模式。</li>
+</ul>
+</li>
+<li>位置 ② (2 Wire)：<strong>保持断开（不要焊）</strong>。
+<ul>
+<li><strong>原因</strong>：这是专门给两线制传感器用的。如果你焊了这里，三线制的线阻补偿功能就失效了，会导致测量温度偏高。</li>
+</ul>
+</li>
+<li>位置 ③ (24 / 3 选区)：<strong>将中间焊盘与标有“3”的一侧焊在一起</strong>。
+<ul>
+<li><strong>作用</strong>：这是三线制最核心的跳线。它在硬件上将 <code>Force+</code> 和 <code>RTD+</code> 连通，使你的那一根白线同时承担供电和感知电压的任务。</li>
+</ul>
+</li>
+</ul>
+<h3 id="为什么这么接">为什么这么接？
+</h3><ul>
+<li><strong>白线端</strong>：通过跳线将 <code>F+</code> 和 <code>RTD+</code> 合二为一，用一根线完成供电和检测。</li>
+<li><strong>红线端</strong>：利用两根红线。一根（<code>F-</code>）负责跑电流，另一根（<code>RTD-</code>）负责探测电压。MAX31865 通过对比两端的电位差，就能自动减去红线的导线电阻，从而给出最精准的温度。</li>
+</ul>
+<p>MAX31865 芯片测量温度的原理是测量 <code>RTD+</code> 和 <code>RTD-</code> 之间的电压。</p>
+<ul>
+<li><strong>4 线制</strong>：<code>F+</code> 供电，<code>RTD+</code> 只负责测电压。</li>
+<li><strong>3 线制</strong>：因为只有一根白线，所以白线既要当“供电员”（<code>F+</code>），又要当“检测员”（<code>RTD+</code>）。</li>
+<li><strong>结论</strong>：只要在进入芯片之前，这两个点是连通的（不管是在 PCB 内部连，还是在端子外面连），芯片收到的信号都是一样的。</li>
+</ul>
+<p>记住这个原则：哪里有“双线”，哪里就是负极
+在三线制 PT100 的世界里，请务必遵守这个“潜规则”：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>传感器侧</strong></th>
+          <th><strong>导线数量</strong></th>
+          <th><strong>对应模块端子</strong></th>
+          <th><strong>备注</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>单线侧 (白线)</strong></td>
+          <td>1 根</td>
+          <td><strong>$F+$ / $RTD+$</strong></td>
+          <td>这里需要通过焊接或跳线短接。</td>
+      </tr>
+      <tr>
+          <td><strong>双线侧 (红线)</strong></td>
+          <td>2 根</td>
+          <td><strong>$RTD-$ / $F-$</strong></td>
+          <td>芯片靠这两根线来“感知”并“消灭”线阻。</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="快速握手测试验证焊接和连线">快速“握手”测试（验证焊接和连线）
+</h3><p>在 <code>main.c</code> 的 <code>while(1)</code> 之前，先写这几行。如果串口能打印出 <code>0xD1</code>，说明你的 SPI 连线、焊接、片选全部正确！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// 在 main.c 的 USER CODE BEGIN 2 处
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">read_val</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">reg_addr</span> <span class="o">=</span> <span class="mh">0x00</span><span class="p">;</span> <span class="c1">// 配置寄存器的读地址
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">test_config</span> <span class="o">=</span> <span class="mh">0xD1</span><span class="p">;</span> <span class="c1">// 我们准备写入的值
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. 尝试写入配置
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_4</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 拉低 CS (PA4)
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">write_buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x80</span><span class="p">,</span> <span class="n">test_config</span><span class="p">};</span> <span class="c1">// 0x80 是配置寄存器的写地址
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_SPI_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hspi1</span><span class="p">,</span> <span class="n">write_buf</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_4</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>   <span class="c1">// 拉高 CS
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">10</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 尝试读回配置
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_4</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 拉低 CS
+</span></span></span><span class="line"><span class="cl"><span class="nf">HAL_SPI_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hspi1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">reg_addr</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_SPI_Receive</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hspi1</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">read_val</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOA</span><span class="p">,</span> <span class="n">GPIO_PIN_4</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>   <span class="c1">// 拉高 CS
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nf">printf</span><span class="p">(</span><span class="s">&#34;MAX31865 Config Reg: 0x%02X (Expected: 0xD1)</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">read_val</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里可线停止打印电流、压力等参数，保持串口输出的内容不会刷一下子就跳过去了
+![[Pasted image 20251228161427.png]]</p>
+<p>看到 <code>0xD1</code> 就说明硬件焊接、引脚连线、SPI 时序配置这三大难关已经全部打通了。芯片已经正确识别了你的指令，并做好了测量准备。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="p">[</span><span class="mi">16</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mf">57.342</span><span class="p">]</span> <span class="n">MAX31865</span> <span class="n">Config</span> <span class="nl">Reg</span><span class="p">:</span> <span class="mh">0xD1</span> <span class="p">(</span><span class="n">Expecte</span>
+</span></span><span class="line"><span class="cl"><span class="p">[</span><span class="mi">16</span><span class="o">:</span><span class="mi">12</span><span class="o">:</span><span class="mf">57.342</span><span class="p">]</span> <span class="nl">d</span><span class="p">:</span> <span class="mh">0xD1</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>1、完善正式驱动 (<code>max31865.c</code>)</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;max31865.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">SPI_HandleTypeDef</span> <span class="o">*</span><span class="n">max_hspi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 片选宏（假设你的 CS 接在 PA4）
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define MAX_CS_L() HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_RESET)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define MAX_CS_H() HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4, GPIO_PIN_SET)
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">MAX31865_Init</span><span class="p">(</span><span class="n">SPI_HandleTypeDef</span> <span class="o">*</span><span class="n">hspi</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">max_hspi</span> <span class="o">=</span> <span class="n">hspi</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 写入配置：0xD1 (1101 0001) -&gt; 开启偏置, 自动模式, 3线制, 50Hz滤波
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">buf</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">{</span><span class="mh">0x80</span><span class="p">,</span> <span class="mh">0xD1</span><span class="p">};</span> 
+</span></span><span class="line"><span class="cl">    <span class="nf">MAX_CS_L</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_SPI_Transmit</span><span class="p">(</span><span class="n">max_hspi</span><span class="p">,</span> <span class="n">buf</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">MAX_CS_H</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @brief 读取当前温度值
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @return float 温度值 (摄氏度)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">MAX31865_ReadTemp</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">addr</span> <span class="o">=</span> <span class="mh">0x01</span><span class="p">;</span> <span class="c1">// RTD 数据起始地址
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">raw</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="nf">MAX_CS_L</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_SPI_Transmit</span><span class="p">(</span><span class="n">max_hspi</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">addr</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_SPI_Receive</span><span class="p">(</span><span class="n">max_hspi</span><span class="p">,</span> <span class="n">raw</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">MAX_CS_H</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 合并为 16 位原始码，并去掉最后一位 Fault 标志位
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">rtd_code</span> <span class="o">=</span> <span class="p">((</span><span class="n">raw</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">raw</span><span class="p">[</span><span class="mi">1</span><span class="p">])</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 2. 计算电阻：$R = \frac{RTD\_Code \times R_{ref}}{32768}$
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// MAX31865_RREF 建议定义为 430.0f
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">resistance</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">rtd_code</span> <span class="o">*</span> <span class="mf">430.0f</span> <span class="o">/</span> <span class="mf">32768.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 3. 计算温度（简化线性公式）：$T = \frac{R/R_{nominal} - 1}{0.003851}$
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// MAX31865_RNOMINAL 建议定义为 100.0f
+</span></span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">temp</span> <span class="o">=</span> <span class="p">(</span><span class="n">resistance</span> <span class="o">/</span> <span class="mf">100.0f</span> <span class="o">-</span> <span class="mf">1.0f</span><span class="p">)</span> <span class="o">/</span> <span class="mf">0.003851f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">temp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、整合到 <code>Logic_Update</code> 业务层</p>
+<h3 id="参考资料">参考资料
+</h3><ul>
+<li><a class="link" href="https://blog.csdn.net/lingzhilab/article/details/148147235"  target="_blank" rel="noopener"
+    >零知开源——STM32F1驱动MAX31865读取三线PT100温度传感器-CSDN博客</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

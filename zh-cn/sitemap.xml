@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-28T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,13 +15,22 @@
                 href="https://teaize.github.io/"
                 />
   </url><url>
+    <loc>https://teaize.github.io/post/</loc>
+    <lastmod>2025-12-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/zzz-29-pt100%E6%B5%8B%E6%B8%A9%E6%A8%A1%E5%9D%97/</loc>
+    <lastmod>2025-12-28T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</loc>
+    <lastmod>2025-12-27T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/zzz-28-%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84/</loc>
+    <lastmod>2025-12-27T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://teaize.github.io/p/pcb%E7%84%8A%E6%8E%A5/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://teaize.github.io/post/</loc>
-    <lastmod>2025-12-26T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://teaize.github.io/p/zzz-29-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/</loc>
+    <loc>https://teaize.github.io/p/zzz-27-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/</loc>
     <lastmod>2025-12-26T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/zzz-30-%E6%A8%A1%E5%9D%97%E5%8C%96%E9%87%8D%E6%9E%84/</loc>
@@ -352,7 +361,7 @@
     <loc>https://teaize.github.io/tags/hardware/</loc>
     <lastmod>2025-12-06T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://teaize.github.io/p/midisart-2000/</loc>
+    <loc>https://teaize.github.io/p/midisart-2000%E9%98%BB%E6%B0%B4%E8%BF%87%E6%BB%A4%E5%99%A8/</loc>
     <lastmod>2025-12-06T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/%E7%94%B5%E5%AE%B9%E5%85%85%E7%94%B5%E6%97%B6%E9%97%B4%E5%B8%B8%E6%95%B0/</loc>

@@ -1,0 +1,2143 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前言 本篇继 ZZZ-26-实现Modbus RTU协议，在上一篇中，所有的程序都是卸载 main.c 文件中的，包含 ADC 采集与滤波、Flash 读写、Modbus 协议解析、物理量换算等功能，但存在下面所述问题：\n">
+<title>ZZZ-27-程序架构</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/zzz-27-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-27-程序架构">
+<meta property='og:description' content="前言 本篇继 ZZZ-26-实现Modbus RTU协议，在上一篇中，所有的程序都是卸载 main.c 文件中的，包含 ADC 采集与滤波、Flash 读写、Modbus 协议解析、物理量换算等功能，但存在下面所述问题：\n">
+<meta property='og:url' content='https://teaize.github.io/p/zzz-27-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-26T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ZZZ-27-程序架构">
+<meta name="twitter:description" content="前言 本篇继 ZZZ-26-实现Modbus RTU协议，在上一篇中，所有的程序都是卸载 main.c 文件中的，包含 ADC 采集与滤波、Flash 读写、Modbus 协议解析、物理量换算等功能，但存在下面所述问题：\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#前言">前言</a>
+      <ol>
+        <li><a href="#为什么-delay-是嵌入式的毒药">为什么 <code>delay</code> 是嵌入式的“毒药”</a>
+          <ol>
+            <li><a href="#屎山写法阻塞式">“屎山”写法（阻塞式）：</a></li>
+          </ol>
+        </li>
+        <li><a href="#为什么-if-else-会变成屎山">为什么 <code>if-else</code> 会变成“屎山”</a></li>
+        <li><a href="#救星状态机fsm架构">救星：状态机（FSM）架构</a>
+          <ol>
+            <li><a href="#fsm-代码架构非阻塞式">FSM 代码架构（非阻塞式）：</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#更改程序架构">更改程序架构</a>
+      <ol>
+        <li><a href="#第一步环境准备">第一步：环境准备</a>
+          <ol>
+            <li><a href="#注意事项与潜规则">注意事项与“潜规则”</a></li>
+          </ol>
+        </li>
+        <li><a href="#转移模块-1一阶滞后滤波-toolsfilter">转移模块 1：一阶滞后滤波 (Tools/Filter)</a></li>
+        <li><a href="#转移模块-2参数存储-bspstorage">转移模块 2：参数存储 (BSP/Storage)</a></li>
+        <li><a href="#转移模块-3modbus">转移模块 3：Modbus</a>
+          <ol>
+            <li><a href="#1-为什么必须-include-storageh">1. 为什么必须 <code>#include &#34;storage.h&#34;</code>？</a></li>
+            <li><a href="#2-为什么必须使用-extern-声明变量">2. 为什么必须使用 <code>extern</code> 声明变量？</a></li>
+          </ol>
+        </li>
+        <li><a href="#转移模块-4logic">转移模块 4：Logic</a>
+          <ol>
+            <li><a href="#1-编写头文件-logich">1. 编写头文件 <code>logic.h</code></a></li>
+            <li><a href="#2-编写源文件-logicc">2. 编写源文件 <code>logic.c</code></a></li>
+          </ol>
+        </li>
+        <li><a href="#精简后的-main">精简后的 main</a></li>
+      </ol>
+    </li>
+    <li><a href="#非阻塞框架">非阻塞框架</a>
+      <ol>
+        <li><a href="#1核心思想从等-500ms变成记录时间戳">1.核心思想：从“等 500ms”变成“记录时间戳”</a></li>
+        <li><a href="#2-实战重构非阻塞按键消抖">2. 实战重构：非阻塞按键消抖</a></li>
+        <li><a href="#3-高级重构非阻塞-led-反馈状态机">3. 高级重构：非阻塞 LED 反馈（状态机）</a>
+          <ol>
+            <li><a href="#第一步触发任务按下快门">第一步：触发任务（按下快门）</a></li>
+            <li><a href="#第二步轮询检查logic_update">第二步：轮询检查（Logic_Update）</a></li>
+          </ol>
+        </li>
+        <li><a href="#4-最终的-logic_update-样子">4. 最终的 <code>Logic_Update</code> 样子</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/zzz-27-%E7%A8%8B%E5%BA%8F%E6%9E%B6%E6%9E%84/">ZZZ-27-程序架构</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-26</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="前言">前言
+</h2><p>本篇继 <a class="link" href="https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu%E5%8D%8F%E8%AE%AE/"  target="_blank" rel="noopener"
+    >ZZZ-26-实现Modbus RTU协议</a>，在上一篇中，所有的程序都是卸载 main.c 文件中的，包含 ADC 采集与滤波、Flash 读写、Modbus 协议解析、物理量换算等功能，但存在下面所述问题：</p>
+<h3 id="为什么-delay-是嵌入式的毒药">为什么 <code>delay</code> 是嵌入式的“毒药”
+</h3><p>假设你的 CEMS 有一个功能：“反吹扫”（用高压气体清理采样探头），需要持续 30 秒。</p>
+<h4 id="屎山写法阻塞式">“屎山”写法（阻塞式）：
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Backflush_Sequence</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Relay_On</span><span class="p">();</span>           <span class="c1">// 打开电磁阀
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">30000</span><span class="p">);</span>     <span class="c1">// 停在这里等 30 秒
+</span></span></span><span class="line"><span class="cl">    <span class="nf">Relay_Off</span><span class="p">();</span>          <span class="c1">// 关闭电磁阀
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>致命问题：</p>
+<ul>
+<li>串口变聋子：在这 30 秒内，如果串口屏发来一个“停止”指令，或者 Modbus 上位机要读数据，单片机完全听不见，因为它正死死地卡在 <code>delay</code> 里。</li>
+<li>控温失效：你的 PID 控温函数无法执行。这 30 秒内，发热片可能会因为没有 PID 调节而过热烧毁。</li>
+</ul>
+<h3 id="为什么-if-else-会变成屎山">为什么 <code>if-else</code> 会变成“屎山”
+</h3><p>随着功能增加，你会发现逻辑变得极其扭曲。</p>
+<p>“逻辑地狱”示例：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">loop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">is_power_on</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">is_warmed_up</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 预热逻辑...
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">button_pressed</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 执行采样...
+</span></span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">mode</span> <span class="o">==</span> <span class="mi">2</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="c1">// 执行校准...
+</span></span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果再加一个“急停”或者“传感器故障”，这个嵌套深度会让你崩溃
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>致命问题：</p>
+<ul>
+<li>难以维护：改动一个地方，可能会导致原本正常的逻辑在某种特定组合下失效。</li>
+<li>无法处理“突发”事件：比如在采样过程中突然发生“漏液报警”，你需要从深深的嵌套 <code>if</code> 中跳出来，非常困难。</li>
+</ul>
+<h3 id="救星状态机fsm架构">救星：状态机（FSM）架构
+</h3><p>状态机就像是一个“自动售货机”：<strong>它永远处于某个特定的状态，并且只在接收到事件时才切换状态</strong>。</p>
+<h4 id="fsm-代码架构非阻塞式">FSM 代码架构（非阻塞式）：
+</h4><p>首先，定义状态（用枚举）：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">STATE_IDLE</span><span class="p">,</span>        <span class="c1">// 空闲
+</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_WARMUP</span><span class="p">,</span>      <span class="c1">// 预热
+</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_MEASURE</span><span class="p">,</span>     <span class="c1">// 测量
+</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_BACKFLUSH</span><span class="p">,</span>   <span class="c1">// 反吹
+</span></span></span><span class="line"><span class="cl">    <span class="n">STATE_FAULT</span>        <span class="c1">// 故障
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">SystemState_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SystemState_t</span> <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_IDLE</span><span class="p">;</span> <span class="c1">// 初始状态
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint32_t</span> <span class="n">stateStartTime</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>             <span class="c1">// 用于非阻塞计时
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>然后，在 <code>while(1)</code> 循环里使用 <code>switch-case</code>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">main_loop</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">currentState</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_IDLE</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">Start_Button_Pressed</span><span class="p">())</span> <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_WARMUP</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_WARMUP</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">Heat_Control</span><span class="p">(</span><span class="mf">120.0</span><span class="p">);</span> <span class="c1">// 调用 PID，不会阻塞
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">Get_Temp</span><span class="p">()</span> <span class="o">&gt;=</span> <span class="mf">120.0</span><span class="p">)</span> <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_MEASURE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_BACKFLUSH</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">Relay_On</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// --- 非阻塞计时核心 ---
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">stateStartTime</span> <span class="o">&gt;=</span> <span class="mi">30000</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">                <span class="nf">Relay_Off</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">currentState</span> <span class="o">=</span> <span class="n">STATE_IDLE</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">STATE_FAULT</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">All_Stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">Show_Error_On_Screen</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="c1">// 【关键】无论在什么状态，这些函数每秒都在跑
+</span></span></span><span class="line"><span class="cl">    <span class="nf">PID_Compute</span><span class="p">();</span>      <span class="c1">// 控温不停
+</span></span></span><span class="line"><span class="cl">    <span class="nf">UART_Parse</span><span class="p">();</span>       <span class="c1">// 串口指令随叫随到
+</span></span></span><span class="line"><span class="cl">    <span class="nf">Safety_Monitor</span><span class="p">();</span>   <span class="c1">// 安全检查一刻不松
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>并发处理：因为它没有 <code>delay</code>，主循环跑得飞快（每秒几千次）。看起来单片机在“同时”控温、接串口、管流程。</li>
+<li>逻辑清晰：你只需要关注“当前状态”以及“跳转条件”。比如在任何状态下发现传感器坏了，直接 <code>currentState = STATE_FAULT</code>，系统立刻进入安全模式。</li>
+<li>易于扩展：如果你想增加一个“手动校准”模式，只需要在 <code>enum</code> 里加一个状态，然后在 <code>switch</code> 里多写一个 <code>case</code>，完全不影响老代码。</li>
+</ul>
+<h2 id="更改程序架构">更改程序架构
+</h2><p>按照“模块化”的思想，将 <a class="link" href="https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu%E5%8D%8F%E8%AE%AE/#%E9%99%84%E5%BD%95---%E5%AE%8C%E6%95%B4%E4%BB%A3%E7%A0%81"  target="_blank" rel="noopener"
+    >ZZZ-26-实现Modbus RTU协议</a> 中完整代码章节进行改写</p>
+<ul>
+<li><strong><code>App</code></strong>: 存放高层逻辑（如 Modbus、校准算法）。</li>
+<li><strong><code>BSP</code></strong>: (Board Support Package) 存放硬件驱动封装（如 Flash、ADC 处理）。</li>
+<li><strong><code>Tools</code></strong>: 存放通用工具（如 CRC 计算、滤波函数）。</li>
+</ul>
+<h3 id="第一步环境准备">第一步：环境准备
+</h3><p>在开始搬运前，先让 CubeIDE 认识你的新家：</p>
+<ol>
+<li>在项目根目录下右键 -&gt; New -&gt; Folder，命名为 <code>User_Library</code>（或者你喜欢的名字）。</li>
+<li>在 <code>User_Library</code> 下创建两个文件夹：<code>Tools</code> 和 <code>BSP</code>。</li>
+<li>告知编译器路径：
+<ul>
+<li>右键工程 -&gt; <strong>Properties</strong>。</li>
+<li><strong>C/C++ Build</strong> -&gt; <strong>Settings</strong> -&gt; <strong>MCU GCC Compiler</strong> -&gt; <strong>Include paths</strong>。</li>
+<li>点击“+”，点击 <strong>Workspace</strong>，选中 <code>User_Library/Tools</code> 和 <code>User_Library/BSP</code>。</li>
+</ul>
+</li>
+</ol>
+<p>![[Pasted image 20251227185813.png]]</p>
+<p>![[Pasted image 20251227190514.png]]</p>
+<p>这两个设置项对应着编译过程中的两个不同阶段：“寻找说明书（头文件）”和“指定加工厂（源文件）”</p>
+<ul>
+<li>1、为什么要在 MCU GCC Compiler -&gt; Include Paths 中添加？
+<ul>
+<li>作用：当你写下 <code>#include &quot;filter.h&quot;</code> 时，编译器并不知道这个文件在哪。添加 Include Paths 相当于给编译器提供了一张 <strong>“地图”</strong>。</li>
+</ul>
+</li>
+<li>为什么要在 General -&gt; Paths and Symbols 中添加？
+<ul>
+<li>告诉 IDE 哪些文件夹是 “源码文件夹”。只有被列入 <code>Source Location</code> 的文件夹，里面的 <code>.c</code> 文件才会被送进编译器转换成 <code>.o</code> 目标文件。</li>
+</ul>
+</li>
+</ul>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>维度</strong></th>
+          <th><strong>MCU GCC Compiler -&gt; Include Paths</strong></th>
+          <th><strong>Paths and Symbols -&gt; Source Location</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>针对对象</strong></td>
+          <td><strong><code>.h</code> 头文件</strong></td>
+          <td><strong><code>.c</code> 源文件</strong></td>
+      </tr>
+      <tr>
+          <td><strong>功能描述</strong></td>
+          <td>告诉编译器去哪里找“声明”</td>
+          <td>告诉编译器去哪里找“代码实现”</td>
+      </tr>
+      <tr>
+          <td><strong>递归性</strong></td>
+          <td><strong>不具备递归性</strong>（必须指定到最后一级）</td>
+          <td><strong>具备递归性</strong>（指定父目录，子目录自动编译）</td>
+      </tr>
+      <tr>
+          <td><strong>报错表现</strong></td>
+          <td><code>No such file or directory</code></td>
+          <td><code>undefined reference to …</code></td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="注意事项与潜规则">注意事项与“潜规则”
+</h4><ol>
+<li>Include Paths 的非递归性：
+<ul>
+<li>如果你有文件夹 <code>User_Library</code>，下面有子文件夹 <code>App</code> 和 <code>Tools</code>。</li>
+<li>你只添加 <code>User_Library</code> 是没用的。你必须<strong>分别添加</strong> <code>User_Library/App</code> 和 <code>User_Library/Tools</code>。</li>
+</ul>
+</li>
+<li>优先使用相对路径：
+<ul>
+<li>千万不要写成 <code>D:\Desktop\Project\…</code>。</li>
+<li>应该使用 <code>${ProjDirPath}/Core/User_Library/…</code> 或者使用 <code>../</code> 开头的相对路径。这样项目发给别人也能直接编译。</li>
+</ul>
+</li>
+<li>Source Folder 的图标：
+<ul>
+<li>检查你的文件夹图标。如果图标右上角有 <strong>蓝色小方块</strong>，说明它已在 <code>Source Location</code> 中；如果是纯黄色文件夹，说明它不会被编译。</li>
+</ul>
+</li>
+<li>修改后记得 Clean：
+<ul>
+<li>改动这些路径设置后，IDE 的索引有时会卡住。最稳妥的操作是 <strong>Project -&gt; Clean</strong>，然后重新 <strong>Build</strong>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="转移模块-1一阶滞后滤波-toolsfilter">转移模块 1：一阶滞后滤波 (Tools/Filter)
+</h3><p>这是最简单的模块，因为它不依赖具体的硬件引脚，只进行数学运算。</p>
+<p>1、创建头文件 <code>filter.h</code></p>
+<p>在 <code>Tools</code> 文件夹右键 -&gt; <strong>New</strong> -&gt; <strong>Header File</strong>，命名为 <code>filter.h</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifndef __FILTER_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __FILTER_H
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;main.h&#34; // 包含 main.h 以使用 float 类型</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 函数声明：告诉别人这个函数怎么用
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">Low_Pass_Filter</span><span class="p">(</span><span class="kt">float</span> <span class="n">input</span><span class="p">,</span> <span class="kt">float</span> <span class="n">last_output</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、第二步：创建源文件 <code>filter.c</code></p>
+<p>在 <code>Tools</code> 文件夹右键 -&gt; New -&gt; Source File，命名为 <code>filter.c</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;filter.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @brief 一阶滞后滤波算法
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param input: 本次采样值
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param last_output: 上次滤波后的输出值
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param alpha: 滤波系数 (0.0~1.0)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @return 滤波后的值
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">Low_Pass_Filter</span><span class="p">(</span><span class="kt">float</span> <span class="n">input</span><span class="p">,</span> <span class="kt">float</span> <span class="n">last_output</span><span class="p">,</span> <span class="kt">float</span> <span class="n">alpha</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">(</span><span class="n">alpha</span> <span class="o">*</span> <span class="n">input</span><span class="p">)</span> <span class="o">+</span> <span class="p">((</span><span class="mf">1.0f</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">)</span> <span class="o">*</span> <span class="n">last_output</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="转移模块-2参数存储-bspstorage">转移模块 2：参数存储 (BSP/Storage)
+</h3><p>这个模块负责把校准数据存进 Flash。它依赖 STM32 的硬件库。</p>
+<p>1、创建头文件 <code>storage.h</code></p>
+<p>在 <code>BSP</code> 文件夹下创建 <code>storage.h</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifndef __STORAGE_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __STORAGE_H
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;main.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 将 FLASH 地址定义在这里，方便修改
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define FLASH_USER_START_ADDR   0x0800FC00 
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="n">slope</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">slope</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>2、创建源文件 <code>storage.c</code></p>
+<p>把 <code>main.c</code> 里那段长长的 Flash 读写逻辑剪切过来：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;storage.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="n">slope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">2</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_to_save</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">data_to_save</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">slope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Unlock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">FLASH_EraseInitTypeDef</span> <span class="n">EraseInitStruct</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">PageError</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">TypeErase</span> <span class="o">=</span> <span class="n">FLASH_TYPEERASE_PAGES</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">PageAddress</span> <span class="o">=</span> <span class="n">FLASH_USER_START_ADDR</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">EraseInitStruct</span><span class="p">.</span><span class="n">NbPages</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASHEx_Erase</span><span class="p">(</span><span class="o">&amp;</span><span class="n">EraseInitStruct</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">PageError</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Program</span><span class="p">(</span><span class="n">FLASH_TYPEPROGRAM_WORD</span><span class="p">,</span> <span class="n">FLASH_USER_START_ADDR</span><span class="p">,</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Program</span><span class="p">(</span><span class="n">FLASH_TYPEPROGRAM_WORD</span><span class="p">,</span> <span class="n">FLASH_USER_START_ADDR</span> <span class="o">+</span> <span class="mi">4</span><span class="p">,</span> <span class="n">data_to_save</span><span class="p">[</span><span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_FLASH_Lock</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="kt">float</span> <span class="o">*</span><span class="n">zero</span><span class="p">,</span> <span class="kt">float</span> <span class="o">*</span><span class="n">slope</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">raw_zero</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">__IO</span> <span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_USER_START_ADDR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">raw_slope</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="n">__IO</span> <span class="kt">uint32_t</span><span class="o">*</span><span class="p">)(</span><span class="n">FLASH_USER_START_ADDR</span> <span class="o">+</span> <span class="mi">4</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">raw_zero</span> <span class="o">!=</span> <span class="mh">0xFFFFFFFF</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">zero</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">raw_zero</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="o">*</span><span class="n">slope</span> <span class="o">=</span> <span class="o">*</span><span class="p">(</span><span class="kt">float</span><span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">raw_slope</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="转移模块-3modbus">转移模块 3：Modbus
+</h3><p>![[Pasted image 20251227192243.png]]</p>
+<p>当你把代码从 <code>main.c</code> 分离到 <code>modbus_slave.c</code> 时，这两个文件就像变成了两个<strong>独立的办公室</strong>。默认情况下，他们互相看不见对方桌子上的资料（变量）和正在做的工程（函数）。这里的两行代码，就是为了<strong>打破办公室之间的墙</strong>，建立通讯。</p>
+<h4 id="1-为什么必须-include-storageh">1. 为什么必须 <code>#include &quot;storage.h&quot;</code>？
+</h4><p><strong>逻辑：获取“使用手册（接口声明）”</strong></p>
+<p>在 <code>Modbus_Handle</code> 函数里，你调用了 <code>Save_Params_To_Flash(…)</code>。</p>
+<ul>
+<li>编译器视角的困惑：当它编译 <code>modbus_slave.c</code> 时，它看到这个函数名会很懵逼：“这个函数长什么样？需要传几个参数？返回什么类型？”</li>
+<li>解决方案：<code>#include &quot;storage.h&quot;</code> 就像是把 <code>Save_Params_To_Flash</code> 的“说明书”复印了一份贴在了 <code>modbus_slave.c</code> 的墙上。</li>
+<li>结果：编译器看到说明书后说：“哦，原来这个函数接收两个 float 参数，不返回任何值，没问题，准许通过！”</li>
+</ul>
+<h4 id="2-为什么必须使用-extern-声明变量">2. 为什么必须使用 <code>extern</code> 声明变量？
+</h4><p><strong>逻辑：寻找“共享单车（跨文件访问）”</strong></p>
+<p>这是新手最容易搞混的地方。你的 <code>zero_offset_volt</code>（零点偏移电压）定义在 <code>main.c</code> 里，它是系统的<strong>核心资产</strong>。</p>
+<ul>
+<li>错误的尝试：如果你在 <code>modbus_slave.c</code> 里又写了一遍 <code>float zero_offset_volt;</code>，这相当于在两个办公室各买了一辆单车。Modbus 修改的是它的单车，而测量模块（ADC）骑的是另一辆单车。<strong>数据不同步！</strong></li>
+<li><code>extern</code> 的妙处：它告诉编译器：“听着，<code>zero_offset_volt</code> 这个变量<strong>真实存在于别的办公室（文件）里</strong>，我这里只是借用一下它的名字，不要在这里给它分配新的内存空间。”</li>
+<li>链接阶段的奇迹：最后链接器（Linker）干活时，会将 <code>modbus_slave.o</code> 里的这个借用请求，精准地指向 <code>main.o</code> 里那个真实的变量地址。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifndef __MODBUS_SLAVE_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __MODBUS_SLAVE_H
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;main.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 宏定义：通讯参数
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define SLAVE_ID      0x01
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define RX_BUF_SIZE   64
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 声明外部变量：这样 main.c 就能看到并往这些寄存器里填浓度数据
+</span></span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">uint16_t</span> <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="k">volatile</span> <span class="kt">uint8_t</span> <span class="n">modbus_rx_flag</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 函数声明
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Modbus_Init</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">);</span> <span class="c1">// 传入串口句柄（如 &amp;huart2）
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Modbus_Handle</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="nf">Modbus_CRC16</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;modbus_slave.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;storage.h&#34;  // [FIX] 必须包含这个头文件，才能调用 Save_Params_To_Flash</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// [FIX] 必须在这里用 extern 声明那些定义在 main.c 或 logic.c 里的变量
+</span></span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">slope_k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 1. 变量定义：真正的内存开辟在这里
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">10</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="n">RX_BUF_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="kt">uint8_t</span> <span class="n">tx_buffer</span><span class="p">[</span><span class="n">RX_BUF_SIZE</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="k">volatile</span> <span class="kt">uint8_t</span>  <span class="n">modbus_rx_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">volatile</span> <span class="kt">uint16_t</span> <span class="n">modbus_rx_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">p_huart</span><span class="p">;</span> <span class="c1">// 内部保存串口句柄
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 初始化：告诉模块用哪个串口
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Modbus_Init</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">p_huart</span> <span class="o">=</span> <span class="n">huart</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="n">p_huart</span><span class="p">,</span> <span class="n">rx_buffer</span><span class="p">,</span> <span class="n">RX_BUF_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. CRC 计算（搬运你之前的代码）
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="nf">Modbus_CRC16</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="n">ptr</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">len</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">crc</span> <span class="o">=</span> <span class="mh">0xFFFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span><span class="p">(</span><span class="n">len</span><span class="o">--</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">crc</span> <span class="o">^=</span> <span class="o">*</span><span class="n">ptr</span><span class="o">++</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span><span class="p">(</span><span class="n">crc</span> <span class="o">&amp;</span> <span class="mh">0x01</span><span class="p">)</span> <span class="p">{</span> <span class="n">crc</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="n">crc</span> <span class="o">^=</span> <span class="mh">0xA001</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">else</span> <span class="p">{</span> <span class="n">crc</span> <span class="o">&gt;&gt;=</span> <span class="mi">1</span><span class="p">;</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">crc</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 4. 解析逻辑（搬运你的 Modbus_Handle，注意把 huart2 改为 p_huart）
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Modbus_Handle</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 如果没有标志位，说明根本没触发串口接收
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">modbus_rx_flag</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 雷达探测：只要串口 2 动了，串口 1 必须说话 ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 这一段放在所有 if 校验的最前面！
+</span></span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\r\n</span><span class="s">[Radar] New Packet! Len: %d</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">modbus_rx_len</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[Radar] Data: &#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">modbus_rx_len</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%02X &#34;</span><span class="p">,</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="n">i</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 下面是原有的逻辑，但我们加了错误诊断 ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">modbus_rx_len</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[Error] Length &lt; 8 bytes!</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">goto</span> <span class="n">reset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">!=</span> <span class="n">SLAVE_ID</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[Error] ID Mismatch! Recv:%02X</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">goto</span> <span class="n">reset</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">crc_calc</span> <span class="o">=</span> <span class="nf">Modbus_CRC16</span><span class="p">(</span><span class="n">rx_buffer</span><span class="p">,</span> <span class="mi">6</span><span class="p">);</span> <span class="c1">// 针对 06 指令固定前 6 位
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint16_t</span> <span class="n">crc_recv</span> <span class="o">=</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="mi">6</span><span class="p">]</span> <span class="o">|</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">7</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">crc_calc</span> <span class="o">!=</span> <span class="n">crc_recv</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[Error] CRC Fail! Calc:%04X, Recv:%04X</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">crc_calc</span><span class="p">,</span> <span class="n">crc_recv</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">goto</span> <span class="n">reset</span><span class="p">;</span> <span class="c1">// 如果CRC校验不成功，不执行任何操作
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 真正的逻辑处理
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// --- 处理 03 读取 ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x03</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint16_t</span> <span class="n">start_addr</span> <span class="o">=</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint16_t</span> <span class="n">reg_num</span> <span class="o">=</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 构造回复报文
+</span></span></span><span class="line"><span class="cl">        <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="n">SLAVE_ID</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="mh">0x03</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">reg_num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">;</span> <span class="c1">// 字节数
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="n">reg_num</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 将数组中的 uint16 拆分为高低字节 (大端序)
+</span></span></span><span class="line"><span class="cl">            <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">3</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">Modbus_Regs</span><span class="p">[</span><span class="n">start_addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">Modbus_Regs</span><span class="p">[</span><span class="n">start_addr</span> <span class="o">+</span> <span class="n">i</span><span class="p">]</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="kt">uint16_t</span> <span class="n">crc_send</span> <span class="o">=</span> <span class="nf">Modbus_CRC16</span><span class="p">(</span><span class="n">tx_buffer</span><span class="p">,</span> <span class="mi">3</span> <span class="o">+</span> <span class="n">reg_num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">3</span> <span class="o">+</span> <span class="n">reg_num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="n">crc_send</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">tx_buffer</span><span class="p">[</span><span class="mi">4</span> <span class="o">+</span> <span class="n">reg_num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="n">crc_send</span> <span class="o">&gt;&gt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">&amp;</span> <span class="mh">0xFF</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="c1">// 通过 USART2 发送回复
+</span></span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="n">p_huart</span><span class="p">,</span> <span class="n">tx_buffer</span><span class="p">,</span> <span class="mi">5</span> <span class="o">+</span> <span class="n">reg_num</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">==</span> <span class="mh">0x06</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint16_t</span> <span class="n">addr</span> <span class="o">=</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="mi">3</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="kt">uint16_t</span> <span class="n">val</span>  <span class="o">=</span> <span class="p">(</span><span class="n">rx_buffer</span><span class="p">[</span><span class="mi">4</span><span class="p">]</span> <span class="o">&lt;&lt;</span> <span class="mi">8</span><span class="p">)</span> <span class="o">|</span> <span class="n">rx_buffer</span><span class="p">[</span><span class="mi">5</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[Match] Function 06! Addr:0x%04X, Val:0x%04X</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">addr</span><span class="p">,</span> <span class="n">val</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">addr</span> <span class="o">==</span> <span class="mh">0x0006</span> <span class="o">&amp;&amp;</span> <span class="n">val</span> <span class="o">==</span> <span class="mh">0x55AA</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">             <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;[Action] Calibrating Zero...</span><span class="se">\r\n</span><span class="s">&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">             <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">             <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">             <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="n">p_huart</span><span class="p">,</span> <span class="n">rx_buffer</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nl">reset</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modbus_rx_flag</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">modbus_rx_len</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">memset</span><span class="p">(</span><span class="n">rx_buffer</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">RX_BUF_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UARTEx_ReceiveToIdle_DMA</span><span class="p">(</span><span class="n">p_huart</span><span class="p">,</span> <span class="n">rx_buffer</span><span class="p">,</span> <span class="n">RX_BUF_SIZE</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 串口接收完成回调函数 (处理 IDLE 中断)
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">HAL_UARTEx_RxEventCallback</span><span class="p">(</span><span class="n">UART_HandleTypeDef</span> <span class="o">*</span><span class="n">huart</span><span class="p">,</span> <span class="kt">uint16_t</span> <span class="n">Size</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">huart</span><span class="o">-&gt;</span><span class="n">Instance</span> <span class="o">==</span> <span class="n">p_huart</span><span class="o">-&gt;</span><span class="n">Instance</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 判断是不是 Modbus 用的那个串口
+</span></span></span><span class="line"><span class="cl">        <span class="n">modbus_rx_len</span> <span class="o">=</span> <span class="n">Size</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">modbus_rx_flag</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="转移模块-4logic">转移模块 4：Logic
+</h3><p>这个模块将作为你系统的“大脑”，负责处理所有的传感器数据和用户的校准操作。</p>
+<h4 id="1-编写头文件-logich">1. 编写头文件 <code>logic.h</code>
+</h4><p>在 <code>Core/Inc</code>（或 <code>User_Library/App</code>）创建 <code>logic.h</code>。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifndef __LOGIC_H
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define __LOGIC_H
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;main.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 声明外部变量，让 main.c 打印调试信息或 Modbus 使用
+</span></span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">current_mA</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">calibrated_pressure</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">float</span> <span class="n">slope_k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 函数声明
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Logic_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>   <span class="c1">// 逻辑初始化（加载参数等）
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Logic_Update</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span> <span class="c1">// 逻辑轮询（采样、计算、按键逻辑）
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cp">#endif
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><h4 id="2-编写源文件-logicc">2. 编写源文件 <code>logic.c</code>
+</h4><p>在 <code>Core/Src</code>（或 <code>User_Library/App</code>）创建 <code>logic.c</code>。这里要把你 <code>while(1)</code> 里的逻辑全部剪切过来。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span><span class="lnt">88
+</span><span class="lnt">89
+</span><span class="lnt">90
+</span><span class="lnt">91
+</span><span class="lnt">92
+</span><span class="lnt">93
+</span><span class="lnt">94
+</span><span class="lnt">95
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;logic.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;filter.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;storage.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;modbus_slave.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// --- 私有常量定义 ---
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define P_NOMINAL 1.6f  </span><span class="c1">// 标准压力满量程 (MPa)
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define R_SAMPLE 150.0f  </span><span class="c1">// 采样电阻 150 欧
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// --- 变量定义 ---
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">current_mA</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="mf">0.60f</span><span class="p">;</span> <span class="c1">// 默认零点 (4mA -&gt; 0.6V)
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">slope_k</span> <span class="o">=</span> <span class="mf">1.6f</span> <span class="o">/</span> <span class="p">(</span><span class="mf">3.0f</span> <span class="o">-</span> <span class="mf">0.60f</span><span class="p">);</span>       <span class="c1">// 默认斜率
+</span></span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="mf">0.60f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 引用 main.c 中的硬件缓存
+</span></span></span><span class="line"><span class="cl"><span class="k">extern</span> <span class="kt">uint16_t</span> <span class="n">adc_buffer</span><span class="p">[];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @brief 逻辑模块初始化
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Logic_Init</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 从 Flash 加载之前保存的标定参数
+</span></span></span><span class="line"><span class="cl">    <span class="nf">Load_Params_From_Flash</span><span class="p">(</span><span class="o">&amp;</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @brief 逻辑模块主轮询函数 (在 main 的 while 循环中调用)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Logic_Update</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 1. ADC 信号采集与一阶滞后滤波 ---
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">sum_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_A</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">];</span> <span class="c1">// 采样通道 0
+</span></span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">raw_volt</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_A</span> <span class="o">/</span> <span class="mf">10.0f</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="nf">Low_Pass_Filter</span><span class="p">(</span><span class="n">raw_volt</span><span class="p">,</span> <span class="n">filter_volt_A</span><span class="p">,</span> <span class="mf">0.15f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 2. 物理量计算 ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">current_mA</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_volt_A</span> <span class="o">/</span> <span class="n">R_SAMPLE</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0f</span><span class="p">;</span> <span class="c1">// 假设采样电阻 150 欧
+</span></span></span><span class="line"><span class="cl">    <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_volt_A</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope_k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 负数截断保护（压力不会是负的）
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">calibrated_pressure</span> <span class="o">&lt;</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 3. 零点校准逻辑 (PB0 引脚) ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// 软件去抖
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 执行零点校准：记录当前电压为 0MPa 对应的电压
+</span></span></span><span class="line"><span class="cl">            <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// LED 反馈：PC13 常亮 500ms 表示成功
+</span></span></span><span class="line"><span class="cl">            <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">500</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 等待按键松开
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 4. 满量程校准逻辑 (PB1 引脚) ---
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// 软件去抖
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="c1">// 计算当前电压与零点电压的差值
+</span></span></span><span class="line"><span class="cl">            <span class="kt">float</span> <span class="n">v_diff</span> <span class="o">=</span> <span class="n">filter_volt_A</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">            <span class="c1">// 安全检查：只有当当前电压明显高于零点电压时，才允许标定满量程
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">v_diff</span> <span class="o">&gt;</span> <span class="mf">0.1f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// 计算新斜率：K = 标准压力 / 电压差
+</span></span></span><span class="line"><span class="cl">                <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">                <span class="c1">// LED 反馈：PC13 快闪 4 次表示成功
+</span></span></span><span class="line"><span class="cl">                <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">8</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">HAL_GPIO_TogglePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="c1">// 确保灭灯
+</span></span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">while</span><span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">)</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 等待按键松开
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 5. 同步数据到 Modbus 寄存器仓库 ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">current_mA</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>      <span class="c1">// 电流，放大100倍
+</span></span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">calibrated_pressure</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span> <span class="c1">// 压力，放大1000倍
+</span></span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">zero_offset_volt</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>    <span class="c1">// 零点电压
+</span></span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">slope_k</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>        <span class="c1">// 斜率K
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>为什么这里的 <code>P_NOMINAL</code> 用 <code>#define</code> 定义
+<ul>
+<li><code>#define</code> 工作原理：在程序真正开始编译之前，预处理器会扫描一遍代码，把所有出现 <code>P_NOMINAL</code> 的地方，<strong>暴力替换</strong>成 <code>1.6f</code></li>
+</ul>
+</li>
+<li>为什么在 <code>logic.c</code> 中推荐用 <code>#define</code>
+<ul>
+<li>物理常量属性：P_NOMINAL（满量程 1.6MPa）是传感器的硬件属性。在设计电路板和选型传感器时就定死了。它属于“配置参数”而非“运行变量”。</li>
+<li><strong>MISRA-C 标准习惯</strong>：在一些工业安全标准中，宏定义常用于定义这种“系统级常量”，让代码逻辑和配置参数清晰分开。</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p>define 定义注意事项
+1、多余的分号
+2、多余的等号</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="err">下面两种都是错误的</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define R_SAMPLE 150.0f; </span><span class="c1">// 注意末尾这个分号
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define R_SAMPLE = 150.0f </span><span class="c1">// 注意这个等号
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>深度避坑指南：给宏加上括号。推荐写法：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#define R_SAMPLE (150.0f)
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>为什么要加括号？</strong> 假设你定义了一个电阻组合：<code>#define R_TOTAL 100.0f + 50.0f</code>。 如果你写 <code>1 / R_TOTAL</code>，替换后会变成 <code>1 / 100.0f + 50.0f</code>。根据数学优先级，它会先算 <code>1/100</code> 再加 <code>50</code>，这显然不是你想要的。加上括号就会变成 <code>1 / (100.0f + 50.0f)</code>。</p>
+<h3 id="精简后的-main">精简后的 main
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN Includes */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdio.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;filter.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;storage.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;logic.h&#34;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END Includes */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN PV */</span>
+</span></span><span class="line"><span class="cl"><span class="cp">#define SAMPLES 10  					</span><span class="c1">// 每个通道采样 10 次
+</span></span></span><span class="line"><span class="cl"><span class="cp">#define CHANNELS 2 						</span><span class="c1">// 共 2 个通道
+</span></span></span><span class="line"><span class="cl"><span class="kt">uint16_t</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">];</span> <span class="c1">// 长度为 20 的数组
+</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END PV */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN 0 */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">__io_putchar</span><span class="p">(</span><span class="kt">int</span> <span class="n">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_UART_Transmit</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint8_t</span> <span class="o">*</span><span class="p">)</span><span class="o">&amp;</span><span class="n">ch</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">HAL_MAX_DELAY</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">ch</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END 0 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">  <span class="cm">/* USER CODE BEGIN 2 */</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// ADC 初始化与校准
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_ADCEx_Calibration_Start</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 启动 ADC DMA 搬运 (搬运 20 个数据到 adc_buffer)
+</span></span></span><span class="line"><span class="cl">    <span class="nf">HAL_ADC_Start_DMA</span><span class="p">(</span><span class="o">&amp;</span><span class="n">hadc1</span><span class="p">,</span> <span class="p">(</span><span class="kt">uint32_t</span><span class="o">*</span><span class="p">)</span><span class="n">adc_buffer</span><span class="p">,</span> <span class="n">SAMPLES</span> <span class="o">*</span> <span class="n">CHANNELS</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">Logic_Init</span><span class="p">();</span>         <span class="c1">// 初始化业务逻辑（加载 Flash）
+</span></span></span><span class="line"><span class="cl">    <span class="nf">Modbus_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">huart2</span><span class="p">);</span> <span class="c1">// 初始化通讯
+</span></span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE END 2 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl">   <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">   <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nf">Logic_Update</span><span class="p">();</span>   <span class="c1">// 运行业务大脑
+</span></span></span><span class="line"><span class="cl">        <span class="nf">Modbus_Handle</span><span class="p">();</span>  <span class="c1">// 运行通讯解析
+</span></span></span><span class="line"><span class="cl">		<span class="c1">// --- 7. VOFA+ 调试输出 (USART1) ---
+</span></span></span><span class="line"><span class="cl">	    <span class="nf">printf</span><span class="p">(</span><span class="s">&#34;%.2f,%.3f,%.3f,%.4f</span><span class="se">\n</span><span class="s">&#34;</span><span class="p">,</span> <span class="n">current_mA</span><span class="p">,</span> <span class="n">calibrated_pressure</span><span class="p">,</span> <span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">	    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">50</span><span class="p">);</span> <span class="c1">// 稍微提高刷新率
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE END WHILE */</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE BEGIN 3 */</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h2 id="非阻塞框架">非阻塞框架
+</h2><p>在上面的 logic 函数当中，用到了 <code>HAL_Delay(500)</code>、<code>HAL_Delay(20)</code>，这会让 CPU 原地踏步，这期间，Modbus 无法回包、ADC 数据无法更新。</p>
+<blockquote>
+<ul>
+<li>另外，重构后，<code>main.c</code> 里的 <code>HAL_Delay(50)</code> 建议保留吗？</li>
+<li>不建议。应将其减小（如 1ms）或彻底移除。主循环运行越快，系统的实时响应速度和采样频率就越高。</li>
+</ul>
+</blockquote>
+<h3 id="1核心思想从等-500ms变成记录时间戳">1.核心思想：从“等 500ms”变成“记录时间戳”
+</h3><p>想象你在煮面：</p>
+<ul>
+<li>阻塞式 (HAL_Delay)：盯着锅看 5 分钟，什么都不干。</li>
+<li>非阻塞式 (GetTick)：记下现在是 12:00，然后去扫地，每隔一会看眼表，发现 12:05 了，关火。</li>
+</ul>
+<p>实现的目的：</p>
+<ul>
+<li>改造前（逻辑流）： <code>按下按键</code> -&gt; <code>死等20ms</code> -&gt; <code>检查状态</code> -&gt; <code>存Flash</code> -&gt; <code>死等500ms闪灯</code> -&gt; <code>结束</code>。</li>
+<li>改造后（逻辑环）：
+<ul>
+<li>主循环：每毫秒转好几圈。</li>
+<li>看按键：现在时间 - 按下时间 &gt; 20ms 了吗？够了就处理。</li>
+<li>看灯：现在时间 - 亮灯时间 &gt; 500ms 了吗？够了就灭灯。</li>
+<li>回 Modbus：有人叫我吗？有就立刻回。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-实战重构非阻塞按键消抖">2. 实战重构：非阻塞按键消抖
+</h3><blockquote>
+<p>重构路线图</p>
+<ul>
+<li><strong>第一步</strong>：在 <code>logic.c</code> 顶部定义记录时间的 <code>uint32_t</code> 变量。</li>
+<li><strong>第二步</strong>：改写按键逻辑，用 <code>HAL_GetTick() - tick &gt; 20</code> 替换 <code>HAL_Delay(20)</code>。</li>
+<li><strong>第三步</strong>：引入 <code>switch-case</code> 状态机处理 LED 反馈。</li>
+<li><strong>第四步</strong>：点击编译，享受那种一边闪灯校准、一边 Modbus 飞速回包的专业快感。</li>
+</ul>
+</blockquote>
+<p>之前的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_Delay</span><span class="p">(</span><span class="mi">20</span><span class="p">);</span> <span class="c1">// 这里死等 20ms（软件去抖的延迟）
+</span></span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><strong>重构后（利用时间戳）：</strong> 我们需要在 <code>logic.c</code> 里定义一些静态变量来记录状态。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">key_press_time</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 记录按键按下的时刻
+</span></span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">key_active</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>      <span class="c1">// 按键是否处于待处理状态
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Logic_Update</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 1. 读取按键物理状态
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">current_pin_state</span> <span class="o">=</span> <span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">current_pin_state</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 按键按下
+</span></span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">key_press_time</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">            <span class="n">key_press_time</span> <span class="o">=</span> <span class="nf">HAL_GetTick</span><span class="p">();</span> <span class="c1">// 刚刚按下，记下开始时间
+</span></span></span><span class="line"><span class="cl">        <span class="p">}</span> 
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">key_press_time</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 时间过了20ms
+</span></span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">key_active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="c1">// --- 执行校准业务 ---
+</span></span></span><span class="line"><span class="cl">                <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                
+</span></span><span class="line"><span class="cl">                <span class="c1">// 触发 LED 任务（看下面）
+</span></span></span><span class="line"><span class="cl">                <span class="nf">Start_LED_Feedback</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">key_active</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> <span class="c1">// 标记已处理，防止长按重复触发
+</span></span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key_press_time</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="c1">// 按键松开，重置计数
+</span></span></span><span class="line"><span class="cl">        <span class="n">key_active</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3-高级重构非阻塞-led-反馈状态机">3. 高级重构：非阻塞 LED 反馈（状态机）
+</h3><p>这是最精彩的部分。我们希望 LED 闪烁的同时，主程序继续飞速运行。我们在 <code>logic.c</code> 顶部定义 LED 的状态：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">enum</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LED_IDLE</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LED_ON_WAIT</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">    <span class="n">LED_OFF_WAIT</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">LED_State_t</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="n">LED_State_t</span> <span class="n">led_step</span> <span class="o">=</span> <span class="n">LED_IDLE</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">uint32_t</span> <span class="n">led_timer</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">static</span> <span class="kt">uint8_t</span> <span class="n">flash_count</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 启动反馈的函数
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Start_LED_Feedback</span><span class="p">(</span><span class="kt">uint8_t</span> <span class="n">times</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">flash_count</span> <span class="o">=</span> <span class="n">times</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">led_step</span> <span class="o">=</span> <span class="n">LED_ON_WAIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">led_timer</span> <span class="o">=</span> <span class="nf">HAL_GetTick</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 点亮
+</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 在 Logic_Update 中轮询这个状态机
+</span></span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Handle_LED_Task</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">switch</span> <span class="p">(</span><span class="n">led_step</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">LED_ON_WAIT</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">led_timer</span> <span class="o">&gt;</span> <span class="mi">500</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 亮够 500ms 了
+</span></span></span><span class="line"><span class="cl">                <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_SET</span><span class="p">);</span> <span class="c1">// 熄灭
+</span></span></span><span class="line"><span class="cl">                <span class="n">led_timer</span> <span class="o">=</span> <span class="nf">HAL_GetTick</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                <span class="n">led_step</span> <span class="o">=</span> <span class="n">LED_OFF_WAIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">        <span class="k">case</span> <span class="nl">LED_OFF_WAIT</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">led_timer</span> <span class="o">&gt;</span> <span class="mi">200</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 灭够 200ms 了
+</span></span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="o">--</span><span class="n">flash_count</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">HAL_GPIO_WritePin</span><span class="p">(</span><span class="n">GPIOC</span><span class="p">,</span> <span class="n">GPIO_PIN_13</span><span class="p">,</span> <span class="n">GPIO_PIN_RESET</span><span class="p">);</span> <span class="c1">// 再亮
+</span></span></span><span class="line"><span class="cl">                    <span class="n">led_timer</span> <span class="o">=</span> <span class="nf">HAL_GetTick</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">led_step</span> <span class="o">=</span> <span class="n">LED_ON_WAIT</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">led_step</span> <span class="o">=</span> <span class="n">LED_IDLE</span><span class="p">;</span> <span class="c1">// 闪完了
+</span></span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">            <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">default</span><span class="o">:</span> <span class="k">break</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为了实现不卡顿的闪灯，我们需要三个零件：</p>
+<ul>
+<li>状态变量 (<code>led_step</code>)：记录“我现在进行到哪一步了”。（备忘录）</li>
+<li>时间戳变量 (<code>led_timer</code>)：记录“我是什么时候开始这一步的”。（闹钟）</li>
+<li>计数值 (<code>flash_count</code>)：记录“我还要闪几次”。</li>
+</ul>
+<p>我们把这个过程拆成三个状态：<code>IDLE</code>（闲置）、<code>ON_WAIT</code>（亮灯等待）、<code>OFF_WAIT</code>（灭灯等待）。</p>
+<h4 id="第一步触发任务按下快门">第一步：触发任务（按下快门）
+</h4><p>当你的校准逻辑成功时，你调用 <code>Start_LED_Feedback(3)</code>。这时发生了什么？</p>
+<ul>
+<li>它不闪灯，它只是<strong>设置参数</strong>：
+<ul>
+<li><code>led_step = LED_ON_WAIT;</code> —— “备忘录：进入亮灯阶段”。</li>
+<li><code>led_timer = HAL_GetTick();</code> —— “闹钟：记下现在的时间”。</li>
+<li><code>HAL_GPIO_WritePin(… , 0);</code> —— “动作：把灯点亮”。</li>
+</ul>
+</li>
+<li><strong>注意</strong>：这个函数执行完只需要几个微秒，程序立刻就退出了，去跑 Modbus 了。</li>
+</ul>
+<h4 id="第二步轮询检查logic_update">第二步：轮询检查（Logic_Update）
+</h4><p>你的 <code>main</code> 循环跑得极快（一秒钟转几万圈）。每一圈都会跑进 <code>Handle_LED_Task()</code>。</p>
+<p>如果现在是亮灯后的第 10 毫秒：</p>
+<ul>
+<li>程序进入 <code>case LED_ON_WAIT</code>。</li>
+<li>检查：<code>HAL_GetTick() - led_timer &gt; 500</code>？（现在的时间减去亮灯的时间，够 500ms 了吗？）</li>
+<li>结果：不够。程序直接跳出 <code>switch</code>。CPU 去干别的事了（比如处理 ADC 采样）。</li>
+</ul>
+<p>如果现在是亮灯后的第 501 毫秒：</p>
+<ul>
+<li>程序再次进入 <code>case LED_ON_WAIT</code>。</li>
+<li>检查：够 500ms 了！</li>
+<li><strong>动作</strong>：
+<ol>
+<li><code>HAL_GPIO_WritePin(… , 1);</code> —— “把灯关了”。</li>
+<li><code>led_timer = HAL_GetTick();</code> —— “重新设闹钟，记下关灯的这一刻”。</li>
+<li><code>led_step = LED_OFF_WAIT;</code> —— “备忘录：改成灭灯等待阶段”。</li>
+</ol>
+</li>
+</ul>
+<h3 id="4-最终的-logic_update-样子">4. 最终的 <code>Logic_Update</code> 样子
+</h3><p>你会发现 <code>HAL_Delay</code> 彻底消失了，取而代之的是不断地“看表”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @brief 逻辑模块主轮询函数
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">Logic_Update</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 1. ADC 信号采集与一阶滞后滤波 ---
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint32_t</span> <span class="n">sum_A</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span><span class="p">(</span><span class="kt">int</span> <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="mi">10</span><span class="p">;</span> <span class="n">i</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">sum_A</span> <span class="o">+=</span> <span class="n">adc_buffer</span><span class="p">[</span><span class="n">i</span> <span class="o">*</span> <span class="mi">2</span><span class="p">];</span> 
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">raw_volt</span> <span class="o">=</span> <span class="p">(</span><span class="kt">float</span><span class="p">)</span><span class="n">sum_A</span> <span class="o">/</span> <span class="mf">10.0f</span> <span class="o">*</span> <span class="mf">3.3f</span> <span class="o">/</span> <span class="mf">4095.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">filter_volt_A</span> <span class="o">=</span> <span class="nf">Low_Pass_Filter</span><span class="p">(</span><span class="n">raw_volt</span><span class="p">,</span> <span class="n">filter_volt_A</span><span class="p">,</span> <span class="mf">0.15f</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 2. 物理量计算 ---
+</span></span></span><span class="line"><span class="cl">    <span class="n">current_mA</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_volt_A</span> <span class="o">/</span> <span class="n">R_SAMPLE</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1000.0f</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="p">(</span><span class="n">filter_volt_A</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">)</span> <span class="o">*</span> <span class="n">slope_k</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">calibrated_pressure</span> <span class="o">&lt;</span> <span class="mf">0.0f</span><span class="p">)</span> <span class="n">calibrated_pressure</span> <span class="o">=</span> <span class="mf">0.0f</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 3. 零点校准逻辑 (PB0) ---
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">pin0</span> <span class="o">=</span> <span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pin0</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">key0_tick</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">key0_tick</span> <span class="o">=</span> <span class="nf">HAL_GetTick</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">key0_tick</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">key0_active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="n">zero_offset_volt</span> <span class="o">=</span> <span class="n">filter_volt_A</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="nf">Start_LED_Feedback</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">                <span class="n">key0_active</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>       
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key0_tick</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key0_active</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 4. 满量程校准逻辑 (PB1) ---
+</span></span></span><span class="line"><span class="cl">    <span class="kt">uint8_t</span> <span class="n">pin1</span> <span class="o">=</span> <span class="nf">HAL_GPIO_ReadPin</span><span class="p">(</span><span class="n">GPIOB</span><span class="p">,</span> <span class="n">GPIO_PIN_1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">pin1</span> <span class="o">==</span> <span class="n">GPIO_PIN_RESET</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">key1_tick</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="n">key1_tick</span> <span class="o">=</span> <span class="nf">HAL_GetTick</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="k">else</span> <span class="k">if</span> <span class="p">(</span><span class="nf">HAL_GetTick</span><span class="p">()</span> <span class="o">-</span> <span class="n">key1_tick</span> <span class="o">&gt;</span> <span class="mi">20</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="k">if</span> <span class="p">(</span><span class="n">key1_active</span> <span class="o">==</span> <span class="mi">0</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                <span class="kt">float</span> <span class="n">v_diff</span> <span class="o">=</span> <span class="n">filter_volt_A</span> <span class="o">-</span> <span class="n">zero_offset_volt</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                <span class="k">if</span> <span class="p">(</span><span class="n">v_diff</span> <span class="o">&gt;</span> <span class="mf">0.1f</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="n">slope_k</span> <span class="o">=</span> <span class="n">P_NOMINAL</span> <span class="o">/</span> <span class="n">v_diff</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">Save_Params_To_Flash</span><span class="p">(</span><span class="n">zero_offset_volt</span><span class="p">,</span> <span class="n">slope_k</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">Start_LED_Feedback</span><span class="p">(</span><span class="mi">4</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">                <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                    <span class="nf">Start_LED_Feedback</span><span class="p">(</span><span class="mi">1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">                <span class="p">}</span>
+</span></span><span class="line"><span class="cl">                <span class="n">key1_active</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">            <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key1_tick</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="n">key1_active</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// 【新增重要步骤】驱动 LED 状态机运行
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 只有调用了它，Start_LED_Feedback 下达的闪烁命令才会被执行
+</span></span></span><span class="line"><span class="cl">    <span class="nf">Handle_LED_Task</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// --- 5. 同步数据到 Modbus 寄存器仓库 ---
+</span></span></span><span class="line"><span class="cl">    <span class="c1">// 这些代码现在回到了 Logic_Update 的怀抱中
+</span></span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">current_mA</span> <span class="o">*</span> <span class="mi">100</span><span class="p">);</span>      
+</span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">calibrated_pressure</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">zero_offset_volt</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>    
+</span></span><span class="line"><span class="cl">    <span class="n">Modbus_Regs</span><span class="p">[</span><span class="mi">3</span><span class="p">]</span> <span class="o">=</span> <span class="p">(</span><span class="kt">uint16_t</span><span class="p">)(</span><span class="n">slope_k</span> <span class="o">*</span> <span class="mi">1000</span><span class="p">);</span>        
+</span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="c1">// 函数在这里结束
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款一次性气体过滤器的商业名称。在 CEMS 领域，它通常被称为阻水过滤器或者疏水过滤器。\n外壳：聚丙烯（PP），耐腐蚀 滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜 精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm ">
-<title>Midisart 2000</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[制作一款Chrome浏览器插件]]，学习一下插件的构成\ngraph TD %% 定义组件 Manifest[(manifest.json配置文件)] subgraph \"网页世界 (Web Page Context)\" DOM[DOM / 网页 HTML] ContentScript[content.js注入脚本] end subgraph \"扩展内部世界 (Extension Context)\" ServiceWorker[Service Worker / Background.js后台逻辑 - 类似大脑] Popup[Popup / Options.js前端交互界面] end subgraph \"外部世界 (External)\" AnkiConnect[AnkiConnect127.0.0.1:8765] WebAPI[外部 API / 网页后端] end %% 定义交互关系 Manifest -.->|注册与配置| ContentScript Manifest -.->|生命周期管理| ServiceWorker Manifest -.->|定义 UI 入口| Popup DOM <-->|读写网页元素| ContentScript ContentScript <==>|Message Passing 通信| ServiceWorker Popup <==>|Message Passing 通信| ServiceWorker ContentScript -->|直接发送数据| AnkiConnect ServiceWorker -->|网络请求| WebAPI style Manifest fill:#f96,stroke:#333,stroke-width:2px style ContentScript fill:#4285f4,color:#fff style ServiceWorker fill:#34a853,color:#fff style Popup fill:#ea4335,color:#fff style AnkiConnect fill:#fff,stroke:#4285f4,stroke-dasharray: 5 5 关键组件解析 1. manifest.json：插件的“身份证”与“说明书” 这是每个插件必须有的文件。没有它，浏览器就不知道这个插件叫什么、能干什么。\n">
+<title>Chrome浏览器插件</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/midisart-2000/'>
+<link rel='canonical' href='https://teaize.github.io/p/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Midisart 2000">
-<meta property='og:description' content="Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款一次性气体过滤器的商业名称。在 CEMS 领域，它通常被称为阻水过滤器或者疏水过滤器。\n外壳：聚丙烯（PP），耐腐蚀 滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜 精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm ">
-<meta property='og:url' content='https://teaize.github.io/p/midisart-2000/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Chrome浏览器插件">
+<meta property='og:description' content="本篇继 [[制作一款Chrome浏览器插件]]，学习一下插件的构成\ngraph TD %% 定义组件 Manifest[(manifest.json配置文件)] subgraph \"网页世界 (Web Page Context)\" DOM[DOM / 网页 HTML] ContentScript[content.js注入脚本] end subgraph \"扩展内部世界 (Extension Context)\" ServiceWorker[Service Worker / Background.js后台逻辑 - 类似大脑] Popup[Popup / Options.js前端交互界面] end subgraph \"外部世界 (External)\" AnkiConnect[AnkiConnect127.0.0.1:8765] WebAPI[外部 API / 网页后端] end %% 定义交互关系 Manifest -.->|注册与配置| ContentScript Manifest -.->|生命周期管理| ServiceWorker Manifest -.->|定义 UI 入口| Popup DOM <-->|读写网页元素| ContentScript ContentScript <==>|Message Passing 通信| ServiceWorker Popup <==>|Message Passing 通信| ServiceWorker ContentScript -->|直接发送数据| AnkiConnect ServiceWorker -->|网络请求| WebAPI style Manifest fill:#f96,stroke:#333,stroke-width:2px style ContentScript fill:#4285f4,color:#fff style ServiceWorker fill:#34a853,color:#fff style Popup fill:#ea4335,color:#fff style AnkiConnect fill:#fff,stroke:#4285f4,stroke-dasharray: 5 5 关键组件解析 1. manifest.json：插件的“身份证”与“说明书” 这是每个插件必须有的文件。没有它，浏览器就不知道这个插件叫什么、能干什么。\n">
+<meta property='og:url' content='https://teaize.github.io/p/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-06T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-06T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="Midisart 2000">
-<meta name="twitter:description" content="Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款一次性气体过滤器的商业名称。在 CEMS 领域，它通常被称为阻水过滤器或者疏水过滤器。\n外壳：聚丙烯（PP），耐腐蚀 滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜 精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm ">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-27T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-27T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Chrome浏览器插件">
+<meta name="twitter:description" content="本篇继 [[制作一款Chrome浏览器插件]]，学习一下插件的构成\ngraph TD %% 定义组件 Manifest[(manifest.json配置文件)] subgraph \"网页世界 (Web Page Context)\" DOM[DOM / 网页 HTML] ContentScript[content.js注入脚本] end subgraph \"扩展内部世界 (Extension Context)\" ServiceWorker[Service Worker / Background.js后台逻辑 - 类似大脑] Popup[Popup / Options.js前端交互界面] end subgraph \"外部世界 (External)\" AnkiConnect[AnkiConnect127.0.0.1:8765] WebAPI[外部 API / 网页后端] end %% 定义交互关系 Manifest -.->|注册与配置| ContentScript Manifest -.->|生命周期管理| ServiceWorker Manifest -.->|定义 UI 入口| Popup DOM <-->|读写网页元素| ContentScript ContentScript <==>|Message Passing 通信| ServiceWorker Popup <==>|Message Passing 通信| ServiceWorker ContentScript -->|直接发送数据| AnkiConnect ServiceWorker -->|网络请求| WebAPI style Manifest fill:#f96,stroke:#333,stroke-width:2px style ContentScript fill:#4285f4,color:#fff style ServiceWorker fill:#34a853,color:#fff style Popup fill:#ea4335,color:#fff style AnkiConnect fill:#fff,stroke:#4285f4,stroke-dasharray: 5 5 关键组件解析 1. manifest.json：插件的“身份证”与“说明书” 这是每个插件必须有的文件。没有它，浏览器就不知道这个插件叫什么、能干什么。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,13 +297,15 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#主要作用">主要作用</a>
+        <li><a href="#关键组件解析">关键组件解析</a>
           <ol>
-            <li><a href="#核心功能疏水保护">核心功能：疏水保护</a></li>
-            <li><a href="#辅助功能精细过滤">辅助功能：精细过滤</a></li>
+            <li><a href="#1-manifestjson插件的身份证与说明书">1. <code>manifest.json</code>：插件的“身份证”与“说明书”</a></li>
+            <li><a href="#2-contentjs注入网页的特工">2. <code>content.js</code>：注入网页的“特工”</a></li>
+            <li><a href="#3-插件架构的四大支柱">3. 插件架构的四大支柱</a></li>
+            <li><a href="#4-它们是如何沟通的message-passing">4. 它们是如何“沟通”的？(Message Passing)</a></li>
+            <li><a href="#5-针对之前的需求它是怎么跑起来的">5. 针对之前的需求，它是怎么跑起来的</a></li>
           </ol>
         </li>
-        <li><a href="#注意事项">注意事项</a></li>
       </ol>
     </li>
   </ol>
@@ -325,7 +327,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/midisart-2000/">Midisart 2000</a>
+            <a href="/p/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/">Chrome浏览器插件</a>
         </h2>
     
         
@@ -347,7 +349,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-06</time>
+                <time class="article-time--published">2025-12-27</time>
             </div>
         
 
@@ -363,55 +365,120 @@
     <section class="article-content">
     
     
-    <p>Midisart 2000 是德国 Sartorius（赛多利斯） 公司生产的一款<strong>一次性气体过滤器</strong>的商业名称。在 CEMS 领域，它通常被称为<strong>阻水过滤器</strong>或者<strong>疏水过滤器</strong>。</p>
-<ul>
-<li>外壳：聚丙烯（PP），耐腐蚀</li>
-<li>滤膜（关键）: 内部是一层 PTFE（聚四氟乙烯）膜</li>
-<li>精度： CEMS 中常用的规格通常是 0.2 µm 或 0.45 µm</li>
-</ul>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206131946.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206131946.png" alt=""  />
-		</a>
-	</div>
+    <p>本篇继 [[制作一款Chrome浏览器插件]]，学习一下插件的构成</p>
+<div class="mermaid">
+  graph TD
+    %% 定义组件
+    Manifest[(manifest.json<br/>配置文件)]
+    
+    subgraph "网页世界 (Web Page Context)"
+        DOM[DOM / 网页 HTML]
+        ContentScript[content.js<br/>注入脚本]
+    end
 
-</p>
-<h3 id="主要作用">主要作用
-</h3><h4 id="核心功能疏水保护">核心功能：疏水保护
-</h4><p>CEMS 的样气经过冷凝器除水后，虽然大部分水被除去了，但在故障或极端工况下（如冷凝器失效、蠕动泵坏了），液态水可能会直接冲向后端的分析仪</p>
+    subgraph "扩展内部世界 (Extension Context)"
+        ServiceWorker[Service Worker / Background.js<br/>后台逻辑 - 类似大脑]
+        Popup[Popup / Options.js<br/>前端交互界面]
+    end
+
+    subgraph "外部世界 (External)"
+        AnkiConnect[AnkiConnect<br/>127.0.0.1:8765]
+        WebAPI[外部 API / 网页后端]
+    end
+
+    %% 定义交互关系
+    Manifest -.->|注册与配置| ContentScript
+    Manifest -.->|生命周期管理| ServiceWorker
+    Manifest -.->|定义 UI 入口| Popup
+
+    DOM <-->|读写网页元素| ContentScript
+    ContentScript <==>|Message Passing 通信| ServiceWorker
+    Popup <==>|Message Passing 通信| ServiceWorker
+    
+    ContentScript -->|直接发送数据| AnkiConnect
+    ServiceWorker -->|网络请求| WebAPI
+    
+    style Manifest fill:#f96,stroke:#333,stroke-width:2px
+    style ContentScript fill:#4285f4,color:#fff
+    style ServiceWorker fill:#34a853,color:#fff
+    style Popup fill:#ea4335,color:#fff
+    style AnkiConnect fill:#fff,stroke:#4285f4,stroke-dasharray: 5 5
+</div>
+<h3 id="关键组件解析">关键组件解析
+</h3><h4 id="1-manifestjson插件的身份证与说明书">1. <code>manifest.json</code>：插件的“身份证”与“说明书”
+</h4><p>这是每个插件<strong>必须</strong>有的文件。没有它，浏览器就不知道这个插件叫什么、能干什么。</p>
 <ul>
-<li>Midisart 2000 的特性： 它的 PTFE 膜是<strong>天然疏水</strong>的。
+<li>核心功能：
 <ul>
-<li>气体（$SO_2, NO, O_2$）可以轻松穿过。</li>
-<li>液态水 无法穿过。</li>
+<li>元数据：定义插件名称、版本号、图标。</li>
+<li>权限声明 (<code>permissions</code>)：告诉浏览器，“我要读取你的剪贴板”、“我要访问 Anki 的接口”。</li>
+<li>运行规则 (<code>content_scripts</code>)：规定“在哪类网址下，运行哪段脚本”。</li>
 </ul>
 </li>
-<li>保护逻辑： 一旦有液态水过来，这个过滤器会瞬间利用表面张力把水挡住（同时也堵死了气路）。
+<li>通俗比喻：它就像是一个<strong>工程图纸</strong>。它不直接干活，但它决定了谁去干活、去哪里干活。</li>
+</ul>
+<h4 id="2-contentjs注入网页的特工">2. <code>content.js</code>：注入网页的“特工”
+</h4><p>这是我们前面制作的插件中“表格抓取”逻辑的地方。</p>
+<h4 id="3-插件架构的四大支柱">3. 插件架构的四大支柱
+</h4><ul>
+<li>核心功能：
 <ul>
-<li>结果： 流量计归零，分析仪报警“流量低”。</li>
-<li>价值： 虽然系统停运了，但它牺牲了自己，救了后面的分析仪气室（如果水进气室，光学部件可能报废）。</li>
+<li>操作 DOM：它能看到网页上的 HTML 结构（比如 <code>&lt;table&gt;</code> 标签）。</li>
+<li>注入 UI：它能在网页上画出你的“导入 Anki”按钮。</li>
+<li>环境限制：它虽然住在网页里，但它和网页原本的 JS 代码是<strong>隔离</strong>的（这叫“隔离世界”），所以它不会破坏网页的功能，但也拿不到网页里的 JS 变量。</li>
 </ul>
 </li>
+<li>通俗比喻：它是一个<strong>派往敌国的间谍</strong>。它直接在“现场”（网页页面）活动，能看到现场发生的一切，并随时准备向家里汇报或在现场搞点小动作（注入按钮）。</li>
 </ul>
-<h4 id="辅助功能精细过滤">辅助功能：精细过滤
-</h4><p>冷凝器前端通常有初级过滤器（如 2μm 或 5μm），但微小的粉尘可能会穿透。Midisart 2000 的精度通常是 0.2μm（微米级）。也就是说，它可以滤除极其细微的颗粒物，确保进入红外/紫外分析仪气室的气体是绝对纯净的，防止镜片脏污。</p>
-<h3 id="注意事项">注意事项
-</h3><p>Midisart 2000 是一个疏水性的精密微孔过滤器，它是<strong>一次性的</strong>。它的存在是为了<strong>防止液态水和微尘进入分析仪</strong>。如果它堵了，说明它为后端的分析仪挡了一次灾。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>组件</strong></th>
+          <th><strong>运行环境</strong></th>
+          <th><strong>主要任务</strong></th>
+          <th><strong>持续时间</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>Manifest</strong></td>
+          <td>配置层</td>
+          <td>注册信息、定义权限</td>
+          <td>始终存在</td>
+      </tr>
+      <tr>
+          <td><strong>Content Script</strong></td>
+          <td><strong>特定网页内</strong></td>
+          <td>修改网页、抓取数据、监听点击</td>
+          <td>随网页关闭而结束</td>
+      </tr>
+      <tr>
+          <td><strong>Background (Service Worker)</strong></td>
+          <td><strong>浏览器后台</strong></td>
+          <td>处理跨标签任务、长连接、全局监听</td>
+          <td>自动唤起/休眠</td>
+      </tr>
+      <tr>
+          <td><strong>Popup / Options</strong></td>
+          <td>插件弹窗</td>
+          <td>用户设置界面、登录入口</td>
+          <td>仅在窗口打开时运行</td>
+      </tr>
+  </tbody>
+</table></div>
+<h4 id="4-它们是如何沟通的message-passing">4. 它们是如何“沟通”的？(Message Passing)
+</h4><p>这是新手最容易困惑的地方：由于安全限制，这几个文件不能直接共享变量。</p>
 <ul>
-<li>基本参数：注意连接方向、使用截止日期及过过滤尺寸。</li>
-<li>变色：如果白色滤膜变黑、变黄，说明粉尘多了，<strong>需要更换</strong>。</li>
-<li>进水： 如果发现前端管路有水珠，且流量突然降低，说明它已经“堵水”了。此时千万不要试图把它甩干再用，<strong>水中的杂质可能已经堵死了微孔，直接换新的</strong>。</li>
-<li>安装位置： 它通常安装在冷凝器之后、分析仪入口之前，或者取样泵的入口处（保护泵）</li>
+<li>如果 <code>content.js</code> 抓到了一个表格，想要告诉 <code>background.js</code> 去通知 Anki，它不能直接调用函数。</li>
+<li>它必须通过 <strong><code>chrome.runtime.sendMessage</code></strong> 发个“短信”。</li>
+<li><code>background.js</code> 收到后，再执行相应逻辑。</li>
 </ul>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206130625.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251206130625.png" alt=""  />
-		</a>
-	</div>
-
-</p>
+<h4 id="5-针对之前的需求它是怎么跑起来的">5. 针对之前的需求，它是怎么跑起来的
+</h4><ol>
+<li>加载阶段：浏览器读取 <code>manifest.json</code>，发现你在 <code>matches</code> 里写了 <code>gemini.google.com</code>。</li>
+<li>注入阶段：当你打开 Gemini 页面，浏览器自动把 <code>content.js</code> “塞”进这个页面里。</li>
+<li>运行阶段：<code>content.js</code> 扫描 DOM 发现表格，在 <code>&lt;table&gt;</code> 上方插了一行 HTML 代码（你的控制条）。</li>
+</ol>
 
 </section>
 
@@ -619,6 +686,15 @@
 
         document.head.appendChild(customFont);
     }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
 </script>
 
     </body>

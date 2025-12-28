@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前几篇 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]] 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="前几篇 ZZZ-23-零点校准、ZZZ-24-满量程校准 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流\n">
 <title>ZZZ-26-实现Modbus RTU协议</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu%E5%8D%8F%E8%AE%AE/'>
 
 <link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-26-实现Modbus RTU协议">
-<meta property='og:description' content="前几篇 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]] 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流\n">
+<meta property='og:description' content="前几篇 ZZZ-23-零点校准、ZZZ-24-满量程校准 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流\n">
 <meta property='og:url' content='https://teaize.github.io/p/zzz-26-%E5%AE%9E%E7%8E%B0modbus-rtu%E5%8D%8F%E8%AE%AE/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-22T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="ZZZ-26-实现Modbus RTU协议">
-<meta name="twitter:description" content="前几篇 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]] 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流\n">
+<meta name="twitter:description" content="前几篇 ZZZ-23-零点校准、ZZZ-24-满量程校准 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -386,7 +386,9 @@
     <section class="article-content">
     
     
-    <p>前几篇 [[ZZZ-23-零点校准]]、[[ZZZ-24-满量程校准]] 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流</p>
+    <p>前几篇 <a class="link" href="https://teaize.github.io/p/zzz-23-%E9%9B%B6%E7%82%B9%E6%A0%A1%E5%87%86/"  target="_blank" rel="noopener"
+    >ZZZ-23-零点校准</a>、<a class="link" href="https://teaize.github.io/p/zzz-24-%E6%BB%A1%E9%87%8F%E7%A8%8B%E6%A0%A1%E5%87%86/"  target="_blank" rel="noopener"
+    >ZZZ-24-满量程校准</a> 已经把分析仪的“心脏”（采集与校准）做好了，现在我们要给它装上“嘴巴”（Modbus RTU 通讯能力），让它能和工业控制系统（PLC/DCS）交流</p>
 <h3 id="硬件接线">硬件接线
 </h3><ul>
 <li><strong>[电脑]</strong> $\xrightarrow{USB}$ <strong>[USB 转 RS485 模块]</strong> $\xrightarrow{A/B \text{ 双绞线}}$ <strong>[TTL 转 RS485 模块]</strong> $\xrightarrow{UART}$ <strong>[STM32]</strong></li>
