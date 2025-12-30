@@ -7,7 +7,831 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 28 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 30 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Google Tasks</title>
+        <link>https://teaize.github.io/p/google-tasks/</link>
+        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/google-tasks/</guid>
+        <description>&lt;p&gt;可以充分利用 Google 的生态，例如在 gemini 当中 &lt;code&gt;@google tasks&lt;/code&gt; 即可快速创建代办事项&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Google&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Tasks&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;帮我记录一个思考：&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2025&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;12&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;30&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，可以考虑将公司的一些协同让&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;gemini负责处理&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;邮件一键转任务&#34;&gt;邮件一键转任务
+&lt;/h3&gt;&lt;p&gt;如果你在 Gmail 里收到一封需要处理的邮件（比如 STM32 的订货确认或客户的需求），直接将邮件&lt;strong&gt;拖拽&lt;/strong&gt;到右侧边栏的 Tasks 标志上。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;技巧：&lt;/strong&gt; 这个任务会自动关联原邮件。以后你处理任务时，点击一下就能直接跳转回邮件，不需要再去搜索。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;时间块管理与日历联动&#34;&gt;时间块管理（与日历联动）
+&lt;/h3&gt;&lt;p&gt;Tasks 与 Google Calendar 是深度集成的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;技巧：&lt;/strong&gt; 在日历界面，你可以直接把任务拖动到特定的时间段。这就不再只是一个“待办”，而是变成了一个“日程”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;子任务subtasks的妙用&#34;&gt;子任务（Subtasks）的妙用
+&lt;/h3&gt;&lt;p&gt;对于像“公司协作方案”这种大任务，直接写一行字很容易烂尾。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;技巧：&lt;/strong&gt; 点击任务进入详情，使用“添加子任务”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;逻辑：&lt;/strong&gt; 比如：
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 公司协作方案
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 调研 Gemini 企业版功能&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 测试 NotebookLM 文档共享&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 编写协作流程 Markdown 草案&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;快捷键网页版&#34;&gt;快捷键（网页版）
+&lt;/h3&gt;&lt;p&gt;如果你在浏览器里使用 Google Docs 或 Gmail，按下 &lt;code&gt;g&lt;/code&gt; 然后按 &lt;code&gt;k&lt;/code&gt; 即可快速呼出 Tasks 边栏。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>NotebookLM简明笔记</title>
+        <link>https://teaize.github.io/p/notebooklm%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/notebooklm%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;NotebookLM，LM 代表的是 Language Model（语言模型）。之所以这样命名，强调这个产品不是一个通用的聊天机器人（像普通的 Gemini 或 ChatGPT），而是一个以“笔记本”为核心交互界面、由“语言模型”驱动的知识处理引擎。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;对于经常需要翻阅技术文档的人来说，NotebookLM 的容量上限其实非常慷慨，但也存在几个“硬门槛”。&lt;/p&gt;
+&lt;h3 id=&#34;项目资料&#34;&gt;项目资料
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;免费版 (Standard)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;Plus 版 (订阅制)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;每个笔记本的来源数量&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;50 个&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;300 个&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;单个文件的大小上限&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;200 MB&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;200 MB&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;单个文件的字数上限&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;500,000 字&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;500,000 字&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;单个文件的页数上限&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;1,000 页&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;1,000 页&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;总笔记本数量&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;100 个&lt;/td&gt;
+          &lt;td&gt;500 个&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;针对书籍-pdf-的处理资料&#34;&gt;针对书籍 PDF 的处理资料
+&lt;/h3&gt;&lt;p&gt;如果你手头的参考资料是厚重的书籍，PDF 文件较大或页数超标，建议采取以下策略：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PDF 拆分： 既然单个文件上限是 1,000 页/200MB，你可以使用工具（如 Adobe Acrobat 或在线的 SmallPDF）将一本书按章节拆分为 &lt;code&gt;[书名]_Part1&lt;/code&gt; 和 &lt;code&gt;[书名]_Part2&lt;/code&gt;。由于一个笔记本可以容纳 50 个来源，这足够你放下一整套技术丛书。&lt;/li&gt;
+&lt;li&gt;压缩 PDF： 如果书籍图片较多导致超过 200MB 但页数没超，可以先进行“减小文件大小”处理。NotebookLM 对文字的识别能力极强，图片质量稍微下降不影响它的理解。&lt;/li&gt;
+&lt;li&gt;优先 OCR： 确保你的 PDF 是可搜索文本格式。如果是扫描件且没有经过 OCR（光学字符识别），AI 可能无法读取其中的文字。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;使用建议&#34;&gt;使用建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;建立专用笔记本： 不要把所有东西塞在一起。建一个名为“STM32 开发库”的笔记本，把相关的 RM（参考手册）、DS（数据手册）和 HAL 库文档丢进去。&lt;/li&gt;
+&lt;li&gt;利用“笔记来源”：可以将自己写的和主题相关的内容导入进去，也可以直接&lt;strong&gt;粘贴为“独立笔记” (Noted Source)&lt;/strong&gt;，AI 会把你写的感悟和官方手册结合起来回答问题。&lt;/li&gt;
+&lt;li&gt;多模态增强： 现在 NotebookLM 支持 YouTube 链接。如果你在 YouTube 上看到好的一系列 STM32 教程视频，直接把 URL 丢进去，它能根据视频字幕和你上传的 PDF 交叉对比，解答你的疑问。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;建立元指令笔记&#34;&gt;建立“元指令”笔记
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;技巧： 在笔记本里手动新建一个 Note，标题叫《我的回答偏好》。内容写上：“我喜欢简洁的回答，所有技术参数请用表格呈现，涉及公式请使用 LaTeX 格式。”&lt;/li&gt;
+&lt;li&gt;价值： 由于 NotebookLM 会参考你所有的笔记来源，这张 Note 会像“系统指令”一样，让 AI 的所有后续回答都符合你的审美和习惯。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;闪卡&#34;&gt;闪卡
+&lt;/h3&gt;&lt;p&gt;生成的闪卡，可以一键在左侧对话框中进行解释。这就是我之前非常想在 Anki 中集成 GPT 的功能！对这效果惊呆了&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20251230110703.png]]&lt;/p&gt;
+&lt;h3 id=&#34;google-文档&#34;&gt;Google 文档
+&lt;/h3&gt;&lt;blockquote&gt;
+&lt;p&gt;Google 有没有自己的 markdown 产品，例如将 NotebookLM 的回复保存到笔记中，然后笔记也可以导入到 Google 文档当中，如果有公式什么的，Google 文档似乎显示不佳&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;1、Google 文档的偏好设置中可以启用 Markdown&lt;/p&gt;
+&lt;p&gt;核心痛点在于公式（LaTeX）显示不佳
+![[Pasted image 20251230131851.png]]&lt;/p&gt;
+&lt;p&gt;目前推荐的导出方案：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用第三方“桥接”插件（最推荐）
+&lt;ul&gt;
+&lt;li&gt;目前社区里有一些专门针对 NotebookLM 开发的插件，比如 “NotebookLM to LaTeX &amp;amp; MD”。&lt;/li&gt;
+&lt;li&gt;操作： 它能一键把 NotebookLM 的回答导出为格式完美的 PDF 或标准 Markdown 文件。你可以先导出为 PDF，这种方式公式最美观。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;MassiveMark Playground
+&lt;ul&gt;
+&lt;li&gt;这个工具专门处理“大模型内容 -&amp;gt; 办公文档”的转换。&lt;/li&gt;
+&lt;li&gt;流程： 将 NotebookLM 内容复制到 &lt;a class=&#34;link&#34; href=&#34;https://www.bibcit.com/en/massivemark&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;MassiveMark&lt;/a&gt; 页面，它会自动渲染公式和表格，然后允许你导出一个 &lt;code&gt;.docx&lt;/code&gt; 文件。由于 &lt;code&gt;.docx&lt;/code&gt; 与 Google Docs 高度兼容，公式通常能保持原样。&lt;/li&gt;
+&lt;li&gt;![[Pasted image 20251230141308.png]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Google Docs 内部插件
+&lt;ul&gt;
+&lt;li&gt;如果坚持在 Docs 内部解决，可以安装 “Auto-LaTeX Equations” 插件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;其实，即使 Google 文档能显示公式，它显示的往往也是一个“对象（Object）”或“图片（Image）”，而不是“代码（Code）
+这正是目前“富文本办公软件”与“结构化数据（AI）”之间最深的鸿沟&lt;/p&gt;
+&lt;/blockquote&gt;
+</description>
+        </item>
+        <item>
+        <title>开关电源</title>
+        <link>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</link>
+        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</guid>
+        <description>&lt;h2 id=&#34;一-选型时的核心指标&#34;&gt;一、 选型时的核心指标
+&lt;/h2&gt;&lt;p&gt;很多工程师只看电压和电流，这在分析仪中是远远不够的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 &lt;strong&gt;60%-80%&lt;/strong&gt;。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。&lt;/li&gt;
+&lt;li&gt;纹波与噪声（Ripple &amp;amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。&lt;/li&gt;
+&lt;li&gt;隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;二-安装与接地的夺命坑&#34;&gt;二、 安装与接地的“夺命坑”
+&lt;/h2&gt;&lt;h3 id=&#34;1-浮地电压与触电感&#34;&gt;1. 浮地电压与触电感
+&lt;/h3&gt;&lt;p&gt;这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。&lt;strong&gt;如果你的设备没有可靠接地&lt;/strong&gt;，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为了通过电磁兼容（EMC）认证，开关电源的输入端都会设计一个 &lt;strong&gt;EMI 滤波器&lt;/strong&gt;。在这个电路中，有两个关键的电容，被称为 &lt;strong&gt;Y 电容&lt;/strong&gt;（通常是 CY1 和 CY2）。
+连接方式： 一个电容接在火线（L）与机壳地（FG/PE）之间；另一个电容接在零线（N）与机壳地之间。当设备没有接地线时，机壳（FG）处于悬浮状态。此时，这两个 Y 电容在电路上形成了一个串联的分压结构：机壳与大地之间会有一个约 110V 的数值
+虽然电压高达 $110V$，但你被电到时只是“麻一下”，通常不会有生命危险。这是因为 Y 电容的容量非常小（电流微弱）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;建议操作： 可以用万用表的交流电压档测量一下分析仪机壳对地的电压。如果确实是 $110V$ 左右，请务必检查电源线的&lt;strong&gt;三相插头接地端&lt;/strong&gt;是否连接良好，或者手动在机壳接地柱上拉一根粗线到配电箱的地排上。&lt;/p&gt;
+&lt;h3 id=&#34;2-接地回路ground-loop&#34;&gt;2. 接地回路（Ground Loop）
+&lt;/h3&gt;&lt;p&gt;在精密分析仪中，如果模拟地、数字地和电源地（FG）混在一起，开关电源的高频开关噪声会通过地线耦合到采样电路上，导致数值跳变。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建议： 采用“单点接地”策略，强电地与弱电地在物理上保持隔离，仅在一点汇合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;三-电磁兼容性emc与布置&#34;&gt;三、 电磁兼容性（EMC）与布置
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;物理间距： 不要把开关电源紧贴着高精度变送器或微小信号放大电路放置。电源变压器产生的漏磁会产生感生电动势。&lt;/li&gt;
+&lt;li&gt;线缆分布： 输入交流线（AC）和输出直流线（DC）严禁捆扎在一起。AC 线的噪声会直接感应到 DC 线中。&lt;/li&gt;
+&lt;li&gt;磁珠与电感： 在电源输出口增加磁珠，可以有效抑制高频开关噪声。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;开关电源输入端必须接地（PE）：开关电源内部有共模干扰电容，如果没有接地，会有漏电感，触碰会有麻麻的感觉，还会让系统干扰变大&lt;/li&gt;
+&lt;li&gt;输出端（DC 侧）：预留电流余量：实际负载电流最好只占 60–80%，例如需要 5A，就选 7.5A 或 10A 规格&lt;/li&gt;
+&lt;li&gt;散热问题：不要封闭安装：开关电源热量大，必须保证对流通风，至少预留 20mm 上下间距
+&lt;ul&gt;
+&lt;li&gt;太热 = 性能下降 = 寿命大幅减少 = 提前报废&lt;/li&gt;
+&lt;li&gt;开关电源最怕热，温度每升 10°C，寿命减少一半&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;EMC 与干扰控制: 旁边有 MCU/传感器/模拟电路时一定要注意布局。地处理非常重要：数字地、模拟地、保护地规范分开再单点汇总&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>如何搜索</title>
+        <link>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2/</link>
+        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2/</guid>
+        <description>&lt;h2 id=&#34;2023&#34;&gt;2023
+&lt;/h2&gt;&lt;h3 id=&#34;图片资源&#34;&gt;图片资源
+&lt;/h3&gt;&lt;p&gt;永远可以相信谷歌的图片搜索&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如下载了一篇网络会议的 pdf，觉得里面的流程图很厉害，想找到他的来源，那么可以截图，然后谷歌图片搜索，如果文章引用的比较多的话，可以轻松将这个图所在的文献找出来。&lt;/li&gt;
+&lt;li&gt;如搜索 3d 回收工厂，YouTube 上面搜过了，但是有没有想过图片比视频要来的容易，发布者很有可能执法不了相关的图片，却没有发布相关视频（或出于企业保密内容），那么此时直接进谷歌图片，搜相应的名称，或许结果要比 YouTube 视频网站出来的结果多些&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;pdf-文档&#34;&gt;PDF 文档
+&lt;/h3&gt;&lt;p&gt;比如说搜索某个领域的发展现状以及进展，可以使用如下语法，可以下载到有关芯片这个行业当前最新的一些进展&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;芯片制造业 or 芯片产业 发展路线图 filetype:pdf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;O形圈 沟槽设计 filetype:pdf
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251230102253.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251230102253.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;2025&#34;&gt;2025
+&lt;/h2&gt;&lt;p&gt;到了 2025 年，搜索不再是单一的动作，而是一个“AI 启发 + 传统指令验证”的闭环过程&lt;/p&gt;
+&lt;h3 id=&#34;filetypepdf-的地位提升从搜信息到搜权威&#34;&gt;&lt;code&gt;filetype:pdf&lt;/code&gt; 的地位提升：从“搜信息”到“搜权威”
+&lt;/h3&gt;&lt;p&gt;大模型虽然能总结知识，但它容易产生“幻觉”。如果你在研究你感兴趣的 CEMS（烟气在线监测），AI 的回答可能模棱两可。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新用法： 先让 AI 告诉你某个技术标准的名词（例如：HJ 76-2017），然后立即使用 &lt;code&gt;HJ 76-2017 filetype:pdf&lt;/code&gt; 去获取原始文档。&lt;/li&gt;
+&lt;li&gt;原因： 官方 PDF 是第一手信源，是大模型生成答案的“锚点”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;ai-搜索如-perplexity-gemini的角色语义理解&#34;&gt;AI 搜索（如 Perplexity, Gemini）的角色：语义理解
+&lt;/h3&gt;&lt;p&gt;传统的 Google 搜索是&lt;strong&gt;关键词匹配&lt;/strong&gt;，而 AI 是&lt;strong&gt;语义匹配&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;传统搜索： 你得想好关键词（芯片制造业 发展路线图）。&lt;/li&gt;
+&lt;li&gt;AI 搜索： 你可以直接问：“帮我梳理 2024-2025 年全球先进制程芯片的竞争格局，并给出几个关键的时间节点。”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;谷歌图片搜索从找图到视觉解析&#34;&gt;谷歌图片搜索：从“找图”到“视觉解析”
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;新用法： 看到一个复杂的电路板或机械结构图，先丢给 AI 问：“这是什么原理？”得到关键词后，再用谷歌图片搜索去找它的原始出处或专利图。&lt;/li&gt;
+&lt;li&gt;升级： 现在配合 Google Lens（多模态搜索），你可以直接圈选图片中的某个零件进行搜索，这比以前截图再上传要快得多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;rag-技术&#34;&gt;RAG 技术
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;简单直接型： ChatPDF 或 Claude.ai（直接上传 PDF 提问，其实就是后台自动做了 RAG）。&lt;/li&gt;
+&lt;li&gt;深度研究型： &lt;strong&gt;NotebookLM&lt;/strong&gt;（谷歌出品，专门针对多文档 RAG，非常适合做研究）。&lt;/li&gt;
+&lt;li&gt;笔记整合型： 如果你用 Obsidian，可以安装 Smart Connections 插件，它能基于你的本地笔记建立 RAG，让你跟自己的笔记“对话”。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>EEPROM</title>
+        <link>https://teaize.github.io/p/eeprom/</link>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/eeprom/</guid>
+        <description>&lt;p&gt;在分析仪的电路设计中，将零点偏置（Zero Offset）和斜率（Slope/Span）存储在 &lt;strong&gt;EEPROM&lt;/strong&gt; 中是一个非常经典的做法。&lt;/p&gt;
+&lt;p&gt;简单来说，如果 Flash 是书写整洁的“书本”，那么 EEPROM 就是一张可以随时用橡皮擦改写其中任何一个字符的“便利贴”。&lt;/p&gt;
+&lt;h3 id=&#34;什么是-eeprom&#34;&gt;什么是 EEPROM？
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;EEPROM&lt;/strong&gt;（Electrically Erasable Programmable Read-Only Memory，电可擦除可编程只读存储器）是一种掉电后数据不丢失的存储芯片。在分析仪中，它专门负责保存那些&lt;strong&gt;经常变动但需要永久保存&lt;/strong&gt;的配置参数。&lt;/p&gt;
+&lt;h3 id=&#34;eeprom-vs-flash核心区别&#34;&gt;EEPROM vs. FLASH：核心区别
+&lt;/h3&gt;&lt;p&gt;虽然两者都是非易失性存储器，但在操作机制上有本质不同：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;特性&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;EEPROM&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;FLASH (如 STM32 内部 Flash)&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;擦除单位&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按字节 (Byte)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;按扇区/块 (Sector/Block)&lt;/strong&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;修改方式&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;可以直接覆盖/修改单个字节&lt;/td&gt;
+          &lt;td&gt;必须先擦除整块（如 4KB），才能写入&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;擦写寿命&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;极高 (通常 100 万次以上)&lt;/td&gt;
+          &lt;td&gt;较低 (通常 1 万 - 10 万次)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;写入速度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;较慢 (ms 级)&lt;/td&gt;
+          &lt;td&gt;较快&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;存储密度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;低 (容量通常只有几 KB 到几 MB)&lt;/td&gt;
+          &lt;td&gt;高 (容量可达 GB 级)&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;成本&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;较高 (按单位容量计)&lt;/td&gt;
+          &lt;td&gt;较低&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;为什么用-eeprom-而不是-flash&#34;&gt;为什么用 EEPROM 而不是 FLASH？
+&lt;/h3&gt;&lt;h4 id=&#34;1-颗粒度字节级随机访问&#34;&gt;1. 颗粒度：字节级随机访问
+&lt;/h4&gt;&lt;p&gt;这是最关键的原因。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Flash 的痛点： 假设你的斜率系数只占 4 个字节，如果你把它存在 Flash 里，当你想要更新这个系数时，你必须先把这一块（通常是 4096 字节）全部读入 RAM，在 RAM 里修改那 4 个字节，擦除整个 Flash 块，最后再写回去。这不仅麻烦，还容易在擦除瞬间断电导致&lt;strong&gt;数据丢失&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;EEPROM 的优势： &lt;strong&gt;你可以精准地指向某个地址，只修改那 4 个字节，不影响其他任何数据&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-擦写寿命-endurance&#34;&gt;2. 擦写寿命 (Endurance)
+&lt;/h4&gt;&lt;p&gt;分析仪如果开启了自动校准逻辑，或者频繁保存运行状态，擦写次数会快速累积。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Flash 的寿命通常在 10 万次左右。&lt;/li&gt;
+&lt;li&gt;EEPROM 的寿命通常高达 100 万次。 对于需要服役 5-10 年的工业分析仪来说，EEPROM 的可靠性更高，不容易因为“写穿”导致主控板损坏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-数据安全性与简化编程&#34;&gt;3. 数据安全性与简化编程
+&lt;/h4&gt;&lt;p&gt;Flash 擦写通常需要更复杂的软件逻辑（如磨损均衡算法），而 EEPROM 通过 I2C 或 SPI 总线通信，协议简单成熟。在分析仪这种对稳定性要求极高的设备中，&lt;strong&gt;越简单的逻辑越不容易出错&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;拓展资料&#34;&gt;拓展资料
+&lt;/h3&gt;&lt;p&gt;在设计 CEMS 分析仪时，由于校准系数非常重要，工程师通常还会做以下处理：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;校验机制：&lt;/strong&gt; 在 EEPROM 存储数据的末尾增加 CRC 校验。读取时如果校验失败，说明芯片损坏或数据被干扰，仪器会报错提示“校准数据异常”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;双备份存储：&lt;/strong&gt; 在 EEPROM 不同的地址段保存两份相同的校准系数。如果 A 段数据损坏，自动尝试读取 B 段。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Hugo博客搜索</title>
+        <link>https://teaize.github.io/p/hugo%E5%8D%9A%E5%AE%A2%E6%90%9C%E7%B4%A2/</link>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/hugo%E5%8D%9A%E5%AE%A2%E6%90%9C%E7%B4%A2/</guid>
+        <description>&lt;h3 id=&#34;hugo-的搜索逻辑&#34;&gt;Hugo 的搜索逻辑
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;https://teaize.github.io/search/?keyword=%s
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;1-核心技术栈&#34;&gt;1. 核心技术栈
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;Hugo (框架)：这是一个极速的静态网站生成器。该博客使用了名为 &lt;strong&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/CaiJimmy/hugo-theme-stack&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Hugo Theme Stack&lt;/a&gt;&lt;/strong&gt; 的主题（由 CaiJimmy 开发），这是目前 Hugo 社区非常流行的一款卡片式主题。&lt;/li&gt;
+&lt;li&gt;Fuse.js (搜索引擎)：这是一个轻量级的 JavaScript &lt;strong&gt;模糊搜索库&lt;/strong&gt;。它不需要后端服务器支持，非常适合静态网站。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-搜索原理它是如何工作的&#34;&gt;2. 搜索原理：它是如何工作的？
+&lt;/h4&gt;&lt;p&gt;由于静态网站没有数据库（如 MySQL），它的搜索通常是“客户端本地搜索”：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;索引生成 (Build Time)：当你（博客作者）运行 &lt;code&gt;hugo&lt;/code&gt; 命令构建网站时，Hugo 会根据配置文件生成一个名为 &lt;code&gt;index.json&lt;/code&gt; 的文件。这个文件包含了你所有文章的标题、内容摘要、标签和链接。&lt;/li&gt;
+&lt;li&gt;数据获取 (Client Side)：当访问者在浏览器中点击搜索按钮时，浏览器会异步下载这个 &lt;code&gt;index.json&lt;/code&gt; 文件（通常在首次打开搜索框时）。&lt;/li&gt;
+&lt;li&gt;模糊匹配：当你在搜索框输入关键词时，&lt;strong&gt;Fuse.js&lt;/strong&gt; 会在这个 JSON 数据中进行实时匹配。由于是模糊搜索，即使你拼错了一两个字母，它通常也能找到相关的文章。&lt;/li&gt;
+&lt;li&gt;结果展示：搜索结果会即时显示在页面上，整个过程都在你的浏览器里完成，不需要请求服务器。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;3-为什么选择这种方式&#34;&gt;3. 为什么选择这种方式？
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;零成本：不需要搭建后端服务器或支付 Algolia 等第三方搜索服务的费用。&lt;/li&gt;
+&lt;li&gt;速度快：对于中小型博客，JSON 文件体积不大，搜索体验非常流畅。&lt;/li&gt;
+&lt;li&gt;易于部署：完全兼容 GitHub Pages 等静态托管平台。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;客户端本地搜索的主要缺点是什么？随着文章增多，索引文件（index.json）会变大，增加首次加载的流量消耗。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;4-静态搜索的天花板&#34;&gt;4. 静态搜索的“天花板”
+&lt;/h4&gt;&lt;p&gt;当文章达到几千篇时，&lt;code&gt;index.json&lt;/code&gt; 可能会达到几 MB 甚至更大。这时候作者通常会采取以下优化：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;分片加载：只加载标题索引，不加载全文索引。&lt;/li&gt;
+&lt;li&gt;切换方案：改用 &lt;strong&gt;Pagefind&lt;/strong&gt;（只下载搜索结果相关的碎片文件）或者 &lt;strong&gt;Algolia&lt;/strong&gt;（真正的云端搜索服务）。 目前该博客的量级，使用 Fuse.js 是非常丝滑的。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;自定义搜索引擎&#34;&gt;自定义搜索引擎
+&lt;/h3&gt;&lt;p&gt;可以把这个博客集成到 Chrome 或 Edge 的地址栏中，实现“一键检索”：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;打开浏览器&lt;strong&gt;设置&lt;/strong&gt; -&amp;gt; &lt;strong&gt;搜索引擎&lt;/strong&gt; -&amp;gt; &lt;strong&gt;管理搜索引擎和网站搜索&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;在“网站搜索”里点击“添加”：
+&lt;ul&gt;
+&lt;li&gt;搜索引擎：Teaize Blog&lt;/li&gt;
+&lt;li&gt;快捷字：&lt;code&gt;tz&lt;/code&gt;（或者任何你喜欢的简写）&lt;/li&gt;
+&lt;li&gt;网址：&lt;code&gt;https://teaize.github.io/search/?keyword=%s&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用方法：以后你只需在浏览器地址栏输入 &lt;code&gt;tz&lt;/code&gt; + &lt;code&gt;空格&lt;/code&gt; + &lt;code&gt;关键词&lt;/code&gt;，敲回车就能直接看到搜索结果。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;![[Pasted image 20251229165216.png]]&lt;/p&gt;
+&lt;h3 id=&#34;anki-学习闭环&#34;&gt;Anki 学习闭环
+&lt;/h3&gt;&lt;p&gt;你平时在复习 Anki 卡片时，如果突然对某个知识点感到模糊，或者想看更多案例，手动去搜非常打断思路。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;实现方式：在 Anki 卡片模板中加入“深度阅读”链接。&lt;/li&gt;
+&lt;li&gt;代码示例：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;href&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;https://teaize.github.io/search/?keyword={{Tags}}&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;查看博主的工程笔记&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;a&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;价值：复习时如果卡住了，一键跳转到博主的深度笔记中查缺补漏，形成“记忆 - 理解 - 应用”的闭环。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>常用参考资料</title>
+        <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</link>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Mechtool 在线机械设计工具&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;尺寸公差
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_tolerances.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;公差查询 | 公差与配合查询&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_tolerancefitquery.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;配合查询 | 公差与配合查询&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;形位公差
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_shapeandpositiontolerance.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;形状公差查询 | 形状与位置公差查询&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_positiontolerance.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;位置公差查询 | 形状与位置公差查询&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bzxz.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;标准下载网-www.bzxz.net-国家标准下载-各类行业标准下载&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;解压密码：&lt;code&gt;www.bzxz.net&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://z-lib.fm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture.&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digikey.sg/zh/resources/conversion-calculators/conversion-calculator-pressure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;压力单位换算器 - 在线计算器 - DigiKey得捷电子&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.paintun.com/ral.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;RAL劳尔色卡对照表&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trelleborg.com/zh-cn/seals&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;液压密封件、旋转密封件、O形圈—特瑞堡&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;润滑与密封
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trelleborg.com/zh-cn/seals/resources/design-support-and-engineering-tools/o-ring-calculator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线O形圈计算器| 特瑞堡密封系统&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.swagelok.com.cn/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;世伟洛克 | Swagelok&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://products.swagelok.com.cn/zh/%e6%89%80%e6%9c%89%e4%ba%a7%e5%93%81/%e6%8e%a5%e5%a4%b4/c/100&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;接头 | Swagelok&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://swagelok-zh-cn.navigator.traceparts.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;3D模型 | 所有类别 On Swagelok Company&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://as-cn.airtac.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AirTAC | 亚德客&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://as-cn.airtac.com/pro_pd.aspx?c_kind=4&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;气源处理元件 | 控制元件 | 执行元件 | 辅助元件 | 导轨 | AirTAC | 亚德客&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;在线模型库：&lt;a class=&#34;link&#34; href=&#34;https://airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;amp;cwid=3389&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;amp;cwid=3389&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;亚德客 2024 产品综合型录.pdf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;嘉立创
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;嘉立创FA_自动化设备零部件-一站式采购商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.fa-part.com/brand&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司&lt;/a&gt;(直接根据 PDF 中的代码，就可以在模型库中查找到)&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lceda.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;嘉立创FA（2024版）电气零部件选型手册.pdf&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;嘉立创FA（第二版）机械零部件选型手册.pdf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;怡合达
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.yhdfa.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;怡合达 |工厂自动化零部件一站式采购平台 怡合达电商平台&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.yhdfa.com/information/3943b74f81b94bd59f3dcdf922507137&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;2024-V2.0版3D模型库更新上线&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;怡合达-工程师设计必备素材库_2024-V2 | 3D模型库&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.yhdfa.com/catalogBook&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;目录书申请-怡合达一站式采购平台&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;爱安特
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ant-fa.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;爱安特FA工厂自动化零部件一站式采购平台&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.smc.com.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;SMC（中国）有限公司&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.smc.com.cn/webcatalog/zh-cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线产品目录 ｜SMC（中国）有限公司&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.parker.com/cn/zh/home.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Parker | 派克汉尼汾主页 | Parker China&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ph.parker.com/cn/zh/category&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线产品&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.xiongchuan.com/home/news/index.html?rid=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;北京熊川科技有限公司丨产品中心&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.festo.com.cn/cn/zh/e/engineering-tools-id_650881/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Festo 开发的工程设计工具 | 费斯托网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;3Dfindit
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.3dfindit.com/zh-CN/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Download 3D CAD Models for free | 3Dfindit&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://www.3dfindit.cn/zh-CN/usercontent/63720/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Title Unavailable | Site Unreachable&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.imao.com/cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;日本IMAO今尾_机械标准配件&amp;amp;工夹具标准件_官网&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.imao.com/catalog/cn/imageindexlists2/?categorycode=$SMEOSL,$SME&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;快速滑动锁紧 _日本IMAO今尾_机械标准配件_工夹具标准件_官网&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;PartsCAD：&lt;a class=&#34;link&#34; href=&#34;https://www.partscad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;零部件CAD - 零部件管理和三维电子目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GrabCAD：&lt;a class=&#34;link&#34; href=&#34;https://grabcad.com/library&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Popular models | 3D CAD Model Collection | GrabCAD Community Library&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.anytocopy.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>公制螺纹简明笔记</title>
+        <link>https://teaize.github.io/p/%E5%85%AC%E5%88%B6%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%85%AC%E5%88%B6%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h2 id=&#34;粗牙公制螺纹底孔尺寸对照表&#34;&gt;粗牙公制螺纹底孔尺寸对照表
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;螺纹规格&lt;/th&gt;
+          &lt;th&gt;底孔尺寸&lt;/th&gt;
+          &lt;th&gt;钻头直径&lt;/th&gt;
+          &lt;th&gt;卡尺内螺纹尺寸&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M1&lt;/td&gt;
+          &lt;td&gt;Φ0.75&lt;/td&gt;
+          &lt;td&gt;Φ0.75&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M2&lt;/td&gt;
+          &lt;td&gt;Φ1.6&lt;/td&gt;
+          &lt;td&gt;Φ1.6&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M3&lt;/td&gt;
+          &lt;td&gt;Φ2.5&lt;/td&gt;
+          &lt;td&gt;Φ2.5&lt;/td&gt;
+          &lt;td&gt;Φ2.4-2.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M4&lt;/td&gt;
+          &lt;td&gt;Φ3.3&lt;/td&gt;
+          &lt;td&gt;Φ3.3&lt;/td&gt;
+          &lt;td&gt;Φ3.3&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M5&lt;/td&gt;
+          &lt;td&gt;Φ4.2&lt;/td&gt;
+          &lt;td&gt;Φ4.2&lt;/td&gt;
+          &lt;td&gt;Φ4.2&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M6&lt;/td&gt;
+          &lt;td&gt;Φ5&lt;/td&gt;
+          &lt;td&gt;Φ5&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M8&lt;/td&gt;
+          &lt;td&gt;Φ6.75&lt;/td&gt;
+          &lt;td&gt;Φ6.7&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M10&lt;/td&gt;
+          &lt;td&gt;Φ8.5&lt;/td&gt;
+          &lt;td&gt;Φ8.5&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M12&lt;/td&gt;
+          &lt;td&gt;Φ10.25&lt;/td&gt;
+          &lt;td&gt;Φ10.2&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M14&lt;/td&gt;
+          &lt;td&gt;Φ12&lt;/td&gt;
+          &lt;td&gt;Φ11.9&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M16&lt;/td&gt;
+          &lt;td&gt;Φ14&lt;/td&gt;
+          &lt;td&gt;Φ13.9&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M18&lt;/td&gt;
+          &lt;td&gt;Φ15.5&lt;/td&gt;
+          &lt;td&gt;Φ15.4&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M20&lt;/td&gt;
+          &lt;td&gt;Φ17.5&lt;/td&gt;
+          &lt;td&gt;Φ17.4&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M22&lt;/td&gt;
+          &lt;td&gt;Φ19.5&lt;/td&gt;
+          &lt;td&gt;Φ19.4&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M24&lt;/td&gt;
+          &lt;td&gt;Φ21&lt;/td&gt;
+          &lt;td&gt;Φ20.9&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M27&lt;/td&gt;
+          &lt;td&gt;Φ24&lt;/td&gt;
+          &lt;td&gt;Φ23.9&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M30&lt;/td&gt;
+          &lt;td&gt;Φ26.5&lt;/td&gt;
+          &lt;td&gt;Φ26.3&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;例如在 SW 中打螺纹孔，选中内部的尺寸就是这个底孔尺寸&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152510.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152510.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;或者直接通过螺纹钻孔，选择对应的螺纹孔，软件自动打出来需要的底孔尺寸&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152519.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152519.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h2 id=&#34;大径小径对照表&#34;&gt;大径小径对照表
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;公称直径 D,d&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;螺距&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;小径 D1 或 d1&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.25&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.73&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.78&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1.57&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.25&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1.73&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;2.46&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.35&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;2.62&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.7&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3.24&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;3.46&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4.13&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.5&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4.46&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;6&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;4.92&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;6&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.75&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;5.19&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1.25&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;6.65&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;6.92&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;0.75&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;7.19&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;D 为内螺纹的基本大径，D1 为内螺纹的基本小径；d 为外螺纹的基本大径，d1 为外螺纹的基本小径&lt;/li&gt;
+&lt;li&gt;D1=D-1.0825P，公式计算得出&lt;/li&gt;
+&lt;li&gt;d1=d-1.0825P，公式计算得出&lt;/li&gt;
+&lt;li&gt;表格中第一次出现的公称直径为粗牙，剩余的螺距为细牙（例如 M1 对应 0.25 和 0.2 两个螺距，第二行的 0.2 为细牙螺距）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;可能会有疑问，比如拿 M4 粗牙螺纹来举例，钻底孔的尺寸是Φ3.3，理论小径算出来是 3.24，按理说钻底孔应该要比理论小径稍大一些，这样为攻丝预留足够的空间，但为什么这里的理论小径比底孔还小呢？
+这里其实有一个概念需要了解，这种公制螺纹是用来连接的，并不是用于密封（详见 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E8%BF%9E%E6%8E%A5%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;气动接头连接螺纹简明笔记&lt;/a&gt;）的。并且内外螺纹旋合后留有径向间隙，这样确保装配过程中不会因为制造误差或材料膨胀等因素造成过度紧配合或卡死的情况。那么理论小径比底孔尺寸小一点也就不奇怪了
+，这点差异允许攻丝工具有效切出螺纹的牙形。&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152529.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152529.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;细牙螺纹底孔尺寸&#34;&gt;细牙螺纹底孔尺寸
+&lt;/h3&gt;&lt;p&gt;以 M12X1.5 细牙螺纹为例，对于普通的 60° 螺纹，底孔直径约为螺纹公称直径减去螺距。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M12×1.75（普通螺距）：底孔直径 ≈ 12 - 1.75 = 10.25 mm&lt;/li&gt;
+&lt;li&gt;M12×1.5（细牙螺纹）：底孔直径 ≈ 12 - 1.5 = 10.5 mm&lt;/li&gt;
+&lt;li&gt;M12×1.25（细牙螺纹）：底孔直径 ≈ 12 - 1.25 = 10.75 mm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;底孔直径计算公式：&lt;/p&gt;
+&lt;p&gt;$d_{\text{底孔}} = d_{\text{公称直径}} - P$&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>Multisim学习资料</title>
+        <link>https://teaize.github.io/p/multisim%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</link>
+        <pubDate>Sun, 28 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/multisim%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/</guid>
+        <description>&lt;h3 id=&#34;常用快捷键&#34;&gt;常用快捷键
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;打开原件库： Ctrl + W&lt;/li&gt;
+&lt;li&gt;元件旋转： Ctrl + R&lt;/li&gt;
+&lt;li&gt;放置导线：Ctrl+Shift+W&lt;/li&gt;
+&lt;li&gt;双击原件：修改属性&lt;/li&gt;
+&lt;li&gt;运行仿真：F5&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>zzz-29-PT100测温模块</title>
         <link>https://teaize.github.io/p/zzz-29-pt100%E6%B5%8B%E6%B8%A9%E6%A8%A1%E5%9D%97/</link>
         <pubDate>Sun, 28 Dec 2025 00:00:00 +0000</pubDate>
@@ -2326,185 +3150,6 @@
 &lt;/div&gt;</description>
         </item>
         <item>
-        <title>ZZZ-30-模块化重构</title>
-        <link>https://teaize.github.io/p/zzz-30-%E6%A8%A1%E5%9D%97%E5%8C%96%E9%87%8D%E6%9E%84/</link>
-        <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/zzz-30-%E6%A8%A1%E5%9D%97%E5%8C%96%E9%87%8D%E6%9E%84/</guid>
-        <description>&lt;p&gt;当你感觉到 &lt;code&gt;main.c&lt;/code&gt; 臃肿、寻找一个变量需要翻几百行滚动条时，说明你的工程已经到了需要 “模块化重构”的时候了&lt;/p&gt;
-&lt;p&gt;以下是工业级嵌入式开发的&lt;strong&gt;推荐重构方案&lt;/strong&gt;：&lt;/p&gt;
-&lt;h3 id=&#34;1-核心思想层级化与模块化&#34;&gt;1. 核心思想：层级化与模块化
-&lt;/h3&gt;&lt;p&gt;我们要把代码像“盖楼”一样分层，不要让所有的家具都挤在客厅（&lt;code&gt;main&lt;/code&gt;）里。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;驱动层 (Drivers/BSP)：直接操作硬件的，如 &lt;code&gt;motor.c&lt;/code&gt;, &lt;code&gt;sensor_pt100.c&lt;/code&gt;, &lt;code&gt;hmi_screen.c&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;功能模块层 (Modules/Common)：纯数学或逻辑，&lt;strong&gt;不依赖具体引脚&lt;/strong&gt;，如 &lt;code&gt;pid.c&lt;/code&gt;, &lt;code&gt;filter.c&lt;/code&gt;, &lt;code&gt;modbus_rtu.c&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;应用逻辑层 (App)：你的核心大脑，如 &lt;code&gt;fsm_logic.c&lt;/code&gt;（状态机）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-具体的文件夹组织结构&#34;&gt;2. 具体的文件夹组织结构
-&lt;/h3&gt;&lt;p&gt;在 CubeIDE 的左侧工程栏，你可以右键创建几个文件夹：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Core&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;Src&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;             &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;只负责初始化和启动&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;App&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;         &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PID&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;结构体和计算&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;filter&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;      &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;滤波算法&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;state_machine&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;状态机核心&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;Hardware&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;relay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;继电器控制封装&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pt100&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;       &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;温度采样转换&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;hmi&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;h&lt;/span&gt;         &lt;span class=&#34;o&#34;&gt;&amp;lt;--&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;串口屏协议解析&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;3-重构实战如何写一个标准的模块&#34;&gt;3. 重构实战：如何写一个标准的模块？
-&lt;/h3&gt;&lt;p&gt;以你的 &lt;strong&gt;PID 模块&lt;/strong&gt; 为例，不要直接在 &lt;code&gt;main&lt;/code&gt; 里写公式。&lt;/p&gt;
-&lt;p&gt;第一步：创建 &lt;code&gt;pid.h&lt;/code&gt; (头文件)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#ifndef __PID_H
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#define __PID_H
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;main.h&amp;#34; // 为了使用 float 等类型&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;typedef&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;struct&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Kp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Ki&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Kd&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Target&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... 其他参数
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PID_t&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;measured&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#endif
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;第二步：创建 &lt;code&gt;pid.c&lt;/code&gt; (源文件)&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;pid.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;d&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... 初始化代码
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;PID_Compute&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID_t&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;pid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;measured&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... 具体的 PID 公式代码
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;output&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;4-让-mainc-彻底变清爽&#34;&gt;4. 让 &lt;code&gt;main.c&lt;/code&gt; 彻底变清爽
-&lt;/h3&gt;&lt;p&gt;重构后，你的 &lt;code&gt;main.c&lt;/code&gt; 应该长这样（非常优雅）：&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN Includes */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;pid.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;state_machine.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cp&#34;&gt;#include&lt;/span&gt; &lt;span class=&#34;cpf&#34;&gt;&amp;#34;hmi.h&amp;#34;&lt;/span&gt;&lt;span class=&#34;cp&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;/* USER CODE END Includes */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;nf&#34;&gt;main&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;void&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;HAL_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;SystemClock_Config&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MX_GPIO_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;MX_USART1_UART_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// ... 其他初始化
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN 2 */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;PID_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;amp;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;HeaterPID&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;2.0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0.5&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 初始化 PID
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nf&#34;&gt;FSM_Init&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;                          &lt;span class=&#34;c1&#34;&gt;// 初始化状态机
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;cm&#34;&gt;/* USER CODE END 2 */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;cm&#34;&gt;/* USER CODE BEGIN WHILE */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;FSM_Update&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt;  &lt;span class=&#34;c1&#34;&gt;// 状态机轮询
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;nf&#34;&gt;HMI_Process&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;();&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;// 处理屏幕指令
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;cm&#34;&gt;/* USER CODE END WHILE */&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;h3 id=&#34;5-这样做有什么好处&#34;&gt;5. 这样做有什么好处？
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;心智负担降低：当你发现控温不准，你只需去 &lt;code&gt;pid.c&lt;/code&gt; 找问题；当你发现屏幕不亮，只需看 &lt;code&gt;hmi.c&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;保护代码安全：CubeMX 重新生成代码时，只会动 &lt;code&gt;Core/Src&lt;/code&gt; 下的文件。你在自己创建的 &lt;code&gt;App&lt;/code&gt; 或 &lt;code&gt;Hardware&lt;/code&gt; 文件夹里的代码是&lt;strong&gt;绝对安全&lt;/strong&gt;的。&lt;/li&gt;
-&lt;li&gt;可移植性：如果你明年想把 CEMS 的 PID 算法换到另一个型号的单片机（比如 STM32H7），你直接把 &lt;code&gt;pid.c&lt;/code&gt; 和 &lt;code&gt;pid.h&lt;/code&gt; 拷贝过去就能用，不用再从 &lt;code&gt;main.c&lt;/code&gt; 的碎纸堆里翻代码。&lt;/li&gt;
-&lt;/ol&gt;
-</description>
-        </item>
-        <item>
         <title>制作一款Chrome浏览器插件</title>
         <link>https://teaize.github.io/p/%E5%88%B6%E4%BD%9C%E4%B8%80%E6%AC%BEchrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/</link>
         <pubDate>Fri, 26 Dec 2025 00:00:00 +0000</pubDate>
@@ -4122,14 +4767,6 @@
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
-        </item>
-        <item>
-        <title>ZZZ-28-串口指令解析器</title>
-        <link>https://teaize.github.io/p/zzz-28-%E4%B8%B2%E5%8F%A3%E6%8C%87%E4%BB%A4%E8%A7%A3%E6%9E%90%E5%99%A8/</link>
-        <pubDate>Thu, 25 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/zzz-28-%E4%B8%B2%E5%8F%A3%E6%8C%87%E4%BB%A4%E8%A7%A3%E6%9E%90%E5%99%A8/</guid>
-        <description></description>
         </item>
         <item>
         <title>工程师成长的三重境界</title>
@@ -14131,7 +14768,7 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;以后提到气室镀镍，请默认指代 化学镀镍，特别是 高磷化学镍（High-Phosphorus EN）。&lt;/p&gt;
+&lt;p&gt;以后提到气室镀镍，请默认指代 &lt;strong&gt;化学镀镍&lt;/strong&gt;，特别是 高磷化学镍（High-Phosphorus EN）。&lt;/p&gt;
 &lt;h3 id=&#34;参数概念镀多厚thickness&#34;&gt;参数概念：镀多厚？（Thickness）
 &lt;/h3&gt;&lt;p&gt;镀层厚度通常以 &lt;strong&gt;微米 ($\mu m$)&lt;/strong&gt; 为单位。厚度不是越厚越好，太厚会导致尺寸超差（螺纹拧不进）或镀层内应力过大导致开裂。&lt;/p&gt;
 &lt;p&gt;在仪器仪表行业，常见的标准如下：&lt;/p&gt;
@@ -14237,6 +14874,11 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;镀了氟化镁有什么现象：如果你拆开一个测 $SO_2$ 或 $NO_x$ 的紫外分析仪，你会看到里面的&lt;strong&gt;反射镜亮得发青或发紫&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;增反作用：通过精确控制 $MgF_2$ 镀层的厚度（利用光的干涉原理），它可以让原本 90% 的反射率提升到 92% 甚至更高。&lt;/li&gt;
+&lt;li&gt;抗老化：没有这层膜，紫外灯照几个月，反射镜就“糊”了（光衰）；有了它，反射镜可以稳定工作好几年。&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h4 id=&#34;总结建议表&#34;&gt;总结建议表
 &lt;/h4&gt;&lt;table&gt;
   &lt;thead&gt;
@@ -14279,6 +14921,97 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+&lt;h3 id=&#34;2025-12-29-探讨&#34;&gt;2025-12-29 探讨
+&lt;/h3&gt;&lt;h4 id=&#34;1表面粗糙度finish比镀层本身更关键&#34;&gt;1、&lt;strong&gt;表面粗糙度&lt;/strong&gt;（Finish）比镀层本身更关键
+&lt;/h4&gt;&lt;p&gt;有一个工程细节容易被忽略：镀层是“长”在基材上的。新手可能认为只要镀了金，反射率就高。&lt;strong&gt;而如果铝合金基材加工后的光洁度（Ra）不够，直接镀金出来的效果是“磨砂金”，反射率依然很差&lt;/strong&gt;。在红外 NDIR 气室中，通常需要先对铝材进行&lt;strong&gt;机械抛光&lt;/strong&gt;或&lt;strong&gt;电解抛光&lt;/strong&gt;，达到镜面效果后，再进行化学镀镍和闪镀金。&lt;strong&gt;光洁度决定了信噪比的上限，镀层只是保证它不被氧化&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;对于大多数中高端 NDIR 气室，铝基材在镀层前的加工要求通常设定在 &lt;strong&gt;Ra 0.1μm 到 Ra 0.2μm&lt;/strong&gt; 之间。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ra 0.8μm（精车/精铣）：肉眼看过去有细微刀痕，属于“有光泽但模糊”，反射光散射严重，信噪比低。&lt;/li&gt;
+&lt;li&gt;Ra 0.4μm（研磨/精抛）：开始有镜像感，但像蒙了一层雾。&lt;/li&gt;
+&lt;li&gt;Ra 0.1μm ~ 0.2μm（机械抛光/镜面加工）：真正的镜面。光线打上去几乎完全按反射定律运行，这是红外分析仪的“黄金标准”。&lt;/li&gt;
+&lt;li&gt;Ra &amp;lt; 0.05μm（超精加工）：通常用于激光或天文望远镜镜片，对于普通 NDIR 来说成本过高，属于“性能过剩”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;为什么是这个数值？这里有一个关键的物理判据：&lt;strong&gt;瑞利准则（Rayleigh Criterion）&lt;/strong&gt;。
+红外分析仪测量的光波长通常在 &lt;strong&gt;$3\mu m \sim 10\mu m$&lt;/strong&gt;（比如 $CO_2$ 是 $4.26\mu m$）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;反射规律：&lt;strong&gt;如果表面的起伏（粗糙度）远小于波长，光线就会发生镜面反射；如果接近或大于波长，光就会四散而开（漫反射）&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;工程经验：通常要求表面粗糙度 $Ra &amp;lt; \frac{\lambda}{10}$。
+&lt;ul&gt;
+&lt;li&gt;对于 $4\mu m$ 的红外光，Ra 0.4μm 是临界点。&lt;/li&gt;
+&lt;li&gt;为了保证多次反射后的光强衰减最小，工程师会把目标定在 &lt;strong&gt;Ra 0.1μm&lt;/strong&gt;，这样光线就像在滑冰场上滑行一样顺畅。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2热膨胀系数cte失配导致的开裂&#34;&gt;2、热膨胀系数（CTE）失配导致的开裂
+&lt;/h4&gt;&lt;p&gt;如果镀层镀的太厚，例如 $20-30 \mu m$，存在潜在风险：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;潜在风险：铝的线膨胀系数很大（约 $23 \times 10^{-6} / K$），而镍镀层较小。气体分析仪气室通常会加热到 $120°C - 180°C$ 甚至更高。&lt;/li&gt;
+&lt;li&gt;如果镀层太厚且工艺控制不好，频繁的升温降温会导致镀层与铝基材之间产生巨大的内应力，&lt;strong&gt;最终导致镀层龟裂或像鱼鳞一样脱落&lt;/strong&gt;。在高温工况下，有时候“薄而均匀”反而比“厚”更安全。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;见过在铝合金气室（气室温度才 55℃左右）上镀金，镀层龟裂脱落的情况&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;3ptfe-涂层的吸附性争议&#34;&gt;3、PTFE 涂层的“吸附性”争议
+&lt;/h4&gt;&lt;p&gt;PTFE 确实化学性质稳定，但它具有&lt;strong&gt;多孔性&lt;/strong&gt;（尤其是烧结或涂层）。对于某些重烃类或特殊的挥发性有机物（VOCs），PTFE 可能会产生物理吸附，导致仪器的&lt;strong&gt;零点漂移&lt;/strong&gt;或&lt;strong&gt;响应时间变长&lt;/strong&gt;（拖尾）。在做痕量（ppb 级别）分析时，有时候全金属结构（如钝化不锈钢）会比 PTFE 更稳定。&lt;/p&gt;
+&lt;h4 id=&#34;4关于电镀镍与法拉第笼效应&#34;&gt;4、关于电镀镍与法拉第笼效应
+&lt;/h4&gt;&lt;p&gt;上面说了电镀依靠电流沉积金属。&lt;strong&gt;法拉第笼效应&lt;/strong&gt;（Faraday Cage Effect）决定了零件【例如气室是一个细长的管子（比如 200mm 长，内径 10mm）】内壁到底能不能长出金属膜&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为什么电离出的金属离子“进不去”？&lt;/li&gt;
+&lt;li&gt;电镀是依靠&lt;strong&gt;外加电场&lt;/strong&gt;驱动溶液中的金属离子（如 $Ni^{2+}$）向零件表面移动。
+&lt;ul&gt;
+&lt;li&gt;电力线的特性：电力线总是倾向于走“阻力最小”的路径，即寻找距离阳极最近、最突出的部位。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;屏蔽效应&lt;/strong&gt;：当你有一个深孔或管状零件时，电荷会聚集在管口边缘。由于电磁物理定律，管口边缘产生的强大电场会掩蔽掉管子内部的电场。&lt;/li&gt;
+&lt;li&gt;结果：管口处被镀得极厚（甚至长出结瘤），而管子中间内壁的电场几乎为零，离子根本没有动力飞进去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;那个“200mm 长、10mm 内径”的例子，这个尺寸在 CEMS 气室中很常见（典型的长光程池）。如果尝试用电镀镍来处理它：
+&lt;ul&gt;
+&lt;li&gt;管两头：可能会镀上 $50 \mu m$ 甚至更厚的镍，导致内径变小，甚至堵塞螺纹。&lt;/li&gt;
+&lt;li&gt;管中心：在距离管口约 1~2 倍内径（即 10-20mm）之后，镀层厚度会断崖式下跌。管子正中央（100mm 处）可能完全没有镍层，露出的基材铝合金会直接被酸性烟气腐蚀。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果必须要电镀深孔，工厂可能就得专门焊一根细细的镍棒伸进你的管子中央。
+代价：这属于“非标工装”，加工费会翻倍，且极其容易短路。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;5关于化学镀镍&#34;&gt;5、关于化学镀镍
+&lt;/h4&gt;&lt;p&gt;在 CEMS 和精密气体分析仪领域，高磷化学镍（High-Phosphorus Electroless Nickel，磷含量通常 &amp;gt;10%） 被公认为“工业级的标准配置”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;结构决定性能：从“晶体”到“玻璃”
+&lt;ul&gt;
+&lt;li&gt;中/低磷镍：其微观结构是&lt;strong&gt;晶体状&lt;/strong&gt;的。晶体之间存在“晶界”（Grain Boundaries），就像墙砖之间的缝隙。腐蚀性气体（如 $SO_2$）会顺着这些缝隙渗透，直接攻击里面的铝基材。&lt;/li&gt;
+&lt;li&gt;高磷镍（&amp;gt;10.5% P）：它在微观上是非晶态（Amorphous）的，类似于玻璃。&lt;strong&gt;它没有晶界，表面像一层致密的、没有缝隙的防护膜&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;结果：腐蚀性分子找不到“破绽”钻进去，耐酸腐蚀能力呈指数级提升。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;卓越的耐酸性
+&lt;ul&gt;
+&lt;li&gt;高磷镍在酸性环境（$H_2SO_4$, $HCl$）中的稳定性远高于中磷镍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;无磁性（Non-Magnetic）
+&lt;ul&gt;
+&lt;li&gt;中/低磷镍：具有铁磁性，可能会干扰分析仪内部的高灵敏度电子元件或磁氧分析仪。&lt;/li&gt;
+&lt;li&gt;高磷镍：是完全无磁性的。这保证了它不会对光电检测器或传感器信号产生电磁干扰，是精密仪表设计的首选。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;权衡（Trade-offs），虽然高磷镍很强，但它也有“小脾气”，在设计时需要知道：
+&lt;ul&gt;
+&lt;li&gt;硬度稍低：刚镀完时，高磷镍的硬度约为 45-50 HRC，比中磷镍稍软。如果零件有剧烈的机械摩擦，可能需要通过 &lt;strong&gt;$400°C$ 热处理&lt;/strong&gt;来提高硬度（但这会让它恢复磁性，要小心）。&lt;/li&gt;
+&lt;li&gt;上镀速度慢：工厂镀高磷镍的时间比中磷镍长一倍，所以&lt;strong&gt;成本会更高一些&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;焊接性较差：如果你打算在镀层上进行锡焊（Soldering），高磷镍会比中磷镍困难得多。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果供应商沟通，可以多问一句：“你们的镍液磷含量能稳定在多少？”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果是 7%-9%：这是市面上最常见的中磷镍，适合普通机械零件防锈。&lt;/li&gt;
+&lt;li&gt;如果是 10.5%-12%：这才是真正的高磷镍，适合你的气室。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你可以用一块强力磁铁去吸镀好的零件。如果零件是铝的但磁铁有吸力感，说明供应商用了中低磷镍骗了你；如果完全没磁力，那大概率是真的高磷镍。&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -28045,6 +28778,48 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
     &gt;Steve Cutts&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/@MarkRober&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Mark Rober - YouTube&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>气动接头简明笔记</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;p&gt;![[Pasted image 20240921102042.png]]&lt;/p&gt;
+&lt;h2 id=&#34;平行螺纹&#34;&gt;平行螺纹
+&lt;/h2&gt;&lt;h3 id=&#34;unf-螺纹&#34;&gt;UNF 螺纹
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;UNF 螺纹是统一细牙螺纹 (Unified National Fine Thread) 的简称，属于英制螺纹的一种。UN 系列螺纹系统主要有两种类型：UNC（统一粗牙螺纹）和 UNF（统一细牙螺纹）&lt;/li&gt;
+&lt;li&gt;螺纹角度为 60°&lt;/li&gt;
+&lt;li&gt;单位为英寸&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如 &lt;code&gt;10-32UNF&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;10：表示 &lt;strong&gt;10#&lt;/strong&gt;。对应的螺纹直径约为 0.19 英寸（4.83mm）。在英制螺纹中，直径的标识通常是由数字（如 4、6、8、10 等）来表示的，而不是直接给出具体的直径尺寸。&lt;/li&gt;
+&lt;li&gt;32：32 表示&lt;strong&gt;每英寸有 32 个螺纹牙&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;m-螺纹&#34;&gt;M 螺纹
+&lt;/h3&gt;&lt;p&gt;M 螺纹是公制螺纹 (Metric Thread) 的缩写，广泛应用于世界各地的机械设计中。M 螺纹也有粗牙和细牙之分，一般默认使用的是粗牙螺纹，螺纹角度为 60°&lt;/p&gt;
+&lt;p&gt;例如 &lt;code&gt;M12×1.5&lt;/code&gt; 表示螺纹直径为 12 毫米，螺距为 1.5 毫米。&lt;/p&gt;
+&lt;h3 id=&#34;g-螺纹&#34;&gt;G 螺纹
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;G 螺纹，也称为 BSPP 螺纹（British Standard Pipe Parallel），是&lt;strong&gt;英国标准的平行管螺纹&lt;/strong&gt;。通常需要配合垫圈或 O 型圈来实现密封。&lt;/li&gt;
+&lt;li&gt;螺纹角为 55°&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;锥形螺纹&#34;&gt;锥形螺纹
+&lt;/h2&gt;&lt;p&gt;有时候碰到 RT 的标注，指的是 &amp;ldquo;R Taper&amp;rdquo;，即锥形螺纹（Tapered Thread）&lt;/p&gt;
+&lt;h3 id=&#34;r-螺纹&#34;&gt;R 螺纹
+&lt;/h3&gt;&lt;p&gt;R 螺纹通常指 BSPT(British Standard Pipe Tapered) 螺纹，即&lt;strong&gt;英国标准管螺纹锥管螺纹&lt;/strong&gt; 。它在欧洲和亚洲的管道系统中使用较多。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;R 螺纹是锥形螺纹，因此它具有自密封功能，通常不需要密封材料，但为了更好的密封性，也可以使用密封带&lt;/li&gt;
+&lt;li&gt;螺纹角为 55°，通过螺纹锥度配合实现自密封&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;npt-螺纹&#34;&gt;NPT 螺纹
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;NPT 螺纹是&lt;strong&gt;美国国家标准管螺纹&lt;/strong&gt;(National Pipe Tapered Thread) ，是一种锥形螺纹，广泛应用于北美地区。&lt;/li&gt;
+&lt;li&gt;与 R 螺纹相似，不过 NPT 螺纹角为 60°&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="一、 选型时的核心指标 很多工程师只看电压和电流，这在分析仪中是远远不够的。\n功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 60%-80%。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。 纹波与噪声（Ripple &amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。 隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。 二、 安装与接地的“夺命坑” 1. 浮地电压与触电感 这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。如果你的设备没有可靠接地，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。\n">
+<title>开关电源</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="开关电源">
+<meta property='og:description' content="一、 选型时的核心指标 很多工程师只看电压和电流，这在分析仪中是远远不够的。\n功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 60%-80%。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。 纹波与噪声（Ripple &amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。 隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。 二、 安装与接地的“夺命坑” 1. 浮地电压与触电感 这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。如果你的设备没有可靠接地，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-30T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-30T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="开关电源">
+<meta name="twitter:description" content="一、 选型时的核心指标 很多工程师只看电压和电流，这在分析仪中是远远不够的。\n功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 60%-80%。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。 纹波与噪声（Ripple &amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。 隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。 二、 安装与接地的“夺命坑” 1. 浮地电压与触电感 这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。如果你的设备没有可靠接地，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一-选型时的核心指标">一、 选型时的核心指标</a></li>
+    <li><a href="#二-安装与接地的夺命坑">二、 安装与接地的“夺命坑”</a>
+      <ol>
+        <li><a href="#1-浮地电压与触电感">1. 浮地电压与触电感</a></li>
+        <li><a href="#2-接地回路ground-loop">2. 接地回路（Ground Loop）</a></li>
+      </ol>
+    </li>
+    <li><a href="#三-电磁兼容性emc与布置">三、 电磁兼容性（EMC）与布置</a></li>
+    <li><a href="#总结">总结</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/">开关电源</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-30</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="一-选型时的核心指标">一、 选型时的核心指标
+</h2><p>很多工程师只看电压和电流，这在分析仪中是远远不够的。</p>
+<ol>
+<li>功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 <strong>60%-80%</strong>。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。</li>
+<li>纹波与噪声（Ripple &amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。</li>
+<li>隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。</li>
+</ol>
+<h2 id="二-安装与接地的夺命坑">二、 安装与接地的“夺命坑”
+</h2><h3 id="1-浮地电压与触电感">1. 浮地电压与触电感
+</h3><p>这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。<strong>如果你的设备没有可靠接地</strong>，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。</p>
+<blockquote>
+<p>为了通过电磁兼容（EMC）认证，开关电源的输入端都会设计一个 <strong>EMI 滤波器</strong>。在这个电路中，有两个关键的电容，被称为 <strong>Y 电容</strong>（通常是 CY1 和 CY2）。
+连接方式： 一个电容接在火线（L）与机壳地（FG/PE）之间；另一个电容接在零线（N）与机壳地之间。当设备没有接地线时，机壳（FG）处于悬浮状态。此时，这两个 Y 电容在电路上形成了一个串联的分压结构：机壳与大地之间会有一个约 110V 的数值
+虽然电压高达 $110V$，但你被电到时只是“麻一下”，通常不会有生命危险。这是因为 Y 电容的容量非常小（电流微弱）</p>
+</blockquote>
+<p>建议操作： 可以用万用表的交流电压档测量一下分析仪机壳对地的电压。如果确实是 $110V$ 左右，请务必检查电源线的<strong>三相插头接地端</strong>是否连接良好，或者手动在机壳接地柱上拉一根粗线到配电箱的地排上。</p>
+<h3 id="2-接地回路ground-loop">2. 接地回路（Ground Loop）
+</h3><p>在精密分析仪中，如果模拟地、数字地和电源地（FG）混在一起，开关电源的高频开关噪声会通过地线耦合到采样电路上，导致数值跳变。</p>
+<ul>
+<li>建议： 采用“单点接地”策略，强电地与弱电地在物理上保持隔离，仅在一点汇合。</li>
+</ul>
+<h2 id="三-电磁兼容性emc与布置">三、 电磁兼容性（EMC）与布置
+</h2><ol>
+<li>物理间距： 不要把开关电源紧贴着高精度变送器或微小信号放大电路放置。电源变压器产生的漏磁会产生感生电动势。</li>
+<li>线缆分布： 输入交流线（AC）和输出直流线（DC）严禁捆扎在一起。AC 线的噪声会直接感应到 DC 线中。</li>
+<li>磁珠与电感： 在电源输出口增加磁珠，可以有效抑制高频开关噪声。</li>
+</ol>
+<h2 id="总结">总结
+</h2><ul>
+<li>开关电源输入端必须接地（PE）：开关电源内部有共模干扰电容，如果没有接地，会有漏电感，触碰会有麻麻的感觉，还会让系统干扰变大</li>
+<li>输出端（DC 侧）：预留电流余量：实际负载电流最好只占 60–80%，例如需要 5A，就选 7.5A 或 10A 规格</li>
+<li>散热问题：不要封闭安装：开关电源热量大，必须保证对流通风，至少预留 20mm 上下间距
+<ul>
+<li>太热 = 性能下降 = 寿命大幅减少 = 提前报废</li>
+<li>开关电源最怕热，温度每升 10°C，寿命减少一半</li>
+</ul>
+</li>
+<li>EMC 与干扰控制: 旁边有 MCU/传感器/模拟电路时一定要注意布局。地处理非常重要：数字地、模拟地、保护地规范分开再单点汇总</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

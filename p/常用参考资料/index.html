@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" Mechtool 在线机械设计工具 尺寸公差 公差查询 | 公差与配合查询 配合查询 | 公差与配合查询 形位公差 形状公差查询 | 形状与位置公差查询 位置公差查询 | 形状与位置公差查询 标准下载网-www.bzxz.net-国家标准下载-各类行业标准下载 解压密码：www.bzxz.net Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture. 压力单位换算器 - 在线计算器 - DigiKey得捷电子 RAL劳尔色卡对照表 液压密封件、旋转密封件、O形圈—特瑞堡 润滑与密封 在线O形圈计算器| 特瑞堡密封系统 世伟洛克 | Swagelok 接头 | Swagelok 3D模型 | 所有类别 On Swagelok Company AirTAC | 亚德客 气源处理元件 | 控制元件 | 执行元件 | 辅助元件 | 导轨 | AirTAC | 亚德客 在线模型库：airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;cwid=3389 亚德客 2024 产品综合型录.pdf 嘉立创 嘉立创FA_自动化设备零部件-一站式采购商城 嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司(直接根据 PDF 中的代码，就可以在模型库中查找到) 国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台 嘉立创FA（2024版）电气零部件选型手册.pdf 嘉立创FA（第二版）机械零部件选型手册.pdf 怡合达 怡合达 |工厂自动化零部件一站式采购平台 怡合达电商平台 2024-V2.0版3D模型库更新上线 怡合达-工程师设计必备素材库_2024-V2 | 3D模型库 目录书申请-怡合达一站式采购平台 爱安特 爱安特FA工厂自动化零部件一站式采购平台 SMC（中国）有限公司 在线产品目录 ｜SMC（中国）有限公司 Parker | 派克汉尼汾主页 | Parker China 在线产品 北京熊川科技有限公司丨产品中心 Festo 开发的工程设计工具 | 费斯托网站 3Dfindit Download 3D CAD Models for free | 3Dfindit 仓库：Title Unavailable | Site Unreachable 日本IMAO今尾_机械标准配件&amp;工夹具标准件_官网 快速滑动锁紧 _日本IMAO今尾_机械标准配件_工夹具标准件_官网 PartsCAD：零部件CAD - 零部件管理和三维电子目录 GrabCAD：Popular models | 3D CAD Model Collection | GrabCAD Community Library AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取 ">
+<title>常用参考资料</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="常用参考资料">
+<meta property='og:description' content=" Mechtool 在线机械设计工具 尺寸公差 公差查询 | 公差与配合查询 配合查询 | 公差与配合查询 形位公差 形状公差查询 | 形状与位置公差查询 位置公差查询 | 形状与位置公差查询 标准下载网-www.bzxz.net-国家标准下载-各类行业标准下载 解压密码：www.bzxz.net Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture. 压力单位换算器 - 在线计算器 - DigiKey得捷电子 RAL劳尔色卡对照表 液压密封件、旋转密封件、O形圈—特瑞堡 润滑与密封 在线O形圈计算器| 特瑞堡密封系统 世伟洛克 | Swagelok 接头 | Swagelok 3D模型 | 所有类别 On Swagelok Company AirTAC | 亚德客 气源处理元件 | 控制元件 | 执行元件 | 辅助元件 | 导轨 | AirTAC | 亚德客 在线模型库：airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;cwid=3389 亚德客 2024 产品综合型录.pdf 嘉立创 嘉立创FA_自动化设备零部件-一站式采购商城 嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司(直接根据 PDF 中的代码，就可以在模型库中查找到) 国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台 嘉立创FA（2024版）电气零部件选型手册.pdf 嘉立创FA（第二版）机械零部件选型手册.pdf 怡合达 怡合达 |工厂自动化零部件一站式采购平台 怡合达电商平台 2024-V2.0版3D模型库更新上线 怡合达-工程师设计必备素材库_2024-V2 | 3D模型库 目录书申请-怡合达一站式采购平台 爱安特 爱安特FA工厂自动化零部件一站式采购平台 SMC（中国）有限公司 在线产品目录 ｜SMC（中国）有限公司 Parker | 派克汉尼汾主页 | Parker China 在线产品 北京熊川科技有限公司丨产品中心 Festo 开发的工程设计工具 | 费斯托网站 3Dfindit Download 3D CAD Models for free | 3Dfindit 仓库：Title Unavailable | Site Unreachable 日本IMAO今尾_机械标准配件&amp;工夹具标准件_官网 快速滑动锁紧 _日本IMAO今尾_机械标准配件_工夹具标准件_官网 PartsCAD：零部件CAD - 零部件管理和三维电子目录 GrabCAD：Popular models | 3D CAD Model Collection | GrabCAD Community Library AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取 ">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-29T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-29T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="常用参考资料">
+<meta name="twitter:description" content=" Mechtool 在线机械设计工具 尺寸公差 公差查询 | 公差与配合查询 配合查询 | 公差与配合查询 形位公差 形状公差查询 | 形状与位置公差查询 位置公差查询 | 形状与位置公差查询 标准下载网-www.bzxz.net-国家标准下载-各类行业标准下载 解压密码：www.bzxz.net Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture. 压力单位换算器 - 在线计算器 - DigiKey得捷电子 RAL劳尔色卡对照表 液压密封件、旋转密封件、O形圈—特瑞堡 润滑与密封 在线O形圈计算器| 特瑞堡密封系统 世伟洛克 | Swagelok 接头 | Swagelok 3D模型 | 所有类别 On Swagelok Company AirTAC | 亚德客 气源处理元件 | 控制元件 | 执行元件 | 辅助元件 | 导轨 | AirTAC | 亚德客 在线模型库：airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;cwid=3389 亚德客 2024 产品综合型录.pdf 嘉立创 嘉立创FA_自动化设备零部件-一站式采购商城 嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司(直接根据 PDF 中的代码，就可以在模型库中查找到) 国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台 嘉立创FA（2024版）电气零部件选型手册.pdf 嘉立创FA（第二版）机械零部件选型手册.pdf 怡合达 怡合达 |工厂自动化零部件一站式采购平台 怡合达电商平台 2024-V2.0版3D模型库更新上线 怡合达-工程师设计必备素材库_2024-V2 | 3D模型库 目录书申请-怡合达一站式采购平台 爱安特 爱安特FA工厂自动化零部件一站式采购平台 SMC（中国）有限公司 在线产品目录 ｜SMC（中国）有限公司 Parker | 派克汉尼汾主页 | Parker China 在线产品 北京熊川科技有限公司丨产品中心 Festo 开发的工程设计工具 | 费斯托网站 3Dfindit Download 3D CAD Models for free | 3Dfindit 仓库：Title Unavailable | Site Unreachable 日本IMAO今尾_机械标准配件&amp;工夹具标准件_官网 快速滑动锁紧 _日本IMAO今尾_机械标准配件_工夹具标准件_官网 PartsCAD：零部件CAD - 零部件管理和三维电子目录 GrabCAD：Popular models | 3D CAD Model Collection | GrabCAD Community Library AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取 ">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/">常用参考资料</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2025-12-29</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <ul>
+<li><a class="link" href="https://www.mechtool.cn/index.html"  target="_blank" rel="noopener"
+    >Mechtool 在线机械设计工具</a>
+<ul>
+<li>尺寸公差
+<ul>
+<li><a class="link" href="https://www.mechtool.cn/calculation/calculation_tolerances.html"  target="_blank" rel="noopener"
+    >公差查询 | 公差与配合查询</a></li>
+<li><a class="link" href="https://www.mechtool.cn/calculation/calculation_tolerancefitquery.html"  target="_blank" rel="noopener"
+    >配合查询 | 公差与配合查询</a></li>
+</ul>
+</li>
+<li>形位公差
+<ul>
+<li><a class="link" href="https://www.mechtool.cn/calculation/calculation_shapeandpositiontolerance.html"  target="_blank" rel="noopener"
+    >形状公差查询 | 形状与位置公差查询</a></li>
+<li><a class="link" href="https://www.mechtool.cn/calculation/calculation_positiontolerance.html"  target="_blank" rel="noopener"
+    >位置公差查询 | 形状与位置公差查询</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="link" href="https://www.bzxz.net/"  target="_blank" rel="noopener"
+    >标准下载网-www.bzxz.net-国家标准下载-各类行业标准下载</a>
+<ul>
+<li>解压密码：<code>www.bzxz.net</code></li>
+</ul>
+</li>
+<li><a class="link" href="https://z-lib.fm/"  target="_blank" rel="noopener"
+    >Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture.</a></li>
+<li><a class="link" href="https://www.digikey.sg/zh/resources/conversion-calculators/conversion-calculator-pressure"  target="_blank" rel="noopener"
+    >压力单位换算器 - 在线计算器 - DigiKey得捷电子</a></li>
+<li><a class="link" href="http://www.paintun.com/ral.html"  target="_blank" rel="noopener"
+    >RAL劳尔色卡对照表</a></li>
+<li><a class="link" href="https://www.trelleborg.com/zh-cn/seals"  target="_blank" rel="noopener"
+    >液压密封件、旋转密封件、O形圈—特瑞堡</a>
+<ul>
+<li>润滑与密封
+<ul>
+<li><a class="link" href="https://www.trelleborg.com/zh-cn/seals/resources/design-support-and-engineering-tools/o-ring-calculator"  target="_blank" rel="noopener"
+    >在线O形圈计算器| 特瑞堡密封系统</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a class="link" href="https://www.swagelok.com.cn/zh"  target="_blank" rel="noopener"
+    >世伟洛克 | Swagelok</a>
+<ul>
+<li><a class="link" href="https://products.swagelok.com.cn/zh/%e6%89%80%e6%9c%89%e4%ba%a7%e5%93%81/%e6%8e%a5%e5%a4%b4/c/100"  target="_blank" rel="noopener"
+    >接头 | Swagelok</a></li>
+<li><a class="link" href="https://swagelok-zh-cn.navigator.traceparts.com/"  target="_blank" rel="noopener"
+    >3D模型 | 所有类别 On Swagelok Company</a></li>
+</ul>
+</li>
+<li><a class="link" href="https://as-cn.airtac.com/"  target="_blank" rel="noopener"
+    >AirTAC | 亚德客</a>
+<ul>
+<li><a class="link" href="https://as-cn.airtac.com/pro_pd.aspx?c_kind=4"  target="_blank" rel="noopener"
+    >气源处理元件 | 控制元件 | 执行元件 | 辅助元件 | 导轨 | AirTAC | 亚德客</a></li>
+<li>在线模型库：<a class="link" href="https://airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;cwid=3389"  target="_blank" rel="noopener"
+    >airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;cwid=3389</a></li>
+<li><code>亚德客 2024 产品综合型录.pdf</code></li>
+</ul>
+</li>
+<li>嘉立创
+<ul>
+<li><a class="link" href="https://www.jlcfa.com/"  target="_blank" rel="noopener"
+    >嘉立创FA_自动化设备零部件-一站式采购商城</a></li>
+<li><a class="link" href="https://www.fa-part.com/brand"  target="_blank" rel="noopener"
+    >嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司</a>(直接根据 PDF 中的代码，就可以在模型库中查找到)</li>
+<li><a class="link" href="https://lceda.cn/"  target="_blank" rel="noopener"
+    >国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台</a></li>
+<li><code>嘉立创FA（2024版）电气零部件选型手册.pdf</code></li>
+<li><code>嘉立创FA（第二版）机械零部件选型手册.pdf</code></li>
+</ul>
+</li>
+<li>怡合达
+<ul>
+<li><a class="link" href="https://www.yhdfa.com/"  target="_blank" rel="noopener"
+    >怡合达 |工厂自动化零部件一站式采购平台 怡合达电商平台</a></li>
+<li><a class="link" href="https://www.yhdfa.com/information/3943b74f81b94bd59f3dcdf922507137"  target="_blank" rel="noopener"
+    >2024-V2.0版3D模型库更新上线</a></li>
+<li><code>怡合达-工程师设计必备素材库_2024-V2 | 3D模型库</code></li>
+<li><a class="link" href="https://www.yhdfa.com/catalogBook"  target="_blank" rel="noopener"
+    >目录书申请-怡合达一站式采购平台</a></li>
+</ul>
+</li>
+<li>爱安特
+<ul>
+<li><a class="link" href="https://ant-fa.com/"  target="_blank" rel="noopener"
+    >爱安特FA工厂自动化零部件一站式采购平台</a></li>
+</ul>
+</li>
+<li><a class="link" href="https://www.smc.com.cn/"  target="_blank" rel="noopener"
+    >SMC（中国）有限公司</a>
+<ul>
+<li><a class="link" href="https://www.smc.com.cn/webcatalog/zh-cn/"  target="_blank" rel="noopener"
+    >在线产品目录 ｜SMC（中国）有限公司</a></li>
+</ul>
+</li>
+<li><a class="link" href="https://www.parker.com/cn/zh/home.html"  target="_blank" rel="noopener"
+    >Parker | 派克汉尼汾主页 | Parker China</a>
+<ul>
+<li><a class="link" href="https://ph.parker.com/cn/zh/category"  target="_blank" rel="noopener"
+    >在线产品</a></li>
+</ul>
+</li>
+<li><a class="link" href="http://www.xiongchuan.com/home/news/index.html?rid=1"  target="_blank" rel="noopener"
+    >北京熊川科技有限公司丨产品中心</a></li>
+<li><a class="link" href="https://www.festo.com.cn/cn/zh/e/engineering-tools-id_650881/"  target="_blank" rel="noopener"
+    >Festo 开发的工程设计工具 | 费斯托网站</a></li>
+<li>3Dfindit
+<ul>
+<li><a class="link" href="https://www.3dfindit.com/zh-CN/"  target="_blank" rel="noopener"
+    >Download 3D CAD Models for free | 3Dfindit</a></li>
+<li>仓库：<a class="link" href="https://www.3dfindit.cn/zh-CN/usercontent/63720/"  target="_blank" rel="noopener"
+    >Title Unavailable | Site Unreachable</a></li>
+</ul>
+</li>
+<li><a class="link" href="https://www.imao.com/cn/"  target="_blank" rel="noopener"
+    >日本IMAO今尾_机械标准配件&amp;工夹具标准件_官网</a>
+<ul>
+<li><a class="link" href="https://www.imao.com/catalog/cn/imageindexlists2/?categorycode=$SMEOSL,$SME"  target="_blank" rel="noopener"
+    >快速滑动锁紧 _日本IMAO今尾_机械标准配件_工夹具标准件_官网</a></li>
+</ul>
+</li>
+<li>PartsCAD：<a class="link" href="https://www.partscad.com/"  target="_blank" rel="noopener"
+    >零部件CAD - 零部件管理和三维电子目录</a></li>
+<li>GrabCAD：<a class="link" href="https://grabcad.com/library"  target="_blank" rel="noopener"
+    >Popular models | 3D CAD Model Collection | GrabCAD Community Library</a></li>
+<li><a class="link" href="https://www.anytocopy.com/"  target="_blank" rel="noopener"
+    >AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取</a></li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2025 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="当你感觉到 main.c 臃肿、寻找一个变量需要翻几百行滚动条时，说明你的工程已经到了需要 “模块化重构”的时候了\n以下是工业级嵌入式开发的推荐重构方案：\n1. 核心思想：层级化与模块化 我们要把代码像“盖楼”一样分层，不要让所有的家具都挤在客厅（main）里。\n">
-<title>ZZZ-30-模块化重构</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="常用快捷键 打开原件库： Ctrl + W 元件旋转： Ctrl + R 放置导线：Ctrl+Shift+W 双击原件：修改属性 运行仿真：F5 ">
+<title>Multisim学习资料</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/zzz-30-%E6%A8%A1%E5%9D%97%E5%8C%96%E9%87%8D%E6%9E%84/'>
+<link rel='canonical' href='https://teaize.github.io/p/multisim%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-30-模块化重构">
-<meta property='og:description' content="当你感觉到 main.c 臃肿、寻找一个变量需要翻几百行滚动条时，说明你的工程已经到了需要 “模块化重构”的时候了\n以下是工业级嵌入式开发的推荐重构方案：\n1. 核心思想：层级化与模块化 我们要把代码像“盖楼”一样分层，不要让所有的家具都挤在客厅（main）里。\n">
-<meta property='og:url' content='https://teaize.github.io/p/zzz-30-%E6%A8%A1%E5%9D%97%E5%8C%96%E9%87%8D%E6%9E%84/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Multisim学习资料">
+<meta property='og:description' content="常用快捷键 打开原件库： Ctrl + W 元件旋转： Ctrl + R 放置导线：Ctrl+Shift+W 双击原件：修改属性 运行仿真：F5 ">
+<meta property='og:url' content='https://teaize.github.io/p/multisim%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-26T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="ZZZ-30-模块化重构">
-<meta name="twitter:description" content="当你感觉到 main.c 臃肿、寻找一个变量需要翻几百行滚动条时，说明你的工程已经到了需要 “模块化重构”的时候了\n以下是工业级嵌入式开发的推荐重构方案：\n1. 核心思想：层级化与模块化 我们要把代码像“盖楼”一样分层，不要让所有的家具都挤在客厅（main）里。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-28T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-28T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="Multisim学习资料">
+<meta name="twitter:description" content="常用快捷键 打开原件库： Ctrl + W 元件旋转： Ctrl + R 放置导线：Ctrl+Shift+W 双击原件：修改属性 运行仿真：F5 ">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,11 +297,7 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#1-核心思想层级化与模块化">1. 核心思想：层级化与模块化</a></li>
-        <li><a href="#2-具体的文件夹组织结构">2. 具体的文件夹组织结构</a></li>
-        <li><a href="#3-重构实战如何写一个标准的模块">3. 重构实战：如何写一个标准的模块？</a></li>
-        <li><a href="#4-让-mainc-彻底变清爽">4. 让 <code>main.c</code> 彻底变清爽</a></li>
-        <li><a href="#5-这样做有什么好处">5. 这样做有什么好处？</a></li>
+        <li><a href="#常用快捷键">常用快捷键</a></li>
       </ol>
     </li>
   </ol>
@@ -323,7 +319,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/zzz-30-%E6%A8%A1%E5%9D%97%E5%8C%96%E9%87%8D%E6%9E%84/">ZZZ-30-模块化重构</a>
+            <a href="/p/multisim%E5%AD%A6%E4%B9%A0%E8%B5%84%E6%96%99/">Multisim学习资料</a>
         </h2>
     
         
@@ -345,7 +341,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-26</time>
+                <time class="article-time--published">2025-12-28</time>
             </div>
         
 
@@ -361,177 +357,14 @@
     <section class="article-content">
     
     
-    <p>当你感觉到 <code>main.c</code> 臃肿、寻找一个变量需要翻几百行滚动条时，说明你的工程已经到了需要 “模块化重构”的时候了</p>
-<p>以下是工业级嵌入式开发的<strong>推荐重构方案</strong>：</p>
-<h3 id="1-核心思想层级化与模块化">1. 核心思想：层级化与模块化
-</h3><p>我们要把代码像“盖楼”一样分层，不要让所有的家具都挤在客厅（<code>main</code>）里。</p>
-<ul>
-<li>驱动层 (Drivers/BSP)：直接操作硬件的，如 <code>motor.c</code>, <code>sensor_pt100.c</code>, <code>hmi_screen.c</code>。</li>
-<li>功能模块层 (Modules/Common)：纯数学或逻辑，<strong>不依赖具体引脚</strong>，如 <code>pid.c</code>, <code>filter.c</code>, <code>modbus_rtu.c</code>。</li>
-<li>应用逻辑层 (App)：你的核心大脑，如 <code>fsm_logic.c</code>（状态机）。</li>
+    <h3 id="常用快捷键">常用快捷键
+</h3><ul>
+<li>打开原件库： Ctrl + W</li>
+<li>元件旋转： Ctrl + R</li>
+<li>放置导线：Ctrl+Shift+W</li>
+<li>双击原件：修改属性</li>
+<li>运行仿真：F5</li>
 </ul>
-<h3 id="2-具体的文件夹组织结构">2. 具体的文件夹组织结构
-</h3><p>在 CubeIDE 的左侧工程栏，你可以右键创建几个文件夹：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="n">Core</span><span class="o">/</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Src</span><span class="o">/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">main</span><span class="p">.</span><span class="n">c</span>             <span class="o">&lt;--</span> <span class="err">只负责初始化和启动</span>
-</span></span><span class="line"><span class="cl">  <span class="n">App</span><span class="o">/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="p">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">.</span><span class="n">h</span>         <span class="o">&lt;--</span> <span class="n">PID</span> <span class="err">结构体和计算</span>
-</span></span><span class="line"><span class="cl">    <span class="n">filter</span><span class="p">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">.</span><span class="n">h</span>      <span class="o">&lt;--</span> <span class="err">滤波算法</span>
-</span></span><span class="line"><span class="cl">    <span class="n">state_machine</span><span class="p">.</span><span class="n">c</span><span class="o">/</span><span class="p">.</span><span class="n">h</span> <span class="o">&lt;--</span> <span class="err">状态机核心</span>
-</span></span><span class="line"><span class="cl">  <span class="n">Hardware</span><span class="o">/</span>
-</span></span><span class="line"><span class="cl">    <span class="n">relay</span><span class="p">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">.</span><span class="n">h</span>       <span class="o">&lt;--</span> <span class="err">继电器控制封装</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pt100</span><span class="p">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">.</span><span class="n">h</span>       <span class="o">&lt;--</span> <span class="err">温度采样转换</span>
-</span></span><span class="line"><span class="cl">    <span class="n">hmi</span><span class="p">.</span><span class="n">c</span> <span class="o">/</span> <span class="p">.</span><span class="n">h</span>         <span class="o">&lt;--</span> <span class="err">串口屏协议解析</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="3-重构实战如何写一个标准的模块">3. 重构实战：如何写一个标准的模块？
-</h3><p>以你的 <strong>PID 模块</strong> 为例，不要直接在 <code>main</code> 里写公式。</p>
-<p>第一步：创建 <code>pid.h</code> (头文件)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#ifndef __PID_H
-</span></span></span><span class="line"><span class="cl"><span class="cp">#define __PID_H
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;main.h&#34; // 为了使用 float 等类型</span><span class="cp">
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="k">typedef</span> <span class="k">struct</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Kp</span><span class="p">,</span> <span class="n">Ki</span><span class="p">,</span> <span class="n">Kd</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">float</span> <span class="n">Target</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ... 其他参数
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span> <span class="n">PID_t</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PID_Init</span><span class="p">(</span><span class="n">PID_t</span> <span class="o">*</span><span class="n">pid</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p</span><span class="p">,</span> <span class="kt">float</span> <span class="n">i</span><span class="p">,</span> <span class="kt">float</span> <span class="n">d</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">PID_Compute</span><span class="p">(</span><span class="n">PID_t</span> <span class="o">*</span><span class="n">pid</span><span class="p">,</span> <span class="kt">float</span> <span class="n">measured</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="cp">#endif
-</span></span></span></code></pre></td></tr></table>
-</div>
-</div><p>第二步：创建 <code>pid.c</code> (源文件)</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;pid.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">PID_Init</span><span class="p">(</span><span class="n">PID_t</span> <span class="o">*</span><span class="n">pid</span><span class="p">,</span> <span class="kt">float</span> <span class="n">p</span><span class="p">,</span> <span class="kt">float</span> <span class="n">i</span><span class="p">,</span> <span class="kt">float</span> <span class="n">d</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">pid</span><span class="o">-&gt;</span><span class="n">Kp</span> <span class="o">=</span> <span class="n">p</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ... 初始化代码
-</span></span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">float</span> <span class="nf">PID_Compute</span><span class="p">(</span><span class="n">PID_t</span> <span class="o">*</span><span class="n">pid</span><span class="p">,</span> <span class="kt">float</span> <span class="n">measured</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ... 具体的 PID 公式代码
-</span></span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">output</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="4-让-mainc-彻底变清爽">4. 让 <code>main.c</code> 彻底变清爽
-</h3><p>重构后，你的 <code>main.c</code> 应该长这样（非常优雅）：</p>
-<div class="highlight"><div class="chroma">
-<table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
-</span><span class="lnt"> 2
-</span><span class="lnt"> 3
-</span><span class="lnt"> 4
-</span><span class="lnt"> 5
-</span><span class="lnt"> 6
-</span><span class="lnt"> 7
-</span><span class="lnt"> 8
-</span><span class="lnt"> 9
-</span><span class="lnt">10
-</span><span class="lnt">11
-</span><span class="lnt">12
-</span><span class="lnt">13
-</span><span class="lnt">14
-</span><span class="lnt">15
-</span><span class="lnt">16
-</span><span class="lnt">17
-</span><span class="lnt">18
-</span><span class="lnt">19
-</span><span class="lnt">20
-</span><span class="lnt">21
-</span><span class="lnt">22
-</span><span class="lnt">23
-</span><span class="lnt">24
-</span><span class="lnt">25
-</span></code></pre></td>
-<td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="cm">/* USER CODE BEGIN Includes */</span>
-</span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;pid.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;state_machine.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&#34;hmi.h&#34;</span><span class="cp">
-</span></span></span><span class="line"><span class="cl"><span class="cm">/* USER CODE END Includes */</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">HAL_Init</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">SystemClock_Config</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">MX_GPIO_Init</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">MX_USART1_UART_Init</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// ... 其他初始化
-</span></span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE BEGIN 2 */</span>
-</span></span><span class="line"><span class="cl">    <span class="nf">PID_Init</span><span class="p">(</span><span class="o">&amp;</span><span class="n">HeaterPID</span><span class="p">,</span> <span class="mf">2.0</span><span class="p">,</span> <span class="mf">0.1</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">);</span> <span class="c1">// 初始化 PID
-</span></span></span><span class="line"><span class="cl">    <span class="nf">FSM_Init</span><span class="p">();</span>                          <span class="c1">// 初始化状态机
-</span></span></span><span class="line"><span class="cl">    <span class="cm">/* USER CODE END 2 */</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="p">(</span><span class="mi">1</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="cm">/* USER CODE BEGIN WHILE */</span>
-</span></span><span class="line"><span class="cl">        <span class="nf">FSM_Update</span><span class="p">();</span>  <span class="c1">// 状态机轮询
-</span></span></span><span class="line"><span class="cl">        <span class="nf">HMI_Process</span><span class="p">();</span> <span class="c1">// 处理屏幕指令
-</span></span></span><span class="line"><span class="cl">        <span class="cm">/* USER CODE END WHILE */</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
-</div>
-</div><h3 id="5-这样做有什么好处">5. 这样做有什么好处？
-</h3><ol>
-<li>心智负担降低：当你发现控温不准，你只需去 <code>pid.c</code> 找问题；当你发现屏幕不亮，只需看 <code>hmi.c</code>。</li>
-<li>保护代码安全：CubeMX 重新生成代码时，只会动 <code>Core/Src</code> 下的文件。你在自己创建的 <code>App</code> 或 <code>Hardware</code> 文件夹里的代码是<strong>绝对安全</strong>的。</li>
-<li>可移植性：如果你明年想把 CEMS 的 PID 算法换到另一个型号的单片机（比如 STM32H7），你直接把 <code>pid.c</code> 和 <code>pid.h</code> 拷贝过去就能用，不用再从 <code>main.c</code> 的碎纸堆里翻代码。</li>
-</ol>
 
 </section>
 
