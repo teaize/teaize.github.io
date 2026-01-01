@@ -7,7 +7,160 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Tue, 30 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 31 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>气体浓度的表示方法</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Wed, 31 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;p&gt;气体的浓度可以用不同的方式表示，常见的有&lt;strong&gt;体积浓度&lt;/strong&gt;、&lt;strong&gt;质量浓度&lt;/strong&gt;、&lt;strong&gt;摩尔浓度&lt;/strong&gt;和&lt;strong&gt;混合比&lt;/strong&gt;等。&lt;/p&gt;
+&lt;h2 id=&#34;1-体积浓度volume-concentration&#34;&gt;1. 体积浓度（Volume Concentration）
+&lt;/h2&gt;&lt;p&gt;体积浓度通常用于气体分析，常见的单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ppm（parts per million，百万分浓度）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppm} = \frac{1 \text{ cm}^3}{1 \text{ m}^3} = 10^{-6}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;ppb（parts per billion，十亿分浓度）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppb} = 10^{-9}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;%（体积分数，Volume Percent）
+&lt;ul&gt;
+&lt;li&gt;1% = $10^4$ppm&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气污染监测（SO₂、NO₂、CO、O₃）、工业气体分析等。&lt;/p&gt;
+&lt;p&gt;体积浓度的优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;体积比不会随温度、压力变化而变化，更加稳定。&lt;/li&gt;
+&lt;li&gt;在不同环境条件下（实验室、工厂、野外），&lt;strong&gt;同一气体的体积浓度值一致&lt;/strong&gt;，便于对比。&lt;/li&gt;
+&lt;li&gt;气体分析仪（如 CEMS）大多基于&lt;strong&gt;体积浓度&lt;/strong&gt;测量，ppm 直接读取，无需复杂换算。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;2-质量浓度mass-concentration&#34;&gt;2. 质量浓度（Mass Concentration）
+&lt;/h2&gt;&lt;p&gt;质量浓度表示单位体积气体中某种气体成分的质量，常见单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mg/m³（毫克每立方米）
+&lt;ul&gt;
+&lt;li&gt;其中 $C_m$ 是质量浓度，$m$ 是质量（mg），$V$ 是体积（m³）。$$C_m = \frac{m}{V}$$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;μg/m³（微克每立方米），用于更低浓度的测量，如空气污染物。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：空气质量监测（PM2.5、PM10、SO₂、NO₂）、职业安全评估等。&lt;/p&gt;
+&lt;p&gt;质量浓度的优势：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;质量浓度&lt;strong&gt;更直观地表示气体的实际污染量&lt;/strong&gt;，适用于环境法规和排放标准。&lt;/li&gt;
+&lt;li&gt;不同气体的密度不同，质量浓度能更好地反映气体的真实影响（例如 SO₂ 和 CO₂ 质量浓度相同，但危害性不同）。&lt;/li&gt;
+&lt;li&gt;适用于职业卫生和健康评估，如吸入某种有毒气体的质量剂量是否超标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;体积浓度与质量浓度转换&lt;/strong&gt;：
+$$C_m = C_v \times \frac{M}{22.4} \times \frac{273.15}{T} \times \frac{P}{101.325}$$
+其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$C_m$：质量浓度（mg/m³）&lt;/li&gt;
+&lt;li&gt;$C_v$：体积浓度（ppm）&lt;/li&gt;
+&lt;li&gt;$M$：气体的摩尔质量（g/mol）&lt;/li&gt;
+&lt;li&gt;$T$：温度（K）&lt;/li&gt;
+&lt;li&gt;$P$：压力（kPa）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-摩尔浓度molar-concentration&#34;&gt;3. 摩尔浓度（Molar Concentration）
+&lt;/h2&gt;&lt;p&gt;摩尔浓度表示单位体积气体中的物质的量，单位是 mol/m³ 或 mol/L。
+$$C_n = \frac{n}{V}$$
+其中 $C_n$ 是摩尔浓度，$n$ 是摩尔数（mol），$V$ 是体积（m³）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在标准状态（0℃，101.325 kPa），1 mol 气体的体积约为 22.4 L。&lt;/li&gt;
+&lt;li&gt;在 25℃ 时，1 mol 气体的体积约为 24.5 L。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;适用范围&lt;/strong&gt;：化学反应计算、气体定量分析等。&lt;/p&gt;
+&lt;h2 id=&#34;4-质量比mass-ratio&#34;&gt;4. 质量比（Mass Ratio）
+&lt;/h2&gt;&lt;p&gt;表示某种气体在混合气体中的质量占比，常见单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mg/kg&lt;/li&gt;
+&lt;li&gt;μg/g&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于空气污染、燃烧排放分析等。&lt;/p&gt;
+&lt;h2 id=&#34;5-体积比mixing-ratio&#34;&gt;5. 体积比（Mixing Ratio）
+&lt;/h2&gt;&lt;p&gt;表示气体的体积占比，通常用于气象、环境科学，单位有：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ppm、ppb、ppt（万亿分比）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppt} = 10^{-12}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;mol/mol（摩尔分数）
+&lt;ul&gt;
+&lt;li&gt;$1 \text{ ppm} = 10^{-6} \text{ mol/mol}$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;适用于温室气体分析（CO₂、CH₄）、大气监测等。&lt;/p&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;体积浓度与质量浓度对比&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;类别&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;优势&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;不受温度、压力影响，适合气体成分分析&lt;/td&gt;
+          &lt;td&gt;CEMS、温室气体、燃烧排放&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;直接反映气体的质量，易于执行环保标准&lt;/td&gt;
+          &lt;td&gt;空气质量、职业安全、健康评估&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;不同浓度类型&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;浓度类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;常见单位&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;适用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ppm、ppb、%&lt;/td&gt;
+          &lt;td&gt;气体污染物、CEMS 监测&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mg/m³、μg/m³&lt;/td&gt;
+          &lt;td&gt;PM2.5、空气质量&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;摩尔浓度&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mol/m³、mol/L&lt;/td&gt;
+          &lt;td&gt;化学反应、气体分析&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;质量比&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;mg/kg、μg/g&lt;/td&gt;
+          &lt;td&gt;燃烧排放、气体混合&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;体积比&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;ppm、ppb、mol/mol&lt;/td&gt;
+          &lt;td&gt;温室气体、环境监测&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
         <title>Google Tasks</title>
         <link>https://teaize.github.io/p/google-tasks/</link>
         <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
@@ -35,8 +188,8 @@
 &lt;h3 id=&#34;子任务subtasks的妙用&#34;&gt;子任务（Subtasks）的妙用
 &lt;/h3&gt;&lt;p&gt;对于像“公司协作方案”这种大任务，直接写一行字很容易烂尾。&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;技巧：&lt;/strong&gt; 点击任务进入详情，使用“添加子任务”。&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;逻辑：&lt;/strong&gt; 比如：
+&lt;li&gt;技巧： 点击任务进入详情，使用“添加子任务”。&lt;/li&gt;
+&lt;li&gt;逻辑： 比如：
 &lt;ul&gt;
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 公司协作方案
 &lt;ul&gt;
@@ -156,58 +309,94 @@
 </description>
         </item>
         <item>
-        <title>开关电源</title>
-        <link>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</link>
+        <title>关于浪涌保护器</title>
+        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%B5%AA%E6%B6%8C%E4%BF%9D%E6%8A%A4%E5%99%A8/</link>
         <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</guid>
-        <description>&lt;h2 id=&#34;一-选型时的核心指标&#34;&gt;一、 选型时的核心指标
-&lt;/h2&gt;&lt;p&gt;很多工程师只看电压和电流，这在分析仪中是远远不够的。&lt;/p&gt;
+        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%B5%AA%E6%B6%8C%E4%BF%9D%E6%8A%A4%E5%99%A8/</guid>
+        <description>&lt;p&gt;这里以南京优倍（ANPE）的 P-FL 系列电源浪涌保护器 &lt;a class=&#34;link&#34; href=&#34;https://www.anpe.cn/select/seldetail/852.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;南京优倍电气-专注于工业测控信号的安全性、稳定性&lt;/a&gt;（SPD）为例&lt;/p&gt;
+&lt;h2 id=&#34;一-什么时候需要用浪涌保护器&#34;&gt;一、 什么时候需要用浪涌保护器？
+&lt;/h2&gt;&lt;p&gt;不是所有地方都要装，但以下三种情况是“刚需”：&lt;/p&gt;
 &lt;ol&gt;
-&lt;li&gt;功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 &lt;strong&gt;60%-80%&lt;/strong&gt;。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。&lt;/li&gt;
-&lt;li&gt;纹波与噪声（Ripple &amp;amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。&lt;/li&gt;
-&lt;li&gt;隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。&lt;/li&gt;
+&lt;li&gt;室外引线入户： 比如分析仪采样探头在几十米高的烟囱上，伴热管线和电源线从室外引入室内，这时入户端必须装 SPD。&lt;/li&gt;
+&lt;li&gt;电网环境恶劣： 如果工厂内有大型电机、变频器频繁启停，会产生严重的“操作过电压”，这种浪涌虽然不如雷电猛烈，但频率高，容易导致 PLC 或分析仪主板死机、电容击穿。&lt;/li&gt;
+&lt;li&gt;高价值设备保护： 像 CEMS 中的红外分析仪、质谱仪等精密设备，主板更换成本动辄上万，加装几百元的 SPD 是极高性价比的保险。&lt;/li&gt;
 &lt;/ol&gt;
-&lt;h2 id=&#34;二-安装与接地的夺命坑&#34;&gt;二、 安装与接地的“夺命坑”
-&lt;/h2&gt;&lt;h3 id=&#34;1-浮地电压与触电感&#34;&gt;1. 浮地电压与触电感
-&lt;/h3&gt;&lt;p&gt;这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。&lt;strong&gt;如果你的设备没有可靠接地&lt;/strong&gt;，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。&lt;/p&gt;
-&lt;blockquote&gt;
-&lt;p&gt;为了通过电磁兼容（EMC）认证，开关电源的输入端都会设计一个 &lt;strong&gt;EMI 滤波器&lt;/strong&gt;。在这个电路中，有两个关键的电容，被称为 &lt;strong&gt;Y 电容&lt;/strong&gt;（通常是 CY1 和 CY2）。
-连接方式： 一个电容接在火线（L）与机壳地（FG/PE）之间；另一个电容接在零线（N）与机壳地之间。当设备没有接地线时，机壳（FG）处于悬浮状态。此时，这两个 Y 电容在电路上形成了一个串联的分压结构：机壳与大地之间会有一个约 110V 的数值
-虽然电压高达 $110V$，但你被电到时只是“麻一下”，通常不会有生命危险。这是因为 Y 电容的容量非常小（电流微弱）&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;建议操作： 可以用万用表的交流电压档测量一下分析仪机壳对地的电压。如果确实是 $110V$ 左右，请务必检查电源线的&lt;strong&gt;三相插头接地端&lt;/strong&gt;是否连接良好，或者手动在机壳接地柱上拉一根粗线到配电箱的地排上。&lt;/p&gt;
-&lt;h3 id=&#34;2-接地回路ground-loop&#34;&gt;2. 接地回路（Ground Loop）
-&lt;/h3&gt;&lt;p&gt;在精密分析仪中，如果模拟地、数字地和电源地（FG）混在一起，开关电源的高频开关噪声会通过地线耦合到采样电路上，导致数值跳变。&lt;/p&gt;
+&lt;h2 id=&#34;二-anpe-852p-fl-系列的核心参数解读&#34;&gt;二、 ANPE 852（P-FL 系列）的核心参数解读
+&lt;/h2&gt;&lt;p&gt;在应用时，需要重点看这三个指标：&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;建议： 采用“单点接地”策略，强电地与弱电地在物理上保持隔离，仅在一点汇合。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;三-电磁兼容性emc与布置&#34;&gt;三、 电磁兼容性（EMC）与布置
-&lt;/h2&gt;&lt;ol&gt;
-&lt;li&gt;物理间距： 不要把开关电源紧贴着高精度变送器或微小信号放大电路放置。电源变压器产生的漏磁会产生感生电动势。&lt;/li&gt;
-&lt;li&gt;线缆分布： 输入交流线（AC）和输出直流线（DC）严禁捆扎在一起。AC 线的噪声会直接感应到 DC 线中。&lt;/li&gt;
-&lt;li&gt;磁珠与电感： 在电源输出口增加磁珠，可以有效抑制高频开关噪声。&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h2 id=&#34;总结&#34;&gt;总结
-&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;开关电源输入端必须接地（PE）：开关电源内部有共模干扰电容，如果没有接地，会有漏电感，触碰会有麻麻的感觉，还会让系统干扰变大&lt;/li&gt;
-&lt;li&gt;输出端（DC 侧）：预留电流余量：实际负载电流最好只占 60–80%，例如需要 5A，就选 7.5A 或 10A 规格&lt;/li&gt;
-&lt;li&gt;散热问题：不要封闭安装：开关电源热量大，必须保证对流通风，至少预留 20mm 上下间距
+&lt;li&gt;$U_c$ (&lt;strong&gt;最大持续工作电压&lt;/strong&gt;)： 385V。这意味着它能长期在 385V 以下工作。如果电网波动经常超过这个值，SPD 会持续发热甚至起火。&lt;/li&gt;
+&lt;li&gt;$I_n$ / $I_{max}$ (放电电流)： 通常为 20kA / 40kA。这决定了它的“挡箭”能力。&lt;/li&gt;
+&lt;li&gt;$U_p$ (电压保护水平)： $\le 1.8kV$。
 &lt;ul&gt;
-&lt;li&gt;太热 = 性能下降 = 寿命大幅减少 = 提前报废&lt;/li&gt;
-&lt;li&gt;开关电源最怕热，温度每升 10°C，寿命减少一半&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;这是个坑点：&lt;/strong&gt; 如果你的设备耐压（$U_w$）只有 $1.5kV$，而 SPD 的 $U_p$ 是 $1.8kV$，那么浪涌来时，SPD 还没动作，设备可能已经穿了。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;EMC 与干扰控制: 旁边有 MCU/传感器/模拟电路时一定要注意布局。地处理非常重要：数字地、模拟地、保护地规范分开再单点汇总&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;三-如何接线关键步骤&#34;&gt;三、 如何接线（关键步骤）
+&lt;/h2&gt;&lt;p&gt;浪涌保护器是&lt;strong&gt;并联&lt;/strong&gt;在电路中的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;并联接入： L 接火线，N 接零线，PE（或 FG）接大地。&lt;/li&gt;
+&lt;li&gt;前置保护（后备保护器）： 如图所示，SPD 前面必须加装 &lt;strong&gt;熔断器（Fuse）或断路器&lt;/strong&gt;（南京优倍通常建议用 32A-63A 的熔断器）。
+&lt;ul&gt;
+&lt;li&gt;原因： SPD 寿命终结时可能发生内部短路。如果没有前置保险，SPD 会直接导致主电缆起火。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251230215603.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020251230215603.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;F1（主回路保护）：
+&lt;ul&gt;
+&lt;li&gt;位置： 串联在整个供电主线上。&lt;/li&gt;
+&lt;li&gt;作用： 保护后端所有的负载设备（包括你的分析仪、显示屏、水泵等）。如果后端设备发生短路，F1 会跳闸断电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;F2（后备保护器 / SPD 专用保险）
+&lt;ul&gt;
+&lt;li&gt;位置：它位于从主线分叉出来进入 SPD 端的这条“支路”上。&lt;/li&gt;
+&lt;li&gt;作用： 它专门为 SPD 服务。如果 SPD 坏了、短路了，F2 会迅速熔断，把坏掉的 SPD 从电网中“踢出去”，从而保证主线（F1 之后的部分）依然有电，不至于因为一个雷击保护器坏了导致整个分析站房停电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;拓展资料&#34;&gt;拓展资料
+&lt;/h3&gt;&lt;p&gt;1、为什么 SPD 需要考虑它的寿命终结：&lt;/p&gt;
+&lt;p&gt;浪涌保护器（SPD）的核心组件——压敏电阻（MOV），它是&lt;strong&gt;易耗品&lt;/strong&gt;。
+SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;。每当有浪涌（雷电感应或电网波动）冲过来时，它就“舍身”导通一次，把高压引向大地。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;微观破坏： 每次冲击都会在压敏电阻内部造成微小的物理损伤。&lt;/li&gt;
+&lt;li&gt;累积效应： 随着浪涌次数增多，它的性能会逐渐退化，漏电流会越来越大。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、两种常见的“寿命终结”方式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;热击穿（慢慢死）： 由于老化，SPD 内部开始产生微弱的持续漏电流，导致内部发热。
+&lt;ul&gt;
+&lt;li&gt;后果： 如果没有保护，它会持续升温甚至起火。&lt;/li&gt;
+&lt;li&gt;解决： SPD 内部自带“脱离器”（就是那个变色窗口），感应到高温后会弹开，窗口变红。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;短路失效（瞬间死）：&lt;/strong&gt; 如果遭遇了一个远超其承受能力的超级浪涌（比如近距离雷击），压敏电阻可能直接被击穿，变成一根“导线”，造成&lt;strong&gt;相线对地直接短路&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;后果： 如果没有 &lt;strong&gt;F2&lt;/strong&gt;，这种短路会直接导致主开关 F1 跳闸，整个设备断电。&lt;/li&gt;
+&lt;li&gt;解决： &lt;strong&gt;F2 会在 F1 动作之前抢先熔断&lt;/strong&gt;，切断短路电流，保护供电连续性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
         <item>
-        <title>如何搜索</title>
-        <link>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2/</link>
+        <title>关于搜索</title>
+        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%90%9C%E7%B4%A2/</link>
         <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2/</guid>
+        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%90%9C%E7%B4%A2/</guid>
         <description>&lt;h2 id=&#34;2023&#34;&gt;2023
 &lt;/h2&gt;&lt;h3 id=&#34;图片资源&#34;&gt;图片资源
 &lt;/h3&gt;&lt;p&gt;永远可以相信谷歌的图片搜索&lt;/p&gt;
@@ -265,6 +454,53 @@
 &lt;li&gt;简单直接型： ChatPDF 或 Claude.ai（直接上传 PDF 提问，其实就是后台自动做了 RAG）。&lt;/li&gt;
 &lt;li&gt;深度研究型： &lt;strong&gt;NotebookLM&lt;/strong&gt;（谷歌出品，专门针对多文档 RAG，非常适合做研究）。&lt;/li&gt;
 &lt;li&gt;笔记整合型： 如果你用 Obsidian，可以安装 Smart Connections 插件，它能基于你的本地笔记建立 RAG，让你跟自己的笔记“对话”。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>开关电源</title>
+        <link>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</link>
+        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</guid>
+        <description>&lt;h2 id=&#34;一-选型时的核心指标&#34;&gt;一、 选型时的核心指标
+&lt;/h2&gt;&lt;p&gt;很多工程师只看电压和电流，这在分析仪中是远远不够的。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;功率余量： 永远不要让开关电源满载运行。工业标准通常建议负载控制在 &lt;strong&gt;60%-80%&lt;/strong&gt;。如果你的分析仪有加热组件（如采样探头、伴热管），启动瞬间的冲击电流巨大，余量不足会导致电源频繁触发过流保护或寿命缩短。&lt;/li&gt;
+&lt;li&gt;纹波与噪声（Ripple &amp;amp; Noise）： 分析仪通常涉及微弱信号处理（如 $\mu A$ 级的传感器电流）。普通工业电源纹波可能在 $100mV$ 以上，这会直接透传到模拟电路中。建议选用低纹波电源，或在输出端加二级线性稳压（LDO）或 LC 滤波。&lt;/li&gt;
+&lt;li&gt;隔离等级： 分析仪经常需要与上位机、PLC 通讯。如果电源的输入输出隔离、输出与地隔离做得不好，很容易通过信号线烧毁 485 芯片或主板。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;二-安装与接地的夺命坑&#34;&gt;二、 安装与接地的“夺命坑”
+&lt;/h2&gt;&lt;h3 id=&#34;1-浮地电压与触电感&#34;&gt;1. 浮地电压与触电感
+&lt;/h3&gt;&lt;p&gt;这是最容易踩的坑。开关电源输入端通常有 Y 电容连接到机壳地（FG）。&lt;strong&gt;如果你的设备没有可靠接地&lt;/strong&gt;，机壳上会带有约 $110V$（输入电压的一半）的感应电压。虽然电流小不至于致命，但足以击穿敏感的传感器输入端，或让维护人员感到明显的“电击”。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;为了通过电磁兼容（EMC）认证，开关电源的输入端都会设计一个 &lt;strong&gt;EMI 滤波器&lt;/strong&gt;。在这个电路中，有两个关键的电容，被称为 &lt;strong&gt;Y 电容&lt;/strong&gt;（通常是 CY1 和 CY2）。
+连接方式： 一个电容接在火线（L）与机壳地（FG/PE）之间；另一个电容接在零线（N）与机壳地之间。当设备没有接地线时，机壳（FG）处于悬浮状态。此时，这两个 Y 电容在电路上形成了一个串联的分压结构：机壳与大地之间会有一个约 110V 的数值
+虽然电压高达 $110V$，但你被电到时只是“麻一下”，通常不会有生命危险。这是因为 Y 电容的容量非常小（电流微弱）&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;建议操作： 可以用万用表的交流电压档测量一下分析仪机壳对地的电压。如果确实是 $110V$ 左右，请务必检查电源线的&lt;strong&gt;三相插头接地端&lt;/strong&gt;是否连接良好，或者手动在机壳接地柱上拉一根粗线到配电箱的地排上。&lt;/p&gt;
+&lt;h3 id=&#34;2-接地回路ground-loop&#34;&gt;2. 接地回路（Ground Loop）
+&lt;/h3&gt;&lt;p&gt;在精密分析仪中，如果模拟地、数字地和电源地（FG）混在一起，开关电源的高频开关噪声会通过地线耦合到采样电路上，导致数值跳变。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建议： 采用“单点接地”策略，强电地与弱电地在物理上保持隔离，仅在一点汇合。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;三-电磁兼容性emc与布置&#34;&gt;三、 电磁兼容性（EMC）与布置
+&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;物理间距： 不要把开关电源紧贴着高精度变送器或微小信号放大电路放置。电源变压器产生的漏磁会产生感生电动势。&lt;/li&gt;
+&lt;li&gt;线缆分布： 输入交流线（AC）和输出直流线（DC）严禁捆扎在一起。AC 线的噪声会直接感应到 DC 线中。&lt;/li&gt;
+&lt;li&gt;磁珠与电感： 在电源输出口增加磁珠，可以有效抑制高频开关噪声。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;开关电源输入端必须接地（PE）：开关电源内部有共模干扰电容，如果没有接地，会有漏电感，触碰会有麻麻的感觉，还会让系统干扰变大&lt;/li&gt;
+&lt;li&gt;输出端（DC 侧）：预留电流余量：实际负载电流最好只占 60–80%，例如需要 5A，就选 7.5A 或 10A 规格&lt;/li&gt;
+&lt;li&gt;散热问题：不要封闭安装：开关电源热量大，必须保证对流通风，至少预留 20mm 上下间距
+&lt;ul&gt;
+&lt;li&gt;太热 = 性能下降 = 寿命大幅减少 = 提前报废&lt;/li&gt;
+&lt;li&gt;开关电源最怕热，温度每升 10°C，寿命减少一半&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;EMC 与干扰控制: 旁边有 MCU/传感器/模拟电路时一定要注意布局。地处理非常重要：数字地、模拟地、保护地规范分开再单点汇总&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

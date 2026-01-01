@@ -3,7 +3,7 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://teaize.github.io/</loc>
-    <lastmod>2025-12-30T00:00:00+00:00</lastmod>
+    <lastmod>2025-12-31T00:00:00+00:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
@@ -15,19 +15,25 @@
                 href="https://teaize.github.io/"
                 />
   </url><url>
+    <loc>https://teaize.github.io/post/</loc>
+    <lastmod>2025-12-31T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</loc>
+    <lastmod>2025-12-31T00:00:00+00:00</lastmod>
+  </url><url>
     <loc>https://teaize.github.io/p/google-tasks/</loc>
     <lastmod>2025-12-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/notebooklm%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</loc>
     <lastmod>2025-12-30T00:00:00+00:00</lastmod>
   </url><url>
-    <loc>https://teaize.github.io/post/</loc>
+    <loc>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%B5%AA%E6%B6%8C%E4%BF%9D%E6%8A%A4%E5%99%A8/</loc>
+    <lastmod>2025-12-30T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%90%9C%E7%B4%A2/</loc>
     <lastmod>2025-12-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/%E5%BC%80%E5%85%B3%E7%94%B5%E6%BA%90/</loc>
-    <lastmod>2025-12-30T00:00:00+00:00</lastmod>
-  </url><url>
-    <loc>https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E6%90%9C%E7%B4%A2/</loc>
     <lastmod>2025-12-30T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://teaize.github.io/p/eeprom/</loc>
