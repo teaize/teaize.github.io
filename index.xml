@@ -7,7 +7,387 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 31 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Fri, 02 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mermaid气路图</title>
+        <link>https://teaize.github.io/p/mermaid%E6%B0%94%E8%B7%AF%E5%9B%BE/</link>
+        <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/mermaid%E6%B0%94%E8%B7%AF%E5%9B%BE/</guid>
+        <description>&lt;h3 id=&#34;案例&#34;&gt;案例
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;graph&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;LR&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;%%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;二氧化硫紫外荧光分析仪接口&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;J3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;辅助气接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;J1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;样气接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;J2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;排口接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;o&#34;&gt;%%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;样气测量气路&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Sample_IN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;烟气样气&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;J1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;样气接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;J1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;样气接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;二通常闭电磁阀&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;S1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;二通常闭电磁阀&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Tee1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;三通接头1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;Tee1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;三通接头1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kicker碳氢涤除器&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;CF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kicker碳氢涤除器&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;A1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;反应室&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;A1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;反应室&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;A2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;集气室&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;A2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;集气室&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;X1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;红宝石气阻&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;X1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;红宝石气阻&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Back&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;purge_IN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kicker碳氢涤除器&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;CF&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Kicker碳氢涤除器&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Back&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;purge_OUT&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;DP&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;取样泵&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;o&#34;&gt;%%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;排气&lt;/span&gt;                                                                      
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;DP&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;取样泵&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Outlet&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;J2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;排口接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;o&#34;&gt;%%&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;辅助气&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;零气&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;Zero_IN&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;零气&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;J3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;辅助气接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;J3&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;辅助气接口&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;F1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;过滤器&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;F1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;过滤器&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;S2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;二通常闭电磁阀&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;     &lt;span class=&#34;n&#34;&gt;S2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;二通常闭电磁阀&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;--&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Tee1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;三通接头1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+
+    %% 二氧化硫紫外荧光分析仪接口
+    J3[辅助气接口]
+    J1[样气接口]
+    J2[排口接口]
+
+    %% 样气测量气路
+    Sample_IN[烟气样气] --&gt; J1[样气接口]
+    J1[样气接口] --&gt; S1[二通常闭电磁阀]
+    S1[二通常闭电磁阀] --&gt; Tee1[三通接头1]
+    Tee1[三通接头1] --&gt; CF[Kicker碳氢涤除器]
+
+     CF[Kicker碳氢涤除器] --&gt; A1[反应室]
+     A1[反应室] --&gt; A2[集气室]
+     A2[集气室] --&gt; X1[红宝石气阻]
+     X1[红宝石气阻] --(Back purge_IN)--&gt; CF[Kicker碳氢涤除器]
+  CF[Kicker碳氢涤除器] --(Back purge_OUT)--&gt; DP[取样泵]
+
+     %% 排气                                                                      
+     DP[取样泵] --(Outlet)--&gt; J2[排口接口]
+
+     %% 辅助气（零气）
+     Zero_IN[零气]--&gt;J3[辅助气接口]
+     J3[辅助气接口] --&gt; F1[过滤器]
+     F1[过滤器] --&gt; S2[二通常闭电磁阀]
+     S2[二通常闭电磁阀] --&gt; Tee1[三通接头1]
+&lt;/div&gt;
+&lt;blockquote&gt;
+&lt;p&gt;你能看懂下面这张图吗，这图中很多符号（例如 A1、A2）没有意义，你能帮我改善一下吗。另外，也没有注释，你能帮我添加注释吗。还有，如果可以，你也可以帮我完善一下流程图的结构，例如某些地方不一定用方框，也可以帮忙完善一下样式&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;改进&#34;&gt;改进
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;语义化标签：将 J1、A1 等抽象符号替换为功能性名称（如 &lt;code&gt;Sample_Inlet&lt;/code&gt;、&lt;code&gt;Reaction_Cell&lt;/code&gt;）。&lt;/li&gt;
+&lt;li&gt;形状多样化：使用 Mermaid 的不同节点形状。例如，接口使用圆角矩形，阀门使用菱形（逻辑切换），泵使用六角形。&lt;/li&gt;
+&lt;li&gt;颜色区分：通过 CSS 样式对“样气路径”、“零气路径”和“核心分析单元”进行了颜色编码。&lt;/li&gt;
+&lt;li&gt;结构理顺：修正了 Kicker（碳氢涤除器）渗透气路（Back Purge）的逻辑表达，使其更符合物理流向。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;mermaid&#34;&gt;
+  graph LR
+    %% 样式全局定义
+    classDef inlet_outlet fill:#f5f5f5,stroke:#333,stroke-width:2px;
+    classDef valve_logic fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+    classDef analyzer_core fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+    classDef power_source fill:#f1f8e9,stroke:#689f38,stroke-width:2px;
+    classDef gas_stream color:#546e7a,stroke-dasharray: 5 5;
+
+    %% 1. 外部物理接口层
+    subgraph Physical_Interfaces [外部连接接口]
+        Inlet_Sample([样气采集口])
+        Inlet_Zero([零气/校准口])
+        Outlet_Exhaust([总排气口])
+    end
+
+    %% 2. 气路预处理与逻辑切换
+    subgraph Gas_Selection [气路切换与过滤]
+        Valve_Sample{样气切换电磁阀}
+        Valve_Zero{零气切换电磁阀}
+        Filter_Zero[零气精细过滤器]
+        Tee_Join((气路汇合点))
+    end
+
+    %% 3. 核心检测单元
+    subgraph Detection_Unit [核心检测单元]
+        Kicker[Kicker 碳氢涤除器]
+        Reaction_Chamber[紫外荧光反应室]
+        Optical_Detector[光电探测检测室]
+    end
+
+    %% 4. 流量管理与动力系统
+    subgraph Flow_Control [流控与动力系统]
+        Capillary_Orifice[毛细限流孔/红宝石气阻]
+        Vacuum_Pump{{大流量真空泵}}
+    end
+
+    %% --- 逻辑连线 ---
+
+    %% 输入路径
+    Inlet_Sample --&gt; Valve_Sample
+    Inlet_Zero --&gt; Filter_Zero --&gt; Valve_Zero
+    
+    Valve_Sample -- 测量模式 --&gt; Tee_Join
+    Valve_Zero -- 校准模式 --&gt; Tee_Join
+
+    %% 分析路径
+    Tee_Join --&gt; Kicker
+    Kicker -- 样气管路 --&gt; Reaction_Chamber
+    Reaction_Chamber --&gt; Optical_Detector
+
+    %% 回流与排气路径
+    Optical_Detector --&gt; Capillary_Orifice
+    Capillary_Orifice -- 反向吹扫干气 --&gt; Kicker
+    Kicker -- 渗透废气/吹扫气 --&gt; Vacuum_Pump
+    Vacuum_Pump --&gt; Outlet_Exhaust
+
+    %% --- 样式应用 ---
+    class Inlet_Sample,Inlet_Zero,Outlet_Exhaust inlet_outlet;
+    class Valve_Sample,Valve_Zero valve_logic;
+    class Kicker,Reaction_Chamber,Optical_Detector analyzer_core;
+    class Vacuum_Pump power_source;
+&lt;/div&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;22
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;23
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;24
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;25
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;26
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;27
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;28
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;29
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;30
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;31
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;32
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;33
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;34
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;35
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;36
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;37
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;38
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;39
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;40
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;41
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;42
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;43
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;44
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;45
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;46
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;47
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;48
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;49
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;50
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;51
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;52
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;53
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;54
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;55
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;56
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;57
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;58
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;59
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;60
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;61
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;graph LR
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 样式全局定义
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef inlet_outlet fill:#f5f5f5,stroke:#333,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef valve_logic fill:#fff9c4,stroke:#fbc02d,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef analyzer_core fill:#e3f2fd,stroke:#1976d2,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef power_source fill:#f1f8e9,stroke:#689f38,stroke-width:2px;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    classDef gas_stream color:#546e7a,stroke-dasharray: 5 5;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 1. 外部物理接口层
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Physical_Interfaces [外部连接接口]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Inlet_Sample([样气采集口])
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Inlet_Zero([零气/校准口])
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Outlet_Exhaust([总排气口])
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 2. 气路预处理与逻辑切换
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Gas_Selection [气路切换与过滤]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Valve_Sample{样气切换电磁阀}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Valve_Zero{零气切换电磁阀}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Filter_Zero[零气精细过滤器]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Tee_Join((气路汇合点))
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 3. 核心检测单元
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Detection_Unit [核心检测单元]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Kicker[Kicker 碳氢涤除器]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Reaction_Chamber[紫外荧光反应室]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Optical_Detector[光电探测检测室]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 4. 流量管理与动力系统
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    subgraph Flow_Control [流控与动力系统]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Capillary_Orifice[毛细限流孔/红宝石气阻]
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        Vacuum_Pump{{大流量真空泵}}
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 逻辑连线 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 输入路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Inlet_Sample --&amp;gt; Valve_Sample
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Inlet_Zero --&amp;gt; Filter_Zero --&amp;gt; Valve_Zero
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Valve_Sample -- 测量模式 --&amp;gt; Tee_Join
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Valve_Zero -- 校准模式 --&amp;gt; Tee_Join
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 分析路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Tee_Join --&amp;gt; Kicker
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Kicker -- 样气管路 --&amp;gt; Reaction_Chamber
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Reaction_Chamber --&amp;gt; Optical_Detector
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% 回流与排气路径
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Optical_Detector --&amp;gt; Capillary_Orifice
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Capillary_Orifice -- 反向吹扫干气 --&amp;gt; Kicker
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Kicker -- 渗透废气/吹扫气 --&amp;gt; Vacuum_Pump
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    Vacuum_Pump --&amp;gt; Outlet_Exhaust
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    %% --- 样式应用 ---
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Inlet_Sample,Inlet_Zero,Outlet_Exhaust inlet_outlet;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Valve_Sample,Valve_Zero valve_logic;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Kicker,Reaction_Chamber,Optical_Detector analyzer_core;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    class Vacuum_Pump power_source;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;节点形状语义化：
+&lt;ul&gt;
+&lt;li&gt;使用 &lt;code&gt;([ ])&lt;/code&gt; 表示外部接口（Stadium shape）。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{ }&lt;/code&gt; 表示电磁阀（决策点）。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;{{ }}&lt;/code&gt; 表示泵（动力源）。&lt;/li&gt;
+&lt;li&gt;使用 &lt;code&gt;(( ))&lt;/code&gt; 表示物理接头或气体状态。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;布局逻辑：
+&lt;ul&gt;
+&lt;li&gt;样气和零气通过三通汇合后进入分析单元，这体现了分时测量的逻辑。&lt;/li&gt;
+&lt;li&gt;Kicker 的双回路：注意图中 CF 的连线。样气走内管，而经过反应室后的废气通过气阻后，作为“干气”回到 CF 的外管进行逆流吹扫，这是一种非常巧妙的&lt;strong&gt;自循环设计&lt;/strong&gt;，节省了额外的干燥气源。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;将外部接口用一个子图表示出来，并且位于代码的第一段非常好，之后可以与其他图进行关联&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>Photoshop调整图片尺寸</title>
+        <link>https://teaize.github.io/p/photoshop%E8%B0%83%E6%95%B4%E5%9B%BE%E7%89%87%E5%B0%BA%E5%AF%B8/</link>
+        <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/photoshop%E8%B0%83%E6%95%B4%E5%9B%BE%E7%89%87%E5%B0%BA%E5%AF%B8/</guid>
+        <description>&lt;h3 id=&#34;方法-1&#34;&gt;方法 1
+&lt;/h3&gt;&lt;p&gt;原图如下：
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304195828.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304195828.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;1、Photoshop 菜单栏：图像—&amp;gt;图像大小&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304195933.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304195933.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;2、可以查看到原稿的像素及分辨率&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304195951.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304195951.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;3、可从下拉菜单中选择常用的选项&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304200007.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304200007.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;4、调整完之后的尺寸及分辨率
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304200025.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304200025.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;方法-2&#34;&gt;方法 2
+&lt;/h3&gt;&lt;p&gt;如果图片的比例正确，只是想等比缩小图片，可以：文件 —&amp;gt; 导出 —&amp;gt; 导出为&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304200113.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20250304200113.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>气体浓度的表示方法</title>
         <link>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</link>
         <pubDate>Wed, 31 Dec 2025 00:00:00 +0000</pubDate>
@@ -14779,6 +15159,7 @@ $$\text{最终读数} \propto \frac{\text{主 PMT 信号 (Sample)}}{\text{参考
         <description>&lt;p&gt;这里主要学习一下固态继电器使用的注意事项&lt;/p&gt;
 &lt;p&gt;固态继电器（Solid State Relay, &lt;strong&gt;SSR&lt;/strong&gt;）在 CEMS 机柜里绝对是“劳模”级别的存在，特别是在伴热管线控制、转换炉加热、冷凝器制冷片控制这些需要 &lt;strong&gt;PID 精确控温&lt;/strong&gt;（频繁开关）的场合。机械继电器如果像它那样每秒开关一次，两天触点就烧废了&lt;/p&gt;
 &lt;p&gt;但它不像机械继电器那样“皮实”，它更像是一个娇气的半导体&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20260102133919.png]]&lt;/p&gt;
 &lt;h3 id=&#34;第一大坑发热&#34;&gt;第一大坑：发热
 &lt;/h3&gt;&lt;p&gt;这是 SSR 90% 的死因。很多人以为继电器就是个开关，不需要消耗能量。错！&lt;/p&gt;
 &lt;ul&gt;
@@ -28517,16 +28898,20 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
     &gt;山药排骨汤_下厨房&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/647992710000000013004609?xsec_token=ABuhfx2QUNdN44JfmfhUCTukXfXKAbSy6lb054_BNioH8=&amp;amp;xsec_source=pc_search&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;花生汤- 小红书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/107514098/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;白菜煎蛋豆腐汤_下厨房&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/614c8da8000000002103d7e9?xsec_token=ABJQAN1XBWh0t-hcp6ILeoSejV5Iwy-2mR2620hOAJqrs=&amp;amp;xsec_source=pc_search&amp;amp;m_source=pwa&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;蘑菇汤 - 小红书&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/65b0cbcc0000000011012842?xsec_token=ABJ5Cdl_CTX89E-Ko8pb6BNHFIR53rMPGNuPgleKI4vDI=&amp;amp;xsec_source=pc_search&amp;amp;m_source=pwa&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;口蘑冬瓜汤 - 小红书&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/105921235/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;山药排骨汤_下厨房&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/63b14b2e0000000022028821?xsec_token=ABzTXCxPoiCNFkCJTRlLQFpS3JivdWl53Nbio6EVYBBj0=&amp;amp;xsec_source=pc_collect&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;紫菜蛋花汤-小红书&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/66dd10c50000000012011ef3?xsec_token=ABh5Fff70R8PRB6pB-FlNhfXX0xfSUw5ob8TSiG_ED7pU=&amp;amp;xsec_source=pc_search&amp;amp;source=unknown&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;山药骨头汤 - 小红书&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/104154238/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;萝卜炖排骨_下厨房&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiachufang.com/recipe/107512164/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;山药瘦肉汤_下厨房&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;待尝试&#34;&gt;待尝试
 &lt;/h3&gt;&lt;ul&gt;
@@ -29023,7 +29408,14 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
         <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
-        <description>&lt;p&gt;![[Pasted image 20240921102042.png]]&lt;/p&gt;
+        <description>&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921111024.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921111024.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 &lt;h2 id=&#34;平行螺纹&#34;&gt;平行螺纹
 &lt;/h2&gt;&lt;h3 id=&#34;unf-螺纹&#34;&gt;UNF 螺纹
 &lt;/h3&gt;&lt;ul&gt;
