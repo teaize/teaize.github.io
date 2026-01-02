@@ -388,6 +388,158 @@
 </description>
         </item>
         <item>
+        <title>SW教程</title>
+        <link>https://teaize.github.io/p/sw%E6%95%99%E7%A8%8B/</link>
+        <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E6%95%99%E7%A8%8B/</guid>
+        <description>&lt;h3 id=&#34;注释&#34;&gt;注释
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;模型视图中可添加注释，工程图当中也可以添加注释&lt;/li&gt;
+&lt;li&gt;在工程图中，有一个&lt;strong&gt;链接到属性&lt;/strong&gt;按钮，在制作工程图模板的时候用得到&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;![[Pasted image 20260102215759.png]]&lt;/p&gt;
+&lt;h3 id=&#34;新建零件时引用零件&#34;&gt;新建零件时引用零件
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;比如零件 A 还没有最终完成，此时需要在 A 的基础上再创建一个零件 B&lt;/li&gt;
+&lt;li&gt;如果不引用 A，重新新建零件 B 的话，之后对 A 进行了修改，零件 B 也需要再重复进行同样的修改，两者之间没有关联且不方便更新&lt;/li&gt;
+&lt;li&gt;方法：新建零件后，插入—&amp;gt;零件，将零件 A 插入进去，然后再进行零件 B 的编辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;![[Pasted image 20241010102239.png]]&lt;/p&gt;
+&lt;h3 id=&#34;保存虚拟零件&#34;&gt;保存虚拟零件
+&lt;/h3&gt;&lt;p&gt;如果装配体中包含了非常多的虚拟零件。右键其中一个，根据提示，可以将所有的虚拟装配体全部保存
+![[Pasted image 20241022102447.png]]&lt;/p&gt;
+&lt;h3 id=&#34;柔性零件&#34;&gt;柔性零件
+&lt;/h3&gt;&lt;p&gt;一个柔性零件 C 装在装配体 A 中，如果将这个装配体 A 再插入到大装配体 B 中，那么就需要将装配体 A 设置为柔性，才能在大装配体 B 中移动柔性零件&lt;/p&gt;
+&lt;p&gt;使子装配体为柔性零件
+![[Pasted image 20240419153645.png]]&lt;/p&gt;
+&lt;h2 id=&#34;清除&#34;&gt;清除
+&lt;/h2&gt;&lt;p&gt;1、清理未使用的特征
+![[Pasted image 20240418134505.png]]&lt;/p&gt;
+&lt;p&gt;2、清除外部参考&lt;/p&gt;
+&lt;p&gt;对于这种外部链接，可以断开链接
+![[Pasted image 20240418135301.png]]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>气路设计准则</title>
+        <link>https://teaize.github.io/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1%E5%87%86%E5%88%99/</link>
+        <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%B0%94%E8%B7%AF%E8%AE%BE%E8%AE%A1%E5%87%86%E5%88%99/</guid>
+        <description>&lt;h3 id=&#34;压力递减原则&#34;&gt;压力“递减”原则
+&lt;/h3&gt;&lt;p&gt;为了稳，压力必须&lt;strong&gt;一级比一级低&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工厂气源 (0.7 MPa) $\to$ 一级减压 (0.55 MPa) $\to$ 二级精密调压 (0.40 MPa) $\to$ 探头。&lt;/li&gt;
+&lt;li&gt;禁忌： 如果你设定的稀释风是 0.45 MPa，而一级减压只调到了 0.46 MPa，那稍微有点波动，稀释风就不稳了。压差余量至少要留 0.1 MPa 以上。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;死体积最小化&#34;&gt;“死体积”最小化
+&lt;/h3&gt;&lt;p&gt;这主要针对&lt;strong&gt;校准气路&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;现象： 当你切标气时，如果管路很长、减压阀很大，要吹扫很久读数才能稳。&lt;/li&gt;
+&lt;li&gt;设计： 好的机柜，标气切换阀会尽量靠近探头（或者在机柜出口），并且管径越细越好（1/8 英寸或 1/4 英寸），以保证&lt;strong&gt;响应速度&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;单向保护&#34;&gt;单向保护
+&lt;/h3&gt;&lt;p&gt;这是为了保护那些昂贵的分析仪和零气发生器。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景： 探头在几十米高的地方，可能存在反压；或者反吹（Blowback）时有高压气。&lt;/li&gt;
+&lt;li&gt;设计： 在稀释风出口、校准气出口，通常都要加装&lt;strong&gt;单向阀 (Check Valve)&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;目的： 防止反吹时，高压脏气倒灌回机柜，把精密的减压阀或零气发生器冲坏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;溢流校准原则&#34;&gt;“溢流”校准原则
+&lt;/h3&gt;&lt;p&gt;把标气送到几十米高的探头上去，怎么保证探头吸进去的是纯标气，而不是混了烟道的烟气？设计逻辑： 绝不能把标气管路和探头“死连接”！必须设计成开放式&lt;strong&gt;溢流&lt;/strong&gt;结构。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;错误设计： 用密封接头直接把标气怼进临界孔。
+&lt;ul&gt;
+&lt;li&gt;后果： 这样会给临界孔施加额外的压力（标气瓶压力），导致压力变了，流量变了，校准完全失真。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;正确设计（溢流法）：
+&lt;ul&gt;
+&lt;li&gt;标气进入探头前端的一个开放腔体（校准口）。&lt;/li&gt;
+&lt;li&gt;流量压制： 如果临界孔的吸入流量是 50 mL/min。&lt;/li&gt;
+&lt;li&gt;供气设定： 你的标气供给流量必须设定为 &amp;gt; 60 mL/min（通常大 10%~20%）。&lt;/li&gt;
+&lt;li&gt;物理过程： 50 mL 被吸走，多余的 10 mL 从探头头部溢出（反向吹向烟道）。&lt;/li&gt;
+&lt;li&gt;目的： 这多余的 10 mL 形成了一个“正压保护伞”，彻底挡住了外面的烟气，确保吸进去的 100% 是标气，且压力完全等于烟道静压。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;也就是说，机柜内的标气流量计，量程必须略大于探头的采样流量，不能刚刚好。&lt;/p&gt;
+&lt;h3 id=&#34;材质的洁癖原则&#34;&gt;材质的“洁癖”原则
+&lt;/h3&gt;&lt;p&gt;这一点在痕量分析（Trace Level）和腐蚀性气体测量中是生与死的区别。对于 $\text{SO}_2$（吸附性强）和 $\text{NO}_x$（化学活性高），气路材质必须有“洁癖”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;绝对禁区（Red List）：
+&lt;ul&gt;
+&lt;li&gt;铜/黄铜 (Copper/Brass)： 绝对禁止！$\text{SO}_2$ 和 $\text{NO}_x$ 会与铜发生反应，还没到分析仪就被管壁“吃”光了。&lt;/li&gt;
+&lt;li&gt;普通橡胶管： 会吸附气体，还会渗入氧气。&lt;/li&gt;
+&lt;li&gt;碳钢： 生锈后吸附力极强。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;黄金标准（Green List）：
+&lt;ul&gt;
+&lt;li&gt;接头/阀门： 必须是 316L 不锈钢 或 PTFE/PFA。&lt;/li&gt;
+&lt;li&gt;管路： 机柜内部优先用 PFA/FEP（特氟龙）软管。如果是测超低排放（&amp;lt;10 ppm），甚至不锈钢管都不行，要用 SilcoNert / Sulfinert（硅烷化镀膜）处理过的管子。&lt;/li&gt;
+&lt;li&gt;密封件： 只能用 Viton (氟橡胶) 或 Kalrez，不能用普通 NBR。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;如果你发现标气通进去，读数爬升很慢（拖尾），第一反应就是去查气路里是不是混进了一个铜接头或者一段普通橡胶管。&lt;/p&gt;
+&lt;h3 id=&#34;排气的大气锚定原则&#34;&gt;排气的“大气锚定”原则
+&lt;/h3&gt;&lt;p&gt;这是新手最容易忽视，但最容易导致测量不准的地方。分析仪测完气后，废气排到哪里去？&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;物理背景： 绝大多数分析仪（如 UVF, CLD）的测量腔体是与排气口连通的。如果排气口有压力波动（背压），测量腔体的密度就会变，读数就会飘（压力加宽效应）。&lt;/li&gt;
+&lt;li&gt;错误设计：
+&lt;ul&gt;
+&lt;li&gt;把排气管接得很长、很细，还是盘旋的。&lt;/li&gt;
+&lt;li&gt;把几台分析仪的排气管强行并成一根细管。&lt;/li&gt;
+&lt;li&gt;排气口直接对着空调出风口吹（风压干扰）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;正确设计（大气平衡）：
+&lt;ul&gt;
+&lt;li&gt;总管加粗： 既然汇流了，总排气管直径要加粗（比如用 Φ10 或 Φ12）。&lt;/li&gt;
+&lt;li&gt;真空破坏： 在分析仪出口和总排气管之间，设计一个&lt;strong&gt;开放式漏斗&lt;/strong&gt;或者&lt;strong&gt;三通大气口&lt;/strong&gt;。
+&lt;ul&gt;
+&lt;li&gt;让废气先排到一个与大气相通的空间，然后再被抽走（如果有抽气扇）或者自然飘走。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;目的： 确保分析仪出口永远只有 &lt;strong&gt;0 Bar (表压)&lt;/strong&gt;，无论室外刮风还是总管堵塞，都不影响仪器内部压力。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;反吹的暴力美学与隔离&#34;&gt;“反吹”的暴力美学与隔离
+&lt;/h3&gt;&lt;p&gt;稀释探头最怕堵。所以必须有压缩空气反吹（Blowback）系统，每隔几小时“轰”一下滤芯。 这里的气路设计有两个核心点：&lt;strong&gt;蓄能&lt;/strong&gt; 与 &lt;strong&gt;隔离&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;蓄能：
+&lt;ul&gt;
+&lt;li&gt;反吹靠的不是气量，而是&lt;strong&gt;爆发力&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;设计：在机柜内或探头旁，必须设计一个储气罐。反吹时，是利用罐子里储存的高压气瞬间释放，产生像“空气锤”一样的效果，把积灰震下来。光靠细管子供气是吹不干净的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;隔离：
+&lt;ul&gt;
+&lt;li&gt;反吹时压力高达 0.4~0.6 MPa。而稀释口那边是脆弱的临界孔。&lt;/li&gt;
+&lt;li&gt;设计：&lt;strong&gt;气路必须保证反吹气绝对不能倒灌进稀释风管路&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;除了加单向阀，通常反吹电磁阀和校准电磁阀会有&lt;strong&gt;互锁逻辑&lt;/strong&gt;，或者采用专门的“钳管阀” (Pinch Valve) 直接夹断采样管，防止高压气回冲伤及无辜。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;伴热的无冷点原则&#34;&gt;伴热的“无冷点”原则
+&lt;/h3&gt;&lt;p&gt;稀释法的优势是不需要全称伴热（因为露点降低了），但是！从探头提取样气到稀释混合的这一小段（几厘米到十几厘米），是生死攸关的。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;问题： 样气刚从 150°C 的烟道出来，如果碰到了一个只有 50°C 的金属法兰。&lt;/li&gt;
+&lt;li&gt;后果： 瞬间冷凝结露。$\text{SO}_2$ 溶于水变成酸，腐蚀法兰，吸附气体。&lt;/li&gt;
+&lt;li&gt;设计原则：
+&lt;ul&gt;
+&lt;li&gt;探头内部的加热块（Heater Block）必须紧紧包裹住所有接触样气的部件（滤芯、临界孔、混合室）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;热传递链不能断：&lt;/strong&gt; 哪怕是一个连接螺母，如果它露在保温层外面，它就是一个“冷点 (Cold Spot)”。氨盐结晶最喜欢在冷点长出来，最后堵死气路。&lt;/li&gt;
+&lt;li&gt;机柜接口：所有的样气传输管（虽然已经稀释了），进入机柜前最好也都有保温，防止极端天气下的二次冷凝。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>气体浓度的表示方法</title>
         <link>https://teaize.github.io/p/%E6%B0%94%E4%BD%93%E6%B5%93%E5%BA%A6%E7%9A%84%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95/</link>
         <pubDate>Wed, 31 Dec 2025 00:00:00 +0000</pubDate>
