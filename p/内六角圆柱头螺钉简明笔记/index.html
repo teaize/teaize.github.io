@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="内六角圆柱头螺钉 摘自 GB/T 70.1-2000 螺纹规格 d b 参考 dk max- 光滑 dk max- 滚花 k max e min s 公称 t min L 长度范围 M1.6 15 3 3.14 1.6 1.73 1.5 0.7 2. 5-16 M2 16 3.8 3.98 2 1.73 1.5 1 3-20 M2.5 17 4.5 4.68 2.5 2.3 2 1.1 4-25 M3 18 5.5 5.68 3 2.87 2.5 1.3 5-30 M4 20 7 7.22 4 3.44 3 2 6-40 M5 22 8.5 8.72 5 4.58 4 2.5 8-50 M6 24 10 10.22 6 5.72 5 3 10 -60 M8 28 13 13.27 8 6.86 6 4 12 -80 MIO 32 16 16.27 10 9.15 8 5 16 -100 M12 36 18 18.27 12 11.43 10 6 20 -120 (M14) 40 21 21.33 14 13.72 12 7 25 -140 M16 44 24 24.33 16 16 14 8 25 -160 M20 52 30 30.33 20 19.44 17 10 30 -200 M24 60 36 36.39 24 21.73 19 12 40 -200 M30 72 45 45.39 30 25.15 22 15.5 45 -200 M36 84 54 54.46 36 30.85 27 19 55 -200 M42 96 63 63.46 42 36.57 32 24 60 -300 M48 106 72 72.46 48 41.13 36 28 70 -300 注意：Solidworks 的 Toolbox 中附带的内六角螺钉为内六角花形圆柱头螺钉 GB/T 6190-1986，与内六角圆柱头螺钉 GB /T 70.1 - 2008 不同\n">
+<title>内六角圆柱头螺钉简明笔记</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%86%85%E5%85%AD%E8%A7%92%E5%9C%86%E6%9F%B1%E5%A4%B4%E8%9E%BA%E9%92%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="内六角圆柱头螺钉简明笔记">
+<meta property='og:description' content="内六角圆柱头螺钉 摘自 GB/T 70.1-2000 螺纹规格 d b 参考 dk max- 光滑 dk max- 滚花 k max e min s 公称 t min L 长度范围 M1.6 15 3 3.14 1.6 1.73 1.5 0.7 2. 5-16 M2 16 3.8 3.98 2 1.73 1.5 1 3-20 M2.5 17 4.5 4.68 2.5 2.3 2 1.1 4-25 M3 18 5.5 5.68 3 2.87 2.5 1.3 5-30 M4 20 7 7.22 4 3.44 3 2 6-40 M5 22 8.5 8.72 5 4.58 4 2.5 8-50 M6 24 10 10.22 6 5.72 5 3 10 -60 M8 28 13 13.27 8 6.86 6 4 12 -80 MIO 32 16 16.27 10 9.15 8 5 16 -100 M12 36 18 18.27 12 11.43 10 6 20 -120 (M14) 40 21 21.33 14 13.72 12 7 25 -140 M16 44 24 24.33 16 16 14 8 25 -160 M20 52 30 30.33 20 19.44 17 10 30 -200 M24 60 36 36.39 24 21.73 19 12 40 -200 M30 72 45 45.39 30 25.15 22 15.5 45 -200 M36 84 54 54.46 36 30.85 27 19 55 -200 M42 96 63 63.46 42 36.57 32 24 60 -300 M48 106 72 72.46 48 41.13 36 28 70 -300 注意：Solidworks 的 Toolbox 中附带的内六角螺钉为内六角花形圆柱头螺钉 GB/T 6190-1986，与内六角圆柱头螺钉 GB /T 70.1 - 2008 不同\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%86%85%E5%85%AD%E8%A7%92%E5%9C%86%E6%9F%B1%E5%A4%B4%E8%9E%BA%E9%92%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2024-09-24T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2024-09-24T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="内六角圆柱头螺钉简明笔记">
+<meta name="twitter:description" content="内六角圆柱头螺钉 摘自 GB/T 70.1-2000 螺纹规格 d b 参考 dk max- 光滑 dk max- 滚花 k max e min s 公称 t min L 长度范围 M1.6 15 3 3.14 1.6 1.73 1.5 0.7 2. 5-16 M2 16 3.8 3.98 2 1.73 1.5 1 3-20 M2.5 17 4.5 4.68 2.5 2.3 2 1.1 4-25 M3 18 5.5 5.68 3 2.87 2.5 1.3 5-30 M4 20 7 7.22 4 3.44 3 2 6-40 M5 22 8.5 8.72 5 4.58 4 2.5 8-50 M6 24 10 10.22 6 5.72 5 3 10 -60 M8 28 13 13.27 8 6.86 6 4 12 -80 MIO 32 16 16.27 10 9.15 8 5 16 -100 M12 36 18 18.27 12 11.43 10 6 20 -120 (M14) 40 21 21.33 14 13.72 12 7 25 -140 M16 44 24 24.33 16 16 14 8 25 -160 M20 52 30 30.33 20 19.44 17 10 30 -200 M24 60 36 36.39 24 21.73 19 12 40 -200 M30 72 45 45.39 30 25.15 22 15.5 45 -200 M36 84 54 54.46 36 30.85 27 19 55 -200 M42 96 63 63.46 42 36.57 32 24 60 -300 M48 106 72 72.46 48 41.13 36 28 70 -300 注意：Solidworks 的 Toolbox 中附带的内六角螺钉为内六角花形圆柱头螺钉 GB/T 6190-1986，与内六角圆柱头螺钉 GB /T 70.1 - 2008 不同\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#内六角圆柱头螺钉">内六角圆柱头螺钉</a></li>
+        <li><a href="#内六角圆柱头螺钉用沉孔尺寸">内六角圆柱头螺钉用沉孔尺寸</a></li>
+        <li><a href="#参考资料">参考资料</a></li>
+        <li><a href="#其他说明">其他说明</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%86%85%E5%85%AD%E8%A7%92%E5%9C%86%E6%9F%B1%E5%A4%B4%E8%9E%BA%E9%92%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/">内六角圆柱头螺钉简明笔记</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2024-09-24</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="内六角圆柱头螺钉">内六角圆柱头螺钉
+</h3><ul>
+<li>摘自 GB/T 70.1-2000</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924204527.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924204527.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>螺纹规格 d</th>
+          <th>b 参考</th>
+          <th>dk max- 光滑</th>
+          <th>dk max- 滚花</th>
+          <th>k max</th>
+          <th>e min</th>
+          <th>s 公称</th>
+          <th>t min</th>
+          <th>L 长度范围</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>M1.6</td>
+          <td>15</td>
+          <td>3</td>
+          <td>3.14</td>
+          <td>1.6</td>
+          <td>1.73</td>
+          <td>1.5</td>
+          <td>0.7</td>
+          <td>2. 5-16</td>
+      </tr>
+      <tr>
+          <td>M2</td>
+          <td>16</td>
+          <td>3.8</td>
+          <td>3.98</td>
+          <td>2</td>
+          <td>1.73</td>
+          <td>1.5</td>
+          <td>1</td>
+          <td>3-20</td>
+      </tr>
+      <tr>
+          <td>M2.5</td>
+          <td>17</td>
+          <td>4.5</td>
+          <td>4.68</td>
+          <td>2.5</td>
+          <td>2.3</td>
+          <td>2</td>
+          <td>1.1</td>
+          <td>4-25</td>
+      </tr>
+      <tr>
+          <td>M3</td>
+          <td>18</td>
+          <td>5.5</td>
+          <td>5.68</td>
+          <td>3</td>
+          <td>2.87</td>
+          <td>2.5</td>
+          <td>1.3</td>
+          <td>5-30</td>
+      </tr>
+      <tr>
+          <td>M4</td>
+          <td>20</td>
+          <td>7</td>
+          <td>7.22</td>
+          <td>4</td>
+          <td>3.44</td>
+          <td>3</td>
+          <td>2</td>
+          <td>6-40</td>
+      </tr>
+      <tr>
+          <td>M5</td>
+          <td>22</td>
+          <td>8.5</td>
+          <td>8.72</td>
+          <td>5</td>
+          <td>4.58</td>
+          <td>4</td>
+          <td>2.5</td>
+          <td>8-50</td>
+      </tr>
+      <tr>
+          <td>M6</td>
+          <td>24</td>
+          <td>10</td>
+          <td>10.22</td>
+          <td>6</td>
+          <td>5.72</td>
+          <td>5</td>
+          <td>3</td>
+          <td>10 -60</td>
+      </tr>
+      <tr>
+          <td>M8</td>
+          <td>28</td>
+          <td>13</td>
+          <td>13.27</td>
+          <td>8</td>
+          <td>6.86</td>
+          <td>6</td>
+          <td>4</td>
+          <td>12 -80</td>
+      </tr>
+      <tr>
+          <td>MIO</td>
+          <td>32</td>
+          <td>16</td>
+          <td>16.27</td>
+          <td>10</td>
+          <td>9.15</td>
+          <td>8</td>
+          <td>5</td>
+          <td>16 -100</td>
+      </tr>
+      <tr>
+          <td>M12</td>
+          <td>36</td>
+          <td>18</td>
+          <td>18.27</td>
+          <td>12</td>
+          <td>11.43</td>
+          <td>10</td>
+          <td>6</td>
+          <td>20 -120</td>
+      </tr>
+      <tr>
+          <td>(M14)</td>
+          <td>40</td>
+          <td>21</td>
+          <td>21.33</td>
+          <td>14</td>
+          <td>13.72</td>
+          <td>12</td>
+          <td>7</td>
+          <td>25 -140</td>
+      </tr>
+      <tr>
+          <td>M16</td>
+          <td>44</td>
+          <td>24</td>
+          <td>24.33</td>
+          <td>16</td>
+          <td>16</td>
+          <td>14</td>
+          <td>8</td>
+          <td>25 -160</td>
+      </tr>
+      <tr>
+          <td>M20</td>
+          <td>52</td>
+          <td>30</td>
+          <td>30.33</td>
+          <td>20</td>
+          <td>19.44</td>
+          <td>17</td>
+          <td>10</td>
+          <td>30 -200</td>
+      </tr>
+      <tr>
+          <td>M24</td>
+          <td>60</td>
+          <td>36</td>
+          <td>36.39</td>
+          <td>24</td>
+          <td>21.73</td>
+          <td>19</td>
+          <td>12</td>
+          <td>40 -200</td>
+      </tr>
+      <tr>
+          <td>M30</td>
+          <td>72</td>
+          <td>45</td>
+          <td>45.39</td>
+          <td>30</td>
+          <td>25.15</td>
+          <td>22</td>
+          <td>15.5</td>
+          <td>45 -200</td>
+      </tr>
+      <tr>
+          <td>M36</td>
+          <td>84</td>
+          <td>54</td>
+          <td>54.46</td>
+          <td>36</td>
+          <td>30.85</td>
+          <td>27</td>
+          <td>19</td>
+          <td>55 -200</td>
+      </tr>
+      <tr>
+          <td>M42</td>
+          <td>96</td>
+          <td>63</td>
+          <td>63.46</td>
+          <td>42</td>
+          <td>36.57</td>
+          <td>32</td>
+          <td>24</td>
+          <td>60 -300</td>
+      </tr>
+      <tr>
+          <td>M48</td>
+          <td>106</td>
+          <td>72</td>
+          <td>72.46</td>
+          <td>48</td>
+          <td>41.13</td>
+          <td>36</td>
+          <td>28</td>
+          <td>70 -300</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>注意：Solidworks 的 Toolbox 中附带的内六角螺钉为内六角花形圆柱头螺钉 <code>GB/T 6190-1986</code>，与内六角圆柱头螺钉 <code>GB /T 70.1 - 2008</code> 不同</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193836.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193836.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193842.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193842.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193846.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193846.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<h3 id="内六角圆柱头螺钉用沉孔尺寸">内六角圆柱头螺钉用沉孔尺寸
+</h3><ul>
+<li>摘自 GB/T 152.3-1988</li>
+</ul>
+<p>
+	<div class="post-img-view">
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193854.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193854.png" alt="image.png"  />
+		</a>
+	</div>
+
+</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th>螺纹规格</th>
+          <th>d2(H13)</th>
+          <th>d1(H13)</th>
+          <th>t</th>
+          <th>d3(H13)</th>
+          <th>d3</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>M1.6</td>
+          <td>3.3</td>
+          <td>1.8</td>
+          <td>1.8</td>
+          <td>1.8</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M2</td>
+          <td>4.3</td>
+          <td>2.4</td>
+          <td>2.3</td>
+          <td>2.3</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M2.5</td>
+          <td>5.0</td>
+          <td>2.9</td>
+          <td>2.9</td>
+          <td>2.9</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M3</td>
+          <td>6.0</td>
+          <td>3.4</td>
+          <td>3.4</td>
+          <td>3.4</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M4</td>
+          <td>8.0</td>
+          <td>4.5</td>
+          <td>4.6</td>
+          <td>4.6</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M5</td>
+          <td>10.0</td>
+          <td>5.5</td>
+          <td>5.5</td>
+          <td>5.7</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M6</td>
+          <td>11.0</td>
+          <td>6.6</td>
+          <td>6.8</td>
+          <td>6.8</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M8</td>
+          <td>15.0</td>
+          <td>9.0</td>
+          <td>9</td>
+          <td>9.0</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M10</td>
+          <td>18.0</td>
+          <td>11.0</td>
+          <td>11</td>
+          <td>11.0</td>
+          <td>—</td>
+      </tr>
+      <tr>
+          <td>M12</td>
+          <td>20.0</td>
+          <td>13.5</td>
+          <td>13.0</td>
+          <td>13.0</td>
+          <td>16.0</td>
+      </tr>
+      <tr>
+          <td>M14</td>
+          <td>24.0</td>
+          <td>15.5</td>
+          <td>15</td>
+          <td>15.0</td>
+          <td>18.0</td>
+      </tr>
+      <tr>
+          <td>M16</td>
+          <td>26.0</td>
+          <td>17.5</td>
+          <td>17.5</td>
+          <td>17.5</td>
+          <td>20.0</td>
+      </tr>
+      <tr>
+          <td>M20</td>
+          <td>33.0</td>
+          <td>22.0</td>
+          <td>21.5</td>
+          <td>21.5</td>
+          <td>24.0</td>
+      </tr>
+      <tr>
+          <td>M24</td>
+          <td>40.0</td>
+          <td>26.0</td>
+          <td>25</td>
+          <td>25.5</td>
+          <td>28.0</td>
+      </tr>
+      <tr>
+          <td>M30</td>
+          <td>48.0</td>
+          <td>33.0</td>
+          <td>32</td>
+          <td>32.0</td>
+          <td>36.0</td>
+      </tr>
+      <tr>
+          <td>M36</td>
+          <td>57.0</td>
+          <td>39.0</td>
+          <td>38</td>
+          <td>38.0</td>
+          <td>42.0</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="参考资料">参考资料
+</h3><ul>
+<li><a class="link" href="https://www.164580.com/info_30447.html?pc=1"  target="_blank" rel="noopener"
+    >GB /T 70.1 - 2008-内六角圆柱头螺钉- 易紧通</a></li>
+<li><a class="link" href="https://www.164580.com/info_19686.html?pc=1"  target="_blank" rel="noopener"
+    >GB 6190 - 1986-内六角花形圆柱头螺钉 4.8级- 易紧通</a></li>
+</ul>
+<h3 id="其他说明">其他说明
+</h3><p>对于外螺纹来说，卡尺测得的尺寸比螺纹公称尺寸稍微小一点，例如</p>
+<ul>
+<li>M2.5，卡尺测量外径 2.4</li>
+<li>M3，测量外径 2.9</li>
+<li>M4，测量外径 3.8-3.9</li>
+<li>M5，测量外径 4.8-4.9</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

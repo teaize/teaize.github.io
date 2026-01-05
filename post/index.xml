@@ -7,7 +7,525 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Fri, 02 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>常用压力单位简明笔记</title>
+        <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8E%8B%E5%8A%9B%E5%8D%95%E4%BD%8D%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sun, 04 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8E%8B%E5%8A%9B%E5%8D%95%E4%BD%8D%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;MPa（兆帕，Megapascal）：
+&lt;ul&gt;
+&lt;li&gt;公制单位，1 MPa = 1,000,000 Pa = 10 bar = 145.038 PSI。&lt;/li&gt;
+&lt;li&gt;常用于工业过程控制和设备参数中，尤其在气体、液体压力的测量和控制中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;PSI（磅力每平方英寸，Pounds per Square Inch）：
+&lt;ul&gt;
+&lt;li&gt;英制单位，1 PSI ≈ 0.006895 MPa ≈ 0.0689476 bar。&lt;/li&gt;
+&lt;li&gt;在美国和一些使用英制系统的国家较为常用，尤其在天然气、石油等领域。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;bar：
+&lt;ul&gt;
+&lt;li&gt;公制单位，1 bar = 100,000 Pa = 0.1 MPa = 14.5038 PSI。&lt;/li&gt;
+&lt;li&gt;广泛用于工业、工程和气体监测，特别是在欧洲和国际标准中常见。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;kPa（千帕，Kilopascal）：
+&lt;ul&gt;
+&lt;li&gt;1 kPa = 1,000 Pa = 0.01 bar = 0.145038 PSI。&lt;/li&gt;
+&lt;li&gt;在中低压场合中常用，如环境监测、气体取样设备的压力测量等。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;atm（标准大气压，Atmosphere）：
+&lt;ul&gt;
+&lt;li&gt;1 atm = 101,325 Pa = 1.01325 bar = 14.696 PSI。&lt;/li&gt;
+&lt;li&gt;用于表示气体在标准大气条件下的压力，尤其在一些实验室和科学研究中。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Pa（帕斯卡，Pascal）：
+&lt;ul&gt;
+&lt;li&gt;SI（国际单位制）标准单位，&lt;strong&gt;1 Pa = 1 N/m²&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;通常用于精密气体分析或低压场合的测量中。&lt;/li&gt;
+&lt;li&gt;在 CEMS 系统中，压力极低时，可能用帕斯卡或其子单位（如 kPa，千帕）进行测量。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;kgf/cm²（kilogram-force per square centimeter，每平方厘米的千克力）
+&lt;ul&gt;
+&lt;li&gt;kgf/cm² 相当于 0.1MPa，即等于 bar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;负压状态常用数值表&#34;&gt;负压状态常用数值表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;表负压 (Kpa)&lt;/th&gt;
+          &lt;th&gt;绝对压力 (Torr)&lt;/th&gt;
+          &lt;th&gt;绝对压力 (mbar)&lt;/th&gt;
+          &lt;th&gt;绝对压力 (inHg)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;0&lt;/td&gt;
+          &lt;td&gt;760&lt;/td&gt;
+          &lt;td&gt;1013.25&lt;/td&gt;
+          &lt;td&gt;224.43&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-5&lt;/td&gt;
+          &lt;td&gt;722.5&lt;/td&gt;
+          &lt;td&gt;963.25&lt;/td&gt;
+          &lt;td&gt;213.35&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-10&lt;/td&gt;
+          &lt;td&gt;685&lt;/td&gt;
+          &lt;td&gt;913.26&lt;/td&gt;
+          &lt;td&gt;202.28&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-15&lt;/td&gt;
+          &lt;td&gt;647.5&lt;/td&gt;
+          &lt;td&gt;863.26&lt;/td&gt;
+          &lt;td&gt;191.21&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-20&lt;/td&gt;
+          &lt;td&gt;610&lt;/td&gt;
+          &lt;td&gt;813.26&lt;/td&gt;
+          &lt;td&gt;180.13&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-25&lt;/td&gt;
+          &lt;td&gt;572.5&lt;/td&gt;
+          &lt;td&gt;763.27&lt;/td&gt;
+          &lt;td&gt;169.06&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-30&lt;/td&gt;
+          &lt;td&gt;535&lt;/td&gt;
+          &lt;td&gt;713.27&lt;/td&gt;
+          &lt;td&gt;157.99&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-35&lt;/td&gt;
+          &lt;td&gt;497.5&lt;/td&gt;
+          &lt;td&gt;663.28&lt;/td&gt;
+          &lt;td&gt;146.91&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-40&lt;/td&gt;
+          &lt;td&gt;460&lt;/td&gt;
+          &lt;td&gt;613.28&lt;/td&gt;
+          &lt;td&gt;135.84&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-45&lt;/td&gt;
+          &lt;td&gt;422.5&lt;/td&gt;
+          &lt;td&gt;563.29&lt;/td&gt;
+          &lt;td&gt;124.76&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-50&lt;/td&gt;
+          &lt;td&gt;385&lt;/td&gt;
+          &lt;td&gt;513.29&lt;/td&gt;
+          &lt;td&gt;113.69&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-55&lt;/td&gt;
+          &lt;td&gt;347.5&lt;/td&gt;
+          &lt;td&gt;463.29&lt;/td&gt;
+          &lt;td&gt;102.62&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-60&lt;/td&gt;
+          &lt;td&gt;310&lt;/td&gt;
+          &lt;td&gt;413.30&lt;/td&gt;
+          &lt;td&gt;91.54&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-65&lt;/td&gt;
+          &lt;td&gt;272.5&lt;/td&gt;
+          &lt;td&gt;363.30&lt;/td&gt;
+          &lt;td&gt;80.47&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-70&lt;/td&gt;
+          &lt;td&gt;235&lt;/td&gt;
+          &lt;td&gt;313.31&lt;/td&gt;
+          &lt;td&gt;69.40&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-75&lt;/td&gt;
+          &lt;td&gt;197.5&lt;/td&gt;
+          &lt;td&gt;263.31&lt;/td&gt;
+          &lt;td&gt;58.32&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-80&lt;/td&gt;
+          &lt;td&gt;160&lt;/td&gt;
+          &lt;td&gt;213.32&lt;/td&gt;
+          &lt;td&gt;47.25&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-85&lt;/td&gt;
+          &lt;td&gt;122.5&lt;/td&gt;
+          &lt;td&gt;163.32&lt;/td&gt;
+          &lt;td&gt;36.17&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-90&lt;/td&gt;
+          &lt;td&gt;85&lt;/td&gt;
+          &lt;td&gt;113.32&lt;/td&gt;
+          &lt;td&gt;25.10&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-95&lt;/td&gt;
+          &lt;td&gt;47.5&lt;/td&gt;
+          &lt;td&gt;63.33&lt;/td&gt;
+          &lt;td&gt;14.03&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;-100&lt;/td&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;13.33&lt;/td&gt;
+          &lt;td&gt;2.95&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;0 KPa（表压）对应大气压，标准值约为 760 Torr、1013.25 mbar、29.92 inHg&lt;/li&gt;
+&lt;li&gt;负压增大（真空度增加），Torr、mbar 和 inHg 逐渐降低&lt;/li&gt;
+&lt;li&gt;1 kPa = 0.2953 inHg&lt;/li&gt;
+&lt;li&gt;1 kPa = 101010 mbar&lt;/li&gt;
+&lt;li&gt;1 kPa = 7.50062 Torr&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;正压状态常用数值表&#34;&gt;正压状态常用数值表
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;PSI&lt;/th&gt;
+          &lt;th&gt;MPa&lt;/th&gt;
+          &lt;th&gt;KPa&lt;/th&gt;
+          &lt;th&gt;torr&lt;/th&gt;
+          &lt;th&gt;Bar&lt;/th&gt;
+          &lt;th&gt;atm&lt;/th&gt;
+          &lt;th&gt;kgf/cm²&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;0.0345&lt;/td&gt;
+          &lt;td&gt;34.4738&lt;/td&gt;
+          &lt;td&gt;258.57&lt;/td&gt;
+          &lt;td&gt;0.3447&lt;/td&gt;
+          &lt;td&gt;0.34&lt;/td&gt;
+          &lt;td&gt;0.3447&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;0.0689&lt;/td&gt;
+          &lt;td&gt;68.9476&lt;/td&gt;
+          &lt;td&gt;517.15&lt;/td&gt;
+          &lt;td&gt;0.6895&lt;/td&gt;
+          &lt;td&gt;0.69&lt;/td&gt;
+          &lt;td&gt;0.6895&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;15&lt;/td&gt;
+          &lt;td&gt;0.1034&lt;/td&gt;
+          &lt;td&gt;103.4214&lt;/td&gt;
+          &lt;td&gt;775.72&lt;/td&gt;
+          &lt;td&gt;1.0342&lt;/td&gt;
+          &lt;td&gt;1.03&lt;/td&gt;
+          &lt;td&gt;1.0342&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;20&lt;/td&gt;
+          &lt;td&gt;0.1379&lt;/td&gt;
+          &lt;td&gt;137.8952&lt;/td&gt;
+          &lt;td&gt;1034.30&lt;/td&gt;
+          &lt;td&gt;1.3790&lt;/td&gt;
+          &lt;td&gt;1.38&lt;/td&gt;
+          &lt;td&gt;1.3790&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;25&lt;/td&gt;
+          &lt;td&gt;0.1724&lt;/td&gt;
+          &lt;td&gt;172.369&lt;/td&gt;
+          &lt;td&gt;1292.87&lt;/td&gt;
+          &lt;td&gt;1.7237&lt;/td&gt;
+          &lt;td&gt;1.72&lt;/td&gt;
+          &lt;td&gt;1.7237&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;30&lt;/td&gt;
+          &lt;td&gt;0.2068&lt;/td&gt;
+          &lt;td&gt;206.8428&lt;/td&gt;
+          &lt;td&gt;1551.45&lt;/td&gt;
+          &lt;td&gt;2.0684&lt;/td&gt;
+          &lt;td&gt;2.07&lt;/td&gt;
+          &lt;td&gt;2.0684&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;35&lt;/td&gt;
+          &lt;td&gt;0.2413&lt;/td&gt;
+          &lt;td&gt;241.3166&lt;/td&gt;
+          &lt;td&gt;1810.02&lt;/td&gt;
+          &lt;td&gt;2.4132&lt;/td&gt;
+          &lt;td&gt;2.41&lt;/td&gt;
+          &lt;td&gt;2.4132&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;40&lt;/td&gt;
+          &lt;td&gt;0.2758&lt;/td&gt;
+          &lt;td&gt;275.7904&lt;/td&gt;
+          &lt;td&gt;2068.60&lt;/td&gt;
+          &lt;td&gt;2.7579&lt;/td&gt;
+          &lt;td&gt;2.76&lt;/td&gt;
+          &lt;td&gt;2.7579&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;0.3103&lt;/td&gt;
+          &lt;td&gt;310.2642&lt;/td&gt;
+          &lt;td&gt;2327.17&lt;/td&gt;
+          &lt;td&gt;3.1026&lt;/td&gt;
+          &lt;td&gt;3.10&lt;/td&gt;
+          &lt;td&gt;3.1026&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;50&lt;/td&gt;
+          &lt;td&gt;0.3447&lt;/td&gt;
+          &lt;td&gt;344.738&lt;/td&gt;
+          &lt;td&gt;2585.75&lt;/td&gt;
+          &lt;td&gt;3.4474&lt;/td&gt;
+          &lt;td&gt;3.45&lt;/td&gt;
+          &lt;td&gt;3.4474&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;55&lt;/td&gt;
+          &lt;td&gt;0.3792&lt;/td&gt;
+          &lt;td&gt;379.2118&lt;/td&gt;
+          &lt;td&gt;2844.32&lt;/td&gt;
+          &lt;td&gt;3.7921&lt;/td&gt;
+          &lt;td&gt;3.79&lt;/td&gt;
+          &lt;td&gt;3.7921&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;60&lt;/td&gt;
+          &lt;td&gt;0.4137&lt;/td&gt;
+          &lt;td&gt;413.6856&lt;/td&gt;
+          &lt;td&gt;3102.89&lt;/td&gt;
+          &lt;td&gt;4.1369&lt;/td&gt;
+          &lt;td&gt;4.14&lt;/td&gt;
+          &lt;td&gt;4.1369&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;65&lt;/td&gt;
+          &lt;td&gt;0.4482&lt;/td&gt;
+          &lt;td&gt;448.1594&lt;/td&gt;
+          &lt;td&gt;3361.47&lt;/td&gt;
+          &lt;td&gt;4.4816&lt;/td&gt;
+          &lt;td&gt;4.48&lt;/td&gt;
+          &lt;td&gt;4.4816&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;70&lt;/td&gt;
+          &lt;td&gt;0.4826&lt;/td&gt;
+          &lt;td&gt;482.6332&lt;/td&gt;
+          &lt;td&gt;3620.04&lt;/td&gt;
+          &lt;td&gt;4.8263&lt;/td&gt;
+          &lt;td&gt;4.83&lt;/td&gt;
+          &lt;td&gt;4.8263&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;75&lt;/td&gt;
+          &lt;td&gt;0.5171&lt;/td&gt;
+          &lt;td&gt;517.107&lt;/td&gt;
+          &lt;td&gt;3878.62&lt;/td&gt;
+          &lt;td&gt;5.1711&lt;/td&gt;
+          &lt;td&gt;5.17&lt;/td&gt;
+          &lt;td&gt;5.1711&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;80&lt;/td&gt;
+          &lt;td&gt;0.5516&lt;/td&gt;
+          &lt;td&gt;551.5808&lt;/td&gt;
+          &lt;td&gt;4137.19&lt;/td&gt;
+          &lt;td&gt;5.5158&lt;/td&gt;
+          &lt;td&gt;5.52&lt;/td&gt;
+          &lt;td&gt;5.5158&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;85&lt;/td&gt;
+          &lt;td&gt;0.5861&lt;/td&gt;
+          &lt;td&gt;586.0546&lt;/td&gt;
+          &lt;td&gt;4395.77&lt;/td&gt;
+          &lt;td&gt;5.8605&lt;/td&gt;
+          &lt;td&gt;5.86&lt;/td&gt;
+          &lt;td&gt;5.8605&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;90&lt;/td&gt;
+          &lt;td&gt;0.6205&lt;/td&gt;
+          &lt;td&gt;620.5284&lt;/td&gt;
+          &lt;td&gt;4654.34&lt;/td&gt;
+          &lt;td&gt;6.2053&lt;/td&gt;
+          &lt;td&gt;6.21&lt;/td&gt;
+          &lt;td&gt;6.2053&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;95&lt;/td&gt;
+          &lt;td&gt;0.6550&lt;/td&gt;
+          &lt;td&gt;655.0022&lt;/td&gt;
+          &lt;td&gt;4912.92&lt;/td&gt;
+          &lt;td&gt;6.5500&lt;/td&gt;
+          &lt;td&gt;6.55&lt;/td&gt;
+          &lt;td&gt;6.5500&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;100&lt;/td&gt;
+          &lt;td&gt;0.6895&lt;/td&gt;
+          &lt;td&gt;689.476&lt;/td&gt;
+          &lt;td&gt;5171.49&lt;/td&gt;
+          &lt;td&gt;6.8948&lt;/td&gt;
+          &lt;td&gt;6.90&lt;/td&gt;
+          &lt;td&gt;6.8948&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>露点和相对湿度</title>
+        <link>https://teaize.github.io/p/%E9%9C%B2%E7%82%B9%E5%92%8C%E7%9B%B8%E5%AF%B9%E6%B9%BF%E5%BA%A6/</link>
+        <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%9C%B2%E7%82%B9%E5%92%8C%E7%9B%B8%E5%AF%B9%E6%B9%BF%E5%BA%A6/</guid>
+        <description>&lt;p&gt;在 CEMS 或高精度工业气路中，测量露点（Dew Point）比测量湿度（Relative Humidity, RH）要普遍得多，也科学得多。因为露点是一个“绝对物理量”，而湿度是一个“相对变色龙”&lt;/p&gt;
+&lt;h3 id=&#34;1相对湿度的局限性&#34;&gt;1、相对湿度的局限性
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;相对湿度（RH）&lt;/strong&gt; 是一个欺骗性很强的参数，因为它受&lt;strong&gt;温度&lt;/strong&gt;的影响极大。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;场景模拟：
+&lt;ul&gt;
+&lt;li&gt;假设样气管路里有一定量的水蒸气。&lt;/li&gt;
+&lt;li&gt;在 &lt;strong&gt;$40^\circ\text{C}$&lt;/strong&gt; 时，相对湿度可能是 &lt;strong&gt;$30%$&lt;/strong&gt;（看起来很安全，不潮湿）。&lt;/li&gt;
+&lt;li&gt;如果管路经过一个冷点，温度降到了 &lt;strong&gt;$10^\circ\text{C}$&lt;/strong&gt;，这同一份气体的相对湿度会立刻飙升到 &lt;strong&gt;$100%$&lt;/strong&gt; 并开始&lt;strong&gt;结露&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;结论： 只看湿度百分比，你无法直观判断样气是否会在冷凝器出口或分析仪内部析出液态水。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-为什么露点是金标准&#34;&gt;2、 为什么露点是“金标准”
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;露点温度&lt;/strong&gt; 代表的是：&lt;strong&gt;“这气里的水，在降到多少度时会变成液态？”&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;直观防结露：
+&lt;ul&gt;
+&lt;li&gt;如果露点变送器告诉你露点是 $3^\circ\text{C}$，你立刻就能知道：只要我的管路和分析仪温度保持在 $3^\circ\text{C}$ 以上，里面绝对不会有水滴。这为维护提供了最直接的依据。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;绝对含水量：
+&lt;ul&gt;
+&lt;li&gt;露点是一个不随外界环境温度改变而改变的物理量（在压力恒定的前提下）。无论你的样气现在是 $50^\circ\text{C}$ 还是 $100^\circ\text{C}$，它的露点只要是 $3^\circ\text{C}$，含水量就是固定的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;适合干气测量：
+&lt;ul&gt;
+&lt;li&gt;CEMS 要求的样气非常干燥。在极低湿度下（如 $1% \text{ RH}$ 以下），普通的湿度传感器已经完全失灵或毫无精度，而像 SF82【这里说的是一种露点变送器】 这种露点仪可以精确到 $-60^\circ\text{C}$ 的露点（对应极微量的水分）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;露点-vs-湿度-的应用场景&#34;&gt;露点 vs 湿度 的应用场景
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;湿度 (RH)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;露点 (Dew Point)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;物理本质&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;相对值（随温度变化）&lt;/td&gt;
+          &lt;td&gt;绝对值（不随环境温度变化）&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;主要用途&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;舒适度、环境监控（如机房）&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;工艺过程控制、保护精密仪器&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;CEMS 角色&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;基本不使用&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;安全联锁的关键指标&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;核心关注点&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;感觉有多潮湿&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;什么时候会出水滴&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
+        <title>平台化设计</title>
+        <link>https://teaize.github.io/p/%E5%B9%B3%E5%8F%B0%E5%8C%96%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Sat, 03 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B9%B3%E5%8F%B0%E5%8C%96%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;h3 id=&#34;平台化设计的本质&#34;&gt;平台化设计的本质
+&lt;/h3&gt;&lt;p&gt;如果说“单兵作战”是为每一个客户需求量身定制一套电路板和代码，那么“平台化设计”就是&lt;strong&gt;先造一个强大的“母舰”，再根据任务不同派出不同的“舰载机”。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;它的核心结构可以拆解为两部分：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;共享基座 (Commonality)：&lt;/strong&gt; 那些 80% 场景下都不会变的零部件。例如：电源管理模块、核心 MCU 系统、标准显示屏接口、通用的外壳模具。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;差异化模块 (Variability)：&lt;/strong&gt; 针对不同型号配置的“插件”。例如：不同的传感器（NOx 传感器 vs SO2 传感器）、不同的通讯模块（4G vs LoRa）、不同的软件算法包。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;为什么要这么做&#34;&gt;为什么要这么做？
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;分摊研发成本： 你为 STM32 编写的底层驱动和稳定可靠的电源保护电路，只需要研发一次，就可以用到 10 款产品上。&lt;/li&gt;
+&lt;li&gt;极速交付： 当市场需要一个新功能时，你只需设计一个小的&lt;strong&gt;扩展板&lt;/strong&gt;，而不需要重新设计整机。&lt;/li&gt;
+&lt;li&gt;品质稳定性： 核心平台在第一款产品上跑通了，后续所有衍生型号都继承了这种稳定性，大大降低了“翻车”概率。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;举例工业气体分析仪&#34;&gt;举例：工业气体分析仪
+&lt;/h3&gt;&lt;p&gt;假设你需要设计一系列环境监测仪表：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;平台化基座：
+&lt;ul&gt;
+&lt;li&gt;硬件： 统一的铝合金机箱、通用的 24V 工业电源、带触控屏的 STM32F4 主控板。&lt;/li&gt;
+&lt;li&gt;软件： 统一的 Modbus 协议框架、统一的 UI 菜单系统、通用的数据记录逻辑。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;型号派生：
+&lt;ul&gt;
+&lt;li&gt;型号 1 (SO2 分析仪)： 插入红外传感器模块 + 调取 SO2 补偿算法。&lt;/li&gt;
+&lt;li&gt;型号 2 (NOx 分析仪)： 插入化学发光法模块 + 调取 NOx 转换系数。&lt;/li&gt;
+&lt;li&gt;型号 3 (温压流检测器)： 换上皮托管接口 + 调取压力转换公式。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;&lt;strong&gt;结果：&lt;/strong&gt; 客户看起来你拥有 3 条产品线，但你的仓库里 90% 的备品备件是通用的。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;平台化设计的反直觉代价&#34;&gt;平台化设计的“反直觉”代价
+&lt;/h3&gt;&lt;p&gt;虽然好处很多，但在设计初期需要注意：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;初期投入高： 设计一个“通用平台”比设计一个“专用产品”要难得多，需要考虑极强的兼容性。&lt;/li&gt;
+&lt;li&gt;性能冗余： 为了兼容高端型号，低端型号可能会被迫使用性能过剩的芯片或更厚的外壳，导致单品成本在初期略高。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>Mermaid气路图</title>
         <link>https://teaize.github.io/p/mermaid%E6%B0%94%E8%B7%AF%E5%9B%BE/</link>
         <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
@@ -324,6 +842,105 @@
 </description>
         </item>
         <item>
+        <title>MOSEFT驱动电路与固态继电器</title>
+        <link>https://teaize.github.io/p/moseft%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E4%B8%8E%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/</link>
+        <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/moseft%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E4%B8%8E%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/</guid>
+        <description>&lt;p&gt;本篇继 [[半导体制冷片]]、&lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;固态继电器&lt;/a&gt;，重点学习 MOSEFT 驱动电路与固态继电器电路的区别。&lt;/p&gt;
+&lt;p&gt;最开始还以为固态继电器就是 MOSEFT 驱动电路的模块封装，实际上这两种还是有区别的！&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;直流型固态继电器&lt;/strong&gt;（DC-DC SSR）的“核心开关部件”确实通常是 MOSFET，但一个完整的 SSR 并不是只有一颗 MOSFET，它是一个高度集成的功能模块。&lt;/p&gt;
+&lt;h3 id=&#34;ssr-内部到底有什么&#34;&gt;SSR 内部到底有什么
+&lt;/h3&gt;&lt;p&gt;一个工业级的 SSR 就像是一个包装好的“黑盒子”，内部通常包含三个部分：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;输入端（隔离层）： 通常是一个&lt;strong&gt;光耦（Optocoupler）&lt;/strong&gt;。当你给输入端 3-32V 电压时，内部的 LED 发光，光信号传给接收端。这就是为什么它叫“固态”——没有机械触点，通过光实现电隔离，保护你的单片机（如 STM32）不被大电流烧毁。&lt;/li&gt;
+&lt;li&gt;中间层（触发电路）： 负责把光耦传来的微弱信号放大，并转化为能快速开启功率管的电信号。&lt;/li&gt;
+&lt;li&gt;输出端（功率开关）： 根据用途不同，选用的零件完全不同：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;DC-DC 型 SSR：&lt;/strong&gt; 内部确实通常是 &lt;strong&gt;MOSFET&lt;/strong&gt; 或 &lt;strong&gt;IGBT&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;AC 型 SSR（最常见）：&lt;/strong&gt; 内部是 &lt;strong&gt;可控硅（Triac 或 SCR）&lt;/strong&gt;。这是为了切换交流电设计的，不能用于直流电。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;既然内部有-mosfet为什么不直接买-mosfet&#34;&gt;既然内部有 MOSFET，为什么不直接买 MOSFET
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;直接用 MOSFET 零件&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;使用 SSR 模块&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;隔离&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;需要你自己设计光耦隔离电路，否则容易烧单片机。&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;自带光电隔离&lt;/strong&gt;，即插即用，安全性极高。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;保护&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;需要你自己加续流二极管、TVS 管防止感性负载冲击。&lt;/td&gt;
+          &lt;td&gt;内部通常已经&lt;strong&gt;集成了吸收回路&lt;/strong&gt;，抗干扰能力强。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;散热与安装&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;需要设计 PCB、加导热垫、拧螺丝到散热片。&lt;/td&gt;
+          &lt;td&gt;标准工业封装，外壳带底座，可以直接拧在机柜板上。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;成本&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;几块钱（零件成本低）。&lt;/td&gt;
+          &lt;td&gt;几十到上百元（模块成本高）。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;一个必须纠正的误区控制频率&#34;&gt;一个必须纠正的误区：控制频率
+&lt;/h3&gt;&lt;p&gt;虽然 DC-SSR 内部是 MOSFET，但由于为了保证工业级的稳定性，SSR 内部的&lt;strong&gt;光耦和触发电路通常做得比较“慢”&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;MOSFET 零件： 你可以用几万赫兹（kHz）的 PWM 信号去控制它，实现非常平稳的温度控制（就像无极调光）。&lt;/li&gt;
+&lt;li&gt;SSR 模块： 大多数工业 SSR 只能承受几十赫兹（Hz）的开关频率。如果你用太快的 PWM 去冲它，它会&lt;strong&gt;发热极其严重&lt;/strong&gt;，甚至根本打不开。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;1、总结建议：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你在做 &lt;strong&gt;CEMS 采样管线加热&lt;/strong&gt;（功率大、热惰性大、动作慢），选 &lt;strong&gt;SSR&lt;/strong&gt;，稳定省心。&lt;/li&gt;
+&lt;li&gt;如果你在做 &lt;strong&gt;分析仪探测器恒温/制冷&lt;/strong&gt;（需要高精度、高频 PID 调节），必须自己设计 &lt;strong&gt;MOSFET 驱动电路&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;2、如何理解：大多数工业 SSR 只能承受几十赫兹（Hz）的开关频率
+绝大多数工业级 &lt;strong&gt;AC SSR&lt;/strong&gt;（交流固态继电器）都设计有“过零触发”电路。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;工作原理： 为了减少电磁干扰（EMI），SSR 只会在交流电电压接近 0V 的那一刻才真正开启或关闭。&lt;/li&gt;
+&lt;li&gt;时间限制： 在 50Hz 的工频电中，一个周期是 20ms，半个周期是 10ms。&lt;strong&gt;这意味着 SSR 的最快响应速度被锁定在了 10ms&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;高频 PWM 的冲突： 如果你的 PID 算法要求 1kHz（周期 1ms）的 PWM 信号，SSR 根本反应不过来。它会漏掉大量的脉冲，导致控制逻辑完全失效。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;场景举例&#34;&gt;场景举例
+&lt;/h4&gt;&lt;p&gt;场景 A：普通饮水机加热（可以使用工业 SSR）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;特点： 水量大，热惯性大，温度反应慢。&lt;/li&gt;
+&lt;li&gt;控制： PID 周期设为 1 秒甚至更长（低频 PWM）。&lt;/li&gt;
+&lt;li&gt;结果： SSR 每秒开关几次，工作轻松，波动可以接受。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;场景 B：PCR 仪（基因扩增仪）或 半导体加热台（不能用工业 SSR）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;特点： 要求温控精度达到 $\pm 0.1^{\circ}C$，且升降温极快。&lt;/li&gt;
+&lt;li&gt;控制： 必须使用高频 PWM（如 1kHz 以上）来平滑电流，避免大电流脉冲对敏感元件的冲击。&lt;/li&gt;
+&lt;li&gt;结果： 此时必须放弃 SSR，改用由单片机直接驱动的 &lt;strong&gt;MOSFET&lt;/strong&gt; 或 &lt;strong&gt;IGBT&lt;/strong&gt; 功率电路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;核心在于：控制频率必须远高于系统的反应速度。如果系统反应很慢（热惯性大），慢吞吞的 SSR 也能跟得上；如果系统转瞬即变（热惯性小），就必须用“快手” MOSFET/IGBT。&lt;/p&gt;
+&lt;h3 id=&#34;拓展资料光耦的作用&#34;&gt;拓展资料：光耦的作用
+&lt;/h3&gt;&lt;p&gt;1、保护“大脑”（高压隔离）&lt;/p&gt;
+&lt;p&gt;如果控制端（STM32）直接连着高压负载（比如 220V 加热管），万一功率管击穿短路，220V 的高压会顺着导线直接冲向单片机，瞬间烧毁所有电子元器件。光耦的绝缘层通常能承受 $2500V$ 到 $5000V$ ($V_{iso}$) 的瞬时高压。&lt;/p&gt;
+&lt;p&gt;2、切断干扰（共模抑制）&lt;/p&gt;
+&lt;p&gt;工业现场（如 CEMS 机柜）有大量的电机、变频器，会产生很强的电磁噪声。如果电路是连通的，这些噪声会干扰单片机的时钟和逻辑信号，导致系统死机或乱码。光耦只传递光，不传递电信号中的杂波，从而实现了“噪声免疫”。&lt;/p&gt;
+&lt;p&gt;3、解决“地电位”冲突&lt;/p&gt;
+&lt;p&gt;不同设备之间的“地（GND）”可能有几伏甚至十几伏的压差。如果直接连在一起，会产生&lt;strong&gt;地环路电流&lt;/strong&gt;。光耦让两个电路各自拥有独立的“地”，互不干涉。&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>Photoshop调整图片尺寸</title>
         <link>https://teaize.github.io/p/photoshop%E8%B0%83%E6%95%B4%E5%9B%BE%E7%89%87%E5%B0%BA%E5%AF%B8/</link>
         <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
@@ -419,6 +1036,85 @@
 &lt;p&gt;2、清除外部参考&lt;/p&gt;
 &lt;p&gt;对于这种外部链接，可以断开链接
 ![[Pasted image 20240418135301.png]]&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>半导体制冷片</title>
+        <link>https://teaize.github.io/p/%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%88%B6%E5%86%B7%E7%89%87/</link>
+        <pubDate>Fri, 02 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8D%8A%E5%AF%BC%E4%BD%93%E5%88%B6%E5%86%B7%E7%89%87/</guid>
+        <description>&lt;p&gt;这里以 TEC1-12706 为例。TEC1-12706 是一种非常常见的半导体制冷片（Thermoelectric Cooler, TEC）。TEC1-12706 的含义是：&lt;strong&gt;127&lt;/strong&gt; 对电偶，额定电流 &lt;strong&gt;6A&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;注意事项&#34;&gt;注意事项
+&lt;/h3&gt;&lt;h4 id=&#34;1-散热是生死的关键&#34;&gt;1、 散热是“生死的关键”
+&lt;/h4&gt;&lt;p&gt;半导体制冷片的工作原理是把热量从一面“搬运”到另一面。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;致命风险： 冷热两面的温差是有限的。如果你不及时把“热面”的热量散掉，热面温度会迅速飙升，通过热传导回流到冷面，甚至直接烧毁制冷片（内部焊点熔断）。&lt;/li&gt;
+&lt;li&gt;应用规范：
+&lt;ul&gt;
+&lt;li&gt;绝对禁止空载通电： 没装散热器时通电超过几秒钟就可能报废。&lt;/li&gt;
+&lt;li&gt;散热器匹配： 12706 在满功率下热面发热量巨大，必须配合&lt;strong&gt;大面积铝制散热片 + 高转速风扇&lt;/strong&gt;，或者冷水散热。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-电力驱动与控制&#34;&gt;2、 电力驱动与控制
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;直流电与极性：
+&lt;ul&gt;
+&lt;li&gt;TEC 必须使用直流电（DC）。红线接正，黑线接负。&lt;/li&gt;
+&lt;li&gt;极性反接： 如果把正负电接反，冷热面会立刻互换（原来的冷面变热，热面变冷）。在某些精密仪器中，这种误操作可能导致前端传感器过热损坏。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;电流纹波（Ripple）：
+&lt;ul&gt;
+&lt;li&gt;TEC 对电流质量很敏感。如果使用纹波很大的开关电源，制冷效率会大幅下降。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;PWM 控制建议：&lt;/strong&gt; 如果你用 STM32 等单片机通过 PWM 调节温度，&lt;strong&gt;切记不要直接用低频 PWM&lt;/strong&gt;。频繁的开启/关闭产生的热应力会缩短 TEC 寿命。建议使用&lt;strong&gt;高频 PWM 配合 LC 滤波回路&lt;/strong&gt;，使其输出平滑的直流电压。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3-物理安装压力与平面度&#34;&gt;3、 物理安装：压力与平面度
+&lt;/h4&gt;&lt;ol&gt;
+&lt;li&gt;导热硅脂： 冷热两面与接触物体之间必须涂抹薄薄的一层高性能导热硅脂，以排除空气。&lt;/li&gt;
+&lt;li&gt;安装压力：
+&lt;ul&gt;
+&lt;li&gt;压力要适中且&lt;strong&gt;均匀&lt;/strong&gt;。如果一头紧一头松，瓷片内部的电偶容易受力不均开裂。&lt;/li&gt;
+&lt;li&gt;避坑指南： 紧固螺丝时应像拧汽车轮胎螺丝一样，交叉循环拧紧。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;冷面结露与密封：
+&lt;ul&gt;
+&lt;li&gt;在 CEMS 这种高湿度环境下，冷面非常容易产生&lt;strong&gt;结露&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;防护： 必须确保制冷片四周进行了&lt;strong&gt;防水处理&lt;/strong&gt;（通常型号后缀带 &amp;ldquo;S&amp;rdquo; 的是带硅胶密封的）。否则水分进入内部，会腐蚀电偶或导致电路短路。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h4 id=&#34;4-cems-场景中的特殊注意点&#34;&gt;4、 CEMS 场景中的特殊注意点
+&lt;/h4&gt;&lt;p&gt;例如在&lt;strong&gt;冷凝器除湿&lt;/strong&gt;（将样气冷却到 2~4°C 以冷凝水蒸气）中的应用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;恒温精度： 对于 CEMS 冷凝器，目标通常是恒定在 &lt;strong&gt;3°C&lt;/strong&gt;。如果制冷片功率太大（12706 算功率较大的），温度波动会很剧烈。此时需要配合高精度的 NTC 温度传感器和 PID 算法。&lt;/li&gt;
+&lt;li&gt;环境温度连锁： 如果夏季机柜环境温度过高（如超过 50°C），12706 可能无法将样气压到 4°C 以下，导致水分进入分析仪。此时应检查散热风扇是否积尘。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;如果在为 &lt;strong&gt;STM32 项目&lt;/strong&gt;设计驱动电路，建议给 12706 配备一个 &lt;strong&gt;12V 10A&lt;/strong&gt; 左右的电源，并配合 &lt;strong&gt;MOSFET 驱动电路&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;电阻&#34;&gt;电阻
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;TEC1-12706 的内部其实就是 127 对 P-N 半导体对串联起来的电路，相当于一个电阻。&lt;/li&gt;
+&lt;li&gt;正常的直流电阻大概在 &lt;strong&gt;1.5Ω ~ 4Ω&lt;/strong&gt; 之间（不同厂家略有差异）。&lt;/li&gt;
+&lt;li&gt;如果你用万用表测量两端电阻：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;开路（无穷大）&lt;/strong&gt; → 说明内部断路了，坏了。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;接近 0Ω（几乎短路）&lt;/strong&gt; → 内部短路，也坏了。&lt;/li&gt;
+&lt;li&gt;在合理范围内（比如 2Ω 左右） → 电气上基本正常。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;实际测试
+&lt;ul&gt;
+&lt;li&gt;测了一个正常的制冷片，在 4 欧左右&lt;/li&gt;
+&lt;li&gt;测了一个坏的制冷片，在 18 欧左右&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 </description>
         </item>
         <item>
@@ -28865,6 +29561,139 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 </description>
         </item>
         <item>
+        <title>矩阵的基本运算</title>
+        <link>https://teaize.github.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97/</link>
+        <pubDate>Sat, 04 Jan 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%9F%A9%E9%98%B5%E7%9A%84%E5%9F%BA%E6%9C%AC%E8%BF%90%E7%AE%97/</guid>
+        <description>&lt;h3 id=&#34;矩阵的转置&#34;&gt;矩阵的转置
+&lt;/h3&gt;&lt;p&gt;矩阵的转置是指将矩阵的行和列交换得到的新矩阵。对于一个矩阵 A，其转置记作 $A^T$ 或者 $A&amp;rsquo;$，定义如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果矩阵 A 是 m × n 的矩阵，那么 $A^T$ 是 n × m 的矩阵。&lt;/li&gt;
+&lt;li&gt;$A^T$ 的元素是 A 的行列交换后的结果，具体为 $A^T_{ij} = A_{ji}$。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如，假设矩阵 A 为：&lt;/p&gt;
+&lt;p&gt;$$
+A = \begin{bmatrix}
+1 &amp;amp; 2 &amp;amp; 3 \
+4 &amp;amp; 5 &amp;amp; 6
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;矩阵 A 的转置是：&lt;/p&gt;
+&lt;p&gt;$$
+A^T = \begin{bmatrix}
+1 &amp;amp; 4 \
+2 &amp;amp; 5 \
+3 &amp;amp; 6
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;性质：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$(A^T)^T = A$（转置的转置是原矩阵）&lt;/li&gt;
+&lt;li&gt;$(A + B)^T = A^T + B^T$（矩阵加法的转置等于转置后再加）&lt;/li&gt;
+&lt;li&gt;$(cA)^T = cA^T$（标量乘法的转置等于标量乘转置）&lt;/li&gt;
+&lt;li&gt;$(AB)^T = B^T A^T$（矩阵乘法的转置是乘数顺序反转）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;矩阵的逆&#34;&gt;矩阵的逆
+&lt;/h3&gt;&lt;p&gt;矩阵的逆是指一个矩阵与其逆矩阵相乘得到单位矩阵（单位矩阵是对角线元素为 1，其他元素为 0 的矩阵）。矩阵 A 的逆矩阵记作 $A^{-1}$，定义如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对于矩阵 A，若存在矩阵 $A^{-1}$ 使得 $A \times A^{-1} = A^{-1} \times A = I$（单位矩阵），则称矩阵 A 可逆。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;并非所有矩阵都有逆矩阵，只有方阵（行数等于列数）的矩阵才可能有逆矩阵&lt;/strong&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;计算逆矩阵&#34;&gt;计算逆矩阵：
+&lt;/h4&gt;&lt;p&gt;计算矩阵的逆通常有两种常用方法：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;高斯消元法：通过行变换将矩阵化为单位矩阵，从而得到逆矩阵。&lt;/li&gt;
+&lt;li&gt;伴随矩阵法：首先求出矩阵的伴随矩阵（adjoint matrix），然后通过公式 $A^{-1} = \frac{1}{\text{det}(A)} \cdot \text{adj}(A)$ 计算逆矩阵。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如，假设矩阵 A 为：&lt;/p&gt;
+&lt;p&gt;$$
+A = \begin{bmatrix}
+4 &amp;amp; 7 \
+2 &amp;amp; 6
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;首先，计算行列式 $\text{det}(A)$：&lt;/p&gt;
+&lt;p&gt;$$
+\text{det}(A) = 4 \times 6 - 7 \times 2 = 24 - 14 = 10
+$$&lt;/p&gt;
+&lt;p&gt;然后，通过伴随矩阵法计算逆矩阵：&lt;/p&gt;
+&lt;p&gt;$$
+A^{-1} = \frac{1}{\text{det}(A)} \cdot \begin{bmatrix}
+6 &amp;amp; -7 \
+-2 &amp;amp; 4
+\end{bmatrix}
+= \frac{1}{10} \cdot \begin{bmatrix}
+6 &amp;amp; -7 \
+-2 &amp;amp; 4
+\end{bmatrix}
+= \begin{bmatrix}
+0.6 &amp;amp; -0.7 \
+-0.2 &amp;amp; 0.4
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;性质：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$(A^{-1})^{-1} = A$（逆矩阵的逆是原矩阵）&lt;/li&gt;
+&lt;li&gt;$(A \times B)^{-1} = B^{-1} \times A^{-1}$（&lt;strong&gt;乘积矩阵的逆是逆的乘积，顺序反转&lt;/strong&gt;）&lt;/li&gt;
+&lt;li&gt;$(cA)^{-1} = \frac{1}{c} A^{-1}$（标量乘法的逆等于标量的倒数乘逆矩阵）&lt;/li&gt;
+&lt;li&gt;$A^{-1}$ 存在的充分必要条件是 $\text{det}(A) \neq 0$（行列式不为零）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;矩阵的乘法&#34;&gt;矩阵的乘法
+&lt;/h3&gt;&lt;p&gt;矩阵的乘法是另一个非常重要的操作，它&lt;strong&gt;不满足交换律&lt;/strong&gt;，即 $AB \neq BA$。对于两个矩阵 A 和 B，矩阵乘法的定义如下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果 A 是 m × n 矩阵，B 是 n × p 矩阵，那么矩阵乘积 AB 是 m × p 矩阵。&lt;/li&gt;
+&lt;li&gt;乘积矩阵的第 i 行第 j 列的元素是 A 的第 i 行和 B 的第 j 列的对应元素的点积。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;例如：&lt;/p&gt;
+&lt;p&gt;$$
+A = \begin{bmatrix}
+1 &amp;amp; 2 \
+3 &amp;amp; 4
+\end{bmatrix}, \quad B = \begin{bmatrix}
+5 &amp;amp; 6 \
+7 &amp;amp; 8
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;那么，矩阵乘积 AB 为：&lt;/p&gt;
+&lt;p&gt;$$
+AB = \begin{bmatrix}
+1 &amp;amp; 2 \
+3 &amp;amp; 4
+\end{bmatrix} \times \begin{bmatrix}
+5 &amp;amp; 6 \
+7 &amp;amp; 8
+\end{bmatrix}
+= \begin{bmatrix}
+1 \times 5 + 2 \times 7 &amp;amp; 1 \times 6 + 2 \times 8 \
+3 \times 5 + 4 \times 7 &amp;amp; 3 \times 6 + 4 \times 8
+\end{bmatrix}
+= \begin{bmatrix}
+19 &amp;amp; 22 \
+43 &amp;amp; 50
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;h3 id=&#34;矩阵的行列式&#34;&gt;矩阵的行列式
+&lt;/h3&gt;&lt;p&gt;行列式（determinant）是一个标量，它反映了矩阵的一些重要性质。行列式只定义在方阵（行数等于列数）上。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果矩阵的行列式为零，则该矩阵是不可逆的（奇异矩阵）。&lt;/li&gt;
+&lt;li&gt;如果矩阵的行列式不为零，则该矩阵是可逆的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;行列式可以通过递归展开来计算，也可以通过高斯消元法等方法计算。&lt;/p&gt;
+&lt;p&gt;例如，对于矩阵 A：&lt;/p&gt;
+&lt;p&gt;$$
+A = \begin{bmatrix}
+a &amp;amp; b \
+c &amp;amp; d
+\end{bmatrix}
+$$&lt;/p&gt;
+&lt;p&gt;行列式计算公式为：&lt;/p&gt;
+&lt;p&gt;$$
+\text{det}(A) = ad - bc
+$$&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>密封简明笔记</title>
         <link>https://teaize.github.io/p/%E5%AF%86%E5%B0%81%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
         <pubDate>Sat, 04 Jan 2025 00:00:00 +0000</pubDate>
@@ -29552,6 +30381,670 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.youtube.com/@MarkRober&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Mark Rober - YouTube&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>内六角圆柱头螺钉简明笔记</title>
+        <link>https://teaize.github.io/p/%E5%86%85%E5%85%AD%E8%A7%92%E5%9C%86%E6%9F%B1%E5%A4%B4%E8%9E%BA%E9%92%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Tue, 24 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%86%85%E5%85%AD%E8%A7%92%E5%9C%86%E6%9F%B1%E5%A4%B4%E8%9E%BA%E9%92%89%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h3 id=&#34;内六角圆柱头螺钉&#34;&gt;内六角圆柱头螺钉
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;摘自 GB/T 70.1-2000&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924204527.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924204527.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;螺纹规格 d&lt;/th&gt;
+          &lt;th&gt;b 参考&lt;/th&gt;
+          &lt;th&gt;dk max- 光滑&lt;/th&gt;
+          &lt;th&gt;dk max- 滚花&lt;/th&gt;
+          &lt;th&gt;k max&lt;/th&gt;
+          &lt;th&gt;e min&lt;/th&gt;
+          &lt;th&gt;s 公称&lt;/th&gt;
+          &lt;th&gt;t min&lt;/th&gt;
+          &lt;th&gt;L 长度范围&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M1.6&lt;/td&gt;
+          &lt;td&gt;15&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;3.14&lt;/td&gt;
+          &lt;td&gt;1.6&lt;/td&gt;
+          &lt;td&gt;1.73&lt;/td&gt;
+          &lt;td&gt;1.5&lt;/td&gt;
+          &lt;td&gt;0.7&lt;/td&gt;
+          &lt;td&gt;2. 5-16&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M2&lt;/td&gt;
+          &lt;td&gt;16&lt;/td&gt;
+          &lt;td&gt;3.8&lt;/td&gt;
+          &lt;td&gt;3.98&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;1.73&lt;/td&gt;
+          &lt;td&gt;1.5&lt;/td&gt;
+          &lt;td&gt;1&lt;/td&gt;
+          &lt;td&gt;3-20&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M2.5&lt;/td&gt;
+          &lt;td&gt;17&lt;/td&gt;
+          &lt;td&gt;4.5&lt;/td&gt;
+          &lt;td&gt;4.68&lt;/td&gt;
+          &lt;td&gt;2.5&lt;/td&gt;
+          &lt;td&gt;2.3&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;1.1&lt;/td&gt;
+          &lt;td&gt;4-25&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M3&lt;/td&gt;
+          &lt;td&gt;18&lt;/td&gt;
+          &lt;td&gt;5.5&lt;/td&gt;
+          &lt;td&gt;5.68&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;2.87&lt;/td&gt;
+          &lt;td&gt;2.5&lt;/td&gt;
+          &lt;td&gt;1.3&lt;/td&gt;
+          &lt;td&gt;5-30&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M4&lt;/td&gt;
+          &lt;td&gt;20&lt;/td&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;7.22&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;3.44&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;2&lt;/td&gt;
+          &lt;td&gt;6-40&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M5&lt;/td&gt;
+          &lt;td&gt;22&lt;/td&gt;
+          &lt;td&gt;8.5&lt;/td&gt;
+          &lt;td&gt;8.72&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;4.58&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;2.5&lt;/td&gt;
+          &lt;td&gt;8-50&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M6&lt;/td&gt;
+          &lt;td&gt;24&lt;/td&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;10.22&lt;/td&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;5.72&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;3&lt;/td&gt;
+          &lt;td&gt;10 -60&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M8&lt;/td&gt;
+          &lt;td&gt;28&lt;/td&gt;
+          &lt;td&gt;13&lt;/td&gt;
+          &lt;td&gt;13.27&lt;/td&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;6.86&lt;/td&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;4&lt;/td&gt;
+          &lt;td&gt;12 -80&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;MIO&lt;/td&gt;
+          &lt;td&gt;32&lt;/td&gt;
+          &lt;td&gt;16&lt;/td&gt;
+          &lt;td&gt;16.27&lt;/td&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;9.15&lt;/td&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;5&lt;/td&gt;
+          &lt;td&gt;16 -100&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M12&lt;/td&gt;
+          &lt;td&gt;36&lt;/td&gt;
+          &lt;td&gt;18&lt;/td&gt;
+          &lt;td&gt;18.27&lt;/td&gt;
+          &lt;td&gt;12&lt;/td&gt;
+          &lt;td&gt;11.43&lt;/td&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;6&lt;/td&gt;
+          &lt;td&gt;20 -120&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;(M14)&lt;/td&gt;
+          &lt;td&gt;40&lt;/td&gt;
+          &lt;td&gt;21&lt;/td&gt;
+          &lt;td&gt;21.33&lt;/td&gt;
+          &lt;td&gt;14&lt;/td&gt;
+          &lt;td&gt;13.72&lt;/td&gt;
+          &lt;td&gt;12&lt;/td&gt;
+          &lt;td&gt;7&lt;/td&gt;
+          &lt;td&gt;25 -140&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M16&lt;/td&gt;
+          &lt;td&gt;44&lt;/td&gt;
+          &lt;td&gt;24&lt;/td&gt;
+          &lt;td&gt;24.33&lt;/td&gt;
+          &lt;td&gt;16&lt;/td&gt;
+          &lt;td&gt;16&lt;/td&gt;
+          &lt;td&gt;14&lt;/td&gt;
+          &lt;td&gt;8&lt;/td&gt;
+          &lt;td&gt;25 -160&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M20&lt;/td&gt;
+          &lt;td&gt;52&lt;/td&gt;
+          &lt;td&gt;30&lt;/td&gt;
+          &lt;td&gt;30.33&lt;/td&gt;
+          &lt;td&gt;20&lt;/td&gt;
+          &lt;td&gt;19.44&lt;/td&gt;
+          &lt;td&gt;17&lt;/td&gt;
+          &lt;td&gt;10&lt;/td&gt;
+          &lt;td&gt;30 -200&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M24&lt;/td&gt;
+          &lt;td&gt;60&lt;/td&gt;
+          &lt;td&gt;36&lt;/td&gt;
+          &lt;td&gt;36.39&lt;/td&gt;
+          &lt;td&gt;24&lt;/td&gt;
+          &lt;td&gt;21.73&lt;/td&gt;
+          &lt;td&gt;19&lt;/td&gt;
+          &lt;td&gt;12&lt;/td&gt;
+          &lt;td&gt;40 -200&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M30&lt;/td&gt;
+          &lt;td&gt;72&lt;/td&gt;
+          &lt;td&gt;45&lt;/td&gt;
+          &lt;td&gt;45.39&lt;/td&gt;
+          &lt;td&gt;30&lt;/td&gt;
+          &lt;td&gt;25.15&lt;/td&gt;
+          &lt;td&gt;22&lt;/td&gt;
+          &lt;td&gt;15.5&lt;/td&gt;
+          &lt;td&gt;45 -200&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M36&lt;/td&gt;
+          &lt;td&gt;84&lt;/td&gt;
+          &lt;td&gt;54&lt;/td&gt;
+          &lt;td&gt;54.46&lt;/td&gt;
+          &lt;td&gt;36&lt;/td&gt;
+          &lt;td&gt;30.85&lt;/td&gt;
+          &lt;td&gt;27&lt;/td&gt;
+          &lt;td&gt;19&lt;/td&gt;
+          &lt;td&gt;55 -200&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M42&lt;/td&gt;
+          &lt;td&gt;96&lt;/td&gt;
+          &lt;td&gt;63&lt;/td&gt;
+          &lt;td&gt;63.46&lt;/td&gt;
+          &lt;td&gt;42&lt;/td&gt;
+          &lt;td&gt;36.57&lt;/td&gt;
+          &lt;td&gt;32&lt;/td&gt;
+          &lt;td&gt;24&lt;/td&gt;
+          &lt;td&gt;60 -300&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M48&lt;/td&gt;
+          &lt;td&gt;106&lt;/td&gt;
+          &lt;td&gt;72&lt;/td&gt;
+          &lt;td&gt;72.46&lt;/td&gt;
+          &lt;td&gt;48&lt;/td&gt;
+          &lt;td&gt;41.13&lt;/td&gt;
+          &lt;td&gt;36&lt;/td&gt;
+          &lt;td&gt;28&lt;/td&gt;
+          &lt;td&gt;70 -300&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;注意：Solidworks 的 Toolbox 中附带的内六角螺钉为内六角花形圆柱头螺钉 &lt;code&gt;GB/T 6190-1986&lt;/code&gt;，与内六角圆柱头螺钉 &lt;code&gt;GB /T 70.1 - 2008&lt;/code&gt; 不同&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193836.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193836.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193842.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193842.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193846.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193846.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;内六角圆柱头螺钉用沉孔尺寸&#34;&gt;内六角圆柱头螺钉用沉孔尺寸
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;摘自 GB/T 152.3-1988&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193854.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240924193854.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;螺纹规格&lt;/th&gt;
+          &lt;th&gt;d2(H13)&lt;/th&gt;
+          &lt;th&gt;d1(H13)&lt;/th&gt;
+          &lt;th&gt;t&lt;/th&gt;
+          &lt;th&gt;d3(H13)&lt;/th&gt;
+          &lt;th&gt;d3&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M1.6&lt;/td&gt;
+          &lt;td&gt;3.3&lt;/td&gt;
+          &lt;td&gt;1.8&lt;/td&gt;
+          &lt;td&gt;1.8&lt;/td&gt;
+          &lt;td&gt;1.8&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M2&lt;/td&gt;
+          &lt;td&gt;4.3&lt;/td&gt;
+          &lt;td&gt;2.4&lt;/td&gt;
+          &lt;td&gt;2.3&lt;/td&gt;
+          &lt;td&gt;2.3&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M2.5&lt;/td&gt;
+          &lt;td&gt;5.0&lt;/td&gt;
+          &lt;td&gt;2.9&lt;/td&gt;
+          &lt;td&gt;2.9&lt;/td&gt;
+          &lt;td&gt;2.9&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M3&lt;/td&gt;
+          &lt;td&gt;6.0&lt;/td&gt;
+          &lt;td&gt;3.4&lt;/td&gt;
+          &lt;td&gt;3.4&lt;/td&gt;
+          &lt;td&gt;3.4&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M4&lt;/td&gt;
+          &lt;td&gt;8.0&lt;/td&gt;
+          &lt;td&gt;4.5&lt;/td&gt;
+          &lt;td&gt;4.6&lt;/td&gt;
+          &lt;td&gt;4.6&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M5&lt;/td&gt;
+          &lt;td&gt;10.0&lt;/td&gt;
+          &lt;td&gt;5.5&lt;/td&gt;
+          &lt;td&gt;5.5&lt;/td&gt;
+          &lt;td&gt;5.7&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M6&lt;/td&gt;
+          &lt;td&gt;11.0&lt;/td&gt;
+          &lt;td&gt;6.6&lt;/td&gt;
+          &lt;td&gt;6.8&lt;/td&gt;
+          &lt;td&gt;6.8&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M8&lt;/td&gt;
+          &lt;td&gt;15.0&lt;/td&gt;
+          &lt;td&gt;9.0&lt;/td&gt;
+          &lt;td&gt;9&lt;/td&gt;
+          &lt;td&gt;9.0&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M10&lt;/td&gt;
+          &lt;td&gt;18.0&lt;/td&gt;
+          &lt;td&gt;11.0&lt;/td&gt;
+          &lt;td&gt;11&lt;/td&gt;
+          &lt;td&gt;11.0&lt;/td&gt;
+          &lt;td&gt;—&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M12&lt;/td&gt;
+          &lt;td&gt;20.0&lt;/td&gt;
+          &lt;td&gt;13.5&lt;/td&gt;
+          &lt;td&gt;13.0&lt;/td&gt;
+          &lt;td&gt;13.0&lt;/td&gt;
+          &lt;td&gt;16.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M14&lt;/td&gt;
+          &lt;td&gt;24.0&lt;/td&gt;
+          &lt;td&gt;15.5&lt;/td&gt;
+          &lt;td&gt;15&lt;/td&gt;
+          &lt;td&gt;15.0&lt;/td&gt;
+          &lt;td&gt;18.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M16&lt;/td&gt;
+          &lt;td&gt;26.0&lt;/td&gt;
+          &lt;td&gt;17.5&lt;/td&gt;
+          &lt;td&gt;17.5&lt;/td&gt;
+          &lt;td&gt;17.5&lt;/td&gt;
+          &lt;td&gt;20.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M20&lt;/td&gt;
+          &lt;td&gt;33.0&lt;/td&gt;
+          &lt;td&gt;22.0&lt;/td&gt;
+          &lt;td&gt;21.5&lt;/td&gt;
+          &lt;td&gt;21.5&lt;/td&gt;
+          &lt;td&gt;24.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M24&lt;/td&gt;
+          &lt;td&gt;40.0&lt;/td&gt;
+          &lt;td&gt;26.0&lt;/td&gt;
+          &lt;td&gt;25&lt;/td&gt;
+          &lt;td&gt;25.5&lt;/td&gt;
+          &lt;td&gt;28.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M30&lt;/td&gt;
+          &lt;td&gt;48.0&lt;/td&gt;
+          &lt;td&gt;33.0&lt;/td&gt;
+          &lt;td&gt;32&lt;/td&gt;
+          &lt;td&gt;32.0&lt;/td&gt;
+          &lt;td&gt;36.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;M36&lt;/td&gt;
+          &lt;td&gt;57.0&lt;/td&gt;
+          &lt;td&gt;39.0&lt;/td&gt;
+          &lt;td&gt;38&lt;/td&gt;
+          &lt;td&gt;38.0&lt;/td&gt;
+          &lt;td&gt;42.0&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/info_30447.html?pc=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GB /T 70.1 - 2008-内六角圆柱头螺钉- 易紧通&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/info_19686.html?pc=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GB 6190 - 1986-内六角花形圆柱头螺钉 4.8级- 易紧通&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;其他说明&#34;&gt;其他说明
+&lt;/h3&gt;&lt;p&gt;对于外螺纹来说，卡尺测得的尺寸比螺纹公称尺寸稍微小一点，例如&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;M2.5，卡尺测量外径 2.4&lt;/li&gt;
+&lt;li&gt;M3，测量外径 2.9&lt;/li&gt;
+&lt;li&gt;M4，测量外径 3.8-3.9&lt;/li&gt;
+&lt;li&gt;M5，测量外径 4.8-4.9&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>连接螺纹与底孔尺寸简明笔记</title>
+        <link>https://teaize.github.io/p/%E8%BF%9E%E6%8E%A5%E8%9E%BA%E7%BA%B9%E4%B8%8E%E5%BA%95%E5%AD%94%E5%B0%BA%E5%AF%B8%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
+        <pubDate>Sat, 21 Sep 2024 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%BF%9E%E6%8E%A5%E8%9E%BA%E7%BA%B9%E4%B8%8E%E5%BA%95%E5%AD%94%E5%B0%BA%E5%AF%B8%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
+        <description>&lt;h3 id=&#34;常见-npt-螺纹尺寸和底孔大小&#34;&gt;常见 NPT 螺纹尺寸和底孔大小
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;NPT 尺寸&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;螺纹外径 (mm)&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;底孔直径 (mm)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1/16 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;7.938&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;6.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1/8 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;10.287&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;8.4&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1/4 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;13.716&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;11.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3/8 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;17.145&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;15.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1/2 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;21.336&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;18.6&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;3/4 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;26.670&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;23.1&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;33.401&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;29.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1-1/4 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;42.164&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;38.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;1-1/2 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;48.261&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;43.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;2 NPT&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;60.325&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;55.0&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210114.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210114.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;尺寸可从 SolidWorks 等这类的软件中测得，锥形孔螺纹 —&amp;gt; ANSI Inch 标准&lt;/p&gt;
+&lt;h3 id=&#34;常见-g-螺纹尺寸和底孔大小&#34;&gt;常见 G 螺纹尺寸和底孔大小
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;G 螺纹尺寸&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;螺纹外径 (mm)&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;底孔直径 (mm)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 1/8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;9.728&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;8.8&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 1/4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;13.157&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;11.8&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 3/8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;16.662&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;15.25&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 1/2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;20.955&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;19.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 5/8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;22.911&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;21.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 3/4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;26.441&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;24.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;33.249&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;30.75&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 1-1/4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;41.91&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;39.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 1-1/2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;47.803&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;44.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;G 2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;59.614&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;56.0&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;直管螺纹孔，ISO 标准&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210126.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210126.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210129.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210129.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;常见-rc-螺纹尺寸和底孔大小&#34;&gt;常见 Rc 螺纹尺寸和底孔大小
+&lt;/h3&gt;&lt;p&gt;注意，R 螺纹是锥形外螺纹，Rc 螺纹是锥形内螺纹&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;Rc 螺纹尺寸&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;螺纹外径 (mm)&lt;/th&gt;
+          &lt;th style=&#34;text-align: center&#34;&gt;底孔直径 (mm)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 1/8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;9.728&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;8.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 1/4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;13.157&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;10.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 3/8&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;16.662&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;14.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 1/2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;20.955&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;17.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 3/4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;26.441&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;23.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 1&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;33.249&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;29.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 1-1/4&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;41.91&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;38.0&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 1-1/2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;47.803&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;43.5&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;Rc 2&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;59.614&lt;/td&gt;
+          &lt;td style=&#34;text-align: center&#34;&gt;55.0&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210149.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210149.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;尺寸可从 SolidWorks 等这类的软件中测得，锥形孔螺纹 —&amp;gt; ISO 标准&lt;/p&gt;
+&lt;h3 id=&#34;unf-螺纹&#34;&gt;UNF 螺纹
+&lt;/h3&gt;&lt;p&gt;螺纹孔，标准选美标英制。ANSI Inch 是指基于 ANSI 标准（American National Standards Institute，美国国家标准协会）规定的，以英寸为单位的机械和工业标准
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210208.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921210208.png&#34; alt=&#34;image.png&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 </description>
         </item>
         <item>

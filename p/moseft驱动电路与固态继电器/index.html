@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html lang="zh-cn" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="本篇继 [[半导体制冷片]]、固态继电器，重点学习 MOSEFT 驱动电路与固态继电器电路的区别。\n最开始还以为固态继电器就是 MOSEFT 驱动电路的模块封装，实际上这两种还是有区别的！\n">
+<title>MOSEFT驱动电路与固态继电器</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/moseft%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E4%B8%8E%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="MOSEFT驱动电路与固态继电器">
+<meta property='og:description' content="本篇继 [[半导体制冷片]]、固态继电器，重点学习 MOSEFT 驱动电路与固态继电器电路的区别。\n最开始还以为固态继电器就是 MOSEFT 驱动电路的模块封装，实际上这两种还是有区别的！\n">
+<meta property='og:url' content='https://teaize.github.io/p/moseft%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E4%B8%8E%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-02T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-02T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="MOSEFT驱动电路与固态继电器">
+<meta name="twitter:description" content="本篇继 [[半导体制冷片]]、固态继电器，重点学习 MOSEFT 驱动电路与固态继电器电路的区别。\n最开始还以为固态继电器就是 MOSEFT 驱动电路的模块封装，实际上这两种还是有区别的！\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#ssr-内部到底有什么">SSR 内部到底有什么</a></li>
+        <li><a href="#既然内部有-mosfet为什么不直接买-mosfet">既然内部有 MOSFET，为什么不直接买 MOSFET</a></li>
+        <li><a href="#一个必须纠正的误区控制频率">一个必须纠正的误区：控制频率</a>
+          <ol>
+            <li><a href="#场景举例">场景举例</a></li>
+          </ol>
+        </li>
+        <li><a href="#拓展资料光耦的作用">拓展资料：光耦的作用</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/moseft%E9%A9%B1%E5%8A%A8%E7%94%B5%E8%B7%AF%E4%B8%8E%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/">MOSEFT驱动电路与固态继电器</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-01-02</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <p>本篇继 [[半导体制冷片]]、<a class="link" href="https://teaize.github.io/p/%E5%9B%BA%E6%80%81%E7%BB%A7%E7%94%B5%E5%99%A8/"  target="_blank" rel="noopener"
+    >固态继电器</a>，重点学习 MOSEFT 驱动电路与固态继电器电路的区别。</p>
+<p>最开始还以为固态继电器就是 MOSEFT 驱动电路的模块封装，实际上这两种还是有区别的！</p>
+<p><strong>直流型固态继电器</strong>（DC-DC SSR）的“核心开关部件”确实通常是 MOSFET，但一个完整的 SSR 并不是只有一颗 MOSFET，它是一个高度集成的功能模块。</p>
+<h3 id="ssr-内部到底有什么">SSR 内部到底有什么
+</h3><p>一个工业级的 SSR 就像是一个包装好的“黑盒子”，内部通常包含三个部分：</p>
+<ol>
+<li>输入端（隔离层）： 通常是一个<strong>光耦（Optocoupler）</strong>。当你给输入端 3-32V 电压时，内部的 LED 发光，光信号传给接收端。这就是为什么它叫“固态”——没有机械触点，通过光实现电隔离，保护你的单片机（如 STM32）不被大电流烧毁。</li>
+<li>中间层（触发电路）： 负责把光耦传来的微弱信号放大，并转化为能快速开启功率管的电信号。</li>
+<li>输出端（功率开关）： 根据用途不同，选用的零件完全不同：
+<ul>
+<li><strong>DC-DC 型 SSR：</strong> 内部确实通常是 <strong>MOSFET</strong> 或 <strong>IGBT</strong>。</li>
+<li><strong>AC 型 SSR（最常见）：</strong> 内部是 <strong>可控硅（Triac 或 SCR）</strong>。这是为了切换交流电设计的，不能用于直流电。</li>
+</ul>
+</li>
+</ol>
+<h3 id="既然内部有-mosfet为什么不直接买-mosfet">既然内部有 MOSFET，为什么不直接买 MOSFET
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>维度</strong></th>
+          <th><strong>直接用 MOSFET 零件</strong></th>
+          <th><strong>使用 SSR 模块</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>隔离</strong></td>
+          <td>需要你自己设计光耦隔离电路，否则容易烧单片机。</td>
+          <td><strong>自带光电隔离</strong>，即插即用，安全性极高。</td>
+      </tr>
+      <tr>
+          <td><strong>保护</strong></td>
+          <td>需要你自己加续流二极管、TVS 管防止感性负载冲击。</td>
+          <td>内部通常已经<strong>集成了吸收回路</strong>，抗干扰能力强。</td>
+      </tr>
+      <tr>
+          <td><strong>散热与安装</strong></td>
+          <td>需要设计 PCB、加导热垫、拧螺丝到散热片。</td>
+          <td>标准工业封装，外壳带底座，可以直接拧在机柜板上。</td>
+      </tr>
+      <tr>
+          <td><strong>成本</strong></td>
+          <td>几块钱（零件成本低）。</td>
+          <td>几十到上百元（模块成本高）。</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="一个必须纠正的误区控制频率">一个必须纠正的误区：控制频率
+</h3><p>虽然 DC-SSR 内部是 MOSFET，但由于为了保证工业级的稳定性，SSR 内部的<strong>光耦和触发电路通常做得比较“慢”</strong>。</p>
+<ul>
+<li>MOSFET 零件： 你可以用几万赫兹（kHz）的 PWM 信号去控制它，实现非常平稳的温度控制（就像无极调光）。</li>
+<li>SSR 模块： 大多数工业 SSR 只能承受几十赫兹（Hz）的开关频率。如果你用太快的 PWM 去冲它，它会<strong>发热极其严重</strong>，甚至根本打不开。</li>
+</ul>
+<blockquote>
+<p>1、总结建议：</p>
+<ul>
+<li>如果你在做 <strong>CEMS 采样管线加热</strong>（功率大、热惰性大、动作慢），选 <strong>SSR</strong>，稳定省心。</li>
+<li>如果你在做 <strong>分析仪探测器恒温/制冷</strong>（需要高精度、高频 PID 调节），必须自己设计 <strong>MOSFET 驱动电路</strong>。</li>
+</ul>
+</blockquote>
+<blockquote>
+<p>2、如何理解：大多数工业 SSR 只能承受几十赫兹（Hz）的开关频率
+绝大多数工业级 <strong>AC SSR</strong>（交流固态继电器）都设计有“过零触发”电路。</p>
+<ul>
+<li>工作原理： 为了减少电磁干扰（EMI），SSR 只会在交流电电压接近 0V 的那一刻才真正开启或关闭。</li>
+<li>时间限制： 在 50Hz 的工频电中，一个周期是 20ms，半个周期是 10ms。<strong>这意味着 SSR 的最快响应速度被锁定在了 10ms</strong></li>
+<li>高频 PWM 的冲突： 如果你的 PID 算法要求 1kHz（周期 1ms）的 PWM 信号，SSR 根本反应不过来。它会漏掉大量的脉冲，导致控制逻辑完全失效。</li>
+</ul>
+</blockquote>
+<h4 id="场景举例">场景举例
+</h4><p>场景 A：普通饮水机加热（可以使用工业 SSR）</p>
+<ul>
+<li>特点： 水量大，热惯性大，温度反应慢。</li>
+<li>控制： PID 周期设为 1 秒甚至更长（低频 PWM）。</li>
+<li>结果： SSR 每秒开关几次，工作轻松，波动可以接受。</li>
+</ul>
+<p>场景 B：PCR 仪（基因扩增仪）或 半导体加热台（不能用工业 SSR）</p>
+<ul>
+<li>特点： 要求温控精度达到 $\pm 0.1^{\circ}C$，且升降温极快。</li>
+<li>控制： 必须使用高频 PWM（如 1kHz 以上）来平滑电流，避免大电流脉冲对敏感元件的冲击。</li>
+<li>结果： 此时必须放弃 SSR，改用由单片机直接驱动的 <strong>MOSFET</strong> 或 <strong>IGBT</strong> 功率电路。</li>
+</ul>
+<p>核心在于：控制频率必须远高于系统的反应速度。如果系统反应很慢（热惯性大），慢吞吞的 SSR 也能跟得上；如果系统转瞬即变（热惯性小），就必须用“快手” MOSFET/IGBT。</p>
+<h3 id="拓展资料光耦的作用">拓展资料：光耦的作用
+</h3><p>1、保护“大脑”（高压隔离）</p>
+<p>如果控制端（STM32）直接连着高压负载（比如 220V 加热管），万一功率管击穿短路，220V 的高压会顺着导线直接冲向单片机，瞬间烧毁所有电子元器件。光耦的绝缘层通常能承受 $2500V$ 到 $5000V$ ($V_{iso}$) 的瞬时高压。</p>
+<p>2、切断干扰（共模抑制）</p>
+<p>工业现场（如 CEMS 机柜）有大量的电机、变频器，会产生很强的电磁噪声。如果电路是连通的，这些噪声会干扰单片机的时钟和逻辑信号，导致系统死机或乱码。光耦只传递光，不传递电信号中的杂波，从而实现了“噪声免疫”。</p>
+<p>3、解决“地电位”冲突</p>
+<p>不同设备之间的“地（GND）”可能有几伏甚至十几伏的压差。如果直接连在一起，会产生<strong>地环路电流</strong>。光耦让两个电路各自拥有独立的“地”，互不干涉。</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
