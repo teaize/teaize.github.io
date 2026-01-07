@@ -7,7 +7,328 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 04 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 07 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SW智能零件</title>
+        <link>https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/</link>
+        <pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;智能零部件smart-components&#34;&gt;智能零部件（Smart Components）
+&lt;/h3&gt;&lt;p&gt;这是专门为“带孔零件”设计的方案。你可以预先定义：当 A 零件放入装配体时，它应该在对方身上切掉什么形状。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;制作模板：
+&lt;ul&gt;
+&lt;li&gt;创建一个装配体 C，将零件 A 和零件 B 插入装配体 C 中&lt;/li&gt;
+&lt;li&gt;在零件 B 上添加需要配合零件 A 需要的特征（例如在零件 B 上开一个零件 A 大小的孔）。注意是直接修改 B 零件， 而不是在装配体中修改 B 零件&lt;/li&gt;
+&lt;li&gt;点击装配体—&amp;gt;制作智能零部件。
+&lt;ul&gt;
+&lt;li&gt;如果菜单中没有这个命令，可以在设置中将命令添加到菜单中 
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107194821.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107194821.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;在弹出窗口中，选择零部件 A 作为“智能零部件”。&lt;/li&gt;
+&lt;li&gt;在“特征”一栏中，选择 B 身上（或者关联的临时装配体中）定义的“开孔特征”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用：
+&lt;ul&gt;
+&lt;li&gt;将 A 拖入你的面板装配体。&lt;/li&gt;
+&lt;li&gt;在设计树中，零件 A 的图标上会出现一个“闪电”图标。&lt;/li&gt;
+&lt;li&gt;右键点击 A，选择【插入智能特征】，面板上就会自动打出配套的孔。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;联动：
+&lt;ul&gt;
+&lt;li&gt;当你移动 A 的位置后，点击重建模型（Ctrl + B），面板上的孔会自动跟随 A 移动。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;创建智能零件&#34;&gt;创建智能零件
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;这个命令需要在装配体中才能激活&lt;/li&gt;
+&lt;li&gt;所选的特征必须属于顶层零件（例如在当前状态下，开孔的面板位于装配体中的子装配体中，那么这个零件下的特征就不能用于制作只能零件）&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;智能扣件&lt;/code&gt; 和 &lt;code&gt;制作智能零部件&lt;/code&gt; 不是一个功能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200108.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200108.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200537.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200537.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;创建完后，零件就会出现小闪电图标
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200719.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200719.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;应用&#34;&gt;应用
+&lt;/h3&gt;&lt;p&gt;假设我们复制一个刚才创建的智能零件
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200926.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200926.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+右键零件，插入智能特征【或者直接点击零件提示的闪电小图标】。此时会弹出一个预览窗口&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201032.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201032.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+点击确认，就自动插入了我们所需要的开孔特征
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201310.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201310.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+对应的零件中，也会显示这个关联的特征
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107202044.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107202044.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;拓展&#34;&gt;拓展
+&lt;/h3&gt;&lt;p&gt;例如前面板零件中需要插入压力传感器、风扇、温控器、开关等等部件。可以在前面板零件中先将这些需要“匹配”的特征一个个创建出来。然后再回到装配体中，将压力传感器、风扇、温控器等制作成智能零件&lt;/p&gt;
+&lt;p&gt;例如这里新建了两个特征，分别对应开关按键和电源插座，提前将特征做好，回到装配体中就可以直接制作智能零件了&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107203409.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107203409.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+细节 1：可以修改特征名字，之后应用智能特征的时候也会是修改后的名字
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204031.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204031.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+细节 2：特征尺寸也是可以带公差的
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204209.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204209.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+细节 3：删除了智能零件 A，零件 B 上对应的特征也会被删除&lt;/p&gt;
+&lt;p&gt;细节 4：删除智能零件下的文件夹，即可恢复普通零件
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204938.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204938.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+细节 5：可以预览智能零件的特征。预览有两个状态（鼠标左建切换）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;第一个状态只显示特征&lt;/li&gt;
+&lt;li&gt;第二个状态显示特征和零件
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107215312.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107215312.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>钣金零件圆角处的处理</title>
+        <link>https://teaize.github.io/p/%E9%92%A3%E9%87%91%E9%9B%B6%E4%BB%B6%E5%9C%86%E8%A7%92%E5%A4%84%E7%9A%84%E5%A4%84%E7%90%86/</link>
+        <pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%92%A3%E9%87%91%E9%9B%B6%E4%BB%B6%E5%9C%86%E8%A7%92%E5%A4%84%E7%9A%84%E5%A4%84%E7%90%86/</guid>
+        <description>&lt;p&gt;如下，无论是边线法兰还是斜接法兰，面对这样的圆角，都无能为力&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260106195532.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260106195532.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;如何处理&#34;&gt;如何处理
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;闭合角（选择标记 1 处的两个截面） —&amp;gt; 出来一个直角&lt;/li&gt;
+&lt;li&gt;选择其中一个面，进入草图绘图模式&lt;/li&gt;
+&lt;li&gt;选中下方的内圆角线，转换实体引用&lt;/li&gt;
+&lt;li&gt;然后等距实体，记得顶端加盖（直线），让生成的草图模型刚好和要切除的图形一样&lt;/li&gt;
+&lt;li&gt;拉伸切除即可&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260106232659.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260106232659.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260106233000.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260106233000.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>DFM面向制造的设计</title>
+        <link>https://teaize.github.io/p/dfm%E9%9D%A2%E5%90%91%E5%88%B6%E9%80%A0%E7%9A%84%E8%AE%BE%E8%AE%A1/</link>
+        <pubDate>Tue, 06 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/dfm%E9%9D%A2%E5%90%91%E5%88%B6%E9%80%A0%E7%9A%84%E8%AE%BE%E8%AE%A1/</guid>
+        <description>&lt;p&gt;画得出来”不代表“造得出来”，更不代表“造得起”。这就是所谓的 DFM（Design for Manufacturing，面向制造的设计） 思维。很多新手容易把 CAD 软件当成“捏泥巴”，而忽略了背后的加工逻辑。&lt;/p&gt;
+&lt;h3 id=&#34;一-几何结构与刀具限制切削加工核心&#34;&gt;一、 几何结构与刀具限制（切削加工核心）
+&lt;/h3&gt;&lt;h4 id=&#34;1-内直角与内锐角最经典的问题&#34;&gt;1. 内直角与内锐角（最经典的问题）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题： 铣刀是圆柱形的，旋转起来切削。因此，&lt;strong&gt;三轴 CNC 永远无法加工出完美的“内直角”&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;后果： 如果你在模型里画了一个直角的凹槽，加工方要么用电火花（EDM）去“清角”，要么用很小的刀具多次从角落“蹭”过去，这都会导致成本飙升。&lt;/li&gt;
+&lt;li&gt;建议：
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;倒圆角&lt;/strong&gt;（Fillet）： 在所有内角处留出圆角，且圆角半径（$R$）最好略大于常用刀具半径。例如，如果你希望对方用 $\phi 10mm$ 的刀快速开粗，内角 $R$ 最好设计为 $5.5mm$ 或 $6mm$，而不是刚好 $5mm$（防止刀具满负荷切削，容易震刀）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;避空角&lt;/strong&gt;（Dog-bone/T-bone）： 如果此处必须装配一个方块，不能有圆角，那么就在角落处画一个“米老鼠耳朵”一样的圆形凹槽，把角避空。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-深腔与深孔深径比-ld&#34;&gt;2. 深腔与深孔（深径比 L/D）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题： 刀具越长越细，刚性越差，加工时越容易弹刀、断刀。&lt;/li&gt;
+&lt;li&gt;黄金法则： 深径比（L/D）尽量控制在 3:1 或 4:1 以内。
+&lt;ul&gt;
+&lt;li&gt;例如：你要加工一个深 $50mm$ 的窄槽，如果你把槽宽设计成 $5mm$，那么刀具直径最大只有 $5mm$，深径比达到 $10:1$，这几乎是无法直接铣削的，可能需要电火花，成本翻倍。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;建议： 尽量加宽凹槽，或者减小深度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3内六角凹槽&#34;&gt;3、内六角凹槽
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;为什么难： 旋转的刀具切不出尖锐的六边形角。这种结构通常需要&lt;strong&gt;拉削（Broaching）或电火花（EDM）&lt;/strong&gt;。前者需要昂贵的专用刀具（拉刀），后者效率极低。&lt;/li&gt;
+&lt;li&gt;替代方案：
+&lt;ul&gt;
+&lt;li&gt;如果是为了拧紧，直接买&lt;strong&gt;标准件&lt;/strong&gt;（如内六角螺钉、止动销）。&lt;/li&gt;
+&lt;li&gt;如果是为了传动，考虑改成&lt;strong&gt;双扁位（D 型切口）或者外六角&lt;/strong&gt;，这些都可以直接铣出来。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-孔的设计细节&#34;&gt;二、 孔的设计细节
+&lt;/h3&gt;&lt;h4 id=&#34;1-盲孔-vs-通孔&#34;&gt;1. 盲孔 vs 通孔
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;通孔： 比较好加工，钻头直接钻穿，排屑容易，冷却液也能流过。&lt;/li&gt;
+&lt;li&gt;盲孔（不通的孔）：
+&lt;ul&gt;
+&lt;li&gt;平底问题： 钻头的尖端是 $118^\circ$ 或 $135^\circ$ 的锥角。如果你在模型里画了一个“平底”的盲孔，操作工需要先用钻头钻孔，再换一把平底铣刀去把底部铣平。增加了一道工序。除非必须放置弹簧或平头柱塞，否则尽量保留钻尖留下的锥角。&lt;/li&gt;
+&lt;li&gt;攻丝深度： 千万不要把螺纹画到孔的最底端。丝锥（切螺纹的工具）前端有一段导向锥度（无法切出满牙）。&lt;/li&gt;
+&lt;li&gt;建议： 钻孔深度要比螺纹深度深 $1.2 \sim 1.5$ 倍直径（或至少预留 $5mm$ 以上的排屑空间）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-孔的规格&#34;&gt;2. 孔的规格
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;尽量使用标准值： 不要设计 $\phi 6.32mm$ 这种孔，除非是配合公差要求。尽量用 $\phi 6.0, \phi 8.0$ 这种整数，对应标准钻头。非标孔需要定做刀具或用铣刀螺旋下刀，比较慢。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-零件刚性与装夹&#34;&gt;三、 零件刚性与装夹
+&lt;/h3&gt;&lt;h4 id=&#34;1-薄壁结构&#34;&gt;1. 薄壁结构
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;问题： 金属也是有弹性的。如果设计的壁厚太薄（例如金属件低于 $0.5mm$，塑胶件低于 $1mm$），加工时在切削力的作用下，零件会像纸片一样震动（Chatter），导致表面光洁度极差，甚至变形报废。&lt;/li&gt;
+&lt;li&gt;建议： 尽量增加壁厚，或增加加强筋。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2-装夹面基准面&#34;&gt;2. 装夹面（基准面）
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;逻辑： 零件需要被虎钳夹紧才能加工。如果你设计的零件全是曲面，或者六个面都是斜的，工人怎么夹？&lt;/li&gt;
+&lt;li&gt;建议： 至少保留一组成对的平行面作为装夹基准。如果实在没有，就需要设计专门的工装夹具（Fixture），这又是一笔额外的模具费（几百到几千元不等）。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>可靠性Reliability</title>
+        <link>https://teaize.github.io/p/%E5%8F%AF%E9%9D%A0%E6%80%A7reliability/</link>
+        <pubDate>Mon, 05 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%8F%AF%E9%9D%A0%E6%80%A7reliability/</guid>
+        <description>&lt;p&gt;对于 CEMS 仪器制造商而言，如果我们抛开“必须满足国家标准（如 HJ 76）”这个最基本的准入门槛不谈，最重要的特性可能既不是单纯的“准确性”，也不是实验室环境下的“稳定性”，而是：可靠性（Reliability）。准确来说，是&lt;strong&gt;在恶劣工况下的长期免维护能力&lt;/strong&gt;。&lt;/p&gt;
+&lt;h3 id=&#34;准确性由于阈值效应它不是核心竞争力&#34;&gt;准确性：由于“阈值效应”，它不是核心竞争力
+&lt;/h3&gt;&lt;p&gt;很多人认为做仪器最重要的是准。但在 CEMS 行业，准确性其实是一个“及格线指标”，而不是“加分指标”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;合规即可：&lt;/strong&gt; 环保局考核的是数据是否在允许误差范围内（例如 $\pm 2% F.S.$ 或 $\pm 5%$ ）。只要仪器能通过环保验收和 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E5%9E%8B%E5%BC%8F%E6%A0%B8%E5%87%86/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;型式核准&lt;/a&gt;（Type Approval），对于用户（排污企业）来说，0.1% 的误差和 1.0% 的误差没有区别，他们不会因为你更准而多付钱。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;过犹不及：&lt;/strong&gt; 甚至在某些“灰色地带”，用户反而不希望仪器“太灵敏”，捕捉到不必要的瞬时超标。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;稳定性是基础但还不够&#34;&gt;稳定性：是基础，但还不够
+&lt;/h3&gt;&lt;p&gt;稳定性（零点漂移、量程漂移小）确实比准确性更重要，因为它决定了校准的频率。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果一台仪器每天漂移，运维人员就得天天跑现场标定，成本极高。&lt;/li&gt;
+&lt;li&gt;但是，仅仅数据稳定是不够的。如果数据很稳定，但预处理系统经常堵塞、采样泵经常停转、光源寿命短，那么“测量单元的稳定性”就没有意义。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;可靠性公司的利润保护神&#34;&gt;可靠性：公司的“利润保护神”
+&lt;/h3&gt;&lt;p&gt;对于仪器公司（特别是现在的 CEMS 行业，往往涉及“设备 + 运维”的一体化服务）来说，&lt;strong&gt;可靠性直接决定了利润率&lt;/strong&gt;。&lt;/p&gt;
+&lt;h4 id=&#34;a-运维成本的黑洞&#34;&gt;A. 运维成本的黑洞
+&lt;/h4&gt;&lt;p&gt;CEMS 现场环境极其恶劣（高温、高湿、高粉尘、腐蚀性气体）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;如果设备不可靠：&lt;/strong&gt; 甚至不需要它彻底坏掉，只要是一个电磁阀卡涩、一个接头漏气、或者冷凝器除水效果下降，运维人员就必须去现场。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;算一笔账：&lt;/strong&gt; 假设一套 CEMS 每年的运维合同费是几万元。一次计划外的现场维修（差旅费、人工费、配件费）可能就要消耗掉 10%-20% 的年度利润。如果一个月坏两次，这单生意就是赔钱的。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;b-客户的信任免责&#34;&gt;B. 客户的信任（免责）
+&lt;/h4&gt;&lt;p&gt;对于电厂或化工厂，CEMS 是他们的“眼睛”。如果 CEMS 故障导致数据缺失（Data Gap），环保局会按最坏情况核算排污量，甚至直接罚款。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;最牛的仪器是： 装上去之后，除了法定周期的巡检和更换耗材，用户感觉不到它的存在。&lt;/li&gt;
+&lt;li&gt;最差的仪器是： 半夜两点报警，导致用户被环保局电话叫醒。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;c-备件周转率&#34;&gt;C. 备件周转率
+&lt;/h4&gt;&lt;p&gt;高可靠性意味着备件更换频率低。这不仅降低了直接材料成本，还降低了公司库存管理的压力和资金占用。&lt;/p&gt;
+&lt;h3 id=&#34;总结&#34;&gt;总结
+&lt;/h3&gt;&lt;p&gt;如果把 CEMS 仪器比作一辆车：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;准确性&lt;/strong&gt;是“最高时速”：只要能开到高速限速（120km/h）就够了，能跑 300km/h 在日常使用中意义不大。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;稳定性&lt;/strong&gt;是“操控感”：方向盘不抖动，开着顺手。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;可靠性&lt;/strong&gt;是“不抛锚”：这是出租车公司（仪器厂商/运维方）最看重的。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>常用压力单位简明笔记</title>
         <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8E%8B%E5%8A%9B%E5%8D%95%E4%BD%8D%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
         <pubDate>Sun, 04 Jan 2026 00:00:00 +0000</pubDate>
@@ -28720,10 +29041,21 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
         <pubDate>Fri, 07 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/sw%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
-        <description>&lt;h3 id=&#34;自定义快捷键&#34;&gt;自定义快捷键
+        <description>&lt;h3 id=&#34;草图&#34;&gt;草图
 &lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;转换为实体引用：F&lt;/li&gt;
+&lt;li&gt;构造几何线：G&lt;/li&gt;
+&lt;li&gt;等距：D&lt;/li&gt;
+&lt;li&gt;镜像：H&lt;/li&gt;
+&lt;li&gt;圆形：C&lt;/li&gt;
+&lt;li&gt;点：.&lt;/li&gt;
+&lt;li&gt;中心矩形：7&lt;/li&gt;
+&lt;li&gt;三点圆弧：1&lt;/li&gt;
+&lt;li&gt;线性阵列：/&lt;/li&gt;
+&lt;li&gt;圆周阵列：*&lt;/li&gt;
+&lt;li&gt;从零件制作工程图：Alt+G&lt;/li&gt;
 &lt;li&gt;使对称：Alt+Q&lt;/li&gt;
-&lt;li&gt;插入基准面：Alt+F&lt;/li&gt;
+&lt;li&gt;插入基准面：P&lt;/li&gt;
 &lt;li&gt;转换为构造线：Alt+W&lt;/li&gt;
 &lt;li&gt;使水平：Alt+A&lt;/li&gt;
 &lt;li&gt;使竖直：Alt+D&lt;/li&gt;
@@ -28731,6 +29063,46 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;使重合：Alt+C&lt;/li&gt;
 &lt;li&gt;选择直线中点：右键直线，B&lt;/li&gt;
 &lt;li&gt;使相等：Shift+W&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实体特征&#34;&gt;实体特征
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;拉伸：Q&lt;/li&gt;
+&lt;li&gt;拉伸切除：W&lt;/li&gt;
+&lt;li&gt;旋转：E&lt;/li&gt;
+&lt;li&gt;旋转切除：R&lt;/li&gt;
+&lt;li&gt;筋：J&lt;/li&gt;
+&lt;li&gt;移动/复制实体：K&lt;/li&gt;
+&lt;li&gt;装饰螺纹线：L&lt;/li&gt;
+&lt;li&gt;异形孔向导：Y&lt;/li&gt;
+&lt;li&gt;实体镜像：U&lt;/li&gt;
+&lt;li&gt;圆周阵列：O&lt;/li&gt;
+&lt;li&gt;线型阵列：I&lt;/li&gt;
+&lt;li&gt;新建基准面：P&lt;/li&gt;
+&lt;li&gt;FeatureManager 树区域：F9（软件自带）&lt;/li&gt;
+&lt;li&gt;扩展树：T&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;装配体命令&#34;&gt;装配体命令
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;编辑零部件：F2&lt;/li&gt;
+&lt;li&gt;插入零部件：F3&lt;/li&gt;
+&lt;li&gt;插入新零件：F4&lt;/li&gt;
+&lt;li&gt;Alt+S：插入配合，配合参考&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工具&#34;&gt;工具
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;测量：Z&lt;/li&gt;
+&lt;li&gt;草图绘制：C&lt;/li&gt;
+&lt;li&gt;扩展/折叠树：T&lt;/li&gt;
+&lt;li&gt;正视于：Space&lt;/li&gt;
+&lt;li&gt;重建模型：F5&lt;/li&gt;
+&lt;li&gt;另存为：Ctrl+Shift+S，F12&lt;/li&gt;
+&lt;li&gt;打包：Ctrl+Shift+Alt+S&lt;/li&gt;
+&lt;li&gt;SW 欢迎界面：R&lt;/li&gt;
+&lt;li&gt;隐藏：Tab&lt;/li&gt;
+&lt;li&gt;取消隐藏：Shift+Tab&lt;/li&gt;
+&lt;li&gt;剖面面：Shift+X&lt;/li&gt;
+&lt;li&gt;插入注释：Alt+1&lt;/li&gt;
+&lt;li&gt;切换文件:Ctrl+tab&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
