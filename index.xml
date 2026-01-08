@@ -7,7 +7,152 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 07 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>SW派生零件</title>
+        <link>https://teaize.github.io/p/sw%E6%B4%BE%E7%94%9F%E9%9B%B6%E4%BB%B6/</link>
+        <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E6%B4%BE%E7%94%9F%E9%9B%B6%E4%BB%B6/</guid>
+        <description>&lt;p&gt;例如零件 A 已经量产了，但此时多了一个需求，需要在零件 A 的基础上增加或减少一部分东西。&lt;/p&gt;
+&lt;h3 id=&#34;方法&#34;&gt;方法
+&lt;/h3&gt;&lt;p&gt;新建零件 B 后，插入—&amp;gt;零件，将零件 A 插入进去，然后再进行零件 B 的编辑（例如在 A 的基础上增加特征、几何修改或者布尔运算）&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260108184751757.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260108184751757.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;核心逻辑关联性link&#34;&gt;核心逻辑：关联性（Link）
+&lt;/h3&gt;&lt;p&gt;这是最关键的一点：&lt;strong&gt;派生零件默认是“联动”的。&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果你修改了原始的零件 A 文件，那么你这个“新零件”里插入的实体也会&lt;strong&gt;自动更新&lt;/strong&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;断开外部参考：&lt;/strong&gt; 如果你不想让它联动了，可以在设计树中右击该零件，选择**“列出外部参考” -&amp;gt; “全部断开”**。这样它就变成了一个独立存在于新文件里的死实体。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>SW设计库</title>
+        <link>https://teaize.github.io/p/sw%E8%AE%BE%E8%AE%A1%E5%BA%93/</link>
+        <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E8%AE%BE%E8%AE%A1%E5%BA%93/</guid>
+        <description>&lt;blockquote&gt;
+&lt;p&gt;设计库那么好用，但是我将装配体发给别人的时候，别人经常缺失零部件，缺失的零部件刚好是我从设计库中引用的，我该如何解决&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;SolidWorks 的装配体（.SLDASM）本质上只是一个“目录”，它并不包含零件的实际模型数据，而只是记录了零件在硬盘上的&lt;strong&gt;路径&lt;/strong&gt;。当你把装配体发给别人，而没有包含设计库里的零件时，对方的电脑找不到这些路径，就会显示“零部件缺失”。下面有几种解决方式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;打包功能（Pack and Go）
+&lt;ul&gt;
+&lt;li&gt;它会自动搜索装配体引用的所有零件（包括设计库、标准件、贴图等），并将它们打包成一个压缩包。&lt;/li&gt;
+&lt;li&gt;关键设置：
+&lt;ul&gt;
+&lt;li&gt;勾选“包括 Toolbox 零部件”： 如果你使用了设计库里的标准件（螺母螺栓），必须勾选此项。&lt;/li&gt;
+&lt;li&gt;勾选“包括自定义属性”： 确保零件的属性信息也一起带走。&lt;/li&gt;
+&lt;li&gt;选择“保存到 Zip 文件”： 这样生成一个压缩包，发给别人非常方便。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;设为虚拟零部件
+&lt;ul&gt;
+&lt;li&gt;如果你只有一两个零件是从设计库引用的，不想搞复杂的文件夹结构，可以把它们“嵌入”到装配体内部。&lt;/li&gt;
+&lt;li&gt;效果： 零件不再依赖外部的 &lt;code&gt;.SLDPRT&lt;/code&gt; 文件，而是直接保存在 &lt;code&gt;.SLDASM&lt;/code&gt; 内部。
+&lt;ul&gt;
+&lt;li&gt;优点：发一个装配体文件就行。&lt;/li&gt;
+&lt;li&gt;缺点： 装配体文件会变大，且该零件无法在其他工程中被再次链接引用。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;规范项目文件夹结构
+&lt;ul&gt;
+&lt;li&gt;不要直接从 SolidWorks 默认的“系统设计库”拖零件（因为每个人的库路径可能不同）&lt;/li&gt;
+&lt;li&gt;在你的项目文件夹下建立一个子文件夹，例如 &lt;code&gt;/Library/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;将需要的通用件&lt;strong&gt;另存为&lt;/strong&gt;到这个文件夹内，再插入装配体。&lt;/li&gt;
+&lt;li&gt;这样整个项目文件夹（包含所有零件）就是一个独立的闭环，拷贝整个项目文件夹即可。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;打开零件，右键添加到库
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171621.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171621.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171631.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171631.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171737.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171737.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171813.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171813.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>SW装配体另存为零件</title>
+        <link>https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93%E5%8F%A6%E5%AD%98%E4%B8%BA%E9%9B%B6%E4%BB%B6/</link>
+        <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93%E5%8F%A6%E5%AD%98%E4%B8%BA%E9%9B%B6%E4%BB%B6/</guid>
+        <description>&lt;h3 id=&#34;需求&#34;&gt;需求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;某一个部件只是一个外购件（不需要机加工的），而且为了提升装配体的装配效率，将装配体保存为一个零件，减小文件大小&lt;/li&gt;
+&lt;li&gt;或者不让对方看到更细节的一些设计&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260108185452723.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260108185452723.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;将装配体另存为 sldprt 格式（零件格式），下面有几种保存方式：&lt;/p&gt;
+&lt;p&gt;1、所有零部件&lt;/p&gt;
+&lt;p&gt;此时所有零部件都会变为实体
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185622.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185622.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;2、外部面&lt;/p&gt;
+&lt;p&gt;文件全是曲面，且只保存了所有零件的外表面，里面都是空心的
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185658.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185658.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>SW智能零件</title>
         <link>https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/</link>
         <pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate>
@@ -121,7 +266,7 @@
 
 &lt;/p&gt;
 &lt;h3 id=&#34;拓展&#34;&gt;拓展
-&lt;/h3&gt;&lt;p&gt;例如前面板零件中需要插入压力传感器、风扇、温控器、开关等等部件。可以在前面板零件中先将这些需要“匹配”的特征一个个创建出来。然后再回到装配体中，将压力传感器、风扇、温控器等制作成智能零件&lt;/p&gt;
+&lt;/h3&gt;&lt;p&gt;例如前面板零件中需要插入压力传感器、风扇、温控器、开关等等部件。可以在前面板零件中先将这些需要“匹配”的特征一个个创建出来。然后再回到装配体中，将压力传感器、风扇、温控器等制作成智能零件（最好是分成不同的装配体一个一个做，容易出问题）&lt;/p&gt;
 &lt;p&gt;例如这里新建了两个特征，分别对应开关按键和电源插座，提前将特征做好，回到装配体中就可以直接制作智能零件了&lt;/p&gt;
 &lt;p&gt;
 	&lt;div class=&#34;post-img-view&#34;&gt;
@@ -172,6 +317,15 @@
 
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;细节 6：可以同时添加多个特征。
+
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108163850.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108163850.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -767,7 +921,6 @@
           &lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
           &lt;th&gt;&lt;strong&gt;湿度 (RH)&lt;/strong&gt;&lt;/th&gt;
           &lt;th&gt;&lt;strong&gt;露点 (Dew Point)&lt;/strong&gt;&lt;/th&gt;
-          &lt;th&gt;&lt;/th&gt;
       &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
@@ -775,25 +928,21 @@
           &lt;td&gt;&lt;strong&gt;物理本质&lt;/strong&gt;&lt;/td&gt;
           &lt;td&gt;相对值（随温度变化）&lt;/td&gt;
           &lt;td&gt;绝对值（不随环境温度变化）&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;主要用途&lt;/strong&gt;&lt;/td&gt;
           &lt;td&gt;舒适度、环境监控（如机房）&lt;/td&gt;
           &lt;td&gt;&lt;strong&gt;工艺过程控制、保护精密仪器&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;CEMS 角色&lt;/strong&gt;&lt;/td&gt;
           &lt;td&gt;基本不使用&lt;/td&gt;
           &lt;td&gt;&lt;strong&gt;安全联锁的关键指标&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
       &lt;/tr&gt;
       &lt;tr&gt;
           &lt;td&gt;&lt;strong&gt;核心关注点&lt;/strong&gt;&lt;/td&gt;
           &lt;td&gt;感觉有多潮湿&lt;/td&gt;
           &lt;td&gt;&lt;strong&gt;什么时候会出水滴&lt;/strong&gt;&lt;/td&gt;
-          &lt;td&gt;&lt;/td&gt;
       &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -2342,6 +2491,8 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
     &gt;Popular models | 3D CAD Model Collection | GrabCAD Community Library&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.anytocopy.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;参考手册、使用手册：&lt;a class=&#34;link&#34; href=&#34;https://all-guidesbox.com/find.html?search=ZSE20A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;请稍候…&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

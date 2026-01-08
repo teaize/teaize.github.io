@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔\n">
-<title>SW智能零件</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 设计库那么好用，但是我将装配体发给别人的时候，别人经常缺失零部件，缺失的零部件刚好是我从设计库中引用的，我该如何解决\nSolidWorks 的装配体（.SLDASM）本质上只是一个“目录”，它并不包含零件的实际模型数据，而只是记录了零件在硬盘上的路径。当你把装配体发给别人，而没有包含设计库里的零件时，对方的电脑找不到这些路径，就会显示“零部件缺失”。下面有几种解决方式：\n">
+<title>SW设计库</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/'>
+<link rel='canonical' href='https://teaize.github.io/p/sw%E8%AE%BE%E8%AE%A1%E5%BA%93/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW智能零件">
-<meta property='og:description' content=" 我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔\n">
-<meta property='og:url' content='https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW设计库">
+<meta property='og:description' content=" 设计库那么好用，但是我将装配体发给别人的时候，别人经常缺失零部件，缺失的零部件刚好是我从设计库中引用的，我该如何解决\nSolidWorks 的装配体（.SLDASM）本质上只是一个“目录”，它并不包含零件的实际模型数据，而只是记录了零件在硬盘上的路径。当你把装配体发给别人，而没有包含设计库里的零件时，对方的电脑找不到这些路径，就会显示“零部件缺失”。下面有几种解决方式：\n">
+<meta property='og:url' content='https://teaize.github.io/p/sw%E8%AE%BE%E8%AE%A1%E5%BA%93/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-07T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="SW智能零件">
-<meta name="twitter:description" content=" 我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="SW设计库">
+<meta name="twitter:description" content=" 设计库那么好用，但是我将装配体发给别人的时候，别人经常缺失零部件，缺失的零部件刚好是我从设计库中引用的，我该如何解决\nSolidWorks 的装配体（.SLDASM）本质上只是一个“目录”，它并不包含零件的实际模型数据，而只是记录了零件在硬盘上的路径。当你把装配体发给别人，而没有包含设计库里的零件时，对方的电脑找不到这些路径，就会显示“零部件缺失”。下面有几种解决方式：\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,45 +273,7 @@
     </ol>
 </aside>
 
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">目录</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li>
-      <ol>
-        <li><a href="#智能零部件smart-components">智能零部件（Smart Components）</a></li>
-        <li><a href="#创建智能零件">创建智能零件</a></li>
-        <li><a href="#应用">应用</a></li>
-        <li><a href="#拓展">拓展</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
+    
 
             <main class="main full-width">
     <article class="main-article">
@@ -322,7 +284,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/">SW智能零件</a>
+            <a href="/p/sw%E8%AE%BE%E8%AE%A1%E5%BA%93/">SW设计库</a>
         </h2>
     
         
@@ -344,7 +306,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2026-01-07</time>
+                <time class="article-time--published">2026-01-08</time>
             </div>
         
 
@@ -361,169 +323,71 @@
     
     
     <blockquote>
-<p>我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔</p>
+<p>设计库那么好用，但是我将装配体发给别人的时候，别人经常缺失零部件，缺失的零部件刚好是我从设计库中引用的，我该如何解决</p>
 </blockquote>
-<h3 id="智能零部件smart-components">智能零部件（Smart Components）
-</h3><p>这是专门为“带孔零件”设计的方案。你可以预先定义：当 A 零件放入装配体时，它应该在对方身上切掉什么形状。</p>
+<p>SolidWorks 的装配体（.SLDASM）本质上只是一个“目录”，它并不包含零件的实际模型数据，而只是记录了零件在硬盘上的<strong>路径</strong>。当你把装配体发给别人，而没有包含设计库里的零件时，对方的电脑找不到这些路径，就会显示“零部件缺失”。下面有几种解决方式：</p>
 <ul>
-<li>制作模板：
+<li>打包功能（Pack and Go）
 <ul>
-<li>创建一个装配体 C，将零件 A 和零件 B 插入装配体 C 中</li>
-<li>在零件 B 上添加需要配合零件 A 需要的特征（例如在零件 B 上开一个零件 A 大小的孔）。注意是直接修改 B 零件， 而不是在装配体中修改 B 零件</li>
-<li>点击装配体—&gt;制作智能零部件。
+<li>它会自动搜索装配体引用的所有零件（包括设计库、标准件、贴图等），并将它们打包成一个压缩包。</li>
+<li>关键设置：
 <ul>
-<li>如果菜单中没有这个命令，可以在设置中将命令添加到菜单中 
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107194821.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107194821.png" alt=""  />
-		</a>
-	</div>
+<li>勾选“包括 Toolbox 零部件”： 如果你使用了设计库里的标准件（螺母螺栓），必须勾选此项。</li>
+<li>勾选“包括自定义属性”： 确保零件的属性信息也一起带走。</li>
+<li>选择“保存到 Zip 文件”： 这样生成一个压缩包，发给别人非常方便。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>设为虚拟零部件
+<ul>
+<li>如果你只有一两个零件是从设计库引用的，不想搞复杂的文件夹结构，可以把它们“嵌入”到装配体内部。</li>
+<li>效果： 零件不再依赖外部的 <code>.SLDPRT</code> 文件，而是直接保存在 <code>.SLDASM</code> 内部。
+<ul>
+<li>优点：发一个装配体文件就行。</li>
+<li>缺点： 装配体文件会变大，且该零件无法在其他工程中被再次链接引用。</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>规范项目文件夹结构
+<ul>
+<li>不要直接从 SolidWorks 默认的“系统设计库”拖零件（因为每个人的库路径可能不同）</li>
+<li>在你的项目文件夹下建立一个子文件夹，例如 <code>/Library/</code></li>
+<li>将需要的通用件<strong>另存为</strong>到这个文件夹内，再插入装配体。</li>
+<li>这样整个项目文件夹（包含所有零件）就是一个独立的闭环，拷贝整个项目文件夹即可。</li>
+</ul>
+</li>
+</ul>
+<p>打开零件，右键添加到库
 
-</li>
-</ul>
-</li>
-<li>在弹出窗口中，选择零部件 A 作为“智能零部件”。</li>
-<li>在“特征”一栏中，选择 B 身上（或者关联的临时装配体中）定义的“开孔特征”。</li>
-</ul>
-</li>
-<li>使用：
-<ul>
-<li>将 A 拖入你的面板装配体。</li>
-<li>在设计树中，零件 A 的图标上会出现一个“闪电”图标。</li>
-<li>右键点击 A，选择【插入智能特征】，面板上就会自动打出配套的孔。</li>
-</ul>
-</li>
-<li>联动：
-<ul>
-<li>当你移动 A 的位置后，点击重建模型（Ctrl + B），面板上的孔会自动跟随 A 移动。</li>
-</ul>
-</li>
-</ul>
-<h3 id="创建智能零件">创建智能零件
-</h3><ul>
-<li>这个命令需要在装配体中才能激活</li>
-<li>所选的特征必须属于顶层零件（例如在当前状态下，开孔的面板位于装配体中的子装配体中，那么这个零件下的特征就不能用于制作只能零件）</li>
-<li><code>智能扣件</code> 和 <code>制作智能零部件</code> 不是一个功能</li>
-</ul>
-<p>
 	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200108.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200108.png" alt=""  />
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171621.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171621.png" alt=""  />
 		</a>
 	</div>
 
 </p>
 <p>
 	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200537.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200537.png" alt=""  />
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171631.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171631.png" alt=""  />
 		</a>
 	</div>
 
 </p>
-<p>创建完后，零件就会出现小闪电图标
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200719.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200719.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="应用">应用
-</h3><p>假设我们复制一个刚才创建的智能零件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200926.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200926.png" alt=""  />
-		</a>
-	</div>
-
-
-右键零件，插入智能特征【或者直接点击零件提示的闪电小图标】。此时会弹出一个预览窗口</p>
 <p>
 	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201032.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201032.png" alt=""  />
-		</a>
-	</div>
-
-
-点击确认，就自动插入了我们所需要的开孔特征
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201310.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201310.png" alt=""  />
-		</a>
-	</div>
-
-
-对应的零件中，也会显示这个关联的特征
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107202044.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107202044.png" alt=""  />
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171737.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171737.png" alt=""  />
 		</a>
 	</div>
 
 </p>
-<h3 id="拓展">拓展
-</h3><p>例如前面板零件中需要插入压力传感器、风扇、温控器、开关等等部件。可以在前面板零件中先将这些需要“匹配”的特征一个个创建出来。然后再回到装配体中，将压力传感器、风扇、温控器等制作成智能零件（最好是分成不同的装配体一个一个做，容易出问题）</p>
-<p>例如这里新建了两个特征，分别对应开关按键和电源插座，提前将特征做好，回到装配体中就可以直接制作智能零件了</p>
 <p>
 	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107203409.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107203409.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 1：可以修改特征名字，之后应用智能特征的时候也会是修改后的名字
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204031.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204031.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 2：特征尺寸也是可以带公差的
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204209.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204209.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 3：删除了智能零件 A，零件 B 上对应的特征也会被删除</p>
-<p>细节 4：删除智能零件下的文件夹，即可恢复普通零件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204938.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204938.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 5：可以预览智能零件的特征。预览有两个状态（鼠标左建切换）：</p>
-<ul>
-<li>第一个状态只显示特征</li>
-<li>第二个状态显示特征和零件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107215312.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107215312.png" alt=""  />
-		</a>
-	</div>
-
-</li>
-</ul>
-<p>细节 6：可以同时添加多个特征。
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108163850.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108163850.png" alt=""  />
+		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171813.png">
+			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108171813.png" alt=""  />
 		</a>
 	</div>
 
