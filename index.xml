@@ -7,7 +7,196 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 08 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Wed, 14 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>轴流风扇选型</title>
+        <link>https://teaize.github.io/p/%E8%BD%B4%E6%B5%81%E9%A3%8E%E6%89%87%E9%80%89%E5%9E%8B/</link>
+        <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E8%BD%B4%E6%B5%81%E9%A3%8E%E6%89%87%E9%80%89%E5%9E%8B/</guid>
+        <description>&lt;p&gt;例如一个 60X60mm 的轴流风扇，风量为 17CFM，如何理解这个风量，如何选型&lt;/p&gt;
+&lt;p&gt;CFM（Cubic Feet per Minute，立方英尺/分钟）是衡量风扇强度的核心指标。对于电子设备散热来说，17 CFM 处于一个“比办公设备强，但比工业暴力扇弱”的中间地带。&lt;/p&gt;
+&lt;h3 id=&#34;1-直观感受17-cfm-到底是多少&#34;&gt;1. 直观感受：17 CFM 到底是多少？
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;空间体积类比： 1 个标准足球（5 号球）的体积大约是 0.2 立方英尺。17 CFM 意味着这台风扇每分钟能吹出相当于 &lt;strong&gt;85 个足球&lt;/strong&gt; 体积的空气。&lt;/li&gt;
+&lt;li&gt;生活对比：
+&lt;ul&gt;
+&lt;li&gt;静音机箱风扇（12cm）： 通常在 40~60 CFM 左右。&lt;/li&gt;
+&lt;li&gt;4cm 小型散热风扇： 往往只有 5~8 CFM。&lt;/li&gt;
+&lt;li&gt;17 CFM 的风扇： 通常是一颗 60mm（6 厘米） 左右的中尺寸风扇。如果你把手放在风扇口，能感受到明显的“凉风感”，风力比你轻轻吹一口气要强，但远没到吹乱头发的程度。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-为什么选-17-cfm散热逻辑&#34;&gt;2. 为什么选 17 CFM？（散热逻辑）
+&lt;/h3&gt;&lt;h4 id=&#34;散热公式经验估算&#34;&gt;散热公式（经验估算）
+&lt;/h4&gt;&lt;p&gt;在海平面环境下，风量与散热功率的关系大约为：&lt;/p&gt;
+&lt;p&gt;$$CFM \approx \frac{1.76 \times P(W)}{\Delta T(^\circ C)}$$&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$P$：设备产生的热功耗（瓦特）。&lt;/li&gt;
+&lt;li&gt;$\Delta T$：允许的温升（设备内空气温度 - 环境温度）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;假设： 你的设备功耗为 50W，你希望机箱内温度比环境温度只高 5℃。
+计算得出：$CFM = \frac{1.76 \times 50}{5} = 17.6$。
+此时 17 CFM 就是为了保证在高功耗下，内部不会积热导致电子元件过早老化。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4 id=&#34;系统阻抗system-impedance&#34;&gt;系统阻抗（System Impedance）
+&lt;/h4&gt;&lt;p&gt;这是最关键的原因。风扇标称的 17 CFM 是“最大自由风量”（即风扇前面什么都不挡时测得的值）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当风扇装进机箱后，由于有 PCB 板、线缆、散热片甚至防尘网 的阻挡，实际风量会大幅缩水。&lt;/li&gt;
+&lt;li&gt;通常实际风量只有标称值的 &lt;strong&gt;40%~60%&lt;/strong&gt;。选 17 CFM 可能只是为了确保在充满零件的机箱里，真正能有 8~10 CFM 的有效气流。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关于静压&#34;&gt;关于静压
+&lt;/h3&gt;&lt;p&gt;这是选型时容易踩进去的坑&lt;/p&gt;
+&lt;p&gt;静压是空气克服系统阻力（如密集的 PCB、滤网、散热片）所需的压力。在流体力学中，总压力 ($P_t$) 由静压 ($P_s$) 和动压 ($P_d$) 组成：$$P_t = P_s + P_d$$
+其中动压 $P_d$ 与风速有关：$P_d = \frac{1}{2} \rho v^2$。&lt;/p&gt;
+&lt;p&gt;当你的设备内部很拥挤时，空气动能会转化为压力能。如果风扇的“静压”不足，空气就会在风扇叶片处“打滑”甚至发生倒流，导致实际风量骤减。&lt;/p&gt;
+&lt;h4 id=&#34;为什么风扇厚度越大静压越高&#34;&gt;为什么风扇厚度越大，静压越高
+&lt;/h4&gt;&lt;p&gt;1、更大的叶片倾角（Pitch Angle）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;薄风扇（如 6010）： 因为厚度有限，叶片必须做得比较扁平。扁平的叶片像扫帚，适合“扫动”空气，但“推力”很小。&lt;/li&gt;
+&lt;li&gt;厚风扇（如 6025）： 厚度空间允许叶片拥有更大的&lt;strong&gt;倾斜角度&lt;/strong&gt;。这意味着叶片每转一圈，不仅能咬住更多空气，还能给空气一个更强的向前的“推力”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、更长的“做功距离”&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;空气在厚风扇的叶片通道中停留的时间更长。叶片像是一个螺旋斜面，厚度增加意味着这个“斜面”更长，风扇有更多的时间和空间对空气做功，将其动能高效转化为压力能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3、更强的电机扭矩&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;厚风扇通常能容纳更大、更长体积的电机定子。&lt;/li&gt;
+&lt;li&gt;在高阻力环境下，风扇需要更大的扭矩来维持转速。薄风扇在遇到阻力时转速会明显掉队，而厚风扇依靠更大的电机扭矩，能“硬刚”阻力，维持稳定的压力输出。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关于风向&#34;&gt;关于风向
+&lt;/h3&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;术语&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;动作&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;专业术语&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;压力状态&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;防尘能力&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;往外抽&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;将内部热空气排走&lt;/td&gt;
+          &lt;td&gt;排风 (Exhaust)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;负压&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;差&lt;/strong&gt;（灰尘从缝隙钻入）&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;往里吹&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;将外部冷空气压入&lt;/td&gt;
+          &lt;td&gt;进风 (Intake)&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;正压&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;好&lt;/strong&gt;（可在风扇口加滤网）&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;建议： 如果你的设备（如 CEMS）工作环境比较脏（有粉尘、烟气），&lt;strong&gt;“往里吹 + 进风口滤网”&lt;/strong&gt; 是更专业的工业级选择。如果设备在干净的实验室，&lt;strong&gt;“往外抽”&lt;/strong&gt; 散热更利索。&lt;/p&gt;
+</description>
+        </item>
+        <item>
+        <title>常用紧固件</title>
+        <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E7%B4%A7%E5%9B%BA%E4%BB%B6/</link>
+        <pubDate>Sat, 10 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E7%B4%A7%E5%9B%BA%E4%BB%B6/</guid>
+        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/catalog/E&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;紧固零件-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;一-螺钉与螺栓类根据头部形状区分用途&#34;&gt;一、 螺钉与螺栓类（根据头部形状区分用途）
+&lt;/h3&gt;&lt;p&gt;螺钉的选择往往决定了产品外壳的“颜值”和装配空间。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;常用名称 (中/英文)&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;特点与应用场景&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;半圆头内六角螺钉&lt;/strong&gt; (Button Head)&lt;/td&gt;
+          &lt;td&gt;头部圆润美观。常用于产品外部面板，不易刮手。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;沉头内六角螺钉&lt;/strong&gt; (Countersunk/Flat Head)&lt;/td&gt;
+          &lt;td&gt;头部为 $90^\circ$ 锥形。用于需要表面完全平齐的场合。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;平头/盘头内六角螺钉&lt;/strong&gt; (Pan Head)&lt;/td&gt;
+          &lt;td&gt;头部较扁。比圆柱头节省空间，常见于电子设备内部。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;内六角紧定螺钉&lt;/strong&gt; (Set Screw / 机米螺丝)&lt;/td&gt;
+          &lt;td&gt;无头部。用于固定轴上的零件（如联轴器、齿轮）防止转动。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;外六角螺栓&lt;/strong&gt; (Hex Bolt)&lt;/td&gt;
+          &lt;td&gt;强度高。多用于重型结构件连接，通常配合扳手使用。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;自攻螺钉&lt;/strong&gt; (Self-tapping Screw)&lt;/td&gt;
+          &lt;td&gt;自带螺纹切削能力。多用于塑料壳体或软金属（如 5052 铝）的快速固定。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;内六角圆柱头螺钉：&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/2078020306979.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;内六角圆柱头螺钉 通孔型-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;ISO 7380 内六角平圆头螺钉：&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1211597773677.html?codeModel=EDLG-S1&amp;amp;spm=fa-pc.search-result.list.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;ISO 7380 内六角平圆头螺钉-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DIN 7991 GB/T 70.3 内六角沉头螺钉：&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1898991977522.html?codeModel=EDLJ-S1&amp;amp;spm=fa-pc.search-result.list.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DIN 7991 GB/T 70.3 内六角沉头螺钉-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;DIN 913/914/915/916 内六角紧定螺钉 平端/锥端/凹端/凸端：&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1700279477884.html?codeModel=EDLR-S1-X1&amp;amp;spm=fa-pc.search-result.list.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;DIN 913/914/915/916 内六角紧定螺钉 平端/锥端/凹端/凸端-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;全螺纹六角头螺栓：&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1506113611277.html?codeModel=ESLA-S1&amp;amp;spm=fa-pc.search-result.list.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Title Unavailable | Site Unreachable&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;GB/T 819 十字槽沉头螺钉：&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1386499185099.html?codeModel=EDLW-S1&amp;amp;spm=fa-pc.search-result.list.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;GB/T 819 十字槽沉头螺钉-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二-螺母与垫圈类侧重防松与保护&#34;&gt;二、 螺母与垫圈类（侧重防松与保护）
+&lt;/h3&gt;&lt;p&gt;在振动环境（如你提到的风扇附近）中，防松是设计的关键。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;尼龙防松螺母 (Nylon Lock Nut): 内嵌尼龙圈，防震效果极佳，拆装多次后仍有锁定能力。&lt;/li&gt;
+&lt;li&gt;法兰螺母 (Flange Nut): 自带宽大底座，相当于“螺母 + 平垫圈”二合一，增加受力面积。&lt;/li&gt;
+&lt;li&gt;盖形螺母 (Cap Nut): 像个小帽子一样扣在螺栓末端。既美观，又能防止外露的螺栓划伤电线或手指。&lt;/li&gt;
+&lt;li&gt;弹簧垫圈 (Spring Washer): 依靠弹性提供预紧力，防止螺钉松动。&lt;/li&gt;
+&lt;li&gt;平垫圈 (Flat Washer): 分散压力，防止螺钉拧紧时损伤铝面板的涂层或氧化层。&lt;/li&gt;
+&lt;li&gt;平头压铆螺钉:&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1166034032408.html?codeModel=EMJN-CD&amp;amp;spm=fa-pc.search-result.list.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;平头压铆螺钉-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;压铆螺柱:&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1618989685336.html?codeModel=EMJP-S1W&amp;amp;series=1&amp;amp;spm=fa-pc.detail.together.0&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;压铆螺柱 盲孔型-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;六角焊接螺母:&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1649815853876.html?codeModel=EMLH-H&amp;amp;series=1&amp;amp;spm=fa-pc.detail.together.2&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;六角焊接螺母-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;压铆螺母:&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/serial/1348635416833.html?codeModel=EMJM-S1W&amp;amp;series=1&amp;amp;spm=fa-pc.detail.similar.5&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;压铆螺母-嘉立创FA商城&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;三-钣金与薄板专用类pem-系列延伸&#34;&gt;三、 钣金与薄板专用类（PEM 系列延伸）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;压铆定位销 (TPS/TP4 Pins): 不带螺纹，用于两块板子之间的快速对位，防止面板装歪。&lt;/li&gt;
+&lt;li&gt;浮动压铆螺母 (AS/AC 系列): 螺母内的螺纹孔可以小范围移动。这对于多孔位装配时出现的位移误差非常有容忍度。&lt;/li&gt;
+&lt;li&gt;面板紧固件 (Panel Fastener / 松不脱螺钉): 螺钉被弹簧卡在板子上，即使松开也不会掉下来。常用于机房服务器面板或需要频繁打开的检修门。&lt;/li&gt;
+&lt;li&gt;卡式螺母 (Cage Nut): 常见于 19 英寸机柜。它嵌在方孔里，可以左右调节位置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;四-销轴与挡圈定位与轴向固定&#34;&gt;四、 销轴与挡圈（定位与轴向固定）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;弹性圆柱销 (Spring Pin): 具有开口的弹性管，通过过盈配合挤入孔中，用于简单的铰链或定位。&lt;/li&gt;
+&lt;li&gt;圆柱销/定位销 (Dowel Pin): 高精度实心销。当你需要面板与壳体重复定位精度极高时使用。&lt;/li&gt;
+&lt;li&gt;轴用/孔用挡圈 (C-clip / Snap Ring): 安装在轴槽或孔槽内，防止零件沿轴向滑动。&lt;/li&gt;
+&lt;li&gt;E 型挡圈 (E-clip): 像字母 E 一样，不需要专门的挡圈钳，用改锥就能撬上去。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;五-支柱与间隔类内部电路板固定&#34;&gt;五、 支柱与间隔类（内部电路板固定）
+&lt;/h3&gt;&lt;p&gt;若产品内部可能有温控器和 PCB：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;六角支柱 (Standoffs): 有双通、单头（公母头）之分。用于在面板背后支撑电路板，保持安全间距。&lt;/li&gt;
+&lt;li&gt;塑料隔离柱 (Nylon Spacers): 绝缘性能好，成本极低，适合轻量化设备。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>SW派生零件</title>
         <link>https://teaize.github.io/p/sw%E6%B4%BE%E7%94%9F%E9%9B%B6%E4%BB%B6/</link>
         <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
@@ -326,6 +515,15 @@
 	&lt;/div&gt;
 
 &lt;/p&gt;
+&lt;h3 id=&#34;2026-1-9-坑&#34;&gt;2026-1-9 坑
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20260109102734.png]]&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20260109104352.png]]&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;先做好智能零件，然后通过距离限位
+确认好大概位置后，开始确认详细位置，在面板上设置好孔位
+释放智能零件的距离限位，然后让他和孔配合
+Ctrl+B 重建，此时面板上开孔就自动更新位置了&lt;/p&gt;
+&lt;/blockquote&gt;
 </description>
         </item>
         <item>
@@ -2360,6 +2558,8 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
         
         <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</guid>
         <description>&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/biaozhun/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;标准信息_易紧通紧固件网&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Mechtool 在线机械设计工具&lt;/a&gt;
 &lt;ul&gt;
@@ -31870,7 +32070,13 @@ $$&lt;/p&gt;
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/notes/</guid>
-        <description>&lt;h3 id=&#34;2025-年-12-月&#34;&gt;2025 年 12 月
+        <description>&lt;h3 id=&#34;2026-年-1-月&#34;&gt;2026 年 1 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;知识会过期，框架不会&lt;/li&gt;
+&lt;li&gt;工程能力 = 结构化看问题 + 结构化提问题 + 结构化做取舍&lt;/li&gt;
+&lt;li&gt;工程不是找“最优解”，而是在约束下找“可接受解”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2025-年-12-月&#34;&gt;2025 年 12 月
 &lt;/h3&gt;&lt;p&gt;上大学那会，幸福就是午休结束前提前 10 分钟冲一杯挂耳咖啡，室友们都还在睡觉，自己站在样台上，晒着太阳，看着窗外的同学们各忙各的。
 世界很安静，我也没什么必须要做，我只是此刻存在着&lt;/p&gt;
 &lt;h3 id=&#34;2025-年-11-月&#34;&gt;2025 年 11 月

@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔\n">
-<title>SW智能零件</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="例如一个 60X60mm 的轴流风扇，风量为 17CFM，如何理解这个风量，如何选型\nCFM（Cubic Feet per Minute，立方英尺/分钟）是衡量风扇强度的核心指标。对于电子设备散热来说，17 CFM 处于一个“比办公设备强，但比工业暴力扇弱”的中间地带。\n">
+<title>轴流风扇选型</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E8%BD%B4%E6%B5%81%E9%A3%8E%E6%89%87%E9%80%89%E5%9E%8B/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="SW智能零件">
-<meta property='og:description' content=" 我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔\n">
-<meta property='og:url' content='https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/'>
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="轴流风扇选型">
+<meta property='og:description' content="例如一个 60X60mm 的轴流风扇，风量为 17CFM，如何理解这个风量，如何选型\nCFM（Cubic Feet per Minute，立方英尺/分钟）是衡量风扇强度的核心指标。对于电子设备散热来说，17 CFM 处于一个“比办公设备强，但比工业暴力扇弱”的中间地带。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E8%BD%B4%E6%B5%81%E9%A3%8E%E6%89%87%E9%80%89%E5%9E%8B/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-07T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-07T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="SW智能零件">
-<meta name="twitter:description" content=" 我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-01-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-01-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="轴流风扇选型">
+<meta name="twitter:description" content="例如一个 60X60mm 的轴流风扇，风量为 17CFM，如何理解这个风量，如何选型\nCFM（Cubic Feet per Minute，立方英尺/分钟）是衡量风扇强度的核心指标。对于电子设备散热来说，17 CFM 处于一个“比办公设备强，但比工业暴力扇弱”的中间地带。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,11 +297,19 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#智能零部件smart-components">智能零部件（Smart Components）</a></li>
-        <li><a href="#创建智能零件">创建智能零件</a></li>
-        <li><a href="#应用">应用</a></li>
-        <li><a href="#拓展">拓展</a></li>
-        <li><a href="#2026-1-9-坑">2026-1-9 坑</a></li>
+        <li><a href="#1-直观感受17-cfm-到底是多少">1. 直观感受：17 CFM 到底是多少？</a></li>
+        <li><a href="#2-为什么选-17-cfm散热逻辑">2. 为什么选 17 CFM？（散热逻辑）</a>
+          <ol>
+            <li><a href="#散热公式经验估算">散热公式（经验估算）</a></li>
+            <li><a href="#系统阻抗system-impedance">系统阻抗（System Impedance）</a></li>
+          </ol>
+        </li>
+        <li><a href="#关于静压">关于静压</a>
+          <ol>
+            <li><a href="#为什么风扇厚度越大静压越高">为什么风扇厚度越大，静压越高</a></li>
+          </ol>
+        </li>
+        <li><a href="#关于风向">关于风向</a></li>
       </ol>
     </li>
   </ol>
@@ -323,7 +331,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/">SW智能零件</a>
+            <a href="/p/%E8%BD%B4%E6%B5%81%E9%A3%8E%E6%89%87%E9%80%89%E5%9E%8B/">轴流风扇选型</a>
         </h2>
     
         
@@ -345,7 +353,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2026-01-07</time>
+                <time class="article-time--published">2026-01-14</time>
             </div>
         
 
@@ -361,183 +369,87 @@
     <section class="article-content">
     
     
-    <blockquote>
-<p>我在使用 solidworks 软件来建模。例如我有一个通用的零部件 A，假设需要安装在面板上，但是我每次装上去都需要开孔，如果我更换了位置，又需要重新开孔，这样非常浪费时间。我想的是，能不能拖动零部件 A 的时候自动在面板上开好孔</p>
-</blockquote>
-<h3 id="智能零部件smart-components">智能零部件（Smart Components）
-</h3><p>这是专门为“带孔零件”设计的方案。你可以预先定义：当 A 零件放入装配体时，它应该在对方身上切掉什么形状。</p>
-<ul>
-<li>制作模板：
-<ul>
-<li>创建一个装配体 C，将零件 A 和零件 B 插入装配体 C 中</li>
-<li>在零件 B 上添加需要配合零件 A 需要的特征（例如在零件 B 上开一个零件 A 大小的孔）。注意是直接修改 B 零件， 而不是在装配体中修改 B 零件</li>
-<li>点击装配体—&gt;制作智能零部件。
-<ul>
-<li>如果菜单中没有这个命令，可以在设置中将命令添加到菜单中 
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107194821.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107194821.png" alt=""  />
-		</a>
-	</div>
-
-</li>
-</ul>
-</li>
-<li>在弹出窗口中，选择零部件 A 作为“智能零部件”。</li>
-<li>在“特征”一栏中，选择 B 身上（或者关联的临时装配体中）定义的“开孔特征”。</li>
-</ul>
-</li>
-<li>使用：
-<ul>
-<li>将 A 拖入你的面板装配体。</li>
-<li>在设计树中，零件 A 的图标上会出现一个“闪电”图标。</li>
-<li>右键点击 A，选择【插入智能特征】，面板上就会自动打出配套的孔。</li>
-</ul>
-</li>
-<li>联动：
-<ul>
-<li>当你移动 A 的位置后，点击重建模型（Ctrl + B），面板上的孔会自动跟随 A 移动。</li>
-</ul>
-</li>
-</ul>
-<h3 id="创建智能零件">创建智能零件
+    <p>例如一个 60X60mm 的轴流风扇，风量为 17CFM，如何理解这个风量，如何选型</p>
+<p>CFM（Cubic Feet per Minute，立方英尺/分钟）是衡量风扇强度的核心指标。对于电子设备散热来说，17 CFM 处于一个“比办公设备强，但比工业暴力扇弱”的中间地带。</p>
+<h3 id="1-直观感受17-cfm-到底是多少">1. 直观感受：17 CFM 到底是多少？
 </h3><ul>
-<li>这个命令需要在装配体中才能激活</li>
-<li>所选的特征必须属于顶层零件（例如在当前状态下，开孔的面板位于装配体中的子装配体中，那么这个零件下的特征就不能用于制作只能零件）</li>
-<li><code>智能扣件</code> 和 <code>制作智能零部件</code> 不是一个功能</li>
-</ul>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200108.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200108.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200537.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200537.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<p>创建完后，零件就会出现小闪电图标
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200719.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200719.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="应用">应用
-</h3><p>假设我们复制一个刚才创建的智能零件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200926.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107200926.png" alt=""  />
-		</a>
-	</div>
-
-
-右键零件，插入智能特征【或者直接点击零件提示的闪电小图标】。此时会弹出一个预览窗口</p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201032.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201032.png" alt=""  />
-		</a>
-	</div>
-
-
-点击确认，就自动插入了我们所需要的开孔特征
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201310.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107201310.png" alt=""  />
-		</a>
-	</div>
-
-
-对应的零件中，也会显示这个关联的特征
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107202044.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107202044.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="拓展">拓展
-</h3><p>例如前面板零件中需要插入压力传感器、风扇、温控器、开关等等部件。可以在前面板零件中先将这些需要“匹配”的特征一个个创建出来。然后再回到装配体中，将压力传感器、风扇、温控器等制作成智能零件（最好是分成不同的装配体一个一个做，容易出问题）</p>
-<p>例如这里新建了两个特征，分别对应开关按键和电源插座，提前将特征做好，回到装配体中就可以直接制作智能零件了</p>
-<p>
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107203409.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107203409.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 1：可以修改特征名字，之后应用智能特征的时候也会是修改后的名字
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204031.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204031.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 2：特征尺寸也是可以带公差的
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204209.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204209.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 3：删除了智能零件 A，零件 B 上对应的特征也会被删除</p>
-<p>细节 4：删除智能零件下的文件夹，即可恢复普通零件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204938.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107204938.png" alt=""  />
-		</a>
-	</div>
-
-
-细节 5：可以预览智能零件的特征。预览有两个状态（鼠标左建切换）：</p>
+<li>空间体积类比： 1 个标准足球（5 号球）的体积大约是 0.2 立方英尺。17 CFM 意味着这台风扇每分钟能吹出相当于 <strong>85 个足球</strong> 体积的空气。</li>
+<li>生活对比：
 <ul>
-<li>第一个状态只显示特征</li>
-<li>第二个状态显示特征和零件
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107215312.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260107215312.png" alt=""  />
-		</a>
-	</div>
-
+<li>静音机箱风扇（12cm）： 通常在 40~60 CFM 左右。</li>
+<li>4cm 小型散热风扇： 往往只有 5~8 CFM。</li>
+<li>17 CFM 的风扇： 通常是一颗 60mm（6 厘米） 左右的中尺寸风扇。如果你把手放在风扇口，能感受到明显的“凉风感”，风力比你轻轻吹一口气要强，但远没到吹乱头发的程度。</li>
+</ul>
 </li>
 </ul>
-<p>细节 6：可以同时添加多个特征。
-
-	<div class="post-img-view">
-		<a data-fancybox="gallery" href="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108163850.png">
-			<img src="https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108163850.png" alt=""  />
-		</a>
-	</div>
-
-</p>
-<h3 id="2026-1-9-坑">2026-1-9 坑
-</h3><p>![[Pasted image 20260109102734.png]]</p>
-<p>![[Pasted image 20260109104352.png]]</p>
+<h3 id="2-为什么选-17-cfm散热逻辑">2. 为什么选 17 CFM？（散热逻辑）
+</h3><h4 id="散热公式经验估算">散热公式（经验估算）
+</h4><p>在海平面环境下，风量与散热功率的关系大约为：</p>
+<p>$$CFM \approx \frac{1.76 \times P(W)}{\Delta T(^\circ C)}$$</p>
+<ul>
+<li>$P$：设备产生的热功耗（瓦特）。</li>
+<li>$\Delta T$：允许的温升（设备内空气温度 - 环境温度）。</li>
+</ul>
 <blockquote>
-<p>先做好智能零件，然后通过距离限位
-确认好大概位置后，开始确认详细位置，在面板上设置好孔位
-释放智能零件的距离限位，然后让他和孔配合
-Ctrl+B 重建，此时面板上开孔就自动更新位置了</p>
+<p>假设： 你的设备功耗为 50W，你希望机箱内温度比环境温度只高 5℃。
+计算得出：$CFM = \frac{1.76 \times 50}{5} = 17.6$。
+此时 17 CFM 就是为了保证在高功耗下，内部不会积热导致电子元件过早老化。</p>
 </blockquote>
+<h4 id="系统阻抗system-impedance">系统阻抗（System Impedance）
+</h4><p>这是最关键的原因。风扇标称的 17 CFM 是“最大自由风量”（即风扇前面什么都不挡时测得的值）。</p>
+<ul>
+<li>当风扇装进机箱后，由于有 PCB 板、线缆、散热片甚至防尘网 的阻挡，实际风量会大幅缩水。</li>
+<li>通常实际风量只有标称值的 <strong>40%~60%</strong>。选 17 CFM 可能只是为了确保在充满零件的机箱里，真正能有 8~10 CFM 的有效气流。</li>
+</ul>
+<h3 id="关于静压">关于静压
+</h3><p>这是选型时容易踩进去的坑</p>
+<p>静压是空气克服系统阻力（如密集的 PCB、滤网、散热片）所需的压力。在流体力学中，总压力 ($P_t$) 由静压 ($P_s$) 和动压 ($P_d$) 组成：$$P_t = P_s + P_d$$
+其中动压 $P_d$ 与风速有关：$P_d = \frac{1}{2} \rho v^2$。</p>
+<p>当你的设备内部很拥挤时，空气动能会转化为压力能。如果风扇的“静压”不足，空气就会在风扇叶片处“打滑”甚至发生倒流，导致实际风量骤减。</p>
+<h4 id="为什么风扇厚度越大静压越高">为什么风扇厚度越大，静压越高
+</h4><p>1、更大的叶片倾角（Pitch Angle）</p>
+<ul>
+<li>薄风扇（如 6010）： 因为厚度有限，叶片必须做得比较扁平。扁平的叶片像扫帚，适合“扫动”空气，但“推力”很小。</li>
+<li>厚风扇（如 6025）： 厚度空间允许叶片拥有更大的<strong>倾斜角度</strong>。这意味着叶片每转一圈，不仅能咬住更多空气，还能给空气一个更强的向前的“推力”。</li>
+</ul>
+<p>2、更长的“做功距离”</p>
+<ul>
+<li>空气在厚风扇的叶片通道中停留的时间更长。叶片像是一个螺旋斜面，厚度增加意味着这个“斜面”更长，风扇有更多的时间和空间对空气做功，将其动能高效转化为压力能。</li>
+</ul>
+<p>3、更强的电机扭矩</p>
+<ul>
+<li>厚风扇通常能容纳更大、更长体积的电机定子。</li>
+<li>在高阻力环境下，风扇需要更大的扭矩来维持转速。薄风扇在遇到阻力时转速会明显掉队，而厚风扇依靠更大的电机扭矩，能“硬刚”阻力，维持稳定的压力输出。</li>
+</ul>
+<h3 id="关于风向">关于风向
+</h3><div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>术语</strong></th>
+          <th><strong>动作</strong></th>
+          <th><strong>专业术语</strong></th>
+          <th><strong>压力状态</strong></th>
+          <th><strong>防尘能力</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>往外抽</strong></td>
+          <td>将内部热空气排走</td>
+          <td>排风 (Exhaust)</td>
+          <td><strong>负压</strong></td>
+          <td><strong>差</strong>（灰尘从缝隙钻入）</td>
+      </tr>
+      <tr>
+          <td><strong>往里吹</strong></td>
+          <td>将外部冷空气压入</td>
+          <td>进风 (Intake)</td>
+          <td><strong>正压</strong></td>
+          <td><strong>好</strong>（可在风扇口加滤网）</td>
+      </tr>
+  </tbody>
+</table></div>
+<p>建议： 如果你的设备（如 CEMS）工作环境比较脏（有粉尘、烟气），<strong>“往里吹 + 进风口滤网”</strong> 是更专业的工业级选择。如果设备在干净的实验室，<strong>“往外抽”</strong> 散热更利索。</p>
 
 </section>
 
