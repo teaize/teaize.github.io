@@ -7,7 +7,56 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>zh-cn</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Wed, 14 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 18 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>O圈选型系统</title>
+        <link>https://teaize.github.io/p/o%E5%9C%88%E9%80%89%E5%9E%8B%E7%B3%BB%E7%BB%9F/</link>
+        <pubDate>Sun, 18 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/o%E5%9C%88%E9%80%89%E5%9E%8B%E7%B3%BB%E7%BB%9F/</guid>
+        <description>&lt;iframe src=&#34;https://teaize.github.io/html-files/O圈选型系统.html&#34; width=&#34;100%&#34; height=&#34;1000px&#34; frameborder=&#34;0&#34;&gt;&lt;/iframe&gt;
+</description>
+        </item>
+        <item>
+        <title>SW材质库</title>
+        <link>https://teaize.github.io/p/sw%E6%9D%90%E8%B4%A8%E5%BA%93/</link>
+        <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E6%9D%90%E8%B4%A8%E5%BA%93/</guid>
+        <description>&lt;ul&gt;
+&lt;li&gt;SolidWorks DIN Materials：基于德国标准规定的材料数据&lt;/li&gt;
+&lt;li&gt;AISI：美国钢铁学会规定的一套的钢铁编号系统&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260114205220066.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260114205220066.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;h3 id=&#34;添加材质库&#34;&gt;添加材质库
+&lt;/h3&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-C&#34; data-lang=&#34;C&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nl&#34;&gt;D&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;mo&#34;&gt;02&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;坚果云\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SolidWorks&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\智朋&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;SW文件库&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\材质数据库\&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Coffeelize常用材质库&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;
+	&lt;div class=&#34;post-img-view&#34;&gt;
+		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260114205851686.png&#34;&gt;
+			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260114205851686.png&#34; alt=&#34;&#34;  /&gt;
+		&lt;/a&gt;
+	&lt;/div&gt;
+
+&lt;/p&gt;
+&lt;p&gt;注意，如果添加了材质数据库文件夹，该文件夹下的所有材质数据库文件都会被添加。一些没有用的 &lt;code&gt;.sldmat&lt;/code&gt; 文件每次都会重新加载进来&lt;/p&gt;
+&lt;h3 id=&#34;ican-工具箱&#34;&gt;Ican 工具箱
+&lt;/h3&gt;&lt;p&gt;![[Pasted image 20260114214711.png]]&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>轴流风扇选型</title>
         <link>https://teaize.github.io/p/%E8%BD%B4%E6%B5%81%E9%A3%8E%E6%89%87%E9%80%89%E5%9E%8B/</link>
         <pubDate>Wed, 14 Jan 2026 00:00:00 +0000</pubDate>
@@ -297,6 +346,7 @@
 	&lt;/div&gt;
 
 &lt;/p&gt;
+&lt;p&gt;从设计库直接拖出来的文件，路径还是设计库中的路径，非常容易导致&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -2559,7 +2609,11 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
         <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</guid>
         <description>&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/biaozhun/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;标准信息_易紧通紧固件网&lt;/a&gt;&lt;/li&gt;
+    &gt;标准信息_易紧通紧固件网&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;标准件库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Mechtool 在线机械设计工具&lt;/a&gt;
 &lt;ul&gt;
@@ -2629,8 +2683,14 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
     &gt;嘉立创FA_自动化设备零部件-一站式采购商城&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.fa-part.com/brand&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司&lt;/a&gt;(直接根据 PDF 中的代码，就可以在模型库中查找到)&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/marketing/09?spm=FA.Homepage.information.d9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;嘉立创FA离线在线选型插件&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lceda.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://share.forface3d.com/share/home&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;嘉立创3D分享平台-深圳嘉立创科技集团股份有限公司&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://model.jlc-3dp.cn/modelMall.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;嘉立创3D模型库_海量3D模型文件免费在线下载_嘉立创3D打印&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;嘉立创FA（2024版）电气零部件选型手册.pdf&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;嘉立创FA（第二版）机械零部件选型手册.pdf&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -2692,7 +2752,7 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.anytocopy.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;参考手册、使用手册：&lt;a class=&#34;link&#34; href=&#34;https://all-guidesbox.com/find.html?search=ZSE20A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;请稍候…&lt;/a&gt;&lt;/li&gt;
+    &gt;all-guidesbox&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -25822,7 +25882,26 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
         <pubDate>Mon, 17 Mar 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/</guid>
-        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+        <description>&lt;ul&gt;
+&lt;li&gt;链接：[[模型文件管理]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;层级递增编号法&#34;&gt;层级递增编号法
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;方案优点：
+&lt;ul&gt;
+&lt;li&gt;逻辑极强： 看到 &lt;code&gt;XXX-02-02-01&lt;/code&gt; 就能立刻定位它在总装 -&amp;gt; 第二层子装 -&amp;gt; 第三层子装里。&lt;/li&gt;
+&lt;li&gt;归档方便： 适合只有你一个人维护的小型项目&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;方案缺点（坑）：
+&lt;ul&gt;
+&lt;li&gt;编号过长： 到了第 5 层以后，编号会变成一长串，手工录入 ERP 或写在标签上非常容易出错。&lt;/li&gt;
+&lt;li&gt;灵活性差： 如果后期你觉得“第二层装配体”不合理，要把它拆了挪到“第一层”去，那它下面所有零件的编号（图号）全都得改，这在 SolidWorks 里会造成巨大的文件关联噩梦。&lt;/li&gt;
+&lt;li&gt;用性差： 如果 &lt;code&gt;XXX-02-01&lt;/code&gt; 这个零件在另一个项目里也要用，它带着旧项目的层级编号，会显得不伦不类。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
@@ -25864,7 +25943,53 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;	&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;……&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;|&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;</description>
+&lt;/div&gt;&lt;h3 id=&#34;三段式编号&#34;&gt;三段式编号
+&lt;/h3&gt;&lt;p&gt;为了平衡“可读性”和“灵活性”，工业界通常采用 &lt;strong&gt;“项目号 - 组件号 - 顺序号”&lt;/strong&gt; 的三段式，而不是无限延长。&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;层级&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;建议编号格式&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;示例&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;总装体&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;项目号 - 00&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CEMS-00&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;整个机器&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级子装&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;项目号 - 01 - 00&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CEMS-01-00&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;比如：采样系统&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级零件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;项目号 - 01 - 01&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CEMS-01-01&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;采样系统里的面板&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;二级子装&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;项目号 - 02 - 00&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CEMS-02-00&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;比如：预处理系统&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;二级零件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;项目号 - 02 - 01&lt;/td&gt;
+          &lt;td&gt;&lt;code&gt;CEMS-02-01&lt;/code&gt;&lt;/td&gt;
+          &lt;td&gt;预处理系统里的支架&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 无论层级多深，都归类到某一个大组件下，用 &lt;strong&gt;3 段&lt;/strong&gt; 封顶。这样编号长度固定，且如果子装配体内部调整，不会影响上一级的编号。&lt;/p&gt;
+&lt;p&gt;分配正式图号后，为了方便直接使用，推荐“定稿即封印”原则。给厂家发完图纸，立刻把这些文件设为&lt;strong&gt;只读&lt;/strong&gt;。&lt;/p&gt;
+</description>
         </item>
         <item>
         <title>AI图像生成</title>
@@ -29454,7 +29579,12 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;剖面面：Shift+X&lt;/li&gt;
 &lt;li&gt;插入注释：Alt+1&lt;/li&gt;
 &lt;li&gt;切换文件:Ctrl+tab&lt;/li&gt;
+&lt;li&gt;选中透明零件面：按住 Shift 点击&lt;/li&gt;
 &lt;/ul&gt;
+&lt;p&gt;Ctrl件可以调出该弹窗&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20260116134349.png]]&lt;/p&gt;
+&lt;p&gt;随配合复制&lt;/p&gt;
+&lt;p&gt;![[Pasted image 20260116162004.png]]&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -29577,77 +29707,46 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
         
         <guid>https://teaize.github.io/p/%E6%9C%BA%E5%8A%A0%E5%B7%A5%E6%8A%80%E6%9C%AF%E8%A6%81%E6%B1%82/</guid>
         <description>&lt;h2 id=&#34;机加工技术要求&#34;&gt;机加工技术要求
-&lt;/h2&gt;&lt;h3 id=&#34;材料要求&#34;&gt;材料要求
+&lt;/h2&gt;&lt;h3 id=&#34;公差要求&#34;&gt;公差要求
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;指定零件的材质，例如钢材（45#钢、不锈钢）、铝合金、铜合金等&lt;/li&gt;
-&lt;li&gt;材料牌号和执行的标准（如 GB、ASTM 等）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;热处理要求&#34;&gt;热处理要求
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;例如调质、淬火、退火、正火等热处理工艺及其具体要求&lt;/li&gt;
-&lt;li&gt;硬度指标（如 HRC 45~50）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;内资/传统制造业&lt;/strong&gt;：通常标注 &lt;code&gt;未注公差按 GB/T 1804-m, GB/T 1184-K&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;外资/合资/出口型企业&lt;/strong&gt;：通常标注 &lt;code&gt;General Tolerances: ISO 2768-mK&lt;/code&gt;。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;表面处理要求&#34;&gt;表面处理要求
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;表面涂层（如镀锌、镀镍、阳极氧化、发黑处理等）
-&lt;ul&gt;
-&lt;li&gt;印字：&lt;code&gt;字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;底色：RAL 7035&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;镀黑色PTFE表面要求光洁，无划痕&lt;/code&gt;。&lt;/li&gt;
-&lt;li&gt;XXX 焊接好后整体喷塑&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;内表面喷氟处理，涂层厚度 20~30um，可在200℃环境下长期使用&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;镀镍后螺纹二次攻牙处理&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;棱边倒钝，去毛刺&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;涂层厚度或质量要求&lt;/li&gt;
 &lt;li&gt;表面粗糙度（Ra 值）&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;整体酸洗，超声波酒精清洗，烘干&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;尺寸公差&#34;&gt;尺寸公差
+&lt;h3 id=&#34;印字要求&#34;&gt;印字要求
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;关键尺寸的公差要求，例如±0.01mm&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;未标注的尺寸公差执行 GB/T 1804-2000M 标准&lt;/strong&gt;&lt;/li&gt;
-&lt;li&gt;对装配或功能影响较大的尺寸标注具体的公差等级（如 H7/g6）&lt;/li&gt;
+&lt;li&gt;印字：&lt;code&gt;字体：Arial，字高：5.5mm，颜色：黑色，文字左右居中放置&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;底色：RAL 7035&lt;/li&gt;
+&lt;li&gt;镀黑色 PTFE 表面要求光洁，无划痕&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;形位公差&#34;&gt;形位公差
+&lt;h3 id=&#34;孔&#34;&gt;孔
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;包括平面度、平行度、垂直度、同轴度、圆跳动等要求&lt;/li&gt;
-&lt;li&gt;通常以符号和数值标注（例如平行度≤0.01mm）&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;未注形位公差值应按GB/T 1184-H&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;配合公差&#34;&gt;配合公差
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;孔和轴的配合公差等级（如 H7/g6）&lt;/li&gt;
-&lt;li&gt;对重要配合部位标注特定的配合关系&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;孔加工要求&#34;&gt;孔加工要求
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;孔间距公差（例如±0.02mm）&lt;/li&gt;
-&lt;li&gt;孔的加工形式（钻孔、攻丝、沉头孔等）&lt;/li&gt;
-&lt;li&gt;孔的直径公差和表面粗糙度要求&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;压铆螺母在背面/正面压铆&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;所有螺纹在喷涂时需要保护。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;工艺孔加工完焊死，外表面走平整，工艺孔打压测试0.2MPa下零泄漏&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;表面粗糙度&#34;&gt;表面粗糙度
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;各部位的表面粗糙度要求（例如 Ra≤1.6μm）&lt;/li&gt;
-&lt;li&gt;重要表面可能单独注明粗糙度要求&lt;/li&gt;
+&lt;li&gt;工艺孔加工完焊死，外表面走平整，工艺孔打压测试 0.2MPa 下零泄漏&lt;/li&gt;
+&lt;li&gt;孔间距公差（例如±0.1mm）&lt;/li&gt;
+&lt;li&gt;镀镍后螺纹二次攻牙处理&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;装配及工艺要求&#34;&gt;装配及工艺要求
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;标注装配要求，如装配间隙或过盈要求&lt;/li&gt;
 &lt;li&gt;具体工艺说明，如需要夹具辅助加工或特定的焊接方法&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;其他技术要求&#34;&gt;其他技术要求
+&lt;h3 id=&#34;表面粗糙度&#34;&gt;表面粗糙度
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;防锈处理（如油封、防锈涂层等）&lt;/li&gt;
-&lt;li&gt;清洗要求（例如无油污、无残渣）
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;整体酸洗，超声波酒精清洗，烘干&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;各部位的表面粗糙度要求（例如 Ra≤1.6μm）&lt;/li&gt;
+&lt;li&gt;重要表面可能单独注明粗糙度要求&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;验收标准和方法（如关键尺寸需全检或抽检标准）&lt;/li&gt;
+&lt;h3 id=&#34;热处理要求&#34;&gt;热处理要求
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;例如调质、淬火、退火、正火等热处理工艺及其具体要求&lt;/li&gt;
+&lt;li&gt;硬度指标（如 HRC 45~50）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;焊接要求&#34;&gt;焊接要求
 &lt;/h3&gt;&lt;ul&gt;
@@ -29673,75 +29772,6 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;孔径公差：φ20H7，孔间距公差±0.02mm&lt;/li&gt;
 &lt;li&gt;表面处理：发黑处理，涂防锈油&lt;/li&gt;
 &lt;li&gt;检验要求：关键尺寸需全检，其他尺寸按抽检标准检验&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h2 id=&#34;焊接要求-1&#34;&gt;焊接要求
-&lt;/h2&gt;&lt;p&gt;在机加工图纸的技术要求中，如果涉及焊接工艺，通常包括以下焊接要求：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;焊接方法&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;明确焊接方式，如手工电弧焊（SMAW）、气体保护焊（MIG/TIG）、电阻焊、激光焊等。&lt;/li&gt;
-&lt;li&gt;对于特殊焊接方法，需要注明具体标准或工艺规范。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;焊接材料&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;指定焊接材料或焊丝型号，例如 E6013、ER70S-6 等。&lt;/li&gt;
-&lt;li&gt;如果需要，注明焊接材料的执行标准。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;3&#34;&gt;
-&lt;li&gt;焊缝形式和尺寸&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;标明焊缝类型（如对接焊缝、角焊缝、T 型焊缝等）。&lt;/li&gt;
-&lt;li&gt;焊缝尺寸，包括焊缝高度、焊角尺寸、坡口角度等。&lt;/li&gt;
-&lt;li&gt;焊缝的具体位置在图纸中应清晰标注。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;4&#34;&gt;
-&lt;li&gt;焊接质量要求&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;标明焊缝等级（如按 GB/T 3323 规定的等级：一级、二级、三级）。&lt;/li&gt;
-&lt;li&gt;对焊缝的外观要求（如无气孔、裂纹、咬边等缺陷）。&lt;/li&gt;
-&lt;li&gt;焊接部位的焊后处理要求（如清除焊渣、抛光等）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;5&#34;&gt;
-&lt;li&gt;焊后热处理要求&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;如果有必要，要求进行焊后热处理（如消除应力处理）。&lt;/li&gt;
-&lt;li&gt;热处理温度范围和保温时间。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;6&#34;&gt;
-&lt;li&gt;无损检测要求&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;指定检测方法（如射线探伤 RT、超声波探伤 UT、磁粉检测 MT、渗透检测 PT）。&lt;/li&gt;
-&lt;li&gt;标明检测范围和验收标准。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;7&#34;&gt;
-&lt;li&gt;表面处理要求&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;对焊接后的表面处理，如打磨光滑、喷漆或防锈处理。&lt;/li&gt;
-&lt;li&gt;涂层厚度和质量要求。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;8&#34;&gt;
-&lt;li&gt;特殊工艺要求&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;明确焊接过程中的特殊要求，例如预热温度、焊接顺序、层间温度等。&lt;/li&gt;
-&lt;li&gt;对焊接环境的要求（如防止风吹或潮湿）。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;示例焊接技术要求书写&#34;&gt;示例焊接技术要求书写
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;焊接方法：手工电弧焊（SMAW），使用 E6013 焊条。&lt;/li&gt;
-&lt;li&gt;焊缝形式：角焊缝，焊脚尺寸 4mm，焊缝长度为 50mm。&lt;/li&gt;
-&lt;li&gt;焊接质量：符合 GB/T 3323 二级焊缝标准。&lt;/li&gt;
-&lt;li&gt;无损检测：关键焊缝进行超声波探伤（UT），探伤比例为 100%。&lt;/li&gt;
-&lt;li&gt;焊后处理：焊后进行打磨并喷涂防锈漆，漆膜厚度≥30μm。&lt;/li&gt;
-&lt;li&gt;特殊要求：焊接前母材需预热至 100℃，焊后消除应力热处理（550℃，保温 2 小时）。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

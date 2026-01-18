@@ -1,0 +1,213 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <title>O形圈密封设计专家系统 V7.0</title>
+    <style>
+        :root { --primary: #1a73e8; --bg: #f0f2f5; --card: #ffffff; --text: #202124; --accent: #d93025; --code-bg: #1e1e1e; }
+        body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; background: var(--bg); color: var(--text); padding: 20px; margin: 0; }
+        .container { max-width: 1100px; margin: 20px auto; background: var(--card); border-radius: 16px; box-shadow: 0 10px 40px rgba(0,0,0,0.08); overflow: hidden; }
+        
+        /* Header */
+        .header { background: var(--primary); color: white; padding: 20px 30px; display: flex; align-items: center; justify-content: space-between; }
+        .header h2 { margin: 0; font-size: 1.4rem; letter-spacing: 0.5px; }
+        .version-tag { background: rgba(255,255,255,0.2); padding: 4px 10px; border-radius: 20px; font-size: 0.75rem; }
+
+        .main-layout { display: grid; grid-template-columns: 340px 1fr; gap: 0; }
+        
+        /* Sidebar */
+        .sidebar { padding: 30px; background: #fafafa; border-right: 1px solid #eee; height: auto; }
+        .control-group { margin-bottom: 20px; }
+        .control-group label { display: block; font-weight: 600; margin-bottom: 8px; font-size: 0.85rem; color: #5f6368; }
+        
+        .input-wrapper { position: relative; display: flex; align-items: center; }
+        .input-wrapper input, .input-wrapper select { width: 100%; padding: 12px 15px; border: 1.5px solid #dadce0; border-radius: 8px; font-size: 14px; outline: none; transition: all 0.2s; background: white; }
+        .input-wrapper input:focus { border-color: var(--primary); box-shadow: 0 0 0 3px rgba(26,115,232,0.1); }
+        .input-unit { position: absolute; right: 15px; color: #9aa0a6; font-size: 12px; pointer-events: none; }
+
+        /* Advanced Settings Divider */
+        .divider { margin: 30px 0 15px; border-top: 1px solid #e0e0e0; position: relative; }
+        .divider-text { position: absolute; top: -10px; left: 10px; background: #fafafa; padding: 0 10px; font-size: 11px; color: #9aa0a6; font-weight: bold; }
+
+        /* Content Area */
+        .content { padding: 30px; }
+        .res-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .res-item { background: #fff; padding: 18px 10px; border-radius: 12px; text-align: center; border: 1px solid #e8eaed; transition: transform 0.2s; box-shadow: 0 2px 5px rgba(0,0,0,0.02); }
+        .res-label { font-size: 0.75rem; color: #1a73e8; display: block; margin-bottom: 8px; font-weight: bold; text-transform: uppercase; }
+        .res-val { font-size: 1.6rem; font-weight: 800; color: var(--accent); font-family: 'Monaco', monospace; }
+
+        /* Logic Panel */
+        .logic-panel { background: var(--code-bg); color: #d4d4d4; border-radius: 12px; overflow: hidden; }
+        .logic-header { background: #333; padding: 10px 20px; font-size: 11px; color: #aaa; display: flex; justify-content: space-between; }
+        .logic-body { padding: 20px; font-family: 'Consolas', monospace; font-size: 13px; line-height: 1.7; }
+        
+        .logic-section { margin-bottom: 18px; border-bottom: 1px solid #333; padding-bottom: 15px; }
+        .logic-section:last-child { margin-bottom: 0; border-bottom: none; padding-bottom: 0; }
+        .section-num { color: var(--primary); margin-right: 8px; font-weight: bold; }
+        .logic-title { color: #569cd6; font-weight: bold; margin-bottom: 8px; display: inline-block; }
+        .math-line { padding-left: 20px; color: #ce9178; }
+        .math-val { color: #b5cea8; font-weight: bold; }
+        .keyword { color: #4ec9b0; }
+        .important { color: #f48771; border-left: 2px solid #f48771; padding-left: 8px; margin: 5px 0; }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div class="header">
+        <h2>O-Ring 密封设计专家系统</h2>
+        <span class="version-tag">V7.0 Engineering Advanced</span>
+    </div>
+    
+    <div class="main-layout">
+        <div class="sidebar">
+            <div class="control-group">
+                <label>设计模式</label>
+                <div class="input-wrapper">
+                    <select id="scheme" onchange="calculate()">
+                        <option value="S1">方案 1：理论基准模式</option>
+                        <option value="S2" selected>方案 2：防掉落(自保持)</option>
+                    </select>
+                </div>
+            </div>
+            <div class="control-group">
+                <label>线径 W (Cross-section)</label>
+                <div class="input-wrapper">
+                    <select id="w_size" onchange="calculate()">
+                        <option value="1.20">1.20 (Micro)</option>
+                        <option value="1.50">1.50</option>
+                        <option value="1.80" selected>1.80</option>
+                        <option value="2.62">2.62</option>
+                        <option value="3.53">3.53</option>
+                    </select>
+                    <span class="input-unit">mm</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label>O圈内径 ID</label>
+                <div class="input-wrapper">
+                    <input type="number" id="id_size" value="6.0" step="0.1" oninput="calculate()">
+                    <span class="input-unit">mm</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label>压力工况</label>
+                <div class="input-wrapper">
+                    <select id="p_type" onchange="calculate()">
+                        <option value="INT">内部正压 (向外推)</option>
+                        <option value="EXT" selected>内部负压 (向内吸)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="divider"><span class="divider-text">ADVANCED CONFIG</span></div>
+            
+            <div class="control-group">
+                <label>设定压缩率 (C)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="custom_comp" value="22" step="1" min="10" max="40" oninput="calculate()">
+                    <span class="input-unit">%</span>
+                </div>
+            </div>
+            <div class="control-group">
+                <label>目标充填率 (F)</label>
+                <div class="input-wrapper">
+                    <input type="number" id="custom_fill" value="82" step="1" min="60" max="95" oninput="calculate()">
+                    <span class="input-unit">%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="content">
+            <div class="res-grid">
+                <div class="res-item"><span class="res-label">槽深 H</span><span id="res_h" class="res-val">-</span></div>
+                <div class="res-item"><span class="res-label">槽宽 G</span><span id="res_g" class="res-val">-</span></div>
+                <div class="res-item"><span class="res-label">槽内径 Din</span><span id="res_din" class="res-val">-</span></div>
+                <div class="res-item"><span class="res-label">槽外径 Dout</span><span id="res_dout" class="res-val">-</span></div>
+            </div>
+
+            <div class="logic-panel">
+                <div class="logic-header">
+                    <span>DYNAMIC CALCULATION ENGINE</span>
+                    <span>REAL-TIME UPDATE</span>
+                </div>
+                <div class="logic-body" id="logic_content">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+function calculate() {
+    const W = parseFloat(document.getElementById('w_size').value);
+    const ID = parseFloat(document.getElementById('id_size').value);
+    const pType = document.getElementById('p_type').value;
+    const sType = document.getElementById('scheme').value;
+    
+    // 获取用户自定义参数
+    const compRate = parseFloat(document.getElementById('custom_comp').value) / 100;
+    const fillRate = parseFloat(document.getElementById('custom_fill').value) / 100;
+    
+    // 基础计算
+    const H = (W * (1 - compRate)).toFixed(2);
+    const area = (Math.PI * Math.pow(W, 2)) / 4;
+    const G = (area / (parseFloat(H) * fillRate)).toFixed(2);
+    
+    const OD = ID + 2 * W;
+    let Din, Dout, step3HTML = "";
+
+    if (sType === 'S1') {
+        step3HTML = `<div class="keyword">[方案1：理论基准模式]</div>`;
+        if (pType === 'INT') {
+            Dout = OD; Din = Dout - 2 * G;
+            step3HTML += `<div>> 正压定位：贴外壁 (Dout = OD)</div>`;
+        } else {
+            Din = ID; Dout = Din + 2 * G;
+            step3HTML += `<div>> 负压定位：贴内壁 (Din = ID)</div>`;
+        }
+    } else {
+        step3HTML = `<div class="keyword">[方案2：防掉落(自保持)模式]</div>`;
+        if (pType === 'INT') {
+            Dout = OD * 0.98; Din = Dout - 2 * G;
+            step3HTML += `<div class="important">> 正压防掉：外径预留 2% 过盈量</div>
+                          <div class="math-line">Dout = OD(${OD.toFixed(2)}) * 0.98 = <span class="math-val">${Dout.toFixed(2)}</span></div>`;
+        } else {
+            Din = ID * 1.02; Dout = Din + 2 * G;
+            step3HTML += `<div class="important">> 负压防掉：内径预留 2% 拉伸量</div>
+                          <div class="math-line">Din = ID(${ID.toFixed(2)}) * 1.02 = <span class="math-val">${Din.toFixed(2)}</span></div>`;
+        }
+    }
+
+    // 更新主数值
+    document.getElementById('res_h').innerText = H;
+    document.getElementById('res_g').innerText = G;
+    document.getElementById('res_din').innerText = Din.toFixed(2);
+    document.getElementById('res_dout').innerText = Dout.toFixed(2);
+
+    // 更新逻辑面板
+    document.getElementById('logic_content').innerHTML = `
+        <div class="logic-section">
+            <span class="section-num">01</span><span class="logic-title">密封特性确认</span>
+            <div class="math-line">线径 W = ${W} mm | 压缩率 C = <span class="math-val">${(compRate*100).toFixed(0)}%</span></div>
+            <div class="math-line">H = W * (1 - ${compRate.toFixed(2)}) = <span class="math-val">${H} mm</span></div>
+        </div>
+        <div class="logic-section">
+            <span class="section-num">02</span><span class="logic-title">空间平衡校验</span>
+            <div class="math-line">O圈面积 A ≈ <span class="math-val">${area.toFixed(3)} mm²</span> | 充填率 F = <span class="math-val">${(fillRate*100).toFixed(0)}%</span></div>
+            <div class="math-line">G = A / (H * ${fillRate.toFixed(2)}) = <span class="math-val">${G} mm</span></div>
+        </div>
+        <div class="logic-section">
+            <span class="section-num">03</span><span class="logic-title">几何定位结果</span>
+            <div style="padding-left: 20px;">
+                ${step3HTML}
+                <div class="math-line">最终尺寸：<span class="math-val">Din=${Din.toFixed(2)} / Dout=${Dout.toFixed(2)}</span></div>
+            </div>
+        </div>
+    `;
+}
+calculate();
+</script>
+
+</body>
+</html>

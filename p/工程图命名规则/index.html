@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 |总装图|XXX-00| |第一层零件图|XXX-01| |第一层装配图|XXX-02-00| |第二层零件图|XXX-02-01| |第二层装配体|XXX-02-02-00| |第三层零件图|XXX-02-02-01| |第三层装配体|XXX-02-02-02-00| |第四层零件图|XXX-02-02-02-01| |XXX-02-02-02-02| |XXX-02-02-02-03| |……| |第三层零件图|XXX-02-02-03| |……|……| |第二层零件图|XXX-02-03| |……|……| |第一层零件图|XXX-03| |第一层装配体|XXX-04-00| |……|……| ">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=" 链接：[[模型文件管理]] 层级递增编号法 方案优点： 逻辑极强： 看到 XXX-02-02-01 就能立刻定位它在总装 -&gt; 第二层子装 -&gt; 第三层子装里。 归档方便： 适合只有你一个人维护的小型项目 方案缺点（坑）： 编号过长： 到了第 5 层以后，编号会变成一长串，手工录入 ERP 或写在标签上非常容易出错。 灵活性差： 如果后期你觉得“第二层装配体”不合理，要把它拆了挪到“第一层”去，那它下面所有零件的编号（图号）全都得改，这在 SolidWorks 里会造成巨大的文件关联噩梦。 用性差： 如果 XXX-02-01 这个零件在另一个项目里也要用，它带着旧项目的层级编号，会显得不伦不类。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 |总装图|XXX-00| |第一层零件图|XXX-01| |第一层装配图|XXX-02-00| |第二层零件图|XXX-02-01| |第二层装配体|XXX-02-02-00| |第三层零件图|XXX-02-02-01| |第三层装配体|XXX-02-02-02-00| |第四层零件图|XXX-02-02-02-01| |XXX-02-02-02-02| |XXX-02-02-02-03| |……| |第三层零件图|XXX-02-02-03| |……|……| |第二层零件图|XXX-02-03| |……|……| |第一层零件图|XXX-03| |第一层装配体|XXX-04-00| |……|……| 三段式编号 为了平衡“可读性”和“灵活性”，工业界通常采用 “项目号 - 组件号 - 顺序号” 的三段式，而不是无限延长。\n">
 <title>工程图命名规则</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/'>
 
 <link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="工程图命名规则">
-<meta property='og:description' content=" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 |总装图|XXX-00| |第一层零件图|XXX-01| |第一层装配图|XXX-02-00| |第二层零件图|XXX-02-01| |第二层装配体|XXX-02-02-00| |第三层零件图|XXX-02-02-01| |第三层装配体|XXX-02-02-02-00| |第四层零件图|XXX-02-02-02-01| |XXX-02-02-02-02| |XXX-02-02-02-03| |……| |第三层零件图|XXX-02-02-03| |……|……| |第二层零件图|XXX-02-03| |……|……| |第一层零件图|XXX-03| |第一层装配体|XXX-04-00| |……|……| ">
+<meta property='og:description' content=" 链接：[[模型文件管理]] 层级递增编号法 方案优点： 逻辑极强： 看到 XXX-02-02-01 就能立刻定位它在总装 -&gt; 第二层子装 -&gt; 第三层子装里。 归档方便： 适合只有你一个人维护的小型项目 方案缺点（坑）： 编号过长： 到了第 5 层以后，编号会变成一长串，手工录入 ERP 或写在标签上非常容易出错。 灵活性差： 如果后期你觉得“第二层装配体”不合理，要把它拆了挪到“第一层”去，那它下面所有零件的编号（图号）全都得改，这在 SolidWorks 里会造成巨大的文件关联噩梦。 用性差： 如果 XXX-02-01 这个零件在另一个项目里也要用，它带着旧项目的层级编号，会显得不伦不类。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 |总装图|XXX-00| |第一层零件图|XXX-01| |第一层装配图|XXX-02-00| |第二层零件图|XXX-02-01| |第二层装配体|XXX-02-02-00| |第三层零件图|XXX-02-02-01| |第三层装配体|XXX-02-02-02-00| |第四层零件图|XXX-02-02-02-01| |XXX-02-02-02-02| |XXX-02-02-02-03| |……| |第三层零件图|XXX-02-02-03| |……|……| |第二层零件图|XXX-02-03| |……|……| |第一层零件图|XXX-03| |第一层装配体|XXX-04-00| |……|……| 三段式编号 为了平衡“可读性”和“灵活性”，工业界通常采用 “项目号 - 组件号 - 顺序号” 的三段式，而不是无限延长。\n">
 <meta property='og:url' content='https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%9B%BE%E5%91%BD%E5%90%8D%E8%A7%84%E5%88%99/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-03-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-03-17T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="工程图命名规则">
-<meta name="twitter:description" content=" 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 |总装图|XXX-00| |第一层零件图|XXX-01| |第一层装配图|XXX-02-00| |第二层零件图|XXX-02-01| |第二层装配体|XXX-02-02-00| |第三层零件图|XXX-02-02-01| |第三层装配体|XXX-02-02-02-00| |第四层零件图|XXX-02-02-02-01| |XXX-02-02-02-02| |XXX-02-02-02-03| |……| |第三层零件图|XXX-02-02-03| |……|……| |第二层零件图|XXX-02-03| |……|……| |第一层零件图|XXX-03| |第一层装配体|XXX-04-00| |……|……| ">
+<meta name="twitter:description" content=" 链接：[[模型文件管理]] 层级递增编号法 方案优点： 逻辑极强： 看到 XXX-02-02-01 就能立刻定位它在总装 -&gt; 第二层子装 -&gt; 第三层子装里。 归档方便： 适合只有你一个人维护的小型项目 方案缺点（坑）： 编号过长： 到了第 5 层以后，编号会变成一长串，手工录入 ERP 或写在标签上非常容易出错。 灵活性差： 如果后期你觉得“第二层装配体”不合理，要把它拆了挪到“第一层”去，那它下面所有零件的编号（图号）全都得改，这在 SolidWorks 里会造成巨大的文件关联噩梦。 用性差： 如果 XXX-02-01 这个零件在另一个项目里也要用，它带着旧项目的层级编号，会显得不伦不类。 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 |总装图|XXX-00| |第一层零件图|XXX-01| |第一层装配图|XXX-02-00| |第二层零件图|XXX-02-01| |第二层装配体|XXX-02-02-00| |第三层零件图|XXX-02-02-01| |第三层装配体|XXX-02-02-02-00| |第四层零件图|XXX-02-02-02-01| |XXX-02-02-02-02| |XXX-02-02-02-03| |……| |第三层零件图|XXX-02-02-03| |……|……| |第二层零件图|XXX-02-03| |……|……| |第一层零件图|XXX-03| |第一层装配体|XXX-04-00| |……|……| 三段式编号 为了平衡“可读性”和“灵活性”，工业界通常采用 “项目号 - 组件号 - 顺序号” 的三段式，而不是无限延长。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -273,7 +273,43 @@
     </ol>
 </aside>
 
-    
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#层级递增编号法">层级递增编号法</a></li>
+        <li><a href="#三段式编号">三段式编号</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
 
             <main class="main full-width">
     <article class="main-article">
@@ -322,7 +358,26 @@
     <section class="article-content">
     
     
-    <div class="highlight"><div class="chroma">
+    <ul>
+<li>链接：[[模型文件管理]]</li>
+</ul>
+<h3 id="层级递增编号法">层级递增编号法
+</h3><ul>
+<li>方案优点：
+<ul>
+<li>逻辑极强： 看到 <code>XXX-02-02-01</code> 就能立刻定位它在总装 -&gt; 第二层子装 -&gt; 第三层子装里。</li>
+<li>归档方便： 适合只有你一个人维护的小型项目</li>
+</ul>
+</li>
+<li>方案缺点（坑）：
+<ul>
+<li>编号过长： 到了第 5 层以后，编号会变成一长串，手工录入 ERP 或写在标签上非常容易出错。</li>
+<li>灵活性差： 如果后期你觉得“第二层装配体”不合理，要把它拆了挪到“第一层”去，那它下面所有零件的编号（图号）全都得改，这在 SolidWorks 里会造成巨大的文件关联噩梦。</li>
+<li>用性差： 如果 <code>XXX-02-01</code> 这个零件在另一个项目里也要用，它带着旧项目的层级编号，会显得不伦不类。</li>
+</ul>
+</li>
+</ul>
+<div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
@@ -364,7 +419,53 @@
 </span></span><span class="line"><span class="cl">	<span class="o">|</span><span class="err">……</span><span class="o">|</span><span class="err">……</span><span class="o">|</span>
 </span></span></code></pre></td></tr></table>
 </div>
-</div>
+</div><h3 id="三段式编号">三段式编号
+</h3><p>为了平衡“可读性”和“灵活性”，工业界通常采用 <strong>“项目号 - 组件号 - 顺序号”</strong> 的三段式，而不是无限延长。</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>层级</strong></th>
+          <th><strong>建议编号格式</strong></th>
+          <th><strong>示例</strong></th>
+          <th><strong>说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>总装体</strong></td>
+          <td>项目号 - 00</td>
+          <td><code>CEMS-00</code></td>
+          <td>整个机器</td>
+      </tr>
+      <tr>
+          <td><strong>一级子装</strong></td>
+          <td>项目号 - 01 - 00</td>
+          <td><code>CEMS-01-00</code></td>
+          <td>比如：采样系统</td>
+      </tr>
+      <tr>
+          <td><strong>一级零件</strong></td>
+          <td>项目号 - 01 - 01</td>
+          <td><code>CEMS-01-01</code></td>
+          <td>采样系统里的面板</td>
+      </tr>
+      <tr>
+          <td><strong>二级子装</strong></td>
+          <td>项目号 - 02 - 00</td>
+          <td><code>CEMS-02-00</code></td>
+          <td>比如：预处理系统</td>
+      </tr>
+      <tr>
+          <td><strong>二级零件</strong></td>
+          <td>项目号 - 02 - 01</td>
+          <td><code>CEMS-02-01</code></td>
+          <td>预处理系统里的支架</td>
+      </tr>
+  </tbody>
+</table></div>
+<p><strong>核心逻辑：</strong> 无论层级多深，都归类到某一个大组件下，用 <strong>3 段</strong> 封顶。这样编号长度固定，且如果子装配体内部调整，不会影响上一级的编号。</p>
+<p>分配正式图号后，为了方便直接使用，推荐“定稿即封印”原则。给厂家发完图纸，立刻把这些文件设为<strong>只读</strong>。</p>
+
 </section>
 
 
