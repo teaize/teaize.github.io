@@ -5,9 +5,113 @@
         <link>https://teaize.github.io/</link>
         <description>Recent content on Coffity&#39;s Blog</description>
         <generator>Hugo -- gohugo.io</generator>
-        <language>zh-cn</language>
+        <language>en-us</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Sun, 18 Jan 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 19 Mar 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>工程变更通知单</title>
+        <link>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%8F%98%E6%9B%B4%E9%80%9A%E7%9F%A5%E5%8D%95/</link>
+        <pubDate>Thu, 19 Mar 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E5%8F%98%E6%9B%B4%E9%80%9A%E7%9F%A5%E5%8D%95/</guid>
+        <description>&lt;p&gt;修改说明文档的标准结构&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;基本信息：变更编号、日期、申请人、关联的项目名称/编号。&lt;/li&gt;
+&lt;li&gt;受影响范围：受影响的图号、零件名称、所属装配件。&lt;/li&gt;
+&lt;li&gt;变更原因（Why）：为什么改？（如：干涉、强度不足、加工成本高、客户需求变动）。&lt;/li&gt;
+&lt;li&gt;变更内容（What）：从 A 变成 B（对比图）。&lt;/li&gt;
+&lt;li&gt;处置方案（Action）：库存的旧零件怎么处理？（报废、返修、继续使用）。&lt;/li&gt;
+&lt;li&gt;会签审批：设计、工艺、质量、采购主管的签字。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h1 id=&#34;工程变更通知单-ecn&#34;&gt;工程变更通知单 (ECN)
+&lt;/h1&gt;&lt;h2 id=&#34;1-变更对象&#34;&gt;1. 变更对象
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;零件/装配名称&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;图号 (Part No.)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;旧版本&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;新版本&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;输入名称&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;输入图号&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;V1.0&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;V1.1&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;2-变更原因&#34;&gt;2. 变更原因
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;[!info] 请在对应的选项前将 &lt;code&gt;[ ]&lt;/code&gt; 改为 &lt;code&gt;[x]&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 设计优化 (减重/增强)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 干涉修正 (SolidWorks 碰撞检查发现)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 加工改进 (降低 CNC/钣金难度)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 成本控制 (更换材料/标准件)&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 错误纠正 (尺寸/标注/公差)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;具体描述：
+在此处输入详细的变更背景说明（例如：原结构在 XX 负载下产生位移，需加固）。&lt;/p&gt;
+&lt;h2 id=&#34;3-详细变更内容&#34;&gt;3. 详细变更内容
+&lt;/h2&gt;&lt;h3 id=&#34;31-结构尺寸调整&#34;&gt;3.1 结构/尺寸调整
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;将 [位置] 的 [参数] 从 &lt;code&gt;旧数值&lt;/code&gt; 修改为 &lt;code&gt;新数值&lt;/code&gt;。&lt;/li&gt;
+&lt;li&gt;增加 [特征/零件]，用于解决 [问题]。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;32-图面标注更新&#34;&gt;3.2 图面/标注更新
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 增加表面处理要求：&lt;code&gt;阳极氧化/喷涂&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 修正公差：从 &lt;code&gt;+/-0.1&lt;/code&gt; 修改为 &lt;code&gt;+/-0.05&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;4-图示对比-截图粘贴区&#34;&gt;4. 图示对比 (截图粘贴区)
+&lt;/h2&gt;&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;修改前 (Before)&lt;/th&gt;
+          &lt;th style=&#34;text-align: left&#34;&gt;修改后 (After)&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;修改前&lt;/td&gt;
+          &lt;td style=&#34;text-align: left&#34;&gt;修改后&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;5-旧物料处置意见&#34;&gt;5. 旧物料处置意见
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;在制品/库存： [ ] 报废 | [ ] 消耗完为止 | [ ] 返修加工&lt;/li&gt;
+&lt;li&gt;工装模具： [ ] 需修改 | [ ] 无需修改&lt;/li&gt;
+&lt;li&gt;采购状态： [ ] 停止订单 | [ ] 按新图采购&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>SW装配体</title>
+        <link>https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93/</link>
+        <pubDate>Sat, 24 Jan 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93/</guid>
+        <description>&lt;p&gt;装配体中零件之间添加配合并没有想象中的那么简单，需要考虑装配的参考关系&lt;/p&gt;
+&lt;h3 id=&#34;建立基准件与星形结构&#34;&gt;建立基准件与星形结构
+&lt;/h3&gt;&lt;p&gt;最混乱的逻辑通常是“链式配合”（&lt;strong&gt;循环参考&lt;/strong&gt;）：$A$ 定位 $B$，$B$ 定位 $C$，$C$ 又去参考 $D$。一旦中间一个零件变了，后面全乱。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;原则&lt;/strong&gt;：选定一个&lt;strong&gt;基准零件&lt;/strong&gt;（通常是底盘、框架或外壳的主体），将其固定（Fix）在原点。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;星形配合&lt;/strong&gt;：尽量让 $A、B、C$ 都直接与这个“基准件”或装配体的“基准面（前视/上视/右视）”进行配合。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;好处&lt;/strong&gt;：零件之间解耦。修改 $A$ 不会影响 $B$ 的位置。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常见的配合禁忌&#34;&gt;常见的配合禁忌
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;禁止循环参考&lt;/strong&gt;：$A$ 的位置由 $B$ 决定，而 $B$ 的某个特征又是参考 $A$ 画出来的。这是 SolidWorks 报错和崩溃的头号原因。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;减少冗余配合&lt;/strong&gt;：如果“重合”就能解决问题，不要用“距离=0”。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;善用子装配体&lt;/strong&gt;：不要把几百个零件全塞在一个总装层级。把功能模块（如电源模块、显示模块）先做成子装配体，逻辑会清晰很多。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>O圈选型系统</title>
         <link>https://teaize.github.io/p/o%E5%9C%88%E9%80%89%E5%9E%8B%E7%B3%BB%E7%BB%9F/</link>
         <pubDate>Sun, 18 Jan 2026 00:00:00 +0000</pubDate>
@@ -25989,6 +26093,88 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;/table&gt;
 &lt;p&gt;&lt;strong&gt;核心逻辑：&lt;/strong&gt; 无论层级多深，都归类到某一个大组件下，用 &lt;strong&gt;3 段&lt;/strong&gt; 封顶。这样编号长度固定，且如果子装配体内部调整，不会影响上一级的编号。&lt;/p&gt;
 &lt;p&gt;分配正式图号后，为了方便直接使用，推荐“定稿即封印”原则。给厂家发完图纸，立刻把这些文件设为&lt;strong&gt;只读&lt;/strong&gt;。&lt;/p&gt;
+&lt;p&gt;====&lt;/p&gt;
+&lt;p&gt;为了区分“子装体”和“零件”，我们约定：&lt;strong&gt;第三段为 &lt;code&gt;00&lt;/code&gt; 的是装配体，&lt;code&gt;01-99&lt;/code&gt; 的是零件&lt;/strong&gt;&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;层级类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;编号示例&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;名称&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;逻辑说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;总装体 (Level 0)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-00-00&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;便携式 CEMS 整机&lt;/td&gt;
+          &lt;td&gt;整个项目的起点。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级子装 (Level 1 Sub)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-10-00&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;采样系统总成&lt;/td&gt;
+          &lt;td&gt;中间段 &lt;code&gt;10&lt;/code&gt; 开启了一个大系统，末尾 &lt;code&gt;00&lt;/code&gt; 表示它是装配体。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级子装下的零件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-10-01&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;采样管接头&lt;/td&gt;
+          &lt;td&gt;隶属于 &lt;code&gt;10-00&lt;/code&gt; 系统，末尾非 &lt;code&gt;00&lt;/code&gt; 表示它是零件。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级子装下的零件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-10-02&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;采样泵固定支架&lt;/td&gt;
+          &lt;td&gt;隶属于 &lt;code&gt;10-00&lt;/code&gt; 系统。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级零件 (Level 1 Part)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-00-01&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;仪器外壳/机箱&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;直属于总装&lt;/strong&gt;。中间段用 &lt;code&gt;00&lt;/code&gt; 标识其顶层地位，末尾从 &lt;code&gt;01&lt;/code&gt; 开始排。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;一级零件 (Level 1 Part)&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-00-02&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;总电源开关&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;直属于总装&lt;/strong&gt;。不属于任何子系统。&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;深度解析二级子装及其零件&#34;&gt;深度解析：二级子装及其零件
+&lt;/h3&gt;&lt;p&gt;当逻辑进一步延伸到“二级子装”时，编号会如下演变：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;&lt;strong&gt;层级类型&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;编号示例&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;名称&lt;/strong&gt;&lt;/th&gt;
+          &lt;th&gt;&lt;strong&gt;逻辑说明&lt;/strong&gt;&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;二级子装&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-11-00&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;预滤芯组合体&lt;/td&gt;
+          &lt;td&gt;它是采样系统（10 段）下的子集，分配 &lt;code&gt;11&lt;/code&gt; 段。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;&lt;strong&gt;二级子装下的零件&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;strong&gt;&lt;code&gt;CEMS-11-01&lt;/code&gt;&lt;/strong&gt;&lt;/td&gt;
+          &lt;td&gt;陶瓷滤芯&lt;/td&gt;
+          &lt;td&gt;隶属于 &lt;code&gt;11-00&lt;/code&gt; 二级子装。&lt;/td&gt;
+      &lt;/tr&gt;
+      &lt;tr&gt;
+          &lt;td&gt;![[Pasted image 20260121094038.png]]&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+          &lt;td&gt;&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 </description>
         </item>
         <item>
@@ -29563,6 +29749,11 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;插入零部件：F3&lt;/li&gt;
 &lt;li&gt;插入新零件：F4&lt;/li&gt;
 &lt;li&gt;Alt+S：插入配合，配合参考&lt;/li&gt;
+&lt;li&gt;随配合复制：Alt+C&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;工程图命令&#34;&gt;工程图命令
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;切边不可见：Alt+X&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;工具&#34;&gt;工具
 &lt;/h3&gt;&lt;ul&gt;
@@ -29580,8 +29771,9 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;li&gt;插入注释：Alt+1&lt;/li&gt;
 &lt;li&gt;切换文件:Ctrl+tab&lt;/li&gt;
 &lt;li&gt;选中透明零件面：按住 Shift 点击&lt;/li&gt;
+&lt;li&gt;选择过滤器：F7&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;Ctrl件可以调出该弹窗&lt;/p&gt;
+&lt;p&gt;Ctrl 件可以调出该弹窗&lt;/p&gt;
 &lt;p&gt;![[Pasted image 20260116134349.png]]&lt;/p&gt;
 &lt;p&gt;随配合复制&lt;/p&gt;
 &lt;p&gt;![[Pasted image 20260116162004.png]]&lt;/p&gt;
@@ -32100,7 +32292,11 @@ $$&lt;/p&gt;
         <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/notes/</guid>
-        <description>&lt;h3 id=&#34;2026-年-1-月&#34;&gt;2026 年 1 月
+        <description>&lt;h3 id=&#34;2026-年-2-月&#34;&gt;2026 年 2 月
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;人的大脑需要“完整块状时间能进入恢复或深度状态，被反复打断会让大脑一直处于半启动状态，半启动比高强度工作还累&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2026-年-1-月&#34;&gt;2026 年 1 月
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;知识会过期，框架不会&lt;/li&gt;
 &lt;li&gt;工程能力 = 结构化看问题 + 结构化提问题 + 结构化做取舍&lt;/li&gt;

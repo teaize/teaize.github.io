@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="zh-cn" dir="ltr">
+<html lang="en-us" dir="ltr">
     <head>
         
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
@@ -299,6 +299,7 @@
       <ol>
         <li><a href="#层级递增编号法">层级递增编号法</a></li>
         <li><a href="#三段式编号">三段式编号</a></li>
+        <li><a href="#深度解析二级子装及其零件">深度解析：二级子装及其零件</a></li>
       </ol>
     </li>
   </ol>
@@ -465,6 +466,88 @@
 </table></div>
 <p><strong>核心逻辑：</strong> 无论层级多深，都归类到某一个大组件下，用 <strong>3 段</strong> 封顶。这样编号长度固定，且如果子装配体内部调整，不会影响上一级的编号。</p>
 <p>分配正式图号后，为了方便直接使用，推荐“定稿即封印”原则。给厂家发完图纸，立刻把这些文件设为<strong>只读</strong>。</p>
+<p>====</p>
+<p>为了区分“子装体”和“零件”，我们约定：<strong>第三段为 <code>00</code> 的是装配体，<code>01-99</code> 的是零件</strong></p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>层级类型</strong></th>
+          <th><strong>编号示例</strong></th>
+          <th><strong>名称</strong></th>
+          <th><strong>逻辑说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>总装体 (Level 0)</strong></td>
+          <td><strong><code>CEMS-00-00</code></strong></td>
+          <td>便携式 CEMS 整机</td>
+          <td>整个项目的起点。</td>
+      </tr>
+      <tr>
+          <td><strong>一级子装 (Level 1 Sub)</strong></td>
+          <td><strong><code>CEMS-10-00</code></strong></td>
+          <td>采样系统总成</td>
+          <td>中间段 <code>10</code> 开启了一个大系统，末尾 <code>00</code> 表示它是装配体。</td>
+      </tr>
+      <tr>
+          <td><strong>一级子装下的零件</strong></td>
+          <td><strong><code>CEMS-10-01</code></strong></td>
+          <td>采样管接头</td>
+          <td>隶属于 <code>10-00</code> 系统，末尾非 <code>00</code> 表示它是零件。</td>
+      </tr>
+      <tr>
+          <td><strong>一级子装下的零件</strong></td>
+          <td><strong><code>CEMS-10-02</code></strong></td>
+          <td>采样泵固定支架</td>
+          <td>隶属于 <code>10-00</code> 系统。</td>
+      </tr>
+      <tr>
+          <td><strong>一级零件 (Level 1 Part)</strong></td>
+          <td><strong><code>CEMS-00-01</code></strong></td>
+          <td>仪器外壳/机箱</td>
+          <td><strong>直属于总装</strong>。中间段用 <code>00</code> 标识其顶层地位，末尾从 <code>01</code> 开始排。</td>
+      </tr>
+      <tr>
+          <td><strong>一级零件 (Level 1 Part)</strong></td>
+          <td><strong><code>CEMS-00-02</code></strong></td>
+          <td>总电源开关</td>
+          <td><strong>直属于总装</strong>。不属于任何子系统。</td>
+      </tr>
+  </tbody>
+</table></div>
+<h3 id="深度解析二级子装及其零件">深度解析：二级子装及其零件
+</h3><p>当逻辑进一步延伸到“二级子装”时，编号会如下演变：</p>
+<div class="table-wrapper"><table>
+  <thead>
+      <tr>
+          <th><strong>层级类型</strong></th>
+          <th><strong>编号示例</strong></th>
+          <th><strong>名称</strong></th>
+          <th><strong>逻辑说明</strong></th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><strong>二级子装</strong></td>
+          <td><strong><code>CEMS-11-00</code></strong></td>
+          <td>预滤芯组合体</td>
+          <td>它是采样系统（10 段）下的子集，分配 <code>11</code> 段。</td>
+      </tr>
+      <tr>
+          <td><strong>二级子装下的零件</strong></td>
+          <td><strong><code>CEMS-11-01</code></strong></td>
+          <td>陶瓷滤芯</td>
+          <td>隶属于 <code>11-00</code> 二级子装。</td>
+      </tr>
+      <tr>
+          <td>![[Pasted image 20260121094038.png]]</td>
+          <td></td>
+          <td></td>
+          <td></td>
+      </tr>
+  </tbody>
+</table></div>
 
 </section>
 
