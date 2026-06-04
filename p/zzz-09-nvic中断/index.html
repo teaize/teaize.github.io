@@ -473,26 +473,26 @@
 <h4 id="怎么知道回调函数叫什么">怎么知道回调函数叫什么
 </h4><p>回调函数的名字是<strong>固定</strong>的。你可以在对应的 HAL 库驱动文件（<code>.h</code>）里找到它们。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>中断类型</strong></th>
-          <th><strong>回调函数名 (你直接在 main.c 里重写即可)</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>外部中断</strong></td>
-          <td><code>HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</code></td>
-      </tr>
-      <tr>
-          <td><strong>定时器中断</strong></td>
-          <td><code>HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)</code></td>
-      </tr>
-      <tr>
-          <td><strong>串口接收完成</strong></td>
-          <td><code>HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>中断类型</strong></th>
+					<th><strong>回调函数名 (你直接在 main.c 里重写即可)</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>外部中断</strong></td>
+					<td><code>HAL_GPIO_EXTI_Callback(uint16_t GPIO_Pin)</code></td>
+			</tr>
+			<tr>
+					<td><strong>定时器中断</strong></td>
+					<td><code>HAL_TIM_PeriodElapsedCallback(TIM_HandleTypeDef *htim)</code></td>
+			</tr>
+			<tr>
+					<td><strong>串口接收完成</strong></td>
+					<td><code>HAL_UART_RxCpltCallback(UART_HandleTypeDef *huart)</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="实战技巧如何快速瞬移到函数名">实战技巧：如何快速“瞬移”到函数名？
 </h4><p>如果你在代码里看到了 <code>HAL_GPIO_EXTI_IRQHandler</code>，想知道它最后会调用哪个回调函数，你可以：</p>

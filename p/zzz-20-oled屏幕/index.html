@@ -372,35 +372,35 @@
 <h3 id="2-硬件连接别接错-5v">2. 硬件连接：别接错 5V
 </h3><p>对于 STM32F103C8T6，我们通常使用 <strong>I2C1</strong>。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>OLED 引脚</strong></th>
-          <th><strong>STM32 引脚</strong></th>
-          <th><strong>说明</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>VCC</strong></td>
-          <td><strong>3.3V</strong></td>
-          <td><strong>严禁接 5V</strong>，否则可能烧毁 OLED 驱动芯片。</td>
-      </tr>
-      <tr>
-          <td><strong>GND</strong></td>
-          <td><strong>GND</strong></td>
-          <td>电源负极。</td>
-      </tr>
-      <tr>
-          <td><strong>SCL</strong></td>
-          <td><strong>PB6</strong></td>
-          <td>I2C1 的时钟信号。</td>
-      </tr>
-      <tr>
-          <td><strong>SDA</strong></td>
-          <td><strong>PB7</strong></td>
-          <td>I2C1 的数据信号。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>OLED 引脚</strong></th>
+					<th><strong>STM32 引脚</strong></th>
+					<th><strong>说明</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>VCC</strong></td>
+					<td><strong>3.3V</strong></td>
+					<td><strong>严禁接 5V</strong>，否则可能烧毁 OLED 驱动芯片。</td>
+			</tr>
+			<tr>
+					<td><strong>GND</strong></td>
+					<td><strong>GND</strong></td>
+					<td>电源负极。</td>
+			</tr>
+			<tr>
+					<td><strong>SCL</strong></td>
+					<td><strong>PB6</strong></td>
+					<td>I2C1 的时钟信号。</td>
+			</tr>
+			<tr>
+					<td><strong>SDA</strong></td>
+					<td><strong>PB7</strong></td>
+					<td>I2C1 的数据信号。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="3-stm32cubeide-配置-ioc">3. STM32CubeIDE 配置 (.ioc)
 </h3><ol>

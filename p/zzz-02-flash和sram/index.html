@@ -407,40 +407,40 @@
 <p>结论： <strong>对 CPU 来说，无论是读 Flash、写 SRAM，还是控制 LED 灯，本质上都只是在不同的地址（门牌号）上读写数据</strong>。这就是“万物皆地址”。</p>
 <h3 id="4-核心区别对比表">4. 核心区别对比表
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th>Flash (闪存)</th>
-          <th>SRAM (内存)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>存放内容</td>
-          <td>程序代码 (Code)、常量 (RO-data)</td>
-          <td>变量 (RW-data)、堆栈</td>
-      </tr>
-      <tr>
-          <td>断电数据</td>
-          <td>保存</td>
-          <td>丢失</td>
-      </tr>
-      <tr>
-          <td>读写速度</td>
-          <td>较慢（所以有时需要等待周期）</td>
-          <td>极快</td>
-      </tr>
-      <tr>
-          <td>擦写寿命</td>
-          <td>有次数限制（约 10 万次）</td>
-          <td>无限制</td>
-      </tr>
-      <tr>
-          <td>起始地址</td>
-          <td><code>0x0800 0000</code></td>
-          <td><code>0x2000 0000</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特性</th>
+					<th>Flash (闪存)</th>
+					<th>SRAM (内存)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>存放内容</td>
+					<td>程序代码 (Code)、常量 (RO-data)</td>
+					<td>变量 (RW-data)、堆栈</td>
+			</tr>
+			<tr>
+					<td>断电数据</td>
+					<td>保存</td>
+					<td>丢失</td>
+			</tr>
+			<tr>
+					<td>读写速度</td>
+					<td>较慢（所以有时需要等待周期）</td>
+					<td>极快</td>
+			</tr>
+			<tr>
+					<td>擦写寿命</td>
+					<td>有次数限制（约 10 万次）</td>
+					<td>无限制</td>
+			</tr>
+			<tr>
+					<td>起始地址</td>
+					<td><code>0x0800 0000</code></td>
+					<td><code>0x2000 0000</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="总结">总结
 </h3><div class="mermaid">

@@ -713,38 +713,38 @@
 </p>
 <h4 id="不同方式的比较">不同方式的比较
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th>适用场景</th>
-          <th>传输方式</th>
-          <th>优点</th>
-          <th>缺点</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>串口通信（UART）</strong></td>
-          <td>直接连接笔记本</td>
-          <td>USB 串口</td>
-          <td>简单，适合调试</td>
-          <td>需 USB 线，距离受限</td>
-      </tr>
-      <tr>
-          <td><strong>WiFi Socket</strong></td>
-          <td>同一局域网内</td>
-          <td>TCP/IP</td>
-          <td>可无线读取，速度快</td>
-          <td>需 WiFi 网络</td>
-      </tr>
-      <tr>
-          <td><strong>MQTT</strong></td>
-          <td>远程监控</td>
-          <td>MQTT 协议</td>
-          <td>适合云端，支持多个设备</td>
-          <td>需 MQTT 服务器</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>适用场景</th>
+					<th>传输方式</th>
+					<th>优点</th>
+					<th>缺点</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>串口通信（UART）</strong></td>
+					<td>直接连接笔记本</td>
+					<td>USB 串口</td>
+					<td>简单，适合调试</td>
+					<td>需 USB 线，距离受限</td>
+			</tr>
+			<tr>
+					<td><strong>WiFi Socket</strong></td>
+					<td>同一局域网内</td>
+					<td>TCP/IP</td>
+					<td>可无线读取，速度快</td>
+					<td>需 WiFi 网络</td>
+			</tr>
+			<tr>
+					<td><strong>MQTT</strong></td>
+					<td>远程监控</td>
+					<td>MQTT 协议</td>
+					<td>适合云端，支持多个设备</td>
+					<td>需 MQTT 服务器</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="拓展-2">拓展 2
 </h3><h4 id="如何理解-wifi-socket">如何理解 Wifi Socket
@@ -755,40 +755,40 @@
 <li>服务器 不会主动给客户端发消息，它只是等着客户端来“点单”，然后才会提供数据</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>需求</th>
-          <th>服务器（ESP32）</th>
-          <th>客户端（笔记本）</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>网络要求</strong></td>
-          <td>连接同一 WiFi，获取 IP</td>
-          <td>连接同一 WiFi，知道 ESP32 的 IP</td>
-      </tr>
-      <tr>
-          <td><strong>通信端口</strong></td>
-          <td>监听特定端口（如 8080）</td>
-          <td>连接到 ESP32 的 IP 和端口</td>
-      </tr>
-      <tr>
-          <td><strong>数据格式</strong></td>
-          <td>按一定格式发送数据</td>
-          <td>按格式解析数据</td>
-      </tr>
-      <tr>
-          <td><strong>可能问题</strong></td>
-          <td>WiFi 连接失败、IP 变动、端口被占用</td>
-          <td>连接不上 ESP32、数据丢失</td>
-      </tr>
-      <tr>
-          <td><strong>解决方案</strong></td>
-          <td>确保 WiFi 稳定、检查 IP、换端口</td>
-          <td>确保同一 WiFi、确认 IP、用 <code>ping</code> 测试</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>需求</th>
+					<th>服务器（ESP32）</th>
+					<th>客户端（笔记本）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>网络要求</strong></td>
+					<td>连接同一 WiFi，获取 IP</td>
+					<td>连接同一 WiFi，知道 ESP32 的 IP</td>
+			</tr>
+			<tr>
+					<td><strong>通信端口</strong></td>
+					<td>监听特定端口（如 8080）</td>
+					<td>连接到 ESP32 的 IP 和端口</td>
+			</tr>
+			<tr>
+					<td><strong>数据格式</strong></td>
+					<td>按一定格式发送数据</td>
+					<td>按格式解析数据</td>
+			</tr>
+			<tr>
+					<td><strong>可能问题</strong></td>
+					<td>WiFi 连接失败、IP 变动、端口被占用</td>
+					<td>连接不上 ESP32、数据丢失</td>
+			</tr>
+			<tr>
+					<td><strong>解决方案</strong></td>
+					<td>确保 WiFi 稳定、检查 IP、换端口</td>
+					<td>确保同一 WiFi、确认 IP、用 <code>ping</code> 测试</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="拓展-3">拓展 3
 </h3><h4 id="图表动态展示数据">图表动态展示数据

@@ -420,40 +420,40 @@
 </ol>
 <h3 id="直观对比表">直观对比表
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th>推挽输出 (Push-Pull)</th>
-          <th>开漏输出 (Open-Drain)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>输出高电平</td>
-          <td>直接输出 VCC (3.3V)</td>
-          <td>高阻态 (需外接上拉电阻才有电压)</td>
-      </tr>
-      <tr>
-          <td>输出低电平</td>
-          <td>直接输出 GND (0V)</td>
-          <td>直接输出 GND (0V)</td>
-      </tr>
-      <tr>
-          <td>驱动能力</td>
-          <td>强 (双向)</td>
-          <td>弱 (高电平靠电阻，低电平靠芯片)</td>
-      </tr>
-      <tr>
-          <td>主要用途</td>
-          <td>LED、普通 IO 控制、SPI、PWM</td>
-          <td>I2C 通信、电平转换、多机通信</td>
-      </tr>
-      <tr>
-          <td>比喻</td>
-          <td>既能推水，又能抽水的水泵</td>
-          <td>只能抽水（排水）的水龙头</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特性</th>
+					<th>推挽输出 (Push-Pull)</th>
+					<th>开漏输出 (Open-Drain)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>输出高电平</td>
+					<td>直接输出 VCC (3.3V)</td>
+					<td>高阻态 (需外接上拉电阻才有电压)</td>
+			</tr>
+			<tr>
+					<td>输出低电平</td>
+					<td>直接输出 GND (0V)</td>
+					<td>直接输出 GND (0V)</td>
+			</tr>
+			<tr>
+					<td>驱动能力</td>
+					<td>强 (双向)</td>
+					<td>弱 (高电平靠电阻，低电平靠芯片)</td>
+			</tr>
+			<tr>
+					<td>主要用途</td>
+					<td>LED、普通 IO 控制、SPI、PWM</td>
+					<td>I2C 通信、电平转换、多机通信</td>
+			</tr>
+			<tr>
+					<td>比喻</td>
+					<td>既能推水，又能抽水的水泵</td>
+					<td>只能抽水（排水）的水龙头</td>
+			</tr>
+	</tbody>
 </table></div>
 <ul>
 <li>推挽输出就像是一个双向推拉门，你既可以用力把它推开（高电平），也可以用力把它拉关（低电平）。</li>

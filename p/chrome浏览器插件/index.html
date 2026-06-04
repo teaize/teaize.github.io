@@ -431,40 +431,40 @@
 <li>通俗比喻：它是一个<strong>派往敌国的间谍</strong>。它直接在“现场”（网页页面）活动，能看到现场发生的一切，并随时准备向家里汇报或在现场搞点小动作（注入按钮）。</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>组件</strong></th>
-          <th><strong>运行环境</strong></th>
-          <th><strong>主要任务</strong></th>
-          <th><strong>持续时间</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>Manifest</strong></td>
-          <td>配置层</td>
-          <td>注册信息、定义权限</td>
-          <td>始终存在</td>
-      </tr>
-      <tr>
-          <td><strong>Content Script</strong></td>
-          <td><strong>特定网页内</strong></td>
-          <td>修改网页、抓取数据、监听点击</td>
-          <td>随网页关闭而结束</td>
-      </tr>
-      <tr>
-          <td><strong>Background (Service Worker)</strong></td>
-          <td><strong>浏览器后台</strong></td>
-          <td>处理跨标签任务、长连接、全局监听</td>
-          <td>自动唤起/休眠</td>
-      </tr>
-      <tr>
-          <td><strong>Popup / Options</strong></td>
-          <td>插件弹窗</td>
-          <td>用户设置界面、登录入口</td>
-          <td>仅在窗口打开时运行</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>组件</strong></th>
+					<th><strong>运行环境</strong></th>
+					<th><strong>主要任务</strong></th>
+					<th><strong>持续时间</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>Manifest</strong></td>
+					<td>配置层</td>
+					<td>注册信息、定义权限</td>
+					<td>始终存在</td>
+			</tr>
+			<tr>
+					<td><strong>Content Script</strong></td>
+					<td><strong>特定网页内</strong></td>
+					<td>修改网页、抓取数据、监听点击</td>
+					<td>随网页关闭而结束</td>
+			</tr>
+			<tr>
+					<td><strong>Background (Service Worker)</strong></td>
+					<td><strong>浏览器后台</strong></td>
+					<td>处理跨标签任务、长连接、全局监听</td>
+					<td>自动唤起/休眠</td>
+			</tr>
+			<tr>
+					<td><strong>Popup / Options</strong></td>
+					<td>插件弹窗</td>
+					<td>用户设置界面、登录入口</td>
+					<td>仅在窗口打开时运行</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="4-它们是如何沟通的message-passing">4. 它们是如何“沟通”的？(Message Passing)
 </h4><p>这是新手最容易困惑的地方：由于安全限制，这几个文件不能直接共享变量。</p>

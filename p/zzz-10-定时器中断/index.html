@@ -475,30 +475,30 @@
 </div>
 </div><h3 id="5-定时中断-vs-hal_delay">5. 定时中断 vs HAL_Delay()
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>特性</strong></th>
-          <th><strong>HAL_Delay()</strong></th>
-          <th><strong>定时器中断</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>原理</strong></td>
-          <td>阻塞式（CPU 在死等，啥也干不了）</td>
-          <td>非阻塞式（CPU 平时干别的，时间到才去处理）</td>
-      </tr>
-      <tr>
-          <td><strong>精度</strong></td>
-          <td>较低（会被其他任务干扰）</td>
-          <td><strong>极高</strong>（硬件自动计数，不受软件干扰）</td>
-      </tr>
-      <tr>
-          <td><strong>用途</strong></td>
-          <td>简单的、不重要的等待</td>
-          <td>精准采样、控制电机速度、多任务并行</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>特性</strong></th>
+					<th><strong>HAL_Delay()</strong></th>
+					<th><strong>定时器中断</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>原理</strong></td>
+					<td>阻塞式（CPU 在死等，啥也干不了）</td>
+					<td>非阻塞式（CPU 平时干别的，时间到才去处理）</td>
+			</tr>
+			<tr>
+					<td><strong>精度</strong></td>
+					<td>较低（会被其他任务干扰）</td>
+					<td><strong>极高</strong>（硬件自动计数，不受软件干扰）</td>
+			</tr>
+			<tr>
+					<td><strong>用途</strong></td>
+					<td>简单的、不重要的等待</td>
+					<td>精准采样、控制电机速度、多任务并行</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="6-进阶如果你想要-1-毫秒定一次时">6. 进阶：如果你想要 1 毫秒定一次时
 </h3><ul>

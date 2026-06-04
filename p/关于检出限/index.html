@@ -420,25 +420,25 @@
 <h3 id="如何理解好的分析仪检出限通常大于分辨率">如何理解：好的分析仪，检出限通常大于分辨率
 </h3><h4 id="概念本质的对比">概念本质的对比
 </h4><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>指标</strong></th>
-          <th><strong>形象比喻</strong></th>
-          <th><strong>决定因素</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>分辨率 (Resolution)</strong></td>
-          <td><strong>尺子的刻度：</strong> 你最细能画到哪一格？</td>
-          <td><strong>数字化能力：</strong> 由电路（AD 转换器位长）和软件显示决定。</td>
-      </tr>
-      <tr>
-          <td><strong>检出限 (LOD)</strong></td>
-          <td><strong>手稳不稳：</strong> 即使刻度很细，如果手抖，你最小能看准多少？</td>
-          <td><strong>物理极限：</strong> 由传感器噪声、电路底噪、光学散射等决定。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>指标</strong></th>
+					<th><strong>形象比喻</strong></th>
+					<th><strong>决定因素</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>分辨率 (Resolution)</strong></td>
+					<td><strong>尺子的刻度：</strong> 你最细能画到哪一格？</td>
+					<td><strong>数字化能力：</strong> 由电路（AD 转换器位长）和软件显示决定。</td>
+			</tr>
+			<tr>
+					<td><strong>检出限 (LOD)</strong></td>
+					<td><strong>手稳不稳：</strong> 即使刻度很细，如果手抖，你最小能看准多少？</td>
+					<td><strong>物理极限：</strong> 由传感器噪声、电路底噪、光学散射等决定。</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>一个优秀的分析仪设计遵循“<strong>宁可让你看到波动的真实，也不让你看到静止的虚假</strong>”的原则。</p>
 <h4 id="a-只有分辨率足够小才能观察到噪声">A. 只有分辨率足够小，才能观察到噪声
@@ -468,40 +468,40 @@
 <p>简单来说：<strong>检出限决定了仪器“能不能看见”，而漂移决定了仪器“看的是不是一直准”。</strong></p>
 <h3 id="检出限-vs-漂移核心区别">检出限 vs 漂移：核心区别
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>维度</strong></th>
-          <th><strong>检出限 (LOD)</strong></th>
-          <th><strong>漂移 (Drift)</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>本质含义</strong></td>
-          <td><strong>短期噪声</strong>的统计表现。</td>
-          <td><strong>长期趋势</strong>的偏差累积。</td>
-      </tr>
-      <tr>
-          <td><strong>时间尺度</strong></td>
-          <td><strong>极短时间</strong>（几分钟内）：读数在零点附近的快速上下跳动。</td>
-          <td><strong>较长时间</strong>（24 小时或 7 天）：读数缓慢地朝着一个方向偏离。</td>
-      </tr>
-      <tr>
-          <td><strong>表现形式</strong></td>
-          <td>“毛刺”或“锯齿波”。</td>
-          <td>“坡度”或“台阶”。</td>
-      </tr>
-      <tr>
-          <td><strong>主要成因</strong></td>
-          <td>电子元件热噪声、光电探测器散粒噪声、信号放大器的底噪。</td>
-          <td>环境温度变化、光源老化、光学镜片污染、气压波动、采样管路吸附。</td>
-      </tr>
-      <tr>
-          <td><strong>计算逻辑</strong></td>
-          <td>$3 \times \sigma$（标准偏差）。</td>
-          <td>$终点值 - 初始值$（绝对差值）。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>维度</strong></th>
+					<th><strong>检出限 (LOD)</strong></th>
+					<th><strong>漂移 (Drift)</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>本质含义</strong></td>
+					<td><strong>短期噪声</strong>的统计表现。</td>
+					<td><strong>长期趋势</strong>的偏差累积。</td>
+			</tr>
+			<tr>
+					<td><strong>时间尺度</strong></td>
+					<td><strong>极短时间</strong>（几分钟内）：读数在零点附近的快速上下跳动。</td>
+					<td><strong>较长时间</strong>（24 小时或 7 天）：读数缓慢地朝着一个方向偏离。</td>
+			</tr>
+			<tr>
+					<td><strong>表现形式</strong></td>
+					<td>“毛刺”或“锯齿波”。</td>
+					<td>“坡度”或“台阶”。</td>
+			</tr>
+			<tr>
+					<td><strong>主要成因</strong></td>
+					<td>电子元件热噪声、光电探测器散粒噪声、信号放大器的底噪。</td>
+					<td>环境温度变化、光源老化、光学镜片污染、气压波动、采样管路吸附。</td>
+			</tr>
+			<tr>
+					<td><strong>计算逻辑</strong></td>
+					<td>$3 \times \sigma$（标准偏差）。</td>
+					<td>$终点值 - 初始值$（绝对差值）。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="检出限与漂移的内在联系">检出限与漂移的内在联系
 </h3><h4 id="-漂移会淹没检出限">① 漂移会“淹没”检出限

@@ -387,30 +387,30 @@
 <h2 id="4-外设与寄存器的复杂度">4. 外设与寄存器的复杂度
 </h2><p>这是初学者最容易感到“压力”的地方：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th>51 单片机</th>
-          <th>STM32 (Cortex-M)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>IO 口控制</td>
-          <td>简单：<code>P1 = 0x01;</code> 即可点灯。</td>
-          <td>复杂：需要先开时钟、配置模式、再写数据。</td>
-      </tr>
-      <tr>
-          <td>寄存器数量</td>
-          <td>几十个，看一遍手册就能背下来。</td>
-          <td>几百上千个，没人能背下来，必须靠库函数。</td>
-      </tr>
-      <tr>
-          <td>功能模块</td>
-          <td>基本只有串口、定时器、ADC（有的还没有）。</td>
-          <td>拥有 DMA、硬件 CRC、USB、CAN、硬件加密等。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特性</th>
+					<th>51 单片机</th>
+					<th>STM32 (Cortex-M)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>IO 口控制</td>
+					<td>简单：<code>P1 = 0x01;</code> 即可点灯。</td>
+					<td>复杂：需要先开时钟、配置模式、再写数据。</td>
+			</tr>
+			<tr>
+					<td>寄存器数量</td>
+					<td>几十个，看一遍手册就能背下来。</td>
+					<td>几百上千个，没人能背下来，必须靠库函数。</td>
+			</tr>
+			<tr>
+					<td>功能模块</td>
+					<td>基本只有串口、定时器、ADC（有的还没有）。</td>
+					<td>拥有 DMA、硬件 CRC、USB、CAN、硬件加密等。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h2 id="总结为什么要学-32-位">总结：为什么要学 32 位
 </h2><p>如果你的项目只是点亮一个灯，或者做一个简单的温控器，51 绰绰有余。但如果你要：</p>

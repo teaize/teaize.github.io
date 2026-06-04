@@ -508,35 +508,35 @@
 </h2><p>在工业控制领域，只要你的状态机（State Machine）设计得足够完善，将它“翻译”成代码，确实就是一个非常机械、甚至可以自动化的过程。</p>
 <p>如果我们以前面的 CEMS 状态图为例，写成 C 语言（单片机）或者 ST 语言（PLC），几乎是一一对应的：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>状态图要素 (Mermaid)</strong></th>
-          <th><strong>代码要素 (C/C++)</strong></th>
-          <th><strong>例子</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>圆角矩形 (State)</strong></td>
-          <td><strong>Case 分支</strong></td>
-          <td><code>case MEASURE:</code></td>
-      </tr>
-      <tr>
-          <td><strong>箭头 (Transition)</strong></td>
-          <td><strong>If 判断</strong></td>
-          <td><code>if (Temp &gt; 300) …</code></td>
-      </tr>
-      <tr>
-          <td><strong>文本描述 (Action)</strong></td>
-          <td><strong>函数调用</strong></td>
-          <td><code>OpenValve();</code></td>
-      </tr>
-      <tr>
-          <td><strong>状态变量</strong></td>
-          <td><strong>枚举 (Enum)</strong></td>
-          <td><code>enum {WARMUP, MEASURE…}</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>状态图要素 (Mermaid)</strong></th>
+					<th><strong>代码要素 (C/C++)</strong></th>
+					<th><strong>例子</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>圆角矩形 (State)</strong></td>
+					<td><strong>Case 分支</strong></td>
+					<td><code>case MEASURE:</code></td>
+			</tr>
+			<tr>
+					<td><strong>箭头 (Transition)</strong></td>
+					<td><strong>If 判断</strong></td>
+					<td><code>if (Temp &gt; 300) …</code></td>
+			</tr>
+			<tr>
+					<td><strong>文本描述 (Action)</strong></td>
+					<td><strong>函数调用</strong></td>
+					<td><code>OpenValve();</code></td>
+			</tr>
+			<tr>
+					<td><strong>状态变量</strong></td>
+					<td><strong>枚举 (Enum)</strong></td>
+					<td><code>enum {WARMUP, MEASURE…}</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="为什么说其实就比较简单">为什么说“其实就比较简单”？
 </h3><p>因为状态机图帮你解决了编程中最让人头秃的三个问题：</p>

@@ -382,35 +382,35 @@
 </ol>
 <h3 id="既然内部有-mosfet为什么不直接买-mosfet">既然内部有 MOSFET，为什么不直接买 MOSFET
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>维度</strong></th>
-          <th><strong>直接用 MOSFET 零件</strong></th>
-          <th><strong>使用 SSR 模块</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>隔离</strong></td>
-          <td>需要你自己设计光耦隔离电路，否则容易烧单片机。</td>
-          <td><strong>自带光电隔离</strong>，即插即用，安全性极高。</td>
-      </tr>
-      <tr>
-          <td><strong>保护</strong></td>
-          <td>需要你自己加续流二极管、TVS 管防止感性负载冲击。</td>
-          <td>内部通常已经<strong>集成了吸收回路</strong>，抗干扰能力强。</td>
-      </tr>
-      <tr>
-          <td><strong>散热与安装</strong></td>
-          <td>需要设计 PCB、加导热垫、拧螺丝到散热片。</td>
-          <td>标准工业封装，外壳带底座，可以直接拧在机柜板上。</td>
-      </tr>
-      <tr>
-          <td><strong>成本</strong></td>
-          <td>几块钱（零件成本低）。</td>
-          <td>几十到上百元（模块成本高）。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>维度</strong></th>
+					<th><strong>直接用 MOSFET 零件</strong></th>
+					<th><strong>使用 SSR 模块</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>隔离</strong></td>
+					<td>需要你自己设计光耦隔离电路，否则容易烧单片机。</td>
+					<td><strong>自带光电隔离</strong>，即插即用，安全性极高。</td>
+			</tr>
+			<tr>
+					<td><strong>保护</strong></td>
+					<td>需要你自己加续流二极管、TVS 管防止感性负载冲击。</td>
+					<td>内部通常已经<strong>集成了吸收回路</strong>，抗干扰能力强。</td>
+			</tr>
+			<tr>
+					<td><strong>散热与安装</strong></td>
+					<td>需要设计 PCB、加导热垫、拧螺丝到散热片。</td>
+					<td>标准工业封装，外壳带底座，可以直接拧在机柜板上。</td>
+			</tr>
+			<tr>
+					<td><strong>成本</strong></td>
+					<td>几块钱（零件成本低）。</td>
+					<td>几十到上百元（模块成本高）。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="一个必须纠正的误区控制频率">一个必须纠正的误区：控制频率
 </h3><p>虽然 DC-SSR 内部是 MOSFET，但由于为了保证工业级的稳定性，SSR 内部的<strong>光耦和触发电路通常做得比较“慢”</strong>。</p>

@@ -384,35 +384,35 @@
 <h3 id="2-uart-的接头暗号通信参数">2. UART 的“接头暗号”（通信参数）
 </h3><p>既然没有时钟线同步，通信双方必须提前约定好“说话的速度”和“说话的格式”，否则就是鸡同鸭讲，显示乱码。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>参数名称</strong></th>
-          <th><strong>常用设置</strong></th>
-          <th><strong>形象比喻</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>波特率 (Baud Rate)</strong></td>
-          <td><strong>115200</strong> / 9600</td>
-          <td><strong>说话的速度</strong>（每秒钟发送多少个比特位）。</td>
-      </tr>
-      <tr>
-          <td><strong>停止位 (Stop Bits)</strong></td>
-          <td><strong>1</strong></td>
-          <td><strong>句号</strong>（一段话结束的标志）。</td>
-      </tr>
-      <tr>
-          <td><strong>数据位 (Data Bits)</strong></td>
-          <td><strong>8 bits</strong></td>
-          <td><strong>单词长度</strong>（每次发 8 位，刚好一个字节）。</td>
-      </tr>
-      <tr>
-          <td><strong>奇偶校验 (Parity)</strong></td>
-          <td><strong>None</strong> (无)</td>
-          <td><strong>逻辑纠错</strong>（检查话有没有传错）。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>参数名称</strong></th>
+					<th><strong>常用设置</strong></th>
+					<th><strong>形象比喻</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>波特率 (Baud Rate)</strong></td>
+					<td><strong>115200</strong> / 9600</td>
+					<td><strong>说话的速度</strong>（每秒钟发送多少个比特位）。</td>
+			</tr>
+			<tr>
+					<td><strong>停止位 (Stop Bits)</strong></td>
+					<td><strong>1</strong></td>
+					<td><strong>句号</strong>（一段话结束的标志）。</td>
+			</tr>
+			<tr>
+					<td><strong>数据位 (Data Bits)</strong></td>
+					<td><strong>8 bits</strong></td>
+					<td><strong>单词长度</strong>（每次发 8 位，刚好一个字节）。</td>
+			</tr>
+			<tr>
+					<td><strong>奇偶校验 (Parity)</strong></td>
+					<td><strong>None</strong> (无)</td>
+					<td><strong>逻辑纠错</strong>（检查话有没有传错）。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="3-硬件连接必须交叉">3. 硬件连接：必须“交叉”
 </h3><p>这是初学者最容易犯错的地方。单片机和电脑（通过 USB-TTL 模块）连接时：</p>

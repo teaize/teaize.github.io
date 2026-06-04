@@ -1,0 +1,1909 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="目录 快速开始 Modbus 通讯管理 内部变量监控 内部变量完整参考 字段映射 数据保存与查询 历史趋势 PID 控制 仪表盘 数据过滤器 仪表状态补偿 报警阈值配置 用户管理与授权 系统工具与备份 配置文件与数据文件参考 常见问题 开发与打包清单 一、快速开始 1.1 启动与登录 双击运行程序，首页显示系统状态和功能入口 首次运行自动创建三个账号： 账号 密码 角色 权限范围 admin admin123 管理员 全部功能 operator operator123 操作员 日常操作（无用户管理） viewer viewer123 观察者 仅查看 自动登录：用户管理页面可开启 &quot; 自动登录 &ldquo;，电脑重启后自动以操作员身份运行，无需人工干预 1.2 基本工作流 Modbus 通讯管理 — 连接设备（主机模式）或对外提供寄存器服务（从机模式），配置解析规则 字段映射 — 将解析字段映射到数据库列名 数据保存与查询 — 启动自动保存，查询历史数据，导出 Excel （可选）PID 控制 — 配置控制回路，自动计算输出值 （可选）报警配置 — 配置看门狗心跳和阈值报警规则 （可选）仪表盘 — 自定义数据看板，拖拽组件 二、Modbus 通讯管理 2.1 主机模式 — 读取设备数据 RTU 连接\n">
+<title>ActDenox 智能脱硝控制系统</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/actdenox-%E6%99%BA%E8%83%BD%E8%84%B1%E7%A1%9D%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ActDenox 智能脱硝控制系统">
+<meta property='og:description' content="目录 快速开始 Modbus 通讯管理 内部变量监控 内部变量完整参考 字段映射 数据保存与查询 历史趋势 PID 控制 仪表盘 数据过滤器 仪表状态补偿 报警阈值配置 用户管理与授权 系统工具与备份 配置文件与数据文件参考 常见问题 开发与打包清单 一、快速开始 1.1 启动与登录 双击运行程序，首页显示系统状态和功能入口 首次运行自动创建三个账号： 账号 密码 角色 权限范围 admin admin123 管理员 全部功能 operator operator123 操作员 日常操作（无用户管理） viewer viewer123 观察者 仅查看 自动登录：用户管理页面可开启 &quot; 自动登录 &ldquo;，电脑重启后自动以操作员身份运行，无需人工干预 1.2 基本工作流 Modbus 通讯管理 — 连接设备（主机模式）或对外提供寄存器服务（从机模式），配置解析规则 字段映射 — 将解析字段映射到数据库列名 数据保存与查询 — 启动自动保存，查询历史数据，导出 Excel （可选）PID 控制 — 配置控制回路，自动计算输出值 （可选）报警配置 — 配置看门狗心跳和阈值报警规则 （可选）仪表盘 — 自定义数据看板，拖拽组件 二、Modbus 通讯管理 2.1 主机模式 — 读取设备数据 RTU 连接\n">
+<meta property='og:url' content='https://teaize.github.io/p/actdenox-%E6%99%BA%E8%83%BD%E8%84%B1%E7%A1%9D%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-06-04T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-04T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="ActDenox 智能脱硝控制系统">
+<meta name="twitter:description" content="目录 快速开始 Modbus 通讯管理 内部变量监控 内部变量完整参考 字段映射 数据保存与查询 历史趋势 PID 控制 仪表盘 数据过滤器 仪表状态补偿 报警阈值配置 用户管理与授权 系统工具与备份 配置文件与数据文件参考 常见问题 开发与打包清单 一、快速开始 1.1 启动与登录 双击运行程序，首页显示系统状态和功能入口 首次运行自动创建三个账号： 账号 密码 角色 权限范围 admin admin123 管理员 全部功能 operator operator123 操作员 日常操作（无用户管理） viewer viewer123 观察者 仅查看 自动登录：用户管理页面可开启 &quot; 自动登录 &ldquo;，电脑重启后自动以操作员身份运行，无需人工干预 1.2 基本工作流 Modbus 通讯管理 — 连接设备（主机模式）或对外提供寄存器服务（从机模式），配置解析规则 字段映射 — 将解析字段映射到数据库列名 数据保存与查询 — 启动自动保存，查询历史数据，导出 Excel （可选）PID 控制 — 配置控制回路，自动计算输出值 （可选）报警配置 — 配置看门狗心跳和阈值报警规则 （可选）仪表盘 — 自定义数据看板，拖拽组件 二、Modbus 通讯管理 2.1 主机模式 — 读取设备数据 RTU 连接\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#目录">目录</a></li>
+    <li><a href="#一快速开始">一、快速开始</a>
+      <ol>
+        <li><a href="#11-启动与登录">1.1 启动与登录</a></li>
+        <li><a href="#12-基本工作流">1.2 基本工作流</a></li>
+      </ol>
+    </li>
+    <li><a href="#二modbus-通讯管理">二、Modbus 通讯管理</a>
+      <ol>
+        <li><a href="#21-主机模式--读取设备数据">2.1 主机模式 — 读取设备数据</a></li>
+        <li><a href="#22-从机模式--对外提供寄存器服务">2.2 从机模式 — 对外提供寄存器服务</a></li>
+        <li><a href="#23-通讯诊断">2.3 通讯诊断</a></li>
+      </ol>
+    </li>
+    <li><a href="#三内部变量监控">三、内部变量监控</a>
+      <ol>
+        <li><a href="#31-变量分类与筛选">3.1 变量分类与筛选</a></li>
+        <li><a href="#32-手动添加变量">3.2 手动添加变量</a></li>
+        <li><a href="#33-计算变量">3.3 计算变量</a></li>
+        <li><a href="#34-搜索">3.4 搜索</a></li>
+      </ol>
+    </li>
+    <li><a href="#四内部变量完整参考">四、内部变量完整参考</a>
+      <ol>
+        <li><a href="#41-系统运行状态_sys_-前缀只读">4.1 系统运行状态（<code>_sys_</code> 前缀，只读）</a></li>
+        <li><a href="#42-pid-控制变量以-pid-1-为例多实例替换名称">4.2 PID 控制变量（以 <code>PID-1</code> 为例，多实例替换名称）</a></li>
+        <li><a href="#43-报警变量">4.3 报警变量</a></li>
+        <li><a href="#44-补偿变量">4.4 补偿变量</a></li>
+      </ol>
+    </li>
+    <li><a href="#五字段映射">五、字段映射</a></li>
+    <li><a href="#六数据保存与查询">六、数据保存与查询</a>
+      <ol>
+        <li><a href="#61-自动保存">6.1 自动保存</a></li>
+        <li><a href="#62-保存变量选择">6.2 保存变量选择</a></li>
+        <li><a href="#63-数据查询">6.3 数据查询</a></li>
+        <li><a href="#64-数据保留策略">6.4 数据保留策略</a></li>
+      </ol>
+    </li>
+    <li><a href="#七历史趋势">七、历史趋势</a></li>
+    <li><a href="#八pid-控制">八、PID 控制</a>
+      <ol>
+        <li><a href="#81-参数说明">8.1 参数说明</a></li>
+        <li><a href="#82-健康指示灯">8.2 健康指示灯</a></li>
+        <li><a href="#83-远程复位">8.3 远程复位</a></li>
+      </ol>
+    </li>
+    <li><a href="#九仪表盘">九、仪表盘</a>
+      <ol>
+        <li><a href="#91-组件类型">9.1 组件类型</a></li>
+        <li><a href="#92-操作">9.2 操作</a></li>
+        <li><a href="#93-聚合模式">9.3 聚合模式</a></li>
+      </ol>
+    </li>
+    <li><a href="#十数据过滤器">十、数据过滤器</a></li>
+    <li><a href="#十一仪表状态补偿">十一、仪表状态补偿</a>
+      <ol>
+        <li><a href="#111-补偿规则">11.1 补偿规则</a></li>
+        <li><a href="#112-补偿动作">11.2 补偿动作</a></li>
+        <li><a href="#113-条件支持变量比较">11.3 条件支持变量比较</a></li>
+        <li><a href="#114-补偿状态变量">11.4 补偿状态变量</a></li>
+      </ol>
+    </li>
+    <li><a href="#十二报警阈值配置">十二、报警阈值配置</a>
+      <ol>
+        <li><a href="#121-总开关与看门狗">12.1 总开关与看门狗</a></li>
+        <li><a href="#122-报警规则">12.2 报警规则</a></li>
+        <li><a href="#123-dcs-如何获取报警状态">12.3 DCS 如何获取报警状态</a></li>
+        <li><a href="#124-报警延时进度">12.4 报警延时进度</a></li>
+      </ol>
+    </li>
+    <li><a href="#十三用户管理与授权">十三、用户管理与授权</a>
+      <ol>
+        <li><a href="#131-用户管理管理员专属">13.1 用户管理（管理员专属）</a></li>
+        <li><a href="#132-权限矩阵">13.2 权限矩阵</a></li>
+        <li><a href="#133-自动登录无人值守">13.3 自动登录（无人值守）</a></li>
+        <li><a href="#134-会话超时与降级">13.4 会话超时与降级</a></li>
+        <li><a href="#135-切换账号">13.5 切换账号</a></li>
+      </ol>
+    </li>
+    <li><a href="#十四系统工具与备份">十四、系统工具与备份</a>
+      <ol>
+        <li><a href="#141-配置备份与恢复">14.1 配置备份与恢复</a></li>
+        <li><a href="#142-数据备份">14.2 数据备份</a></li>
+        <li><a href="#143-数据清理">14.3 数据清理</a></li>
+      </ol>
+    </li>
+    <li><a href="#十五配置文件与数据文件参考">十五、配置文件与数据文件参考</a>
+      <ol>
+        <li><a href="#151-文件清单">15.1 文件清单</a></li>
+        <li><a href="#152-更新程序是否丢失数据">15.2 更新程序是否丢失数据</a></li>
+        <li><a href="#153-查看-sqlite-数据库">15.3 查看 SQLite 数据库</a></li>
+      </ol>
+    </li>
+    <li><a href="#十六常见问题">十六、常见问题</a></li>
+    <li><a href="#十七开发与打包清单">十七、开发与打包清单</a>
+      <ol>
+        <li><a href="#171-技术栈">17.1 技术栈</a></li>
+        <li><a href="#172-项目结构">17.2 项目结构</a></li>
+        <li><a href="#173-打包命令">17.3 打包命令</a></li>
+        <li><a href="#174-构建产物">17.4 构建产物</a></li>
+        <li><a href="#175-代码保护">17.5 代码保护</a></li>
+        <li><a href="#176-首次安装初始化流程">17.6 首次安装初始化流程</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/actdenox-%E6%99%BA%E8%83%BD%E8%84%B1%E7%A1%9D%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F/">ActDenox 智能脱硝控制系统</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-04</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="目录">目录
+</h2><ol>
+<li><a class="link" href="#%e4%b8%80%e5%bf%ab%e9%80%9f%e5%bc%80%e5%a7%8b" >快速开始</a></li>
+<li><a class="link" href="#%e4%ba%8cmodbus-%e9%80%9a%e8%ae%af%e7%ae%a1%e7%90%86" >Modbus 通讯管理</a></li>
+<li><a class="link" href="#%e4%b8%89%e5%86%85%e9%83%a8%e5%8f%98%e9%87%8f%e7%9b%91%e6%8e%a7" >内部变量监控</a></li>
+<li><a class="link" href="#%e5%9b%9b%e5%86%85%e9%83%a8%e5%8f%98%e9%87%8f%e5%ae%8c%e6%95%b4%e5%8f%82%e8%80%83" >内部变量完整参考</a></li>
+<li><a class="link" href="#%e4%ba%94%e5%ad%97%e6%ae%b5%e6%98%a0%e5%b0%84" >字段映射</a></li>
+<li><a class="link" href="#%e5%85%ad%e6%95%b0%e6%8d%ae%e4%bf%9d%e5%ad%98%e4%b8%8e%e6%9f%a5%e8%af%a2" >数据保存与查询</a></li>
+<li><a class="link" href="#%e4%b8%83%e5%8e%86%e5%8f%b2%e8%b6%8b%e5%8a%bf" >历史趋势</a></li>
+<li><a class="link" href="#%e5%85%abpid-%e6%8e%a7%e5%88%b6" >PID 控制</a></li>
+<li><a class="link" href="#%e4%b9%9d%e4%bb%aa%e8%a1%a8%e7%9b%98" >仪表盘</a></li>
+<li><a class="link" href="#%e5%8d%81%e6%95%b0%e6%8d%ae%e8%bf%87%e6%bb%a4%e5%99%a8" >数据过滤器</a></li>
+<li><a class="link" href="#%e5%8d%81%e4%b8%80%e4%bb%aa%e8%a1%a8%e7%8a%b6%e6%80%81%e8%a1%a5%e5%81%bf" >仪表状态补偿</a></li>
+<li><a class="link" href="#%e5%8d%81%e4%ba%8c%e6%8a%a5%e8%ad%a6%e9%98%88%e5%80%bc%e9%85%8d%e7%bd%ae" >报警阈值配置</a></li>
+<li><a class="link" href="#%e5%8d%81%e4%b8%89%e7%94%a8%e6%88%b7%e7%ae%a1%e7%90%86%e4%b8%8e%e6%8e%88%e6%9d%83" >用户管理与授权</a></li>
+<li><a class="link" href="#%e5%8d%81%e5%9b%9b%e7%b3%bb%e7%bb%9f%e5%b7%a5%e5%85%b7%e4%b8%8e%e5%a4%87%e4%bb%bd" >系统工具与备份</a></li>
+<li><a class="link" href="#%e5%8d%81%e4%ba%94%e9%85%8d%e7%bd%ae%e6%96%87%e4%bb%b6%e4%b8%8e%e6%95%b0%e6%8d%ae%e6%96%87%e4%bb%b6%e5%8f%82%e8%80%83" >配置文件与数据文件参考</a></li>
+<li><a class="link" href="#%e5%8d%81%e5%85%ad%e5%b8%b8%e8%a7%81%e9%97%ae%e9%a2%98" >常见问题</a></li>
+<li><a class="link" href="#%e5%8d%81%e4%b8%83%e5%bc%80%e5%8f%91%e4%b8%8e%e6%89%93%e5%8c%85%e6%b8%85%e5%8d%95" >开发与打包清单</a></li>
+</ol>
+<hr>
+<h2 id="一快速开始">一、快速开始
+</h2><h3 id="11-启动与登录">1.1 启动与登录
+</h3><ul>
+<li>双击运行程序，首页显示系统状态和功能入口</li>
+<li>首次运行自动创建三个账号：</li>
+</ul>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>账号</th>
+					<th>密码</th>
+					<th>角色</th>
+					<th>权限范围</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>admin</td>
+					<td>admin123</td>
+					<td>管理员</td>
+					<td>全部功能</td>
+			</tr>
+			<tr>
+					<td>operator</td>
+					<td>operator123</td>
+					<td>操作员</td>
+					<td>日常操作（无用户管理）</td>
+			</tr>
+			<tr>
+					<td>viewer</td>
+					<td>viewer123</td>
+					<td>观察者</td>
+					<td>仅查看</td>
+			</tr>
+	</tbody>
+</table></div>
+<ul>
+<li><strong>自动登录</strong>：用户管理页面可开启 &quot; 自动登录 &ldquo;，电脑重启后自动以操作员身份运行，无需人工干预</li>
+</ul>
+<h3 id="12-基本工作流">1.2 基本工作流
+</h3><ol>
+<li><strong>Modbus 通讯管理</strong> — 连接设备（主机模式）或对外提供寄存器服务（从机模式），配置解析规则</li>
+<li><strong>字段映射</strong> — 将解析字段映射到数据库列名</li>
+<li><strong>数据保存与查询</strong> — 启动自动保存，查询历史数据，导出 Excel</li>
+<li>（可选）<strong>PID 控制</strong> — 配置控制回路，自动计算输出值</li>
+<li>（可选）<strong>报警配置</strong> — 配置看门狗心跳和阈值报警规则</li>
+<li>（可选）<strong>仪表盘</strong> — 自定义数据看板，拖拽组件</li>
+</ol>
+<hr>
+<h2 id="二modbus-通讯管理">二、Modbus 通讯管理
+</h2><h3 id="21-主机模式--读取设备数据">2.1 主机模式 — 读取设备数据
+</h3><p><strong>RTU 连接</strong></p>
+<ol>
+<li>选择模式：<strong>主机 (Master)</strong></li>
+<li>选择协议：<strong>Modbus RTU (串口)</strong></li>
+<li>填入串口号（如 COM1）、波特率、校验位、停止位</li>
+<li>点击 <strong>连接</strong></li>
+<li>读写操作：设置地址、数量、数据类型，点击<strong>读取</strong>或<strong>写入</strong></li>
+</ol>
+<p><strong>TCP 连接</strong></p>
+<ol>
+<li>选择协议：<strong>Modbus TCP (以太网)</strong></li>
+<li>填入 IP 地址和端口（默认 502）</li>
+<li>点击 <strong>连接</strong></li>
+</ol>
+<p><strong>后台轮询</strong></p>
+<ul>
+<li>点击 <strong>启动后台轮询</strong>，程序持续读取并更新内部变量</li>
+<li>间隔建议 1000ms</li>
+<li>页面切换后继续运行</li>
+</ul>
+<p><strong>解析规则表</strong></p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>列</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>起始地址</td>
+					<td>从机模式下可见，主机模式下隐藏</td>
+			</tr>
+			<tr>
+					<td>字段名</td>
+					<td>内部变量名，需一字不差地匹配</td>
+			</tr>
+			<tr>
+					<td>类型</td>
+					<td>uint16 / int16 / float32 / float64</td>
+			</tr>
+			<tr>
+					<td>字节序</td>
+					<td>BE（大端，标准）/ LE（小端）</td>
+			</tr>
+			<tr>
+					<td>字序</td>
+					<td>ABCD（标准）/ BADC / CDAB / DCBA</td>
+			</tr>
+			<tr>
+					<td>备注</td>
+					<td>自由文本</td>
+			</tr>
+			<tr>
+					<td>当前值</td>
+					<td>实时显示解析结果，绿色=正常，红色=异常</td>
+			</tr>
+			<tr>
+					<td>操作</td>
+					<td>↑↓ 移动行 / 删除</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="22-从机模式--对外提供寄存器服务">2.2 从机模式 — 对外提供寄存器服务
+</h3><p>程序作为 Modbus 从站，DCS/PLC 可通过标准 Modbus 协议读写本机寄存器。</p>
+<ol>
+<li>选择模式：<strong>从机 (Slave)</strong></li>
+<li>配置端口（如 COM2）、波特率、站号</li>
+<li>在解析规则表中填好 &quot; 起始地址 &quot; 列</li>
+<li>点击 <strong>启动从机</strong></li>
+</ol>
+<p><strong>数据流向</strong>：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">DCS 写寄存器 → 从机接收 → internalVariables[&#39;字段名&#39;] = 值
+</span></span><span class="line"><span class="cl">PID/报警内部计算 → internalVariables[&#39;输出变量&#39;] = 值
+</span></span><span class="line"><span class="cl">DCS 读寄存器 ← 从机响应 ← internalVariables[&#39;输出变量&#39;]
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>DCS 写入的 CEMS 数据：在解析规则表中有地址的字段自动接收</li>
+<li>PID 输出/报警状态：在解析规则表中有地址的字段自动暴露给 DCS</li>
+</ul>
+<h3 id="23-通讯诊断">2.3 通讯诊断
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>总请求数</td>
+					<td>发送/接收的总帧数</td>
+			</tr>
+			<tr>
+					<td>成功/失败</td>
+					<td>主机读写成功/失败次数</td>
+			</tr>
+			<tr>
+					<td>成功率</td>
+					<td>成功次数 / 总次数</td>
+			</tr>
+			<tr>
+					<td>超时次数</td>
+					<td>操作超时计数</td>
+			</tr>
+			<tr>
+					<td>连接断开</td>
+					<td>串口异常断开次数</td>
+			</tr>
+			<tr>
+					<td>CRC/校验失败</td>
+					<td>帧校验错误次数</td>
+			</tr>
+			<tr>
+					<td>异常响应</td>
+					<td>Modbus 异常码响应次数</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h2 id="三内部变量监控">三、内部变量监控
+</h2><h3 id="31-变量分类与筛选">3.1 变量分类与筛选
+</h3><p>页面顶部筛选栏：<strong>全部 | Modbus | PID | 手动 | 计算 | 系统</strong></p>
+<ul>
+<li>Modbus：解析规则表中的字段，数据来自 Modbus 读取或从机接收</li>
+<li>PID：PID 控制回路产生的变量（P/I/D 分量、输出值、健康指标）</li>
+<li>手动：用户手动添加的变量</li>
+<li>计算：用户自定义表达式计算出的变量</li>
+<li>系统：程序运行状态指标（<code>_sys_</code> 前缀）</li>
+</ul>
+<h3 id="32-手动添加变量">3.2 手动添加变量
+</h3><p>填写变量名和初始值 → 点击<strong>添加变量</strong>。变量值可点击直接编辑。</p>
+<h3 id="33-计算变量">3.3 计算变量
+</h3><p>输入表达式，引用其他变量名进行数学计算。示例：</p>
+<ul>
+<li><code>入口NOX * 0.8 + 出口NOX * 0.2</code>（加权平均）</li>
+<li><code>(PID-1_output + 50) / 2</code>（映射到 0-100 范围）</li>
+<li><code>出口NOX / 入口NOX * 100</code>（转化率百分比）</li>
+</ul>
+<p>支持运算符：<code>+ - * / ( )</code>。变量不存在时静默跳过不报错。</p>
+<h3 id="34-搜索">3.4 搜索
+</h3><p>筛选栏右侧搜索框，输入关键字即时过滤。</p>
+<hr>
+<h2 id="四内部变量完整参考">四、内部变量完整参考
+</h2><h3 id="41-系统运行状态_sys_-前缀只读">4.1 系统运行状态（<code>_sys_</code> 前缀，只读）
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>变量名</th>
+					<th>类型</th>
+					<th>单位</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>_sys_uptime</code></td>
+					<td>数值</td>
+					<td>秒</td>
+					<td>程序已运行时间</td>
+			</tr>
+			<tr>
+					<td><code>_sys_memory_rss_mb</code></td>
+					<td>数值</td>
+					<td>MB</td>
+					<td>进程物理内存占用</td>
+			</tr>
+			<tr>
+					<td><code>_sys_memory_heap_mb</code></td>
+					<td>数值</td>
+					<td>MB</td>
+					<td>JS 堆内存占用</td>
+			</tr>
+			<tr>
+					<td><code>_sys_memory_total_mb</code></td>
+					<td>数值</td>
+					<td>MB</td>
+					<td>JS 堆内存总量</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_connected</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>主机或从机任一在线即为 1</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_slave_running</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>从机是否运行中</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_requests</code></td>
+					<td>数值</td>
+					<td>次</td>
+					<td>主机总请求数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_success</code></td>
+					<td>数值</td>
+					<td>次</td>
+					<td>主机成功次数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_errors</code></td>
+					<td>数值</td>
+					<td>次</td>
+					<td>主机失败次数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_rate</code></td>
+					<td>数值</td>
+					<td>%</td>
+					<td>主机成功率</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_consecutive_errors</code></td>
+					<td>数值</td>
+					<td>次</td>
+					<td>连续错误数（≥3 触发重连）</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_healthy</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>通讯健康状态</td>
+			</tr>
+			<tr>
+					<td><code>_sys_modbus_refresh_failures</code></td>
+					<td>数值</td>
+					<td>次</td>
+					<td>后台轮询连续失败次数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_background_active</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>后台轮询是否运行中</td>
+			</tr>
+			<tr>
+					<td><code>_sys_pid_total</code></td>
+					<td>数值</td>
+					<td>个</td>
+					<td>PID 实例总数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_pid_active</code></td>
+					<td>数值</td>
+					<td>个</td>
+					<td>活跃 PID 实例数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_alarm_enabled</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>报警引擎是否启用</td>
+			</tr>
+			<tr>
+					<td><code>_sys_alarm_active_rules</code></td>
+					<td>数值</td>
+					<td>条</td>
+					<td>当前触发的报警规则数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_auto_save_active</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>自动保存是否运行中</td>
+			</tr>
+			<tr>
+					<td><code>_sys_db_datastore_mb</code></td>
+					<td>数值</td>
+					<td>MB</td>
+					<td>主数据库文件大小</td>
+			</tr>
+			<tr>
+					<td><code>_sys_db_write_failures</code></td>
+					<td>数值</td>
+					<td>次</td>
+					<td>连续数据库写入失败次数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_db_write_healthy</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>数据库写入健康（0=不健康）</td>
+			</tr>
+			<tr>
+					<td><code>_sys_db_retention_days</code></td>
+					<td>数值</td>
+					<td>天</td>
+					<td>数据保留天数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_db_last_cleanup_count</code></td>
+					<td>数值</td>
+					<td>行</td>
+					<td>上次清理删除的数据行数</td>
+			</tr>
+			<tr>
+					<td><code>_sys_variable_count</code></td>
+					<td>数值</td>
+					<td>个</td>
+					<td>内部变量总数（不含系统变量）</td>
+			</tr>
+			<tr>
+					<td><code>_sys_variable_limit_reached</code></td>
+					<td>0/1</td>
+					<td>—</td>
+					<td>变量数是否达上限（500）</td>
+			</tr>
+			<tr>
+					<td><code>_sys_compensation_active_count</code></td>
+					<td>数值</td>
+					<td>条</td>
+					<td>当前活跃的补偿规则数</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="42-pid-控制变量以-pid-1-为例多实例替换名称">4.2 PID 控制变量（以 <code>PID-1</code> 为例，多实例替换名称）
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>变量名</th>
+					<th>类型</th>
+					<th>方向</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>PID-1_P</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>比例项实时值</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_I</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>积分项实时值</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_D</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>微分项实时值</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_output</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>PID 修正量输出值</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_abs_error</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>当前绝对误差 |SP - PV|</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_divergence_seconds</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>偏离超阈值已持续秒数（0=正常）</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_saturation</code></td>
+					<td>0/1/2</td>
+					<td>输出</td>
+					<td>输出饱和：0=正常, 1=上限饱和, 2=下限饱和</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_reset_trigger</code></td>
+					<td>0/1</td>
+					<td><strong>输入</strong></td>
+					<td>DCS 写 1 → PID 自动复位（清零积分 + 历史），复位后自动归 0</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_integralFreeze</code></td>
+					<td>0/1</td>
+					<td><strong>输入</strong></td>
+					<td>写 1 冻结积分累积，写 0 恢复</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_integralFreeze(补偿)</code></td>
+					<td>0/1</td>
+					<td>输出</td>
+					<td>补偿引擎自动控制的积分冻结标志</td>
+			</tr>
+			<tr>
+					<td><code>&lt;输出目标&gt;</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>PID 最终输出值（基准 + PID 修正），等于配置的 outputTarget</td>
+			</tr>
+			<tr>
+					<td><code>&lt;输出目标&gt;_SP</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>当前设定值</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="43-报警变量">4.3 报警变量
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>变量名</th>
+					<th>类型</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>_alarm_heartbeat</code></td>
+					<td>数值</td>
+					<td>看门狗心跳计数（0-65535 循环递增）</td>
+			</tr>
+			<tr>
+					<td><code>&lt;规则名&gt;_alarm</code></td>
+					<td>0/1</td>
+					<td>该报警规则当前是否触发（1=报警中, 0=正常）</td>
+			</tr>
+			<tr>
+					<td><code>_alarm_active_&lt;规则名&gt;</code></td>
+					<td>字符串</td>
+					<td>报警级别（warning/alarm/critical），内部使用</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="44-补偿变量">4.4 补偿变量
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>变量名</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>&lt;字段名&gt;(补偿)</code></td>
+					<td>补偿引擎处理后的值。原始值保留在 <code>&lt;字段名&gt;</code> 不变</td>
+			</tr>
+			<tr>
+					<td><code>&lt;字段名&gt;(过滤)</code></td>
+					<td>数据过滤器处理后的值</td>
+			</tr>
+			<tr>
+					<td><code>&lt;规则名&gt;_compensating</code></td>
+					<td>该补偿规则是否正在执行中（1=补偿中, 0=正常）</td>
+			</tr>
+	</tbody>
+</table></div>
+<hr>
+<h2 id="五字段映射">五、字段映射
+</h2><ul>
+<li>将内部变量名（sourceName）映射到数据库列名（dbField）</li>
+<li>保存数据时，系统从内部变量读取值，写入数据库对应列</li>
+<li>点击 <strong>从规则和 PID 加载</strong> 自动填充所有已知字段</li>
+<li>可手动添加行</li>
+<li><strong>数据库列管理</strong>：查看所有列、删除不需要的列</li>
+</ul>
+<hr>
+<h2 id="六数据保存与查询">六、数据保存与查询
+</h2><h3 id="61-自动保存">6.1 自动保存
+</h3><ul>
+<li>设置保存间隔（秒），点击 <strong>启动自动保存</strong></li>
+<li>程序定时将勾选的字段值写入 SQLite 数据库</li>
+<li>数据文件：<code>data/datastore.sqlite</code></li>
+</ul>
+<h3 id="62-保存变量选择">6.2 保存变量选择
+</h3><ul>
+<li>点击 <strong>刷新数据库字段列表</strong> 加载当前映射</li>
+<li>勾选需要保存的字段，取消勾选的字段不会写入数据库</li>
+<li><strong>全选 / 取消全选</strong> 快捷操作</li>
+</ul>
+<h3 id="63-数据查询">6.3 数据查询
+</h3><ul>
+<li>聚合模式：原始数据 / 分钟均值 / 小时均值 / 天均值</li>
+<li>时间范围：预设快捷按钮（最近 1 小时/1 天/7 天/30 天）或手动输入起止时间</li>
+<li>显示条数：仅影响表格展示行数</li>
+<li><strong>查询</strong> 按钮执行查询</li>
+<li><strong>导出 Excel</strong>：导出选中时间范围内全部数据（不受显示条数限制），上限 50000 条</li>
+</ul>
+<h3 id="64-数据保留策略">6.4 数据保留策略
+</h3><ul>
+<li>保留天数默认 180 天（6 个月），可修改</li>
+<li>每天凌晨 3:00 自动清理超过保留期的旧数据</li>
+<li>页面显示上次清理时间和删除行数</li>
+</ul>
+<hr>
+<h2 id="七历史趋势">七、历史趋势
+</h2><ul>
+<li>选择聚合模式和时间范围 → 点击 <strong>查询</strong></li>
+<li>字段选择面板：勾选要显示的字段（只有已选保存的字段才有历史数据）</li>
+<li>Y 轴分配：1-3 个独立轴，支持手动设量程</li>
+<li>底部滑块缩放时间范围</li>
+<li>鼠标悬停查看具体数值</li>
+<li>图例点击切换曲线显隐</li>
+</ul>
+<hr>
+<h2 id="八pid-控制">八、PID 控制
+</h2><h3 id="81-参数说明">8.1 参数说明
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>说明</th>
+					<th>建议</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>控制目标 (PV)</td>
+					<td>要控制的内部变量名</td>
+					<td>通常是 Modbus 解析的 CEMS 字段</td>
+			</tr>
+			<tr>
+					<td>设定值 (SP)</td>
+					<td>期望达到的目标值</td>
+					<td>如排放限值 50 mg/m³</td>
+			</tr>
+			<tr>
+					<td>Kp</td>
+					<td>比例系数：误差越大输出越大</td>
+					<td>先调这个</td>
+			</tr>
+			<tr>
+					<td>Ki</td>
+					<td>积分系数：消除稳态误差</td>
+					<td>太大易振荡，先设小值</td>
+			</tr>
+			<tr>
+					<td>Kd</td>
+					<td>微分系数：抑制超调</td>
+					<td>对噪声敏感，建议先设 0</td>
+			</tr>
+			<tr>
+					<td>修正下限/上限</td>
+					<td>PID 修正量的限幅</td>
+					<td>防止过度调节</td>
+			</tr>
+			<tr>
+					<td>基准频率</td>
+					<td>PID 修正前的基准输出值</td>
+					<td>喷氨泵正常工作频率</td>
+			</tr>
+			<tr>
+					<td>输出下限/上限</td>
+					<td>最终输出值的安全范围</td>
+					<td>保护执行机构</td>
+			</tr>
+			<tr>
+					<td>采样间隔</td>
+					<td>每次 PID 计算的间隔</td>
+					<td>建议 500-2000ms</td>
+			</tr>
+			<tr>
+					<td>偏差带 (±)</td>
+					<td>图表上 SP ± X 画两条虚线</td>
+					<td>0=不显示，视觉辅助</td>
+			</tr>
+			<tr>
+					<td>偏离阈值 (%)</td>
+					<td>SP × X% 超过后开始计时偏离</td>
+					<td>默认 10%，决定 &quot; 偏差正常 &quot; 判断</td>
+			</tr>
+			<tr>
+					<td>PV 滤波 (α)</td>
+					<td>低通滤波系数，0=强滤波, 1=无滤波</td>
+					<td>测量噪声大时设为 0.3-0.5</td>
+			</tr>
+			<tr>
+					<td>死区</td>
+					<td>|error| &lt; 此值时不做调节</td>
+					<td>防止频繁微小调整</td>
+			</tr>
+			<tr>
+					<td>输出变化率限制</td>
+					<td>每秒最大变化量，0=不限</td>
+					<td>防止执行机构剧烈动作</td>
+			</tr>
+			<tr>
+					<td>输出寄存器地址</td>
+					<td>PID 计算结果写入的 Modbus 寄存器</td>
+					<td>主机模式下才生效</td>
+			</tr>
+			<tr>
+					<td>字节序/字序</td>
+					<td>输出寄存器的字节/字排列</td>
+					<td>float32 时需与设备一致</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="82-健康指示灯">8.2 健康指示灯
+</h3><p>PID 运行控制区显示两个实时状态：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>指示灯</th>
+					<th>数据源</th>
+					<th>绿色 (正常)</th>
+					<th>红色/橙色 (异常)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>输出饱和</td>
+					<td>PID-1_saturation</td>
+					<td>输出正常</td>
+					<td>上限饱和（红）/ 下限饱和（橙）</td>
+			</tr>
+			<tr>
+					<td>偏差状态</td>
+					<td>PID-1_divergence_seconds</td>
+					<td>偏差正常</td>
+					<td>持续偏离 + 时长</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="83-远程复位">8.3 远程复位
+</h3><p>DCS 通过 Modbus 从机写入 <code>PID-1_reset_trigger = 1</code> → PID 自动清零（积分归零、历史清空）→ 自动写回 0。只响应 0→1 上升沿，DCS 持续保持 1 不会反复触发。</p>
+<hr>
+<h2 id="九仪表盘">九、仪表盘
+</h2><h3 id="91-组件类型">9.1 组件类型
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>组件</th>
+					<th>说明</th>
+					<th>数据源</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>数值卡片</td>
+					<td>显示一个或多个变量值</td>
+					<td>实时 / 聚合（分钟/小时/天均值）</td>
+			</tr>
+			<tr>
+					<td>状态指示灯</td>
+					<td>根据阈值显示正常/报警状态</td>
+					<td>实时值 + 自定义条件</td>
+			</tr>
+			<tr>
+					<td>折线图/柱状图</td>
+					<td>历史趋势曲线/柱状图</td>
+					<td>数据库聚合查询</td>
+			</tr>
+			<tr>
+					<td>环形仪表盘</td>
+					<td>单值仪表盘显示</td>
+					<td>实时 / 聚合</td>
+			</tr>
+			<tr>
+					<td>进度条</td>
+					<td>百分比进度条</td>
+					<td>实时值 + 独立量程</td>
+			</tr>
+			<tr>
+					<td>图片</td>
+					<td>显示网络图片</td>
+					<td>URL</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="92-操作">9.2 操作
+</h3><ul>
+<li><strong>添加组件</strong>：点击工具栏「+ 添加组件」</li>
+<li><strong>编辑</strong>：卡片右上角 ✎ 按钮</li>
+<li><strong>删除</strong>：卡片右上角 × 按钮</li>
+<li><strong>尺寸切换</strong>：点击尺寸标签（小/中/大/特大），四档循环</li>
+<li><strong>拖拽排序</strong>：拖拽卡片到目标位置交换</li>
+<li><strong>保存/加载布局</strong>：工具栏按钮，布局存入备份</li>
+</ul>
+<h3 id="93-聚合模式">9.3 聚合模式
+</h3><p>数值卡片和环形仪表盘支持查询数据库聚合数据（分钟均值/小时均值/天均值），显示最近一个时段的值。图表支持多时段折线。</p>
+<hr>
+<h2 id="十数据过滤器">十、数据过滤器
+</h2><p>按需添加过滤规则，只显示已配置的规则。未配置的字段直接透传。</p>
+<p><strong>过滤器类型</strong>：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>类型</th>
+					<th>参数</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>范围限制</td>
+					<td>min, max, 越界动作</td>
+					<td>钳位到边界或拒绝</td>
+			</tr>
+			<tr>
+					<td>变化率限制</td>
+					<td>maxDelta</td>
+					<td>相邻值变化不超过设定值</td>
+			</tr>
+			<tr>
+					<td>移动平均</td>
+					<td>windowSize</td>
+					<td>最近 N 次值的算数平均</td>
+			</tr>
+			<tr>
+					<td>尖峰抑制</td>
+					<td>threshold</td>
+					<td>偏差超过阈值沿用上次有效值</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>过滤结果写入伴生变量 <code>字段名(过滤)</code>，原始值保留不变。</p>
+<hr>
+<h2 id="十一仪表状态补偿">十一、仪表状态补偿
+</h2><h3 id="111-补偿规则">11.1 补偿规则
+</h3><p>每条规则包含：</p>
+<ul>
+<li><strong>进入条件</strong>（IF）：满足时进入补偿状态</li>
+<li><strong>退出条件</strong>（可选）：满足时退出补偿状态（无退出条件则为跟随模式）</li>
+</ul>
+<h3 id="112-补偿动作">11.2 补偿动作
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>动作</th>
+					<th>说明</th>
+					<th>示例</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>保持 (hold)</td>
+					<td>冻结为进入补偿前的值</td>
+					<td>仪表吹扫时保持最后好值</td>
+			</tr>
+			<tr>
+					<td>偏移 (offset)</td>
+					<td>当前值 ± 偏移量</td>
+					<td>NOX + 10</td>
+			</tr>
+			<tr>
+					<td>缩放 (scale)</td>
+					<td>当前值 × 系数</td>
+					<td>流量 × 1.2</td>
+			</tr>
+			<tr>
+					<td>设值 (set)</td>
+					<td>设为固定值</td>
+					<td>设为 0</td>
+			</tr>
+			<tr>
+					<td>取变量值 (setVar)</td>
+					<td>取另一变量的当前值</td>
+					<td>用出口 NOX 替换入口 NOX</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>设值支持两种模式：固定数值 / 取变量值（点击输入框旁的 &quot; 取变量 &quot; 切换）。</p>
+<h3 id="113-条件支持变量比较">11.3 条件支持变量比较
+</h3><p>进入/退出条件除了比较固定阈值，还可以比较两个变量：</p>
+<ul>
+<li><code>IF 出口NOX &gt; 入口NOX</code> — 两个变量实时比较</li>
+<li><code>IF _sys_modbus_connected == 0</code> — 系统状态触发补偿</li>
+</ul>
+<p>条件行阈值输入框旁有 &quot; 取变量 &quot; 切换按钮。</p>
+<h3 id="114-补偿状态变量">11.4 补偿状态变量
+</h3><p>每条启用的补偿规则实时产生 <code>&lt;规则名&gt;_compensating</code>（1=补偿中, 0=正常）和 <code>_sys_compensation_active_count</code>（活跃规则总数），可在仪表盘显示。</p>
+<hr>
+<h2 id="十二报警阈值配置">十二、报警阈值配置
+</h2><h3 id="121-总开关与看门狗">12.1 总开关与看门狗
+</h3><ul>
+<li><strong>启用报警</strong>：开启整个报警引擎</li>
+<li><strong>检查间隔</strong>：检查频率（ms），默认 1000</li>
+<li><strong>看门狗心跳</strong>：定时向指定寄存器写入递增计数。DCS 读到计数不变化 = 程序通讯断开</li>
+</ul>
+<h3 id="122-报警规则">12.2 报警规则
+</h3><p>每个规则配置：</p>
+<ul>
+<li><strong>规则名</strong>：唯一标识（内部变量 <code>&lt;规则名&gt;_alarm</code> 由此生成）</li>
+<li><strong>级别</strong>：⚠ 预警 / 🚨 报警 / 🔥 严重</li>
+<li><strong>条件组合</strong>：多条件 AND（全部满足）/ OR（任一满足）</li>
+<li><strong>延时</strong>：条件持续满足 N 秒后才触发（0 = 立即）</li>
+<li><strong>滞后</strong>：报警触发后需值回落阈值 - 死区才解除</li>
+<li><strong>通知寄存器</strong>：报警时写入报警值，恢复时写入正常值</li>
+</ul>
+<h3 id="123-dcs-如何获取报警状态">12.3 DCS 如何获取报警状态
+</h3><p>将以下变量加入从机解析规则表（填写地址）：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>变量名</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>_alarm_heartbeat</code></td>
+					<td>看门狗计数，DCS 读这个检查程序是否存活</td>
+			</tr>
+			<tr>
+					<td><code>&lt;规则名&gt;_alarm</code></td>
+					<td>该规则报警状态（1=报警中, 0=正常）</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="124-报警延时进度">12.4 报警延时进度
+</h3><p>延时触发中，状态面板实时显示倒计时（剩余 N 秒），到 0 自动触发报警。</p>
+<hr>
+<h2 id="十三用户管理与授权">十三、用户管理与授权
+</h2><h3 id="131-用户管理管理员专属">13.1 用户管理（管理员专属）
+</h3><ul>
+<li>添加/删除用户，修改密码</li>
+<li>三种角色：管理员（全部权限）/ 操作员（日常操作）/ 观察者（只读）</li>
+</ul>
+<h3 id="132-权限矩阵">13.2 权限矩阵
+</h3><p>为每个角色勾选可访问的页面。管理员始终拥有全部权限。修改后立即生效。</p>
+<h3 id="133-自动登录无人值守">13.3 自动登录（无人值守）
+</h3><p>勾选 &quot; 启用自动登录 &quot; 后，电脑重启/程序自启时自动以操作员身份运行，无需人工登录。确保 PID/报警在无人时持续工作。</p>
+<h3 id="134-会话超时与降级">13.4 会话超时与降级
+</h3><p>会话超时时间可设置（默认 30 分钟）。无操作超时后<strong>不退出</strong>，而是自动降级为观察者角色。管理员操作后超时不会被完全锁死，程序仍在运行。</p>
+<h3 id="135-切换账号">13.5 切换账号
+</h3><p>首页顶栏和用户管理页面均有「切换账号」按钮，无需先退出即可换账号。</p>
+<hr>
+<h2 id="十四系统工具与备份">十四、系统工具与备份
+</h2><h3 id="141-配置备份与恢复">14.1 配置备份与恢复
+</h3><ul>
+<li><strong>导出配置备份</strong>：将所有配置文件打包为一个 JSON 文件</li>
+<li><strong>导入配置备份</strong>：从备份文件恢复。支持选择性恢复（勾选要恢复的项）</li>
+<li>备份文件列表自动扫描 <code>data/</code> 目录，新增配置自动纳入</li>
+</ul>
+<h3 id="142-数据备份">14.2 数据备份
+</h3><p>每天凌晨 3:00 自动将 <code>data/</code> 下所有文件备份到 <code>data/backups/YYYY-MM-DD/</code>，保留 30 天。</p>
+<h3 id="143-数据清理">14.3 数据清理
+</h3><p>每天凌晨 3:00 自动删除超过保留天数（默认 180 天）的历史数据。在数据保存页面可调整保留天数。</p>
+<hr>
+<h2 id="十五配置文件与数据文件参考">十五、配置文件与数据文件参考
+</h2><h3 id="151-文件清单">15.1 文件清单
+</h3><p>所有配置和数据存储在 <code>data/</code> 目录下：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>文件</th>
+					<th>内容</th>
+					<th>格式</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><code>modbus.json</code></td>
+					<td>Modbus 连接参数</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>autosave.json</code></td>
+					<td>自动保存配置</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>pid.json</code></td>
+					<td>PID 实例配置</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>alarm.json</code></td>
+					<td>报警规则 + 看门狗</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>save-filter.json</code></td>
+					<td>保存变量选择</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>manual-variables.json</code></td>
+					<td>手动添加的变量</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>computed-variables.json</code></td>
+					<td>计算变量表达式</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>data-filter.json</code></td>
+					<td>数据过滤规则</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>instrument-compensation.json</code></td>
+					<td>补偿规则</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>dashboard-layout.json</code></td>
+					<td>仪表盘布局</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>mapping.json</code></td>
+					<td>字段映射表</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>pages.json</code></td>
+					<td>页面权限配置</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>modbus-slave-config.json</code></td>
+					<td>从机串口参数</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>modbus-parse-rules.json</code></td>
+					<td>解析规则（根目录）</td>
+					<td>JSON</td>
+			</tr>
+			<tr>
+					<td><code>datastore.sqlite</code></td>
+					<td>CEMS 历史数据</td>
+					<td>SQLite</td>
+			</tr>
+			<tr>
+					<td><code>auth.db</code></td>
+					<td>用户/权限/授权/自登录</td>
+					<td>SQLite</td>
+			</tr>
+			<tr>
+					<td><code>alarm_history.sqlite</code></td>
+					<td>报警历史记录</td>
+					<td>SQLite</td>
+			</tr>
+			<tr>
+					<td><code>audit_log.sqlite</code></td>
+					<td>操作审计日志</td>
+					<td>SQLite</td>
+			</tr>
+			<tr>
+					<td><code>error-YYYY-MM-DD.log</code></td>
+					<td>错误日志（按天滚动）</td>
+					<td>文本</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="152-更新程序是否丢失数据">15.2 更新程序是否丢失数据
+</h3><p><strong>不会</strong>。安装新版本时，安装目录下的程序文件会更新，但 <code>data/</code> 目录不会被覆盖。所有配置、数据库、布局全部保留。</p>
+<h3 id="153-查看-sqlite-数据库">15.3 查看 SQLite 数据库
+</h3><p>推荐使用 <a class="link" href="https://sqlitebrowser.org/"  target="_blank" rel="noopener"
+    >DB Browser for SQLite</a>（免费开源），直接拖 <code>.sqlite</code> 文件打开即可浏览数据。</p>
+<hr>
+<h2 id="十六常见问题">十六、常见问题
+</h2><p><strong>Q: 连接设备后读取失败？</strong>
+检查端口、波特率、校验位、停止位是否与设备匹配。查看报文区域的 hex 帧。</p>
+<p><strong>Q: 从机启动没反应？</strong>
+确保串口未被其他程序占用。COM 口必须存在且配置正确。</p>
+<p><strong>Q: 从机 Modbus Poll 超时？</strong>
+检查 Poll 的站号是否与从机 &quot; 本机站号 &quot; 一致。检查 COM 口和波特率。</p>
+<p><strong>Q: 数据查询没有结果？</strong>
+确认自动保存已启动、保存变量已勾选、字段映射已配置。注意：只有勾选了 &quot; 保存变量选择 &quot; 的字段才有历史数据。</p>
+<p><strong>Q: PID 不工作？</strong>
+确认控制目标字段在内部变量中有值（需要 Modbus 读取或从机接收获取 PV）。</p>
+<p><strong>Q: PID 页面显示 &quot; 仅更新内部变量 &ldquo;？</strong>
+这表示 Modbus 主机未连接。如果只用从机模式，这是正常的——PID 计算结果通过从机暴露给 DCS 读取，不需要主机写寄存器。</p>
+<p><strong>Q: 报警不触发？</strong>
+确认报警总开关已启用、规则已添加并勾选启用、监控字段在内部变量中已有值。</p>
+<p><strong>Q: 变量页面看不到某个字段？</strong>
+使用搜索框或分类筛选。系统变量以 <code>_sys_</code> 开头，PID 变量以实例名开头。</p>
+<p><strong>Q: 补偿规则中 &quot; 取变量 &quot; 怎么用？</strong>
+条件行阈值输入框旁点 &quot; 取变量 &ldquo;，切换为变量选择。可以实现 &quot; 出口 NOX &gt; 入口 NOX&rdquo; 这样的动态比较。</p>
+<hr>
+<h2 id="十七开发与打包清单">十七、开发与打包清单
+</h2><h3 id="171-技术栈">17.1 技术栈
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>层</th>
+					<th>技术</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>桌面框架</td>
+					<td>Electron</td>
+			</tr>
+			<tr>
+					<td>前端</td>
+					<td>HTML/CSS/JS + ECharts</td>
+			</tr>
+			<tr>
+					<td>后端</td>
+					<td>Node.js (CommonJS)</td>
+			</tr>
+			<tr>
+					<td>数据库</td>
+					<td>SQLite (sqlite3)</td>
+			</tr>
+			<tr>
+					<td>Modbus</td>
+					<td>modbus-serial</td>
+			</tr>
+			<tr>
+					<td>Excel</td>
+					<td>xlsx (SheetJS)</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="172-项目结构">17.2 项目结构
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-gdscript3" data-lang="gdscript3"><span class="line"><span class="cl"><span class="n">Electron_Test</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">main</span><span class="o">.</span><span class="n">js</span>              <span class="c1"># 主进程入口（窗口、IPC、核心逻辑）</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="nb">preload</span><span class="o">.</span><span class="n">js</span>           <span class="c1"># 预加载（安全桥梁）</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">configManager</span><span class="o">.</span><span class="n">js</span>     <span class="c1"># 统一配置管理器</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">variableRegistry</span><span class="o">.</span><span class="n">js</span>  <span class="c1"># 变量元数据注册表</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">modbusManage</span><span class="o">.</span><span class="n">js</span>      <span class="c1"># Modbus 主机（读写/连接）</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">modbusSlave</span><span class="o">.</span><span class="n">js</span>       <span class="c1"># Modbus 从机</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pidController</span><span class="o">.</span><span class="n">js</span>     <span class="c1"># PID 控制器类</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">dataStore</span><span class="o">.</span><span class="n">js</span>         <span class="c1"># SQLite 数据存储</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">alarmManager</span><span class="o">.</span><span class="n">js</span>      <span class="c1"># 报警引擎</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">authManager</span><span class="o">.</span><span class="n">js</span>       <span class="c1"># 用户管理/授权</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">auditLogger</span><span class="o">.</span><span class="n">js</span>       <span class="c1"># 操作审计日志</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">generateLicense</span><span class="o">.</span><span class="n">js</span>   <span class="c1"># 离线授权码生成工具</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">build</span><span class="o">-</span><span class="n">obfuscate</span><span class="o">.</span><span class="n">js</span>   <span class="c1"># 构建混淆脚本</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">ipc</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">modbusIpc</span><span class="o">.</span><span class="n">js</span>     <span class="c1"># Modbus IPC 注册</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">pidIpc</span><span class="o">.</span><span class="n">js</span>        <span class="c1"># PID IPC</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">alarmIpc</span><span class="o">.</span><span class="n">js</span>      <span class="c1"># 报警 IPC</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">authIpc</span><span class="o">.</span><span class="n">js</span>       <span class="c1"># 授权 IPC</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">dataIpc</span><span class="o">.</span><span class="n">js</span>       <span class="c1"># 数据 IPC</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">variableIpc</span><span class="o">.</span><span class="n">js</span>   <span class="c1"># 变量 IPC</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="n">systemIpc</span><span class="o">.</span><span class="n">js</span>     <span class="c1"># 系统 IPC</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">pages</span><span class="o">/</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">home</span><span class="o">.</span><span class="n">html</span>        <span class="c1"># 首页（功能入口）</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">dashboard</span><span class="o">.</span><span class="n">html</span>   <span class="c1"># 仪表盘</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">modbus</span><span class="o">.</span><span class="n">html</span>      <span class="c1"># Modbus 通讯</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">variables</span><span class="o">.</span><span class="n">html</span>   <span class="c1"># 内部变量</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">pid</span><span class="o">.</span><span class="n">html</span>         <span class="c1"># PID 控制</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">data</span><span class="o">.</span><span class="n">html</span>        <span class="c1"># 数据查询</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">trend</span><span class="o">.</span><span class="n">html</span>       <span class="c1"># 历史趋势</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">filter</span><span class="o">.</span><span class="n">html</span>      <span class="c1"># 数据过滤</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">compensation</span><span class="o">.</span><span class="n">html</span> <span class="c1"># 仪表补偿</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">alarm</span><span class="o">.</span><span class="n">html</span>       <span class="c1"># 报警配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">auth</span><span class="o">.</span><span class="n">html</span>        <span class="c1"># 用户管理</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">mapping</span><span class="o">.</span><span class="n">html</span>     <span class="c1"># 字段映射</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">index</span><span class="o">.</span><span class="n">css</span>        <span class="c1"># 基础样式</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">theme</span><span class="o">-</span><span class="n">light</span><span class="o">.</span><span class="n">css</span>  <span class="c1"># 主题</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">layout</span><span class="o">.</span><span class="n">js</span>        <span class="c1"># 统一导航栏</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">authGuard</span><span class="o">.</span><span class="n">js</span>     <span class="c1"># 权限守卫</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">├──</span> <span class="n">dashboardWidgets</span><span class="o">.</span><span class="n">js</span> <span class="c1"># 仪表盘组件注册</span>
+</span></span><span class="line"><span class="cl"><span class="err">│</span>   <span class="err">└──</span> <span class="o">*.</span><span class="n">js</span>             <span class="c1"># 各页面逻辑</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">package</span><span class="o">.</span><span class="n">json</span>         <span class="c1"># 项目配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">nodemon</span><span class="o">.</span><span class="n">json</span>         <span class="c1"># 热重载配置</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">modbus</span><span class="o">-</span><span class="n">parse</span><span class="o">-</span><span class="n">rules</span><span class="o">.</span><span class="n">json</span> <span class="c1"># 默认解析规则</span>
+</span></span><span class="line"><span class="cl"><span class="err">└──</span> <span class="n">icon</span><span class="o">.</span><span class="n">png</span>             <span class="c1"># 应用图标</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="173-打包命令">17.3 打包命令
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-bash" data-lang="bash"><span class="line"><span class="cl"><span class="c1"># 开发模式</span>
+</span></span><span class="line"><span class="cl">npm start        <span class="c1"># nodemon 热重载启动</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 生产构建（含代码混淆）</span>
+</span></span><span class="line"><span class="cl">npm run build    <span class="c1"># 混淆 → 打包 → 输出到 dist/</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 仅混淆不打包</span>
+</span></span><span class="line"><span class="cl">npm run obfuscate
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1"># 直接运行（无混淆，无热重载）</span>
+</span></span><span class="line"><span class="cl">npm run prod
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="174-构建产物">17.4 构建产物
+</h3><p>执行 <code>npm run build</code> 后在 <code>dist/</code> 目录生成：</p>
+<ul>
+<li><code>ActDenox 智能脱硝控制系统 Setup x.x.x.exe</code> — NSIS 安装包</li>
+</ul>
+<p>安装程序后，数据目录位于：</p>
+<ul>
+<li><code>%APPDATA%/ActDenox 智能脱硝控制系统/data/</code></li>
+</ul>
+<h3 id="175-代码保护">17.5 代码保护
+</h3><p>打包前自动使用 <code>javascript-obfuscator</code> 混淆所有核心 JS 文件。</p>
+<ul>
+<li>原始源码：开发目录，正常可读</li>
+<li>构建产物：<code>dist/</code> 中安装包内的 JS 文件已混淆为不可读形式</li>
+<li>页面文件（HTML/CSS）不混淆</li>
+<li>混淆仅影响打包产物，不影响开发源码</li>
+</ul>
+<h3 id="176-首次安装初始化流程">17.6 首次安装初始化流程
+</h3><ol>
+<li>安装程序复制文件到目标目录</li>
+<li><code>data/</code> 目录首次创建，所有 JSON 配置由 <code>config.load()</code> 自动生成默认值</li>
+<li><code>auth.db</code> 首次创建，自动建立 admin / operator / viewer 三个账号</li>
+<li>解析规则文件 <code>modbus-parse-rules.json</code> 包含一条默认示例规则</li>
+<li>程序启动 → 自动登录（如启用）→ 恢复上次的运行状态</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

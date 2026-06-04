@@ -400,40 +400,40 @@
 </li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>TTL 转 485 模块引脚</strong></th>
-          <th><strong>STM32F103 引脚</strong></th>
-          <th><strong>说明</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>VCC</strong></td>
-          <td><strong>3.3V</strong></td>
-          <td>保证电平一致</td>
-      </tr>
-      <tr>
-          <td><strong>GND</strong></td>
-          <td><strong>GND</strong></td>
-          <td>共地</td>
-      </tr>
-      <tr>
-          <td><strong>TXD</strong></td>
-          <td><strong>PA3 (RX)</strong></td>
-          <td>模块发，单片机收</td>
-      </tr>
-      <tr>
-          <td><strong>RXD</strong></td>
-          <td><strong>PA2 (TX)</strong></td>
-          <td>单片机发，模块收</td>
-      </tr>
-      <tr>
-          <td><strong>A / B</strong></td>
-          <td><strong>接 USB 转 485 模块</strong></td>
-          <td>A 接 A，B 接 B</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>TTL 转 485 模块引脚</strong></th>
+					<th><strong>STM32F103 引脚</strong></th>
+					<th><strong>说明</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>VCC</strong></td>
+					<td><strong>3.3V</strong></td>
+					<td>保证电平一致</td>
+			</tr>
+			<tr>
+					<td><strong>GND</strong></td>
+					<td><strong>GND</strong></td>
+					<td>共地</td>
+			</tr>
+			<tr>
+					<td><strong>TXD</strong></td>
+					<td><strong>PA3 (RX)</strong></td>
+					<td>模块发，单片机收</td>
+			</tr>
+			<tr>
+					<td><strong>RXD</strong></td>
+					<td><strong>PA2 (TX)</strong></td>
+					<td>单片机发，模块收</td>
+			</tr>
+			<tr>
+					<td><strong>A / B</strong></td>
+					<td><strong>接 USB 转 485 模块</strong></td>
+					<td>A 接 A，B 接 B</td>
+			</tr>
+	</tbody>
 </table></div>
 <blockquote>
 <p>USB 转 485、485 转 TTL、USB 转 TTL 模块上通常有 RX、TX 和电源指示灯。通过 RX 和 TX 灯（例如通过串口不断的发送数据，查看灯是否闪烁）可判断是否配置正常。</p>
@@ -1555,28 +1555,28 @@
 </ul>
 <p>在本次 STM32F103 开发中，典型的双串口硬件布局如下：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>串口编号</strong></th>
-          <th><strong>硬件连接</strong></th>
-          <th><strong>逻辑角色</strong></th>
-          <th><strong>传输内容</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>USART1 (PA9/PA10)</strong></td>
-          <td><strong>USB 转 TTL 线</strong> -&gt; 电脑</td>
-          <td><strong>调试/监控口</strong></td>
-          <td>文本格式（ASCII）、VOFA+ 波形数据、报错日志。</td>
-      </tr>
-      <tr>
-          <td><strong>USART2 (PA2/PA3)</strong></td>
-          <td><strong>TTL 转 485 模块</strong> -&gt; 总线</td>
-          <td><strong>工业通讯口</strong></td>
-          <td>二进制格式（Hex）、Modbus RTU 协议数据、PLC 指令。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>串口编号</strong></th>
+					<th><strong>硬件连接</strong></th>
+					<th><strong>逻辑角色</strong></th>
+					<th><strong>传输内容</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>USART1 (PA9/PA10)</strong></td>
+					<td><strong>USB 转 TTL 线</strong> -&gt; 电脑</td>
+					<td><strong>调试/监控口</strong></td>
+					<td>文本格式（ASCII）、VOFA+ 波形数据、报错日志。</td>
+			</tr>
+			<tr>
+					<td><strong>USART2 (PA2/PA3)</strong></td>
+					<td><strong>TTL 转 485 模块</strong> -&gt; 总线</td>
+					<td><strong>工业通讯口</strong></td>
+					<td>二进制格式（Hex）、Modbus RTU 协议数据、PLC 指令。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="软件架构实现">软件架构实现
 </h4><ul>
@@ -1626,40 +1626,40 @@
 </h4><p>“强制取前 8 字节”并不是不遵守协议，而是一种针对<strong>现实复杂环境</strong>的<strong>防御性编程</strong>策略。</p>
 <p>1、协议的“固定性”：03/06 指令的标准定义：在 Modbus RTU 标准协议中，无论是读取请求（03）还是单次写入请求（06），它们的报文结构在物理上是绝对固定为 8 个字节的：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>字节序号</strong></th>
-          <th><strong>定义</strong></th>
-          <th><strong>说明</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>第 1 字节</td>
-          <td>从机地址 (Slave ID)</td>
-          <td>1 Byte</td>
-      </tr>
-      <tr>
-          <td>第 2 字节</td>
-          <td>功能码 (Function Code)</td>
-          <td>1 Byte (0x03 或 0x06)</td>
-      </tr>
-      <tr>
-          <td>第 3-4 字节</td>
-          <td>寄存器地址</td>
-          <td>2 Bytes</td>
-      </tr>
-      <tr>
-          <td>第 5-6 字节</td>
-          <td>寄存器数量 / 写入数据</td>
-          <td>2 Bytes</td>
-      </tr>
-      <tr>
-          <td><strong>第 7-8 字节</strong></td>
-          <td><strong>CRC 校验码</strong></td>
-          <td><strong>2 Bytes (这就是最后 2 位)</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>字节序号</strong></th>
+					<th><strong>定义</strong></th>
+					<th><strong>说明</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>第 1 字节</td>
+					<td>从机地址 (Slave ID)</td>
+					<td>1 Byte</td>
+			</tr>
+			<tr>
+					<td>第 2 字节</td>
+					<td>功能码 (Function Code)</td>
+					<td>1 Byte (0x03 或 0x06)</td>
+			</tr>
+			<tr>
+					<td>第 3-4 字节</td>
+					<td>寄存器地址</td>
+					<td>2 Bytes</td>
+			</tr>
+			<tr>
+					<td>第 5-6 字节</td>
+					<td>寄存器数量 / 写入数据</td>
+					<td>2 Bytes</td>
+			</tr>
+			<tr>
+					<td><strong>第 7-8 字节</strong></td>
+					<td><strong>CRC 校验码</strong></td>
+					<td><strong>2 Bytes (这就是最后 2 位)</strong></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>2、解决“隐形尾巴” (Garbage Bytes)</p>
 <p>这是我上面亲身经历的坑。很多串口调试助手、PLC 甚至劣质的 485 转换器，在发送完标准的 8 字节后，会因为设置问题或硬件干扰，顺便带出一个或多个“脏字节”：</p>

@@ -413,40 +413,40 @@
 <h4 id="第五步跳转到-main">第五步：跳转到 <code>main</code>
 </h4><p>所有环境都搭好了，“办公桌”清理干净了，“时钟”也准了。启动文件最后执行一条跳转指令： <code>BL main</code> 至此，你熟悉的 C 语言世界大幕开启！</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>阶段</strong></th>
-          <th><strong>发生位置</strong></th>
-          <th><strong>主要任务</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>硬件阶段</strong></td>
-          <td>CPU 内核</td>
-          <td>获取栈顶地址和首条指令地址</td>
-      </tr>
-      <tr>
-          <td><strong>软件阶段 (汇编)</strong></td>
-          <td><code>startup_xxx.s</code></td>
-          <td>配置中断向量表，初始化堆栈</td>
-      </tr>
-      <tr>
-          <td><strong>系统初始化</strong></td>
-          <td><code>system_stm32xxx.c</code></td>
-          <td>设置系统时钟 (RCC)</td>
-      </tr>
-      <tr>
-          <td><strong>数据搬运</strong></td>
-          <td>库代码</td>
-          <td>将 Flash 中的变量初始值拷贝到 SRAM</td>
-      </tr>
-      <tr>
-          <td><strong>应用阶段</strong></td>
-          <td><code>main.c</code></td>
-          <td>执行你写的代码</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>阶段</strong></th>
+					<th><strong>发生位置</strong></th>
+					<th><strong>主要任务</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>硬件阶段</strong></td>
+					<td>CPU 内核</td>
+					<td>获取栈顶地址和首条指令地址</td>
+			</tr>
+			<tr>
+					<td><strong>软件阶段 (汇编)</strong></td>
+					<td><code>startup_xxx.s</code></td>
+					<td>配置中断向量表，初始化堆栈</td>
+			</tr>
+			<tr>
+					<td><strong>系统初始化</strong></td>
+					<td><code>system_stm32xxx.c</code></td>
+					<td>设置系统时钟 (RCC)</td>
+			</tr>
+			<tr>
+					<td><strong>数据搬运</strong></td>
+					<td>库代码</td>
+					<td>将 Flash 中的变量初始值拷贝到 SRAM</td>
+			</tr>
+			<tr>
+					<td><strong>应用阶段</strong></td>
+					<td><code>main.c</code></td>
+					<td>执行你写的代码</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="为什么要了解这个">为什么要了解这个
 </h3><ul>

@@ -534,35 +534,35 @@
 </div><h3 id="对比">对比
 </h3><p>两种方法的深度对比</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>特性</th>
-          <th>轮询扫描 (Polling)</th>
-          <th>外部中断 (EXTI)</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>CPU 占用</td>
-          <td>高（一直在跑判断语句）</td>
-          <td>极低（平时 CPU 可以休眠）</td>
-      </tr>
-      <tr>
-          <td>实时性</td>
-          <td>取决于 <code>while</code> 循环里其他代码的长短</td>
-          <td>极高（信号一到立刻响应）</td>
-      </tr>
-      <tr>
-          <td>消抖处理</td>
-          <td>简单（用 <code>HAL_Delay</code>）</td>
-          <td>复杂（中断里不建议用 Delay，通常用定时器）</td>
-      </tr>
-      <tr>
-          <td>适用场景</td>
-          <td>简单按键、对实时性要求不高</td>
-          <td>紧急停止、脉冲计数、低功耗唤醒</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>特性</th>
+					<th>轮询扫描 (Polling)</th>
+					<th>外部中断 (EXTI)</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>CPU 占用</td>
+					<td>高（一直在跑判断语句）</td>
+					<td>极低（平时 CPU 可以休眠）</td>
+			</tr>
+			<tr>
+					<td>实时性</td>
+					<td>取决于 <code>while</code> 循环里其他代码的长短</td>
+					<td>极高（信号一到立刻响应）</td>
+			</tr>
+			<tr>
+					<td>消抖处理</td>
+					<td>简单（用 <code>HAL_Delay</code>）</td>
+					<td>复杂（中断里不建议用 Delay，通常用定时器）</td>
+			</tr>
+			<tr>
+					<td>适用场景</td>
+					<td>简单按键、对实时性要求不高</td>
+					<td>紧急停止、脉冲计数、低功耗唤醒</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="常见坑点避坑指南">常见坑点（避坑指南）
 </h3><ol>

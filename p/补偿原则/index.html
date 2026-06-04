@@ -448,52 +448,52 @@
 <h3 id="总结设计师的补偿决策矩阵">总结：设计师的“补偿决策矩阵”
 </h3><p>当审视一台分析仪时，可以按这个逻辑去看：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>部件老化特性</strong></th>
-          <th><strong>影响程度</strong></th>
-          <th><strong>变化速度</strong></th>
-          <th><strong>决策方案</strong></th>
-          <th><strong>典型例子</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>源头、非线性</strong></td>
-          <td>致命 (Fatal)</td>
-          <td>快 (分/秒)</td>
-          <td><strong>硬件实时补偿</strong></td>
-          <td>光源参考探测器、PMT 快门、激光器温控</td>
-      </tr>
-      <tr>
-          <td><strong>物理规律明确</strong></td>
-          <td>显著 (Significant)</td>
-          <td>中 (小时/天)</td>
-          <td><strong>软件算法补偿</strong></td>
-          <td>压力补偿、温度补偿 (P/T Comp)</td>
-      </tr>
-      <tr>
-          <td><strong>线性、缓慢</strong></td>
-          <td>一般 (Moderate)</td>
-          <td>慢 (周/月)</td>
-          <td><strong>定期标定 (校准)</strong></td>
-          <td>滤光片老化、光路积灰、传感器灵敏度漂移</td>
-      </tr>
-      <tr>
-          <td><strong>机械磨损</strong></td>
-          <td>轻微 (Minor)</td>
-          <td>慢 (月/年)</td>
-          <td><strong>定期更换 (维护)</strong></td>
-          <td>泵管、密封圈、滤芯</td>
-      </tr>
-      <tr>
-          <td><strong>电路元件</strong></td>
-          <td>极微 (Negligible)</td>
-          <td>极慢 (年)</td>
-          <td><strong>忽略</strong></td>
-          <td>电阻电容、PCB 板材</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>部件老化特性</strong></th>
+					<th><strong>影响程度</strong></th>
+					<th><strong>变化速度</strong></th>
+					<th><strong>决策方案</strong></th>
+					<th><strong>典型例子</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>源头、非线性</strong></td>
+					<td>致命 (Fatal)</td>
+					<td>快 (分/秒)</td>
+					<td><strong>硬件实时补偿</strong></td>
+					<td>光源参考探测器、PMT 快门、激光器温控</td>
+			</tr>
+			<tr>
+					<td><strong>物理规律明确</strong></td>
+					<td>显著 (Significant)</td>
+					<td>中 (小时/天)</td>
+					<td><strong>软件算法补偿</strong></td>
+					<td>压力补偿、温度补偿 (P/T Comp)</td>
+			</tr>
+			<tr>
+					<td><strong>线性、缓慢</strong></td>
+					<td>一般 (Moderate)</td>
+					<td>慢 (周/月)</td>
+					<td><strong>定期标定 (校准)</strong></td>
+					<td>滤光片老化、光路积灰、传感器灵敏度漂移</td>
+			</tr>
+			<tr>
+					<td><strong>机械磨损</strong></td>
+					<td>轻微 (Minor)</td>
+					<td>慢 (月/年)</td>
+					<td><strong>定期更换 (维护)</strong></td>
+					<td>泵管、密封圈、滤芯</td>
+			</tr>
+			<tr>
+					<td><strong>电路元件</strong></td>
+					<td>极微 (Negligible)</td>
+					<td>极慢 (年)</td>
+					<td><strong>忽略</strong></td>
+					<td>电阻电容、PCB 板材</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>所以，<strong>“忽略”并不是真的不管，而是因为它的变化太慢，已经被“每周校准”这个操作给覆盖掉了</strong>；或者它的变化太快且无规律，被“硬件参考路”给抵消掉了。</p>
 

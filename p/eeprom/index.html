@@ -373,45 +373,45 @@
 <h3 id="eeprom-vs-flash核心区别">EEPROM vs. FLASH：核心区别
 </h3><p>虽然两者都是非易失性存储器，但在操作机制上有本质不同：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>特性</strong></th>
-          <th><strong>EEPROM</strong></th>
-          <th><strong>FLASH (如 STM32 内部 Flash)</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>擦除单位</strong></td>
-          <td><strong>按字节 (Byte)</strong></td>
-          <td><strong>按扇区/块 (Sector/Block)</strong></td>
-      </tr>
-      <tr>
-          <td><strong>修改方式</strong></td>
-          <td>可以直接覆盖/修改单个字节</td>
-          <td>必须先擦除整块（如 4KB），才能写入</td>
-      </tr>
-      <tr>
-          <td><strong>擦写寿命</strong></td>
-          <td>极高 (通常 100 万次以上)</td>
-          <td>较低 (通常 1 万 - 10 万次)</td>
-      </tr>
-      <tr>
-          <td><strong>写入速度</strong></td>
-          <td>较慢 (ms 级)</td>
-          <td>较快</td>
-      </tr>
-      <tr>
-          <td><strong>存储密度</strong></td>
-          <td>低 (容量通常只有几 KB 到几 MB)</td>
-          <td>高 (容量可达 GB 级)</td>
-      </tr>
-      <tr>
-          <td><strong>成本</strong></td>
-          <td>较高 (按单位容量计)</td>
-          <td>较低</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>特性</strong></th>
+					<th><strong>EEPROM</strong></th>
+					<th><strong>FLASH (如 STM32 内部 Flash)</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>擦除单位</strong></td>
+					<td><strong>按字节 (Byte)</strong></td>
+					<td><strong>按扇区/块 (Sector/Block)</strong></td>
+			</tr>
+			<tr>
+					<td><strong>修改方式</strong></td>
+					<td>可以直接覆盖/修改单个字节</td>
+					<td>必须先擦除整块（如 4KB），才能写入</td>
+			</tr>
+			<tr>
+					<td><strong>擦写寿命</strong></td>
+					<td>极高 (通常 100 万次以上)</td>
+					<td>较低 (通常 1 万 - 10 万次)</td>
+			</tr>
+			<tr>
+					<td><strong>写入速度</strong></td>
+					<td>较慢 (ms 级)</td>
+					<td>较快</td>
+			</tr>
+			<tr>
+					<td><strong>存储密度</strong></td>
+					<td>低 (容量通常只有几 KB 到几 MB)</td>
+					<td>高 (容量可达 GB 级)</td>
+			</tr>
+			<tr>
+					<td><strong>成本</strong></td>
+					<td>较高 (按单位容量计)</td>
+					<td>较低</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="为什么用-eeprom-而不是-flash">为什么用 EEPROM 而不是 FLASH？
 </h3><h4 id="1-颗粒度字节级随机访问">1. 颗粒度：字节级随机访问

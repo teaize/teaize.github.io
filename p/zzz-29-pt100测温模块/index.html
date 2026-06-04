@@ -405,52 +405,52 @@
 </ol>
 <h3 id="关于硬件接线">关于硬件接线
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>模块引脚</strong></th>
-          <th><strong>功能说明</strong></th>
-          <th><strong>建议连接 STM32 引脚</strong></th>
-          <th><strong>备注</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>VIN</strong></td>
-          <td>电源输入 (3-5V)</td>
-          <td><strong>5V 或 3.3V</strong></td>
-          <td>建议接 3.3V，与 STM32 电平一致</td>
-      </tr>
-      <tr>
-          <td><strong>GND</strong></td>
-          <td>电源地</td>
-          <td><strong>GND</strong></td>
-          <td>必须与单片机共地</td>
-      </tr>
-      <tr>
-          <td><strong>CLK</strong></td>
-          <td>SPI 时钟 (Clock)</td>
-          <td><strong>PA5 (SPI1_SCK)</strong></td>
-          <td>通讯节拍</td>
-      </tr>
-      <tr>
-          <td><strong>SDO</strong></td>
-          <td>串口输出 (MISO)</td>
-          <td><strong>PA6 (SPI1_MISO)</strong></td>
-          <td>模块发数据给单片机</td>
-      </tr>
-      <tr>
-          <td><strong>SDI</strong></td>
-          <td>串口输入 (MOSI)</td>
-          <td><strong>PA7 (SPI1_MOSI)</strong></td>
-          <td>单片机发数据给模块</td>
-      </tr>
-      <tr>
-          <td><strong>CS</strong></td>
-          <td>片选 (Chip Select)</td>
-          <td><strong>PA4 (GPIO)</strong></td>
-          <td><strong>手动控制</strong>，拉低才开始通讯</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>模块引脚</strong></th>
+					<th><strong>功能说明</strong></th>
+					<th><strong>建议连接 STM32 引脚</strong></th>
+					<th><strong>备注</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>VIN</strong></td>
+					<td>电源输入 (3-5V)</td>
+					<td><strong>5V 或 3.3V</strong></td>
+					<td>建议接 3.3V，与 STM32 电平一致</td>
+			</tr>
+			<tr>
+					<td><strong>GND</strong></td>
+					<td>电源地</td>
+					<td><strong>GND</strong></td>
+					<td>必须与单片机共地</td>
+			</tr>
+			<tr>
+					<td><strong>CLK</strong></td>
+					<td>SPI 时钟 (Clock)</td>
+					<td><strong>PA5 (SPI1_SCK)</strong></td>
+					<td>通讯节拍</td>
+			</tr>
+			<tr>
+					<td><strong>SDO</strong></td>
+					<td>串口输出 (MISO)</td>
+					<td><strong>PA6 (SPI1_MISO)</strong></td>
+					<td>模块发数据给单片机</td>
+			</tr>
+			<tr>
+					<td><strong>SDI</strong></td>
+					<td>串口输入 (MOSI)</td>
+					<td><strong>PA7 (SPI1_MOSI)</strong></td>
+					<td>单片机发数据给模块</td>
+			</tr>
+			<tr>
+					<td><strong>CS</strong></td>
+					<td>片选 (Chip Select)</td>
+					<td><strong>PA4 (GPIO)</strong></td>
+					<td><strong>手动控制</strong>，拉低才开始通讯</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>特殊引脚说明（可以暂时不接）</p>
 <ul>
@@ -486,40 +486,40 @@
 <h4 id="物理接线方案两红一白">物理接线方案（两红一白）
 </h4><p>三线制的本质是：一端用单线，另一端用双线来补偿线阻。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>端子位置</strong></th>
-          <th><strong>标记</strong></th>
-          <th><strong>传感器线色</strong></th>
-          <th><strong>逻辑说明</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>第 1 个 (最左)</strong></td>
-          <td><strong>F-</strong></td>
-          <td><strong>红线 1</strong></td>
-          <td>电流回路负极</td>
-      </tr>
-      <tr>
-          <td><strong>第 2 个</strong></td>
-          <td><strong>RTD-</strong></td>
-          <td><strong>红线 2</strong></td>
-          <td>电压感知负极</td>
-      </tr>
-      <tr>
-          <td><strong>第 3 个</strong></td>
-          <td><strong>RTD+</strong></td>
-          <td><strong>(空着)</strong></td>
-          <td>正极感知（依靠背后的“3”焊盘连通到 F+）</td>
-      </tr>
-      <tr>
-          <td><strong>第 4 个 (最右)</strong></td>
-          <td><strong>F+</strong></td>
-          <td><strong>白线</strong></td>
-          <td>电流/电压正极</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>端子位置</strong></th>
+					<th><strong>标记</strong></th>
+					<th><strong>传感器线色</strong></th>
+					<th><strong>逻辑说明</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>第 1 个 (最左)</strong></td>
+					<td><strong>F-</strong></td>
+					<td><strong>红线 1</strong></td>
+					<td>电流回路负极</td>
+			</tr>
+			<tr>
+					<td><strong>第 2 个</strong></td>
+					<td><strong>RTD-</strong></td>
+					<td><strong>红线 2</strong></td>
+					<td>电压感知负极</td>
+			</tr>
+			<tr>
+					<td><strong>第 3 个</strong></td>
+					<td><strong>RTD+</strong></td>
+					<td><strong>(空着)</strong></td>
+					<td>正极感知（依靠背后的“3”焊盘连通到 F+）</td>
+			</tr>
+			<tr>
+					<td><strong>第 4 个 (最右)</strong></td>
+					<td><strong>F+</strong></td>
+					<td><strong>白线</strong></td>
+					<td>电流/电压正极</td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="必须处理的三个焊盘">必须处理的“三个焊盘”
 </h4><p>这是新手最容易失败的地方。请翻到模块背面（或者正面寻找标有 <code>2/3/4</code> 的区域）：</p>
@@ -572,28 +572,28 @@
 <p>记住这个原则：哪里有“双线”，哪里就是负极
 在三线制 PT100 的世界里，请务必遵守这个“潜规则”：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>传感器侧</strong></th>
-          <th><strong>导线数量</strong></th>
-          <th><strong>对应模块端子</strong></th>
-          <th><strong>备注</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>单线侧 (白线)</strong></td>
-          <td>1 根</td>
-          <td><strong>$F+$ / $RTD+$</strong></td>
-          <td>这里需要通过焊接或跳线短接。</td>
-      </tr>
-      <tr>
-          <td><strong>双线侧 (红线)</strong></td>
-          <td>2 根</td>
-          <td><strong>$RTD-$ / $F-$</strong></td>
-          <td>芯片靠这两根线来“感知”并“消灭”线阻。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>传感器侧</strong></th>
+					<th><strong>导线数量</strong></th>
+					<th><strong>对应模块端子</strong></th>
+					<th><strong>备注</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>单线侧 (白线)</strong></td>
+					<td>1 根</td>
+					<td><strong>$F+$ / $RTD+$</strong></td>
+					<td>这里需要通过焊接或跳线短接。</td>
+			</tr>
+			<tr>
+					<td><strong>双线侧 (红线)</strong></td>
+					<td>2 根</td>
+					<td><strong>$RTD-$ / $F-$</strong></td>
+					<td>芯片靠这两根线来“感知”并“消灭”线阻。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="快速握手测试验证焊接和连线">快速“握手”测试（验证焊接和连线）
 </h3><p>在 <code>main.c</code> 的 <code>while(1)</code> 之前，先写这几行。如果串口能打印出 <code>0xD1</code>，说明你的 SPI 连线、焊接、片选全部正确！</p>

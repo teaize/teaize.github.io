@@ -389,35 +389,35 @@
 <h3 id="2-stm32-adc-的核心参数">2. STM32 ADC 的核心参数
 </h3><p>在 STM32F103C8T6 中，自带有一个 ADC，ADC 的性能非常强劲：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>参数</strong></th>
-          <th><strong>数值</strong></th>
-          <th><strong>含义</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>分辨率 (Resolution)</strong></td>
-          <td><strong>12 位 (12-bit)</strong></td>
-          <td>把 0~3.3V 分成 $2^{12} = 4096$ 份。</td>
-      </tr>
-      <tr>
-          <td><strong>转换范围 (Range)</strong></td>
-          <td><strong>0V ~ 3.3V</strong></td>
-          <td>超过 3.3V 可能烧毁引脚，低于 0V 读不到。</td>
-      </tr>
-      <tr>
-          <td><strong>对应关系</strong></td>
-          <td><strong>0 $\to$ 0V, 4095 $\to$ 3.3V</strong></td>
-          <td>数值每增加 1，代表电压增加了约 0.8mV。</td>
-      </tr>
-      <tr>
-          <td><strong>通道数量</strong></td>
-          <td>10 个外部通道</td>
-          <td>PA0<del>PA7, PB0</del>PB1 都可以作为“眼睛”。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>参数</strong></th>
+					<th><strong>数值</strong></th>
+					<th><strong>含义</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>分辨率 (Resolution)</strong></td>
+					<td><strong>12 位 (12-bit)</strong></td>
+					<td>把 0~3.3V 分成 $2^{12} = 4096$ 份。</td>
+			</tr>
+			<tr>
+					<td><strong>转换范围 (Range)</strong></td>
+					<td><strong>0V ~ 3.3V</strong></td>
+					<td>超过 3.3V 可能烧毁引脚，低于 0V 读不到。</td>
+			</tr>
+			<tr>
+					<td><strong>对应关系</strong></td>
+					<td><strong>0 $\to$ 0V, 4095 $\to$ 3.3V</strong></td>
+					<td>数值每增加 1，代表电压增加了约 0.8mV。</td>
+			</tr>
+			<tr>
+					<td><strong>通道数量</strong></td>
+					<td>10 个外部通道</td>
+					<td>PA0<del>PA7, PB0</del>PB1 都可以作为“眼睛”。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="3-adc-的内部构造-mermaid">3. ADC 的内部构造 (Mermaid)
 </h3><p>你会发现 ADC 也有很多 <strong>Channel（通道）</strong>，它的原理和定时器通道类似：一个“测量核心”配合一个“多路开关”。</p>

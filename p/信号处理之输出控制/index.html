@@ -371,34 +371,34 @@
 </h3><p>PID 的伟大之处在于，它把人类控制事物的<strong>三种直觉</strong>，抽象成了三个数学公式。</p>
 <p>想象你正以此去控制一辆车的<strong>油门</strong>，试图让它停在前方 100 米处的红绿灯线（目标点）上</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>PID 环节</strong></th>
-          <th><strong>你的动作</strong></th>
-          <th><strong>对应的心理活动</strong></th>
-          <th><strong>物理结果</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>P (比例)</strong></td>
-          <td><strong>看距离踩油门</strong></td>
-          <td>“还有好远，冲啊！” vs “快到了，松油门。”</td>
-          <td>越近越没劲，最后可能会因为没劲而停在半路（静差）。</td>
-      </tr>
-      <tr>
-          <td><strong>I (积分)</strong></td>
-          <td><strong>盯着停下的车</strong></td>
-          <td>“怎么停这儿不动了？还没到呢！给我动！”</td>
-          <td>慢慢积攒怒气，补一脚油门，克服上坡阻力，推过终点。</td>
-      </tr>
-      <tr>
-          <td><strong>D (微分)</strong></td>
-          <td><strong>看速度表踩刹车</strong></td>
-          <td>“哇！冲得太快了，肯定要过头，赶紧点一下刹车！”</td>
-          <td>产生反向阻尼，防止一头撞出去（抑制超调）。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>PID 环节</strong></th>
+					<th><strong>你的动作</strong></th>
+					<th><strong>对应的心理活动</strong></th>
+					<th><strong>物理结果</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>P (比例)</strong></td>
+					<td><strong>看距离踩油门</strong></td>
+					<td>“还有好远，冲啊！” vs “快到了，松油门。”</td>
+					<td>越近越没劲，最后可能会因为没劲而停在半路（静差）。</td>
+			</tr>
+			<tr>
+					<td><strong>I (积分)</strong></td>
+					<td><strong>盯着停下的车</strong></td>
+					<td>“怎么停这儿不动了？还没到呢！给我动！”</td>
+					<td>慢慢积攒怒气，补一脚油门，克服上坡阻力，推过终点。</td>
+			</tr>
+			<tr>
+					<td><strong>D (微分)</strong></td>
+					<td><strong>看速度表踩刹车</strong></td>
+					<td>“哇！冲得太快了，肯定要过头，赶紧点一下刹车！”</td>
+					<td>产生反向阻尼，防止一头撞出去（抑制超调）。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="二-工程师的噩梦积分饱和-integral-windup">二、 工程师的噩梦：积分饱和 (Integral Windup)
 </h3><p>PID 原理书上都有，但在工程现场，新手最容易翻车的坑叫做 <strong>“积分饱和” (Integral Windup)</strong>。</p>

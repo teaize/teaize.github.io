@@ -369,34 +369,34 @@
 <h3 id="1-定时器的等级制度-classification">1. 定时器的等级制度 (Classification)
 </h3><p>在 STM32F103C8T6 中，并不是所有的定时器都一样。它们被分为三个等级：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>等级</strong></th>
-          <th><strong>编号</strong></th>
-          <th><strong>特色功能</strong></th>
-          <th><strong>形象比喻</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>高级定时器</strong></td>
-          <td><strong>TIM1</strong></td>
-          <td>带死区控制、互补输出（专为电机驱动设计）。</td>
-          <td><strong>全能大 BOSS</strong></td>
-      </tr>
-      <tr>
-          <td><strong>通用定时器</strong></td>
-          <td><strong>TIM2, 3, 4</strong></td>
-          <td>具备定时、PWM、输入捕获、编码器接口。</td>
-          <td><strong>工厂主力中层</strong></td>
-      </tr>
-      <tr>
-          <td><strong>基本定时器</strong></td>
-          <td>(C8T6 没有)</td>
-          <td>仅有最基本的定时功能，通常给 DAC 触发用。</td>
-          <td><strong>纯体力临时工</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>等级</strong></th>
+					<th><strong>编号</strong></th>
+					<th><strong>特色功能</strong></th>
+					<th><strong>形象比喻</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>高级定时器</strong></td>
+					<td><strong>TIM1</strong></td>
+					<td>带死区控制、互补输出（专为电机驱动设计）。</td>
+					<td><strong>全能大 BOSS</strong></td>
+			</tr>
+			<tr>
+					<td><strong>通用定时器</strong></td>
+					<td><strong>TIM2, 3, 4</strong></td>
+					<td>具备定时、PWM、输入捕获、编码器接口。</td>
+					<td><strong>工厂主力中层</strong></td>
+			</tr>
+			<tr>
+					<td><strong>基本定时器</strong></td>
+					<td>(C8T6 没有)</td>
+					<td>仅有最基本的定时功能，通常给 DAC 触发用。</td>
+					<td><strong>纯体力临时工</strong></td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="2-定时器的内部结构图-mermaid">2. 定时器的内部结构图 (Mermaid)
 </h3><p>为了让你看懂什么是 <strong>Channel（通道）</strong>，我们先看一个定时器的内部逻辑。你可以把通道看作是定时器伸向外部引脚的“手臂”。</p>
@@ -447,34 +447,34 @@
 <h4 id="通道背后的秘密武器ccr-寄存器">通道背后的“秘密武器”：CCR 寄存器
 </h4><p>为什么同一个计数器（CNT）能让不同的通道输出不同的信号？因为每个通道都配了一个属于自己的“挡位设置”，叫做 CCR（Capture/Compare Register，捕获/比较寄存器）。</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>组件</strong></th>
-          <th><strong>角色</strong></th>
-          <th><strong>谁拥有它？</strong></th>
-          <th><strong>决定了什么？</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>CNT (计数器)</strong></td>
-          <td>跑步的秒表</td>
-          <td><strong>整个定时器</strong>共有</td>
-          <td><strong>频率</strong>（跑一圈要多久）</td>
-      </tr>
-      <tr>
-          <td><strong>ARR (重装载值)</strong></td>
-          <td>跑道的终点</td>
-          <td><strong>整个定时器</strong>共有</td>
-          <td><strong>周期</strong>（什么时候回头重新跑）</td>
-      </tr>
-      <tr>
-          <td><strong>CCR (比较值)</strong></td>
-          <td>跑道上的记号</td>
-          <td><strong>每个通道</strong>独立拥有</td>
-          <td><strong>占空比</strong>（跑到哪个位置触发动作）</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>组件</strong></th>
+					<th><strong>角色</strong></th>
+					<th><strong>谁拥有它？</strong></th>
+					<th><strong>决定了什么？</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>CNT (计数器)</strong></td>
+					<td>跑步的秒表</td>
+					<td><strong>整个定时器</strong>共有</td>
+					<td><strong>频率</strong>（跑一圈要多久）</td>
+			</tr>
+			<tr>
+					<td><strong>ARR (重装载值)</strong></td>
+					<td>跑道的终点</td>
+					<td><strong>整个定时器</strong>共有</td>
+					<td><strong>周期</strong>（什么时候回头重新跑）</td>
+			</tr>
+			<tr>
+					<td><strong>CCR (比较值)</strong></td>
+					<td>跑道上的记号</td>
+					<td><strong>每个通道</strong>独立拥有</td>
+					<td><strong>占空比</strong>（跑到哪个位置触发动作）</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="4-为什么会有多个-channel">4. 为什么会有多个 Channel
 </h3><p>比喻 1：教室里的那口大钟（一个节奏，多个事件）

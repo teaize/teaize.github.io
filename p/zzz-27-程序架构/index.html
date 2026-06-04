@@ -618,35 +618,35 @@
 </li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>维度</strong></th>
-          <th><strong>MCU GCC Compiler -&gt; Include Paths</strong></th>
-          <th><strong>Paths and Symbols -&gt; Source Location</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>针对对象</strong></td>
-          <td><strong><code>.h</code> 头文件</strong></td>
-          <td><strong><code>.c</code> 源文件</strong></td>
-      </tr>
-      <tr>
-          <td><strong>功能描述</strong></td>
-          <td>告诉编译器去哪里找“声明”</td>
-          <td>告诉编译器去哪里找“代码实现”</td>
-      </tr>
-      <tr>
-          <td><strong>递归性</strong></td>
-          <td><strong>不具备递归性</strong>（必须指定到最后一级）</td>
-          <td><strong>具备递归性</strong>（指定父目录，子目录自动编译）</td>
-      </tr>
-      <tr>
-          <td><strong>报错表现</strong></td>
-          <td><code>No such file or directory</code></td>
-          <td><code>undefined reference to …</code></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>维度</strong></th>
+					<th><strong>MCU GCC Compiler -&gt; Include Paths</strong></th>
+					<th><strong>Paths and Symbols -&gt; Source Location</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>针对对象</strong></td>
+					<td><strong><code>.h</code> 头文件</strong></td>
+					<td><strong><code>.c</code> 源文件</strong></td>
+			</tr>
+			<tr>
+					<td><strong>功能描述</strong></td>
+					<td>告诉编译器去哪里找“声明”</td>
+					<td>告诉编译器去哪里找“代码实现”</td>
+			</tr>
+			<tr>
+					<td><strong>递归性</strong></td>
+					<td><strong>不具备递归性</strong>（必须指定到最后一级）</td>
+					<td><strong>具备递归性</strong>（指定父目录，子目录自动编译）</td>
+			</tr>
+			<tr>
+					<td><strong>报错表现</strong></td>
+					<td><code>No such file or directory</code></td>
+					<td><code>undefined reference to …</code></td>
+			</tr>
+	</tbody>
 </table></div>
 <h4 id="注意事项与潜规则">注意事项与“潜规则”
 </h4><ol>

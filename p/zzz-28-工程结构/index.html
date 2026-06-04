@@ -400,40 +400,40 @@
 </div>
 </div><h3 id="2-各层级的功能分配职责表">2. 各层级的功能分配（职责表）
 </h3><div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th><strong>层级</strong></th>
-          <th><strong>职责 (Role)</strong></th>
-          <th><strong>就像公司的…</strong></th>
-          <th><strong>编写注意事项</strong></th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>App (应用层)</strong></td>
-          <td>负责“怎么做”。比如：按下按键后先闪灯再保存。</td>
-          <td><strong>总经理</strong></td>
-          <td>不直接操作引脚，只调用 BSP 提供的函数。</td>
-      </tr>
-      <tr>
-          <td><strong>BSP (驱动层)</strong></td>
-          <td>负责“跟谁做”。专门针对你的电路板硬件。</td>
-          <td><strong>部门主管</strong></td>
-          <td>把底层的 HAL 函数包装成有意义的名字（如 <code>Relay_On</code>）。</td>
-      </tr>
-      <tr>
-          <td><strong>Tools (工具层)</strong></td>
-          <td>负责“怎么算”。纯数学运算。</td>
-          <td><strong>技术顾问</strong></td>
-          <td><strong>不包含任何硬件头文件</strong>。它是纯 C 代码，可以轻松移植到任何单片机。</td>
-      </tr>
-      <tr>
-          <td><strong>Core (系统层)</strong></td>
-          <td>负责“活下来”。硬件初始化、中断入口。</td>
-          <td><strong>地基/物业</strong></td>
-          <td>尽量不要在这里写逻辑，保持 CubeMX 生成的样貌。</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th><strong>层级</strong></th>
+					<th><strong>职责 (Role)</strong></th>
+					<th><strong>就像公司的…</strong></th>
+					<th><strong>编写注意事项</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>App (应用层)</strong></td>
+					<td>负责“怎么做”。比如：按下按键后先闪灯再保存。</td>
+					<td><strong>总经理</strong></td>
+					<td>不直接操作引脚，只调用 BSP 提供的函数。</td>
+			</tr>
+			<tr>
+					<td><strong>BSP (驱动层)</strong></td>
+					<td>负责“跟谁做”。专门针对你的电路板硬件。</td>
+					<td><strong>部门主管</strong></td>
+					<td>把底层的 HAL 函数包装成有意义的名字（如 <code>Relay_On</code>）。</td>
+			</tr>
+			<tr>
+					<td><strong>Tools (工具层)</strong></td>
+					<td>负责“怎么算”。纯数学运算。</td>
+					<td><strong>技术顾问</strong></td>
+					<td><strong>不包含任何硬件头文件</strong>。它是纯 C 代码，可以轻松移植到任何单片机。</td>
+			</tr>
+			<tr>
+					<td><strong>Core (系统层)</strong></td>
+					<td>负责“活下来”。硬件初始化、中断入口。</td>
+					<td><strong>地基/物业</strong></td>
+					<td>尽量不要在这里写逻辑，保持 CubeMX 生成的样貌。</td>
+			</tr>
+	</tbody>
 </table></div>
 <h3 id="3-避坑指南为什么这么分">3. 避坑指南：为什么这么分？
 </h3><ul>

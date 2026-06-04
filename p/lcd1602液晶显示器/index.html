@@ -390,60 +390,60 @@
 </ul>
 <p>如果是 并口版本，一般有以下 16 个引脚：</p>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>引脚</th>
-          <th>说明</th>
-          <th>备注</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td>VSS</td>
-          <td>电源地</td>
-          <td>接 GND</td>
-      </tr>
-      <tr>
-          <td>VDD</td>
-          <td>电源正</td>
-          <td>一般接 <strong>5V</strong>（部分可 3.3V）</td>
-      </tr>
-      <tr>
-          <td>V0</td>
-          <td>对比度调节</td>
-          <td>需接 <strong>电位器</strong> 调节</td>
-      </tr>
-      <tr>
-          <td>RS</td>
-          <td>寄存器选择</td>
-          <td>0=指令，1=数据</td>
-      </tr>
-      <tr>
-          <td>RW</td>
-          <td>读/写选择</td>
-          <td>0=写入，1=读取（一般接 GND 使能写入）</td>
-      </tr>
-      <tr>
-          <td>E</td>
-          <td>使能信号</td>
-          <td>高电平触发</td>
-      </tr>
-      <tr>
-          <td>D0-D7</td>
-          <td>数据线</td>
-          <td>4 位模式用 D4-D7，8 位模式用 D0-D7</td>
-      </tr>
-      <tr>
-          <td>A</td>
-          <td>背光电源正</td>
-          <td>接 5V</td>
-      </tr>
-      <tr>
-          <td>K</td>
-          <td>背光电源地</td>
-          <td>接 GND</td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>引脚</th>
+					<th>说明</th>
+					<th>备注</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>VSS</td>
+					<td>电源地</td>
+					<td>接 GND</td>
+			</tr>
+			<tr>
+					<td>VDD</td>
+					<td>电源正</td>
+					<td>一般接 <strong>5V</strong>（部分可 3.3V）</td>
+			</tr>
+			<tr>
+					<td>V0</td>
+					<td>对比度调节</td>
+					<td>需接 <strong>电位器</strong> 调节</td>
+			</tr>
+			<tr>
+					<td>RS</td>
+					<td>寄存器选择</td>
+					<td>0=指令，1=数据</td>
+			</tr>
+			<tr>
+					<td>RW</td>
+					<td>读/写选择</td>
+					<td>0=写入，1=读取（一般接 GND 使能写入）</td>
+			</tr>
+			<tr>
+					<td>E</td>
+					<td>使能信号</td>
+					<td>高电平触发</td>
+			</tr>
+			<tr>
+					<td>D0-D7</td>
+					<td>数据线</td>
+					<td>4 位模式用 D4-D7，8 位模式用 D0-D7</td>
+			</tr>
+			<tr>
+					<td>A</td>
+					<td>背光电源正</td>
+					<td>接 5V</td>
+			</tr>
+			<tr>
+					<td>K</td>
+					<td>背光电源地</td>
+					<td>接 GND</td>
+			</tr>
+	</tbody>
 </table></div>
 <p>如果是 I²C 版本（带 PCF8574 扩展板），只保留 4 个引脚：</p>
 <ul>
@@ -648,28 +648,28 @@
 <li>如果 LCD1602 连接了 I2C 扩展模块（如 PCF8574 芯片），它就可以通过 I2C 总线（SDA/SCL）进行通信，这样就减少了引脚使用</li>
 </ul>
 <div class="table-wrapper"><table>
-  <thead>
-      <tr>
-          <th>方法</th>
-          <th>GPIO 口占用</th>
-          <th>代码复杂度</th>
-          <th>适用场景</th>
-      </tr>
-  </thead>
-  <tbody>
-      <tr>
-          <td><strong>使用 I2C 驱动（推荐）</strong></td>
-          <td><strong>仅 2 根线</strong></td>
-          <td><strong>简单</strong>，调用 Python 函数即可</td>
-          <td><strong>适合 ESP32，节省引脚</strong></td>
-      </tr>
-      <tr>
-          <td><strong>直接用 GPIO（无驱动）</strong></td>
-          <td><strong>6~8 根线</strong></td>
-          <td><strong>复杂</strong>，手动写 LCD 指令</td>
-          <td><strong>适用于无 I2C 模块的 LCD1602</strong></td>
-      </tr>
-  </tbody>
+	<thead>
+			<tr>
+					<th>方法</th>
+					<th>GPIO 口占用</th>
+					<th>代码复杂度</th>
+					<th>适用场景</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>使用 I2C 驱动（推荐）</strong></td>
+					<td><strong>仅 2 根线</strong></td>
+					<td><strong>简单</strong>，调用 Python 函数即可</td>
+					<td><strong>适合 ESP32，节省引脚</strong></td>
+			</tr>
+			<tr>
+					<td><strong>直接用 GPIO（无驱动）</strong></td>
+					<td><strong>6~8 根线</strong></td>
+					<td><strong>复杂</strong>，手动写 LCD 指令</td>
+					<td><strong>适用于无 I2C 模块的 LCD1602</strong></td>
+			</tr>
+	</tbody>
 </table></div>
 <p>在 ESP32 + LCD1602 I2C 方案中，驱动的作用是：</p>
 <ul>
