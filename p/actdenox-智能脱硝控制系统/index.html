@@ -338,9 +338,10 @@
     <li><a href="#八pid-控制">八、PID 控制</a>
       <ol>
         <li><a href="#81-参数说明">8.1 参数说明</a></li>
-        <li><a href="#82-健康指示灯">8.2 健康指示灯</a></li>
-        <li><a href="#83-远程复位">8.3 远程复位</a></li>
-        <li><a href="#84-手动自动无扰动切换bumpless-transfer">8.4 手动/自动无扰动切换（Bumpless Transfer）</a></li>
+        <li><a href="#82-史密斯预估器smith-predictor">8.2 史密斯预估器（Smith Predictor）</a></li>
+        <li><a href="#83-健康指示灯与-smith-显示">8.3 健康指示灯与 Smith 显示</a></li>
+        <li><a href="#84-远程复位">8.4 远程复位</a></li>
+        <li><a href="#85-手动自动无扰动切换bumpless-transfer">8.5 手动/自动无扰动切换（Bumpless Transfer）</a></li>
       </ol>
     </li>
     <li><a href="#九仪表盘">九、仪表盘</a>
@@ -378,11 +379,11 @@
         <li><a href="#135-切换账号">13.5 切换账号</a></li>
       </ol>
     </li>
-    <li><a href="#十四系统工具与备份">十四、系统工具与备份</a>
+    <li><a href="#十四系统工具">十四、系统工具</a>
       <ol>
-        <li><a href="#141-配置备份与恢复">14.1 配置备份与恢复</a></li>
-        <li><a href="#142-数据备份">14.2 数据备份</a></li>
-        <li><a href="#143-数据清理">14.3 数据清理</a></li>
+        <li><a href="#141-开机自启">14.1 开机自启</a></li>
+        <li><a href="#142-配置备份与恢复">14.2 配置备份与恢复</a></li>
+        <li><a href="#143-数据备份与数据库信息">14.3 数据备份与数据库信息</a></li>
       </ol>
     </li>
     <li><a href="#十五配置文件与数据文件参考">十五、配置文件与数据文件参考</a>
@@ -937,6 +938,24 @@
 					<td>补偿引擎自动控制的积分冻结标志</td>
 			</tr>
 			<tr>
+					<td><code>PID-1_schedFactor</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>增益调度缩放因子（1=基准工况）</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_FF</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>前馈控制分量实时值</td>
+			</tr>
+			<tr>
+					<td><code>PID-1_smithPV</code></td>
+					<td>数值</td>
+					<td>输出</td>
+					<td>史密斯预估器预测 PV 值（关闭预估器时 = 实际 PV）</td>
+			</tr>
+			<tr>
 					<td><code>&lt;输出目标&gt;</code></td>
 					<td>数值</td>
 					<td>输出</td>
@@ -1139,9 +1158,75 @@
 					<td>输出寄存器的字节/字排列</td>
 					<td>float32 时需与设备一致</td>
 			</tr>
+			<tr>
+					<td>反向作用</td>
+					<td>勾选后 error = PV − SP（脱硝等负增益过程）</td>
+					<td><strong>脱硝推荐开启</strong></td>
+			</tr>
+			<tr>
+					<td>前馈源变量</td>
+					<td>可测扰动变量名（如入口 NOX），按系数直接叠加到输出</td>
+					<td>提升对入口波动的响应速度</td>
+			</tr>
+			<tr>
+					<td>前馈系数/偏置</td>
+					<td>FF = 源变量 × 系数 + 偏置</td>
+					<td></td>
+			</tr>
+			<tr>
+					<td>增益调度</td>
+					<td>根据工况变量动态缩放 P/I/D 系数</td>
+					<td>高负荷自动增强，低负荷减弱</td>
+			</tr>
+			<tr>
+					<td>调度源变量/基准值/敏感度</td>
+					<td>Factor = 1 + (当前值 − 基准值) × 敏感度</td>
+					<td></td>
+			</tr>
 	</tbody>
 </table></div>
-<h3 id="82-健康指示灯">8.2 健康指示灯
+<h3 id="82-史密斯预估器smith-predictor">8.2 史密斯预估器（Smith Predictor）
+</h3><p>脱硝系统最大的物理特性是<strong>纯滞后</strong>——从喷氨泵动作到出口 CEMS 读数变化，存在 3~15 分钟的物理延迟。传统 PID 面对超大滞后极易过冲或振荡。</p>
+<p>史密斯预估器通过建立<strong>一阶 + 纯滞后 (FOPDT) 过程模型</strong>，预测 &quot; 如果没有滞后，PV 现在应该是什么值 &ldquo;，将预测值送入 PID 计算，使控制器提前响应。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>参数</th>
+					<th>说明</th>
+					<th>建议</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>启用预估器</td>
+					<td>开启后 PID 使用 Smith 预测 PV 进行控制</td>
+					<td>先整定好 Kp/Ki 再开启</td>
+			</tr>
+			<tr>
+					<td>滞后时间 (s)</td>
+					<td>纯滞后 τ，从喷氨到 CEMS 读数的延迟</td>
+					<td>典型范围 180<del>900（3</del>15 分钟）</td>
+			</tr>
+			<tr>
+					<td>时间常数 (s)</td>
+					<td>一阶惯性 T，过程响应快慢</td>
+					<td>T 越大响应越慢，需现场测定</td>
+			</tr>
+			<tr>
+					<td>过程增益 K</td>
+					<td>ΔPV / Δ输出（如 +5Hz → -10mg/m³ → K=-2）</td>
+					<td>脱硝通常为负值</td>
+			</tr>
+	</tbody>
+</table></div>
+<p><strong>启用后效果</strong>：</p>
+<ul>
+<li>趋势图新增紫色「预估 PV」曲线，可对比实际 PV 观察预估准确性</li>
+<li>运行控制区新增「史密斯预估 PV」行，显示预测值及与 SP 的偏差</li>
+<li>内部变量 <code>PID-1_smithPV</code> 记录预测值，可存入数据库用于离线分析</li>
+<li>关闭预估器时预估 PV = 实际 PV，两者一致</li>
+</ul>
+<h3 id="83-健康指示灯与-smith-显示">8.3 健康指示灯与 Smith 显示
 </h3><p>PID 运行控制区显示两个实时状态：</p>
 <div class="table-wrapper"><table>
 	<thead>
@@ -1167,9 +1252,9 @@
 			</tr>
 	</tbody>
 </table></div>
-<h3 id="83-远程复位">8.3 远程复位
+<h3 id="84-远程复位">8.4 远程复位
 </h3><p>DCS 通过 Modbus 从机写入 <code>PID-1_reset_trigger = 1</code> → PID 自动清零（积分归零、历史清空）→ 自动写回 0。只响应 0→1 上升沿，DCS 持续保持 1 不会反复触发。</p>
-<h3 id="84-手动自动无扰动切换bumpless-transfer">8.4 手动/自动无扰动切换（Bumpless Transfer）
+<h3 id="85-手动自动无扰动切换bumpless-transfer">8.5 手动/自动无扰动切换（Bumpless Transfer）
 </h3><p>PID 控制回路支持<strong>手动模式</strong>与<strong>自动模式</strong>之间的平滑切换。切换瞬间，系统内置的无扰动跟踪算法自动介入，确保控制输出信号<strong>绝对不发生任何突跳或骤变</strong>。</p>
 <p><strong>适用场景</strong>：</p>
 <ul>
@@ -1467,17 +1552,23 @@
 <h3 id="135-切换账号">13.5 切换账号
 </h3><p>首页顶栏和用户管理页面均有「切换账号」按钮，无需先退出即可换账号。</p>
 <hr>
-<h2 id="十四系统工具与备份">十四、系统工具与备份
-</h2><h3 id="141-配置备份与恢复">14.1 配置备份与恢复
+<h2 id="十四系统工具">十四、系统工具
+</h2><p>系统工具页面（导航栏「🔧 工具」）整合了所有系统级配置，admin 和 operator 角色可访问。</p>
+<h3 id="141-开机自启">14.1 开机自启
+</h3><p>控制程序是否随系统启动自动运行。开关即时生效，写入系统注册表。</p>
+<h3 id="142-配置备份与恢复">14.2 配置备份与恢复
 </h3><ul>
-<li><strong>导出配置备份</strong>：将所有配置文件打包为一个 JSON 文件，默认保存到用户的 &quot; 文档 &quot; 文件夹</li>
-<li><strong>导入配置备份</strong>：从备份文件恢复。支持选择性恢复（勾选要恢复的项）</li>
-<li>备份文件列表自动扫描 <code>data/</code> 目录，新增配置自动纳入</li>
+<li><strong>文件勾选列表</strong>：列出所有可备份的配置文件（含中文名称），可全选/取消全选</li>
+<li><strong>导出选中配置</strong>：仅导出勾选的配置文件 → 弹出保存对话框，默认路径为用户 &quot; 文档 &quot; 文件夹</li>
+<li><strong>导出全部配置</strong>：一键导出所有配置文件</li>
+<li><strong>导入配置备份</strong>：从之前导出的 JSON 文件恢复。支持选择性恢复（勾选要恢复的项）</li>
 </ul>
-<h3 id="142-数据备份">14.2 数据备份
-</h3><p>每天凌晨 3:00 自动将 <code>data/</code> 下所有文件备份到 <code>data/backups/YYYY-MM-DD/</code>，保留 30 天。</p>
-<h3 id="143-数据清理">14.3 数据清理
-</h3><p>每天凌晨 3:00 自动删除超过保留天数（默认 180 天）的历史数据。在数据保存页面可调整保留天数。</p>
+<h3 id="143-数据备份与数据库信息">14.3 数据备份与数据库信息
+</h3><ul>
+<li><strong>立即备份数据文件</strong>：手动触发一次文件级备份到 <code>data/backups/当天日期/</code></li>
+<li><strong>数据库文件大小</strong>：实时显示 datastore.sqlite / auth.db / alarm_history.sqlite / audit_log.sqlite / error.log 的大小</li>
+<li><strong>数据保留天数</strong>：请在「数据保存与查询」页面中设置（每天凌晨 3:00 自动执行清理和备份）</li>
+</ul>
 <hr>
 <h2 id="十五配置文件与数据文件参考">十五、配置文件与数据文件参考
 </h2><h3 id="151-文件清单">15.1 文件清单

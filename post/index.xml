@@ -490,6 +490,24 @@
 					&lt;td&gt;补偿引擎自动控制的积分冻结标志&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;PID-1_schedFactor&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;数值&lt;/td&gt;
+					&lt;td&gt;输出&lt;/td&gt;
+					&lt;td&gt;增益调度缩放因子（1=基准工况）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;PID-1_FF&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;数值&lt;/td&gt;
+					&lt;td&gt;输出&lt;/td&gt;
+					&lt;td&gt;前馈控制分量实时值&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;PID-1_smithPV&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;数值&lt;/td&gt;
+					&lt;td&gt;输出&lt;/td&gt;
+					&lt;td&gt;史密斯预估器预测 PV 值（关闭预估器时 = 实际 PV）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
 					&lt;td&gt;&lt;code&gt;&amp;lt;输出目标&amp;gt;&lt;/code&gt;&lt;/td&gt;
 					&lt;td&gt;数值&lt;/td&gt;
 					&lt;td&gt;输出&lt;/td&gt;
@@ -692,9 +710,75 @@
 					&lt;td&gt;输出寄存器的字节/字排列&lt;/td&gt;
 					&lt;td&gt;float32 时需与设备一致&lt;/td&gt;
 			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;反向作用&lt;/td&gt;
+					&lt;td&gt;勾选后 error = PV − SP（脱硝等负增益过程）&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;脱硝推荐开启&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;前馈源变量&lt;/td&gt;
+					&lt;td&gt;可测扰动变量名（如入口 NOX），按系数直接叠加到输出&lt;/td&gt;
+					&lt;td&gt;提升对入口波动的响应速度&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;前馈系数/偏置&lt;/td&gt;
+					&lt;td&gt;FF = 源变量 × 系数 + 偏置&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;增益调度&lt;/td&gt;
+					&lt;td&gt;根据工况变量动态缩放 P/I/D 系数&lt;/td&gt;
+					&lt;td&gt;高负荷自动增强，低负荷减弱&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;调度源变量/基准值/敏感度&lt;/td&gt;
+					&lt;td&gt;Factor = 1 + (当前值 − 基准值) × 敏感度&lt;/td&gt;
+					&lt;td&gt;&lt;/td&gt;
+			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;82-健康指示灯&#34;&gt;8.2 健康指示灯
+&lt;h3 id=&#34;82-史密斯预估器smith-predictor&#34;&gt;8.2 史密斯预估器（Smith Predictor）
+&lt;/h3&gt;&lt;p&gt;脱硝系统最大的物理特性是&lt;strong&gt;纯滞后&lt;/strong&gt;——从喷氨泵动作到出口 CEMS 读数变化，存在 3~15 分钟的物理延迟。传统 PID 面对超大滞后极易过冲或振荡。&lt;/p&gt;
+&lt;p&gt;史密斯预估器通过建立&lt;strong&gt;一阶 + 纯滞后 (FOPDT) 过程模型&lt;/strong&gt;，预测 &amp;quot; 如果没有滞后，PV 现在应该是什么值 &amp;ldquo;，将预测值送入 PID 计算，使控制器提前响应。&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;参数&lt;/th&gt;
+					&lt;th&gt;说明&lt;/th&gt;
+					&lt;th&gt;建议&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;启用预估器&lt;/td&gt;
+					&lt;td&gt;开启后 PID 使用 Smith 预测 PV 进行控制&lt;/td&gt;
+					&lt;td&gt;先整定好 Kp/Ki 再开启&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;滞后时间 (s)&lt;/td&gt;
+					&lt;td&gt;纯滞后 τ，从喷氨到 CEMS 读数的延迟&lt;/td&gt;
+					&lt;td&gt;典型范围 180&lt;del&gt;900（3&lt;/del&gt;15 分钟）&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;时间常数 (s)&lt;/td&gt;
+					&lt;td&gt;一阶惯性 T，过程响应快慢&lt;/td&gt;
+					&lt;td&gt;T 越大响应越慢，需现场测定&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;过程增益 K&lt;/td&gt;
+					&lt;td&gt;ΔPV / Δ输出（如 +5Hz → -10mg/m³ → K=-2）&lt;/td&gt;
+					&lt;td&gt;脱硝通常为负值&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;&lt;strong&gt;启用后效果&lt;/strong&gt;：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;趋势图新增紫色「预估 PV」曲线，可对比实际 PV 观察预估准确性&lt;/li&gt;
+&lt;li&gt;运行控制区新增「史密斯预估 PV」行，显示预测值及与 SP 的偏差&lt;/li&gt;
+&lt;li&gt;内部变量 &lt;code&gt;PID-1_smithPV&lt;/code&gt; 记录预测值，可存入数据库用于离线分析&lt;/li&gt;
+&lt;li&gt;关闭预估器时预估 PV = 实际 PV，两者一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;83-健康指示灯与-smith-显示&#34;&gt;8.3 健康指示灯与 Smith 显示
 &lt;/h3&gt;&lt;p&gt;PID 运行控制区显示两个实时状态：&lt;/p&gt;
 &lt;table&gt;
 	&lt;thead&gt;
@@ -720,9 +804,9 @@
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;h3 id=&#34;83-远程复位&#34;&gt;8.3 远程复位
+&lt;h3 id=&#34;84-远程复位&#34;&gt;8.4 远程复位
 &lt;/h3&gt;&lt;p&gt;DCS 通过 Modbus 从机写入 &lt;code&gt;PID-1_reset_trigger = 1&lt;/code&gt; → PID 自动清零（积分归零、历史清空）→ 自动写回 0。只响应 0→1 上升沿，DCS 持续保持 1 不会反复触发。&lt;/p&gt;
-&lt;h3 id=&#34;84-手动自动无扰动切换bumpless-transfer&#34;&gt;8.4 手动/自动无扰动切换（Bumpless Transfer）
+&lt;h3 id=&#34;85-手动自动无扰动切换bumpless-transfer&#34;&gt;8.5 手动/自动无扰动切换（Bumpless Transfer）
 &lt;/h3&gt;&lt;p&gt;PID 控制回路支持&lt;strong&gt;手动模式&lt;/strong&gt;与&lt;strong&gt;自动模式&lt;/strong&gt;之间的平滑切换。切换瞬间，系统内置的无扰动跟踪算法自动介入，确保控制输出信号&lt;strong&gt;绝对不发生任何突跳或骤变&lt;/strong&gt;。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：&lt;/p&gt;
 &lt;ul&gt;
@@ -1020,17 +1104,23 @@
 &lt;h3 id=&#34;135-切换账号&#34;&gt;13.5 切换账号
 &lt;/h3&gt;&lt;p&gt;首页顶栏和用户管理页面均有「切换账号」按钮，无需先退出即可换账号。&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;十四系统工具与备份&#34;&gt;十四、系统工具与备份
-&lt;/h2&gt;&lt;h3 id=&#34;141-配置备份与恢复&#34;&gt;14.1 配置备份与恢复
+&lt;h2 id=&#34;十四系统工具&#34;&gt;十四、系统工具
+&lt;/h2&gt;&lt;p&gt;系统工具页面（导航栏「🔧 工具」）整合了所有系统级配置，admin 和 operator 角色可访问。&lt;/p&gt;
+&lt;h3 id=&#34;141-开机自启&#34;&gt;14.1 开机自启
+&lt;/h3&gt;&lt;p&gt;控制程序是否随系统启动自动运行。开关即时生效，写入系统注册表。&lt;/p&gt;
+&lt;h3 id=&#34;142-配置备份与恢复&#34;&gt;14.2 配置备份与恢复
 &lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;导出配置备份&lt;/strong&gt;：将所有配置文件打包为一个 JSON 文件，默认保存到用户的 &amp;quot; 文档 &amp;quot; 文件夹&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;导入配置备份&lt;/strong&gt;：从备份文件恢复。支持选择性恢复（勾选要恢复的项）&lt;/li&gt;
-&lt;li&gt;备份文件列表自动扫描 &lt;code&gt;data/&lt;/code&gt; 目录，新增配置自动纳入&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;文件勾选列表&lt;/strong&gt;：列出所有可备份的配置文件（含中文名称），可全选/取消全选&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;导出选中配置&lt;/strong&gt;：仅导出勾选的配置文件 → 弹出保存对话框，默认路径为用户 &amp;quot; 文档 &amp;quot; 文件夹&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;导出全部配置&lt;/strong&gt;：一键导出所有配置文件&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;导入配置备份&lt;/strong&gt;：从之前导出的 JSON 文件恢复。支持选择性恢复（勾选要恢复的项）&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;142-数据备份&#34;&gt;14.2 数据备份
-&lt;/h3&gt;&lt;p&gt;每天凌晨 3:00 自动将 &lt;code&gt;data/&lt;/code&gt; 下所有文件备份到 &lt;code&gt;data/backups/YYYY-MM-DD/&lt;/code&gt;，保留 30 天。&lt;/p&gt;
-&lt;h3 id=&#34;143-数据清理&#34;&gt;14.3 数据清理
-&lt;/h3&gt;&lt;p&gt;每天凌晨 3:00 自动删除超过保留天数（默认 180 天）的历史数据。在数据保存页面可调整保留天数。&lt;/p&gt;
+&lt;h3 id=&#34;143-数据备份与数据库信息&#34;&gt;14.3 数据备份与数据库信息
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;立即备份数据文件&lt;/strong&gt;：手动触发一次文件级备份到 &lt;code&gt;data/backups/当天日期/&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据库文件大小&lt;/strong&gt;：实时显示 datastore.sqlite / auth.db / alarm_history.sqlite / audit_log.sqlite / error.log 的大小&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;数据保留天数&lt;/strong&gt;：请在「数据保存与查询」页面中设置（每天凌晨 3:00 自动执行清理和备份）&lt;/li&gt;
+&lt;/ul&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;十五配置文件与数据文件参考&#34;&gt;十五、配置文件与数据文件参考
 &lt;/h2&gt;&lt;h3 id=&#34;151-文件清单&#34;&gt;15.1 文件清单
@@ -1424,7 +1514,7 @@
         <guid>https://teaize.github.io/p/%E6%99%BA%E8%83%BD%E8%84%B1%E7%A1%9D%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F-%E5%BC%80%E5%8F%91%E6%B8%85%E5%8D%95/</guid>
         <description>&lt;h1 id=&#34;开发清单--actdenox-智能脱硝控制系统&#34;&gt;开发清单 — ActDenox 智能脱硝控制系统
 &lt;/h1&gt;&lt;blockquote&gt;
-&lt;p&gt;最后更新：2026-06-07 | 版本 v1.0.0-rc2（安全加固 + 代码审查）&lt;/p&gt;
+&lt;p&gt;最后更新：2026-06-08 | 版本 v1.0.0-rc4（终局审查 + 精准重构，15 文件全量通过）&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;一项目最新技术指标&#34;&gt;一、项目最新技术指标
@@ -1583,6 +1673,7 @@
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;78
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;79
 &lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;80
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;81
 &lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
 &lt;td class=&#34;lntd&#34;&gt;
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-gdscript3&#34; data-lang=&#34;gdscript3&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;Electron_Test&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;
@@ -1600,12 +1691,13 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;configManager&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;              &lt;span class=&#34;err&#34;&gt;统一配置管理器&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;load&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;save&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;list&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;backupAll&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;restoreAll&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;variableRegistry&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;           &lt;span class=&#34;err&#34;&gt;变量元数据注册表&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;单例&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;category&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;description&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;unit&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;writable&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modbusUtils&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                &lt;span class=&#34;mi&#34;&gt;344&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Modbus&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;共享工具&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;CRC16&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;帧构建解析&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字节重排&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;寄存器↔值转换&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pidDefaults&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                 &lt;span class=&#34;mi&#34;&gt;24&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;PID&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;默认配置模板（单一来源，杜绝分叉）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;licenseKey&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                  &lt;span class=&#34;mi&#34;&gt;29&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;授权密钥单一来源（&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;authManager&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;generateLicense&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;共用）&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pidDefaults&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                 &lt;span class=&#34;mi&#34;&gt;52&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;PID&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;默认配置模板（单一来源，杜绝分叉）&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;constants&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                    &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;全局常量&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;MAX_INTERNAL_VARIABLES&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;  &lt;span class=&#34;err&#34;&gt;★&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;业务逻辑模块&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;—&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;有状态&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;独立自治&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;│&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modbusManage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;               &lt;span class=&#34;mi&#34;&gt;625&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Modbus&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;主机&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;连接&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;队列&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;诊断&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;重连&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modbusManage&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;               &lt;span class=&#34;mi&#34;&gt;590&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Modbus&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;主机&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;连接&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;队列&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;诊断&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;重连，&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PID退避已上移至pidOrchestrator&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;modbusSlave&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                &lt;span class=&#34;mi&#34;&gt;392&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;Modbus&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;RTU&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;从机&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;ServerSerial&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;帧捕获&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;回显过滤&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pidController&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;              &lt;span class=&#34;mi&#34;&gt;209&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;PID&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;控制器类&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;位置式&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;抗饱和&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;微分先行&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;低通滤波&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;err&#34;&gt;├──&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dataStore&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;js&lt;/span&gt;                   &lt;span class=&#34;mi&#34;&gt;300&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;行&lt;/span&gt;  &lt;span class=&#34;n&#34;&gt;SQLite&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;数据存储&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;自动建列&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;聚合查询&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;列管理&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;健康&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
@@ -1745,6 +1837,19 @@
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 多实例 PID 控制器（增删/Tab 切换）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 位置式 PID + 积分抗饱和 + 微分先行&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; PV 低通滤波 / 死区 / 输出变化率限制&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ★ &lt;strong&gt;反向作用（Reverse Action）&lt;/strong&gt; — 脱硝等负增益过程，error = PV − SP&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ★ &lt;strong&gt;前馈控制（Feed-forward）&lt;/strong&gt; — 可测扰动直接叠加到输出&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ★ &lt;strong&gt;增益调度（Gain Scheduling）&lt;/strong&gt; — 根据工况变量动态缩放 P/I/D 系数&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ★ &lt;strong&gt;史密斯预估器（Smith Predictor）&lt;/strong&gt; — 补偿 3~15 分钟纯滞后
+&lt;ul&gt;
+&lt;li&gt;偏差模型：仅模拟频率变化量 → PV 变化量的增量关系&lt;/li&gt;
+&lt;li&gt;ZOH 精确离散：α = exp(-Δt/T) 一阶惯性差分方程&lt;/li&gt;
+&lt;li&gt;纯滞后环形缓冲区（支持 τ = 180~900s）&lt;/li&gt;
+&lt;li&gt;派生变量 &lt;code&gt;PID-1_smithPV&lt;/code&gt;（可存入数据库分析）&lt;/li&gt;
+&lt;li&gt;趋势图预估 PV 曲线（紫色实线）&lt;/li&gt;
+&lt;li&gt;运行控制区第二行对齐显示（预估 PV | SP | 偏差）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ★ &lt;strong&gt;手动/自动无扰动切换（Bumpless Transfer）&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;自动→手动：反算积分项对齐当前输出（输出零跳变）&lt;/li&gt;
@@ -1754,7 +1859,7 @@
 &lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 远程复位信号（上升沿触发，只响应 0→1）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 补偿引擎积分冻结联动&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ECharts 实时趋势（SP/PV/总输出/修正 四曲线 + 偏差带虚线）&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; ECharts 实时趋势（SP/PV/预估 PV/总输出/修正 五曲线 + 偏差带虚线）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 健康指示灯（输出饱和 + 偏差状态 + 偏离持续时长）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 周期溢出检测 + 定时器卡死看门狗（3×采样周期强制释放）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 启动延迟 3s（等待 Modbus 连接就绪）&lt;/li&gt;
@@ -1806,12 +1911,13 @@
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; contextIsolation: true + nodeIntegration: false（进程严格隔离）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 所有 IPC 通过 invoke/handle（无 on/send 裸通道）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 配置原子写入（tmp + copyFile + unlink，防断电损坏）&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 配置备份与恢复（动态扫描 data/，选择性恢复）&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;系统工具页面&lt;/strong&gt;：开机自启开关、配置文件勾选备份/恢复、数据备份触发、数据库大小查看&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 配置备份与恢复（动态扫描 data/，选择性导出/导入，默认路径为用户文档目录）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 进程退出快照记录（模块状态完整 dump → error.log）&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 错误日志统一写入 error.log&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 错误日志统一写入 error.log（已废弃按天滚动）&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 全局异常守卫（uncaughtException + unhandledRejection + SIGINT/SIGTERM）&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 系统托盘 + 最小化到托盘 + 开机自启&lt;/li&gt;
-&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 电源休眠阻止 + 休眠唤醒全自动恢复&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 系统托盘 + 最小化到托盘&lt;/li&gt;
+&lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 电源休眠阻止 + 休眠唤醒全自动恢复 + before-quit 释放阻止器&lt;/li&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; 代码混淆保护（javascript-obfuscator，打包时自动）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
@@ -1935,7 +2041,181 @@
 &lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;报警/PID 复杂算法流程图&lt;/strong&gt;：报警延时触发状态机、PID 无扰动切换反算公式、补偿引擎状态机建议补充 ASCII 流程图注释&lt;/li&gt;
 &lt;/ul&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;七版本历史&#34;&gt;七、版本历史
+&lt;h2 id=&#34;七v11-版本技术债与长效架构优化清单&#34;&gt;七、V1.1 版本技术债与长效架构优化清单
+&lt;/h2&gt;&lt;blockquote&gt;
+&lt;p&gt;以下 4 项架构调整在 v1.0.0-rc4 终局审查中确认，当前系统表现完美，&lt;strong&gt;本次打包不予执行&lt;/strong&gt;。待 V1.1 迭代时集中处理。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h3 id=&#34;71-ipc-deps-巨型对象分解审计项-31&#34;&gt;7.1 IPC deps 巨型对象分解（审计项 3.1）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;目标&lt;/strong&gt;：将 &lt;code&gt;main.js&lt;/code&gt; 中 63 属性的单体 &lt;code&gt;deps&lt;/code&gt; 对象拆分为逻辑分组&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ipcDeps&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;electron&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;   &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;ipcMain&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;BrowserWindow&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;dialog&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;shell&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;app&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;modules&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;    &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;modbus&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;modbusSlave&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;dataStore&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alarmManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;authManager&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;config&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;     &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;cm&#34;&gt;/* getter/setter 代理对 */&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;operations&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;startBackgroundPolling&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stopBackgroundPolling&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;nx&#34;&gt;state&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt;      &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;latestParsedItems&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;latestRawRegisters&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;...&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;},&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;收益&lt;/strong&gt;：各 IPC 模块仅接收自己需要的分组，消除 &amp;quot; 全量注入 &amp;quot; 的隐式耦合&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;风险&lt;/strong&gt;：涉及 7 个 IPC 文件 + &lt;code&gt;main.js&lt;/code&gt; 的 deps 组装区，约 80 行变更&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;优先级&lt;/strong&gt;：🟡 中 — 不影响功能，纯架构洁癖&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;72-systemipcjs-关注点分离审计项-32&#34;&gt;7.2 systemIpc.js 关注点分离（审计项 3.2）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;目标&lt;/strong&gt;：将 272 行的 &lt;code&gt;systemIpc.js&lt;/code&gt;（承载 9 个独立关注点）拆分为 5 个单一职责 IPC 文件&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;拆分方案&lt;/strong&gt;：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;新文件&lt;/th&gt;
+					&lt;th&gt;职责&lt;/th&gt;
+					&lt;th&gt;预计行数&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;ipc/systemHealthIpc.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;健康状态聚合 + 变量元数据&lt;/td&gt;
+					&lt;td&gt;~50&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;ipc/configBackupIpc.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;配置备份/恢复/列出/预览&lt;/td&gt;
+					&lt;td&gt;~120&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;ipc/dashboardIpc.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;仪表盘布局读写&lt;/td&gt;
+					&lt;td&gt;~30&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;ipc/dialogIpc.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;原生对话框 (showMessage/showConfirm)&lt;/td&gt;
+					&lt;td&gt;~25&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;ipc/rulesFileIpc.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;解析规则文件 CRUD&lt;/td&gt;
+					&lt;td&gt;~35&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;收益&lt;/strong&gt;：每个文件 ≤ 120 行，职责单一，易于独立测试和维护&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;风险&lt;/strong&gt;：需在 &lt;code&gt;main.js&lt;/code&gt; 中新增 4 个 &lt;code&gt;require&lt;/code&gt; 调用，IPC 通道名不变（对前端透明）&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;优先级&lt;/strong&gt;：🟡 中 — 当前 systemIpc.js 结构清晰，拆分非紧急&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;73-datapipeline-内部函数暴露给-pid-层的耦合审计项-34&#34;&gt;7.3 dataPipeline 内部函数暴露给 PID 层的耦合（审计项 3.4）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;问题&lt;/strong&gt;：&lt;code&gt;pidOrchestrator.js&lt;/code&gt; 调用 &lt;code&gt;dataPipeline.applyFiltersToItems()&lt;/code&gt; 时需构造伪 items 数组，绕过了管线的标准接口&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;方案&lt;/strong&gt;：在 &lt;code&gt;dataPipeline.js&lt;/code&gt; 中新增专用函数：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-js&#34; data-lang=&#34;js&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;applyFiltersToValue&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;value&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;fieldName&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 内部构造单元素 items，调用 applyFiltersToItems，返回过滤后的值
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;收益&lt;/strong&gt;：PID 层无需了解管线的内部数据结构（items 格式），通信通过语义化 API&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;风险&lt;/strong&gt;：低 — 仅新增一个函数，不改变现有行为&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;优先级&lt;/strong&gt;：🟢 低 — 功能正常，纯接口优化&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;74-渲染层大文件拆分审计项-36&#34;&gt;7.4 渲染层大文件拆分（审计项 3.6）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;目标&lt;/strong&gt;：对渲染进程中超过 400 行的页面 JS 文件进行关注点分离&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;涉及文件&lt;/strong&gt;（预估行数）：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;文件&lt;/th&gt;
+					&lt;th&gt;关注点&lt;/th&gt;
+					&lt;th&gt;建议拆分&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;pid.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;DOM 绑定 + API 调用 + ECharts 图表 + 状态轮询&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;pid-chart.js&lt;/code&gt; / &lt;code&gt;pid-controls.js&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;modbusRender.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;DOM 绑定 + API 调用 + 规则表编辑 + 诊断轮询&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;modbus-rules.js&lt;/code&gt; / &lt;code&gt;modbus-diag.js&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;code&gt;dashboard.js&lt;/code&gt;&lt;/td&gt;
+					&lt;td&gt;组件渲染 + 历史查询 + 拖拽 + 模板管理&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;dashboard-charts.js&lt;/code&gt; / &lt;code&gt;dashboard-layout.js&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;额外&lt;/strong&gt;：8 个 HTML 文件中重复的 &lt;code&gt;display: grid; grid-template-columns&lt;/code&gt; 样式提取到 &lt;code&gt;index.css&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;收益&lt;/strong&gt;：单文件 ≤ 300 行，渲染进程可测试性提升&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;风险&lt;/strong&gt;：中等 — 涉及 HTML &lt;code&gt;&amp;lt;script&amp;gt;&lt;/code&gt; 标签变更，需逐页回归测试&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; &lt;strong&gt;优先级&lt;/strong&gt;：🟢 低 — 当前渲染层运行稳定，拆分非紧急&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;八版本历史&#34;&gt;八、版本历史
 &lt;/h2&gt;&lt;table&gt;
 	&lt;thead&gt;
 			&lt;tr&gt;
@@ -1945,6 +2225,16 @@
 			&lt;/tr&gt;
 	&lt;/thead&gt;
 	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;1.0.0-rc4&lt;/td&gt;
+					&lt;td&gt;2026-06-08&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;终局代码审查与精准重构&lt;/strong&gt;（15 文件，全量通过 node &amp;ndash;check）：统一 dataDir 注入（4 模块废除自计算 electron require）+ alarmManager ConfigManager DI 解耦 + 电源事件监听器生命周期清理 + 关键空 catch 升级 writeErrorLog + 死代码删除（bufferToRegisterArray/loadArray/getRolePermissions）+ 密钥源去重（licenseKey.js）+ Modbus 异常码去重 + PID 写入退避逻辑从 Modbus 层上移至 PID 编排器 + 无扰动切换/Smith 预估器深度 JSDoc&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;1.0.0-rc3&lt;/td&gt;
+					&lt;td&gt;2026-06-07&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;史密斯预估器 + 系统工具&lt;/strong&gt;：PID 新增史密斯预估器（FOPDT 偏差模型 + ZOH 精确离散 + 纯滞后环形缓冲区）+ 反向作用（error = PV − SP）+ 前馈控制 + 增益调度；新增系统工具页面（开机自启开关 + 配置文件勾选备份/恢复 + 数据备份触发 + 数据库大小展示）；PID 趋势图新增预估 PV 紫色曲线 + 运行控制区预估 PV/SP/偏差对齐显示；派生变量 &lt;code&gt;_smithPV&lt;/code&gt; 支持数据库存储分析；修正 Smith 初始化符号翻转 bug 及输入基准对齐；错误日志从按天滚动改为统一 error.log；data.html 风格对齐 auth.html&lt;/td&gt;
+			&lt;/tr&gt;
 			&lt;tr&gt;
 					&lt;td&gt;1.0.0-rc2&lt;/td&gt;
 					&lt;td&gt;2026-06-07&lt;/td&gt;
