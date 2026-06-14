@@ -7,7 +7,229 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 04 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 14 Jun 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>仓位大小</title>
+        <link>https://teaize.github.io/p/%E4%BB%93%E4%BD%8D%E5%A4%A7%E5%B0%8F/</link>
+        <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BB%93%E4%BD%8D%E5%A4%A7%E5%B0%8F/</guid>
+        <description>&lt;p&gt;公式：仓位大小 = (账户总额 × 风险百分比) / (Entry - Stop Loss)
+目的：控制单笔风险（通常账户 1-2%）。这是防止爆仓的命门
+应用：永远先定风险金额，再算能买多少手/股/合约&lt;/p&gt;
+&lt;p&gt;仓位大小（股数）= (账户总资金 × 风险百分比) / 单笔止损距离&lt;/p&gt;
+&lt;p&gt;例子（假设你账户 100 万人民币）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你决定单笔风险 1% → 单笔最多能亏 1 万元。&lt;/li&gt;
+&lt;li&gt;某只股票：买入价 10 元，你设止损在 9.5 元（止损距离 0.5 元/股）&lt;/li&gt;
+&lt;li&gt;那么你能买的股数 = 10,000 元 / 0.5 元 = 20,000 股（价值 20 万元）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;这笔交易用了你账户 20% 的资金（20 万/100 万），但风险只有 1%。 即使这只股票暴跌到止损，你也只亏 1 万，账户还剩 99 万。&lt;/p&gt;
+&lt;h3 id=&#34;计算流程&#34;&gt;计算流程
+&lt;/h3&gt;&lt;p&gt;1、先确定单笔风险金额（最重要，先保护本金）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;通常为账户总资金的 &lt;strong&gt;0.5%～2%&lt;/strong&gt;（新手建议 1% 以内）。&lt;/li&gt;
+&lt;li&gt;示例：账户 100 万 → 单笔风险 1% = &lt;strong&gt;1 万元&lt;/strong&gt;（最多只能亏这么多）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;2、再确定止损距离（基于技术分析或价格行为）&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;止损价 = 入场价下方某个关键支撑位（或 ATR 的 1～2 倍等）。&lt;/li&gt;
+&lt;li&gt;止损距离 = 入场价 - 止损价（每股/每手）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;3、最后计算买入股数/手数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;公式： 买入股数 = 单笔风险金额 ÷ 止损距离（每股）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;关键点&#34;&gt;关键点
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;止损距离越大&lt;/strong&gt; → 能买的股数越少（自动降低仓位）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;止损距离越小&lt;/strong&gt; → 能买的股数越多（但要确保止损位合理，别设得太近被洗出去）。&lt;/li&gt;
+&lt;li&gt;这样操作后，你可以同时持有&lt;strong&gt;多只股票&lt;/strong&gt;，总占用资金甚至达到 80-100%（接近全仓），但&lt;strong&gt;所有持仓加起来的总风险&lt;/strong&gt;仍然可控（例如总风险 8-10%）。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>风险回报比</title>
+        <link>https://teaize.github.io/p/%E9%A3%8E%E9%99%A9%E5%9B%9E%E6%8A%A5%E6%AF%94/</link>
+        <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E9%A3%8E%E9%99%A9%E5%9B%9E%E6%8A%A5%E6%AF%94/</guid>
+        <description>&lt;p&gt;风险回报比（Risk-Reward Ratio，简称 R:R）&lt;/p&gt;
+&lt;p&gt;R:R 衡量的是每一笔交易中，你&lt;strong&gt;愿意承担多少风险，来换取多少潜在回报&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;风险（Risk）：你准备亏多少钱（通常就是止损距离对应的金额）。&lt;/li&gt;
+&lt;li&gt;回报（Reward）：如果你判断正确，能赚多少钱（止盈距离对应的金额）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;核心理念：优秀的交易不是追求每次都对，而是让正确的交易赚得更多，错误的交易亏得更少。&lt;/p&gt;
+&lt;h3 id=&#34;计算公式&#34;&gt;计算公式
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;R:R = 潜在盈利 ÷ 潜在亏损&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;或更具体： &lt;strong&gt;R:R = (止盈价 - 入场价) / (入场价 - 止损价)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;结果通常写成 &lt;strong&gt;1:X&lt;/strong&gt; 的形式（例如 1:2、1:3）。&lt;/p&gt;
+&lt;h3 id=&#34;实际例子&#34;&gt;实际例子
+&lt;/h3&gt;&lt;p&gt;假设你账户 100 万，单笔风险控制在 1%（1 万元）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;股票当前价：20 元&lt;/li&gt;
+&lt;li&gt;你设止损在 19 元（风险距离 = 1 元/股）&lt;/li&gt;
+&lt;li&gt;你设止盈在 23 元（盈利距离 = 3 元/股）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;计算：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;潜在亏损 = 1 元/股&lt;/li&gt;
+&lt;li&gt;潜在盈利 = 3 元/股&lt;/li&gt;
+&lt;li&gt;R:R = 3 : 1（或写成 1:3）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;含义：你每冒 1 份风险，就预期获得 3 份回报。&lt;/p&gt;
+&lt;p&gt;根据前面仓位大小公式：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可买入股数 = 1 万元 / 1 元 = 10,000 股&lt;/li&gt;
+&lt;li&gt;如果止损触发：亏 1 万元&lt;/li&gt;
+&lt;li&gt;如果止盈触发：赚 3 万元&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;常见标准&#34;&gt;常见标准
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;最低要求：&lt;strong&gt;1:2&lt;/strong&gt;（最常见）。即赚的至少要是亏的 2 倍。&lt;/li&gt;
+&lt;li&gt;优秀水平：&lt;strong&gt;1:3&lt;/strong&gt; 或更高（趋势跟踪策略常用）。&lt;/li&gt;
+&lt;li&gt;激进短线：有时接受 1:1.5，但必须有极高的胜率。&lt;/li&gt;
+&lt;li&gt;新手建议：严格只做 &lt;strong&gt;R:R ≥ 1:2&lt;/strong&gt; 的交易机会，否则直接放弃这笔 setup。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;实际操作建议&#34;&gt;实际操作建议
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;先画好止损和止盈，再决定是否进场（不要先看图形激动就买）。&lt;/li&gt;
+&lt;li&gt;止盈目标要基于合理的技术位：支撑/阻力位、前面高点/低点、斐波那契扩展、ATR 倍数等，而不是随意拍脑袋。&lt;/li&gt;
+&lt;li&gt;动态管理：趋势很强时，可以把止盈设远一点，提高 R:R；震荡市则降低目标。&lt;/li&gt;
+&lt;li&gt;日志记录：每笔交易都要记录 R:R、实际结果、胜率，定期复盘。&lt;/li&gt;
+&lt;li&gt;常见错误：
+&lt;ul&gt;
+&lt;li&gt;止损设得太远，导致 R:R 很差。&lt;/li&gt;
+&lt;li&gt;赚一点就跑（止盈太近），亏的时候却死扛（破坏 R:R）。&lt;/li&gt;
+&lt;li&gt;只看胜率，不看 R:R（很多散户的致命伤）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>交易期望值</title>
+        <link>https://teaize.github.io/p/%E4%BA%A4%E6%98%93%E6%9C%9F%E6%9C%9B%E5%80%BC/</link>
+        <pubDate>Sun, 14 Jun 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BA%A4%E6%98%93%E6%9C%9F%E6%9C%9B%E5%80%BC/</guid>
+        <description>&lt;h3 id=&#34;什么是交易期望值&#34;&gt;什么是交易期望值
+&lt;/h3&gt;&lt;p&gt;期望值（Expectancy）衡量的是&lt;strong&gt;在大量交易后，每承担 1 元风险，平均能获得多少净利润&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;正期望值（&amp;gt;0）：长期盈利，策略可行。&lt;/li&gt;
+&lt;li&gt;零或负期望值（≤0）：长期亏损或白忙活（即使胜率看起来不错）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;核心理念：&lt;strong&gt;交易不是追求高胜率，而是追求正期望值&lt;/strong&gt;。很多高胜率策略因为 R:R 太低而最终亏损；低胜率策略如果 R:R 够高，反而能大赚。&lt;/p&gt;
+&lt;h3 id=&#34;计算公式&#34;&gt;计算公式
+&lt;/h3&gt;&lt;p&gt;&lt;strong&gt;Expectancy = (胜率 × 平均盈利) - (亏损率 × 平均亏损)&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;其中：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;胜率（Win Rate）= 盈利交易次数 / 总交易次数&lt;/li&gt;
+&lt;li&gt;亏损率 = 1 - 胜率&lt;/li&gt;
+&lt;li&gt;平均盈利 和 平均亏损 通常用 &lt;strong&gt;相对于风险的倍数&lt;/strong&gt; 来表示（以 R:R 为基础）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;更实用的形式（以每 1 元风险为单位）&lt;/strong&gt;： &lt;strong&gt;Expectancy = (胜率 × 平均 R:R) - (1 - 胜率)&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;实际例子&#34;&gt;实际例子
+&lt;/h3&gt;&lt;p&gt;假设你做了 100 笔交易，单笔风险始终控制在 1%（每笔风险 1 元计算）：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;胜率 = &lt;strong&gt;45%&lt;/strong&gt;（赢 45 笔，输 55 笔）&lt;/li&gt;
+&lt;li&gt;平均 R:R = &lt;strong&gt;1:2.5&lt;/strong&gt;（即赢的时候平均赚 2.5 元，输的时候亏 1 元）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;计算：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;赢的时候贡献：45% × 2.5 = &lt;strong&gt;1.125&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;输的时候贡献：55% × (-1) = &lt;strong&gt;-0.55&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;期望值 = 1.125 - 0.55 = +0.575&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;解读：平均每承担 1 元风险，你能赚 0.575 元。 如果账户 100 万，每笔风险 1%（1 万元），长期下来每笔交易平均赚 &lt;strong&gt;5750 元&lt;/strong&gt;。做 100 笔就是 57.5 万净利润（扣除手续费前）。&lt;/p&gt;
+&lt;p&gt;另一个对比例子：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;胜率 60%，但平均 R:R 只有 1:1.2 Expectancy = (0.6 × 1.2) - (0.4 × 1) = 0.72 - 0.4 = &lt;strong&gt;+0.32&lt;/strong&gt;（盈利，但效率低）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;r-multiple&#34;&gt;R-Multiple
+&lt;/h4&gt;&lt;p&gt;实际情况并不是每笔风险始终控制在 1%，这时候可以用 R-Multiple（R 倍数）计算期望值。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;核心思路：把每一笔交易的盈亏，都换算成“相对于该笔交易风险金额的倍数”，然后求平均。&lt;/li&gt;
+&lt;li&gt;公式（风险不一致时）：交易期望值（Expectancy）= 所有交易的 R-Multiples 平均值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;其中，对于每一笔交易： &lt;strong&gt;R-Multiple = 该笔实际盈亏金额 ÷ 该笔风险金额&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;盈利交易：R-Multiple &amp;gt; 0（例如止盈赚了风险金额的 2.5 倍 → +2.5）&lt;/li&gt;
+&lt;li&gt;亏损交易：R-Multiple = -1（如果严格止损，亏损就是你设的风险金额 → -1）&lt;/li&gt;
+&lt;li&gt;如果没到止损就手动平仓或爆亏，则可能是 -1.5 或其他值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;最终 Expectancy = （所有 R-Multiples 之和）÷ 交易总笔数&lt;/p&gt;
+&lt;p&gt;实际例子：假设你做了 5 笔交易，账户 100 万：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;交易&lt;/th&gt;
+					&lt;th&gt;风险%&lt;/th&gt;
+					&lt;th&gt;风险金额&lt;/th&gt;
+					&lt;th&gt;实际结果&lt;/th&gt;
+					&lt;th&gt;R-Multiple&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;1&lt;/td&gt;
+					&lt;td&gt;1.0%&lt;/td&gt;
+					&lt;td&gt;1 万元&lt;/td&gt;
+					&lt;td&gt;+2.8 万元&lt;/td&gt;
+					&lt;td&gt;+2.8&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;2&lt;/td&gt;
+					&lt;td&gt;0.5%&lt;/td&gt;
+					&lt;td&gt;0.5 万元&lt;/td&gt;
+					&lt;td&gt;-0.5 万元&lt;/td&gt;
+					&lt;td&gt;-1.0&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;3&lt;/td&gt;
+					&lt;td&gt;1.5%&lt;/td&gt;
+					&lt;td&gt;1.5 万元&lt;/td&gt;
+					&lt;td&gt;+4.5 万元&lt;/td&gt;
+					&lt;td&gt;+3.0&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;4&lt;/td&gt;
+					&lt;td&gt;1.0%&lt;/td&gt;
+					&lt;td&gt;1 万元&lt;/td&gt;
+					&lt;td&gt;-1 万元&lt;/td&gt;
+					&lt;td&gt;-1.0&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;5&lt;/td&gt;
+					&lt;td&gt;0.8%&lt;/td&gt;
+					&lt;td&gt;0.8 万元&lt;/td&gt;
+					&lt;td&gt;+1.2 万元&lt;/td&gt;
+					&lt;td&gt;+1.5&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;计算步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;R-Multiples：+2.8、-1.0、+3.0、-1.0、+1.5&lt;/li&gt;
+&lt;li&gt;总和 = 2.8 -1 + 3 -1 + 1.5 = 5.3&lt;/li&gt;
+&lt;li&gt;Expectancy = 5.3 ÷ 5 = +1.06&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;解读：平均每承担 1 元风险，你能赚 &lt;strong&gt;1.06 元&lt;/strong&gt;。这是一个非常优秀的期望值。&lt;/p&gt;
+&lt;h3 id=&#34;参考标准&#34;&gt;参考标准
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;优秀策略：期望值 ≥ &lt;strong&gt;0.3~0.5&lt;/strong&gt;（每 1 元风险赚 0.3 元以上）&lt;/li&gt;
+&lt;li&gt;顶级策略：期望值 &lt;strong&gt;0.6~1.0+&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;最低及格线：&amp;gt;0（只要为正就能长期赚钱，但要考虑手续费、滑点、心理压力）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;与-rr-和仓位大小的关系&#34;&gt;与 R:R 和仓位大小的关系
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;期望值 = 正期望值的核心&lt;/strong&gt;：前面讲的 R:R 是“单笔质量”，胜率是“命中率”，期望值是“综合成绩”。&lt;/li&gt;
+&lt;li&gt;结合&lt;strong&gt;仓位大小&lt;/strong&gt;（1-2% 单笔风险）：即使期望值只有 0.4，只要严格执行，长期也能实现稳定复利。&lt;/li&gt;
+&lt;li&gt;公式可以扩展到整个策略回测：用历史数据计算整体 Expectancy。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>ActDenox 智能脱硝控制系统</title>
         <link>https://teaize.github.io/p/actdenox-%E6%99%BA%E8%83%BD%E8%84%B1%E7%A1%9D%E6%8E%A7%E5%88%B6%E7%B3%BB%E7%BB%9F/</link>
         <pubDate>Thu, 04 Jun 2026 00:00:00 +0000</pubDate>
@@ -1516,7 +1738,6 @@
 &lt;/h1&gt;&lt;blockquote&gt;
 &lt;p&gt;最后更新：2026-06-08 | 版本 v1.0.0-rc4（终局审查 + 精准重构，15 文件全量通过）&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;hr&gt;
 &lt;h2 id=&#34;一项目最新技术指标&#34;&gt;一、项目最新技术指标
 &lt;/h2&gt;&lt;table&gt;
 	&lt;thead&gt;
@@ -1589,7 +1810,6 @@
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;hr&gt;
 &lt;h2 id=&#34;二重构后全局架构全景图&#34;&gt;二、重构后全局架构全景图
 &lt;/h2&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1792,8 +2012,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                         DCS/PLC ← modbusSlave ←─────────────────────────┘
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;三已实现功能全景&#34;&gt;三、已实现功能全景
+&lt;/div&gt;&lt;h2 id=&#34;三已实现功能全景&#34;&gt;三、已实现功能全景
 &lt;/h2&gt;&lt;h3 id=&#34;modbus-通讯主机&#34;&gt;Modbus 通讯（主机）
 &lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; RTU/TCP 双协议，连接/断开，FC03/FC04/FC06&lt;/li&gt;

@@ -1,0 +1,692 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="什么是交易期望值 期望值（Expectancy）衡量的是在大量交易后，每承担 1 元风险，平均能获得多少净利润。\n正期望值（&gt;0）：长期盈利，策略可行。 零或负期望值（≤0）：长期亏损或白忙活（即使胜率看起来不错）。 核心理念：交易不是追求高胜率，而是追求正期望值。很多高胜率策略因为 R:R 太低而最终亏损；低胜率策略如果 R:R 够高，反而能大赚。\n">
+<title>交易期望值</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E4%BA%A4%E6%98%93%E6%9C%9F%E6%9C%9B%E5%80%BC/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="交易期望值">
+<meta property='og:description' content="什么是交易期望值 期望值（Expectancy）衡量的是在大量交易后，每承担 1 元风险，平均能获得多少净利润。\n正期望值（&gt;0）：长期盈利，策略可行。 零或负期望值（≤0）：长期亏损或白忙活（即使胜率看起来不错）。 核心理念：交易不是追求高胜率，而是追求正期望值。很多高胜率策略因为 R:R 太低而最终亏损；低胜率策略如果 R:R 够高，反而能大赚。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E4%BA%A4%E6%98%93%E6%9C%9F%E6%9C%9B%E5%80%BC/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-06-14T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-14T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="交易期望值">
+<meta name="twitter:description" content="什么是交易期望值 期望值（Expectancy）衡量的是在大量交易后，每承担 1 元风险，平均能获得多少净利润。\n正期望值（&gt;0）：长期盈利，策略可行。 零或负期望值（≤0）：长期亏损或白忙活（即使胜率看起来不错）。 核心理念：交易不是追求高胜率，而是追求正期望值。很多高胜率策略因为 R:R 太低而最终亏损；低胜率策略如果 R:R 够高，反而能大赚。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#什么是交易期望值">什么是交易期望值</a></li>
+        <li><a href="#计算公式">计算公式</a></li>
+        <li><a href="#实际例子">实际例子</a>
+          <ol>
+            <li><a href="#r-multiple">R-Multiple</a></li>
+          </ol>
+        </li>
+        <li><a href="#参考标准">参考标准</a></li>
+        <li><a href="#与-rr-和仓位大小的关系">与 R:R 和仓位大小的关系</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BA%A4%E6%98%93%E6%9C%9F%E6%9C%9B%E5%80%BC/">交易期望值</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-14</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="什么是交易期望值">什么是交易期望值
+</h3><p>期望值（Expectancy）衡量的是<strong>在大量交易后，每承担 1 元风险，平均能获得多少净利润</strong>。</p>
+<ul>
+<li>正期望值（&gt;0）：长期盈利，策略可行。</li>
+<li>零或负期望值（≤0）：长期亏损或白忙活（即使胜率看起来不错）。</li>
+</ul>
+<p>核心理念：<strong>交易不是追求高胜率，而是追求正期望值</strong>。很多高胜率策略因为 R:R 太低而最终亏损；低胜率策略如果 R:R 够高，反而能大赚。</p>
+<h3 id="计算公式">计算公式
+</h3><p><strong>Expectancy = (胜率 × 平均盈利) - (亏损率 × 平均亏损)</strong></p>
+<p>其中：</p>
+<ul>
+<li>胜率（Win Rate）= 盈利交易次数 / 总交易次数</li>
+<li>亏损率 = 1 - 胜率</li>
+<li>平均盈利 和 平均亏损 通常用 <strong>相对于风险的倍数</strong> 来表示（以 R:R 为基础）</li>
+</ul>
+<p><strong>更实用的形式（以每 1 元风险为单位）</strong>： <strong>Expectancy = (胜率 × 平均 R:R) - (1 - 胜率)</strong></p>
+<h3 id="实际例子">实际例子
+</h3><p>假设你做了 100 笔交易，单笔风险始终控制在 1%（每笔风险 1 元计算）：</p>
+<ul>
+<li>胜率 = <strong>45%</strong>（赢 45 笔，输 55 笔）</li>
+<li>平均 R:R = <strong>1:2.5</strong>（即赢的时候平均赚 2.5 元，输的时候亏 1 元）</li>
+</ul>
+<p>计算：</p>
+<ul>
+<li>赢的时候贡献：45% × 2.5 = <strong>1.125</strong></li>
+<li>输的时候贡献：55% × (-1) = <strong>-0.55</strong></li>
+<li><strong>期望值 = 1.125 - 0.55 = +0.575</strong></li>
+</ul>
+<p>解读：平均每承担 1 元风险，你能赚 0.575 元。 如果账户 100 万，每笔风险 1%（1 万元），长期下来每笔交易平均赚 <strong>5750 元</strong>。做 100 笔就是 57.5 万净利润（扣除手续费前）。</p>
+<p>另一个对比例子：</p>
+<ul>
+<li>胜率 60%，但平均 R:R 只有 1:1.2 Expectancy = (0.6 × 1.2) - (0.4 × 1) = 0.72 - 0.4 = <strong>+0.32</strong>（盈利，但效率低）</li>
+</ul>
+<h4 id="r-multiple">R-Multiple
+</h4><p>实际情况并不是每笔风险始终控制在 1%，这时候可以用 R-Multiple（R 倍数）计算期望值。</p>
+<ul>
+<li>核心思路：把每一笔交易的盈亏，都换算成“相对于该笔交易风险金额的倍数”，然后求平均。</li>
+<li>公式（风险不一致时）：交易期望值（Expectancy）= 所有交易的 R-Multiples 平均值</li>
+</ul>
+<p>其中，对于每一笔交易： <strong>R-Multiple = 该笔实际盈亏金额 ÷ 该笔风险金额</strong></p>
+<ul>
+<li>盈利交易：R-Multiple &gt; 0（例如止盈赚了风险金额的 2.5 倍 → +2.5）</li>
+<li>亏损交易：R-Multiple = -1（如果严格止损，亏损就是你设的风险金额 → -1）</li>
+<li>如果没到止损就手动平仓或爆亏，则可能是 -1.5 或其他值</li>
+</ul>
+<p>最终 Expectancy = （所有 R-Multiples 之和）÷ 交易总笔数</p>
+<p>实际例子：假设你做了 5 笔交易，账户 100 万：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>交易</th>
+					<th>风险%</th>
+					<th>风险金额</th>
+					<th>实际结果</th>
+					<th>R-Multiple</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>1</td>
+					<td>1.0%</td>
+					<td>1 万元</td>
+					<td>+2.8 万元</td>
+					<td>+2.8</td>
+			</tr>
+			<tr>
+					<td>2</td>
+					<td>0.5%</td>
+					<td>0.5 万元</td>
+					<td>-0.5 万元</td>
+					<td>-1.0</td>
+			</tr>
+			<tr>
+					<td>3</td>
+					<td>1.5%</td>
+					<td>1.5 万元</td>
+					<td>+4.5 万元</td>
+					<td>+3.0</td>
+			</tr>
+			<tr>
+					<td>4</td>
+					<td>1.0%</td>
+					<td>1 万元</td>
+					<td>-1 万元</td>
+					<td>-1.0</td>
+			</tr>
+			<tr>
+					<td>5</td>
+					<td>0.8%</td>
+					<td>0.8 万元</td>
+					<td>+1.2 万元</td>
+					<td>+1.5</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>计算步骤：</p>
+<ol>
+<li>R-Multiples：+2.8、-1.0、+3.0、-1.0、+1.5</li>
+<li>总和 = 2.8 -1 + 3 -1 + 1.5 = 5.3</li>
+<li>Expectancy = 5.3 ÷ 5 = +1.06</li>
+</ol>
+<p>解读：平均每承担 1 元风险，你能赚 <strong>1.06 元</strong>。这是一个非常优秀的期望值。</p>
+<h3 id="参考标准">参考标准
+</h3><ul>
+<li>优秀策略：期望值 ≥ <strong>0.3~0.5</strong>（每 1 元风险赚 0.3 元以上）</li>
+<li>顶级策略：期望值 <strong>0.6~1.0+</strong></li>
+<li>最低及格线：&gt;0（只要为正就能长期赚钱，但要考虑手续费、滑点、心理压力）</li>
+</ul>
+<h3 id="与-rr-和仓位大小的关系">与 R:R 和仓位大小的关系
+</h3><ul>
+<li><strong>期望值 = 正期望值的核心</strong>：前面讲的 R:R 是“单笔质量”，胜率是“命中率”，期望值是“综合成绩”。</li>
+<li>结合<strong>仓位大小</strong>（1-2% 单笔风险）：即使期望值只有 0.4，只要严格执行，长期也能实现稳定复利。</li>
+<li>公式可以扩展到整个策略回测：用历史数据计算整体 Expectancy。</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
