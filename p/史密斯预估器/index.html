@@ -1,0 +1,1167 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="为什么要引入史密斯预估器 史密斯预估器（Smith Predictor）就是给控制器装了一个“预知未来的模拟器”，让它不用傻等烟气跑完几十秒甚至几分钟后才知道喷氨有没有效果\n">
+<title>史密斯预估器</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%8F%B2%E5%AF%86%E6%96%AF%E9%A2%84%E4%BC%B0%E5%99%A8/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="史密斯预估器">
+<meta property='og:description' content="为什么要引入史密斯预估器 史密斯预估器（Smith Predictor）就是给控制器装了一个“预知未来的模拟器”，让它不用傻等烟气跑完几十秒甚至几分钟后才知道喷氨有没有效果\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%8F%B2%E5%AF%86%E6%96%AF%E9%A2%84%E4%BC%B0%E5%99%A8/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-06-22T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-22T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="史密斯预估器">
+<meta name="twitter:description" content="为什么要引入史密斯预估器 史密斯预估器（Smith Predictor）就是给控制器装了一个“预知未来的模拟器”，让它不用傻等烟气跑完几十秒甚至几分钟后才知道喷氨有没有效果\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#为什么要引入史密斯预估器">为什么要引入史密斯预估器</a></li>
+        <li><a href="#史密斯预估器">史密斯预估器</a></li>
+        <li><a href="#滞后时间smith-dead-time">滞后时间（Smith Dead Time）</a>
+          <ol>
+            <li><a href="#怎么在现场计算它">怎么在现场计算它</a></li>
+          </ol>
+        </li>
+        <li><a href="#时间常数smith-time-constant">时间常数（Smith Time Constant）</a>
+          <ol>
+            <li><a href="#怎么在现场计算它-1">怎么在现场计算它</a></li>
+          </ol>
+        </li>
+        <li><a href="#过程增益-ksmith-process-gain">过程增益 K（Smith Process Gain）</a>
+          <ol>
+            <li><a href="#怎么在现场计算它-2">怎么在现场计算它</a></li>
+          </ol>
+        </li>
+        <li><a href="#额外说明">额外说明</a></li>
+        <li><a href="#验证模型是否准确">验证模型是否准确</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%8F%B2%E5%AF%86%E6%96%AF%E9%A2%84%E4%BC%B0%E5%99%A8/">史密斯预估器</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-22</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="为什么要引入史密斯预估器">为什么要引入史密斯预估器
+</h3><blockquote>
+<p>史密斯预估器（Smith Predictor）就是给控制器装了一个“预知未来的模拟器”，让它不用傻等烟气跑完几十秒甚至几分钟后才知道喷氨有没有效果</p>
+</blockquote>
+<p>先理解为什么普通 PID 容易震荡</p>
+<p>假设：</p>
+<ul>
+<li>当前出口 NOx = 50 mg/m³</li>
+<li>目标 NOx = 30 mg/m³</li>
+<li>烟道很长</li>
+<li>喷氨后要 120 秒才能被 CEMS 测到</li>
+</ul>
+<p>也就是说：</p>
+<ul>
+<li>t=0 开始增加喷氨</li>
+<li>t=30s CEMS 没变化</li>
+<li>t=60s CEMS 没变化</li>
+<li>t=90s CEMS 没变化</li>
+<li>t=120s 终于看到 NOx 下降</li>
+</ul>
+<p>而 PID 不知道有 120 秒延迟。它会这样想：</p>
+<ul>
+<li>我加氨了</li>
+<li>怎么还没降？</li>
+<li>继续加！</li>
+<li>怎么还没降？</li>
+<li>再加！</li>
+<li>怎么还没降？</li>
+<li>再加！</li>
+</ul>
+<p>结果：氨阀越来越大。
+120 秒后：NOx 突然暴跌；然后 PID 又开始：减氨！减氨！减氨！
+于是形成：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="n">NOx</span>
+</span></span><span class="line"><span class="cl"><span class="err">↑</span>
+</span></span><span class="line"><span class="cl"><span class="m">60</span> <span class="p">|</span>       <span class="p">/</span><span class="err">\</span>        <span class="p">/</span>\
+</span></span><span class="line"><span class="cl"><span class="m">50</span> <span class="p">|</span>      <span class="p">/</span>  <span class="err">\</span>      <span class="p">/</span>  \
+</span></span><span class="line"><span class="cl"><span class="m">40</span> <span class="p">|</span><span class="n">_____</span><span class="p">/</span>    <span class="err">\</span><span class="n">____</span><span class="p">/</span>    <span class="err">\</span><span class="n">__</span>
+</span></span><span class="line"><span class="cl"><span class="m">30</span> <span class="p">|</span>
+</span></span><span class="line"><span class="cl"><span class="p">--------------------------------</span><span class="err">→</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>工业上叫：大滞后振荡；Hunting</p>
+<h3 id="史密斯预估器">史密斯预估器
+</h3><p>在工业自动化控制中，史密斯预估器（Smith Predictor）使用的是一阶带纯滞后模型（FOPDT, First-Order Plus Dead-Time）。</p>
+<p>三个参数：</p>
+<ul>
+<li>滞后时间（$L$ 或 $\tau$）</li>
+<li>时间常数（$T$ 或 $\tau_c$）</li>
+<li>过程增益（$K$）</li>
+</ul>
+<h3 id="滞后时间smith-dead-time">滞后时间（Smith Dead Time）
+</h3><p>指<strong>控制动作发出</strong>到<strong>传感器检测到发生变化</strong>之间的<strong>纯物理等待时间</strong>。在脱硝现场，这是烟气和化学反应的“赶路时间”</p>
+<h4 id="怎么在现场计算它">怎么在现场计算它
+</h4><ol>
+<li>让系统处于手动的稳态（比如控制输出稳定在 $30\text{ Hz}$，出口 $\text{NOx}$ 稳定在 $60\text{ mg/m}^3$）。</li>
+<li>在某个精确的时间点（记为 $t_0$），突然手动将输出频率拉高到 $35\text{ Hz}$（增加 $5\text{ Hz}$ 的阶跃）。</li>
+<li>盯着出口 $\text{NOx}$ 的趋势图，记录它<strong>刚刚开始往下拐头、发生变化</strong>的那个时间点（记为 $t_1$）。</li>
+<li>计算公式：
+$$\text{滞后时间 } L = t_1 - t_0$$</li>
+</ol>
+<blockquote>
+<p><strong>📌 例如：</strong> 10:00:00 调整了频率，直到 10:05:00 出口 $\text{NOx}$ 才开始有下降趋势。那么滞后时间就是 5 分钟 = <strong>$300\text{ 秒}$</strong>。</p>
+</blockquote>
+<h3 id="时间常数smith-time-constant">时间常数（Smith Time Constant）
+</h3><p>指系统开始做出响应后，<strong>反映反应快慢、惯性大小</strong>的时间指标。</p>
+<p>在脱硝现场，它代表氨气在催化剂层彻底气化、混合、反应，并达到最终稳定状态的“爬坡速度”。时间常数越大，说明系统惯性越大，反应越慢。</p>
+<h4 id="怎么在现场计算它-1">怎么在现场计算它
+</h4><p>在控制理论中，一阶系统在纯滞后结束、开始响应后，<strong>当响应达到最终总变化量的 $63.2%$ 时所需要的时间</strong>，就是时间常数 $T$。</p>
+<p>继续用刚才的阶跃测试数据：</p>
+<ol>
+<li>记录 $\text{NOx}$ 开始变化的时间点（$t_1$）。</li>
+<li>观察 $\text{NOx}$ 一路下降，直到最终在新的低点完全稳定下来（记为 $t_{\text{end}}$），计算出<strong>总变化量（$\Delta \text{PV}$）</strong>。
+<ul>
+<li>例如： 从 $60\text{ mg/m}^3$ 掉到了 $40\text{ mg/m}^3$，总变化量 $\Delta \text{PV} = -20$。</li>
+</ul>
+</li>
+<li>计算总变化量的 $63.2%$ 分界点：$$60 + (-20 \times 63.2%) = 47.36\text{ mg/m}^3$$</li>
+<li>在趋势图上，找出 $\text{NOx}$ 跌到 $47.36\text{ mg/m}^3$ 的那个时间点（记为 $t_{63.2}$）。</li>
+<li><strong>计算公式：</strong>$$\text{时间常数 } T = t_{63.2} - t_1$$</li>
+</ol>
+<blockquote>
+<p><strong>📌 例如：</strong> 10:05:00 $\text{NOx}$ 开始下降（$t_1$），到了 10:08:00 时正好完成了总跌幅的近三分之二（$t_{63.2}$）。那么时间常数就是 3 分钟 = <strong>$180\text{ 秒}$</strong>。</p>
+</blockquote>
+<h3 id="过程增益-ksmith-process-gain">过程增益 K（Smith Process Gain）
+</h3><p>指<strong>静态放大倍数</strong>。即你的控制输出改变了 1 个单位，被控对象（实际 $\text{PV}$）最终会改变多少个单位。它决定了控制的“放大力度”。</p>
+<h4 id="怎么在现场计算它-2">怎么在现场计算它
+</h4><p>$$\text{过程增益 } K = \frac{\text{实际值的最终变化量 } \Delta \text{PV}}{\text{控制输出的阶跃变化量 } \Delta \text{MV}}$$
+继续用上面的测试数据：</p>
+<ul>
+<li>控制输出（$\Delta \text{MV}$）：从 $30\text{ Hz}$ 变到 $35\text{ Hz}$，变化了 $+5\text{ Hz}$。</li>
+<li>实际 $\text{PV}$（$\Delta \text{PV}$）：出口 $\text{NOx}$ 从 $60$ 稳态跌到了 $40$，变化了 $-20\text{ mg/m}^3$。</li>
+<li>计算公式：$$K = \frac{-20}{+5} = -4$$</li>
+</ul>
+<blockquote>
+<p>⚠️ 重点注意（正负号）：
+在脱硝喷氨中，<strong>$K$ 通常是负数</strong>。因为加大喷氨频率（$+$），出口 $\text{NOx}$ 就会下降（$-$）。在代码里输入参数时，务必注意这个正负号关系！如果增益正负号反了，史密斯预估器会进行倒扣补偿。</p>
+</blockquote>
+<h3 id="额外说明">额外说明
+</h3><p><strong>滞后时间尽量“宁小勿大”：</strong> 如果现场测出来大概是 300 秒，在软件里设 280 秒或 300 秒是安全的。但<strong>绝对不能设太大</strong>（比如设成 350 秒）。如果预估的滞后时间大于实际滞后时间，史密斯算法会在真实数据已经变了之后，还在那瞎预测，反而会引发剧烈的二次震荡。</p>
+<h3 id="验证模型是否准确">验证模型是否准确
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">  1
+</span><span class="lnt">  2
+</span><span class="lnt">  3
+</span><span class="lnt">  4
+</span><span class="lnt">  5
+</span><span class="lnt">  6
+</span><span class="lnt">  7
+</span><span class="lnt">  8
+</span><span class="lnt">  9
+</span><span class="lnt"> 10
+</span><span class="lnt"> 11
+</span><span class="lnt"> 12
+</span><span class="lnt"> 13
+</span><span class="lnt"> 14
+</span><span class="lnt"> 15
+</span><span class="lnt"> 16
+</span><span class="lnt"> 17
+</span><span class="lnt"> 18
+</span><span class="lnt"> 19
+</span><span class="lnt"> 20
+</span><span class="lnt"> 21
+</span><span class="lnt"> 22
+</span><span class="lnt"> 23
+</span><span class="lnt"> 24
+</span><span class="lnt"> 25
+</span><span class="lnt"> 26
+</span><span class="lnt"> 27
+</span><span class="lnt"> 28
+</span><span class="lnt"> 29
+</span><span class="lnt"> 30
+</span><span class="lnt"> 31
+</span><span class="lnt"> 32
+</span><span class="lnt"> 33
+</span><span class="lnt"> 34
+</span><span class="lnt"> 35
+</span><span class="lnt"> 36
+</span><span class="lnt"> 37
+</span><span class="lnt"> 38
+</span><span class="lnt"> 39
+</span><span class="lnt"> 40
+</span><span class="lnt"> 41
+</span><span class="lnt"> 42
+</span><span class="lnt"> 43
+</span><span class="lnt"> 44
+</span><span class="lnt"> 45
+</span><span class="lnt"> 46
+</span><span class="lnt"> 47
+</span><span class="lnt"> 48
+</span><span class="lnt"> 49
+</span><span class="lnt"> 50
+</span><span class="lnt"> 51
+</span><span class="lnt"> 52
+</span><span class="lnt"> 53
+</span><span class="lnt"> 54
+</span><span class="lnt"> 55
+</span><span class="lnt"> 56
+</span><span class="lnt"> 57
+</span><span class="lnt"> 58
+</span><span class="lnt"> 59
+</span><span class="lnt"> 60
+</span><span class="lnt"> 61
+</span><span class="lnt"> 62
+</span><span class="lnt"> 63
+</span><span class="lnt"> 64
+</span><span class="lnt"> 65
+</span><span class="lnt"> 66
+</span><span class="lnt"> 67
+</span><span class="lnt"> 68
+</span><span class="lnt"> 69
+</span><span class="lnt"> 70
+</span><span class="lnt"> 71
+</span><span class="lnt"> 72
+</span><span class="lnt"> 73
+</span><span class="lnt"> 74
+</span><span class="lnt"> 75
+</span><span class="lnt"> 76
+</span><span class="lnt"> 77
+</span><span class="lnt"> 78
+</span><span class="lnt"> 79
+</span><span class="lnt"> 80
+</span><span class="lnt"> 81
+</span><span class="lnt"> 82
+</span><span class="lnt"> 83
+</span><span class="lnt"> 84
+</span><span class="lnt"> 85
+</span><span class="lnt"> 86
+</span><span class="lnt"> 87
+</span><span class="lnt"> 88
+</span><span class="lnt"> 89
+</span><span class="lnt"> 90
+</span><span class="lnt"> 91
+</span><span class="lnt"> 92
+</span><span class="lnt"> 93
+</span><span class="lnt"> 94
+</span><span class="lnt"> 95
+</span><span class="lnt"> 96
+</span><span class="lnt"> 97
+</span><span class="lnt"> 98
+</span><span class="lnt"> 99
+</span><span class="lnt">100
+</span><span class="lnt">101
+</span><span class="lnt">102
+</span><span class="lnt">103
+</span><span class="lnt">104
+</span><span class="lnt">105
+</span><span class="lnt">106
+</span><span class="lnt">107
+</span><span class="lnt">108
+</span><span class="lnt">109
+</span><span class="lnt">110
+</span><span class="lnt">111
+</span><span class="lnt">112
+</span><span class="lnt">113
+</span><span class="lnt">114
+</span><span class="lnt">115
+</span><span class="lnt">116
+</span><span class="lnt">117
+</span><span class="lnt">118
+</span><span class="lnt">119
+</span><span class="lnt">120
+</span><span class="lnt">121
+</span><span class="lnt">122
+</span><span class="lnt">123
+</span><span class="lnt">124
+</span><span class="lnt">125
+</span><span class="lnt">126
+</span><span class="lnt">127
+</span><span class="lnt">128
+</span><span class="lnt">129
+</span><span class="lnt">130
+</span><span class="lnt">131
+</span><span class="lnt">132
+</span><span class="lnt">133
+</span><span class="lnt">134
+</span><span class="lnt">135
+</span><span class="lnt">136
+</span><span class="lnt">137
+</span><span class="lnt">138
+</span><span class="lnt">139
+</span><span class="lnt">140
+</span><span class="lnt">141
+</span><span class="lnt">142
+</span><span class="lnt">143
+</span><span class="lnt">144
+</span><span class="lnt">145
+</span><span class="lnt">146
+</span><span class="lnt">147
+</span><span class="lnt">148
+</span><span class="lnt">149
+</span><span class="lnt">150
+</span><span class="lnt">151
+</span><span class="lnt">152
+</span><span class="lnt">153
+</span><span class="lnt">154
+</span><span class="lnt">155
+</span><span class="lnt">156
+</span><span class="lnt">157
+</span><span class="lnt">158
+</span><span class="lnt">159
+</span><span class="lnt">160
+</span><span class="lnt">161
+</span><span class="lnt">162
+</span><span class="lnt">163
+</span><span class="lnt">164
+</span><span class="lnt">165
+</span><span class="lnt">166
+</span><span class="lnt">167
+</span><span class="lnt">168
+</span><span class="lnt">169
+</span><span class="lnt">170
+</span><span class="lnt">171
+</span><span class="lnt">172
+</span><span class="lnt">173
+</span><span class="lnt">174
+</span><span class="lnt">175
+</span><span class="lnt">176
+</span><span class="lnt">177
+</span><span class="lnt">178
+</span><span class="lnt">179
+</span><span class="lnt">180
+</span><span class="lnt">181
+</span><span class="lnt">182
+</span><span class="lnt">183
+</span><span class="lnt">184
+</span><span class="lnt">185
+</span><span class="lnt">186
+</span><span class="lnt">187
+</span><span class="lnt">188
+</span><span class="lnt">189
+</span><span class="lnt">190
+</span><span class="lnt">191
+</span><span class="lnt">192
+</span><span class="lnt">193
+</span><span class="lnt">194
+</span><span class="lnt">195
+</span><span class="lnt">196
+</span><span class="lnt">197
+</span><span class="lnt">198
+</span><span class="lnt">199
+</span><span class="lnt">200
+</span><span class="lnt">201
+</span><span class="lnt">202
+</span><span class="lnt">203
+</span><span class="lnt">204
+</span><span class="lnt">205
+</span><span class="lnt">206
+</span><span class="lnt">207
+</span><span class="lnt">208
+</span><span class="lnt">209
+</span><span class="lnt">210
+</span><span class="lnt">211
+</span><span class="lnt">212
+</span><span class="lnt">213
+</span><span class="lnt">214
+</span><span class="lnt">215
+</span><span class="lnt">216
+</span><span class="lnt">217
+</span><span class="lnt">218
+</span><span class="lnt">219
+</span><span class="lnt">220
+</span><span class="lnt">221
+</span><span class="lnt">222
+</span><span class="lnt">223
+</span><span class="lnt">224
+</span><span class="lnt">225
+</span><span class="lnt">226
+</span><span class="lnt">227
+</span><span class="lnt">228
+</span><span class="lnt">229
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-C#" data-lang="C#"><span class="line"><span class="cl"><span class="err">请帮我严格验证一个工业高级过程控制（</span><span class="n">APC</span><span class="err">）中的</span> <span class="p">**</span><span class="n">Smith</span> <span class="n">Predictor</span><span class="err">（史密斯预估器）离散数学仿真过程</span><span class="p">**</span><span class="err">，并输出前几步以及关键时间点（例如</span> <span class="n">k</span><span class="p">=</span><span class="m">0</span><span class="p">~</span><span class="m">5</span><span class="err">、</span><span class="m">10</span><span class="err">、</span><span class="m">50</span><span class="err">、</span><span class="m">100</span><span class="err">、</span><span class="m">149</span><span class="err">、</span><span class="m">150</span><span class="err">、</span><span class="m">151</span><span class="err">）的完整计算结果。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">请不要跳步，请逐步推导每一步公式和数值。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">一、控制背景（非常重要）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">这是一个</span> <span class="p">**</span><span class="err">脱硝喷氨控制系统（</span><span class="n">SCR</span><span class="p">/</span><span class="n">SNCR</span><span class="err">）</span><span class="p">**</span><span class="err">。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">控制输出：喷氨泵频率（</span><span class="n">Hz</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">被控变量（</span><span class="n">PV</span><span class="err">）：出口</span> <span class="n">NOx</span> <span class="err">浓度</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">系统具有</span> <span class="p">**</span><span class="err">负过程增益（</span><span class="n">negative</span> <span class="n">process</span> <span class="n">gain</span><span class="err">）</span><span class="p">**</span><span class="err">：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">喷氨频率增加</span> <span class="err">→</span> <span class="err">喷氨量增加</span> <span class="err">→</span> <span class="n">NOx</span> <span class="err">浓度下降</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">即：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">Δ</span><span class="n">u</span> <span class="p">&gt;</span> <span class="m">0</span> <span class="err">⇒</span> <span class="err">Δ</span><span class="n">PV</span> <span class="p">&lt;</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">因此：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">当前值（</span><span class="n">PV</span><span class="err">）高于设定值（</span><span class="n">SP</span><span class="err">）时</span> <span class="err">→</span> <span class="err">应增加喷氨频率</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">当前值（</span><span class="n">PV</span><span class="err">）低于设定值（</span><span class="n">SP</span><span class="err">）时</span> <span class="err">→</span> <span class="err">应降低喷氨频率</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">请注意控制方向必须符合这一逻辑。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">二、控制参数与初始条件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="err">控制器参数（纯</span><span class="n">P控制</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Kp</span> <span class="p">=</span> <span class="m">1</span>
+</span></span><span class="line"><span class="cl"><span class="n">Ki</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl"><span class="n">Kd</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="err">基准输出</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">baseFreq</span> <span class="p">=</span> <span class="m">30.0</span> <span class="n">Hz</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="err">设定值与实际值</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">SP</span> <span class="p">=</span> <span class="m">50.0</span>
+</span></span><span class="line"><span class="cl"><span class="err">实际</span> <span class="n">PV</span> <span class="p">=</span> <span class="m">49.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">假设由于物理原因，实际测量值在整个仿真过程中始终固定不变：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PV_actual</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="m">49.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="err">采样周期</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">Δ</span><span class="n">t</span> <span class="p">=</span> <span class="m">1</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">三、</span><span class="n">Smith</span> <span class="n">Predictor</span> <span class="err">的</span> <span class="n">FOPDT</span> <span class="err">模型参数</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Dead</span> <span class="n">Time</span> <span class="p">=</span> <span class="m">150</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="n">Time</span> <span class="n">Constant</span> <span class="p">=</span> <span class="m">80</span> <span class="n">s</span>
+</span></span><span class="line"><span class="cl"><span class="n">Process</span> <span class="n">Gain</span> <span class="p">=</span> <span class="p">-</span><span class="m">1.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">四、离散算法定义（严格按此执行）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">请严格按照以下顺序执行每个离散步。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">0</span><span class="err">：初始条件</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">模型初始状态：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_model</span><span class="p">(</span><span class="m">0</span><span class="p">)</span> <span class="p">=</span> <span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">初始预测值：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PredictedPV</span><span class="p">(</span><span class="m">0</span><span class="p">)</span> <span class="p">=</span> <span class="n">PV_actual</span> <span class="p">=</span> <span class="m">49.0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">1</span><span class="err">：计算误差</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">误差定义：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Error_comp</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">SP</span> <span class="p">-</span> <span class="n">PredictedPV</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">即：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Error_comp</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="m">50</span> <span class="p">-</span> <span class="n">PredictedPV</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">2</span><span class="err">：计算控制输出（注意控制方向）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">由于这是负增益对象，控制器采用反作用控制。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">控制律定义为：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">totalOutput</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">baseFreq</span> <span class="p">-</span> <span class="n">Kp</span> <span class="err">×</span> <span class="n">Error_comp</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">即：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">totalOutput</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="m">30</span> <span class="p">-</span> <span class="n">Error_comp</span><span class="p">(</span><span class="n">k</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">注意是减号，不是加号。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">例如初始：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PredictedPV</span><span class="p">(</span><span class="m">0</span><span class="p">)=</span><span class="m">49</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Error_comp</span><span class="p">(</span><span class="m">0</span><span class="p">)=</span><span class="m">1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">因此：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">totalOutput</span><span class="p">(</span><span class="m">0</span><span class="p">)=</span><span class="m">30</span><span class="err">−</span><span class="m">1</span><span class="p">=</span><span class="m">29</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">3</span><span class="err">：计算模型输入</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">模型输入为相对基准输出的增量：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">modelInput</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">totalOutput</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">-</span> <span class="n">baseFreq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">即：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">modelInput</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">totalOutput</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">-</span> <span class="m">30</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">4</span><span class="err">：无延迟模型计算（使用</span> <span class="n">k</span><span class="p">-</span><span class="m">1</span> <span class="err">输入更新</span> <span class="n">k</span><span class="err">）</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">离散化采用</span> <span class="n">ZOH</span> <span class="err">精确解：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">α</span> <span class="p">=</span> <span class="n">exp</span><span class="p">(-</span><span class="err">Δ</span><span class="n">t</span> <span class="p">/</span> <span class="n">TimeConstant</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">=</span> <span class="n">exp</span><span class="p">(-</span><span class="m">1</span> <span class="p">/</span> <span class="m">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">离散模型：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_model</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="err">α</span> <span class="err">×</span> <span class="n">y_model</span><span class="p">(</span><span class="n">k</span><span class="p">-</span><span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">+</span> <span class="p">(</span><span class="m">1</span><span class="err">−α</span><span class="p">)</span> <span class="err">×</span> <span class="n">ProcessGain</span> <span class="err">×</span> <span class="n">modelInput</span><span class="p">(</span><span class="n">k</span><span class="p">-</span><span class="m">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">注意：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">使用的是</span> <span class="n">k</span><span class="p">-</span><span class="m">1</span> <span class="err">时刻的</span> <span class="n">modelInput</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">初始</span> <span class="n">y_model</span><span class="p">(</span><span class="m">0</span><span class="p">)=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">5</span><span class="err">：延迟模型输出</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">延迟输出：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_delayed</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="m">150</span> <span class="err">秒前的</span> <span class="n">y_model</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">即：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_delayed</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">y_model</span><span class="p">(</span><span class="n">k</span><span class="err">−</span><span class="m">150</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">但在前</span> <span class="m">150</span> <span class="err">秒内，延迟队列未满，因此：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">y_delayed</span><span class="p">(</span><span class="n">k</span><span class="p">)=</span><span class="m">0</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">对于：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">k</span> <span class="p">=</span> <span class="m">0</span><span class="p">~</span><span class="m">150</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">##</span> <span class="n">Step</span> <span class="m">6</span><span class="err">：计算预测值</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PredictedPV</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">=</span> <span class="n">PV_actual</span> <span class="p">+</span> <span class="p">(</span><span class="n">y_model</span><span class="p">(</span><span class="n">k</span><span class="p">)</span> <span class="p">-</span> <span class="n">y_delayed</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">即：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">PredictedPV</span><span class="p">(</span><span class="n">k</span><span class="p">)=</span><span class="m">49</span><span class="p">+(</span><span class="n">y_model</span><span class="p">(</span><span class="n">k</span><span class="p">)-</span><span class="n">y_delayed</span><span class="p">(</span><span class="n">k</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">#</span> <span class="err">五、请回答以下问题</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">1.</span> <span class="err">请输出：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">0</span><span class="p">~</span><span class="m">5</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">10</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">50</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">100</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">149</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">150</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">k</span><span class="p">=</span><span class="m">151</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">每一步的：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">y_model</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">y_delayed</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">PredictedPV</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">Error_comp</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">totalOutput</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">2.</span> <span class="err">请判断：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">在前</span><span class="m">150</span><span class="err">秒内：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="n">totalOutput</span> <span class="err">是否是线性变化？</span>
+</span></span><span class="line"><span class="cl">  <span class="err">还是</span>
+</span></span><span class="line"><span class="cl"><span class="p">*</span> <span class="err">指数型（一阶惯性）变化？</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">请给出数学推导。</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">---</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">3.</span> <span class="err">请验证：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">k</span><span class="p">=</span><span class="m">150</span> <span class="err">时</span> <span class="n">totalOutput</span> <span class="err">是否约等于：</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="m">29.489</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="err">请严格计算验证。</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>Grok 模型验证：<a class="link" href="https://grok.com/share/c2hhcmQtNA_aa44f6ed-b254-4baf-9d0a-b3f8ab75efa3"  target="_blank" rel="noopener"
+    >Smith Predictor Discrete FOPDT Simulation | Shared Grok Conversation</a></p>
+<p>![[Pasted image 20260622174925.png]]</p>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

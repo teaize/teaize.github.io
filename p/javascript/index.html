@@ -1,0 +1,1678 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="1、CommonJS 模块引入 (require) 在 Node.js 环境下，我们使用 require() 函数来引入其他文件或第三方库\n1 2 const path = require(&#39;path&#39;); // 引入 Node.js 原生的路径处理模块 const modbus = require(&#39;./modules/modbusManage&#39;); // 引入自己写的本地文件 带有路径的 (./…)：代表引入项目本地的文件。 不带路径的 (path, fs, electron)：代表引入 Node.js 内置模块或通过 npm install 安装的第三方依赖。 2、对象解构赋值 1 2 const path = require(&#39;path&#39;); const { app, BrowserWindow } = require(&#39;electron&#39;); 为什么有的有一对大括号 {}，有的没有？ 带有大括号 {}：说明那个文件导出了很多东西，而我们只需要其中的某几个。这就叫“解构”。\n">
+<title>JavaScript</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/javascript/'>
+
+<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="JavaScript">
+<meta property='og:description' content="1、CommonJS 模块引入 (require) 在 Node.js 环境下，我们使用 require() 函数来引入其他文件或第三方库\n1 2 const path = require(&#39;path&#39;); // 引入 Node.js 原生的路径处理模块 const modbus = require(&#39;./modules/modbusManage&#39;); // 引入自己写的本地文件 带有路径的 (./…)：代表引入项目本地的文件。 不带路径的 (path, fs, electron)：代表引入 Node.js 内置模块或通过 npm install 安装的第三方依赖。 2、对象解构赋值 1 2 const path = require(&#39;path&#39;); const { app, BrowserWindow } = require(&#39;electron&#39;); 为什么有的有一对大括号 {}，有的没有？ 带有大括号 {}：说明那个文件导出了很多东西，而我们只需要其中的某几个。这就叫“解构”。\n">
+<meta property='og:url' content='https://teaize.github.io/p/javascript/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-06-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-06-26T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="JavaScript">
+<meta name="twitter:description" content="1、CommonJS 模块引入 (require) 在 Node.js 环境下，我们使用 require() 函数来引入其他文件或第三方库\n1 2 const path = require(&#39;path&#39;); // 引入 Node.js 原生的路径处理模块 const modbus = require(&#39;./modules/modbusManage&#39;); // 引入自己写的本地文件 带有路径的 (./…)：代表引入项目本地的文件。 不带路径的 (path, fs, electron)：代表引入 Node.js 内置模块或通过 npm install 安装的第三方依赖。 2、对象解构赋值 1 2 const path = require(&#39;path&#39;); const { app, BrowserWindow } = require(&#39;electron&#39;); 为什么有的有一对大括号 {}，有的没有？ 带有大括号 {}：说明那个文件导出了很多东西，而我们只需要其中的某几个。这就叫“解构”。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#1commonjs-模块引入-require">1、CommonJS 模块引入 (<code>require</code>)</a></li>
+        <li><a href="#2对象解构赋值">2、对象解构赋值</a></li>
+        <li><a href="#3electron-内置核心模块内置-api">3、Electron 内置核心模块（内置 API）</a></li>
+        <li><a href="#typescript-声明提示">TypeScript 声明提示</a></li>
+        <li><a href="#process-变量">process 变量</a></li>
+        <li><a href="#__dirname-全局变量"><code>__dirname</code> 全局变量</a></li>
+        <li><a href="#三元表达式">三元表达式</a></li>
+        <li><a href="#configmanagerjs">configManager.js</a></li>
+      </ol>
+    </li>
+    <li><a href="#代码解读">代码解读</a>
+      <ol>
+        <li><a href="#1注释部分jsdoc-规范">1、注释部分（JSDoc 规范）</a></li>
+        <li><a href="#2第一阶段准备工作">2、第一阶段：准备工作</a></li>
+        <li><a href="#3第二阶段条件分支判断try-catch-内部">3、第二阶段：条件分支判断（Try-Catch 内部）</a>
+          <ol>
+            <li><a href="#-defaults-"><code>{ …defaults }</code></a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#loggerjs">logger.js</a>
+      <ol>
+        <li><a href="#1权重比大小与对象查表">1、权重比大小与对象查表</a></li>
+        <li><a href="#2剩余参数">2、剩余参数</a></li>
+        <li><a href="#3初始化函数">3、初始化函数</a>
+          <ol>
+            <li><a href="#参数默认值">参数默认值</a></li>
+            <li><a href="#接下来的判断">接下来的判断</a></li>
+          </ol>
+        </li>
+        <li><a href="#在整个项目里是怎么串联运行的">在整个项目里是怎么串联运行的</a></li>
+        <li><a href="#注释语法-jsdoc">注释语法 JSDoc</a>
+          <ol>
+            <li><a href="#拆解-type-boolean-语法">拆解 <code>@type {boolean}</code> 语法</a></li>
+            <li><a href="#功能">功能</a></li>
+            <li><a href="#常用的-type-还有哪些">常用的 <code>@type</code> 还有哪些</a></li>
+          </ol>
+        </li>
+        <li><a href="#api">API</a>
+          <ol>
+            <li><a href="#函数-vs-api">函数 vs API</a></li>
+          </ol>
+        </li>
+        <li><a href="#如何理解注入">如何理解注入</a>
+          <ol>
+            <li><a href="#理解">理解</a></li>
+            <li><a href="#传参-vs-注入它们的本质区别">传参 vs 注入：它们的本质区别</a></li>
+            <li><a href="#为什么被注入的函数叫做依赖项">为什么被注入的函数叫做“依赖项”</a></li>
+            <li><a href="#编程界的高级黑话控制反转ioc">编程界的高级黑话：控制反转（IoC）</a></li>
+          </ol>
+        </li>
+        <li><a href="#出口导出声明">出口导出声明</a>
+          <ol>
+            <li><a href="#拆解里面的语法糖属性简写">拆解里面的语法糖（属性简写）</a></li>
+            <li><a href="#别的模块是怎么接货的">别的模块是怎么接货的</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+    <li><a href="#controlrouter-js">controlRouter js</a>
+      <ol>
+        <li><a href="#回调函数-callback">回调函数 (Callback)</a></li>
+        <li><a href="#为什么要套一层-safeinit">为什么要套一层 <code>safeInit</code></a></li>
+        <li><a href="#安全初始化包装器">安全初始化包装器</a></li>
+        <li><a href="#怎么配合工作的">怎么配合工作的</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/javascript/">JavaScript</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-06-26</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="1commonjs-模块引入-require">1、CommonJS 模块引入 (<code>require</code>)
+</h3><p>在 Node.js 环境下，我们使用 <code>require()</code> 函数来引入其他文件或第三方库</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span> <span class="c1">// 引入 Node.js 原生的路径处理模块
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">modbus</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./modules/modbusManage&#39;</span><span class="p">);</span> <span class="c1">// 引入自己写的本地文件
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>带有路径的 (<code>./…</code>)：代表引入项目本地的文件。</li>
+<li>不带路径的 (<code>path</code>, <code>fs</code>, <code>electron</code>)：代表引入 Node.js 内置模块或通过 <code>npm install</code> 安装的第三方依赖。</li>
+</ul>
+<h3 id="2对象解构赋值">2、对象解构赋值
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span> 
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>为什么有的有一对大括号 <code>{}</code>，有的没有？
+带有大括号 <code>{}</code>：说明那个文件导出了很多东西，而我们只需要其中的某几个。这就叫“解构”。</p>
+<p>如果不写大括号，等价于下面这段繁琐的代码：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="err">↓</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">electron</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">electron</span><span class="p">.</span><span class="nx">app</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">BrowserWindow</span> <span class="o">=</span> <span class="nx">electron</span><span class="p">.</span><span class="nx">BrowserWindow</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="3electron-内置核心模块内置-api">3、Electron 内置核心模块（内置 API）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">app</span><span class="p">,</span> <span class="nx">BrowserWindow</span><span class="p">,</span> <span class="nx">ipcMain</span><span class="p">,</span> <span class="nx">dialog</span><span class="p">,</span> <span class="nx">powerMonitor</span><span class="p">,</span> <span class="nx">powerSaveBlocker</span><span class="p">,</span> <span class="nx">Tray</span><span class="p">,</span> <span class="nx">Menu</span><span class="p">,</span> <span class="nx">shell</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;electron&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>核心生命周期与窗口管理
+<ul>
+<li><strong><code>app</code></strong>：整个应用程序的“大管家”。它负责控制软件的生命周期。比如：软件什么时候启动完成（<code>app.whenReady()</code>）、什么时候用户想关闭软件、怎么强行退出软件等。</li>
+<li><strong><code>BrowserWindow</code></strong>：窗口制造机。在 Electron 中，一个 <code>BrowserWindow</code> 实例就代表屏幕上的一个窗口。你可以用它来指定窗口的大小、有没有边框、是不是全屏，以及让它加载哪个 HTML 页面。</li>
+</ul>
+</li>
+<li>操作系统原生交互（让网页变身桌面软件的关键）
+<ul>
+<li><strong><code>dialog</code></strong>：系统对话框。平时我们在电脑上看到的“保存文件”、“选择文件夹”或者“确定/取消”的弹窗，就是靠它调出来的。</li>
+<li><strong><code>Tray</code></strong>：系统托盘。就是 Windows 电脑右下角（或 Mac 电脑右上角）那一排常驻的小图标。比如微信、QQ 缩小后的图标。</li>
+<li><strong><code>Menu</code></strong>：菜单栏。用来创建软件顶部的菜单（文件、编辑、帮助等），或者右键点击时弹出的上下文菜单。</li>
+<li><strong><code>shell</code></strong>：系统外壳工具。非常实用，比如你想在软件里放一个链接，用户一点击就<strong>调用电脑默认的浏览器</strong>（如 Chrome、Edge）打开网页，或者想在电脑的资源管理器中打开某个文件夹，就要靠 <code>shell</code>。</li>
+</ul>
+</li>
+<li>硬件与电源管理（工业/大型软件标配）
+<ul>
+<li><strong><code>powerMonitor</code></strong>：电源监视器。它可以监听电脑的状态，比如：电脑现在是插着电源还是用着电池？电脑是不是进入休眠了？用户是不是锁屏了？</li>
+<li><strong><code>powerSaveBlocker</code></strong>：<strong>休眠阻止器</strong>。这在工业控制中非常关键！ 如果你的软件正在后台死循环读取硬件（Modbus）数据，一旦电脑自动休眠，监控就断了。这个模块的作用就是向系统申请：“我现在在干正事，请不要让电脑睡着。”</li>
+</ul>
+</li>
+<li>通信桥梁
+<ul>
+<li><strong><code>ipcMain</code></strong>：进程间通信（Main 端）。这是 Electron 最核心的概念之一。</li>
+</ul>
+</li>
+</ul>
+<p>其他内置核心模块：<code>fs</code>（File System，文件系统）、<code>path</code>（路径处理）、<code>http</code>（网络请求）、<code>crypto</code>（加密解密）。</p>
+<h3 id="typescript-声明提示">TypeScript 声明提示
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(...</span><span class="nx">paths</span><span class="o">:</span> <span class="nx">string</span><span class="p">[])</span><span class="o">:</span> <span class="nx">string</span>
+</span></span><span class="line"><span class="cl"><span class="nx">Join</span> <span class="nx">all</span> <span class="nx">arguments</span> <span class="nx">together</span> <span class="nx">and</span> <span class="nx">normalize</span> <span class="nx">the</span> <span class="nx">resulting</span> <span class="nx">path</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="nx">param</span> <span class="nx">paths</span> <span class="err">—</span> <span class="nx">paths</span> <span class="nx">to</span> <span class="nx">join</span><span class="p">.</span>
+</span></span><span class="line"><span class="cl"><span class="err">@</span><span class="kr">throws</span> <span class="err">—</span> <span class="p">{</span><span class="nx">TypeError</span><span class="p">}</span> <span class="k">if</span> <span class="nx">any</span> <span class="k">of</span> <span class="nx">the</span> <span class="nx">path</span> <span class="nx">segments</span> <span class="nx">is</span> <span class="nx">not</span> <span class="nx">a</span> <span class="nx">string</span><span class="p">.</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>第一行：函数的“长相” (函数签名)
+<ul>
+<li><strong><code>…paths</code></strong>：前面的三个点 <code>…</code> 叫做剩余参数（Rest Parameters）语法。意思是不管你往里传 2 个、3 个还是 10 个路径片段，它都能一把抓进来，当成一个数组处理。</li>
+<li><strong><code>: string[]</code></strong>：意思是这些传进去的参数，<strong>必须全都得是字符串（string）组成的数组</strong>。比如你可以传 <code>'core'</code>, <code>'logs'</code>, <code>'error.txt'</code>。</li>
+<li><strong><code>): string</code></strong>：最右边的 <code>: string</code> 代表这个函数运行完之后，最终<strong>返回给你的结果也是一个字符串</strong>（也就是拼接好的完整路径）。</li>
+</ul>
+</li>
+<li>第二行：函数的功能描述</li>
+<li>第三部分：参数解释
+<ul>
+<li><strong><code>@param</code></strong> 是参数（Parameter）的缩写。</li>
+</ul>
+</li>
+<li>第四部分：报错警告
+<ul>
+<li><strong><code>@throws</code></strong> 意思是“在什么情况下程序会抛出异常（报错）”</li>
+<li>这句话是说：“如果输入的任何一个路径片段不是字符串（比如你误传了一个数字或对象），程序就会报类型错误（TypeError）。”</li>
+</ul>
+</li>
+</ul>
+<h3 id="process-变量">process 变量
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">dataDir</span> <span class="o">=</span> <span class="nx">app</span><span class="p">.</span><span class="nx">isPackaged</span>
+</span></span><span class="line"><span class="cl">  <span class="o">?</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">resourcesPath</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">dataDir</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="nx">dataDir</span><span class="p">,</span> <span class="p">{</span> <span class="nx">recursive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>大白话来说，<code>process</code> 代表了“当前正在运行的这个软件进程（也就是你的后台程序）”</p>
+<ul>
+<li><code>process.resourcesPath</code>: 用来获取应用打包后，静态资源（如图片、自带的本地数据库、配置文件）存放的绝对路径</li>
+<li><strong><code>process.platform</code></strong>：打听当前的操作系统。返回值可能是 <code>'win32'</code>（Windows）、<code>'darwin'</code>（Mac）或 <code>'linux'</code></li>
+<li><strong><code>process.env</code></strong>：获取系统的环境变量（Environment Variables）。常用来判断当前是“开发测试环境”还是“正式上线环境”</li>
+<li><strong><code>process.exit()</code></strong>：命令。让当前程序直接立刻退出</li>
+</ul>
+<h3 id="__dirname-全局变量"><code>__dirname</code> 全局变量
+</h3><p>代表“当前正在执行的这个 JS 文件，所在的文件夹的绝对路径”</p>
+<p>假设项目装在 <code>D</code> 盘，文件结构长这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">my-electron-app/
+</span></span><span class="line"><span class="cl">├── src/
+</span></span><span class="line"><span class="cl">│   └── main.js   &lt;-- 你的代码写在这里
+</span></span><span class="line"><span class="cl">└── data/
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>当你在 <code>main.js</code> 里面写下 <code>console.log(__dirname)</code> 并运行时，控制台会打印出：</p>
+<blockquote>
+<p><code>D:\my-electron-app\src</code></p>
+</blockquote>
+<ul>
+<li><code>__dirname</code>：只拿到<strong>文件夹</strong>路径（如：<code>D:\my-electron-app\src</code>）</li>
+<li><code>__filename</code>：不仅拿到文件夹，连<strong>当前文件的名字</strong>也一起拿到（如：<code>D:\my-electron-app\src\main.js</code>）</li>
+</ul>
+<h3 id="三元表达式">三元表达式
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;..&#39;</span><span class="p">,</span> <span class="s1">&#39;data&#39;</span><span class="p">)</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>__dirname</code></strong> = <code>D:\my-electron-app\src</code> （当前文件所在目录）</li>
+<li><strong><code>'..'</code></strong> = 在计算机里代表“返回上一级目录”。所以 <code>src</code> 的上一级就是 <code>my-electron-app</code>。</li>
+<li><strong><code>'data'</code></strong> = 进入 <code>data</code> 文件夹。</li>
+</ul>
+<p>通过 <code>path.join</code> 这么一拼，最终得到的绝对路径就是：<code>D:\my-electron-app\data</code></p>
+<h3 id="configmanagerjs">configManager.js
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">fs</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;fs&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">class</span> <span class="nx">ConfigManager</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">constructor</span><span class="p">(</span><span class="nx">dataDir</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">dir</span> <span class="o">=</span> <span class="nx">dataDir</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">_cleanupOrphanTmpFiles</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * ★ 启动时自动清理因断电/进程崩溃残留的 *.tmp.* 孤儿文件
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">_cleanupOrphanTmpFiles</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 原子保存配置
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">save</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">_ensureDir</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">filePath</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_path</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">json</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">,</span> <span class="kc">null</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">tmpPath</span> <span class="o">=</span> <span class="nx">filePath</span> <span class="o">+</span> <span class="s1">&#39;.tmp.&#39;</span> <span class="o">+</span> <span class="nb">Date</span><span class="p">.</span><span class="nx">now</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">fs</span><span class="p">.</span><span class="nx">writeFileSync</span><span class="p">(</span><span class="nx">tmpPath</span><span class="p">,</span> <span class="nx">json</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">try</span> <span class="p">{</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">copyFileSync</span><span class="p">(</span><span class="nx">tmpPath</span><span class="p">,</span> <span class="nx">filePath</span><span class="p">);</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">_</span><span class="p">)</span> <span class="p">{</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">renameSync</span><span class="p">(</span><span class="nx">tmpPath</span><span class="p">,</span> <span class="nx">filePath</span><span class="p">);</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="k">try</span> <span class="p">{</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">unlinkSync</span><span class="p">(</span><span class="nx">tmpPath</span><span class="p">);</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">_</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="sb">`[Config] 保存 </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb"> 失败:`</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="k">try</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">tmpPath</span><span class="p">))</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">unlinkSync</span><span class="p">(</span><span class="nx">tmpPath</span><span class="p">);</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">_</span><span class="p">)</span> <span class="p">{}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">ConfigManager</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在这段代码中，最外层是一个 <code>class ConfigManager { … }</code>。 是一个 Class（类） 。</li>
+<li>constructor()，类的构造函数</li>
+<li>在这个类里面，有很多函数（在类里我们叫它们“方法”）。凡是以 <code>_</code> 开头的方法（如 <code>_ensureDir</code>），是作者的一种命名规范，代表“<strong>私有方法</strong>”——意思是这些方法是管家自己内部偷偷用的，不需要在外面被调用。</li>
+</ul>
+<h2 id="代码解读">代码解读
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl">  <span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * 加载配置，不存在时返回 defaults 并自动创建文件
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param {string} name - 配置名（对应 data/name.json）
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @param {object} defaults - 默认值
+</span></span></span><span class="line"><span class="cl"><span class="cm">   * @returns {object} 配置对象（defaults 的浅拷贝 + 文件内容合并）
+</span></span></span><span class="line"><span class="cl"><span class="cm">   */</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">load</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="k">this</span><span class="p">.</span><span class="nx">_ensureDir</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">filePath</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_path</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">defaults</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">    <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kr">const</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">raw</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="nx">parsed</span> <span class="o">&amp;&amp;</span> <span class="k">typeof</span> <span class="nx">parsed</span> <span class="o">===</span> <span class="s1">&#39;object&#39;</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="nb">Array</span><span class="p">.</span><span class="nx">isArray</span><span class="p">(</span><span class="nx">parsed</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">          <span class="nb">Object</span><span class="p">.</span><span class="nx">assign</span><span class="p">(</span><span class="nx">result</span><span class="p">,</span> <span class="nx">parsed</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="c1">// 文件不存在 → 创建默认文件
+</span></span></span><span class="line"><span class="cl">        <span class="k">this</span><span class="p">.</span><span class="nx">save</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">defaults</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">      <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">      <span class="nx">console</span><span class="p">.</span><span class="nx">warn</span><span class="p">(</span><span class="sb">`[Config] 加载 </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb"> 失败:`</span><span class="p">,</span> <span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="1注释部分jsdoc-规范">1、注释部分（JSDoc 规范）
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 加载配置，不存在时返回 defaults 并自动创建文件
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param {string} name - 配置名（对应 data/name.json）
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param {object} defaults - 默认值
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @returns {object} 配置对象（defaults 的浅拷贝 + 文件内容合并）
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这是一种标准的 JSDoc 注释</p>
+<ul>
+<li><strong><code>@param {string} name</code></strong>：告诉调用者，第一个参数必须是字符串（比如 <code>'modbus'</code>）。</li>
+<li><strong><code>@param {object} defaults</code></strong>：第二个参数必须是一个对象（比如默认的各种参数配置）。</li>
+<li><strong><code>@returns {object}</code></strong>：告诉调用者，这个函数最后会吐给你一个合并好的对象。</li>
+</ul>
+<h3 id="2第一阶段准备工作">2、第一阶段：准备工作
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">load</span><span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">this</span><span class="p">.</span><span class="nx">_ensureDir</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">filePath</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">_path</span><span class="p">(</span><span class="nx">name</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">defaults</span> <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>defaults = {}</code></strong>：这叫 <strong>参数默认值</strong>。如果别人调用 <code>load('modbus')</code> 没传第二个参数，系统会自动把 <code>defaults</code> 设为一个空对象 <code>{}</code>，防止程序报错。</li>
+<li><strong><code>const result = { …defaults };</code></strong>：<strong>（重点）</strong> 使用扩展运算符 <code>…</code> 把默认值复制一份给 <code>result</code>。为什么要复制？因为 JavaScript 的对象是引用类型，如果不复制而直接修改，就会把最初定义在代码里的“标准模板（defaults）”给改脏了。</li>
+</ul>
+<h3 id="3第二阶段条件分支判断try-catch-内部">3、第二阶段：条件分支判断（Try-Catch 内部）
+</h3><p>1、如果文件存在（读取并合并）</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="k">if</span> <span class="p">(</span><span class="nx">fs</span><span class="p">.</span><span class="nx">existsSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">raw</span> <span class="o">=</span> <span class="nx">fs</span><span class="p">.</span><span class="nx">readFileSync</span><span class="p">(</span><span class="nx">filePath</span><span class="p">,</span> <span class="s1">&#39;utf-8&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kr">const</span> <span class="nx">parsed</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">raw</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>用 <code>fs.readFileSync(…, 'utf-8')</code> 把硬盘里的 JSON 文件读出来。读出来的是一堆<strong>纯文本字符串</strong>（<code>raw</code>）。</li>
+<li>用 <code>JSON.parse(raw)</code> 把这堆文本字符串转换成 JavaScript 能看懂的<strong>真实对象</strong>（<code>parsed</code>）。</li>
+</ul>
+<h4 id="-defaults-"><code>{ …defaults }</code>
+</h4><p>假设手里有一张“标准参数表格”（这就是 <code>defaults</code>），上面写着工厂机器的默认配置：</p>
+<ul>
+<li>端口：502</li>
+<li>波特率：9600</li>
+</ul>
+<p>1、如果不加 <code>…</code></p>
+<p>如果你直接写 <code>const result = defaults;</code>。
+这在 JavaScript 里<strong>不是复制</strong>，而是相当于给这张纸起了个外号叫 <code>result</code>。两边其实是指向<strong>同一张纸</strong>。 如果你后来改了 <code>result</code> 的波特率，由于它们是同一张纸，<strong>原本的“标准参数表格 (<code>defaults</code>)”也被你涂改了！</strong> 下次别的模块想看一眼真正的默认值是多少，全全被你改脏了。</p>
+<p>2、加了 <code>…</code></p>
+<p>当你写 <code>const result = { …defaults };</code> 这里的 <code>…</code> 就像是一台复印机。它把 <code>defaults</code> 那张纸上的所有条目一把抓过去，一模一样地复印到一张全新的纸上，并把新纸命名为 <code>result</code>。
+这时候，你爱怎么涂改 <code>result</code>（新纸）都行，原本的 <code>defaults</code>（老纸）依然干干净净地躺在文件柜里！</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="c1">// 1. 我们定义了一个默认配置（老纸）
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">defaults</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">port</span><span class="o">:</span> <span class="mi">502</span><span class="p">,</span> <span class="nx">baudRate</span><span class="o">:</span> <span class="mi">9600</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 用 ... 复制一份给 result（新纸）
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">result</span> <span class="o">=</span> <span class="p">{</span> <span class="p">...</span><span class="nx">defaults</span> <span class="p">};</span> 
+</span></span><span class="line"><span class="cl"><span class="c1">// 此时 result 也是：{ port: 502, baudRate: 9600 }
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 3. 我们现在去改 result（新纸）
+</span></span></span><span class="line"><span class="cl"><span class="nx">result</span><span class="p">.</span><span class="nx">baudRate</span> <span class="o">=</span> <span class="mi">115200</span><span class="p">;</span> 
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 4. 我们最后来看看这两张纸分别变成了什么：
+</span></span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>   <span class="c1">// 打印出：{ port: 502, baudRate: 115200 } （新纸变了）
+</span></span></span><span class="line"><span class="cl"><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">defaults</span><span class="p">);</span> <span class="c1">// 打印出：{ port: 502, baudRate: 9600 }   （老纸没变，被保护得很好！）
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>大白话来说，<code>{ …defaults }</code> 的目的就是<strong>安全隔离</strong>。</p>
+<p>因为在 JavaScript 中，直接把一个对象赋值给另一个变量（不用 <code>…</code>）会导致它们共用同一个内存地址。使用 <code>…</code>（展开运算符）可以非常快速地制造一个<strong>独立的副本</strong>，确保不管以后怎么修改新副本，都绝对不会影响到最初的默认配置模板。</p>
+<h2 id="loggerjs">logger.js
+</h2><p>在工业控制或大型软件中，如果到处都用原生的 <code>console.log</code>，控制台会瞬间被海量数据淹没。</p>
+<p>这个模块的核心设计思想叫做<strong>日志分级（Logging Levels）</strong>。它给日志划分了轻重缓急，通过简单的数字比大小，就能实现“在开发时看全部细节，在生产环境只看严重报错”的智能控制。</p>
+<h3 id="1权重比大小与对象查表">1、权重比大小与对象查表
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">LEVELS</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">debug</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">info</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">warn</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">none</span><span class="o">:</span> <span class="mi">4</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">LEVEL_LABELS</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">debug</span><span class="o">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span> <span class="nx">info</span><span class="o">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span> <span class="nx">warn</span><span class="o">:</span> <span class="s1">&#39;WARN&#39;</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="s1">&#39;ERROR&#39;</span> <span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里利用了**对象键值对（Key-Value）<strong>来当做“查表”工具，并且通过</strong>数字递增****来代表严重性。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">_shouldLog</span><span class="p">(</span><span class="nx">level</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nx">LEVELS</span><span class="p">[</span><span class="nx">level</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">LEVELS</span><span class="p">[</span><span class="nx">currentLevel</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>语法含义</strong>：通过 <code>LEVELS[level]</code>（方括号语法）去查刚才定义的数字。</li>
+<li><strong>妙在哪里</strong>：假设当前系统设置的级别 <code>currentLevel</code> 是 <code>'warn'</code>（权重为 2）。
+<ul>
+<li>如果调用 <code>info('…')</code>，<code>LEVELS['info']</code> 是 1。由于 <code>1 &gt;= 2</code> 不成立，返回 <code>false</code>，这条信息就被<strong>无情屏蔽</strong>了。</li>
+<li>如果调用 <code>error('…')</code>，<code>LEVELS['error']</code> 是 3。由于 <code>3 &gt;= 2</code> 成立，返回 <code>true</code>，信息正常打印。</li>
+<li><strong>这就是用极简的数学“比大小”实现了复杂的日志过滤逻辑。</strong></li>
+</ul>
+</li>
+</ul>
+<h3 id="2剩余参数">2、剩余参数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * INFO 级别 — 正常运行状态
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">info</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">_shouldLog</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">))</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">_format</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="nx">args</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>语法点</strong>：这里的 <code>…args</code> 叫做<strong>剩余参数（Rest Parameters）</strong>。</li>
+<li><strong>作用</strong>：不管你在调用时传了多少个参数（比如 <code>logger.info('数据:', data, '状态:', status)</code>），<code>…args</code> 都会把它们一把抓过来，打包成一个叫 <code>args</code> 的<strong>数组</strong>。</li>
+<li>后面所有的操作（如 <code>args.map</code>、<code>args.join</code>）都是在对这个数组进行批量加工。</li>
+</ul>
+<h3 id="3初始化函数">3、初始化函数
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="cm">/**
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * 初始化日志控制器
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param {object} opts
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param {string} [opts.level=&#39;info&#39;]     - 日志级别: &#39;debug&#39; | &#39;info&#39; | &#39;warn&#39; | &#39;error&#39; | &#39;none&#39;
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param {Function} [opts.writeErrorLog]   - error 级别的落盘回调 (message, stack)
+</span></span></span><span class="line"><span class="cl"><span class="cm"> * @param {boolean} [opts.showTimestamp=true] - 是否显示时间戳
+</span></span></span><span class="line"><span class="cl"><span class="cm"> */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">init</span><span class="p">(</span><span class="nx">opts</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">level</span> <span class="o">&amp;&amp;</span> <span class="nx">LEVELS</span><span class="p">.</span><span class="nx">hasOwnProperty</span><span class="p">(</span><span class="nx">opts</span><span class="p">.</span><span class="nx">level</span><span class="p">))</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">currentLevel</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">level</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">writeErrorLog</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">errorLogWriter</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">writeErrorLog</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">showTimestamp</span> <span class="o">===</span> <span class="s1">&#39;boolean&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">showTimestamp</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">showTimestamp</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个 <code>init</code> 函数在软件设计里被称为 <strong>配置初始化器（Initializer）</strong>。</p>
+<p>像 <code>logger.js</code> 这样的日志模块，在软件一启动时，它自己是不知道当前是要在“开发环境”运行，还是在“工厂生产环境”运行的。于是它留出了这个 <code>init</code> 窗口，等待主进程（<code>main.js</code>）在启动时调用它，把环境配置（如日志级别、怎么写文件）塞给它。</p>
+<h4 id="参数默认值">参数默认值
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">init</span><span class="p">(</span><span class="nx">opts</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>语法：</strong> <strong>参数默认值（Default Parameter）</strong>。</li>
+<li><strong>深层原因：</strong> 如果调用者直接写 <code>init()</code>，<code>opts</code> 会被自动赋值为 <code>{}</code>。这保护了后面所有类似 <code>opts.level</code> 的代码。在 JavaScript 中，读取空对象的属性（<code>({}).level</code>）会得到 <code>undefined</code>，这很安全；但如果直接读取 <code>undefined</code> 的属性（<code>undefined.level</code>），程序就会<strong>瞬间抛出致命类型错误（TypeError）并闪退</strong>。</li>
+</ul>
+<h4 id="接下来的判断">接下来的判断
+</h4><ul>
+<li>第一道关卡：校验并设置日志级别
+<ul>
+<li><strong><code>opts.level</code></strong>：首先检查用户有没有传这个属性。如果没传（<code>undefined</code>），在 JavaScript 的 <code>if</code> 判断里它代表 <code>false</code>（假值），整条 <code>if</code> 直接跳过。</li>
+</ul>
+</li>
+<li>第二道关卡：拦截并绑定落盘回调
+<ul>
+<li><strong><code>typeof opts.writeErrorLog === 'function'</code></strong>：<code>typeof</code> 是用来探测变量类型的操作符。这里用来严格检查传进来的 <code>writeErrorLog</code> <strong>究竟是不是一个可以被运行的“函数”</strong>。</li>
+</ul>
+</li>
+<li>第三道关卡：严格控制布尔开关
+<ul>
+<li><strong><code>typeof … === 'boolean'</code></strong>：确保传进来的控制时间戳显示的参数，<strong>必须是且只能是标准的布尔值</strong>（<code>true</code> 或 <code>false</code>）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="在整个项目里是怎么串联运行的">在整个项目里是怎么串联运行的
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="c1">// 在 main.js 启动时：
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./services/logger&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">writeErrorLog</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./core/errorLogger&#39;</span><span class="p">);</span> <span class="c1">// 引入写文件的模块
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 调用 init 注入超能力！
+</span></span></span><span class="line"><span class="cl"><span class="nx">logger</span><span class="p">.</span><span class="nx">init</span><span class="p">({</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">level</span><span class="o">:</span> <span class="nx">app</span><span class="p">.</span><span class="nx">isPackaged</span> <span class="o">?</span> <span class="s1">&#39;warn&#39;</span> <span class="o">:</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="c1">// 如果打包了就用 warn 级别，开发时用 info 级别
+</span></span></span><span class="line"><span class="cl">  <span class="nx">writeErrorLog</span><span class="o">:</span> <span class="nx">writeErrorLog</span><span class="p">,</span>            <span class="c1">// 把真正能写文件的函数塞给 logger
+</span></span></span><span class="line"><span class="cl">  <span class="nx">showTimestamp</span><span class="o">:</span> <span class="kc">true</span>                      <span class="c1">// 开启时间戳
+</span></span></span><span class="line"><span class="cl"><span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="注释语法-jsdoc">注释语法 JSDoc
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">LEVELS</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">debug</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">info</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">warn</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">none</span><span class="o">:</span> <span class="mi">4</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">LEVEL_LABELS</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">debug</span><span class="o">:</span> <span class="s1">&#39;DEBUG&#39;</span><span class="p">,</span> <span class="nx">info</span><span class="o">:</span> <span class="s1">&#39;INFO&#39;</span><span class="p">,</span> <span class="nx">warn</span><span class="o">:</span> <span class="s1">&#39;WARN&#39;</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="s1">&#39;ERROR&#39;</span> <span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** @type {string} 当前日志级别名 */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">currentLevel</span> <span class="o">=</span> <span class="s1">&#39;info&#39;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** @type {Function|null} 错误日志落盘回调（通常为 errorLogger.writeErrorLog） */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">errorLogWriter</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** @type {boolean} 是否在消息前附加时间戳 */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">showTimestamp</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 JavaScript 中，变量是“动态类型”的，这意味着你写下 <code>let showTimestamp = true;</code> 时，虽然现在是个布尔值，但后面如果不小心手误写成 <code>showTimestamp = '是的';</code>，JavaScript 是允许你这么做的，而且它在运行前<strong>绝对不会向你报警</strong>。
+为了解决这个痛点，高级开发者们就发明了 <code>@type</code> 这样的 JSDoc 语法。</p>
+<h4 id="拆解-type-boolean-语法">拆解 <code>@type {boolean}</code> 语法
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="cm">/** @type {boolean} 是否在消息前附加时间戳 */</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>/ … */</code></strong>（注意开头是<strong>两个</strong>星号）：这是 JSDoc 的专用开启标志。普通的单行注释 <code>//</code> 或普通多行注释 <code>/* */</code> 是不会触发 VSCode 智能解析的。</li>
+<li><strong><code>@type</code></strong>：这是一个<strong>标签指令（Tag）</strong>，告诉编辑器：“听好了，我要给紧接着的这行变量指定一个精准的类型了！”</li>
+<li><strong><code>{boolean}</code></strong>：大括号里面写的就是<strong>数据类型</strong>。这里规定了必须是布尔值（<code>true</code> 或 <code>false</code>）。</li>
+<li><strong><code>是否在消息前附加时间戳</code></strong>：大括号后面的文字是<strong>大白话解释（描述）</strong>。</li>
+</ul>
+<h4 id="功能">功能
+</h4><p>当你写下了这行注释后，VSCode 能为你提供两大核心帮助：</p>
+<p>1、悬停提示“小说明书”</p>
+<p>当你在代码后面的第 50 行或者 100 行用到 <code>showTimestamp</code> 时，你只需要把鼠标指针悬停在这个变量上，VSCode 就会瞬间弹出一个极其漂亮的悬停提示：</p>
+<p>它不仅会清晰地告诉你这个变量是 <code>boolean</code>（布尔值），还会把你写的中文解释“是否在消息前附加时间戳”展示出来。这样哪怕项目过去半年，你也不用翻回开头去看这个变量是干嘛的。</p>
+<p>2、拦截你的手误（智能纠错）</p>
+<p>如果你在后面的代码中不小心写错了：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">showTimestamp</span> <span class="o">=</span> <span class="s1">&#39;开启&#39;</span><span class="p">;</span> <span class="c1">// 手误赋值了一个字符串文本
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>VSCode 的语法检查器（或者团队的类型检查工具）就会在这行代码下面画上红线或黄线，义正言辞地警告你：不能将类型“string”分配给类型“boolean”。</p>
+<h4 id="常用的-type-还有哪些">常用的 <code>@type</code> 还有哪些
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="cm">/** @type {number} 传感器的默认波特率 */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">baudRate</span> <span class="o">=</span> <span class="mi">9600</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** @type {string[]} 支持的日志级别列表（字符串数组） */</span>
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">allowedLevels</span> <span class="o">=</span> <span class="p">[</span><span class="s1">&#39;debug&#39;</span><span class="p">,</span> <span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span> <span class="s1">&#39;error&#39;</span><span class="p">];</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="cm">/** @type {Function} 错误落盘的回调函数 */</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">errorLogWriter</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p><code>/ @type {…} */</code> 是一种<strong>静态类型标注语法</strong>。</p>
+<p>因为你用的是原生的 JavaScript（不像 TypeScript 那样天然强制规定类型），所以 Claude 帮你好写了这段 JSDoc 注释，相当于<strong>给这个变量办了一张身份证</strong>。有了它，VSCode 就能在开发阶段死死帮你盯住这个变量，防止你以后写代码时发生“把字符串误塞给布尔开关”的低级错误。</p>
+<h3 id="api">API
+</h3><p><strong>API</strong> 的全称是 <em>Application Programming Interface</em>（应用程序编程接口）。听起来很高级，但大白话来说，它就是“别人写好的一套工具，你直接调用就行，不需要管它里面是怎么实现的”。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">fs</span><span class="p">.</span><span class="nx">mkdirSync</span><span class="p">(</span><span class="nx">dataDir</span><span class="p">,</span> <span class="p">{</span> <span class="nx">recursive</span><span class="o">:</span> <span class="kc">true</span> <span class="p">});</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong>API</strong>：Node.js 官方写好的 <code>fs.mkdirSync</code> 函数。</li>
+<li>只要把路径（参数）传给它，它全自动在硬盘上把文件夹建好。你根本不需要知道操作系统是怎么在底层操作二进制数据的。<strong>这个函数，就叫做 <code>fs</code> 模块提供的 API。</strong></li>
+</ul>
+<h4 id="函数-vs-api">函数 vs API
+</h4><p>我们可以用一句话分清它们俩的关系：<strong>“函数”是它的身体（实现方式），“API”是它的身份（它的功能和承诺）。</strong></p>
+<ul>
+<li><strong>普通函数</strong>：你自己随手在代码里写的 <code>function add(a, b) { return a + b; }</code>。它是为了解决你眼前某个小计算而写的。</li>
+<li><strong>API</strong>：通常是指<strong>某一个独立的系统、框架或模块，专门向外界毫无保留地公开出来、供大家标准调用的一组特殊函数</strong>。
+<ul>
+<li>比如你的 <code>logger.js</code> 模块，它里面有 <code>_format</code>、<code>_shouldLog</code>、<code>info</code>、<code>error</code> 很多函数。</li>
+<li><code>_format</code> 和 <code>_shouldLog</code> 是内部偷着用的，不叫 API。</li>
+<li>而你导出给别人用的 <code>logger.info()</code>、<code>logger.error()</code>，就是这个日志模块<strong>公开的 API</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="如何理解注入">如何理解注入
+</h3><p>假设你家里有一根自来水管。正常情况下，拧开水龙头，流出来的只有普通自来水，对吧？</p>
+<p>现在，你买了一个“全自动免擦洗洗车喷枪”。这个喷枪中间有一个小盒子，里面装满了高浓度的洗车泡沫原液。</p>
+<ul>
+<li>当自来水穿过这个喷枪时，水流会把小盒子里的泡沫原液一起带出来。</li>
+<li>最终，水龙头里喷出来的就不再是普通的清水，而是<strong>带有超强去污能力的泡沫水</strong>。</li>
+</ul>
+<p>在这个过程里：</p>
+<ul>
+<li>自来水管就是原本的环境（或者原本的代码）。</li>
+<li>泡沫原液就是你想加的新功能（依赖项）。</li>
+<li>把泡沫盒子卡在水管中间的动作，就叫做“注入”。</li>
+<li>最终结果：你成功地给清水注入了泡沫超能力。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">errorLogWriter</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span> <span class="c1">// 一开始，日志管家手里没有写文件的笔
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">init</span><span class="p">(</span><span class="nx">opts</span> <span class="o">=</span> <span class="p">{})</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="p">(</span><span class="k">typeof</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">writeErrorLog</span> <span class="o">===</span> <span class="s1">&#39;function&#39;</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">errorLogWriter</span> <span class="o">=</span> <span class="nx">opts</span><span class="p">.</span><span class="nx">writeErrorLog</span><span class="p">;</span> <span class="c1">// 别人把写文件的笔“递”进来了
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>原本 <code>logger.js</code> 只是一个在控制台打印文字的普通工具，它自己是<strong>根本不知道怎么往硬盘写文件</strong>的。</p>
+<p>但在主进程启动时，你调用了 <code>logger.init({ writeErrorLog: errorLogger.writeErrorLog })</code>。</p>
+<p>这就相当于：主进程把一把专门写文件的“枪”（<code>writeErrorLog</code> 函数），<strong>注入</strong>到了日志管家的手里。日志管家收下这把枪后，以后一旦发生严重报错，它就能开枪（执行函数）把日志钉在硬盘上。</p>
+<h4 id="理解">理解
+</h4><blockquote>
+<p>把某个参数传给另一个函数，就叫做传参；把某一个函数传给另一个函数，就叫做注入。此时这个被注入的函数就叫做依赖项，是这么理解吗</p>
+</blockquote>
+<h4 id="传参-vs-注入它们的本质区别">传参 vs 注入：它们的本质区别
+</h4><p>其实，<strong>“注入”在代码底层的物理动作，百分之百就是“传参”</strong>。它们不是对立的，而是包含关系：<strong>注入是传参的一种高级业务形式。</strong></p>
+<ul>
+<li><strong>普通传参</strong>：关注的是<strong>数据（Data）</strong>。
+<ul>
+<li>比如：<code>logger.info('连接超时')</code>。你传过去一个字符串，函数拿着这个字符串去打印。这叫传参。</li>
+</ul>
+</li>
+<li><strong>注入（特指依赖注入）</strong>：关注的是<strong>能力/控制权（Capability / Control）</strong>。
+<ul>
+<li>正如你所说，当你<strong>把一个函数、或者一个写满了各种本事的对象（也就是你说的依赖项），当成参数传给另一个函数/类</strong>时，这就叫注入。</li>
+<li>比如：<code>logger.init({ writeErrorLog: fn })</code>。你传过去的不是一个死的数据，而是一把能干活的“工具（函数）”。</li>
+</ul>
+</li>
+</ul>
+<h4 id="为什么被注入的函数叫做依赖项">为什么被注入的函数叫做“依赖项”
+</h4><p>我们来拆字理解为什么叫“依赖”： 在没有注入这把“枪”之前，<code>logger.js</code> 自己是无法让日志在硬盘落盘的。它想要实现落盘功能，<strong>必须依赖</strong>外部那个真正懂文件系统的模块（<code>errorLogger.js</code>）提供帮助。</p>
+<ul>
+<li><code>logger.js</code> 是 <strong>控制方（宿主）</strong>。</li>
+<li><code>writeErrorLog</code> 函数是 <strong>被依赖方（依赖项）</strong>。</li>
+</ul>
+<p>把依赖项从外面送进去的过程，在行业黑话里就叫：<strong>“把系统依赖注入进模块中”</strong>。</p>
+<h4 id="编程界的高级黑话控制反转ioc">编程界的高级黑话：控制反转（IoC）
+</h4><p>既然你已经理解到这一步了，我必须送你一个听起来能唬住所有人、但其实很好懂的高级概念——<strong>控制反转（Inversion of Control）</strong>。</p>
+<p>在传统思维里（不使用注入）：</p>
+<blockquote>
+<p><code>logger.js</code> 如果想写文件，它必须自己在文件开头写死：<code>const fs = require('fs')</code>，然后自己辛辛苦苦去调用 <code>fs.writeFileSync</code>。 <strong>（这叫：我自己的命运，我自己控制，我自己去抓依赖项）</strong></p>
+</blockquote>
+<p>在注入思维里：</p>
+<blockquote>
+<p><code>logger.js</code> 躺平了，它说：“我不知道怎么写文件，我也不去 require 任何文件模块。我只留出一个全局变量 <code>errorLogWriter</code>。谁初始化我，谁就必须把写文件的函数主动喂到我嘴里。” <strong>（这叫：控制权反转了。我不再主动去找依赖，而是等待别人把依赖注入给我）</strong></p>
+</blockquote>
+<p>这样做有什么惊人的好处？</p>
+<p>假设你以后觉得把错误日志写在本地硬盘太低端了，你想让软件把错误日志上传到阿里云服务器。</p>
+<ul>
+<li><strong>如果没有使用注入</strong>：你必须拆开 <code>logger.js</code> 的源码，把里面的 <code>fs.writeFileSync</code> 删掉，改成复杂的网络请求代码。这叫“牵一发而动全身”，很容易改出 Bug。</li>
+<li><strong>因为使用了注入</strong>：你一个字都不需要改动 <code>logger.js</code>。你只需要在外面写一个新的联网上传函数 <code>uploadFn</code>，然后在初始化时改写成 <code>logger.init({ writeErrorLog: uploadFn })</code>。<code>logger.js</code> 内部会自动用你的新函数去干活！</li>
+</ul>
+<h3 id="出口导出声明">出口导出声明
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">init</span><span class="p">,</span> <span class="nx">getLevel</span><span class="p">,</span> <span class="nx">setLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">debug</span><span class="p">,</span> <span class="nx">info</span><span class="p">,</span> <span class="nx">warn</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">LEVELS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>用一句话大白话来解释它的作用：<strong>“它是这个 JS 文件的‘对外营业窗口’。只有写在这里面的函数和变量，别的 JS 文件才能看得见、调得动。”</strong></p>
+<p>在 JavaScript 的模块世界里，有一个非常重要的安全核心规则：<strong>“闭关锁国”</strong>。 每一个独立的 <code>.js</code> 文件，默认都是一个完全封闭的独立王国。你在 <code>logger.js</code> 里面定义的变量（比如 <code>currentLevel</code>）和内部函数（比如 <code>_format</code>），别的文件（比如你的主入口 <code>main.js</code>）是<strong>根本没有权限读取或运行的</strong>。</p>
+<h4 id="拆解里面的语法糖属性简写">拆解里面的语法糖（属性简写）
+</h4><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">init</span><span class="p">,</span> <span class="nx">getLevel</span><span class="p">,</span> <span class="nx">setLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">debug</span><span class="p">,</span> <span class="nx">info</span><span class="p">,</span> <span class="nx">warn</span><span class="p">,</span> <span class="nx">error</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">LEVELS</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这里利用了 JavaScript 的 <strong>对象属性简写（Property Shorthand）</strong> 语法。如果不简写，它的完整面貌其实长这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">init</span><span class="o">:</span> <span class="nx">init</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">getLevel</span><span class="o">:</span> <span class="nx">getLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">setLevel</span><span class="o">:</span> <span class="nx">setLevel</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">debug</span><span class="o">:</span> <span class="nx">debug</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">info</span><span class="o">:</span> <span class="nx">info</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">warn</span><span class="o">:</span> <span class="nx">warn</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">error</span><span class="o">:</span> <span class="nx">error</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">LEVELS</span><span class="o">:</span> <span class="nx">LEVELS</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>在 JavaScript 里，如果一个对象的 <strong>属性名（键名）</strong> 和它绑定的 <strong>变量名/函数名</strong> 恰好一模一样，你就可以只写一个词，系统会自动帮你配对。</p>
+<h4 id="别的模块是怎么接货的">别的模块是怎么接货的
+</h4><p>因为你在这里用了 <code>module.exports = { … }</code> 导出了一个包含很多超能力的大对象，所以在你的主程序 <code>main.js</code> 里面，别人就可以用你第一课学到的<strong>对象解构赋值</strong>，精准地把这些超能力接过去：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="c1">// main.js 中接货：
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="p">{</span> <span class="nx">init</span><span class="p">,</span> <span class="nx">info</span><span class="p">,</span> <span class="nx">error</span> <span class="p">}</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./services/logger&#39;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 直接开始一键调用！
+</span></span></span><span class="line"><span class="cl"><span class="nx">init</span><span class="p">({</span> <span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;info&#39;</span> <span class="p">});</span>
+</span></span><span class="line"><span class="cl"><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;系统一切正常&#39;</span><span class="p">);</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>我看导出的即有 LEVELS，也有 init，这两个东西是一个层级的东西吗</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 1号格子：名字叫 init，里面装的是一个【函数】
+</span></span></span><span class="line"><span class="cl">  <span class="nx">init</span><span class="o">:</span> <span class="kd">function</span><span class="p">(</span><span class="nx">opts</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 2号格子：名字叫 info，里面装的是一个【函数】
+</span></span></span><span class="line"><span class="cl">  <span class="nx">info</span><span class="o">:</span> <span class="kd">function</span><span class="p">(...</span><span class="nx">args</span><span class="p">)</span> <span class="p">{</span> <span class="p">...</span> <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 3号格子：名字叫 LEVELS，里面装的是一个【普通的对象表】
+</span></span></span><span class="line"><span class="cl">  <span class="nx">LEVELS</span><span class="o">:</span> <span class="p">{</span> <span class="nx">debug</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">info</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">warn</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">error</span><span class="o">:</span> <span class="mi">3</span><span class="p">,</span> <span class="nx">none</span><span class="o">:</span> <span class="mi">4</span> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>发现了吗？在最外层的大括号工具箱里，<code>init</code>、<code>info</code>、<code>LEVELS</code> 都是这个大对象的<strong>属性键名（格子名）</strong>。</p>
+<h2 id="controlrouter-js">controlRouter js
+</h2><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// ============================================================
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  初始化序列
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ============================================================
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 控制策略路由器初始化
+</span></span></span><span class="line"><span class="cl"><span class="nx">safeInit</span><span class="p">(</span><span class="s1">&#39;controlRouter.init&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">controlRouter</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">internalVariables</span><span class="p">));</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>这个模块叫 <strong>“控制策略路由器”</strong>，它是整个智能控制系统的“中枢神经调度官”。</p>
+<p>在工业控制中，你可能需要根据不同的工况，实时切换不同的控制策略（比如：现在是用传统的 PID 算法来控氨水阀门，还是切换到用 AI 预测模型来控阀门？）。</p>
+<p><code>controlRouter.init(config, internalVariables)</code> 这一步，就是把系统配置（config）和内部的核心传感器变量表（internalVariables）一股脑全注入到这个路由器里，让它做好随时调度控制策略的准备。</p>
+<h3 id="回调函数-callback">回调函数 (Callback)
+</h3><p>在这里，<code>safeInit</code> 是一个函数，但你注意到它接收的第二个参数了吗？ <strong><code>() =&gt; controlRouter.init(…)</code></strong> 这是一个<strong>箭头函数</strong>。</p>
+<p>很多新手会奇怪：为什么不直接写 <code>safeInit('…', controlRouter.init(config, internalVariables))</code> 呢？</p>
+<ul>
+<li><strong>如果直接写（错误做法）</strong>：JavaScript 会在执行 <code>safeInit</code> 的一瞬间，立刻把右边的 <code>controlRouter.init</code> 函数给运行了。此时 <code>safeInit</code> 根本来不及对它做任何安全保护。</li>
+<li><strong>写成箭头函数（正确做法）</strong>：相当于把这一行初始化命令<strong>打包放进了一个“小锦囊”里</strong>，当做参数传给 <code>safeInit</code>。<code>safeInit</code> 拿到了锦囊先不打开，它会先布置好安全网（比如包裹 <code>try-catch</code>），然后再在安全的环境下拆开锦囊执行里面的代码。这种作为参数传进去、等待合适时机再执行的函数，就叫“回调函数”。</li>
+</ul>
+<h3 id="为什么要套一层-safeinit">为什么要套一层 <code>safeInit</code>
+</h3><p>这个 <code>safeInit</code> 应该是在文件的其他地方定义的一个“安全启动包裹器”（它的名字起得非常直观：安全初始化）。它的内部源码大概率长成这样：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">safeInit</span><span class="p">(</span><span class="nx">taskName</span><span class="p">,</span> <span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="sb">`正在启动初始化任务: </span><span class="si">${</span><span class="nx">taskName</span><span class="si">}</span><span class="sb">`</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">callback</span><span class="p">();</span> <span class="c1">// 在这里才真正打开锦囊，运行你的 controlRouter.init(...)
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 工业级防御：万一控制路由器初始化报错（比如配置写错了），这里死死抓住了错误
+</span></span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`致命错误：任务 </span><span class="si">${</span><span class="nx">taskName</span><span class="si">}</span><span class="sb"> 初始化失败！`</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 可以在这里执行紧急降级预案，比如强行让阀门复位，防止软件直接闪退导致工业事故
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="安全初始化包装器">安全初始化包装器
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="c1">// ============================================================
+</span></span></span><span class="line"><span class="cl"><span class="c1">//  安全初始化包装器
+</span></span></span><span class="line"><span class="cl"><span class="c1">// ============================================================
+</span></span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">safeInit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span> <span class="nx">fn</span><span class="p">();</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="sb">`[INIT] </span><span class="si">${</span><span class="nx">name</span><span class="si">}</span><span class="sb"> 初始化失败: </span><span class="si">${</span><span class="nx">e</span><span class="p">.</span><span class="nx">message</span><span class="si">}</span><span class="sb">`</span><span class="p">,</span> <span class="nx">e</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">safeInit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li><strong><code>const safeInit = …</code></strong>：这是 JavaScript 中非常流行的<strong>函数表达式</strong>定义方式。</li>
+<li><strong><code>(name, fn) =&gt; { … }</code></strong>：这是一个<strong>箭头函数</strong>。它接收两个参数：
+<ul>
+<li><code>name</code>：一个字符串，代表任务的名字（比如 <code>'controlRouter.init'</code>）。</li>
+<li><code>fn</code>：<strong>（核心重点）</strong> 这是一个<strong>函数类型的参数</strong>。也就是你上一课猜对的“依赖项/回调函数”。在它的眼里，<code>fn</code> 就是那个被打包送进来的安全锦囊。</li>
+</ul>
+</li>
+</ul>
+<h3 id="怎么配合工作的">怎么配合工作的
+</h3><div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-JavaScript" data-lang="JavaScript"><span class="line"><span class="cl"><span class="c1">// 1. 调用时：我们把具体动作打包成“锦囊”丢进去
+</span></span></span><span class="line"><span class="cl"><span class="nx">safeInit</span><span class="p">(</span><span class="s1">&#39;controlRouter.init&#39;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="nx">controlRouter</span><span class="p">.</span><span class="nx">init</span><span class="p">(</span><span class="nx">config</span><span class="p">,</span> <span class="nx">internalVariables</span><span class="p">));</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 2. 源码里：fn 变量接住了这个“锦囊”
+</span></span></span><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">safeInit</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="p">,</span> <span class="nx">fn</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">try</span> <span class="p">{</span> 
+</span></span><span class="line"><span class="cl">    <span class="nx">fn</span><span class="p">();</span> <span class="c1">// 3. 在这里，fn() 一执行，等价于在 try 里面执行了 controlRouter.init(...)
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span> <span class="k">catch</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// 4. 万一 init 炸了，在这里被完美拦截，软件不闪退！
+</span></span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>你现在看到的这段 <code>safeInit</code>，是大型生产环境软件的核心标配。</p>
+<p>如果一个软件里有 15 个核心功能模块需要初始化，传统的写法是老老实实写 15 个独立的 <code>try…catch</code>，代码会变得极其臃肿，满屏幕都是重复的代码。</p>
+<p>而 Claude 帮你好写的方法：</p>
+<ol>
+<li>把通用的“安检大门和安全网”单独抽出来，做成了 <code>safeInit</code> 模板。</li>
+<li>哪个模块想初始化，就把自己打包成小锦囊（箭头函数）往里丢。</li>
+</ol>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
