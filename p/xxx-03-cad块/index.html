@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/xxx-03-cad%E5%9D%97/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="XXX-03-CAD块">
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="XXX-03-CAD块">
 <meta property='og:description' content="简单来说，块就是将多个图形对象（线、圆、文字等）“打包”成一个单一的整体。你可以把它想象成一个“印章”或者一个“乐高零件”。\n框架图 graph TD Objects[散乱的线/圆/弧] -- \"B (创建)\" --> BlockDef[块定义: 存在于当前文件] BlockDef -- \"W (写块)\" --> DWGFile[独立的 DWG 文件: 存入个人库] DWGFile -- \"I (插入)\" --> Drawing[当前图纸中的实例] BlockDef -- \"I (插入)\" --> Drawing Drawing -- \"BE (编辑)\" --> Change[修改形状] Change -- \"保存\" --> Update[全图所有实例自动同步] Drawing -- \"X (炸开)\" --> Objects[变回散乱的线] 一、 为什么要用“块”？（核心价值） 全局更新（牵一发而动全身）： 如果你在图纸里用了 100 个采样泵符号，后来发现泵的形状画错了。 不用块： 你得手动改 100 次。 用了块： 你只需修改“块定义”，全图 100 个泵会自动同步更新。 减小文件体积： CAD 只记录一个块的定义，其余的只是“引用”。这能让复杂的系统图运行得更流畅。 标准化管理： 你可以建立一套标准件库（分析仪、机柜、法兰、单向阀），保证全公司画出来的图纸符号一模一样。 二、 块的常用操作指令 1. 创建块：B (Block) 这是“打包”的过程。\n">
 <meta property='og:url' content='https://teaize.github.io/p/xxx-03-cad%E5%9D%97/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
@@ -64,7 +64,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 

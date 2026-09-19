@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="系统思维">
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="系统思维">
 <meta property='og:description' content="考虑三个维度：系统稳定性、测量纯度、架构设计\n第一维度：关于“稳” —— 系统的生存能力 这一层的概念和“鲁棒性”最接近，关注系统在极端或故障条件下的表现。\n冗余 (Redundancy) 含义： 为了提高可靠性，故意多配置一套组件。 CEMS 应用： 热备（Hot Standby）： 比如工控机双硬盘备份，或者采样泵“一用一备”。一旦主泵坏了，备用泵 0 秒自动切入，数据不中断。 架构思考： 用空间（多余的硬件）换时间（无故障运行时间）。 容错 (Fault Tolerance) 含义： 当系统出现部分故障时，仍能继续运行（哪怕性能降级），而不会直接死机或崩溃。 CEMS 应用： 伴热管线某一段温度传感器坏了，系统不应该直接停机，而是应该报警并根据历史电流估算温度，维持基本的防冷凝功能，直到维修人员到达。 架构思考： 承认故障是不可避免的，重点在于故障隔离和降级运行。 失效安全 (Failsafe) 含义： 如果系统彻底坏了，它必须处于一个“安全”的状态，不能造成更大的破坏。 CEMS 应用： 如果探头反吹电磁阀突然断电（失效），阀门必须设计成自动关闭（常闭型），防止压缩空气无限制吹入烟道，或者防止烟气倒灌进仪表柜。 架构思考： 设计的底线思维，考虑“死法”是否安全。 第二维度：关于“准” —— 数据的纯净度 这一层的概念关注如何从干扰中提取真实信号，是对抗“影响量”的具体手段。\n">
 <meta property='og:url' content='https://teaize.github.io/p/%E7%B3%BB%E7%BB%9F%E6%80%9D%E7%BB%B4/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
@@ -64,7 +64,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 

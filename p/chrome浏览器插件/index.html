@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="Chrome浏览器插件">
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="Chrome浏览器插件">
 <meta property='og:description' content="本篇继 [[制作一款Chrome浏览器插件]]，学习一下插件的构成\ngraph TD %% 定义组件 Manifest[(manifest.json配置文件)] subgraph \"网页世界 (Web Page Context)\" DOM[DOM / 网页 HTML] ContentScript[content.js注入脚本] end subgraph \"扩展内部世界 (Extension Context)\" ServiceWorker[Service Worker / Background.js后台逻辑 - 类似大脑] Popup[Popup / Options.js前端交互界面] end subgraph \"外部世界 (External)\" AnkiConnect[AnkiConnect127.0.0.1:8765] WebAPI[外部 API / 网页后端] end %% 定义交互关系 Manifest -.->|注册与配置| ContentScript Manifest -.->|生命周期管理| ServiceWorker Manifest -.->|定义 UI 入口| Popup DOM <-->|读写网页元素| ContentScript ContentScript <==>|Message Passing 通信| ServiceWorker Popup <==>|Message Passing 通信| ServiceWorker ContentScript -->|直接发送数据| AnkiConnect ServiceWorker -->|网络请求| WebAPI style Manifest fill:#f96,stroke:#333,stroke-width:2px style ContentScript fill:#4285f4,color:#fff style ServiceWorker fill:#34a853,color:#fff style Popup fill:#ea4335,color:#fff style AnkiConnect fill:#fff,stroke:#4285f4,stroke-dasharray: 5 5 关键组件解析 1. manifest.json：插件的“身份证”与“说明书” 这是每个插件必须有的文件。没有它，浏览器就不知道这个插件叫什么、能干什么。\n">
 <meta property='og:url' content='https://teaize.github.io/p/chrome%E6%B5%8F%E8%A7%88%E5%99%A8%E6%8F%92%E4%BB%B6/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
@@ -64,7 +64,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 

@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Mermaid on Coffity&#39;s Blog</title>
+        <link>https://teaize.github.io/tags/mermaid/</link>
+        <description>Recent content in Mermaid on Coffity&#39;s Blog</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <copyright>Coffity</copyright>
+        <lastBuildDate>Fri, 19 Dec 2025 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/tags/mermaid/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mermaid时序图</title>
+        <link>https://teaize.github.io/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/</link>
+        <pubDate>Fri, 19 Dec 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/mermaid%E6%97%B6%E5%BA%8F%E5%9B%BE/</guid>
+        <description>&lt;p&gt;本篇继 [[Mermaid思维导图]]、[[Mermaid状态图]]，学习 Mermaid 时序图&lt;/p&gt;
+&lt;h3 id=&#34;核心语法谁跟谁说话&#34;&gt;核心语法：谁跟谁说话
+&lt;/h3&gt;&lt;p&gt;时序图的代码就像写剧本。基本句式： &lt;code&gt;A-&amp;gt;&amp;gt;B: 你好啊&lt;/code&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;participant&lt;/code&gt;：定义演员。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;-&amp;gt;&amp;gt;&lt;/code&gt;：实线箭头（发指令）。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;--&amp;gt;&amp;gt;&lt;/code&gt;：虚线箭头（回消息）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sequenceDiagram
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant DAS as 🖥️工控机
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant CEMS as ⚙️分析仪
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    DAS-&amp;gt;&amp;gt;CEMS: 1. 现在的浓度是多少？(Modbus请求)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    CEMS--&amp;gt;&amp;gt;DAS: 2. 是 35.5 mg/m3 (返回数据)
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;进阶语法加个背景色-loop--alt&#34;&gt;进阶语法：加个背景色 (Loop / Alt)
+&lt;/h3&gt;&lt;p&gt;只有对话太单调，有时候需要表示“循环”或者“特殊情况”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;loop … end&lt;/code&gt;：表示一直做某事。&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;alt … else … end&lt;/code&gt;：表示“如果…否则…” (Alternative)。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;sequenceDiagram
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant P as 采样泵
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    participant S as 传感器
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    loop 每秒一次
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        P-&amp;gt;&amp;gt;S: 抽气
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S--&amp;gt;&amp;gt;S: 读取光强
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    alt 光强太低
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S-&amp;gt;&amp;gt;P: 报警！停止抽气！
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    else 光强正常
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        S-&amp;gt;&amp;gt;P: 继续工作
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    end
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;div class=&#34;mermaid&#34;&gt;
+  sequenceDiagram
+    participant P as 采样泵
+    participant S as 传感器
+
+    loop 每秒一次
+        P-&gt;&gt;S: 抽气
+        S--&gt;&gt;S: 读取光强
+    end
+    
+    alt 光强太低
+        S-&gt;&gt;P: 报警！停止抽气！
+    else 光强正常
+        S-&gt;&gt;P: 继续工作
+    end
+&lt;/div&gt;
+&lt;h3 id=&#34;避坑指南&#34;&gt;避坑指南
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;箭头方向：
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;-&amp;gt;&amp;gt;&lt;/code&gt; 是发出去（实线），&lt;code&gt;--&amp;gt;&amp;gt;&lt;/code&gt; 是回话（虚线）。&lt;/li&gt;
+&lt;li&gt;千万别写成 &lt;code&gt;--&amp;gt;&lt;/code&gt;（这是流程图的写法），虽然有时候能混过去，但在时序图里不规范。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;别名 (as) 很重要：
+&lt;ul&gt;
+&lt;li&gt;如果名字太长（比如“脱硝出口 CEMS 分析仪主控板”），一定要用 &lt;code&gt;participant A as …&lt;/code&gt; 这种写法，否则后面的代码会写得你想哭。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;顺序决定站位：
+&lt;ul&gt;
+&lt;li&gt;代码里谁先出现（&lt;code&gt;participant&lt;/code&gt; 定义的顺序），图上谁就站在左边。通常我们把“发起者”（比如电脑）放在最左边。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;小结&#34;&gt;小结
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;&lt;strong&gt;遇到什么问题？&lt;/strong&gt;&lt;/th&gt;
+					&lt;th&gt;&lt;strong&gt;用什么图？&lt;/strong&gt;&lt;/th&gt;
+					&lt;th&gt;&lt;strong&gt;核心思考&lt;/strong&gt;&lt;/th&gt;
+					&lt;th&gt;&lt;strong&gt;代码关键词&lt;/strong&gt;&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;我要拆解结构&lt;/strong&gt;&lt;br&gt;(如：这台机器由什么组成？)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;Mindmap&lt;/strong&gt;&lt;br&gt;(思维导图)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;分类&lt;/strong&gt;&lt;br&gt;(包含关系)&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;mindmap&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;我要理清状态&lt;/strong&gt;&lt;br&gt;(如：故障了怎么恢复？)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;StateDiagram&lt;/strong&gt;&lt;br&gt;(状态图)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;变化&lt;/strong&gt;&lt;br&gt;(从 A 变 B)&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;stateDiagram-v2&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;我要搞懂通讯&lt;/strong&gt;&lt;br&gt;(如：软件怎么控制硬件？)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;Sequence&lt;/strong&gt;&lt;br&gt;(时序图)&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;时间&lt;/strong&gt;&lt;br&gt;(谁先谁后)&lt;/td&gt;
+					&lt;td&gt;&lt;code&gt;sequenceDiagram&lt;/code&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        
+    </channel>
+</rss>

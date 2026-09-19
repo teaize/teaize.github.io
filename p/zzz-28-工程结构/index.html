@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/zzz-28-%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84/'>
 
-<link rel="stylesheet" href="/scss/style.min.40de2c9146c99dd64cc79a5931e76b8a780c81a4bc700b87fdd9684436ee3dd3.css"><meta property='og:title' content="ZZZ-28-工程结构">
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="ZZZ-28-工程结构">
 <meta property='og:description' content="1.工业级嵌入式工程结构（推荐方案） 你可以按照这个逻辑在 Core 文件夹下（或与其平级）构建你的目录：\n1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 Project_Root/ ├── Core/ # 由 CubeMX 生成的核心代码 │ ├── Inc/ # 存放 main.h, stm32..._it.h │ └── Src/ # 存放 main.c, stm32..._it.c ├── Drivers/ # 厂商底层库 (HAL, CMSIS) └── User_Library/ # 【重点】你自己的代码帝国 ├── App/ # 应用层 (Application) │ ├── logic.c/h # 业务大脑：按键流程、标定顺序 │ └── modbus_slave.c/h # 通讯官：协议解析、寄存器映射 ├── BSP/ # 板级支持包 (Board Support Package) │ ├── storage.c/h # 存储驱动：内部 Flash 读写封装 │ └── sensor_adc.c/h # 硬件抽象：ADC 原始数据采集 └── Tools/ # 工具层 (Utilities) ├── filter.c/h # 数学工具：一阶滞后、平均值滤波 └── pid.c/h # 算法工具：PID 控制算法 2. 各层级的功能分配（职责表） 层级 职责 (Role) 就像公司的… 编写注意事项 App (应用层) 负责“怎么做”。比如：按下按键后先闪灯再保存。 总经理 不直接操作引脚，只调用 BSP 提供的函数。 BSP (驱动层) 负责“跟谁做”。专门针对你的电路板硬件。 部门主管 把底层的 HAL 函数包装成有意义的名字（如 Relay_On）。 Tools (工具层) 负责“怎么算”。纯数学运算。 技术顾问 不包含任何硬件头文件。它是纯 C 代码，可以轻松移植到任何单片机。 Core (系统层) 负责“活下来”。硬件初始化、中断入口。 地基/物业 尽量不要在这里写逻辑，保持 CubeMX 生成的样貌。 3. 避坑指南：为什么这么分？ 为什么要分 App 和 BSP？ 场景：如果你以后把压力传感器从 ADC 接口换成了 I2C 接口。 好处：你只需要修改 BSP/sensor.c，而你的 App/logic.c（标定逻辑）一行代码都不用改。 为什么要分 Tools？ 场景：你以后做一个温控器项目。 好处：你直接把 filter.c 和 pid.c 拷贝过去就能用，不用担心里面混杂了 CEMS 的硬件定义。 4. 改名与重构的注意事项清单 当你按照这个结构建立文件夹时，请务必检查这三点：\n">
 <meta property='og:url' content='https://teaize.github.io/p/zzz-28-%E5%B7%A5%E7%A8%8B%E7%BB%93%E6%9E%84/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
@@ -64,7 +64,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu_cfb650d8c14450d1.png" width="300"
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
