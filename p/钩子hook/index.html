@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="拆卸芯片 从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）\n1、核心秘诀：“以锡引锡” 这是最重要的一点。不要直接用干烙铁去烫旧焊点。\n">
-<title>PCB焊接</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="通俗来说，“钩子”（Hook）就是软件官方在流水线上故意留的一个“插手机会”。\n生活中的类比：快递打包流水线 想象你把寄快递的整个流程委托给了一个自动化打包系统：\n系统拿取货物（编译代码） 塞进内包装盒（打包成文件夹） 【系统停顿 3 秒并喊一句：“谁要往盒子里放东西？”】 $\\leftarrow$ 这就是钩子！ 封箱并打打包带（压缩成最终的 .exe 安装包） 如果没有这个钩子，自动化流水线会一气呵成从第 1 步跑到第 4 步。如果你想在盒子封死前塞一张手写感谢信，或者拿剪刀把多余的泡沫塑料剪掉，你就只能把最终打好包的箱子暴力拆开，改完再重新粘上。\n">
+<title>钩子Hook</title>
 
-<link rel='canonical' href='https://teaize.github.io/p/pcb%E7%84%8A%E6%8E%A5/'>
+<link rel='canonical' href='https://teaize.github.io/p/%E9%92%A9%E5%AD%90hook/'>
 
-<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="PCB焊接">
-<meta property='og:description' content="拆卸芯片 从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）\n1、核心秘诀：“以锡引锡” 这是最重要的一点。不要直接用干烙铁去烫旧焊点。\n">
-<meta property='og:url' content='https://teaize.github.io/p/pcb%E7%84%8A%E6%8E%A5/'>
+<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="钩子Hook">
+<meta property='og:description' content="通俗来说，“钩子”（Hook）就是软件官方在流水线上故意留的一个“插手机会”。\n生活中的类比：快递打包流水线 想象你把寄快递的整个流程委托给了一个自动化打包系统：\n系统拿取货物（编译代码） 塞进内包装盒（打包成文件夹） 【系统停顿 3 秒并喊一句：“谁要往盒子里放东西？”】 $\\leftarrow$ 这就是钩子！ 封箱并打打包带（压缩成最终的 .exe 安装包） 如果没有这个钩子，自动化流水线会一气呵成从第 1 步跑到第 4 步。如果你想在盒子封死前塞一张手写感谢信，或者拿剪刀把多余的泡沫塑料剪掉，你就只能把最终打好包的箱子暴力拆开，改完再重新粘上。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E9%92%A9%E5%AD%90hook/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
-<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-26T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-26T00:00:00&#43;00:00'/>
-<meta name="twitter:title" content="PCB焊接">
-<meta name="twitter:description" content="拆卸芯片 从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）\n1、核心秘诀：“以锡引锡” 这是最重要的一点。不要直接用干烙铁去烫旧焊点。\n">
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-10-08T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-10-08T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="钩子Hook">
+<meta name="twitter:description" content="通俗来说，“钩子”（Hook）就是软件官方在流水线上故意留的一个“插手机会”。\n生活中的类比：快递打包流水线 想象你把寄快递的整个流程委托给了一个自动化打包系统：\n系统拿取货物（编译代码） 塞进内包装盒（打包成文件夹） 【系统停顿 3 秒并喊一句：“谁要往盒子里放东西？”】 $\\leftarrow$ 这就是钩子！ 封箱并打打包带（压缩成最终的 .exe 安装包） 如果没有这个钩子，自动化流水线会一气呵成从第 1 步跑到第 4 步。如果你想在盒子封死前塞一张手写感谢信，或者拿剪刀把多余的泡沫塑料剪掉，你就只能把最终打好包的箱子暴力拆开，改完再重新粘上。\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
@@ -297,29 +297,22 @@
   <ol>
     <li>
       <ol>
-        <li><a href="#拆卸芯片">拆卸芯片</a>
+        <li><a href="#生活中的类比快递打包流水线">生活中的类比：快递打包流水线</a></li>
+        <li><a href="#在编程与工程中它长什么样">在编程与工程中，它长什么样</a></li>
+        <li><a href="#常见的几种钩子形态">常见的几种“钩子”形态</a></li>
+        <li><a href="#工业与实体制造中的类似映射">工业与实体制造中的类似映射</a></li>
+        <li><a href="#顶层抽象它究竟是什么">顶层抽象：它究竟是什么</a>
           <ol>
-            <li><a href="#1核心秘诀以锡引锡">1、核心秘诀：“以锡引锡”</a></li>
-            <li><a href="#2必须使用助焊剂-flux">2、必须使用助焊剂 (Flux)</a></li>
-            <li><a href="#3工具的选择">3、工具的选择</a></li>
-            <li><a href="#4芯片取下来后pcb-上锡怎么清理">4、芯片取下来后，PCB 上锡怎么清理</a></li>
-            <li><a href="#5避免焊盘脱落的绝招">5、避免“焊盘脱落”的绝招</a></li>
+            <li><a href="#1-控制反转inversion-of-control-ioc与好莱坞原则">1. 控制反转（Inversion of Control, IoC）与“好莱坞原则”</a></li>
+            <li><a href="#2-开闭原则open-closed-principle-ocp">2. 开闭原则（Open-Closed Principle, OCP）</a></li>
+            <li><a href="#3-关注点分离separation-of-concerns">3. 关注点分离（Separation of Concerns）</a></li>
+            <li><a href="#4-协作契约contract-based-extension">4. 协作契约（Contract-based Extension）</a></li>
           </ol>
         </li>
-        <li><a href="#连锡">连锡</a>
-          <ol>
-            <li><a href="#为什么会连在一起">为什么会连在一起</a></li>
-            <li><a href="#化解连锡的三大法宝">化解“连锡”的三大法宝</a></li>
-          </ol>
-        </li>
-        <li><a href="#进阶技巧把连锡变成拖焊">进阶技巧：把连锡变成拖焊</a></li>
-        <li><a href="#关于温度">关于温度</a></li>
-        <li><a href="#定心丸">定心丸</a></li>
-      </ol>
-    </li>
-    <li><a href="#烙铁头">烙铁头</a>
-      <ol>
-        <li><a href="#刀头的日常保养">刀头的日常保养</a></li>
+        <li><a href="#举例">举例</a></li>
+        <li><a href="#核心区别传的是数据还是逻辑">核心区别：传的是“数据”还是“逻辑”？</a></li>
+        <li><a href="#对比维度">对比维度</a></li>
+        <li><a href="#如果在安装程序里什么才算钩子">如果在安装程序里，什么才算“钩子”？</a></li>
       </ol>
     </li>
   </ol>
@@ -341,7 +334,7 @@
 
     <div class="article-title-wrapper">
         <h2 class="article-title">
-            <a href="/p/pcb%E7%84%8A%E6%8E%A5/">PCB焊接</a>
+            <a href="/p/%E9%92%A9%E5%AD%90hook/">钩子Hook</a>
         </h2>
     
         
@@ -363,7 +356,7 @@
   <path d="M3 11h16" />
   <path d="M18 16.496v1.504l1 1" />
 </svg>
-                <time class="article-time--published">2025-12-26</time>
+                <time class="article-time--published">2026-10-08</time>
             </div>
         
 
@@ -379,157 +372,188 @@
     <section class="article-content">
     
     
-    <h3 id="拆卸芯片">拆卸芯片
-</h3><p>从 PCB 上拆芯片遇到的问题：将温度设置到 460°，长时间都没有将芯片取下来，导致焊盘脱落（掉焊盘）</p>
-<h4 id="1核心秘诀以锡引锡">1、核心秘诀：“以锡引锡”
-</h4><p>这是最重要的一点。<strong>不要直接用干烙铁去烫旧焊点。</strong></p>
+    <p>通俗来说，“钩子”（Hook）就是软件官方在流水线上故意留的一个“插手机会”。</p>
+<h3 id="生活中的类比快递打包流水线">生活中的类比：快递打包流水线
+</h3><p>想象你把寄快递的整个流程委托给了一个<strong>自动化打包系统</strong>：</p>
+<ol>
+<li>系统拿取货物（编译代码）</li>
+<li>塞进内包装盒（打包成文件夹）</li>
+<li><strong>【系统停顿 3 秒并喊一句：“谁要往盒子里放东西？”】</strong> $\leftarrow$ <strong>这就是钩子！</strong></li>
+<li>封箱并打打包带（压缩成最终的 <code>.exe</code> 安装包）</li>
+</ol>
+<p>如果没有这个钩子，自动化流水线会一气呵成从第 1 步跑到第 4 步。如果你想在盒子封死前塞一张<strong>手写感谢信</strong>，或者拿剪刀把<strong>多余的泡沫塑料剪掉</strong>，你就只能把最终打好包的箱子暴力拆开，改完再重新粘上。</p>
+<p>而官方在这里挂了一个“钩子”，意思就是：</p>
+<blockquote>
+<p>“我知道我的自动化脚本不可能满足所有人千奇百怪的需求。所以在这个关键节点，我预先留一个空位（钩子）。如果你挂上了你的脚本，我就先暂停，执行你的代码；执行完了，我再继续往下走。”</p>
+</blockquote>
+<h3 id="在编程与工程中它长什么样">在编程与工程中，它长什么样
+</h3><p>钩子的本质，就是<strong>事件驱动的回调函数（Callback）或拦截器</strong>。</p>
 <ul>
-<li>做法：在拆卸前，先给芯片的引脚加上一些<strong>新鲜的含铅焊锡</strong>。</li>
-<li>原理：新鲜焊锡中的助焊剂能去除氧化层，同时增加接触面积，让热量迅速渗透到旧焊锡中。</li>
+<li>没有钩子时的死板程序：</li>
 </ul>
-<h4 id="2必须使用助焊剂-flux">2、必须使用助焊剂 (Flux)
-</h4><p>在芯片引脚周围涂抹适量的<strong>助焊剂膏</strong>。助焊剂能显著提高热传导效率，防止焊锡拉丝和氧化。</p>
-<h4 id="3工具的选择">3、工具的选择
-</h4><ul>
-<li>多引脚芯片： 建议使用热风枪而不是烙铁。
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Plaintext" data-lang="Plaintext"><span class="line"><span class="cl">开始打包 ──&gt; 拷贝文件 ──&gt; 压缩成安装包 ──&gt; 完成
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>留了“钩子”的开放程序：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-Plaintext" data-lang="Plaintext"><span class="line"><span class="cl">开始打包 ──&gt; 拷贝文件 ──&gt; [ 检查有没有 afterPack 钩子？ ]
+</span></span><span class="line"><span class="cl">				│
+</span></span><span class="line"><span class="cl">		  ┌───────────┴───────────┐
+</span></span><span class="line"><span class="cl">		 没有                    有！
+</span></span><span class="line"><span class="cl">		  │                       │
+</span></span><span class="line"><span class="cl">		  │                 执行你写的清理脚本
+</span></span><span class="line"><span class="cl">		  │                 (比如删掉 100MB 冗余文件)
+</span></span><span class="line"><span class="cl">		  │                       │
+</span></span><span class="line"><span class="cl">		  └───────────┬───────────┘
+</span></span><span class="line"><span class="cl">				▼
+</span></span><span class="line"><span class="cl">		      压缩生成安装包 ──&gt; 完成
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="常见的几种钩子形态">常见的几种“钩子”形态
+</h3><p>钩子这个概念在整个软件开发中无处不在，叫法不同，底层逻辑完全一致：</p>
+<ol>
+<li><strong>构建工具的生命周期钩子</strong>（如 <code>afterPack</code>、Webpack 的 plugins）：
 <ul>
-<li>设置：风温 $350-380^\circ\text{C}$ 左右，风速中等。</li>
-<li>操作：均匀地在芯片四周及上方环绕加热，直到焊锡全部闪亮融化，用镊子轻轻拨动即可。</li>
+<li>在“编译前”、“编译后”、“打包前”给你插手修改产物文件的机会。</li>
 </ul>
 </li>
-<li>双排引脚（如 SOP）： 如果只有烙铁，可以使用“堆锡法”，将两排引脚全部用大锡球连起来，两边交替加热，趁热滑下</li>
-</ul>
-<h4 id="4芯片取下来后pcb-上锡怎么清理">4、芯片取下来后，PCB 上锡怎么清理
-</h4><p>芯片取掉后，焊盘上肯定会留下一大摊焊锡。这时候你需要你的“焊接橡皮擦”——吸锡带（Solder Wick）。</p>
-<ol>
-<li>涂抹助焊剂（关键）： 在那一坨焊锡上涂上大量的助焊剂（不要心疼，这是清理成功的灵魂）。</li>
-<li>使用吸锡带： * 将吸锡带压在焊锡堆上。
+<li><strong>Git 钩子（Git Hooks）</strong>：
 <ul>
-<li>用烙铁头压住吸锡带。你会看到焊锡像被海绵吸水一样，顺着铜丝网吸了上去。</li>
-<li>注意： 当吸锡带变色（吸满锡）后，剪掉那一段再继续吸。</li>
+<li>在 <code>git commit</code>（提交代码）的瞬间自动拦截，先运行代码格式检查；格式不合格直接拒绝提交。</li>
 </ul>
 </li>
-<li>平推清理： 像拖地一样，带着吸锡带在焊盘上轻轻平移，直到焊盘露出原本平整、闪亮的铜面。</li>
-</ol>
-<h4 id="5避免焊盘脱落的绝招">5、避免“焊盘脱落”的绝招
-</h4><p>新手最容易犯的错误是：<strong>锡还没完全化，就用镊子暴力去撬。</strong></p>
-<p>记住： 永远不要用力。如果锡化了，芯片应该能像漂在水面上一样，用镊子轻轻拨一下就能位移。如果拨不动，说明热量还没透，绝对不能硬拔！</p>
-<h3 id="连锡">连锡
-</h3><p>焊新芯片时，经常将芯片一排的引脚连接在了一起，如何处理：</p>
-<h4 id="为什么会连在一起">为什么会连在一起
-</h4><p>通常只有两个原因：</p>
-<ol>
-<li>焊锡给多了： 你的焊锡丝太粗，或者接触时间太长。</li>
-<li>助焊剂干了： 助焊剂是焊锡的“润滑剂”。一旦它挥发完了，焊锡就会变得像黏稠的胶水，互相拉扯，形成连锡。</li>
-</ol>
-<h4 id="化解连锡的三大法宝">化解“连锡”的三大法宝
-</h4><p>1、助焊剂大法（首选，最无损）</p>
+<li><strong>前端框架生命周期钩子</strong>（如 Vue 的 <code>mounted</code> / React 的 <code>useEffect</code>）：
 <ul>
-<li>操作： 在连锡的那一排引脚上，大量涂抹助焊剂。</li>
-<li>做法： 把烙铁头擦干净（在湿海绵或金属清洁球擦到发亮），然后直接去烫那块连锡的地方。
-<ul>
-<li>不能用干海绵,直接把几百度的烙铁头往干海绵上擦，海绵会立刻被烧焦，冒出一股黑烟，产生的焦炭会粘在烙铁头上，让烙铁头彻底“毁容”且再也不沾锡</li>
+<li>页面在“组件刚创建”、“DOM 渲染完成”、“组件销毁前”给你插手发起网络请求或清理内存的机会。</li>
 </ul>
 </li>
-<li>原理： 在助焊剂的作用下，<strong>焊锡会产生很强的表面张力，它们会由于“趋温性”自动往烙铁头上吸</strong>，或者缩回引脚和焊盘上。</li>
-</ul>
-<p>2、物理拉开法（“带走”多余的锡）</p>
-<p>如果锡实在太多，助焊剂也缩不回去：</p>
+<li><strong>操作系统/底层钩子（Windows Hook）</strong>：
 <ul>
-<li>动作： 将板子倾斜，烙铁头顺着引脚的方向（<strong>从内向外</strong>）轻轻一扫。</li>
-<li>技巧： 每次扫完，都要在海绵上把烙铁头上的余锡擦掉。重复两三次，多余的锡就被烙铁头“带走”了。</li>
+<li>当用户按下键盘某个按键时，系统先不传给普通软件，而是先让钩子函数“偷看”或拦截（例如全局截屏快捷键、外设按键捕获）。</li>
 </ul>
-<h3 id="进阶技巧把连锡变成拖焊">进阶技巧：把连锡变成拖焊
-</h3><p>其实很多高手焊芯片，是故意把一排引脚全部连起来的，这叫“拖焊 (Drag Soldering)”。</p>
-<p>如何正确地“拖”：</p>
-<ol>
-<li>对齐： 先焊住对角的两个引脚，固定好芯片。</li>
-<li>抹油： 在一整排引脚上抹一层厚厚的助焊剂膏。</li>
-<li>喂锡： 在烙铁头上融化一坨适量的锡（形成一个小锡球）。</li>
-<li>拖动： 让烙铁头带着这个锡球，从引脚的一头平滑地刷到另一头。</li>
-<li>奇迹时刻： 只要助焊剂足够，你会发现锡球走过的地方，每个引脚都自动吸附了完美的锡量，而多余的锡一直跟着烙铁头走。</li>
+</li>
 </ol>
-<h3 id="关于温度">关于温度
-</h3><p>为什么不推荐 $460^\circ\text{C}$</p>
-<ul>
-<li>助焊剂瞬间失效： <strong>焊锡膏（助焊剂）在超过 $350^\circ\text{C}$ 时会迅速碳化、发黑</strong>。失去了助焊剂的润滑和传热，焊锡会变得像干枯的渣子，流动性极差，反而更难融化。</li>
-<li>损坏电路板（PCB）： PCB 的材质通常是树脂和玻璃纤维，超过 $400^\circ\text{C}$ 极易导致<strong>焊盘脱落</strong>或板材炭化起泡。</li>
-<li>烙铁头氧化： 高温会使烙铁头表面的镀层迅速氧化发黑，一旦发黑，它就再也无法传导热量了。</li>
-</ul>
-<p>推荐的温度范围</p>
+<p>一句话总结：“主流程你来跑，关键节点等我插一手”，这个留给你插手的地方，就叫钩子。</p>
+<h3 id="工业与实体制造中的类似映射">工业与实体制造中的类似映射
+</h3><p>软件里的架构思想，很多本就是现实工业流水线工程经验的代码化：</p>
 <div class="table-wrapper"><table>
 	<thead>
 			<tr>
-					<th><strong>操作类型</strong></th>
-					<th><strong>焊锡类型</strong></th>
-					<th><strong>建议温度</strong></th>
-					<th><strong>备注</strong></th>
+					<th><strong>实体工程操作</strong></th>
+					<th><strong>现实场景</strong></th>
+					<th><strong>对应的软件概念</strong></th>
 			</tr>
 	</thead>
 	<tbody>
 			<tr>
-					<td><strong>正常焊接</strong></td>
-					<td>含铅焊锡 (63/37)</td>
-					<td>$320^\circ\text{C} - 340^\circ\text{C}$</td>
-					<td>最好上手，流动性极佳。</td>
+					<td><strong>流水线预留工位</strong></td>
+					<td>汽车装配线上留出“选装工位”，标准车架直接滑过，加装天窗或四驱套件的车型在此停留作业</td>
+					<td>构建工具生命周期钩子（如 <code>afterPack</code>）</td>
 			</tr>
 			<tr>
-					<td><strong>正常焊接</strong></td>
-					<td>无铅焊锡</td>
-					<td>$350^\circ\text{C} - 370^\circ\text{C}$</td>
-					<td>熔点较高，现代工业主板常用。</td>
+					<td><strong>出厂检验卡点（QC Gate）</strong></td>
+					<td>钣金件冲压完成进入烤漆前，必须先经过三坐标尺寸扫描；超差直接停线报警打回</td>
+					<td><code>pre-commit</code> Git 钩子、构建前校验</td>
 			</tr>
 			<tr>
-					<td><strong>拆卸芯片</strong></td>
-					<td>堆锡法/热风枪</td>
-					<td>$350^\circ\text{C} - 380^\circ\text{C}$</td>
-					<td>温度上限，配合助焊剂使用。</td>
+					<td><strong>旁路阀与取样口（Bypass / Tap）</strong></td>
+					<td>工业流体管路主管道上预留三通球阀与取样接头，平时封闭，需要校验或外接分析仪器时接管引流</td>
+					<td>操作系统拦截器、Packet Filter / Tap 钩子</td>
 			</tr>
 			<tr>
-					<td><strong>超大焊盘</strong></td>
-					<td>如电源插座/GND</td>
-					<td>$380^\circ\text{C} - 400^\circ\text{C}$</td>
-					<td>仅限大散热面积场景，且停留时间要短。</td>
+					<td><strong>急停安全联锁（Interlock）</strong></td>
+					<td>防护光栅被遮挡或急停按钮按下时，硬接线电路优先于 PLC 主程序切断驱动电源</td>
+					<td>操作系统底层硬件中断与全局拦截钩子</td>
 			</tr>
 	</tbody>
 </table></div>
-<p>新手操作时，为什么调高了温度还是拆不下来</p>
-<ul>
-<li>散热面积太大
-<ul>
-<li>如果你拆的芯片引脚连接着大面积的接地（GND）铜箔，这块铜箔就像一个“黑洞”，会迅速吸走你烙铁头上的热量。</li>
-<li>对策： 不要盲目加温，而是<strong>换用更粗、热容量更大的烙铁头</strong>（如刀头或 D 型头），增加接触面积。</li>
-</ul>
-</li>
-<li>烙铁头“挂不住锡”
-<ul>
-<li>如果你的烙铁头看起来黑乎乎的，不沾锡，那么它和焊点之间只有一点点接触，热量传不过去。</li>
-<li>对策： 用湿海绵擦净，涂上新鲜焊锡。只有亮亮的、带锡的烙铁头传热最快。</li>
-</ul>
-</li>
-<li>焊锡“干涸”
-<ul>
-<li>旧焊锡表面有一层氧化膜。</li>
-<li>对策： 往旧焊点上<strong>加一点新鲜的含铅焊锡丝</strong>。新鲜焊锡里的助焊剂能瞬间打破氧化膜，把热量“导”进旧焊点。</li>
-</ul>
-</li>
-</ul>
-<h3 id="定心丸">定心丸
+<h3 id="顶层抽象它究竟是什么">顶层抽象：它究竟是什么
+</h3><h4 id="1-控制反转inversion-of-control-ioc与好莱坞原则">1. 控制反转（Inversion of Control, IoC）与“好莱坞原则”
+</h4><blockquote>
+<p><strong>“Don&rsquo;t call us, we&rsquo;ll call you.”（别找我们，我们会找你。）</strong></p>
+</blockquote>
+<p>传统编程是你调用库函数；而在“钩子/框架”模式下，是<strong>主流程调度你的代码</strong>。主流程掌握控制权，你只需要提供在特定时机被唤起的逻辑。</p>
+<h4 id="2-开闭原则open-closed-principle-ocp">2. 开闭原则（Open-Closed Principle, OCP）
+</h4><blockquote>
+<p><strong>对扩展开放，对修改关闭。</strong></p>
+</blockquote>
+<p>当你想增加新功能时，不需要把官方封装好的底层源码撕开大改；官方通过暴露钩子，让系统在<strong>不需要动核心代码的前提下，无限支持未来未知的扩展</strong>。</p>
+<h4 id="3-关注点分离separation-of-concerns">3. 关注点分离（Separation of Concerns）
+</h4><p>将<strong>全局流程编排</strong>（怎么打包、怎么运行生命周期、怎么调度请求）与<strong>局部业务细节</strong>（删哪个冗余文件、弹什么感谢信、加什么鉴权校验）彻底解耦，互不污染。</p>
+<h4 id="4-协作契约contract-based-extension">4. 协作契约（Contract-based Extension）
+</h4><p>钩子不是随意的入侵，而是一份严格的“协议”。框架承诺：“在 X 时机给你传入 Y 数据，并等待你完成”；你承诺：“在钩子内按约定格式处理数据，不破坏主流水线的生命周期约束”。</p>
+<h3 id="举例">举例
+</h3><blockquote>
+<p>例如在安装程序的时候，会有一个选择安装目录的选择，这是不是就是一个钩子</p>
+</blockquote>
+<p><strong>严格来说，不是</strong>。</p>
+<p>它更准确的定性是“参数配置”（Parameter / Configuration），而不是“钩子”（Hook）。虽然它们在表面上很像——都是系统暂停下来让你插手——但它们的“抽象层级”和“插手性质”有本质区别。</p>
+<h3 id="核心区别传的是数据还是逻辑">核心区别：传的是“数据”还是“逻辑”？
 </h3><ul>
-<li>助焊剂是神： 90% 的焊接问题，加助焊剂都能解决；剩下 10% 的问题，加更多助焊剂。</li>
-<li>洗板水（酒精）： 焊完之后，板子上会留下一堆黄色的焦糊状物质，那是助焊剂残余。用棉签蘸酒精擦干净，你会发现焊点其实非常漂亮。</li>
+<li><strong>选择安装目录（传数据 / 配置）：</strong> 安装程序已经内置好了解压、写入文件的<strong>固定逻辑</strong>，它只是向你索取一个字符串变量（比如 <code>D:\Software\App</code>）。你没有注入任何新的代码或流程，你只是在填空。</li>
+<li><strong>钩子（传逻辑 / 代码）：</strong> 钩子不是给你填参数的，而是<strong>让你把一段自定义的代码/脚本挂上去执行</strong>。官方原本没有这个逻辑，是你临时生造了一段行为塞进流程里。</li>
 </ul>
-<h2 id="烙铁头">烙铁头
-</h2><p>在维修界，<strong>刀头</strong>被称为“全能型选手”，它比<strong>尖头</strong>（I 头）拥有更大的热容量和接触面积，是拆卸和拖焊芯片的神器</p>
-<h3 id="刀头的日常保养">刀头的日常保养
-</h3><p>刀头虽然好用，但如果你之前用过 $460^\circ\text{C}$，它现在可能已经“中毒”（氧化严重）了。</p>
+<h3 id="对比维度">对比维度
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th><strong>维度</strong></th>
+					<th><strong>选择安装目录（配置参数）</strong></th>
+					<th><strong>真正的钩子（Hook）</strong></th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td><strong>输入内容</strong></td>
+					<td><strong>纯数据</strong>（路径字符串、布尔开关）</td>
+					<td><strong>可执行逻辑</strong>（函数、回调、外部脚本）</td>
+			</tr>
+			<tr>
+					<td><strong>执行者</strong></td>
+					<td>安装程序原有的内置代码</td>
+					<td>开发者或用户自己编写的扩展逻辑</td>
+			</tr>
+			<tr>
+					<td><strong>功能上限</strong></td>
+					<td>无论选哪个盘，执行的动作都是 <code>WriteFiles(path)</code></td>
+					<td>拥有无限可能（比如“安装前扫描竞品并杀掉进程”、“解压后自动配置环境变量并向企业微信发报警通知”）</td>
+			</tr>
+			<tr>
+					<td><strong>抽象概念</strong></td>
+					<td>配置驱动（Config-driven） / 依赖注入数据</td>
+					<td>控制反转（IoC） / 回调（Callback）</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="如果在安装程序里什么才算钩子">如果在安装程序里，什么才算“钩子”？
+</h3><p>如果你用过专业安装包制作工具（如 Inno Setup、NSIS、WiX）：</p>
 <ul>
-<li>检查： 你的刀头表面还是闪亮的银色吗？如果变成了黑灰色，且加锡上去会缩成一个球掉下来，说明它不沾锡了。</li>
-<li>复活：
+<li><strong>普通配置</strong>：勾选“创建桌面快捷方式”、输入“安装路径 <code>C:\Program Files</code>” $\rightarrow$ <strong>配置参数</strong>。</li>
+<li><strong>钩子实例</strong>：
 <ul>
-<li>趁热在助焊剂里蘸一下，然后在湿海绵上用力擦。</li>
-<li>如果不行，使用“烙铁头复活膏”（Tip Refresher）。</li>
-<li>千万不要用砂纸去磨，磨掉镀层这把刀就废了。</li>
+<li><strong><code>BeforeInstall</code> 钩子</strong>：解压前执行一段 Pascal/C++ 脚本，检测当前机器的 VC++ 运行库版本，如果低于要求则自动下载安装。</li>
+<li><strong><code>AfterInstall</code> 钩子</strong>：文件全部拷贝完毕后、写注册表之前，调用你的自定义脚本，静默修改某个 <code>.ini</code> 文件的特定字段，或向服务器发起激活请求。</li>
 </ul>
 </li>
 </ul>

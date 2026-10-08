@@ -7,18 +7,18 @@
 <script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
 
 <meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n">
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n问题：我们在做 $\\frac{Signal}{Reference}$ 补偿时，默认的前提是：两个探测器对光的响应系数（Sensitivity） 是常数。在这个场景中，温度这个变量是如何破坏“共模抑制”的？（即：当环境温度变化时，PMT 和 PD 是“同甘共苦”的吗？）\n">
 <title>温度的陷阱</title>
 
 <link rel='canonical' href='https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/'>
 
 <link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="温度的陷阱">
-<meta property='og:description' content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n">
+<meta property='og:description' content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n问题：我们在做 $\\frac{Signal}{Reference}$ 补偿时，默认的前提是：两个探测器对光的响应系数（Sensitivity） 是常数。在这个场景中，温度这个变量是如何破坏“共模抑制”的？（即：当环境温度变化时，PMT 和 PD 是“同甘共苦”的吗？）\n">
 <meta property='og:url' content='https://teaize.github.io/p/%E6%B8%A9%E5%BA%A6%E7%9A%84%E9%99%B7%E9%98%B1/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2025-12-18T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2025-12-18T00:00:00&#43;00:00'/>
 <meta name="twitter:title" content="温度的陷阱">
-<meta name="twitter:description" content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n">
+<meta name="twitter:description" content="场景：温度的陷阱 背景：为了追求紧凑，把分析仪设计得很小。\n主探测器 (PMT)：不得不安装在气室旁边，而气室为了防止结露，加热到了 43℃。 参考检测器 (PD)：安装在光源室旁边，虽然有风扇，但因为靠近灯泡，环境温度约为 35℃。 故障现象：仪器在冬天开机预热时，前 30 分钟读数剧烈漂移。虽然光源已经稳定了，但读数还在变。\n问题：我们在做 $\\frac{Signal}{Reference}$ 补偿时，默认的前提是：两个探测器对光的响应系数（Sensitivity） 是常数。在这个场景中，温度这个变量是如何破坏“共模抑制”的？（即：当环境温度变化时，PMT 和 PD 是“同甘共苦”的吗？）\n">
     <link rel="shortcut icon" href="/coffeelize.ico" />
 
     </head>
