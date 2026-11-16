@@ -7,7 +7,74 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <copyright>Coffity</copyright>
-        <lastBuildDate>Thu, 08 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Mon, 12 Oct 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://teaize.github.io/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>交易准则</title>
+        <link>https://teaize.github.io/p/%E4%BA%A4%E6%98%93%E5%87%86%E5%88%99/</link>
+        <pubDate>Mon, 12 Oct 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E4%BA%A4%E6%98%93%E5%87%86%E5%88%99/</guid>
+        <description>&lt;h3 id=&#34;法则一仓位管理--选股能力&#34;&gt;法则一：仓位管理 &amp;gt; 选股能力
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;首次开仓永远不满仓，永远有预备队&lt;/li&gt;
+&lt;li&gt;实操：334 仓位法
+&lt;ul&gt;
+&lt;li&gt;30 底仓（压舱石）&lt;/li&gt;
+&lt;li&gt;30 机动（做波段）&lt;/li&gt;
+&lt;li&gt;40 现金（等机会）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;法则二止损纪律分析预测&#34;&gt;法则二：止损纪律&amp;gt;分析预测
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;止损要快，止盈要慢 (预测得再准，只要错一次没止损，就可能直接出局)&lt;/li&gt;
+&lt;li&gt;实操：机械止损法
+&lt;ul&gt;
+&lt;li&gt;比如买入价下方 5% 无条件止损&lt;/li&gt;
+&lt;li&gt;比如破 60 日线无条件清仓&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;法则三逻辑验证消息内幕&#34;&gt;法则三：逻辑验证&amp;gt;消息内幕
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;口诀：听消息买，必须眼见实&lt;/li&gt;
+&lt;li&gt;实操：买入三问
+&lt;ul&gt;
+&lt;li&gt;为什么涨（逻辑）&lt;/li&gt;
+&lt;li&gt;谁在卖（资金）&lt;/li&gt;
+&lt;li&gt;还能涨吗（空间）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;法则四等待操作&#34;&gt;法则四：等待&amp;gt;操作
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;口诀：等待是一种美德&lt;/li&gt;
+&lt;li&gt;数据：80% 的收益来自 20% 的时间&lt;/li&gt;
+&lt;li&gt;记住：机会大于能力&lt;/li&gt;
+&lt;li&gt;记住：股市不关门，机会天天有，钱亏完了就真的完了&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
+        <title>环境扰动隔离</title>
+        <link>https://teaize.github.io/p/%E7%8E%AF%E5%A2%83%E6%89%B0%E5%8A%A8%E9%9A%94%E7%A6%BB/</link>
+        <pubDate>Sat, 10 Oct 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%8E%AF%E5%A2%83%E6%89%B0%E5%8A%A8%E9%9A%94%E7%A6%BB/</guid>
+        <description>&lt;p&gt;![[Pasted image 20261010144300.png]]&lt;/p&gt;
+&lt;p&gt;这个现象背后的底层逻辑可以抽象为：&lt;strong&gt;系统鲁棒性工程中的“环境扰动隔离”与“操作基准锚定”&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;抑制状态漂移&#34;&gt;抑制状态漂移
+&lt;/h3&gt;&lt;p&gt;任何精密系统都是物理实体，其内部参数都具有“温度敏感度”（如热膨胀系数、半导体温漂、折射率温变系数 $\mathrm{d}n/\mathrm{d}T$）。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;抽象模型&lt;/strong&gt;：输出 $Y = f(X, T)$，其中 $X$ 是测量目标，$T$ 是不可控的环境温度扰动。控温的本质是将变量 $T$ 强制约束为一个常数 $T_0$，使得输出转为单纯的 $Y = f(X)$，从而彻底消除 $T$ 对系统状态的偏导影响（$\frac{\partial Y}{\partial T} \to 0$）。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;解耦与边界隔离&#34;&gt;解耦与边界隔离
+&lt;/h3&gt;&lt;p&gt;当外部环境的不确定性（如季节、昼夜温差、机房热岛效应）无法直接改造时，系统选择在核心敏感子系统周围建立一个主动稳态边界。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;抽象模型&lt;/strong&gt;：&lt;strong&gt;“主动补偿胜于被动耐受”&lt;/strong&gt;。与其在算法端去拟合极其复杂、往往带有非线性滞后（Hysteresis）的温度 - 输出模型，不如直接在硬件端构建闭环温控环路，将外界高熵扰动在物理层隔离。&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>FOPDT过程模型</title>
         <link>https://teaize.github.io/p/fopdt%E8%BF%87%E7%A8%8B%E6%A8%A1%E5%9E%8B/</link>
         <pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
@@ -403,6 +470,126 @@
 </description>
         </item>
         <item>
+        <title>标的止损</title>
+        <link>https://teaize.github.io/p/%E6%A0%87%E7%9A%84%E6%AD%A2%E6%8D%9F/</link>
+        <pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%A0%87%E7%9A%84%E6%AD%A2%E6%8D%9F/</guid>
+        <description>&lt;p&gt;&lt;strong&gt;-10% 止损本质不是为了“卖在最低点”，而是为了“防止你失去控制”&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;一为什么人会跌了不卖&#34;&gt;一、为什么人会“跌了不卖”？
+&lt;/h2&gt;&lt;p&gt;这不是人的问题，而是普遍现象，背后有几个很强的心理机制：&lt;/p&gt;
+&lt;h3 id=&#34;1损失厌恶核心原因&#34;&gt;1、损失厌恶（核心原因）
+&lt;/h3&gt;&lt;p&gt;人对亏损的痛苦，远大于盈利的快乐。&lt;/p&gt;
+&lt;p&gt;结果就是：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;亏 10% → 不想承认&lt;/li&gt;
+&lt;li&gt;亏 20% → 更不想承认&lt;/li&gt;
+&lt;li&gt;亏 50% → 已经麻木&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 心理路径是：&lt;strong&gt;不接受 → 拖延 → 被动套牢&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;2回本执念&#34;&gt;2、“回本执念”
+&lt;/h3&gt;&lt;p&gt;很多人脑子里默认一个锚点：&lt;/p&gt;
+&lt;p&gt;👉 “我成本是 100，那它就应该回到 100”，但市场根本不认这个东西。&lt;/p&gt;
+&lt;h3 id=&#34;3把浮亏当成没亏&#34;&gt;3、把“浮亏”当成“没亏”
+&lt;/h3&gt;&lt;p&gt;常见自我安慰：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;“我没卖就不算亏”&lt;/li&gt;
+&lt;li&gt;“等它回来我再卖”&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 这其实是&lt;strong&gt;用时间换运气&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;二问题的关键亏损是非线性恶化的&#34;&gt;二、问题的关键：亏损是“非线性恶化”的
+&lt;/h2&gt;&lt;p&gt;我们把数字摆出来，你会更直观：&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;下跌幅度&lt;/th&gt;
+					&lt;th&gt;回本需要涨幅&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;-10%&lt;/td&gt;
+					&lt;td&gt;+11%&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;-20%&lt;/td&gt;
+					&lt;td&gt;+25%&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;-30%&lt;/td&gt;
+					&lt;td&gt;+43%&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;-50%&lt;/td&gt;
+					&lt;td&gt;+100%&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;👉 这就是为什么：小亏可以控制，大亏会失控&lt;/p&gt;
+&lt;h3 id=&#34;三那为什么是-10这种级别&#34;&gt;三、那为什么是“-10%”这种级别？
+&lt;/h3&gt;&lt;p&gt;不是说 10% 是绝对标准，而是它满足三个条件：&lt;/p&gt;
+&lt;h3 id=&#34;1足够小还能承受&#34;&gt;1、足够小：还能承受
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;对账户伤害有限&lt;/li&gt;
+&lt;li&gt;心理上还能执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2足够大避免被噪音洗出去&#34;&gt;2、足够大：避免被“噪音洗出去”
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;市场正常波动可能 5% 以内&lt;/li&gt;
+&lt;li&gt;10% 已经有“趋势出错”的可能&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3可重复执行最重要&#34;&gt;3、可重复执行（最重要）
+&lt;/h3&gt;&lt;p&gt;止损不是一次动作，而是一个“系统动作”。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;你要的是：多次小亏换一次大赚&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;而不是：一次大亏 → 游戏结束&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;四真正的核心止损是在对抗你自己&#34;&gt;四、真正的核心：止损是在“对抗你自己”
+&lt;/h2&gt;&lt;p&gt;说白一点：👉 &lt;strong&gt;止损不是风控工具，是“反人性工具”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;你可以对比两种路径：&lt;/p&gt;
+&lt;h3 id=&#34;-不止损路径大多数人&#34;&gt;❌ 不止损路径（大多数人）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;-10%：再等等&lt;/li&gt;
+&lt;li&gt;-20%：补仓&lt;/li&gt;
+&lt;li&gt;-30%：死扛&lt;/li&gt;
+&lt;li&gt;-50%：装死&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 结果：一笔交易毁掉半年甚至几年&lt;/p&gt;
+&lt;h3 id=&#34;-止损路径少数人&#34;&gt;✔ 止损路径（少数人）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;-10%：执行止损&lt;/li&gt;
+&lt;li&gt;等待新机会&lt;/li&gt;
+&lt;li&gt;再次进场&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;👉 结果：虽然经常小亏，但不会出现致命亏损&lt;/p&gt;
+&lt;h2 id=&#34;五一个更真实的认知&#34;&gt;五、一个更真实的认知
+&lt;/h2&gt;&lt;p&gt;👉 &lt;strong&gt;市场上真正拉开差距的，不是赚多少，而是“有没有躲过大亏”&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;你可以回看这些极端时期：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2008 年全球金融危机&lt;/li&gt;
+&lt;li&gt;2020 年 3 月全球股市暴跌&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;很多人不是不会选股，而是：&lt;strong&gt;一次不止损，直接被市场淘汰&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&#34;六更高级一点的做法&#34;&gt;六、更高级一点的做法
+&lt;/h2&gt;&lt;p&gt;你不一定非要死用“10% 止损”，可以升级成：&lt;/p&gt;
+&lt;h3 id=&#34;1技术止损&#34;&gt;1）技术止损
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;跌破关键结构位再走&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2时间止损&#34;&gt;2）时间止损
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;横盘太久 → 资金效率太低 → 换标的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3逻辑止损最强&#34;&gt;3）逻辑止损（最强）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;逻辑错了 → 立即走&lt;/li&gt;
+&lt;li&gt;不看价格&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;七最后给你一句很关键的话&#34;&gt;七、最后给你一句很关键的话
+&lt;/h2&gt;&lt;p&gt;👉 &lt;strong&gt;止损的痛苦，是短痛；不止损的痛苦，是长痛 + 重伤&lt;/strong&gt;&lt;/p&gt;
+</description>
+        </item>
+        <item>
         <title>钩子Hook</title>
         <link>https://teaize.github.io/p/%E9%92%A9%E5%AD%90hook/</link>
         <pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
@@ -596,6 +783,202 @@
 </description>
         </item>
         <item>
+        <title>收口方法</title>
+        <link>https://teaize.github.io/p/%E6%94%B6%E5%8F%A3%E6%96%B9%E6%B3%95/</link>
+        <pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E6%94%B6%E5%8F%A3%E6%96%B9%E6%B3%95/</guid>
+        <description>&lt;h2 id=&#34;收口方法&#34;&gt;收口方法
+&lt;/h2&gt;&lt;p&gt;我们用日常生活中最常见的「网购下单」来打个比方。&lt;/p&gt;
+&lt;p&gt;下单这件事底层其实非常繁琐，涉及很多步骤：&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;检查库存够不够&lt;/li&gt;
+&lt;li&gt;计算用户有没有优惠券&lt;/li&gt;
+&lt;li&gt;扣除账户余额&lt;/li&gt;
+&lt;li&gt;扣减真实库存&lt;/li&gt;
+&lt;li&gt;生成物流运单&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;没有收口方法敞口状态&#34;&gt;没有收口方法（敞口状态）
+&lt;/h3&gt;&lt;p&gt;如果系统没有提供“收口方法”，各个端的开发人员（比如写 App 界面的前端工程师）就得自己在界面代码里一步步去协调这些底层服务：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-TypeScript&#34; data-lang=&#34;TypeScript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// ❌ 敞口设计：调用方必须自己知道所有细节、自己来回判断
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handleUserClickBuyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 1. 自己查库存
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;check&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;stock&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;库存不足&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 2. 自己查优惠
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;coupon&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;couponService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;findBestCoupon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;price&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;couponService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;apply&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;coupon&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 3. 自己去扣钱
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;payResult&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;paymentService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;deduct&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;price&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;payResult&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;扣款失败&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 4. 自己去扣库存
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;stockService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;decrease&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 5. 自己去建物流单
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;deliveryService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;createOrder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;strong&gt;问题在哪？&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;前端写得要吐血&lt;/strong&gt;：前端只是想实现“用户买了个东西”，却要关心 5 个服务的细节。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;极易出 Bug&lt;/strong&gt;：如果明天老板说“下单前还要加一个【风控黑名单校验】”，那么 Web 端、iOS 端、安卓端、小程序端全部都得改一遍代码。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;有了收口方法收口设计&#34;&gt;有了收口方法（收口设计）
+&lt;/h3&gt;&lt;p&gt;后端提供一个&lt;strong&gt;高层方法&lt;/strong&gt;，把上面这 5 件事全部收拢关照好。这个对外提供的方法，就是&lt;strong&gt;收口方法&lt;/strong&gt;：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;20
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;21
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-TypeScript&#34; data-lang=&#34;TypeScript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// 服务的内部实现：把所有琐碎步骤收拢在里面
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;class&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;OrderService&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;cm&#34;&gt;/**
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;   * 👉 这就是一个典型的【收口方法】
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;   * 外部只管调它，里面的库存、优惠、支付、物流细节全部内聚
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;cm&#34;&gt;   */&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;placeOrder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Promise&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;OrderResult&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 内部自己按顺序调度：
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c1&#34;&gt;// 检查库存 -&amp;gt; 算优惠 -&amp;gt; 扣款 -&amp;gt; 扣库存 -&amp;gt; 创物流
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;checkStock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;success&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;reason&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;库存不足&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;price&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;calcDiscount&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;paid&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;pay&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;price&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;paid&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;      &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;success&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;false&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;reason&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;支付失败&amp;#34;&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;orderId&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;createDelivery&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;success&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;true&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;orderId&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;};&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;现在调用方（App 端）的代码变成了什么样？&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-TypeScript&#34; data-lang=&#34;TypeScript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;// ✅ 收口后的调用：极简、稳定、无脑
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kr&#34;&gt;async&lt;/span&gt; &lt;span class=&#34;kd&#34;&gt;function&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;handleUserClickBuyButton&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;: &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c1&#34;&gt;// 不管你内部有几百个流程，我只调这一个收口方法
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;kr&#34;&gt;const&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;await&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;orderService&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;placeOrder&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;userId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;productId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;!&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;success&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;reason&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;else&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;nx&#34;&gt;alert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;下单成功，单号：&amp;#34;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;+&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;result&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;orderId&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h2 id=&#34;总结&#34;&gt;总结
+&lt;/h2&gt;&lt;p&gt;用一句话概括就是：&lt;strong&gt;“化零为整，对外暴露一个总开关，对内按序调度一堆小开关。”&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;1-软件设计模式外观模式facade-pattern门面模式&#34;&gt;1. 软件设计模式：外观模式（Facade Pattern，门面模式）
+&lt;/h3&gt;&lt;p&gt;这是你描述的场景在经典设计模式里&lt;strong&gt;最正统、最贴切的对应&lt;/strong&gt;。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;概念&lt;/strong&gt;：外部要与一个复杂的子系统（库存、优惠券、支付、物流）打交道。与其让外部面对十几张不同面孔的微服务，不如派出一个统一的“前台接待人员”（Facade，门面/收口）。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;类比&lt;/strong&gt;：去医院看病，没有收口时你得自己跑挂号处、化验室、药房、缴费窗口（敞口）；有收口后，有了“一站式 VIP 导医服务”，你把医保卡交给导医，他帮你跑完所有窗口，最后把药给你。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;2-系统架构层bff-与-api-网关backend-for-frontend--api-gateway&#34;&gt;2. 系统架构层：BFF 与 API 网关（Backend For Frontend / API Gateway）
+&lt;/h3&gt;&lt;p&gt;当你把代码里的 &lt;code&gt;OrderService.placeOrder&lt;/code&gt; 放大到整套网络架构时：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;网页端、iOS、安卓不需要分别向 5 台不同的微服务机器发 HTTP 请求。&lt;/li&gt;
+&lt;li&gt;中间架设一台 API 网关或 BFF 服务，前端只发一个 &lt;code&gt;POST /api/order/create&lt;/code&gt; 请求，网关在内网并行把子请求分发出去并汇总。这个网关就是物理网络层面的“收口服务”。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;3-面向对象原则高内聚与封装encapsulation&#34;&gt;3. 面向对象原则：高内聚与封装（Encapsulation）
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;收口的意义在于“隐藏易变的细节”&lt;/strong&gt;：外部调用方只需要关心“业务意图”（我想下单），不需要关心“技术实现顺序”（先算优惠还是先查库存）。&lt;/li&gt;
+&lt;li&gt;如果将来业务逻辑变更（比如加风控、把顺丰换成圆通），只有收口方法内部要改，成百上千个外部调用方毫无感知。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;收口与钩子的有趣对比&#34;&gt;“收口”与“钩子”的有趣对比
+&lt;/h3&gt;&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
+					&lt;th&gt;&lt;strong&gt;收口（Facade / 封装）&lt;/strong&gt;&lt;/th&gt;
+					&lt;th&gt;&lt;strong&gt;钩子（Hook / 反转）&lt;/strong&gt;&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;动作方向&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;从外向内收（收敛）&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;&lt;strong&gt;从内向外放（开放）&lt;/strong&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;核心目的&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;降低复杂度，隐藏细节，不让外部瞎操心&lt;/td&gt;
+					&lt;td&gt;预留灵活性，暴露关键点，允许外部强行介入&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;&lt;strong&gt;形象类比&lt;/strong&gt;&lt;/td&gt;
+					&lt;td&gt;一键启动的“自动洗衣机总开关”&lt;/td&gt;
+					&lt;td&gt;洗衣机运行中留的“中途添衣仓门”&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+</description>
+        </item>
+        <item>
         <title>Modbus大小端</title>
         <link>https://teaize.github.io/p/modbus%E5%A4%A7%E5%B0%8F%E7%AB%AF/</link>
         <pubDate>Wed, 07 Oct 2026 00:00:00 +0000</pubDate>
@@ -659,15 +1042,7 @@
     &gt;Online Modbus RTU Parser &amp;amp; Modbus TCP Parser&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;![[Pasted image 20260716190332.png]]&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-JavaScript&#34; data-lang=&#34;JavaScript&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nx&#34;&gt;我看到网页中&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;Modbus&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;TCP报文解析&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;和&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;在线Modbus&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;RTU报文解码器&lt;/span&gt; &lt;span class=&#34;nx&#34;&gt;还是分开的&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;这两者不一样吗&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;。&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;我还以为TCP就是相当于用网线代替串口了而已&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt;&lt;span class=&#34;nx&#34;&gt;是这样吗&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
+</description>
         </item>
         <item>
         <title>SW装配体避坑指南</title>
@@ -2581,48 +2956,6 @@ $$\text{滞后时间 } L = t_1 - t_0$$&lt;/li&gt;
 </description>
         </item>
         <item>
-        <title>SW装配体另存为零件</title>
-        <link>https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93%E5%8F%A6%E5%AD%98%E4%B8%BA%E9%9B%B6%E4%BB%B6/</link>
-        <pubDate>Thu, 08 Jan 2026 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93%E5%8F%A6%E5%AD%98%E4%B8%BA%E9%9B%B6%E4%BB%B6/</guid>
-        <description>&lt;h3 id=&#34;需求&#34;&gt;需求
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;某一个部件只是一个外购件（不需要机加工的），而且为了提升装配体的装配效率，将装配体保存为一个零件，减小文件大小&lt;/li&gt;
-&lt;li&gt;或者不让对方看到更细节的一些设计&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260108185452723.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20260108185452723.png&#34; alt=&#34;&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;p&gt;将装配体另存为 sldprt 格式（零件格式），下面有几种保存方式：&lt;/p&gt;
-&lt;p&gt;1、所有零部件&lt;/p&gt;
-&lt;p&gt;此时所有零部件都会变为实体
-
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185622.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185622.png&#34; alt=&#34;&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;p&gt;2、外部面&lt;/p&gt;
-&lt;p&gt;文件全是曲面，且只保存了所有零件的外表面，里面都是空心的
-
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185658.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/Pasted%20image%2020260108185658.png&#34; alt=&#34;&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>SW智能零件</title>
         <link>https://teaize.github.io/p/sw%E6%99%BA%E8%83%BD%E9%9B%B6%E4%BB%B6/</link>
         <pubDate>Wed, 07 Jan 2026 00:00:00 +0000</pubDate>
@@ -3910,109 +4243,6 @@ $$C_n = \frac{n}{V}$$
 </description>
         </item>
         <item>
-        <title>NotebookLM简明笔记</title>
-        <link>https://teaize.github.io/p/notebooklm%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
-        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/notebooklm%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
-        <description>&lt;blockquote&gt;
-&lt;p&gt;NotebookLM，LM 代表的是 Language Model（语言模型）。之所以这样命名，强调这个产品不是一个通用的聊天机器人（像普通的 Gemini 或 ChatGPT），而是一个以“笔记本”为核心交互界面、由“语言模型”驱动的知识处理引擎。&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;对于经常需要翻阅技术文档的人来说，NotebookLM 的容量上限其实非常慷慨，但也存在几个“硬门槛”。&lt;/p&gt;
-&lt;h3 id=&#34;项目资料&#34;&gt;项目资料
-&lt;/h3&gt;&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;&lt;strong&gt;维度&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;免费版 (Standard)&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;Plus 版 (订阅制)&lt;/strong&gt;&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;每个笔记本的来源数量&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;strong&gt;50 个&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;strong&gt;300 个&lt;/strong&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;单个文件的大小上限&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;strong&gt;200 MB&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;200 MB&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;单个文件的字数上限&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;strong&gt;500,000 字&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;500,000 字&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;单个文件的页数上限&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;&lt;strong&gt;1,000 页&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;1,000 页&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;&lt;strong&gt;总笔记本数量&lt;/strong&gt;&lt;/td&gt;
-					&lt;td&gt;100 个&lt;/td&gt;
-					&lt;td&gt;500 个&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h3 id=&#34;针对书籍-pdf-的处理资料&#34;&gt;针对书籍 PDF 的处理资料
-&lt;/h3&gt;&lt;p&gt;如果你手头的参考资料是厚重的书籍，PDF 文件较大或页数超标，建议采取以下策略：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;PDF 拆分： 既然单个文件上限是 1,000 页/200MB，你可以使用工具（如 Adobe Acrobat 或在线的 SmallPDF）将一本书按章节拆分为 &lt;code&gt;[书名]_Part1&lt;/code&gt; 和 &lt;code&gt;[书名]_Part2&lt;/code&gt;。由于一个笔记本可以容纳 50 个来源，这足够你放下一整套技术丛书。&lt;/li&gt;
-&lt;li&gt;压缩 PDF： 如果书籍图片较多导致超过 200MB 但页数没超，可以先进行“减小文件大小”处理。NotebookLM 对文字的识别能力极强，图片质量稍微下降不影响它的理解。&lt;/li&gt;
-&lt;li&gt;优先 OCR： 确保你的 PDF 是可搜索文本格式。如果是扫描件且没有经过 OCR（光学字符识别），AI 可能无法读取其中的文字。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;使用建议&#34;&gt;使用建议
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;建立专用笔记本： 不要把所有东西塞在一起。建一个名为“STM32 开发库”的笔记本，把相关的 RM（参考手册）、DS（数据手册）和 HAL 库文档丢进去。&lt;/li&gt;
-&lt;li&gt;利用“笔记来源”：可以将自己写的和主题相关的内容导入进去，也可以直接&lt;strong&gt;粘贴为“独立笔记” (Noted Source)&lt;/strong&gt;，AI 会把你写的感悟和官方手册结合起来回答问题。&lt;/li&gt;
-&lt;li&gt;多模态增强： 现在 NotebookLM 支持 YouTube 链接。如果你在 YouTube 上看到好的一系列 STM32 教程视频，直接把 URL 丢进去，它能根据视频字幕和你上传的 PDF 交叉对比，解答你的疑问。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;建立元指令笔记&#34;&gt;建立“元指令”笔记
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;技巧： 在笔记本里手动新建一个 Note，标题叫《我的回答偏好》。内容写上：“我喜欢简洁的回答，所有技术参数请用表格呈现，涉及公式请使用 LaTeX 格式。”&lt;/li&gt;
-&lt;li&gt;价值： 由于 NotebookLM 会参考你所有的笔记来源，这张 Note 会像“系统指令”一样，让 AI 的所有后续回答都符合你的审美和习惯。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;闪卡&#34;&gt;闪卡
-&lt;/h3&gt;&lt;p&gt;生成的闪卡，可以一键在左侧对话框中进行解释。这就是我之前非常想在 Anki 中集成 GPT 的功能！对这效果惊呆了&lt;/p&gt;
-&lt;p&gt;![[Pasted image 20251230110703.png]]&lt;/p&gt;
-&lt;h3 id=&#34;google-文档&#34;&gt;Google 文档
-&lt;/h3&gt;&lt;blockquote&gt;
-&lt;p&gt;Google 有没有自己的 markdown 产品，例如将 NotebookLM 的回复保存到笔记中，然后笔记也可以导入到 Google 文档当中，如果有公式什么的，Google 文档似乎显示不佳&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;p&gt;1、Google 文档的偏好设置中可以启用 Markdown&lt;/p&gt;
-&lt;p&gt;核心痛点在于公式（LaTeX）显示不佳
-![[Pasted image 20251230131851.png]]&lt;/p&gt;
-&lt;p&gt;目前推荐的导出方案：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;使用第三方“桥接”插件（最推荐）
-&lt;ul&gt;
-&lt;li&gt;目前社区里有一些专门针对 NotebookLM 开发的插件，比如 “NotebookLM to LaTeX &amp;amp; MD”。&lt;/li&gt;
-&lt;li&gt;操作： 它能一键把 NotebookLM 的回答导出为格式完美的 PDF 或标准 Markdown 文件。你可以先导出为 PDF，这种方式公式最美观。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;MassiveMark Playground
-&lt;ul&gt;
-&lt;li&gt;这个工具专门处理“大模型内容 -&amp;gt; 办公文档”的转换。&lt;/li&gt;
-&lt;li&gt;流程： 将 NotebookLM 内容复制到 &lt;a class=&#34;link&#34; href=&#34;https://www.bibcit.com/en/massivemark&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;MassiveMark&lt;/a&gt; 页面，它会自动渲染公式和表格，然后允许你导出一个 &lt;code&gt;.docx&lt;/code&gt; 文件。由于 &lt;code&gt;.docx&lt;/code&gt; 与 Google Docs 高度兼容，公式通常能保持原样。&lt;/li&gt;
-&lt;li&gt;![[Pasted image 20251230141308.png]]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Google Docs 内部插件
-&lt;ul&gt;
-&lt;li&gt;如果坚持在 Docs 内部解决，可以安装 “Auto-LaTeX Equations” 插件。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;blockquote&gt;
-&lt;p&gt;其实，即使 Google 文档能显示公式，它显示的往往也是一个“对象（Object）”或“图片（Image）”，而不是“代码（Code）
-这正是目前“富文本办公软件”与“结构化数据（AI）”之间最深的鸿沟&lt;/p&gt;
-&lt;/blockquote&gt;
-</description>
-        </item>
-        <item>
         <title>关于浪涌保护器</title>
         <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%B5%AA%E6%B6%8C%E4%BF%9D%E6%8A%A4%E5%99%A8/</link>
         <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
@@ -4092,72 +4322,6 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
 &lt;li&gt;解决： &lt;strong&gt;F2 会在 F1 动作之前抢先熔断&lt;/strong&gt;，切断短路电流，保护供电连续性。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>关于搜索</title>
-        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%90%9C%E7%B4%A2/</link>
-        <pubDate>Tue, 30 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E6%90%9C%E7%B4%A2/</guid>
-        <description>&lt;h2 id=&#34;2023&#34;&gt;2023
-&lt;/h2&gt;&lt;h3 id=&#34;图片资源&#34;&gt;图片资源
-&lt;/h3&gt;&lt;p&gt;永远可以相信谷歌的图片搜索&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;如下载了一篇网络会议的 pdf，觉得里面的流程图很厉害，想找到他的来源，那么可以截图，然后谷歌图片搜索，如果文章引用的比较多的话，可以轻松将这个图所在的文献找出来。&lt;/li&gt;
-&lt;li&gt;如搜索 3d 回收工厂，YouTube 上面搜过了，但是有没有想过图片比视频要来的容易，发布者很有可能执法不了相关的图片，却没有发布相关视频（或出于企业保密内容），那么此时直接进谷歌图片，搜相应的名称，或许结果要比 YouTube 视频网站出来的结果多些&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;pdf-文档&#34;&gt;PDF 文档
-&lt;/h3&gt;&lt;p&gt;比如说搜索某个领域的发展现状以及进展，可以使用如下语法，可以下载到有关芯片这个行业当前最新的一些进展&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;芯片制造业 or 芯片产业 发展路线图 filetype:pdf
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;O形圈 沟槽设计 filetype:pdf
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251230102253.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/20251230102253.png&#34; alt=&#34;&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;h2 id=&#34;2025&#34;&gt;2025
-&lt;/h2&gt;&lt;p&gt;到了 2025 年，搜索不再是单一的动作，而是一个“AI 启发 + 传统指令验证”的闭环过程&lt;/p&gt;
-&lt;h3 id=&#34;filetypepdf-的地位提升从搜信息到搜权威&#34;&gt;&lt;code&gt;filetype:pdf&lt;/code&gt; 的地位提升：从“搜信息”到“搜权威”
-&lt;/h3&gt;&lt;p&gt;大模型虽然能总结知识，但它容易产生“幻觉”。如果你在研究你感兴趣的 CEMS（烟气在线监测），AI 的回答可能模棱两可。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;新用法： 先让 AI 告诉你某个技术标准的名词（例如：HJ 76-2017），然后立即使用 &lt;code&gt;HJ 76-2017 filetype:pdf&lt;/code&gt; 去获取原始文档。&lt;/li&gt;
-&lt;li&gt;原因： 官方 PDF 是第一手信源，是大模型生成答案的“锚点”。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;ai-搜索如-perplexity-gemini的角色语义理解&#34;&gt;AI 搜索（如 Perplexity, Gemini）的角色：语义理解
-&lt;/h3&gt;&lt;p&gt;传统的 Google 搜索是&lt;strong&gt;关键词匹配&lt;/strong&gt;，而 AI 是&lt;strong&gt;语义匹配&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;传统搜索： 你得想好关键词（芯片制造业 发展路线图）。&lt;/li&gt;
-&lt;li&gt;AI 搜索： 你可以直接问：“帮我梳理 2024-2025 年全球先进制程芯片的竞争格局，并给出几个关键的时间节点。”&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;谷歌图片搜索从找图到视觉解析&#34;&gt;谷歌图片搜索：从“找图”到“视觉解析”
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;新用法： 看到一个复杂的电路板或机械结构图，先丢给 AI 问：“这是什么原理？”得到关键词后，再用谷歌图片搜索去找它的原始出处或专利图。&lt;/li&gt;
-&lt;li&gt;升级： 现在配合 Google Lens（多模态搜索），你可以直接圈选图片中的某个零件进行搜索，这比以前截图再上传要快得多。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;rag-技术&#34;&gt;RAG 技术
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;简单直接型： ChatPDF 或 Claude.ai（直接上传 PDF 提问，其实就是后台自动做了 RAG）。&lt;/li&gt;
-&lt;li&gt;深度研究型： &lt;strong&gt;NotebookLM&lt;/strong&gt;（谷歌出品，专门针对多文档 RAG，非常适合做研究）。&lt;/li&gt;
-&lt;li&gt;笔记整合型： 如果你用 Obsidian，可以安装 Smart Connections 插件，它能基于你的本地笔记建立 RAG，让你跟自己的笔记“对话”。&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>
@@ -4360,413 +4524,353 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
 </description>
         </item>
         <item>
-        <title>常用参考资料</title>
-        <link>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</link>
+        <title>机械设计资源导航</title>
+        <link>https://teaize.github.io/p/%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/</link>
         <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
         
-        <guid>https://teaize.github.io/p/%E5%B8%B8%E7%94%A8%E5%8F%82%E8%80%83%E8%B5%84%E6%96%99/</guid>
-        <description>&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/biaozhun/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;标准信息_易紧通紧固件网&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;标准件库&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+        <guid>https://teaize.github.io/p/%E6%9C%BA%E6%A2%B0%E8%AE%BE%E8%AE%A1%E8%B5%84%E6%BA%90%E5%AF%BC%E8%88%AA/</guid>
+        <description>&lt;h1 id=&#34;机械设计资源导航&#34;&gt;机械设计资源导航
+&lt;/h1&gt;&lt;p&gt;整理机械设计、机械标准件、尺寸公差、形位公差、3D CAD 模型、自动化零部件选型及工程技术资料等常用资源。&lt;/p&gt;
+&lt;h2 id=&#34;1-机械设计工具与标准查询&#34;&gt;1. 机械设计工具与标准查询
+&lt;/h2&gt;&lt;h3 id=&#34;11-机械设计在线工具&#34;&gt;1.1 机械设计在线工具
+&lt;/h3&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/index.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;Mechtool 在线机械设计工具&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;尺寸公差
+&lt;li&gt;&lt;strong&gt;尺寸公差&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_tolerances.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;公差查询 | 公差与配合查询&lt;/a&gt;&lt;/li&gt;
+    &gt;公差查询：公差与配合查询&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_tolerancefitquery.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;配合查询 | 公差与配合查询&lt;/a&gt;&lt;/li&gt;
+    &gt;配合查询：公差与配合查询&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;形位公差
+&lt;li&gt;&lt;strong&gt;形位公差&lt;/strong&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_shapeandpositiontolerance.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;形状公差查询 | 形状与位置公差查询&lt;/a&gt;&lt;/li&gt;
+    &gt;形状公差查询&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/calculation/calculation_positiontolerance.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;位置公差查询 | 形状与位置公差查询&lt;/a&gt;&lt;/li&gt;
+    &gt;位置公差查询&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/site/site_online3dresourcelibrarywebsite.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线3D资源库网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/site/site_mechanicalsupplierwebsite.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;知名机械供应商官网导航&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;12-国家标准与行业标准&#34;&gt;1.2 国家标准与行业标准
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/biaozhun/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;易紧通：标准信息与紧固件标准库&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;紧固件相关国家标准、行业标准及产品标准查询。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.bzxz.net/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;标准下载网-www.bzxz.net-国家标准下载-各类行业标准下载&lt;/a&gt;
+    &gt;标准下载网（BZXZ）&lt;/a&gt;
 &lt;ul&gt;
+&lt;li&gt;国家标准、行业标准及各类技术标准资料下载。&lt;/li&gt;
 &lt;li&gt;解压密码：&lt;code&gt;www.bzxz.net&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://z-lib.fm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Z-Library – the world’s largest e-book library. Your gateway to knowledge and culture.&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digikey.sg/zh/resources/conversion-calculators/conversion-calculator-pressure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;压力单位换算器 - 在线计算器 - DigiKey得捷电子&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.paintun.com/ral.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;RAL劳尔色卡对照表&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trelleborg.com/zh-cn/seals&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;液压密封件、旋转密封件、O形圈—特瑞堡&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;润滑与密封
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trelleborg.com/zh-cn/seals/resources/design-support-and-engineering-tools/o-ring-calculator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;在线O形圈计算器| 特瑞堡密封系统&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.swagelok.com.cn/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;世伟洛克 | Swagelok&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://products.swagelok.com.cn/zh/%e6%89%80%e6%9c%89%e4%ba%a7%e5%93%81/%e6%8e%a5%e5%a4%b4/c/100&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;接头 | Swagelok&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://swagelok-zh-cn.navigator.traceparts.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;3D模型 | 所有类别 On Swagelok Company&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://as-cn.airtac.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AirTAC | 亚德客&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://as-cn.airtac.com/pro_pd.aspx?c_kind=4&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;气源处理元件 | 控制元件 | 执行元件 | 辅助元件 | 导轨 | AirTAC | 亚德客&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;在线模型库：&lt;a class=&#34;link&#34; href=&#34;https://airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;amp;cwid=3389&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;amp;cwid=3389&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;亚德客 2024 产品综合型录.pdf&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;嘉立创
-&lt;ul&gt;
+&lt;h2 id=&#34;2-机械标准件与工程零部件&#34;&gt;2. 机械标准件与工程零部件
+&lt;/h2&gt;&lt;h3 id=&#34;21-工业自动化零部件采购平台&#34;&gt;2.1 工业自动化零部件采购平台
+&lt;/h3&gt;&lt;h4 id=&#34;嘉立创-fa&#34;&gt;嘉立创 FA
+&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;嘉立创FA_自动化设备零部件-一站式采购商城&lt;/a&gt;&lt;/li&gt;
+    &gt;嘉立创 FA 自动化设备零部件采购商城&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.fa-part.com/brand&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;嘉立创3D零件库平台-深圳嘉立创科技集团股份有限公司&lt;/a&gt;(直接根据 PDF 中的代码，就可以在模型库中查找到)&lt;/li&gt;
+    &gt;嘉立创 3D 零件库平台&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;可根据选型手册中的零件代码，在模型库中查找对应的 3D 模型。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.jlcfa.com/marketing/09?spm=FA.Homepage.information.d9&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;嘉立创FA离线在线选型插件&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lceda.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台&lt;/a&gt;&lt;/li&gt;
+    &gt;嘉立创 FA 离线/在线选型插件&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://share.forface3d.com/share/home&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;嘉立创3D分享平台-深圳嘉立创科技集团股份有限公司&lt;/a&gt;&lt;/li&gt;
+    &gt;嘉立创 3D 分享平台&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://model.jlc-3dp.cn/modelMall.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;嘉立创3D模型库_海量3D模型文件免费在线下载_嘉立创3D打印&lt;/a&gt;&lt;/li&gt;
+    &gt;嘉立创 3D 模型商城&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考资料：&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;&lt;code&gt;嘉立创FA（2024版）电气零部件选型手册.pdf&lt;/code&gt;&lt;/li&gt;
 &lt;li&gt;&lt;code&gt;嘉立创FA（第二版）机械零部件选型手册.pdf&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;怡合达
-&lt;ul&gt;
+&lt;h4 id=&#34;怡合达&#34;&gt;怡合达
+&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.yhdfa.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;怡合达 |工厂自动化零部件一站式采购平台 怡合达电商平台&lt;/a&gt;&lt;/li&gt;
+    &gt;怡合达：工厂自动化零部件一站式采购平台&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.yhdfa.com/information/3943b74f81b94bd59f3dcdf922507137&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;2024-V2.0版3D模型库更新上线&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;怡合达-工程师设计必备素材库_2024-V2 | 3D模型库&lt;/code&gt;&lt;/li&gt;
+    &gt;2024-V2.0版3D模型库更新说明&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.yhdfa.com/catalogBook&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;目录书申请-怡合达一站式采购平台&lt;/a&gt;&lt;/li&gt;
+    &gt;怡合达目录书申请&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;爱安特
+&lt;p&gt;参考资料：&lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;&lt;code&gt;怡合达-工程师设计必备素材库_2024-V2 | 3D模型库&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;爱安特&#34;&gt;爱安特
+&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ant-fa.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;爱安特FA工厂自动化零部件一站式采购平台&lt;/a&gt;&lt;/li&gt;
+    &gt;爱安特 FA 工厂自动化零部件采购平台&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;mcmaster-carr&#34;&gt;McMaster-Carr
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mcmaster.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;McMaster-Carr&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;工业标准件、机械零部件及工程材料选型与采购。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;22-紧固件与机械标准配件&#34;&gt;2.2 紧固件与机械标准配件
+&lt;/h3&gt;&lt;h4 id=&#34;易紧通&#34;&gt;易紧通
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.164580.com/biaozhun/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;易紧通标准信息与紧固件资源库&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;日本-imao-今尾&#34;&gt;日本 IMAO 今尾
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.imao.com/cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;IMAO 中国官方网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.imao.com/catalog/cn/imageindexlists2/?categorycode=$SMEOSL,$SME&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;快速滑动锁紧产品目录&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;主要用于工装夹具、机械定位及快速锁紧结构设计。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;3-3d-cad-模型资源库&#34;&gt;3. 3D CAD 模型资源库
+&lt;/h2&gt;&lt;p&gt;用于查找机械零部件、标准件、气动元件、液压元件及工业设备的三维 CAD 模型。&lt;/p&gt;
+&lt;table&gt;
+	&lt;thead&gt;
+			&lt;tr&gt;
+					&lt;th&gt;平台&lt;/th&gt;
+					&lt;th&gt;资源特点&lt;/th&gt;
+					&lt;th&gt;链接&lt;/th&gt;
+			&lt;/tr&gt;
+	&lt;/thead&gt;
+	&lt;tbody&gt;
+			&lt;tr&gt;
+					&lt;td&gt;3Dfindit&lt;/td&gt;
+					&lt;td&gt;全球工业零部件 CAD 模型库&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.3dfindit.com/zh-CN/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;访问官网&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;TraceParts&lt;/td&gt;
+					&lt;td&gt;工业零部件及制造商 3D 模型库&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.traceparts.cn/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;访问官网&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;PARTcommunity&lt;/td&gt;
+					&lt;td&gt;工业零部件在线 CAD 模型库&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://linkable.partcommunity.com/3d-cad-models/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;访问官网&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;GrabCAD&lt;/td&gt;
+					&lt;td&gt;工程师共享的 3D CAD 模型社区&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://grabcad.com/library&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;访问官网&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;3Dsource&lt;/td&gt;
+					&lt;td&gt;国产 3D 零件模型库&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://lib.3dsource.cn/#/chooseClass&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;访问官网&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+			&lt;tr&gt;
+					&lt;td&gt;PartsCAD&lt;/td&gt;
+					&lt;td&gt;零部件管理及三维电子目录&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.partscad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;访问官网&lt;/a&gt;&lt;/td&gt;
+			&lt;/tr&gt;
+	&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h2 id=&#34;4-气动液压及流体连接元件&#34;&gt;4. 气动、液压及流体连接元件
+&lt;/h2&gt;&lt;h3 id=&#34;41-气动元件&#34;&gt;4.1 气动元件
+&lt;/h3&gt;&lt;h4 id=&#34;亚德客-airtac&#34;&gt;亚德客 AirTAC
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://as-cn.airtac.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;亚德客中国官方网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://as-cn.airtac.com/pro_pd.aspx?c_kind=4&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;产品中心：气源处理、控制元件、执行元件及辅助元件&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://airtac-embedded.partcommunity.com/3d-cad-models/airtac?info=airtac&amp;amp;cwid=3389&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;亚德客在线 3D CAD 模型库&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;参考资料：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;亚德客 2024 产品综合型录.pdf&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;smc&#34;&gt;SMC
+&lt;/h4&gt;&lt;ul&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.smc.com.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;SMC（中国）有限公司&lt;/a&gt;
-&lt;ul&gt;
+    &gt;SMC 中国官方网站&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.smc.com.cn/webcatalog/zh-cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;在线产品目录 ｜SMC（中国）有限公司&lt;/a&gt;&lt;/li&gt;
+    &gt;SMC 在线产品目录&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;festo-费斯托&#34;&gt;Festo 费斯托
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.festo.com.cn/cn/zh/e/engineering-tools-id_650881/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Festo 工程设计工具&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;42-液压气动及流体密封&#34;&gt;4.2 液压、气动及流体密封
+&lt;/h3&gt;&lt;h4 id=&#34;parker-派克汉尼汾&#34;&gt;Parker 派克汉尼汾
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.parker.com/cn/zh/home.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Parker 中国官方网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ph.parker.com/cn/zh/category&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Parker 在线产品目录&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;特瑞堡-trelleborg&#34;&gt;特瑞堡 Trelleborg
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trelleborg.com/zh-cn/seals&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;特瑞堡密封系统官方网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.trelleborg.com/zh-cn/seals/resources/design-support-and-engineering-tools/o-ring-calculator&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线 O 形圈计算器&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;用于 O 形圈尺寸设计、沟槽尺寸及密封结构选型。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.parker.com/cn/zh/home.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Parker | 派克汉尼汾主页 | Parker China&lt;/a&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;43-不锈钢管路与流体连接件&#34;&gt;4.3 不锈钢管路与流体连接件
+&lt;/h3&gt;&lt;h4 id=&#34;swagelok-世伟洛克&#34;&gt;Swagelok 世伟洛克
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.swagelok.com.cn/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Swagelok 中国官方网站&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://products.swagelok.com.cn/zh/%e6%89%80%e6%9c%89%e4%ba%a7%e5%93%81/%e6%8e%a5%e5%a4%b4/c/100&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;接头产品目录&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://swagelok-zh-cn.navigator.traceparts.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Swagelok 3D CAD 模型库&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;5-仪器仪表与工程技术资料&#34;&gt;5. 仪器仪表与工程技术资料
+&lt;/h2&gt;&lt;h3 id=&#34;51-产品手册及使用说明书&#34;&gt;5.1 产品手册及使用说明书
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://all-guidesbox.com/find.html?search=ZSE20A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;All-GuidesBox：产品说明书及技术手册搜索&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://ph.parker.com/cn/zh/category&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;在线产品&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;可根据产品型号搜索使用手册、产品说明书及相关技术资料。&lt;/li&gt;
+&lt;li&gt;例如：SMC ZSE20A 压力开关。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.xiongchuan.com/home/news/index.html?rid=1&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;北京熊川科技有限公司丨产品中心&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.festo.com.cn/cn/zh/e/engineering-tools-id_650881/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Festo 开发的工程设计工具 | 费斯托网站&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;3Dfindit
+    &gt;北京熊川科技有限公司产品中心&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;52-电子设计及电路开发&#34;&gt;5.2 电子设计及电路开发
+&lt;/h3&gt;&lt;h4 id=&#34;嘉立创-eda&#34;&gt;嘉立创 EDA
+&lt;/h4&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lceda.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;嘉立创 EDA 在线电路设计平台&lt;/a&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.3dfindit.com/zh-CN/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Download 3D CAD Models for free | 3Dfindit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;仓库：&lt;a class=&#34;link&#34; href=&#34;https://www.3dfindit.cn/zh-CN/usercontent/63720/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Title Unavailable | Site Unreachable&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;电路原理图设计、PCB 设计及元器件选型。&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.imao.com/cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;日本IMAO今尾_机械标准配件&amp;amp;工夹具标准件_官网&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.imao.com/catalog/cn/imageindexlists2/?categorycode=$SMEOSL,$SME&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;快速滑动锁紧 _日本IMAO今尾_机械标准配件_工夹具标准件_官网&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;PartsCAD：&lt;a class=&#34;link&#34; href=&#34;https://www.partscad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;零部件CAD - 零部件管理和三维电子目录&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;GrabCAD：&lt;a class=&#34;link&#34; href=&#34;https://grabcad.com/library&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Popular models | 3D CAD Model Collection | GrabCAD Community Library&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.anytocopy.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;AnyToCopy | 免费在线视频文案提取，一键抖音文案提取，支持50+平台文案提取与音频提取,职得文案提取&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;参考手册、使用手册：&lt;a class=&#34;link&#34; href=&#34;https://all-guidesbox.com/find.html?search=ZSE20A&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;all-guidesbox&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>公制螺纹简明笔记</title>
-        <link>https://teaize.github.io/p/%E5%85%AC%E5%88%B6%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</link>
-        <pubDate>Mon, 29 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E5%85%AC%E5%88%B6%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/</guid>
-        <description>&lt;h2 id=&#34;粗牙公制螺纹底孔尺寸对照表&#34;&gt;粗牙公制螺纹底孔尺寸对照表
+&lt;h2 id=&#34;6-工程辅助工具&#34;&gt;6. 工程辅助工具
 &lt;/h2&gt;&lt;table&gt;
 	&lt;thead&gt;
 			&lt;tr&gt;
-					&lt;th&gt;螺纹规格&lt;/th&gt;
-					&lt;th&gt;底孔尺寸&lt;/th&gt;
-					&lt;th&gt;钻头直径&lt;/th&gt;
-					&lt;th&gt;卡尺内螺纹尺寸&lt;/th&gt;
+					&lt;th&gt;工具&lt;/th&gt;
+					&lt;th&gt;用途&lt;/th&gt;
+					&lt;th&gt;链接&lt;/th&gt;
 			&lt;/tr&gt;
 	&lt;/thead&gt;
 	&lt;tbody&gt;
 			&lt;tr&gt;
-					&lt;td&gt;M1&lt;/td&gt;
-					&lt;td&gt;Φ0.75&lt;/td&gt;
-					&lt;td&gt;Φ0.75&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
+					&lt;td&gt;DigiKey 压力单位换算器&lt;/td&gt;
+					&lt;td&gt;Pa、kPa、MPa、bar、psi 等压力单位转换&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.digikey.sg/zh/resources/conversion-calculators/conversion-calculator-pressure&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线使用&lt;/a&gt;&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td&gt;M2&lt;/td&gt;
-					&lt;td&gt;Φ1.6&lt;/td&gt;
-					&lt;td&gt;Φ1.6&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
+					&lt;td&gt;RAL 劳尔色卡&lt;/td&gt;
+					&lt;td&gt;工业设备、机械外观及涂装颜色查询&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;http://www.paintun.com/ral.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;RAL 色卡对照表&lt;/a&gt;&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td&gt;M3&lt;/td&gt;
-					&lt;td&gt;Φ2.5&lt;/td&gt;
-					&lt;td&gt;Φ2.5&lt;/td&gt;
-					&lt;td&gt;Φ2.4-2.5&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M4&lt;/td&gt;
-					&lt;td&gt;Φ3.3&lt;/td&gt;
-					&lt;td&gt;Φ3.3&lt;/td&gt;
-					&lt;td&gt;Φ3.3&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M5&lt;/td&gt;
-					&lt;td&gt;Φ4.2&lt;/td&gt;
-					&lt;td&gt;Φ4.2&lt;/td&gt;
-					&lt;td&gt;Φ4.2&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M6&lt;/td&gt;
-					&lt;td&gt;Φ5&lt;/td&gt;
-					&lt;td&gt;Φ5&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M8&lt;/td&gt;
-					&lt;td&gt;Φ6.75&lt;/td&gt;
-					&lt;td&gt;Φ6.7&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M10&lt;/td&gt;
-					&lt;td&gt;Φ8.5&lt;/td&gt;
-					&lt;td&gt;Φ8.5&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M12&lt;/td&gt;
-					&lt;td&gt;Φ10.25&lt;/td&gt;
-					&lt;td&gt;Φ10.2&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M14&lt;/td&gt;
-					&lt;td&gt;Φ12&lt;/td&gt;
-					&lt;td&gt;Φ11.9&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M16&lt;/td&gt;
-					&lt;td&gt;Φ14&lt;/td&gt;
-					&lt;td&gt;Φ13.9&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M18&lt;/td&gt;
-					&lt;td&gt;Φ15.5&lt;/td&gt;
-					&lt;td&gt;Φ15.4&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M20&lt;/td&gt;
-					&lt;td&gt;Φ17.5&lt;/td&gt;
-					&lt;td&gt;Φ17.4&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M22&lt;/td&gt;
-					&lt;td&gt;Φ19.5&lt;/td&gt;
-					&lt;td&gt;Φ19.4&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M24&lt;/td&gt;
-					&lt;td&gt;Φ21&lt;/td&gt;
-					&lt;td&gt;Φ20.9&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M27&lt;/td&gt;
-					&lt;td&gt;Φ24&lt;/td&gt;
-					&lt;td&gt;Φ23.9&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;M30&lt;/td&gt;
-					&lt;td&gt;Φ26.5&lt;/td&gt;
-					&lt;td&gt;Φ26.3&lt;/td&gt;
-					&lt;td&gt;&lt;/td&gt;
+					&lt;td&gt;AnyToCopy&lt;/td&gt;
+					&lt;td&gt;在线视频文案及音频提取&lt;/td&gt;
+					&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.anytocopy.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;在线使用&lt;/a&gt;&lt;/td&gt;
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;例如在 SW 中打螺纹孔，选中内部的尺寸就是这个底孔尺寸&lt;/p&gt;
-&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152510.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152510.png&#34; alt=&#34;image.png&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;p&gt;或者直接通过螺纹钻孔，选择对应的螺纹孔，软件自动打出来需要的底孔尺寸&lt;/p&gt;
-&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152519.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152519.png&#34; alt=&#34;image.png&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;h2 id=&#34;大径小径对照表&#34;&gt;大径小径对照表
+&lt;h2 id=&#34;7-技术文献与电子书&#34;&gt;7. 技术文献与电子书
+&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://z-lib.fm/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;Z-Library&lt;/a&gt;
+&lt;ul&gt;
+&lt;li&gt;电子书及文献资源搜索平台。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h2 id=&#34;8-常用资源使用建议&#34;&gt;8. 常用资源使用建议
 &lt;/h2&gt;&lt;table&gt;
 	&lt;thead&gt;
 			&lt;tr&gt;
-					&lt;th style=&#34;text-align: center&#34;&gt;公称直径 D,d&lt;/th&gt;
-					&lt;th style=&#34;text-align: center&#34;&gt;螺距&lt;/th&gt;
-					&lt;th style=&#34;text-align: center&#34;&gt;小径 D1 或 d1&lt;/th&gt;
+					&lt;th&gt;设计任务&lt;/th&gt;
+					&lt;th&gt;优先推荐资源&lt;/th&gt;
 			&lt;/tr&gt;
 	&lt;/thead&gt;
 	&lt;tbody&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.25&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.73&lt;/td&gt;
+					&lt;td&gt;查询机械国家标准&lt;/td&gt;
+					&lt;td&gt;易紧通、标准下载网&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.2&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.78&lt;/td&gt;
+					&lt;td&gt;查询尺寸公差与配合&lt;/td&gt;
+					&lt;td&gt;Mechtool&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;2&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.4&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1.57&lt;/td&gt;
+					&lt;td&gt;查询形位公差&lt;/td&gt;
+					&lt;td&gt;Mechtool&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;2&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.25&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1.73&lt;/td&gt;
+					&lt;td&gt;查找机械标准件&lt;/td&gt;
+					&lt;td&gt;嘉立创 FA、怡合达、McMaster-Carr&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;3&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.5&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;2.46&lt;/td&gt;
+					&lt;td&gt;查找气动元件&lt;/td&gt;
+					&lt;td&gt;亚德客、SMC、Festo&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;3&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.35&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;2.62&lt;/td&gt;
+					&lt;td&gt;查找液压及密封件&lt;/td&gt;
+					&lt;td&gt;Parker、特瑞堡&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;4&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.7&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;3.24&lt;/td&gt;
+					&lt;td&gt;查找不锈钢管接头&lt;/td&gt;
+					&lt;td&gt;Swagelok&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;4&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.5&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;3.46&lt;/td&gt;
+					&lt;td&gt;查找 3D CAD 模型&lt;/td&gt;
+					&lt;td&gt;3Dfindit、TraceParts、PARTcommunity&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;5&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.8&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;4.13&lt;/td&gt;
+					&lt;td&gt;查询 O 形圈沟槽尺寸&lt;/td&gt;
+					&lt;td&gt;特瑞堡 O 形圈计算器&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;5&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.5&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;4.46&lt;/td&gt;
+					&lt;td&gt;查询产品说明书&lt;/td&gt;
+					&lt;td&gt;All-GuidesBox、品牌官方网站&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;6&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;4.92&lt;/td&gt;
+					&lt;td&gt;查询工业设备颜色&lt;/td&gt;
+					&lt;td&gt;RAL 色卡&lt;/td&gt;
 			&lt;/tr&gt;
 			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;6&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.75&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;5.19&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;8&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1.25&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;6.65&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;8&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;1&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;6.92&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;8&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;0.75&lt;/td&gt;
-					&lt;td style=&#34;text-align: center&#34;&gt;7.19&lt;/td&gt;
+					&lt;td&gt;PCB 设计&lt;/td&gt;
+					&lt;td&gt;嘉立创 EDA&lt;/td&gt;
 			&lt;/tr&gt;
 	&lt;/tbody&gt;
 &lt;/table&gt;
-&lt;ul&gt;
-&lt;li&gt;D 为内螺纹的基本大径，D1 为内螺纹的基本小径；d 为外螺纹的基本大径，d1 为外螺纹的基本小径&lt;/li&gt;
-&lt;li&gt;D1=D-1.0825P，公式计算得出&lt;/li&gt;
-&lt;li&gt;d1=d-1.0825P，公式计算得出&lt;/li&gt;
-&lt;li&gt;表格中第一次出现的公称直径为粗牙，剩余的螺距为细牙（例如 M1 对应 0.25 和 0.2 两个螺距，第二行的 0.2 为细牙螺距）&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;可能会有疑问，比如拿 M4 粗牙螺纹来举例，钻底孔的尺寸是Φ3.3，理论小径算出来是 3.24，按理说钻底孔应该要比理论小径稍大一些，这样为攻丝预留足够的空间，但为什么这里的理论小径比底孔还小呢？
-这里其实有一个概念需要了解，这种公制螺纹是用来连接的，并不是用于密封（详见 &lt;a class=&#34;link&#34; href=&#34;https://teaize.github.io/p/%E6%B0%94%E5%8A%A8%E6%8E%A5%E5%A4%B4%E8%BF%9E%E6%8E%A5%E8%9E%BA%E7%BA%B9%E7%AE%80%E6%98%8E%E7%AC%94%E8%AE%B0/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;气动接头连接螺纹简明笔记&lt;/a&gt;）的。并且内外螺纹旋合后留有径向间隙，这样确保装配过程中不会因为制造误差或材料膨胀等因素造成过度紧配合或卡死的情况。那么理论小径比底孔尺寸小一点也就不奇怪了
-，这点差异允许攻丝工具有效切出螺纹的牙形。&lt;/p&gt;
-&lt;p&gt;
-	&lt;div class=&#34;post-img-view&#34;&gt;
-		&lt;a data-fancybox=&#34;gallery&#34; href=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152529.png&#34;&gt;
-			&lt;img src=&#34;https://coffeelize-1307708315.cos.ap-beijing.myqcloud.com/imgs/blog20240921152529.png&#34; alt=&#34;image.png&#34;  /&gt;
-		&lt;/a&gt;
-	&lt;/div&gt;
-
-&lt;/p&gt;
-&lt;h3 id=&#34;细牙螺纹底孔尺寸&#34;&gt;细牙螺纹底孔尺寸
-&lt;/h3&gt;&lt;p&gt;以 M12X1.5 细牙螺纹为例，对于普通的 60° 螺纹，底孔直径约为螺纹公称直径减去螺距。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;M12×1.75（普通螺距）：底孔直径 ≈ 12 - 1.75 = 10.25 mm&lt;/li&gt;
-&lt;li&gt;M12×1.5（细牙螺纹）：底孔直径 ≈ 12 - 1.5 = 10.5 mm&lt;/li&gt;
-&lt;li&gt;M12×1.25（细牙螺纹）：底孔直径 ≈ 12 - 1.25 = 10.75 mm&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;底孔直径计算公式：&lt;/p&gt;
-&lt;p&gt;$d_{\text{底孔}} = d_{\text{公称直径}} - P$&lt;/p&gt;
 </description>
         </item>
         <item>
@@ -14970,7 +15074,7 @@ SPD 内部的压敏电阻在&lt;strong&gt;平时是不导电的&lt;/strong&gt;�
         <pubDate>Sat, 20 Dec 2025 00:00:00 +0000</pubDate>
         
         <guid>https://teaize.github.io/p/zzz-03-%E5%85%B3%E4%BA%8E%E5%AF%84%E5%AD%98%E5%99%A8/</guid>
-        <description>&lt;p&gt;“控制硬件”的本质就是“读写寄存器”。我们可以把 STM32 想象成一个巨大的控制中心，而寄存器（Register）就是控制中心面板上密密麻麻的旋钮和开关。&lt;/p&gt;
+        <description>&lt;p&gt;“控制硬件”的a本质就是“读写寄存器”。我们可以把 STM32 想象成一个巨大的控制中心，而寄存器（Register）就是控制中心面板上密密麻麻的旋钮和开关。&lt;/p&gt;
 &lt;h3 id=&#34;1-什么是寄存器&#34;&gt;1. 什么是寄存器
 &lt;/h3&gt;&lt;p&gt;从物理上看，寄存器就是一小块极速存储单元，通常是 32 位（因为 STM32 是 32 位机），每一位（Bit）就是一个开关。&lt;/p&gt;
 &lt;ul&gt;
@@ -23180,167 +23284,6 @@ $$\text{最终显示浓度} = \frac{\text{ADC读数电压}}{\text{当前的硬�
 </description>
         </item>
         <item>
-        <title>快与稳的悖论</title>
-        <link>https://teaize.github.io/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/</link>
-        <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E5%BF%AB%E4%B8%8E%E7%A8%B3%E7%9A%84%E6%82%96%E8%AE%BA/</guid>
-        <description>&lt;p&gt;现在，我们要解决两个更让现场工程师抓狂的问题：&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;“&lt;strong&gt;快与稳的悖论&lt;/strong&gt;”： 想要读数稳，反应就慢；想要反应快，读数就乱跳。怎么兼得？&lt;/li&gt;
-&lt;li&gt;“&lt;strong&gt;幽灵漂移&lt;/strong&gt;”： 明明采用了切光轮/脉冲灯，为什么过了一周零点还是歪了？&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这里涉及到两个非常经典的信号处理策略：自适应数字滤波 和 自动调零。&lt;/p&gt;
-&lt;h3 id=&#34;第一关自适应滤波--智能减震器&#34;&gt;第一关：自适应滤波 —— “智能减震器”
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;工程师的困境：T90 vs. 噪声&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;T90 (响应时间)： 环保局要求，当烟气浓度突变时，你的仪表要在几十秒内反应过来。&lt;/li&gt;
-&lt;li&gt;噪声 (Noise)： 信号里总是有白噪声在跳动。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;常规解法（滑动平均 Moving Average）：CPU 像一个收银员，手里拿着一个计算器：“我不看现在的瞬时值，我看过去 10 秒的平均值。”$$\text{显示值} = \frac{V_1 + V_2 + … + V_{10}}{10}$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;问题来了：
-&lt;ul&gt;
-&lt;li&gt;如果你平均 100 个 数据（重滤波）：读数稳如老狗，但是反应迟钝。烟气都超标一分钟了，你还在慢慢爬坡。&lt;/li&gt;
-&lt;li&gt;如果你只平均 5 个 数据（轻滤波）：反应极快，但读数像心电图一样乱跳。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;2-高端解法自适应滤波器-smart-filter&#34;&gt;2. 高端解法：自适应滤波器 (Smart Filter)
-&lt;/h3&gt;&lt;p&gt;聪明的算法不会死板地用固定的平均时间，它会“看人下菜碟”。它会实时计算“当前的变化率” (Delta)。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;场景 A：平稳工况
-&lt;ul&gt;
-&lt;li&gt;监测： 现在的测量值 $V_{now}$ 和上一秒的值 $V_{last}$ 差值很小（比如变化 &amp;lt; 1%）。&lt;/li&gt;
-&lt;li&gt;判断： “现在锅炉运行很稳，这点波动肯定是噪声。”&lt;/li&gt;
-&lt;li&gt;动作： &lt;strong&gt;加大滤波力度！&lt;/strong&gt; 把过去 60 秒的数据拿来平均。&lt;/li&gt;
-&lt;li&gt;效果： 屏幕上的线条平滑得像直线。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;场景 B：突发工况（如喷氨、起炉）
-&lt;ul&gt;
-&lt;li&gt;监测： 突然， $V_{now}$ 比 $V_{last}$ 激增了 20%！&lt;/li&gt;
-&lt;li&gt;判断： “这不是噪声！这是真的浓度突变！出大事了！”&lt;/li&gt;
-&lt;li&gt;动作： &lt;strong&gt;瞬间扔掉滤波器！&lt;/strong&gt; 甚至直接显示瞬时值，或者把平均时间缩短到 1 秒。&lt;/li&gt;
-&lt;li&gt;效果： 读数直线飙升，瞬间跟上工况变化。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这就是为什么你在看仪表时，平时它很稳，但一旦给标气，它“噌”地一下就上去了。不是它反应本来就那么快，是算法帮你“换挡”了。&lt;/p&gt;
-&lt;h3 id=&#34;第二关自动调零-auto-zero--给仪表清零&#34;&gt;第二关：自动调零 (Auto-Zero) —— 给仪表“清零”
-&lt;/h3&gt;&lt;ol&gt;
-&lt;li&gt;为什么还需要调零？&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;你可能会问：“我们不是用了切光轮/脉冲灯了吗？不是已经把温漂减掉了吗？”很遗憾，减得不彻底。切光轮只能扣除探测器和电路的漂移。但它&lt;strong&gt;扣除不了光路本身的物理变化&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;例子： 如果测量室的窗片（Window）慢慢蒙上了一层极其均匀的薄雾（油气），或者镜片慢慢变黄了。&lt;/li&gt;
-&lt;li&gt;后果： $I_{meas}$ 会慢慢变小。仪表会以为是有气体在吸收光，导致读数正漂。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;这种几小时甚至几天的极慢速漂移，切光轮（几十 Hz）是无能为力的。&lt;/p&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;解决方案：电磁阀的“偷梁换柱”&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;在痕量分析仪（特别是测 CO 或 UVF SO2）里，你会听到每隔几小时，机柜里就“咔哒”一声响。这是 Auto-Zero Solenoid Valve (自动调零电磁阀) 在动作。&lt;/p&gt;
-&lt;p&gt;算法逻辑：&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;测量模式 ：
-&lt;ul&gt;
-&lt;li&gt;阀门让样气进入气室。&lt;/li&gt;
-&lt;li&gt;读数 = 样气信号 + 脏背景。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;调零模式 （比如每 4 小时一次）：
-&lt;ul&gt;
-&lt;li&gt;CPU 启动电磁阀，切断样气。&lt;/li&gt;
-&lt;li&gt;让样气通过一个内部的 Scrubber (吸附剂/洗涤器)，把 $\text{SO}_2$ 或是 CO 过滤干净，变成零气。&lt;/li&gt;
-&lt;li&gt;此时气室里只有“脏背景”。&lt;/li&gt;
-&lt;li&gt;CPU 记录： “哦，原来现在就算没有气，也有 0.5V 的电压啊。记下来，这是新的零点偏置 (Zero Offset)。”&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;恢复测量：
-&lt;ul&gt;
-&lt;li&gt;切回样气。&lt;/li&gt;
-&lt;li&gt;$$\text{最终读数} = \text{当前测量值} - \text{刚才记下的 0.5V}$$
-这就是为什么高端仪表可以无人值守运行好几个月，零点依然不飘。因为它自己会“每天洗几次澡”。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;第三关温度系数--电阻的热胀冷缩&#34;&gt;第三关：温度系数 —— 电阻的“热胀冷缩”
-&lt;/h3&gt;&lt;p&gt;这是硬件电路设计中最隐蔽的“精度杀手”。&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;那个 1G$\Omega$ 的大电阻&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;还记得我们用来做 I/V 转换的那个 1G$\Omega$ (10 亿欧姆) 反馈电阻吗？$$V = I \times R$$&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;理想情况： 电阻永远是 1,000,000,000 $\Omega$。&lt;/li&gt;
-&lt;li&gt;现实情况： 所有电阻都有 温度系数 (TCR, Temperature Coefficient of Resistance)。
-&lt;ul&gt;
-&lt;li&gt;普通电阻的 TCR 可能是 100 ppm/°C。&lt;/li&gt;
-&lt;li&gt;这意味着：温度每变 1°C，电阻值就变万分之一。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;灾难推演&lt;/li&gt;
-&lt;/ol&gt;
-&lt;ul&gt;
-&lt;li&gt;早晚温差 20°C。&lt;/li&gt;
-&lt;li&gt;电阻值变化：$20 \times 100\text{ppm} = 2000\text{ppm} = 0.2%$。&lt;/li&gt;
-&lt;li&gt;后果： 你的测量结果会凭空产生 0.2% 的误差。对于痕量分析来说，0.2% 的满量程误差可能就是几十 ppb，直接导致数据超标。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol start=&#34;2&#34;&gt;
-&lt;li&gt;解决方案：&lt;strong&gt;恒温舱&lt;/strong&gt; (The Oven)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;这也是为什么 CEMS 分析仪的核心光具座通常都要包裹厚厚的保温棉，并且要加热到 &lt;strong&gt;45°C 或 50°C&lt;/strong&gt;。&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;目的： 不是为了让气体舒服，而是为了“烤电阻”和“烤探测器”**。&lt;/li&gt;
-&lt;li&gt;逻辑： 既然电阻随温度变，那我就死死地&lt;strong&gt;把温度锁在 45°C&lt;/strong&gt;。&lt;/li&gt;
-&lt;li&gt;硬件细节： 你会发现前置放大板通常直接贴在发热的光学底板上，或者有一个专门的铝盒罩着它。&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;总结&#34;&gt;总结
-&lt;/h3&gt;&lt;p&gt;信号处理不仅仅是公式，&lt;strong&gt;它是对物理世界缺陷的补救&lt;/strong&gt;&lt;/p&gt;
-&lt;table&gt;
-	&lt;thead&gt;
-			&lt;tr&gt;
-					&lt;th&gt;&lt;strong&gt;问题&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;物理缺陷&lt;/strong&gt;&lt;/th&gt;
-					&lt;th&gt;&lt;strong&gt;信号处理补救&lt;/strong&gt; (补丁)&lt;/th&gt;
-			&lt;/tr&gt;
-	&lt;/thead&gt;
-	&lt;tbody&gt;
-			&lt;tr&gt;
-					&lt;td&gt;读数乱跳&lt;/td&gt;
-					&lt;td&gt;瞬时噪声大&lt;/td&gt;
-					&lt;td&gt;滑动平均 (Moving Average)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;反应太慢&lt;/td&gt;
-					&lt;td&gt;滤波导致滞后&lt;/td&gt;
-					&lt;td&gt;自适应滤波 (Adaptive Filter)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;长期漂移&lt;/td&gt;
-					&lt;td&gt;镜片脏/光路变&lt;/td&gt;
-					&lt;td&gt;自动调零 (Auto-Zero Valve)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;量程不够&lt;/td&gt;
-					&lt;td&gt;ADC 位数有限&lt;/td&gt;
-					&lt;td&gt;自动增益 (Auto-Ranging)&lt;/td&gt;
-			&lt;/tr&gt;
-			&lt;tr&gt;
-					&lt;td&gt;昼夜温差&lt;/td&gt;
-					&lt;td&gt;电阻阻值变化&lt;/td&gt;
-					&lt;td&gt;恒温控制 (Oven Control)&lt;/td&gt;
-			&lt;/tr&gt;
-	&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;p&gt;现在的分析仪，其实就是 &lt;strong&gt;20% 的物理/化学原理 + 80% 的信号处理“补丁”&lt;/strong&gt;。你看懂了这些补丁，你就看懂了这台仪器的灵魂。&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>氧气的测量</title>
         <link>https://teaize.github.io/p/%E6%B0%A7%E6%B0%94%E7%9A%84%E6%B5%8B%E9%87%8F/</link>
         <pubDate>Thu, 11 Dec 2025 00:00:00 +0000</pubDate>
@@ -25940,19 +25883,6 @@ $$R_{真实} = (2r + R_{PT100}) - 2r = R_{PT100}$$
 </description>
         </item>
         <item>
-        <title>关于稳定性优先原则</title>
-        <link>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BC%98%E5%85%88%E5%8E%9F%E5%88%99/</link>
-        <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E5%85%B3%E4%BA%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BC%98%E5%85%88%E5%8E%9F%E5%88%99/</guid>
-        <description>&lt;h3 id=&#34;稳定性优先原则&#34;&gt;稳定性优先原则
-&lt;/h3&gt;&lt;p&gt;Stability-first principle&lt;/p&gt;
-&lt;p&gt;一些芯片存在“使能”引脚（Enable、EN 等），它们存在的主要目的，就是控制“什么时候让芯片真正开始工作”，以避免在电源、时钟或外设没准备好之前就开始运行，导致错误输出、不稳定行为甚至损坏。
-同样，在一些传感器检测系统中，也存在“预热”的说法，需要先使系统达到稳定状态之后，传感器再开始工作。如果系统还未稳定，即使传感器有输出，这些输出也可能是不准确、不可信的，这些不准确的数据反而更容易误导使用者。&lt;/p&gt;
-&lt;p&gt;本质一句话：先保证自己处于正确、稳定、可控的状态，再向外界产生影响。换句话说，&lt;strong&gt;不成熟的输出比没有输出更危险&lt;/strong&gt;&lt;/p&gt;
-</description>
-        </item>
-        <item>
         <title>零气产生方式</title>
         <link>https://teaize.github.io/p/%E9%9B%B6%E6%B0%94%E4%BA%A7%E7%94%9F%E6%96%B9%E5%BC%8F/</link>
         <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
@@ -26281,6 +26211,35 @@ $$R_{真实} = (2r + R_{PT100}) - 2r = R_{PT100}$$
 </description>
         </item>
         <item>
+        <title>稳定性优先原则</title>
+        <link>https://teaize.github.io/p/%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BC%98%E5%85%88%E5%8E%9F%E5%88%99/</link>
+        <pubDate>Sun, 30 Nov 2025 00:00:00 +0000</pubDate>
+        
+        <guid>https://teaize.github.io/p/%E7%A8%B3%E5%AE%9A%E6%80%A7%E4%BC%98%E5%85%88%E5%8E%9F%E5%88%99/</guid>
+        <description>&lt;h2 id=&#34;稳定性优先原则&#34;&gt;稳定性优先原则
+&lt;/h2&gt;&lt;h3 id=&#34;核心观点&#34;&gt;核心观点
+&lt;/h3&gt;&lt;p&gt;不成熟的输出比没有输出更危险。系统应先保证自身处于正确、稳定、可控的状态，再向外界产生影响。&lt;/p&gt;
+&lt;h3 id=&#34;底层机制&#34;&gt;底层机制
+&lt;/h3&gt;&lt;ol&gt;
+&lt;li&gt;[[系统就绪状态]]&lt;/li&gt;
+&lt;li&gt;[[输出许可机制]]&lt;/li&gt;
+&lt;li&gt;[[系统初始化与正常运行的区别]]&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;典型应用&#34;&gt;典型应用
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;[[芯片 EN 引脚]]&lt;/li&gt;
+&lt;li&gt;[[传感器预热]]&lt;/li&gt;
+&lt;li&gt;[[CEMS 测量数据有效性]]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;相关工程思想&#34;&gt;相关工程思想
+&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;[[故障安全原则]]&lt;/li&gt;
+&lt;li&gt;[[可靠性工程]]&lt;/li&gt;
+&lt;li&gt;[[失效模式与影响分析 FMEA]]&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+        </item>
+        <item>
         <title>使用Python创建Word文档</title>
         <link>https://teaize.github.io/p/%E4%BD%BF%E7%94%A8python%E5%88%9B%E5%BB%BAword%E6%96%87%E6%A1%A3/</link>
         <pubDate>Sat, 29 Nov 2025 00:00:00 +0000</pubDate>
@@ -26382,43 +26341,6 @@ $$R_{真实} = (2r + R_{PT100}) - 2r = R_{PT100}$$
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;doc&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;save&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;file_path&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;file_path&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;</description>
-        </item>
-        <item>
-        <title>主板字库文件</title>
-        <link>https://teaize.github.io/p/%E4%B8%BB%E6%9D%BF%E5%AD%97%E5%BA%93%E6%96%87%E4%BB%B6/</link>
-        <pubDate>Sat, 29 Nov 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E4%B8%BB%E6%9D%BF%E5%AD%97%E5%BA%93%E6%96%87%E4%BB%B6/</guid>
-        <description>&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;vi&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;usr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nanox&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;bin&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Casella&lt;/span&gt; 
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;p&gt;切换成英文输入法，&lt;code&gt;Shift+D&lt;/code&gt;，删除字符 &lt;code&gt;&amp;amp;&lt;/code&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;cd&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;usr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;share&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fonts&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;X11&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dpi&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mnt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nfs&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;AR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sung&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;12.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fnt&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;.&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;ls&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;l&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;AR&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;PL&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;New&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Sung&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;12.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;fnt&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
-&lt;/div&gt;
-&lt;/div&gt;&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
-&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
-&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
-&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
-&lt;td class=&#34;lntd&#34;&gt;
-&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;bootdelay&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;save&lt;/span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;pri&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
@@ -31218,7 +31140,7 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
 &lt;/li&gt;
 &lt;li&gt;参数化设计：通过尺寸和约束实现设计的可变性和自适应性
 &lt;ul&gt;
-&lt;li&gt;[[基于规则的模块化设计]]&lt;/li&gt;
+&lt;li&gt;[[SW基于规则的模块化设计]]&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;镜像与阵列：在设计中实现对称或多次重复元素
@@ -31435,77 +31357,6 @@ It’s like you are adding leverage to go long, while the NPD is continually cas
     &gt;香煎鸡胸肉 - 小红书&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.xiaohongshu.com/explore/64a6785e000000001e0127c2?xsec_token=ABX4IfZxf090RkdzefrXlsJcyCs_LBReYZjlXzQCZsKWg=&amp;amp;xsec_source=pc_search&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;大学生糊弄做饭之糖醋鸡胸肉！ - 小红书&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>DIY设计手册</title>
-        <link>https://teaize.github.io/p/diy%E8%AE%BE%E8%AE%A1%E6%89%8B%E5%86%8C/</link>
-        <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/diy%E8%AE%BE%E8%AE%A1%E6%89%8B%E5%86%8C/</guid>
-        <description>&lt;h3 id=&#34;参考资料&#34;&gt;参考资料
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.tinkercad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Tinkercad - From mind to design in minutes&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;Tinkercad 是一款免费的在线软件工具集合，可帮助世界各地的用户进行思考、创造和制造。我们是三维设计、工程和娱乐软件领导企业 Autodesk&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lceda.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;国产嘉立创EDA - 一个用心为中国人定制的电路板开发平台&lt;/a&gt;
-&lt;ul&gt;
-&lt;li&gt;更简单，更强大的国产在线 PCB 设计软件&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.elecfans.com/tools/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;电子技术资料工具-电子发烧友&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.elecfans.com/topic/software/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;电子工程师工具库 - 电子发烧友网&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.instructables.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Yours for the making - Instructables&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.taiwansensor.com.tw/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;台灣智能感測科技, 一個讓你的夢想實現,創意可以實踐的地方&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.pcbway.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;China PCB Prototype &amp;amp; Fabrication Manufacturer - PCB Prototype the Easy Way&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-</description>
-        </item>
-        <item>
-        <title>模型资料</title>
-        <link>https://teaize.github.io/p/%E6%A8%A1%E5%9E%8B%E8%B5%84%E6%96%99/</link>
-        <pubDate>Fri, 03 Jan 2025 00:00:00 +0000</pubDate>
-        
-        <guid>https://teaize.github.io/p/%E6%A8%A1%E5%9E%8B%E8%B5%84%E6%96%99/</guid>
-        <description>&lt;h3 id=&#34;链接&#34;&gt;链接
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;[[标准件3D模型下载方法]]&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;3d-模型资料&#34;&gt;3D 模型资料
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/site/site_online3dresourcelibrarywebsite.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;在线3D资源库网站 | 机械网站&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://xifengboke.com/post/1862.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;SolidWorks插件外购件模型标准件模型下载SolidWorks选型库下载 - solidworks插件 - 溪风博客SolidWorks自学网站&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://linkable.partcommunity.com/3d-cad-models/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;三维CAD零部件在线模型库 - LinkAble PARTcommunity&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.3dfindit.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Download 3D CAD Models for free | 3Dfindit&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://grabcad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;GrabCAD Making Additive Manufacturing at Scale Possible&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.partscad.com/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Partscad 零部件CAD - 零部件管理和三维电子目录&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.traceparts.cn/zh&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;Traceparts 3D 零件库&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://lib.3dsource.cn/#/chooseClass&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;3dsource 3D 零件库&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;知名机械供应商&#34;&gt;知名机械供应商
-&lt;/h3&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a class=&#34;link&#34; href=&#34;https://www.mechtool.cn/site/site_mechanicalsupplierwebsite.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;知名机械供应商官网 | 机械网站&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;特美意：&lt;a class=&#34;link&#34; href=&#34;https://www.tme.cn/&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
-    &gt;特美意电子 中国 TME官网 | 供应商直授权电子元器件分销商&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 </description>
         </item>

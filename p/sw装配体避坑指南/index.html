@@ -12,7 +12,7 @@
 
 <link rel='canonical' href='https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/'>
 
-<link rel="stylesheet" href="/scss/style.min.726ede3bdc6b8c9dbb134dfa0a0eae548b130e90e62892d6ced4147808750243.css"><meta property='og:title' content="SW装配体避坑指南">
+<link rel="stylesheet" href="/scss/style.min.ab8d6b4458219aa4a263341027c8a95dfe1d16e76f9a7d3f9923e067ad40dcbf.css"><meta property='og:title' content="SW装配体避坑指南">
 <meta property='og:description' content="一、结构层面的坑（最致命） 一股脑全丢在顶层装配体 典型症状 所有零件都直接插在总装配体 没有任何子装配体 装到后期 FeatureManager 树上百个零件 后果 后期根本看不懂结构 工程图没法拆子装 BOM 无法按模块统计 一改就是全局重算，容易炸 正确做法 按真实装配逻辑建子装配体 面板模块 气路模块 电控模块 原则一句话：现实中如果是一个人可以先装好的东西 → 就该是一个子装配体 子装配体拆得太细 这是另一个反向极端。典型症状： 两个螺钉一个子装配体 一个接头一个装配体 装配树比零件树还深 后果 打开模型巨慢 工程图极其痛苦 BOM 结构毫无意义 经验法则 一个子装配体至少包含： 3~5 个功能相关零件 子装配体必须： 有明确“功能边界” 有独立装配意义 二、约束层面的坑（最常见） 顶层装配体乱加约束 典型错误 所有零件都在顶层加 Mate 子装配体内部没约束 全靠顶层“硬拉对” 后果 子装配体一单独打开 → 全散架 工程图引用子装配体直接报废 后期修改极易出错 正确逻辑 约束分层原则： 子装配体内部：自己完全约束 顶层装配体：只约子装配体之间 一句工程金句：子装配体必须 可以独立站得住\n">
 <meta property='og:url' content='https://teaize.github.io/p/sw%E8%A3%85%E9%85%8D%E4%BD%93%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97/'>
 <meta property='og:site_name' content='Coffity&#39;s Blog'>
