@@ -1,0 +1,1157 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="工程项目管理：里程碑与阶段门控制 [!abstract] 核心观点 工程项目不应该只是按照任务顺序不断向前推进，而应该将整个过程划分为多个阶段，在每个关键阶段结束时设置里程碑，通过检查、验证和评审，确认当前成果满足要求后，再进入下一阶段。\n不要在未经验证的成果上持续叠加工作。\n里程碑的真正价值，是尽可能在问题影响范围扩大之前发现问题，降低返工成本和项目风险。\n">
+<title>工程项目管理：里程碑与阶段门控制</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%8C%E7%A8%8B%E7%A2%91%E4%B8%8E%E9%98%B6%E6%AE%B5%E9%97%A8%E6%8E%A7%E5%88%B6/'>
+
+<link rel="stylesheet" href="/scss/style.min.ab8d6b4458219aa4a263341027c8a95dfe1d16e76f9a7d3f9923e067ad40dcbf.css"><meta property='og:title' content="工程项目管理：里程碑与阶段门控制">
+<meta property='og:description' content="工程项目管理：里程碑与阶段门控制 [!abstract] 核心观点 工程项目不应该只是按照任务顺序不断向前推进，而应该将整个过程划分为多个阶段，在每个关键阶段结束时设置里程碑，通过检查、验证和评审，确认当前成果满足要求后，再进入下一阶段。\n不要在未经验证的成果上持续叠加工作。\n里程碑的真正价值，是尽可能在问题影响范围扩大之前发现问题，降低返工成本和项目风险。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%8C%E7%A8%8B%E7%A2%91%E4%B8%8E%E9%98%B6%E6%AE%B5%E9%97%A8%E6%8E%A7%E5%88%B6/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-11-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-11-16T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="工程项目管理：里程碑与阶段门控制">
+<meta name="twitter:description" content="工程项目管理：里程碑与阶段门控制 [!abstract] 核心观点 工程项目不应该只是按照任务顺序不断向前推进，而应该将整个过程划分为多个阶段，在每个关键阶段结束时设置里程碑，通过检查、验证和评审，确认当前成果满足要求后，再进入下一阶段。\n不要在未经验证的成果上持续叠加工作。\n里程碑的真正价值，是尽可能在问题影响范围扩大之前发现问题，降低返工成本和项目风险。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一为什么工程项目需要里程碑">一、为什么工程项目需要里程碑？</a>
+      <ol>
+        <li><a href="#1-从一次机械设计返工说起">1. 从一次机械设计返工说起</a></li>
+        <li><a href="#2-错误为什么越晚发现代价越高">2. 错误为什么越晚发现，代价越高？</a></li>
+      </ol>
+    </li>
+    <li><a href="#二理解两个核心概念里程碑与阶段门">二、理解两个核心概念：里程碑与阶段门</a>
+      <ol>
+        <li><a href="#1-里程碑milestone">1. 里程碑（Milestone）</a></li>
+        <li><a href="#2-阶段门stage-gate">2. 阶段门（Stage Gate）</a></li>
+        <li><a href="#3-两者有什么区别">3. 两者有什么区别？</a></li>
+      </ol>
+    </li>
+    <li><a href="#三如何将里程碑应用到一台设备的开发过程中">三、如何将里程碑应用到一台设备的开发过程中？</a>
+      <ol>
+        <li><a href="#阶段一需求与资源确认">阶段一：需求与资源确认</a></li>
+        <li><a href="#阶段二总体方案设计">阶段二：总体方案设计</a></li>
+        <li><a href="#阶段三关键零部件设计与建模">阶段三：关键零部件设计与建模</a></li>
+        <li><a href="#阶段四装配体设计与验证">阶段四：装配体设计与验证</a></li>
+        <li><a href="#阶段五工程图设计与发布">阶段五：工程图设计与发布</a></li>
+        <li><a href="#阶段六零件加工与来料检验">阶段六：零件加工与来料检验</a></li>
+        <li><a href="#阶段七设备装配与调试">阶段七：设备装配与调试</a></li>
+        <li><a href="#阶段八最终验收与交付">阶段八：最终验收与交付</a></li>
+      </ol>
+    </li>
+    <li><a href="#四里程碑应该如何设置并不是每个小任务都需要一个">四、里程碑应该如何设置？并不是每个小任务都需要一个</a>
+      <ol>
+        <li><a href="#1-工作成果具有阶段性">1. 工作成果具有阶段性</a></li>
+        <li><a href="#2-后续工作高度依赖当前成果">2. 后续工作高度依赖当前成果</a></li>
+        <li><a href="#3-错误越晚发现修复成本越高">3. 错误越晚发现，修复成本越高</a></li>
+      </ol>
+    </li>
+    <li><a href="#五建立一套简单的里程碑检查机制">五、建立一套简单的里程碑检查机制</a>
+      <ol>
+        <li><a href="#1-里程碑管理表">1. 里程碑管理表</a></li>
+        <li><a href="#2-每个里程碑需要记录什么">2. 每个里程碑需要记录什么？</a></li>
+        <li><a href="#3-设置三种验收状态">3. 设置三种验收状态</a></li>
+      </ol>
+    </li>
+    <li><a href="#六一个更重要的工程管理思想控制设计变更">六、一个更重要的工程管理思想：控制设计变更</a></li>
+    <li><a href="#七最终认知项目管理的本质是管理不确定性">七、最终认知：项目管理的本质是管理不确定性</a></li>
+    <li><a href="#延伸学习">延伸学习</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%B7%A5%E7%A8%8B%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86%E9%87%8C%E7%A8%8B%E7%A2%91%E4%B8%8E%E9%98%B6%E6%AE%B5%E9%97%A8%E6%8E%A7%E5%88%B6/">工程项目管理：里程碑与阶段门控制</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-11-16</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="工程项目管理里程碑与阶段门控制">工程项目管理：里程碑与阶段门控制
+</h1><blockquote>
+<p>[!abstract] 核心观点
+工程项目不应该只是按照任务顺序不断向前推进，而应该将整个过程划分为多个阶段，在每个关键阶段结束时设置里程碑，通过检查、验证和评审，确认当前成果满足要求后，再进入下一阶段。</p>
+<p><strong>不要在未经验证的成果上持续叠加工作。</strong></p>
+<p>里程碑的真正价值，是尽可能在问题影响范围扩大之前发现问题，降低返工成本和项目风险。</p>
+</blockquote>
+<h2 id="一为什么工程项目需要里程碑">一、为什么工程项目需要里程碑？
+</h2><h3 id="1-从一次机械设计返工说起">1. 从一次机械设计返工说起
+</h3><p>在一次设备开发项目中，整个工作流程可能包括：</p>
+<ol>
+<li>领取物料、确认现有资源。</li>
+<li>零件建模。</li>
+<li>总体方案讨论。</li>
+<li>核心结构设计与建模。</li>
+<li>装配体建立与验证。</li>
+<li>工程图绘制。</li>
+<li>零件加工。</li>
+<li>设备装配。</li>
+<li>调试与验收。</li>
+</ol>
+<p>这些工作并不是彼此独立的，而是存在明显的前后依赖关系。</p>
+<p>例如：</p>
+<ul>
+<li>核心结构依赖总体方案。</li>
+<li>装配体依赖零件模型。</li>
+<li>工程图依赖经过确认的三维模型。</li>
+<li>加工依赖经过审核的工程图。</li>
+<li>最终装配依赖零件尺寸、加工精度和装配方案。</li>
+</ul>
+<p>假设在零件建模阶段出现了一个尺寸或结构错误，但没有及时发现，后续工作仍然继续推进：</p>
+<div class="mermaid">
+  flowchart TD
+    A["零件建模<br/>出现尺寸或结构错误，未及时发现"]
+    B["核心结构建模<br/>建立在错误模型之上"]
+    C["装配体与工程图<br/>错误进一步传播"]
+    D["⚠️ 返工<br/>发现问题，前序成果需要重新修改<br/>修改模型、重新检查装配、更新工程图"]
+
+    A --> B
+    B --> C
+    C --> D
+
+    classDef normal fill:#f1f3f5,stroke:#adb5bd,color:#333
+    classDef error fill:#fde8e7,stroke:#dc3545,color:#b02a37
+
+    class A,B,C normal
+    class D error
+
+    linkStyle 0,1,2 stroke:#dc3545,stroke-width:2px
+</div>
+<p>真正的问题不是最初出现了错误，而是错误没有在适当的阶段被发现。</p>
+<h3 id="2-错误为什么越晚发现代价越高">2. 错误为什么越晚发现，代价越高？
+</h3><p>工程设计具有明显的依赖关系。</p>
+<p>一个基础零件发生变化，可能影响：</p>
+<ul>
+<li>与它配合的其他零件。</li>
+<li>装配体中的位置和约束。</li>
+<li>整体结构尺寸。</li>
+<li>工程图中的尺寸和标注。</li>
+<li>已经采购或加工的零部件。</li>
+<li>最终设备的装配与调试。</li>
+</ul>
+<p>这意味着，一个小错误可能随着项目推进不断向下游传播。</p>
+<p>可以用一个简单的模型理解：</p>
+<p>$$<br>
+C_{total}=C_{correction}+C_{rework}<br>
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$C_{correction}$：修正问题本身的成本。</li>
+<li>$C_{rework}$：由于问题传播而产生的后续返工成本。</li>
+</ul>
+<p>通常，问题发现得越晚，返工范围越大，协调成本也越高。</p>
+<blockquote>
+<p>[!tip] 核心认知
+工程项目管理不只是管理任务什么时候完成，还需要管理成果什么时候被确认。</p>
+<p>尽可能在问题传播之前发现错误，比问题发生之后提高返工效率更重要。</p>
+</blockquote>
+<h2 id="二理解两个核心概念里程碑与阶段门">二、理解两个核心概念：里程碑与阶段门
+</h2><h3 id="1-里程碑milestone">1. 里程碑（Milestone）
+</h3><p>里程碑是项目中的关键节点，用于标记一个重要阶段的完成，或者一个重要成果的实现。</p>
+<p>例如：</p>
+<ul>
+<li>总体方案确定。</li>
+<li>核心结构设计完成。</li>
+<li>三维装配验证通过。</li>
+<li>工程图正式发布。</li>
+<li>设备装配完成。</li>
+<li>整机验收通过。</li>
+</ul>
+<p>里程碑强调的是：<strong>项目已经推进到了什么重要节点，取得了什么成果。</strong></p>
+<p>它通常不代表一项具体工作，而代表一个重要的项目状态。</p>
+<h3 id="2-阶段门stage-gate">2. 阶段门（Stage Gate）
+</h3><p>阶段门是设置在项目阶段之间的审核关口。</p>
+<p>当一个阶段完成后，需要按照预先确定的标准进行检查。只有满足要求，才能进入下一阶段。</p>
+<p>例如：</p>
+<ul>
+<li>零件模型完成后，检查关键尺寸、结构和加工可行性。</li>
+<li>装配体完成后，检查干涉、配合和装配顺序。</li>
+<li>工程图完成后，检查尺寸、公差、技术要求和版本。</li>
+</ul>
+<p>阶段门强调的是：<strong>当前成果是否已经具备进入下一阶段的条件。</strong></p>
+<h3 id="3-两者有什么区别">3. 两者有什么区别？
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>对比维度</th>
+					<th>里程碑（Milestone）</th>
+					<th>阶段门（Stage Gate）</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>核心作用</td>
+					<td>标记关键节点</td>
+					<td>审核阶段成果</td>
+			</tr>
+			<tr>
+					<td>关注重点</td>
+					<td>是否取得阶段性成果</td>
+					<td>是否满足进入下一阶段的条件</td>
+			</tr>
+			<tr>
+					<td>主要形式</td>
+					<td>关键事件或完成状态</td>
+					<td>检查、评审和批准</td>
+			</tr>
+			<tr>
+					<td>核心问题</td>
+					<td>做到了哪里？</td>
+					<td>能不能继续？</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>两者结合起来，就形成了一个完整的阶段控制机制：</p>
+<p><strong>完成阶段任务 → 到达里程碑 → 进行阶段评审 → 通过阶段门 → 进入下一阶段。</strong></p>
+<blockquote>
+<p>[!important] 特别注意
+里程碑不等于简单地把任务标记为已完成。</p>
+<p>一个阶段的工作做完了，不代表它的成果一定正确。</p>
+<p>必须有明确的验收标准，才能判断这个里程碑是否真正达成。</p>
+</blockquote>
+<h2 id="三如何将里程碑应用到一台设备的开发过程中">三、如何将里程碑应用到一台设备的开发过程中？
+</h2><p>下面以一台机械设备从方案设计到最终交付的过程为例，建立一套阶段划分和评审机制。</p>
+<h3 id="阶段一需求与资源确认">阶段一：需求与资源确认
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>明确设备功能和使用场景。</li>
+<li>确认设备的工作环境。</li>
+<li>确认关键性能指标。</li>
+<li>领取并核对现有物料。</li>
+<li>确认外购件、标准件和已有零部件。</li>
+<li>确定设备尺寸、重量、成本和交付要求。</li>
+</ul>
+<p><badge color="success">里程碑 M1</badge> <strong>需求与资源确认完成</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>设备的核心功能是否明确？</li>
+<li>关键技术指标是否明确？</li>
+<li>使用环境和外部接口是否明确？</li>
+<li>已有物料是否核对完成？</li>
+<li>是否存在尚未解决的关键需求？</li>
+</ul>
+<p><strong>放行条件：</strong> 不存在影响总体方案选择的重大需求不确定性。</p>
+<h3 id="阶段二总体方案设计">阶段二：总体方案设计
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>讨论并确定设备总体方案。</li>
+<li>划分功能模块。</li>
+<li>确定核心工作原理。</li>
+<li>确定各模块之间的连接关系。</li>
+<li>初步确定关键零部件和外购件。</li>
+<li>识别主要技术风险。</li>
+</ul>
+<p><badge color="success">里程碑 M2</badge> <strong>总体方案评审通过</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>核心工作原理是否可行？</li>
+<li>主要功能模块是否明确？</li>
+<li>模块之间的接口是否清楚？</li>
+<li>核心零部件的选型是否合理？</li>
+<li>是否识别了主要设计风险？</li>
+<li>是否存在尚未验证的关键技术假设？</li>
+</ul>
+<p><strong>放行条件：</strong> 总体架构和关键接口得到确认，核心技术风险具有明确的验证计划。</p>
+<h3 id="阶段三关键零部件设计与建模">阶段三：关键零部件设计与建模
+</h3><p>这是本次返工经验中最值得重点加强的阶段。</p>
+<p><strong>主要工作：</strong></p>
+<ul>
+<li>建立关键零部件三维模型。</li>
+<li>确定关键尺寸。</li>
+<li>确定材料和结构形式。</li>
+<li>考虑加工工艺。</li>
+<li>考虑装配方式。</li>
+<li>检查与其他零部件之间的配合关系。</li>
+</ul>
+<p><badge color="success">里程碑 M3</badge> <strong>关键零部件设计评审通过</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>关键尺寸是否经过确认？</li>
+<li>结构是否满足功能要求？</li>
+<li>材料和加工方式是否合理？</li>
+<li>是否考虑了制造和装配误差？</li>
+<li>是否考虑了安装、拆卸和维护空间？</li>
+<li>模型是否存在明显结构错误？</li>
+<li>关键配合关系是否已经验证？</li>
+</ul>
+<p><strong>放行条件：</strong> 关键零部件的设计依据明确，主要结构和尺寸经过检查，未解决问题不会影响后续设计。</p>
+<blockquote>
+<p>[!warning] 重点提醒
+零件建模完成，不等于零件设计完成。</p>
+<p>三维模型只是设计成果的表达形式，真正需要确认的是模型背后的尺寸、结构、功能和制造要求。</p>
+</blockquote>
+<h3 id="阶段四装配体设计与验证">阶段四：装配体设计与验证
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>建立完整装配体。</li>
+<li>确定零件之间的位置和约束。</li>
+<li>检查零部件之间的干涉。</li>
+<li>验证装配顺序。</li>
+<li>检查安装空间。</li>
+<li>考虑紧固、调整和维护方式。</li>
+</ul>
+<p><badge color="success">里程碑 M4</badge> <strong>装配方案验证通过</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>所有零部件是否能够正确装配？</li>
+<li>是否存在几何干涉？</li>
+<li>是否存在装配顺序冲突？</li>
+<li>紧固件是否具有足够的操作空间？</li>
+<li>是否考虑了装配工具和工装？</li>
+<li>是否考虑了调整和拆卸需求？</li>
+<li>装配后的整体尺寸是否满足要求？</li>
+</ul>
+<p><strong>放行条件：</strong> 装配关系、结构空间和主要操作过程经过验证，重大装配问题已经解决。</p>
+<h3 id="阶段五工程图设计与发布">阶段五：工程图设计与发布
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>生成零件工程图。</li>
+<li>生成装配图。</li>
+<li>标注尺寸和公差。</li>
+<li>标注形位公差和表面粗糙度。</li>
+<li>编写技术要求。</li>
+<li>核对材料和数量。</li>
+<li>进行图纸审核和版本管理。</li>
+</ul>
+<p><badge color="success">里程碑 M5</badge> <strong>工程图审核通过并正式发布</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>关键尺寸是否完整？</li>
+<li>公差是否合理？</li>
+<li>加工基准是否明确？</li>
+<li>形位公差是否满足功能要求？</li>
+<li>表面处理和技术要求是否明确？</li>
+<li>图纸与三维模型是否一致？</li>
+<li>是否完成图纸版本和发布状态管理？</li>
+</ul>
+<p><strong>放行条件：</strong> 图纸满足加工、检验和装配所需的信息要求，正式发布的版本明确。</p>
+<blockquote>
+<p>[!danger] 特别注意
+工程图发布意味着设计成果进入制造环节。</p>
+<p>一旦开始加工，设计变更就可能产生材料浪费、加工返工和交付延期。因此，工程图发布前应设置正式审核节点。</p>
+</blockquote>
+<h3 id="阶段六零件加工与来料检验">阶段六：零件加工与来料检验
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>下发加工图纸。</li>
+<li>采购或加工零部件。</li>
+<li>跟踪加工进度。</li>
+<li>检查加工质量。</li>
+<li>核对关键尺寸。</li>
+<li>检查材料和表面处理。</li>
+</ul>
+<p><badge color="success">里程碑 M6</badge> <strong>加工完成，零件检验合格</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>加工零件是否与正式图纸版本一致？</li>
+<li>关键尺寸是否符合要求？</li>
+<li>材料和表面处理是否符合要求？</li>
+<li>是否存在影响装配的加工缺陷？</li>
+<li>不合格零件是否已经处理？</li>
+</ul>
+<p><strong>放行条件：</strong> 零部件满足装配要求，不合格项已得到处理或明确隔离。</p>
+<h3 id="阶段七设备装配与调试">阶段七：设备装配与调试
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>按装配顺序完成设备组装。</li>
+<li>检查连接和紧固状态。</li>
+<li>完成电气、气路或其他辅助系统连接。</li>
+<li>进行机械运动和功能检查。</li>
+<li>处理装配问题。</li>
+<li>进行整机调试。</li>
+</ul>
+<p><badge color="success">里程碑 M7</badge> <strong>设备装配与功能调试完成</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>机械结构是否完整？</li>
+<li>连接和紧固是否可靠？</li>
+<li>运动机构是否运行正常？</li>
+<li>电气和辅助系统是否正常？</li>
+<li>是否存在异常噪声、振动或泄漏？</li>
+<li>关键性能是否达到设计要求？</li>
+</ul>
+<h3 id="阶段八最终验收与交付">阶段八：最终验收与交付
+</h3><p><strong>主要工作：</strong></p>
+<ul>
+<li>完成整机性能测试。</li>
+<li>验证设备功能。</li>
+<li>整理技术文档。</li>
+<li>整理物料和备件清单。</li>
+<li>记录遗留问题。</li>
+<li>完成最终交付。</li>
+</ul>
+<p><badge color="success">里程碑 M8</badge> <strong>设备验收完成</strong></p>
+<p><strong>阶段门检查：</strong></p>
+<ul>
+<li>是否满足最初的需求和性能指标？</li>
+<li>是否完成必要的功能测试？</li>
+<li>技术文档是否完整？</li>
+<li>遗留问题是否得到处理或正式记录？</li>
+<li>是否具备交付条件？</li>
+</ul>
+<h2 id="四里程碑应该如何设置并不是每个小任务都需要一个">四、里程碑应该如何设置？并不是每个小任务都需要一个
+</h2><p>如果每完成一个小任务就设置一次里程碑，管理成本反而会很高。</p>
+<p>真正值得设置里程碑的地方，通常具有以下特征：</p>
+<h3 id="1-工作成果具有阶段性">1. 工作成果具有阶段性
+</h3><p>例如：</p>
+<ul>
+<li>总体方案确定。</li>
+<li>核心零件设计完成。</li>
+<li>装配验证通过。</li>
+<li>工程图正式发布。</li>
+</ul>
+<p>这些成果具有相对独立的价值，可以单独进行评审。</p>
+<h3 id="2-后续工作高度依赖当前成果">2. 后续工作高度依赖当前成果
+</h3><p>如果当前阶段出现错误，会影响大量后续工作，就应该设置检查节点。</p>
+<p>例如：</p>
+<ul>
+<li>关键尺寸确认。</li>
+<li>核心结构建模。</li>
+<li>装配接口确定。</li>
+<li>工程图发布。</li>
+</ul>
+<h3 id="3-错误越晚发现修复成本越高">3. 错误越晚发现，修复成本越高
+</h3><p>例如：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>检查阶段</th>
+					<th>发现尺寸错误后的影响</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>零件建模阶段</td>
+					<td>修改零件模型</td>
+			</tr>
+			<tr>
+					<td>装配体阶段</td>
+					<td>修改零件并重新验证装配</td>
+			</tr>
+			<tr>
+					<td>工程图阶段</td>
+					<td>修改模型、装配体和相关图纸</td>
+			</tr>
+			<tr>
+					<td>加工阶段</td>
+					<td>可能需要重新加工零件</td>
+			</tr>
+			<tr>
+					<td>最终装配阶段</td>
+					<td>可能涉及拆卸、返工和重新加工</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>因此，里程碑应该优先设置在关键设计决策、重要接口确认和成果正式发布之前。</p>
+<h2 id="五建立一套简单的里程碑检查机制">五、建立一套简单的里程碑检查机制
+</h2><p>不需要一开始就引入复杂的项目管理软件。</p>
+<p>对于个人负责的机械设备开发项目，可以使用一张简单的里程碑记录表。</p>
+<h3 id="1-里程碑管理表">1. 里程碑管理表
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>编号</th>
+					<th>里程碑</th>
+					<th>主要交付成果</th>
+					<th>验收状态</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>M1</td>
+					<td>需求与资源确认</td>
+					<td>需求清单、物料清单</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M2</td>
+					<td>总体方案确认</td>
+					<td>总体方案、结构布局</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M3</td>
+					<td>关键零件设计完成</td>
+					<td>三维零件模型</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M4</td>
+					<td>装配验证完成</td>
+					<td>三维装配体、验证记录</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M5</td>
+					<td>工程图正式发布</td>
+					<td>零件图、装配图</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M6</td>
+					<td>零件加工完成</td>
+					<td>加工零件、检验记录</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M7</td>
+					<td>装配调试完成</td>
+					<td>装配设备、调试记录</td>
+					<td>待评审</td>
+			</tr>
+			<tr>
+					<td>M8</td>
+					<td>最终验收完成</td>
+					<td>验收记录、交付文档</td>
+					<td>待评审</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="2-每个里程碑需要记录什么">2. 每个里程碑需要记录什么？
+</h3><p>建议每个节点至少记录以下信息：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>字段</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>里程碑名称</td>
+					<td>当前阶段的关键节点</td>
+			</tr>
+			<tr>
+					<td>计划完成时间</td>
+					<td>预计完成日期</td>
+			</tr>
+			<tr>
+					<td>实际完成时间</td>
+					<td>实际完成日期</td>
+			</tr>
+			<tr>
+					<td>交付成果</td>
+					<td>模型、图纸、方案或测试记录</td>
+			</tr>
+			<tr>
+					<td>检查项目</td>
+					<td>需要验证的关键内容</td>
+			</tr>
+			<tr>
+					<td>遗留问题</td>
+					<td>尚未解决的问题</td>
+			</tr>
+			<tr>
+					<td>验收结论</td>
+					<td>通过、条件通过或不通过</td>
+			</tr>
+			<tr>
+					<td>版本信息</td>
+					<td>当前成果的版本号</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="3-设置三种验收状态">3. 设置三种验收状态
+</h3><p><strong>通过（Pass）</strong></p>
+<p>当前阶段满足要求，可以进入下一阶段。</p>
+<p><strong>条件通过（Conditional Pass）</strong></p>
+<p>存在少量遗留问题，但经过评估，不影响下一阶段的特定工作。需要明确问题、责任人和解决期限。</p>
+<p><strong>不通过（Fail）</strong></p>
+<p>存在影响后续工作的重大问题，需要修改和重新验证，不能直接进入依赖该成果的下一阶段。</p>
+<blockquote>
+<p>[!tip] 一个实用原则
+里程碑不是为了让项目停下来，而是为了避免项目带着未经确认的错误继续向前推进。</p>
+<p>评审不必复杂，关键是检查标准明确、问题有记录、放行有依据。</p>
+</blockquote>
+<h2 id="六一个更重要的工程管理思想控制设计变更">六、一个更重要的工程管理思想：控制设计变更
+</h2><p>里程碑能够帮助我们尽早发现错误，但不能保证后续永远不会出现新的设计问题。</p>
+<p>例如：</p>
+<p>工程图已经发布，零件也已经加工完成，结果在装配时发现结构需要调整。</p>
+<p>这时就涉及另一个重要概念：设计变更管理（Engineering Change Management）。</p>
+<p>建议建立以下机制：</p>
+<ol>
+<li>记录变更原因：为什么需要修改？</li>
+<li>评估影响范围：会影响哪些零件、模型、图纸和已加工物料？</li>
+<li>确认变更方案：如何修改？</li>
+<li>执行变更：更新相关设计成果。</li>
+<li>重新验证：确认修改后的设计没有引入新的问题。</li>
+<li>版本管理：明确新旧版本，防止加工和装配时混用。</li>
+</ol>
+<p>对于已经正式发布的工程图，不能只在模型中修改尺寸，还需要同步更新受影响的图纸和相关文件。</p>
+<blockquote>
+<p>[!warning] 设计冻结不等于禁止修改
+设计冻结的目的是减少随意变更，而不是禁止合理变更。</p>
+<p>当发现原设计存在问题时，应通过正式的变更流程修正，而不是为了维持进度而继续使用错误设计。</p>
+</blockquote>
+<h2 id="七最终认知项目管理的本质是管理不确定性">七、最终认知：项目管理的本质是管理不确定性
+</h2><p>回顾这次设备开发经历，可以得到一个很重要的认识：</p>
+<p>项目推进过程中，最大的风险并不一定是某项任务做得慢，而是带着错误的假设持续推进，直到错误影响了大量后续工作。</p>
+<p>里程碑和阶段门的价值，就是将项目划分为一系列可检查、可验证、可交付的阶段。</p>
+<p>它们帮助我们：</p>
+<ol>
+<li>提前发现设计错误。</li>
+<li>降低问题传播范围。</li>
+<li>减少重复劳动和返工成本。</li>
+<li>明确每个阶段的完成标准。</li>
+<li>保证后续工作建立在已经确认的成果之上。</li>
+<li>让项目进度和质量都变得更加可控。</li>
+</ol>
+<p><strong>不要只关注任务是否完成，还要关注成果是否经过验证。</strong></p>
+<p>一个成熟的工程项目，不是一路不停地向前冲，而是在关键节点停下来确认方向正确，然后再继续推进。</p>
+<hr>
+<h2 id="延伸学习">延伸学习
+</h2><ul>
+<li>项目管理中的 WBS（工作分解结构）：如何将大型项目拆分为可执行的任务？</li>
+<li>阶段门管理（Stage-Gate）：如何建立正式的阶段评审机制？</li>
+<li>设计冻结（Design Freeze）：什么时候应该停止修改方案？</li>
+<li>工程变更管理（ECN/ECR）：如何控制设计变更及其影响范围？</li>
+<li>版本管理：如何避免模型、工程图和加工文件版本不一致？</li>
+<li>FMEA（失效模式与影响分析）：如何在设计阶段提前识别潜在风险？</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

@@ -1,0 +1,1303 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="产品架构设计：功能、接口、依赖与约束 [!abstract] 核心观点 一个产品不仅仅是零部件、功能模块和软件程序的集合，更是一个与外部环境持续交互、依赖各种资源并受到多种条件约束的完整系统。\n在设计一个产品时，应该优先回答四个核心问题：\n功能（Function）：产品要完成什么任务？\n接口（Interface）：产品与外部世界如何交互？\n依赖（Dependency）：产品需要什么资源和条件才能实现功能？\n约束（Constraint）：产品必须在什么边界条件下实现功能？\n这四个问题构成了产品需求分析、系统架构设计、模块划分和设计评审的基础。\n">
+<title>产品架构设计：功能、接口、依赖与约束</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E4%BA%A7%E5%93%81%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8A%9F%E8%83%BD%E6%8E%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%BA%A6%E6%9D%9F/'>
+
+<link rel="stylesheet" href="/scss/style.min.ab8d6b4458219aa4a263341027c8a95dfe1d16e76f9a7d3f9923e067ad40dcbf.css"><meta property='og:title' content="产品架构设计：功能、接口、依赖与约束">
+<meta property='og:description' content="产品架构设计：功能、接口、依赖与约束 [!abstract] 核心观点 一个产品不仅仅是零部件、功能模块和软件程序的集合，更是一个与外部环境持续交互、依赖各种资源并受到多种条件约束的完整系统。\n在设计一个产品时，应该优先回答四个核心问题：\n功能（Function）：产品要完成什么任务？\n接口（Interface）：产品与外部世界如何交互？\n依赖（Dependency）：产品需要什么资源和条件才能实现功能？\n约束（Constraint）：产品必须在什么边界条件下实现功能？\n这四个问题构成了产品需求分析、系统架构设计、模块划分和设计评审的基础。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E4%BA%A7%E5%93%81%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8A%9F%E8%83%BD%E6%8E%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%BA%A6%E6%9D%9F/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-11-17T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-11-17T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="产品架构设计：功能、接口、依赖与约束">
+<meta name="twitter:description" content="产品架构设计：功能、接口、依赖与约束 [!abstract] 核心观点 一个产品不仅仅是零部件、功能模块和软件程序的集合，更是一个与外部环境持续交互、依赖各种资源并受到多种条件约束的完整系统。\n在设计一个产品时，应该优先回答四个核心问题：\n功能（Function）：产品要完成什么任务？\n接口（Interface）：产品与外部世界如何交互？\n依赖（Dependency）：产品需要什么资源和条件才能实现功能？\n约束（Constraint）：产品必须在什么边界条件下实现功能？\n这四个问题构成了产品需求分析、系统架构设计、模块划分和设计评审的基础。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一为什么需要从系统角度理解一个产品">一、为什么需要从系统角度理解一个产品？</a></li>
+    <li><a href="#二产品的四个核心问题">二、产品的四个核心问题</a>
+      <ol>
+        <li><a href="#1-功能function产品要完成什么任务">1. 功能（Function）：产品要完成什么任务？</a></li>
+        <li><a href="#2-接口interface产品与外部世界如何交互">2. 接口（Interface）：产品与外部世界如何交互？</a></li>
+        <li><a href="#3-依赖dependency产品需要什么资源和条件">3. 依赖（Dependency）：产品需要什么资源和条件？</a></li>
+        <li><a href="#4-约束constraint产品必须在什么边界条件下实现功能">4. 约束（Constraint）：产品必须在什么边界条件下实现功能？</a></li>
+      </ol>
+    </li>
+    <li><a href="#三四个维度之间的关系">三、四个维度之间的关系</a></li>
+    <li><a href="#四用-cems-系统理解四个维度">四、用 CEMS 系统理解四个维度</a>
+      <ol>
+        <li><a href="#1-系统功能">1. 系统功能</a></li>
+        <li><a href="#2-系统接口">2. 系统接口</a></li>
+        <li><a href="#3-系统依赖">3. 系统依赖</a></li>
+        <li><a href="#4-系统约束">4. 系统约束</a></li>
+      </ol>
+    </li>
+    <li><a href="#五从产品分析进一步走向模块化设计">五、从产品分析进一步走向模块化设计</a></li>
+    <li><a href="#六一个容易忽略的维度异常与失效">六、一个容易忽略的维度：异常与失效</a></li>
+    <li><a href="#七建立自己的产品分析工作流">七、建立自己的产品分析工作流</a>
+      <ol>
+        <li><a href="#产品系统分析表">产品系统分析表</a></li>
+        <li><a href="#推荐的设计顺序">推荐的设计顺序</a></li>
+      </ol>
+    </li>
+    <li><a href="#八最终认知从零件设计思维走向系统设计思维">八、最终认知：从零件设计思维走向系统设计思维</a></li>
+    <li><a href="#延伸学习">延伸学习</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E4%BA%A7%E5%93%81%E6%9E%B6%E6%9E%84%E8%AE%BE%E8%AE%A1%E5%8A%9F%E8%83%BD%E6%8E%A5%E5%8F%A3%E4%BE%9D%E8%B5%96%E4%B8%8E%E7%BA%A6%E6%9D%9F/">产品架构设计：功能、接口、依赖与约束</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-11-17</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="产品架构设计功能接口依赖与约束">产品架构设计：功能、接口、依赖与约束
+</h1><blockquote>
+<p>[!abstract] 核心观点
+一个产品不仅仅是零部件、功能模块和软件程序的集合，更是一个与外部环境持续交互、依赖各种资源并受到多种条件约束的完整系统。</p>
+<p>在设计一个产品时，应该优先回答四个核心问题：</p>
+<ol>
+<li>
+<p><strong>功能（Function）：产品要完成什么任务？</strong></p>
+</li>
+<li>
+<p><strong>接口（Interface）：产品与外部世界如何交互？</strong></p>
+</li>
+<li>
+<p><strong>依赖（Dependency）：产品需要什么资源和条件才能实现功能？</strong></p>
+</li>
+<li>
+<p><strong>约束（Constraint）：产品必须在什么边界条件下实现功能？</strong></p>
+</li>
+</ol>
+<p>这四个问题构成了产品需求分析、系统架构设计、模块划分和设计评审的基础。</p>
+</blockquote>
+<h2 id="一为什么需要从系统角度理解一个产品">一、为什么需要从系统角度理解一个产品？
+</h2><p>在传统的机械设计工作中，我们经常从零件和结构入手：</p>
+<ul>
+<li>需要什么零件？</li>
+<li>零件应该采用什么结构？</li>
+<li>尺寸应该如何确定？</li>
+<li>使用什么材料？</li>
+<li>如何加工和装配？</li>
+</ul>
+<p>这些问题当然重要，但它们更多关注产品的具体实现。</p>
+<p>如果在设计初期就直接进入零件建模，很容易忽略一个更重要的问题：</p>
+<p><strong>我们究竟要设计一个什么样的系统？</strong></p>
+<p>例如，设计一台自动化设备：</p>
+<ul>
+<li>它需要完成什么功能？</li>
+<li>它需要与哪些外部设备连接？</li>
+<li>它需要什么能源和物料才能运行？</li>
+<li>它需要满足什么环境和性能要求？</li>
+</ul>
+<p>如果这些问题没有提前明确，后续可能出现：</p>
+<ul>
+<li>机械结构设计完成后，才发现安装接口不匹配。</li>
+<li>电气设计完成后，才发现供电容量不足。</li>
+<li>软件开发完成后，才发现通信协议不兼容。</li>
+<li>设备装配完成后，才发现维护空间不足。</li>
+<li>产品能够运行，但无法达到预期的精度和可靠性。</li>
+</ul>
+<p>这些问题并不一定是零件设计错误，而可能是系统层面的需求和架构没有考虑完整。</p>
+<p>因此，在正式设计之前，应该先建立产品的系统视角。</p>
+<h2 id="二产品的四个核心问题">二、产品的四个核心问题
+</h2><h3 id="1-功能function产品要完成什么任务">1. 功能（Function）：产品要完成什么任务？
+</h3><p>功能描述的是产品存在的目的，以及它需要实现的能力。</p>
+<p>它回答的是：<strong>用户为什么需要这个产品？这个产品究竟要做什么？</strong></p>
+<p>例如，一台自动化机械设备可能具有以下功能：</p>
+<ul>
+<li>自动输送物料。</li>
+<li>完成工件定位。</li>
+<li>对工件进行加工。</li>
+<li>自动检测加工结果。</li>
+<li>输出运行状态和故障信息。</li>
+</ul>
+<p>功能分析需要关注产品最终要实现的结果，而不是过早限定具体实现方式。</p>
+<p>例如：</p>
+<p>需求：设备需要自动完成工件定位。</p>
+<p>这是功能需求。</p>
+<p>实现方式可能是：</p>
+<ul>
+<li>气缸推动定位。</li>
+<li>伺服电机驱动定位。</li>
+<li>电动推杆执行定位。</li>
+<li>机械凸轮实现定位。</li>
+</ul>
+<p>这些属于不同的技术实现方案。</p>
+<blockquote>
+<p>[!tip] 设计原则
+先明确需要实现什么功能，再研究采用什么结构和技术实现。</p>
+<p>不要在需求尚未明确时，就过早锁定具体的零件、结构或技术方案。</p>
+</blockquote>
+<h3 id="2-接口interface产品与外部世界如何交互">2. 接口（Interface）：产品与外部世界如何交互？
+</h3><p>接口定义了产品与外部用户、设备或系统之间的交互边界。</p>
+<p>它回答的是：</p>
+<p><strong>外部世界如何使用这个产品？产品如何与外部世界交换信息、能量和物质？</strong></p>
+<p>接口不只是一个连接器或者一个通信端口，而是一个更广泛的概念。</p>
+<p>常见的接口类型包括：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>接口类别</th>
+					<th>典型内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>机械接口</td>
+					<td>安装孔位、法兰尺寸、定位基准、连接方式</td>
+			</tr>
+			<tr>
+					<td>电气接口</td>
+					<td>电源电压、功率、接线端子、信号电平</td>
+			</tr>
+			<tr>
+					<td>通信接口</td>
+					<td>RS485、Modbus RTU、以太网、通信协议</td>
+			</tr>
+			<tr>
+					<td>控制接口</td>
+					<td>启停、复位、运行模式、设定值</td>
+			</tr>
+			<tr>
+					<td>数据接口</td>
+					<td>测量数据、运行状态、故障代码</td>
+			</tr>
+			<tr>
+					<td>人机接口</td>
+					<td>按钮、指示灯、触摸屏、操作方式</td>
+			</tr>
+			<tr>
+					<td>性能接口</td>
+					<td>精度、处理能力、响应时间、输出能力</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>接口设计的关键，不仅是明确接口的类型，还要定义接口的具体规格。</p>
+<p>例如，一个 RS485 通信接口，至少还需要考虑：</p>
+<ul>
+<li>通信速率。</li>
+<li>数据位、停止位和校验位。</li>
+<li>通信协议。</li>
+<li>寄存器地址和数据格式。</li>
+<li>主从站关系。</li>
+<li>超时和异常处理机制。</li>
+</ul>
+<p>同样，一个机械安装接口也不能只写明采用法兰连接，还需要明确法兰尺寸、孔位、定位方式、密封要求和承载能力。</p>
+<blockquote>
+<p>[!important] 核心认知
+接口定义了产品的边界，也决定了产品能否顺利融入更大的系统。</p>
+<p>一个产品内部设计得再优秀，如果无法与外部系统正确连接和协作，也无法真正发挥价值。</p>
+</blockquote>
+<h3 id="3-依赖dependency产品需要什么资源和条件">3. 依赖（Dependency）：产品需要什么资源和条件？
+</h3><p>依赖描述的是产品为了实现自身功能，需要哪些内部资源、外部资源和运行条件。</p>
+<p>它回答的是：<strong>为了让产品正常工作，我们必须提供什么？</strong></p>
+<p>常见的依赖可以分为以下几类：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>依赖类别</th>
+					<th>典型内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>能源依赖</td>
+					<td>220V AC、24V DC、压缩空气、液压动力</td>
+			</tr>
+			<tr>
+					<td>机械依赖</td>
+					<td>电机、减速机、轴承、导轨、紧固件</td>
+			</tr>
+			<tr>
+					<td>感知依赖</td>
+					<td>温度传感器、压力传感器、位置传感器</td>
+			</tr>
+			<tr>
+					<td>执行依赖</td>
+					<td>电磁阀、气缸、伺服电机、执行机构</td>
+			</tr>
+			<tr>
+					<td>控制依赖</td>
+					<td>PLC、控制器、驱动器</td>
+			</tr>
+			<tr>
+					<td>软件依赖</td>
+					<td>控制程序、通信驱动、算法、运行环境</td>
+			</tr>
+			<tr>
+					<td>环境依赖</td>
+					<td>工作温度、湿度、粉尘条件、安装环境</td>
+			</tr>
+			<tr>
+					<td>维护依赖</td>
+					<td>易损件、备件、维修空间、校准工具</td>
+			</tr>
+			<tr>
+					<td>外部系统依赖</td>
+					<td>上位机、数据库、网络、其他设备</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>这里需要特别注意：</p>
+<p>依赖不一定都是产品内部的组成部分。</p>
+<p>例如，一台设备可能需要外部提供：</p>
+<ul>
+<li>稳定的电源。</li>
+<li>一定压力范围的压缩空气。</li>
+<li>上位机通信连接。</li>
+<li>特定规格的原材料。</li>
+<li>定期校准和维护服务。</li>
+</ul>
+<p>这些虽然不属于设备本体，但它们是设备能够正常工作的必要条件。</p>
+<p>因此，产品设计不能只考虑设备本身，还必须考虑设备所处的运行环境和外部资源体系。</p>
+<blockquote>
+<p>[!warning] 容易忽略的问题
+产品设计时，不能只问需要安装哪些零部件，还要问这些零部件依赖什么才能正常工作。</p>
+<p>例如，电磁阀依赖供电和气源，PLC 依赖供电和程序，通信模块依赖网络或总线连接。</p>
+<p>如果只考虑第一层组成，而忽略更深层的依赖，就容易遗漏系统运行所需的条件。</p>
+</blockquote>
+<h3 id="4-约束constraint产品必须在什么边界条件下实现功能">4. 约束（Constraint）：产品必须在什么边界条件下实现功能？
+</h3><p>约束描述的是产品设计和运行过程中必须遵守的限制条件。</p>
+<p>它回答的是：<strong>产品必须在什么条件下工作？哪些事情不能超出允许范围？</strong></p>
+<p>常见约束包括：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>约束类别</th>
+					<th>典型内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>尺寸约束</td>
+					<td>长度、宽度、高度、安装空间</td>
+			</tr>
+			<tr>
+					<td>重量约束</td>
+					<td>整机重量、单个模块重量</td>
+			</tr>
+			<tr>
+					<td>成本约束</td>
+					<td>研发成本、制造成本、维护成本</td>
+			</tr>
+			<tr>
+					<td>性能约束</td>
+					<td>精度、速度、响应时间、处理能力</td>
+			</tr>
+			<tr>
+					<td>能耗约束</td>
+					<td>功率、耗电量、气体消耗量</td>
+			</tr>
+			<tr>
+					<td>环境约束</td>
+					<td>温度、湿度、粉尘、腐蚀性环境</td>
+			</tr>
+			<tr>
+					<td>安全约束</td>
+					<td>防护等级、防爆要求、机械安全</td>
+			</tr>
+			<tr>
+					<td>标准约束</td>
+					<td>国家标准、行业标准、企业标准</td>
+			</tr>
+			<tr>
+					<td>可靠性约束</td>
+					<td>使用寿命、故障率、维护周期</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>例如：设计一台工业分析仪器，可能需要满足：</p>
+<ul>
+<li>环境温度：5～40℃。</li>
+<li>供电电压：AC 220V。</li>
+<li>整机功率：不超过某个设计上限。</li>
+<li>设备防护等级：满足安装场所要求。</li>
+<li>测量精度：满足相应技术指标。</li>
+<li>连续运行时间：满足现场运行要求。</li>
+</ul>
+<p>约束与功能有明显区别。</p>
+<p>功能是希望产品实现什么，约束是实现这些功能时必须遵守什么条件。</p>
+<p>例如：</p>
+<ul>
+<li>功能：设备能够连续测量烟气中的 NOx 浓度。</li>
+<li>约束：设备需要在规定的环境温度范围内工作，并满足测量精度、响应时间和功耗要求。</li>
+</ul>
+<blockquote>
+<p>[!tip] 核心认知
+功能决定产品要做什么，约束决定产品必须在什么边界内完成这些事情。</p>
+<p>一个功能能够实现，并不意味着产品就满足设计要求。</p>
+</blockquote>
+<h2 id="三四个维度之间的关系">三、四个维度之间的关系
+</h2><p>四个维度不是彼此孤立的，它们之间存在紧密的逻辑关系。</p>
+<p>可以将其理解为：</p>
+<ol>
+<li>功能定义产品需要实现的目标。</li>
+<li>接口定义产品如何与外部世界交互。</li>
+<li>依赖定义产品实现功能所需要的资源。</li>
+<li>约束定义产品实现功能时必须遵守的边界。</li>
+</ol>
+<p>例如：</p>
+<p>一台自动化设备需要完成工件自动定位。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>维度</th>
+					<th>对应设计内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>功能</td>
+					<td>自动完成工件定位</td>
+			</tr>
+			<tr>
+					<td>接口</td>
+					<td>工件入口、定位基准、电源接口、PLC 控制接口</td>
+			</tr>
+			<tr>
+					<td>依赖</td>
+					<td>气缸、气源、电磁阀、位置传感器、PLC</td>
+			</tr>
+			<tr>
+					<td>约束</td>
+					<td>定位精度、定位时间、设备尺寸、气源压力、安全要求</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>这四个维度可以组合成一个完整的产品分析模型：</p>
+<div class="mermaid">
+  flowchart TD
+    A["产品系统分析"]
+    A --> B["功能 Function<br/>产品要完成什么任务？"]
+    A --> C["接口 Interface<br/>产品如何与外部交互？"]
+    A --> D["依赖 Dependency<br/>产品需要什么资源？"]
+    A --> E["约束 Constraint<br/>产品必须遵守什么边界？"]
+
+    B --> F["产品需求与能力定义"]
+    C --> F
+    D --> F
+    E --> F
+
+    F --> G["系统架构设计"]
+    G --> H["模块划分与技术方案"]
+    H --> I["详细设计与实现"]
+</div>
+<h2 id="四用-cems-系统理解四个维度">四、用 CEMS 系统理解四个维度
+</h2><p>以一套 CEMS（连续排放监测系统）为例，可以更直观地理解这四个维度如何应用到真实产品中。</p>
+<h3 id="1-系统功能">1. 系统功能
+</h3><p>CEMS 的主要功能包括：</p>
+<ul>
+<li>采集烟气样品。</li>
+<li>对样气进行预处理。</li>
+<li>测量污染物浓度。</li>
+<li>测量烟气温度、压力、流速、湿度等参数。</li>
+<li>计算和处理监测数据。</li>
+<li>输出监测结果和设备运行状态。</li>
+</ul>
+<h3 id="2-系统接口">2. 系统接口
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>接口类别</th>
+					<th>具体内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>烟气接口</td>
+					<td>烟道采样口、采样探头</td>
+			</tr>
+			<tr>
+					<td>气路接口</td>
+					<td>采样管路、标准气体入口、排气口</td>
+			</tr>
+			<tr>
+					<td>电气接口</td>
+					<td>AC 220V、DC 24V</td>
+			</tr>
+			<tr>
+					<td>通信接口</td>
+					<td>RS485、以太网</td>
+			</tr>
+			<tr>
+					<td>控制接口</td>
+					<td>设备启停、反吹控制、报警信号</td>
+			</tr>
+			<tr>
+					<td>数据接口</td>
+					<td>NOx、SO2、O2、流速、温度、压力等数据</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="3-系统依赖">3. 系统依赖
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>依赖类别</th>
+					<th>具体内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>能源</td>
+					<td>稳定的电源</td>
+			</tr>
+			<tr>
+					<td>气源</td>
+					<td>仪表空气、反吹气源</td>
+			</tr>
+			<tr>
+					<td>标准物质</td>
+					<td>标准气体、校准气体</td>
+			</tr>
+			<tr>
+					<td>采样系统</td>
+					<td>探头、伴热管线、采样泵</td>
+			</tr>
+			<tr>
+					<td>预处理系统</td>
+					<td>过滤器、冷凝器、排水装置</td>
+			</tr>
+			<tr>
+					<td>分析系统</td>
+					<td>分析仪、检测器、光学系统</td>
+			</tr>
+			<tr>
+					<td>控制系统</td>
+					<td>PLC、传感器、执行器</td>
+			</tr>
+			<tr>
+					<td>数据系统</td>
+					<td>数采仪、上位机、通信网络</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="4-系统约束">4. 系统约束
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>约束类别</th>
+					<th>具体内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>测量性能</td>
+					<td>测量范围、准确度、响应时间</td>
+			</tr>
+			<tr>
+					<td>环境条件</td>
+					<td>烟气温度、环境温度、湿度</td>
+			</tr>
+			<tr>
+					<td>安装条件</td>
+					<td>采样位置、安装空间、维护空间</td>
+			</tr>
+			<tr>
+					<td>运行要求</td>
+					<td>连续运行能力、设备可用率</td>
+			</tr>
+			<tr>
+					<td>合规要求</td>
+					<td>适用的环保监测标准和技术规范</td>
+			</tr>
+			<tr>
+					<td>维护要求</td>
+					<td>校准周期、反吹周期、耗材更换周期</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>从这个案例可以看出：</p>
+<p>CEMS 并不是简单地将采样探头、伴热管线、预处理设备和分析仪组合在一起。</p>
+<p>它是一个由多个子系统组成的完整产品，各子系统之间存在明确的功能分工、接口关系、资源依赖和运行约束。</p>
+<p>只有把这些关系梳理清楚，才能真正完成系统层面的设计。</p>
+<h2 id="五从产品分析进一步走向模块化设计">五、从产品分析进一步走向模块化设计
+</h2><p>理解四个维度之后，还可以进一步应用到模块化设计。</p>
+<p>模块化设计并不是简单地把产品拆分成几个零件或几个功能区域。</p>
+<p>真正的模块化设计，需要明确每个模块的职责，以及它与其他模块之间的关系。</p>
+<p>对于每个模块，都应该回答以下问题：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>分析维度</th>
+					<th>需要明确的内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>模块功能</td>
+					<td>这个模块负责完成什么任务？</td>
+			</tr>
+			<tr>
+					<td>输入接口</td>
+					<td>需要接收什么物质、能量或信息？</td>
+			</tr>
+			<tr>
+					<td>输出接口</td>
+					<td>向其他模块提供什么物质、能量或信息？</td>
+			</tr>
+			<tr>
+					<td>内部依赖</td>
+					<td>模块内部由哪些零部件和资源组成？</td>
+			</tr>
+			<tr>
+					<td>外部依赖</td>
+					<td>模块需要其他模块提供什么条件？</td>
+			</tr>
+			<tr>
+					<td>设计约束</td>
+					<td>模块需要满足什么尺寸、性能和环境要求？</td>
+			</tr>
+			<tr>
+					<td>异常处理</td>
+					<td>输入中断、依赖失效或输出异常时如何处理？</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>例如，一个 CEMS 预处理模块：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>具体内容</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>功能</td>
+					<td>将采集的样气处理到满足分析仪要求的状态</td>
+			</tr>
+			<tr>
+					<td>输入接口</td>
+					<td>原始样气入口、电源接口</td>
+			</tr>
+			<tr>
+					<td>输出接口</td>
+					<td>处理后的样气出口、排水口、状态信号</td>
+			</tr>
+			<tr>
+					<td>内部依赖</td>
+					<td>冷凝器、过滤器、蠕动泵、温度传感器</td>
+			</tr>
+			<tr>
+					<td>外部依赖</td>
+					<td>采样系统、供电、分析仪</td>
+			</tr>
+			<tr>
+					<td>约束</td>
+					<td>样气流量、露点、压力、温度、维护要求</td>
+			</tr>
+			<tr>
+					<td>异常处理</td>
+					<td>排水异常、温度异常、流量不足、过滤器堵塞时的检测和处理</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>这张表可以作为模块设计说明书的基础。</p>
+<p>它还能帮助我们发现模块之间的接口是否完整、依赖是否遗漏，以及设计约束是否明确。</p>
+<h2 id="六一个容易忽略的维度异常与失效">六、一个容易忽略的维度：异常与失效
+</h2><p>在完成正常工作条件下的功能、接口、依赖和约束分析后，还应该进一步考虑异常情况。</p>
+<p>因为一个产品真正的可靠性，不仅体现在正常情况下能够工作，还体现在异常发生时能够正确响应。</p>
+<p>例如，一台自动化设备：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>异常场景</th>
+					<th>需要考虑的问题</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>电源中断</td>
+					<td>设备如何停机？是否需要保存状态？</td>
+			</tr>
+			<tr>
+					<td>气源压力不足</td>
+					<td>能否检测？是否禁止执行动作？</td>
+			</tr>
+			<tr>
+					<td>通信中断</td>
+					<td>是否进入安全状态？如何恢复通信？</td>
+			</tr>
+			<tr>
+					<td>传感器故障</td>
+					<td>如何识别异常数据？是否需要报警？</td>
+			</tr>
+			<tr>
+					<td>执行器卡滞</td>
+					<td>如何检测动作失败？是否停止后续流程？</td>
+			</tr>
+			<tr>
+					<td>关键零件损坏</td>
+					<td>是否会引发连锁故障？如何保护其他部件？</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>这里涉及系统工程中的可靠性、安全性和故障分析。</p>
+<p>尤其需要注意依赖之间的关系：</p>
+<p>一个模块可能依赖多个资源，而一个资源也可能同时被多个模块依赖。</p>
+<p>如果某个公共资源失效，就可能影响多个模块。</p>
+<p>例如，24V DC 电源同时为 PLC、传感器和电磁阀供电，一旦电源故障，可能导致整个控制系统失去正常工作能力。</p>
+<p>因此，产品设计不仅要梳理依赖，还要识别关键依赖、公共依赖和单点失效风险。</p>
+<h2 id="七建立自己的产品分析工作流">七、建立自己的产品分析工作流
+</h2><p>以后面对一个新的产品或设备，不妨先建立一份产品分析表，而不是直接开始建模或编写程序。</p>
+<h3 id="产品系统分析表">产品系统分析表
+</h3><div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>分析项目</th>
+					<th>核心问题</th>
+					<th>输出成果</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>功能分析</td>
+					<td>产品要完成什么任务？</td>
+					<td>功能需求清单</td>
+			</tr>
+			<tr>
+					<td>输入分析</td>
+					<td>产品需要接收什么？</td>
+					<td>输入清单</td>
+			</tr>
+			<tr>
+					<td>输出分析</td>
+					<td>产品需要提供什么？</td>
+					<td>输出清单</td>
+			</tr>
+			<tr>
+					<td>接口分析</td>
+					<td>产品如何与外部系统连接？</td>
+					<td>接口控制文件 ICD</td>
+			</tr>
+			<tr>
+					<td>依赖分析</td>
+					<td>产品需要什么资源和条件？</td>
+					<td>资源与依赖清单</td>
+			</tr>
+			<tr>
+					<td>约束分析</td>
+					<td>产品受到哪些边界条件限制？</td>
+					<td>设计约束清单</td>
+			</tr>
+			<tr>
+					<td>异常分析</td>
+					<td>依赖失效或接口异常时怎么办？</td>
+					<td>异常处理要求</td>
+			</tr>
+			<tr>
+					<td>架构设计</td>
+					<td>如何划分模块并组织关系？</td>
+					<td>系统架构图</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="推荐的设计顺序">推荐的设计顺序
+</h3><div class="mermaid">
+  flowchart TD
+    A["明确产品目标"]
+    B["功能分析"]
+    C["输入与输出分析"]
+    D["接口分析"]
+    E["依赖分析"]
+    F["约束分析"]
+    G["异常与失效分析"]
+    H["系统架构设计"]
+    I["模块划分"]
+    J["详细设计与验证"]
+
+    A --> B --> C --> D
+    D --> E --> F --> G
+    G --> H --> I --> J
+</div>
+<p>这并不是一条绝对线性的流程。实际工程中，功能、接口、依赖和约束往往需要反复迭代。</p>
+<p>例如，发现某个机械接口无法满足安装空间约束，就可能需要调整总体方案；调整方案后，又可能改变能源需求和其他模块的接口。</p>
+<p>因此，系统设计本质上是一个不断分析、权衡、验证和迭代的过程。</p>
+<h2 id="八最终认知从零件设计思维走向系统设计思维">八、最终认知：从零件设计思维走向系统设计思维
+</h2><p>回顾整个思路，可以发现两种不同的设计视角。</p>
+<p><strong>传统的零件设计视角：</strong></p>
+<ul>
+<li>这个零件怎么做？</li>
+<li>需要什么材料？</li>
+<li>尺寸应该是多少？</li>
+<li>如何加工和装配？</li>
+</ul>
+<p><strong>系统工程视角：</strong></p>
+<ul>
+<li>产品需要完成什么功能？</li>
+<li>产品如何与外部世界交互？</li>
+<li>产品依赖什么资源才能运行？</li>
+<li>产品受到什么条件和边界限制？</li>
+<li>各个模块之间如何协作？</li>
+<li>当某个接口或依赖失效时，系统会发生什么？</li>
+</ul>
+<p>两种视角并不矛盾。</p>
+<p>零件设计解决具体实现问题，系统设计解决整体组织与协同问题。一个优秀的产品既需要可靠的零件设计，也需要合理的系统架构。</p>
+<blockquote>
+<p>[!important] 最值得记住的一句话
+<strong>不要一开始就问产品由什么零件组成，而应该先问产品要完成什么功能、如何与外部交互、依赖什么资源，以及受到什么约束。</strong></p>
+<p>当这四个问题回答清楚之后，产品应该如何划分模块、采用什么技术方案、选择什么零部件，才有了更加明确的设计依据。</p>
+</blockquote>
+<hr>
+<h2 id="延伸学习">延伸学习
+</h2><ul>
+<li>系统工程（Systems Engineering）：如何从整体角度组织复杂产品的需求、架构和验证？</li>
+<li>需求工程（Requirements Engineering）：如何将模糊的产品需求转化为可验证的技术指标？</li>
+<li>接口控制文件（ICD）：如何规范不同模块和设备之间的机械、电气、通信接口？</li>
+<li>功能架构与逻辑架构：如何从功能分解逐步形成系统模块？</li>
+<li>依赖分析与故障树分析（FTA）：如何识别关键依赖和单点失效？</li>
+<li>失效模式与影响分析（FMEA）：如何提前识别产品设计和运行过程中的潜在风险？</li>
+<li>V 模型开发流程：如何将需求、系统设计、详细设计与验证测试对应起来？</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+<script type="module">
+  import mermaid from 'https://cdn.jsdelivr.net/npm/mermaid/dist/mermaid.esm.min.mjs';
+  mermaid.initialize({ 
+    startOnLoad: true,
+    theme: 'base', 
+    securityLevel: 'loose',
+  });
+</script>
+
+    </body>
+</html>

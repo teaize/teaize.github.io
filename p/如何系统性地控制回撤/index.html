@@ -1,0 +1,1111 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head>
+        
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+
+<meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content="投资组合风险管理：如何系统性地控制回撤？ [!abstract] 核心观点 控制回撤不是依靠某一个止损点，也不是简单地保留一部分现金，而是一套贯穿投资全过程的风险管理体系。\n它的核心目标不是避免亏损，而是控制亏损的幅度、速度和持续时间，确保投资组合在经历市场波动后，仍然具备恢复和持续增长的能力。\n">
+<title>如何系统性地控制回撤</title>
+
+<link rel='canonical' href='https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E7%B3%BB%E7%BB%9F%E6%80%A7%E5%9C%B0%E6%8E%A7%E5%88%B6%E5%9B%9E%E6%92%A4/'>
+
+<link rel="stylesheet" href="/scss/style.min.ab8d6b4458219aa4a263341027c8a95dfe1d16e76f9a7d3f9923e067ad40dcbf.css"><meta property='og:title' content="如何系统性地控制回撤">
+<meta property='og:description' content="投资组合风险管理：如何系统性地控制回撤？ [!abstract] 核心观点 控制回撤不是依靠某一个止损点，也不是简单地保留一部分现金，而是一套贯穿投资全过程的风险管理体系。\n它的核心目标不是避免亏损，而是控制亏损的幅度、速度和持续时间，确保投资组合在经历市场波动后，仍然具备恢复和持续增长的能力。\n">
+<meta property='og:url' content='https://teaize.github.io/p/%E5%A6%82%E4%BD%95%E7%B3%BB%E7%BB%9F%E6%80%A7%E5%9C%B0%E6%8E%A7%E5%88%B6%E5%9B%9E%E6%92%A4/'>
+<meta property='og:site_name' content='Coffity&#39;s Blog'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:published_time' content='2026-11-16T00:00:00&#43;00:00'/><meta property='article:modified_time' content='2026-11-16T00:00:00&#43;00:00'/>
+<meta name="twitter:title" content="如何系统性地控制回撤">
+<meta name="twitter:description" content="投资组合风险管理：如何系统性地控制回撤？ [!abstract] 核心观点 控制回撤不是依靠某一个止损点，也不是简单地保留一部分现金，而是一套贯穿投资全过程的风险管理体系。\n它的核心目标不是避免亏损，而是控制亏损的幅度、速度和持续时间，确保投资组合在经历市场波动后，仍然具备恢复和持续增长的能力。\n">
+    <link rel="shortcut icon" href="/coffeelize.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="切换菜单">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu_cf9b28557ea5114f.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Coffity&#39;s Blog</a></h1>
+            <h2 class="site-description">吹灭读书灯，一身都是月</h2>
+        </div>
+    </header><ol class="menu-social">
+            
+                <li>
+                    <a 
+                        href='https://github.com/teaize'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>主页</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/notes/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>Notes</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/%E5%85%B3%E4%BA%8E/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>关于</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/links/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-link" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M10 14a3.5 3.5 0 0 0 5 0l4 -4a3.5 3.5 0 0 0 -5 -5l-.5 .5" />
+  <path d="M14 10a3.5 3.5 0 0 0 -5 0l-4 4a3.5 3.5 0 0 0 5 5l.5 -.5" />
+</svg>
+
+
+
+                
+                <span>Links</span>
+            </a>
+        </li>
+        
+        <li class="menu-bottom-section">
+            <ol class="menu">
+                    
+                        <li id="i18n-switch">  
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                            <select name="language" title="language" onchange="window.location.href = this.selectedOptions[0].value">
+                                
+                                    <option value="https://teaize.github.io/" selected>中文</option>
+                                
+                                    <option value="https://teaize.github.io/en/" >English</option>
+                                
+                            </select>
+                        </li>
+                    
+                
+
+                
+                    <li id="dark-mode-toggle">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                        <span>暗色模式</span>
+                    </li>
+                
+            </ol>
+        </li>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">目录</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一理解回撤为什么控制回撤如此重要">一、理解回撤：为什么控制回撤如此重要？</a>
+      <ol>
+        <li><a href="#1-什么是最大回撤">1. 什么是最大回撤？</a></li>
+        <li><a href="#2-为什么回撤越大恢复越困难">2. 为什么回撤越大，恢复越困难？</a></li>
+      </ol>
+    </li>
+    <li><a href="#二第一层风险预算与资金配置">二、第一层：风险预算与资金配置</a>
+      <ol>
+        <li><a href="#1-保留现金为组合提供缓冲空间">1. 保留现金：为组合提供缓冲空间</a></li>
+        <li><a href="#2-控制整体仓位避免一次性承担过多风险">2. 控制整体仓位：避免一次性承担过多风险</a></li>
+        <li><a href="#3-分批建仓降低单次决策风险">3. 分批建仓：降低单次决策风险</a></li>
+        <li><a href="#4-设置单一标的仓位上限">4. 设置单一标的仓位上限</a></li>
+      </ol>
+    </li>
+    <li><a href="#三第二层组合结构管理">三、第二层：组合结构管理</a>
+      <ol>
+        <li><a href="#5-行业与资产分散">5. 行业与资产分散</a></li>
+        <li><a href="#6-相关性管理识别隐藏的集中风险">6. 相关性管理：识别隐藏的集中风险</a></li>
+        <li><a href="#7-波动率管理让不同风险资产合理共存">7. 波动率管理：让不同风险资产合理共存</a></li>
+      </ol>
+    </li>
+    <li><a href="#四第三层投资逻辑与退出机制">四、第三层：投资逻辑与退出机制</a>
+      <ol>
+        <li><a href="#8-价格止损与逻辑止损">8. 价格止损与逻辑止损</a></li>
+        <li><a href="#9-市场趋势过滤控制系统性风险">9. 市场趋势过滤：控制系统性风险</a></li>
+      </ol>
+    </li>
+    <li><a href="#五第四层动态风险监控与组合调整">五、第四层：动态风险监控与组合调整</a>
+      <ol>
+        <li><a href="#10-动态再平衡防止组合偏离原定配置">10. 动态再平衡：防止组合偏离原定配置</a></li>
+        <li><a href="#11-设定组合级风险预警">11. 设定组合级风险预警</a></li>
+      </ol>
+    </li>
+    <li><a href="#六现金管理重新理解现金的战略价值">六、现金管理：重新理解现金的战略价值</a>
+      <ol>
+        <li><a href="#1-现金的三种核心价值">1. 现金的三种核心价值</a></li>
+        <li><a href="#2-为什么不能简单地越跌越买">2. 为什么不能简单地越跌越买？</a></li>
+      </ol>
+    </li>
+    <li><a href="#七建立一套可执行的风险管理框架">七、建立一套可执行的风险管理框架</a>
+      <ol>
+        <li><a href="#一个简化的实战模型">一个简化的实战模型</a></li>
+      </ol>
+    </li>
+    <li><a href="#八最终认知控制回撤的真正目的">八、最终认知：控制回撤的真正目的</a></li>
+    <li><a href="#延伸思考">延伸思考</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/%E5%A6%82%E4%BD%95%E7%B3%BB%E7%BB%9F%E6%80%A7%E5%9C%B0%E6%8E%A7%E5%88%B6%E5%9B%9E%E6%92%A4/">如何系统性地控制回撤</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">2026-11-16</time>
+            </div>
+        
+
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h1 id="投资组合风险管理如何系统性地控制回撤">投资组合风险管理：如何系统性地控制回撤？
+</h1><blockquote>
+<p>[!abstract] 核心观点
+控制回撤不是依靠某一个止损点，也不是简单地保留一部分现金，而是一套贯穿投资全过程的风险管理体系。</p>
+<p>它的核心目标不是避免亏损，而是控制亏损的幅度、速度和持续时间，确保投资组合在经历市场波动后，仍然具备恢复和持续增长的能力。</p>
+</blockquote>
+<h2 id="一理解回撤为什么控制回撤如此重要">一、理解回撤：为什么控制回撤如此重要？
+</h2><h3 id="1-什么是最大回撤">1. 什么是最大回撤？
+</h3><p>最大回撤（Maximum Drawdown，MDD）是指在某一观察期间内，投资组合从历史最高净值下跌到随后最低净值的最大幅度。</p>
+<p>计算公式：</p>
+<p>$$<br>
+MDD = \max_{t_1 &lt; t_2}<br>
+\left(<br>
+\frac{NAV_{t_1}-NAV_{t_2}}{NAV_{t_1}}<br>
+\right)<br>
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$NAV_{t_1}$：某一时点的历史峰值净值。</li>
+<li>$NAV_{t_2}$：该峰值之后的最低净值。</li>
+</ul>
+<p>例如：</p>
+<p>账户净值从 100 万元上涨至 120 万元，随后下跌至 90 万元。</p>
+<p>$$<br>
+MDD = \frac{120-90}{120}=25%<br>
+$$</p>
+<p>注意：最大回撤是从历史峰值计算，而不是从最初投入的本金计算。</p>
+<h3 id="2-为什么回撤越大恢复越困难">2. 为什么回撤越大，恢复越困难？
+</h3><p>亏损与恢复收益之间并不是线性关系。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>账户亏损幅度</th>
+					<th>恢复到原始净值所需收益</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>-10%</td>
+					<td>+11.1%</td>
+			</tr>
+			<tr>
+					<td>-20%</td>
+					<td>+25%</td>
+			</tr>
+			<tr>
+					<td>-30%</td>
+					<td>+42.9%</td>
+			</tr>
+			<tr>
+					<td>-40%</td>
+					<td>+66.7%</td>
+			</tr>
+			<tr>
+					<td>-50%</td>
+					<td>+100%</td>
+			</tr>
+			<tr>
+					<td>-60%</td>
+					<td>+150%</td>
+			</tr>
+			<tr>
+					<td>-70%</td>
+					<td>+233.3%</td>
+			</tr>
+			<tr>
+					<td>-80%</td>
+					<td>+400%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>恢复收益计算公式：</p>
+<p>$$<br>
+R_{recovery}=\frac{1}{1-D}-1<br>
+$$</p>
+<p>其中 $D$ 为亏损幅度。</p>
+<p><strong>核心认知：回撤不仅影响当前资产规模，还会显著提高未来恢复所需的收益率。</strong></p>
+<p>因此，控制回撤的意义在于保护复利能力。</p>
+<hr>
+<h2 id="二第一层风险预算与资金配置">二、第一层：风险预算与资金配置
+</h2><p>这是风险管理的基础。投资之前，首先要确定自己愿意承担多大的风险，以及准备投入多少资金。</p>
+<h3 id="1-保留现金为组合提供缓冲空间">1. 保留现金：为组合提供缓冲空间
+</h3><p>现金的作用主要有三个：</p>
+<ul>
+<li><strong>降低组合波动</strong>：现金通常不会像股票一样随市场价格大幅波动。</li>
+<li><strong>提供流动性</strong>：在市场下跌时，不必为了获取资金而被迫卖出其他资产。</li>
+<li><strong>保留投资选择权</strong>：当优质资产出现更有吸引力的估值时，可以利用现金进行配置。</li>
+</ul>
+<p>但需要注意：</p>
+<p>现金并不是天然的抄底资金，更不是越多越好。</p>
+<p>长期持有现金也存在机会成本，例如通货膨胀导致的购买力下降，以及牛市中错失的上涨收益。</p>
+<p>因此，现金比例应该服务于组合的风险承受能力、流动性需求和投资机会，而不是简单地追求某个固定比例。</p>
+<h3 id="2-控制整体仓位避免一次性承担过多风险">2. 控制整体仓位：避免一次性承担过多风险
+</h3><p>整体仓位决定了投资组合对市场波动的敏感程度。</p>
+<p>例如：</p>
+<p>假设投资组合为 100 万元：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>股票仓位</th>
+					<th>现金仓位</th>
+					<th>股票下跌 20% 后的组合亏损</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>100%</td>
+					<td>0%</td>
+					<td>-20%</td>
+			</tr>
+			<tr>
+					<td>80%</td>
+					<td>20%</td>
+					<td>-16%</td>
+			</tr>
+			<tr>
+					<td>60%</td>
+					<td>40%</td>
+					<td>-12%</td>
+			</tr>
+			<tr>
+					<td>40%</td>
+					<td>60%</td>
+					<td>-8%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>以上假设现金收益为零，股票资产同步下跌 20%，且不考虑其他资产和交易成本。</p>
+<p>可以看到，在其他条件相同的情况下，降低股票仓位能够直接降低市场下跌对账户净值的冲击。</p>
+<h3 id="3-分批建仓降低单次决策风险">3. 分批建仓：降低单次决策风险
+</h3><p>分批建仓的核心不是预测最低点，而是将一次性决策拆分为多个阶段。</p>
+<p>例如：</p>
+<ul>
+<li>第一阶段：建立试探性仓位。</li>
+<li>第二阶段：基本面和投资逻辑得到进一步验证后增加仓位。</li>
+<li>第三阶段：估值、趋势和风险收益比仍然具备吸引力时继续配置。</li>
+</ul>
+<p>分批建仓可以降低一次性买入时点错误带来的风险。</p>
+<p>但需要注意：</p>
+<p>分批买入不等于越跌越买。如果企业基本面恶化，或者原有投资逻辑已经被证伪，就不应该仅仅因为价格下跌而继续增加仓位。</p>
+<h3 id="4-设置单一标的仓位上限">4. 设置单一标的仓位上限
+</h3><p>单一标的仓位决定了个股风险对整个投资组合的影响程度。</p>
+<p>例如：</p>
+<ul>
+<li>普通股票：可以设置一个基础仓位上限。</li>
+<li>高波动、高不确定性股票：设置更低的仓位上限。</li>
+<li>尚未充分验证的投资机会：仅建立试探性仓位。</li>
+</ul>
+<p>假设某只股票占组合的 20%，该股票下跌 50%，那么在其他资产不变的情况下，组合净值将损失 10%。</p>
+<p>因此，单一标的仓位上限的本质是：<strong>避免任何一个投资判断的错误，对整个账户造成不可接受的损失。</strong></p>
+<hr>
+<h2 id="三第二层组合结构管理">三、第二层：组合结构管理
+</h2><p>控制整体仓位之后，还需要考虑资金究竟分布在哪里。</p>
+<p>真正有效的分散投资，不是简单增加持仓数量，而是降低组合对同一风险来源的依赖。</p>
+<h3 id="5-行业与资产分散">5. 行业与资产分散
+</h3><p>组合可以从三个维度进行分散：</p>
+<p><strong>行业分散</strong></p>
+<p>避免资产过度集中在同一个行业，例如：</p>
+<ul>
+<li>科技</li>
+<li>消费</li>
+<li>医疗</li>
+<li>金融</li>
+<li>工业</li>
+<li>能源</li>
+</ul>
+<p><strong>投资逻辑分散</strong></p>
+<p>不同类型的资产可能受到不同因素驱动：</p>
+<ul>
+<li>成长型资产：对未来收入增长和估值变化较敏感。</li>
+<li>价值型资产：更加关注盈利能力、现金流和估值。</li>
+<li>周期型资产：对经济周期、供需和商品价格较敏感。</li>
+</ul>
+<p><strong>市场与地域分散</strong></p>
+<p>例如：</p>
+<ul>
+<li>A 股</li>
+<li>美股</li>
+<li>港股</li>
+<li>其他国际市场</li>
+</ul>
+<p>需要注意：地域分散不代表风险完全独立。全球市场在重大金融危机期间可能出现明显的同步下跌。</p>
+<h3 id="6-相关性管理识别隐藏的集中风险">6. 相关性管理：识别隐藏的集中风险
+</h3><p>相关性（Correlation）描述两个资产价格收益率之间的线性联动程度。</p>
+<p>相关系数的范围为：</p>
+<p>$$<br>
+-1 \leq \rho_{XY} \leq 1<br>
+$$</p>
+<ul>
+<li>$\rho=1$：完全正相关。</li>
+<li>$\rho=0$：无线性相关。</li>
+<li>$\rho=-1$：完全负相关。</li>
+</ul>
+<p>例如：</p>
+<p>投资组合同时持有新能源、光伏和锂电池，看起来持有了三只不同方向的股票。</p>
+<p>但这些资产可能同时受到以下因素影响：</p>
+<ul>
+<li>利率变化</li>
+<li>行业供需</li>
+<li>原材料价格</li>
+<li>产业政策</li>
+<li>市场风险偏好</li>
+</ul>
+<p>当共同风险因素发生变化时，它们可能同时下跌。</p>
+<p>因此，持仓数量多并不意味着风险分散。</p>
+<p><strong>真正需要关注的是风险来源，而不是持仓数量。</strong></p>
+<h3 id="7-波动率管理让不同风险资产合理共存">7. 波动率管理：让不同风险资产合理共存
+</h3><p>波动率（Volatility）用于衡量资产收益率的波动程度。</p>
+<p>一般而言：</p>
+<ul>
+<li>高波动资产：价格变化幅度较大。</li>
+<li>低波动资产：价格变化相对平缓。</li>
+</ul>
+<p>假设两只股票的预期收益率相同：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>股票</th>
+					<th>年化波动率</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>A</td>
+					<td>15%</td>
+			</tr>
+			<tr>
+					<td>B</td>
+					<td>35%</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>如果两者采用相同仓位，B 对组合波动的贡献通常会更大。</p>
+<p>因此，可以考虑根据资产波动率调整仓位。</p>
+<p>一种简单的方法是波动率倒数配置：</p>
+<p>$$<br>
+w_i \propto \frac{1}{\sigma_i}<br>
+$$</p>
+<p>其中：</p>
+<ul>
+<li>$w_i$：资产配置权重。</li>
+<li>$\sigma_i$：资产波动率。</li>
+</ul>
+<p>但这只是简化模型。实际组合还需要考虑资产之间的相关性、预期收益、流动性以及极端风险。</p>
+<hr>
+<h2 id="四第三层投资逻辑与退出机制">四、第三层：投资逻辑与退出机制
+</h2><p>仓位和分散投资能够降低组合风险，但无法解决所有问题。</p>
+<p>如果持有的企业本身出现严重问题，即使仓位不高，也需要重新评估是否应该继续持有。</p>
+<h3 id="8-价格止损与逻辑止损">8. 价格止损与逻辑止损
+</h3><p>投资退出通常可以从两个维度判断。</p>
+<p><strong>价格止损：关注市场价格变化</strong></p>
+<p>例如：</p>
+<ul>
+<li>跌破预设价格或关键支撑位。</li>
+<li>亏损达到预设风险预算。</li>
+<li>价格趋势明显恶化。</li>
+</ul>
+<p>价格止损的优点是规则明确、执行相对简单。</p>
+<p>但缺点是容易受到市场噪声影响，可能在短期波动中卖出长期价值仍然存在的资产。</p>
+<p><strong>逻辑止损：关注投资假设是否成立</strong></p>
+<p>例如：</p>
+<ul>
+<li>企业核心竞争力明显下降。</li>
+<li>商业模式发生不利变化。</li>
+<li>行业长期增长空间被重新评估。</li>
+<li>原先预期的盈利增长无法实现。</li>
+<li>管理层出现严重诚信或治理问题。</li>
+</ul>
+<p>逻辑止损关注的是买入时的核心投资假设是否仍然成立。</p>
+<p>对于长期基本面投资者而言，逻辑止损通常比单纯的固定百分比止损更有解释力。</p>
+<p>但这并不意味着价格止损没有意义。对于交易型策略，价格止损仍然是重要的纪律工具。</p>
+<h3 id="9-市场趋势过滤控制系统性风险">9. 市场趋势过滤：控制系统性风险
+</h3><p>个股风险之外，还需要关注整个市场的系统性风险。</p>
+<p>当市场进入明显的下行周期时，即使企业基本面没有发生变化，股票也可能因为市场风险偏好下降而出现大幅回撤。</p>
+<p>可以关注：</p>
+<ul>
+<li>主要指数的长期趋势。</li>
+<li>市场整体估值水平。</li>
+<li>市场广度与上涨股票比例。</li>
+<li>信用环境和流动性变化。</li>
+<li>宏观经济与企业盈利周期。</li>
+</ul>
+<p>例如，可以将主要指数跌破长期均线作为风险预警信号。</p>
+<p>但需要注意：</p>
+<p>跌破年线并不意味着市场一定进入熊市，也不意味着所有股票都应该立即减仓。</p>
+<p>趋势指标更适合与估值、基本面和市场广度结合使用，而不是作为唯一的决策依据。</p>
+<hr>
+<h2 id="五第四层动态风险监控与组合调整">五、第四层：动态风险监控与组合调整
+</h2><p>投资组合不是建立完成后就一成不变的。随着资产价格、基本面和市场环境发生变化，组合风险也会不断变化。</p>
+<h3 id="10-动态再平衡防止组合偏离原定配置">10. 动态再平衡：防止组合偏离原定配置
+</h3><p>假设最初的组合配置为：</p>
+<ul>
+<li>股票 A：40%</li>
+<li>股票 B：30%</li>
+<li>股票 C：30%</li>
+</ul>
+<p>经过一段时间，股票 A 大幅上涨，组合权重变为：</p>
+<ul>
+<li>股票 A：60%</li>
+<li>股票 B：22%</li>
+<li>股票 C：18%</li>
+</ul>
+<p>此时，组合已经明显偏离最初的风险配置。</p>
+<p>动态再平衡就是通过适当买入或卖出，使组合重新回到目标配置范围。</p>
+<p>常见方式：</p>
+<p><strong>定期再平衡</strong></p>
+<p>例如每季度、每半年检查一次组合权重。</p>
+<p><strong>阈值再平衡</strong></p>
+<p>当某项资产的实际权重偏离目标权重达到一定幅度时，触发调整。</p>
+<p>需要注意：再平衡不是机械地卖出所有上涨资产、买入所有下跌资产。</p>
+<p>如果某项资产上涨是因为企业基本面持续改善，就需要重新评估其估值和未来收益，而不是单纯为了恢复权重而卖出。</p>
+<h3 id="11-设定组合级风险预警">11. 设定组合级风险预警
+</h3><p>除了关注个股，还应该定期监控整个投资组合。</p>
+<p>建议关注以下指标：</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>指标</th>
+					<th>主要作用</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>最大回撤（MDD）</td>
+					<td>衡量组合从历史高点下跌的幅度</td>
+			</tr>
+			<tr>
+					<td>年化波动率</td>
+					<td>衡量组合收益率的波动程度</td>
+			</tr>
+			<tr>
+					<td>单一标的权重</td>
+					<td>识别个股集中风险</td>
+			</tr>
+			<tr>
+					<td>行业集中度</td>
+					<td>识别行业风险暴露</td>
+			</tr>
+			<tr>
+					<td>资产相关性</td>
+					<td>识别隐藏的共同风险</td>
+			</tr>
+			<tr>
+					<td>现金比例</td>
+					<td>评估流动性和资金缓冲能力</td>
+			</tr>
+			<tr>
+					<td>盈亏来源</td>
+					<td>识别组合收益是否过度依赖少数资产</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>还可以为组合设置风险预警线。</p>
+<p>例如：</p>
+<ul>
+<li>回撤达到第一预警线：重新检查风险来源。</li>
+<li>回撤达到第二预警线：评估整体仓位和资产相关性。</li>
+<li>回撤达到第三预警线：全面复核投资逻辑和风险预算。</li>
+</ul>
+<p>预警线不应直接等同于机械卖出线，具体行动需要结合回撤原因判断。</p>
+<hr>
+<h2 id="六现金管理重新理解现金的战略价值">六、现金管理：重新理解现金的战略价值
+</h2><p>现金在投资组合中并不是没有收益的闲置资产，而是一种具有流动性和选择权价值的配置。</p>
+<h3 id="1-现金的三种核心价值">1. 现金的三种核心价值
+</h3><p><strong>第一：降低组合风险</strong></p>
+<p>当股票市场下跌时，现金不会像股票一样直接承受相同幅度的价格冲击。</p>
+<p><strong>第二：提供流动性</strong></p>
+<p>避免在市场最不利的时候，因为资金需求而被迫出售资产。</p>
+<p><strong>第三：提供选择权</strong></p>
+<p>当市场出现优质投资机会时，可以在不破坏现有组合结构的情况下进行新的配置。</p>
+<h3 id="2-为什么不能简单地越跌越买">2. 为什么不能简单地越跌越买？
+</h3><p>因为价格下跌不等于投资价值提升。</p>
+<p>例如：</p>
+<p>一只股票从 100 元跌到 80 元，表面上便宜了 20%。</p>
+<p>但如果企业未来盈利预期同时下降 40%，那么它的估值可能反而变得更高。</p>
+<p>因此，使用现金补仓之前，至少需要重新判断：</p>
+<ul>
+<li>企业基本面是否发生变化？</li>
+<li>原有投资逻辑是否仍然成立？</li>
+<li>当前估值是否具有吸引力？</li>
+<li>增加仓位后，组合风险是否仍在可接受范围内？</li>
+</ul>
+<p><strong>现金应该用于配置具有吸引力的风险收益机会，而不是无条件承接下跌的资产。</strong></p>
+<hr>
+<h2 id="七建立一套可执行的风险管理框架">七、建立一套可执行的风险管理框架
+</h2><p>前面的内容可以归纳为一个完整的风险管理闭环。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>管理层级</th>
+					<th>核心问题</th>
+					<th>主要工具</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>风险预算</td>
+					<td>我最多愿意承担多大风险？</td>
+					<td>最大回撤目标、风险承受能力</td>
+			</tr>
+			<tr>
+					<td>资金配置</td>
+					<td>应该投入多少资金？</td>
+					<td>现金比例、整体仓位、分批建仓</td>
+			</tr>
+			<tr>
+					<td>组合结构</td>
+					<td>资金应该分布在哪里？</td>
+					<td>行业分散、资产分散、相关性管理</td>
+			</tr>
+			<tr>
+					<td>个股管理</td>
+					<td>单个投资判断能造成多大损失？</td>
+					<td>单标的上限、价格止损、逻辑止损</td>
+			</tr>
+			<tr>
+					<td>市场监控</td>
+					<td>整体市场风险是否正在上升？</td>
+					<td>趋势过滤、宏观环境、市场广度</td>
+			</tr>
+			<tr>
+					<td>动态调整</td>
+					<td>组合是否偏离原有风险配置？</td>
+					<td>再平衡、风险预警、仓位调整</td>
+			</tr>
+	</tbody>
+</table></div>
+<h3 id="一个简化的实战模型">一个简化的实战模型
+</h3><p>对于中等经验的长期投资者，可以先建立以下规则作为初始框架，再根据实际风险承受能力进行调整。</p>
+<div class="table-wrapper"><table>
+	<thead>
+			<tr>
+					<th>项目</th>
+					<th>初始参考规则</th>
+					<th>说明</th>
+			</tr>
+	</thead>
+	<tbody>
+			<tr>
+					<td>整体股票仓位</td>
+					<td>50%～80%</td>
+					<td>根据市场环境和风险承受能力调整</td>
+			</tr>
+			<tr>
+					<td>现金储备</td>
+					<td>20%～50%</td>
+					<td>兼顾流动性和投资机会</td>
+			</tr>
+			<tr>
+					<td>单一标的上限</td>
+					<td>设定明确上限</td>
+					<td>高风险资产采用更低上限</td>
+			</tr>
+			<tr>
+					<td>分批建仓</td>
+					<td>分阶段配置</td>
+					<td>避免一次性承担过多时点风险</td>
+			</tr>
+			<tr>
+					<td>组合回撤</td>
+					<td>设置预警线</td>
+					<td>根据回撤原因采取措施</td>
+			</tr>
+			<tr>
+					<td>投资逻辑</td>
+					<td>定期复核</td>
+					<td>基本面发生变化时重新评估</td>
+			</tr>
+			<tr>
+					<td>再平衡</td>
+					<td>定期或偏离阈值触发</td>
+					<td>防止组合风险持续集中</td>
+			</tr>
+	</tbody>
+</table></div>
+<p>这里的数字是示例性起点，不是适用于所有人的标准答案。尤其是固定止损比例、大盘跌破年线后降至某个仓位，都需要根据投资策略、持仓性质和历史回测确定。</p>
+<hr>
+<h2 id="八最终认知控制回撤的真正目的">八、最终认知：控制回撤的真正目的
+</h2><p>投资中有一个非常重要的事实：</p>
+<p><strong>回撤不是能否发生的问题，而是发生之后，你是否还有能力继续投资的问题。</strong></p>
+<p>优秀的风险管理体系，至少需要做到：</p>
+<ol>
+<li>不让单一投资判断决定整个账户的命运。</li>
+<li>不让相关性过高的资产制造虚假的分散。</li>
+<li>不因为短期价格波动而轻易放弃长期投资逻辑。</li>
+<li>不因为长期投资信念而忽视基本面恶化。</li>
+<li>不让市场极端行情迫使自己在最差的时点卖出。</li>
+<li>始终保留重新配置和修复组合的能力。</li>
+</ol>
+<p>最终，控制回撤不是为了让净值曲线永远平滑，而是为了提高长期生存概率。</p>
+<p><strong>投资的第一原则不是赚得最多，而是在承担合理风险的前提下，让资本能够长期留在市场中，持续参与复利。</strong></p>
+<hr>
+<h2 id="延伸思考">延伸思考
+</h2><ul>
+<li>如何根据最大可接受回撤，反向推导合理的整体仓位？</li>
+<li>如何计算一只股票对投资组合的实际风险贡献？</li>
+<li>如何使用相关性矩阵识别组合中的隐藏集中风险？</li>
+<li>如何建立基于波动率和相关性的动态仓位模型？</li>
+<li>如何区分正常市场回撤与投资逻辑被证伪？</li>
+</ul>
+
+</section>
+
+
+    <footer class="article-footer">
+    
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.css"integrity="sha384-n8MVd4RsNIU0tAv4ct0nTaAbDJwPJzDEaqSD1odI&#43;WdtXRGWt2kTvGFasHpSy3SV"crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/katex.min.js"integrity="sha384-XjKyOOlGwcjNTAIQHIpgOno0Hl1YQqzUOEleOLALmuqehneUG&#43;vnGctmUb0ZY0l8"crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.16.9/dist/contrib/auto-render.min.js"integrity="sha384-&#43;VBxd3r6XgURycqtZ117nYw44OOcIax56Z4dCRWbxyPt0Koah1uHoK0o4&#43;/RRE05"crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.body, {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+     
+    
+        
+    <div id="gitalk-container"></div>
+<link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.css"
+/>
+<script src="https://cdn.jsdelivr.net/npm/gitalk@1.7.2/dist/gitalk.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/blueimp-md5@2.18.0/js/md5.min.js"></script>
+<script>
+    const gitalk = new Gitalk({
+        clientID: "Ov23liPkB211Cu82mYQR",
+        clientSecret: "e6606e92a24b5bd34ea7a348491478ab478f5fad",
+        repo: "teaize.github.io",
+        owner: "teaize",
+        admin: ["teaize"],
+        distractionFreeMode: false, 
+        id: md5(location.pathname), 
+    });
+    (function () {
+        if (
+            ["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1
+        ) {
+            document.getElementById("gitalk-container").innerHTML =
+                "Gitalk comments not available by default when the website is previewed locally.";
+            return;
+        }
+        gitalk.render("gitalk-container");
+    })();
+</script>
+
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2024 - 
+        
+        2026 Coffity
+    </section>
+    
+    <section class="powerby">
+        
+
+
+    </section>
+	
+	
+		<script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js"></script>
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.css" />
+		<script src="https://cdn.jsdelivr.net/gh/fancyapps/fancybox@3.5.7/dist/jquery.fancybox.min.js"></script>
+	
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>
